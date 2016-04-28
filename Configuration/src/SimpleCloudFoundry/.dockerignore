@@ -1,0 +1,10 @@
+# Per-user files for the project
+*.user
+
+# Generated DNX files
+project.lock.json
+artifacts/
+
+# Docker support files
+Docker/
+!Docker/Dockerfile.*
