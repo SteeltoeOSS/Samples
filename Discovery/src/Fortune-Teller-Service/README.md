@@ -1,4 +1,4 @@
-# Fortune-Teller-Service - ASP.NET 5 Micro Service
+# Fortune-Teller-Service - ASP.NET 5 Microservice
 ASP.NET 5 sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
 
 # Pre-requisites

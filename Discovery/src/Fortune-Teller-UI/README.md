@@ -1,4 +1,4 @@
-# Fortune-Teller-UI - ASP.NET 5 MVC App
+# Fortune-Teller-UI - ASP.NET 5 MVC Application
 ASP.NET 5 sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
 # Pre-requisites
