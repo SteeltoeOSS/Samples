@@ -5,7 +5,7 @@ ASP.NET 5 sample app illustrating how to use [Config Server for Pivotal Cloud Fo
 1. Installed Pivotal CloudFoundry 1.7
 2. Installed Spring Cloud Services 1.0.8
 
-# Configuring Config Server
+# Configuring Config Server & Pushing App
 You must first create an instance of the Config Server service in a org/space.
 1. cf target -o myorg -s development
 2. cd src/SimpleCloudFoundry
