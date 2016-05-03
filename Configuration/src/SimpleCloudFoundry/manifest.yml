@@ -1,0 +1,10 @@
+---
+applications:
+- name: foo
+  memory: 512M
+  host: foo
+  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
+  env:
+    Hosting__Environment: development
+  services:
+   - myConfigServer
