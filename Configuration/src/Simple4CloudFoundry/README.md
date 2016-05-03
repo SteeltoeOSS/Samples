@@ -6,13 +6,15 @@ ASP.NET 4.5 sample app illustrating how to use [Config Server for Pivotal Cloud 
 2. Installed Spring Cloud Services 1.0.8
 3. Visual Studio 2015 Update 1
 
-# Configuring Config Server
+# Setup Config Server
 You must first create an instance of the Config Server service in a org/space.
+
 1. cf target -o myorg -s development
 2. cd src/Simple4CloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
 
 # Publish App & Pushing
+
 1. Open \Samples\Configuration\Configuration.sln in Visual Studio 2015 Update 1.
 2. Select SimpleCloudFoundry4 project in Solution Explorer.
 3. Right-click and select Publish
