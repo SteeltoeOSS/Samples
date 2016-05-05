@@ -13,7 +13,7 @@ You must first create an instance of the Config Server service in a org/space.
 2. cd src/Simple4CloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
 
-# Publish App & Pushing
+# Publish App & Push
 
 1. Open \Samples\Configuration\Configuration.sln in Visual Studio 2015 Update 1.
 2. Select SimpleCloudFoundry4 project in Solution Explorer.
