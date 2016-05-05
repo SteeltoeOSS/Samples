@@ -6,14 +6,19 @@ ASP.NET 5 sample app illustrating how to use [Config Server for Pivotal Cloud Fo
 1. Installed Pivotal CloudFoundry 1.7
 2. Installed Spring Cloud Services 1.0.8
 
-# Setup Config Server & Pushing App
-
+# Setup Config Server
 You must first create an instance of the Config Server service in a org/space.
 
 1. cf target -o myorg -s development
 2. cd src/SimpleCloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
-4. cf push
+
+# Publish App & Push
+
+1. cf target -o myorg -s development
+2. cd src
+3. Publish app to a directory selecting the runtime you want to run on. (e.g. `dnu publish --out ./publish --configuration Release  --runtime /usr/local/lib/dnx/runtimes/dnx-coreclr-linux-x64.1.0.0-rc1-update1/ SimpleCloudFoundry/`)
+4. Push the app using the appropriate manifest. (e.g. `cf push -f SimpleCloudFoundry/manifest.yml -p ./publish` or `cf push -f SimpleCloudFoundry/manifest-windows.yml -p ./publish`)
 
 # What to expect
 The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
@@ -30,7 +35,7 @@ Use the menus at the top of the app to see various output:
 # Observe Logs
 To see the logs as you startup and use the app: `cf logs foo`
 
-You should see something like this during startup:
+On a Linux cell, you should see something like this during startup:
 ```
 2016-05-03T10:26:59.86-0600 [CELL/0]     OUT Creating container
 2016-05-03T10:27:00.25-0600 [CELL/0]     OUT Successfully created container
