@@ -1,11 +1,11 @@
 ---
 applications:
-- name: foo
+- name: fortuneui
   memory: 512M
-  host: foo
+  host: fortuneui
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: export "DNX_PACKAGES=$PWD/approot/packages"; ./approot/web --server.urls "http://*:$PORT"
   env:
     Hosting__Environment: development
   services:
-   - myConfigServer
+    - myDiscoveryService
