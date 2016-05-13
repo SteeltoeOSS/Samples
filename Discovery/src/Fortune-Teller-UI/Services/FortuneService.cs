@@ -1,4 +1,4 @@
-﻿using SteelToe.Discovery.Client;
+﻿using Pivotal.Discovery.Client;
 using System.Net.Http;
 using System.Threading.Tasks;
 

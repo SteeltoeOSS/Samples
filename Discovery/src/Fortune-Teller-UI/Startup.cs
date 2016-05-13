@@ -5,17 +5,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Fortune_Teller_UI.Services;
-using SteelToe.Discovery.Client;
+using Pivotal.Discovery.Client;
+using SteelToe.Extensions.Configuration;
+using System;
 
 namespace Fortune_Teller_UI
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, ILoggerFactory factory)
         {
+            factory.MinimumLevel = LogLevel.Debug;
+
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddCloudFoundry()
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
