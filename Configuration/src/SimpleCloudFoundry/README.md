@@ -5,6 +5,8 @@ ASP.NET 5 sample app illustrating how to use [Config Server for Pivotal Cloud Fo
 
 1. Installed Pivotal CloudFoundry 1.7
 2. Installed Spring Cloud Services 1.0.8
+3. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
+Note: If your on Windows and you have VS2015 Update 1, you can add these to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\WebTemplates\DNX\CSharp\1033\StarterWeb\node_modules\.bin` and `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Web Tools\External` and you should get what you need.
 
 # Setup Config Server
 You must first create an instance of the Config Server service in a org/space.
@@ -16,9 +18,18 @@ You must first create an instance of the Config Server service in a org/space.
 # Publish App & Push
 
 1. cf target -o myorg -s development
-2. cd src
-3. Publish app to a directory selecting the runtime you want to run on. (e.g. `dnu publish --out ./publish --configuration Release  --runtime /usr/local/lib/dnx/runtimes/dnx-coreclr-linux-x64.1.0.0-rc1-update1/ SimpleCloudFoundry/`)
-4. Push the app using the appropriate manifest. (e.g. `cf push -f SimpleCloudFoundry/manifest.yml -p ./publish` or `cf push -f SimpleCloudFoundry/manifest-windows.yml -p ./publish`)
+2. cd src/SimpleCloudFoundry
+3. dnu restore
+4. cd ..
+5. Publish app to a directory selecting the runtime you want to run on.
+(e.g. `dnu publish --out ./publish --configuration Release  --runtime /usr/local/lib/dnx/runtimes/dnx-coreclr-linux-x64.1.0.0-rc1-update1/ SimpleCloudFoundry/`)
+6. Push the app using the appropriate manifest.
+ (e.g. `cf push -f SimpleCloudFoundry/manifest.yml -p ./publish` or `cf push -f SimpleCloudFoundry/manifest-windows.yml -p ./publish`)
+
+Note: If you are pushing to a windows stack, and you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
+
+1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install that ROOT CA on the windows cells and you would be good to go.
+2. Disable certificate validation for the Spring Cloud Config Server Client.  You can do this by editing `appsettings.json` and add `spring:cloud:client:validate_certificates=false`. This only works on Windows, it will not work on CoreCLR/Linux.
 
 # What to expect
 The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
