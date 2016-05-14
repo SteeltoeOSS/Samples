@@ -3,7 +3,7 @@ ASP.NET 4.5 sample app illustrating how to use [Config Server for Pivotal Cloud 
 
 # Pre-requisites
 1. Installed Pivotal CloudFoundry 1.7
-2. Installed Spring Cloud Services 1.0.8
+2. Installed Spring Cloud Services 1.0.9
 3. Visual Studio 2015 Update 1
 
 # Setup Config Server

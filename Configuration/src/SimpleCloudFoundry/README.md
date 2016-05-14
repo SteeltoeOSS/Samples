@@ -4,7 +4,7 @@ ASP.NET 5 sample app illustrating how to use [Config Server for Pivotal Cloud Fo
 # Pre-requisites
 
 1. Installed Pivotal CloudFoundry 1.7
-2. Installed Spring Cloud Services 1.0.8
+2. Installed Spring Cloud Services 1.0.9
 3. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
 Note: If your on Windows and you have VS2015 Update 1, you can add these to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\WebTemplates\DNX\CSharp\1033\StarterWeb\node_modules\.bin` and `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Web Tools\External` and you should get what you need.
 
@@ -21,16 +21,17 @@ You must first create an instance of the Config Server service in a org/space.
 2. cd src/SimpleCloudFoundry
 3. dnu restore
 4. cd ..
-5. Publish app to a directory selecting the runtime you want to run on.
+5. Publish app to a directory selecting the runtime you want to run on. 
 (e.g. `dnu publish --out ./publish --configuration Release  --runtime /usr/local/lib/dnx/runtimes/dnx-coreclr-linux-x64.1.0.0-rc1-update1/ SimpleCloudFoundry/`)
 6. Push the app using the appropriate manifest.
  (e.g. `cf push -f SimpleCloudFoundry/manifest.yml -p ./publish` or `cf push -f SimpleCloudFoundry/manifest-windows.yml -p ./publish`)
 
-Note: If you are pushing to a windows stack, and you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
+Windows Note: If you are pushing to a windows stack, and you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
 
-1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install that ROOT CA on the windows cells and you would be good to go.
+1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install the ROOT CA on the windows cells and you would be good to go.
 2. Disable certificate validation for the Spring Cloud Config Server Client.  You can do this by editing `appsettings.json` and add `spring:cloud:client:validate_certificates=false`. This only works on Windows, it will not work on CoreCLR/Linux.
 
+Note: We have experienced this [problem](https://github.com/aspnet/KestrelHttpServer/issues/341) with Kestrel running behind a proxy (e.g. HAProxy/Nginx, etc.). As a result, currently this app is configured to run using the `Microsoft.AspNet.Server.WebListener`; which only runs on Windows. If you'd like to try it on Linux, you can change `project.json` to use Kestrel and see what happens. We will change this when moving to RC2 bits.
 # What to expect
 The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
 
