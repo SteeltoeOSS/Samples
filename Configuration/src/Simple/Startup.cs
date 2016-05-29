@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Simple.Model;
 
 using SteelToe.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 
 namespace Simple
 {
@@ -30,7 +31,9 @@ namespace Simple
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables()
 
                 // Adds the Spring Cloud Configuration Server as a configuration source.
@@ -52,7 +55,7 @@ namespace Simple
             // Performs:
             //      services.AddOptions();
             //      services.Configure<ConfigServerClientSettingsOptions>(config);
-            //      services.AddInstance<IConfigurationRoot>(config);
+            //      services.AddSingleton<IConfigurationRoot>(config);
             services.AddConfigServer(Configuration);
 
             // Add framework services.
@@ -79,8 +82,6 @@ namespace Simple
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseIISPlatformHandler();
-
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -91,7 +92,5 @@ namespace Simple
             });
         }
 
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

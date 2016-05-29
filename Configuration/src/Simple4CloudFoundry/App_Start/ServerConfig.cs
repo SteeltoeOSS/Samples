@@ -1,10 +1,10 @@
 ﻿
-using Microsoft.AspNet.FileProviders;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using SteelToe.Extensions.Configuration.CloudFoundry;
 using Pivotal.Extensions.Configuration;
-
+using Microsoft.Extensions.FileProviders;
+using System;
 
 namespace SimpleCloudFoundry4
 {
@@ -12,16 +12,21 @@ namespace SimpleCloudFoundry4
     {
         public static CloudFoundryApplicationOptions CloudFoundryApplication
         {
+
             get
             {
-                return ConfigurationBinder.Get<CloudFoundryApplicationOptions>(Configuration, new CloudFoundryApplicationOptions());
+                var opts = new CloudFoundryApplicationOptions();
+                ConfigurationBinder.Bind(Configuration, opts);
+                return opts;
             }
         }
         public static CloudFoundryServicesOptions CloudFoundryServices
         {
             get
             {
-                return ConfigurationBinder.Get<CloudFoundryServicesOptions>(Configuration, new CloudFoundryServicesOptions());
+                var opts = new CloudFoundryServicesOptions();
+                ConfigurationBinder.Bind(Configuration, opts);
+                return opts;
             }
         }
 
@@ -33,6 +38,7 @@ namespace SimpleCloudFoundry4
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables()
 
@@ -54,11 +60,63 @@ namespace SimpleCloudFoundry4
         {
             EnvironmentName = env;
         }
+
+        public string ApplicationName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IFileProvider ContentRootFileProvider
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string ContentRootPath
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public string EnvironmentName { get; set; }
 
         public IFileProvider WebRootFileProvider { get; set; }
 
         public string WebRootPath { get; set; }
 
+        IFileProvider IHostingEnvironment.WebRootFileProvider
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

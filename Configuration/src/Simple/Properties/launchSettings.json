@@ -15,10 +15,12 @@
         "Hosting:Environment": "development"
       }
     },
-    "web": {
-      "commandName": "web",
+    "Simple": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000",
       "environmentVariables": {
-        "Hosting:Environment": "development"
+        "ASPNETCORE_ENVIRONMENT": "development"
       }
     }
   }

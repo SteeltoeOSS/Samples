@@ -15,10 +15,13 @@
         "Hosting:Environment": "Development"
       }
     },
-    "web": {
-      "commandName": "web",
+    "Fortune-Teller-UI": {
+      "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:5555",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5555",
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNETCORE_ENVIRONMENT": "development"
       }
     }
   }

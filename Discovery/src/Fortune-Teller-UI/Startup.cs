@@ -1,13 +1,13 @@
 ﻿
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Fortune_Teller_UI.Services;
 using Pivotal.Discovery.Client;
 using SteelToe.Extensions.Configuration;
-using System;
+
 
 namespace Fortune_Teller_UI
 {
@@ -15,10 +15,10 @@ namespace Fortune_Teller_UI
     {
         public Startup(IHostingEnvironment env, ILoggerFactory factory)
         {
-            factory.MinimumLevel = LogLevel.Debug;
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
                 .AddCloudFoundry()
                 .AddEnvironmentVariables();
@@ -30,6 +30,8 @@ namespace Fortune_Teller_UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging();
+
             services.AddDiscoveryClient(Configuration);
 
             services.AddSingleton<IFortuneService, FortuneService>();
@@ -54,8 +56,6 @@ namespace Fortune_Teller_UI
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseIISPlatformHandler();
-
             app.UseStaticFiles();
 
             app.UseMvc();
@@ -63,7 +63,5 @@ namespace Fortune_Teller_UI
             app.UseDiscoveryClient();
         }
 
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNet.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using SteelToe.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.FileProviders;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace Simple4
 {
@@ -22,6 +20,7 @@ namespace Simple4
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables()
 
@@ -44,11 +43,63 @@ namespace Simple4
         {
             EnvironmentName = env;
         }
+
+        public string ApplicationName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public IFileProvider ContentRootFileProvider
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string ContentRootPath
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public string EnvironmentName { get; set; }
 
         public IFileProvider WebRootFileProvider { get; set; }
 
         public string WebRootPath { get; set; }
 
+        IFileProvider IHostingEnvironment.WebRootFileProvider
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

@@ -1,8 +1,9 @@
 ﻿
 using FortuneTellerService.Models;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,13 +18,15 @@ namespace FortuneTellerService
     {
         public Startup(IHostingEnvironment env, ILoggerFactory factory)
         {
-            factory.MinimumLevel = LogLevel.Debug;
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddCloudFoundry()
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -33,12 +36,13 @@ namespace FortuneTellerService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFramework()
-                .AddInMemoryDatabase()
                 .AddDbContext<FortuneContext>(options => options.UseInMemoryDatabase());
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
             services.AddDiscoveryClient(Configuration);
+
+            services.AddLogging();
 
             // Add framework services.
             services.AddMvc();
@@ -51,8 +55,6 @@ namespace FortuneTellerService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseIISPlatformHandler();
-
             app.UseStaticFiles();
 
             app.UseMvc();
@@ -62,7 +64,5 @@ namespace FortuneTellerService
             SampleData.InitializeFortunesAsync(app.ApplicationServices).Wait();
         }
 
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
