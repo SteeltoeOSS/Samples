@@ -1,9 +1,9 @@
-# Simple - ASP.NET 5 Sample Application
-ASP.NET 5 sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config) as a configuration source.
+# Simple - ASP.NET Core Sample Application
+ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config) as a configuration source.
 
 # Pre-requisites
 
-This sample assumes that there is a running Spring Cloud Config Server on your machine. To make this happen
+This sample assumes that there is a running Spring Cloud Config Server on your machine. To make this happen:
 
 1. Install Java 8 JDK.
 2. Install Maven 3.x.
@@ -17,10 +17,9 @@ This default configuration of the Config Server uses [this github repo]( https:/
 
 1. Clone this repo. (i.e. git clone https://github.com/SteelToeOSS/Samples)
 2. cd samples/Configuration/src/Simple
-3. Install DNX 1.0.0-rc1-final/update1. Install either the coreclr and/or clr runtimes. 
-4. Add a DNX runtime to your path. (e.g. dnvm use 1.0.0-rc1-update1 -r clr)
-5. dnu restore
-6. dnx web
+3. Install .NET Core SDK 
+4. dotnet restore --configfile nuget.config
+5. dotnet run 
 
 # What to expect
 After building and running the app, you should see something like the following:

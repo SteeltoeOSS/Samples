@@ -4,8 +4,8 @@ applications:
   memory: 512M
   host: foo
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
-  command: export "DNX_PACKAGES=$PWD/approot/packages"; ./approot/web --server.urls "http://*:$PORT"
+  command: ./SimpleCloudFoundry --server.urls "http://*:$PORT"
   env:
-    Hosting__Environment: development
+    ASPNETCORE_ENVIRONMENT: development
   services:
    - myConfigServer

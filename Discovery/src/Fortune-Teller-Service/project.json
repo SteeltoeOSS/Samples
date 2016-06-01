@@ -5,9 +5,15 @@
   },
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "copyToOutput": {
+      "include": [
+        "wwwroot",
+        "appsettings.json",
+        "web.config"
+      ]
+    }
   },
-
   "frameworks": {
     "net451": {
       "dependencies": {
@@ -18,8 +24,7 @@
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {
-          "version": "1.0.0-rc2-*",
-          "type": "platform"
+          "version": "1.0.0-rc2-*"
         }
       },
       "imports": [
@@ -54,12 +59,8 @@
   },
 
   "publishOptions": {
-    "include": [
-      "wwwroot",
-      "Views",
-      "appsettings.json",
-      "web.config"
-    ]
+    "include": [ "wwwroot"],
+    "includeFiles": ["appsettings.json", "web.config"]
   },
 
   "scripts": {

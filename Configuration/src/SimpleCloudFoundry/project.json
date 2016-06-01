@@ -5,9 +5,20 @@
   },
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "copyToOutput": {
+      "include": [
+        "Views",
+        "wwwroot",
+        "appsettings.json",
+        "web.config"
+      ]
+    }
   },
-
+  "publishOptions": {
+    "include": [ "wwwroot", "Views"],
+    "includeFiles" :["appsettings.json", "web.config"]
+  },
   "frameworks": {
     "net451": {
       "dependencies": {
@@ -17,8 +28,7 @@
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {
-          "version": "1.0.0-rc2-*",
-          "type": "platform"
+          "version": "1.0.0-rc2-*"
         }
       },
       "imports": [
@@ -45,15 +55,6 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc2-final",
     "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-dev-*"
-  },
-
-  "publishOptions": {
-    "include": [
-      "wwwroot",
-      "Views",
-      "appsettings.json",
-      "web.config"
-    ]
   },
   "scripts": {
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ],
