@@ -11,19 +11,26 @@ Note: If your on Windows and you have VS2015 Update 1, you can add these to your
 # Setup Config Server
 You must first create an instance of the Config Server service in a org/space.
 
-1. cf target -o myorg -s development
-2. cd src/SimpleCloudFoundry
-3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
+1. `cf target -o myorg -s development`
+2. `cd Configuration/src/SimpleCloudFoundry`
+3. `cf create-service p-config-server standard myConfigServer -c ./config-server.json`
+
+# Find the correct asp.net runtime
+1. Ensure `dnvm` and `dnu` are installed properly
+1. `dnvm list`  (This will output the currently installed runtimes, pick a linux coreclr runtime e.g. 1.0.0-rc1-update2)
+1. Find where the runtime is installed. e.g. `sudo find / -type d | grep "1.0.0-rc1-update2"`
+1. `export NET_RUNTIME=/Users/myuser/.dnx/runtimes/dnx-coreclr-linux-x64.1.0.0-rc1-update2`
+1. Ensure `dnvm` is using the correct runtime e.g. `dnvm use 1.0.0-rc1-update2 -r coreclr`
 
 # Publish App & Push
 
-1. cf target -o myorg -s development
-2. cd src/SimpleCloudFoundry
-3. dnu restore
-4. cd ..
+1. `cf target -o myorg -s development`
+2. `cd Configuration/src/SimpleCloudFoundry`
+3. `dnu restore`
+4. `cd ..`
 5. Publish app to a directory selecting the runtime you want to run on. 
-(e.g. `dnu publish --out ./publish --configuration Release  --runtime /usr/local/lib/dnx/runtimes/dnx-coreclr-linux-x64.1.0.0-rc1-update1/ SimpleCloudFoundry/`)
-6. Push the app using the appropriate manifest.
+(e.g. `dnu publish --out ./publish --configuration Release  --runtime $NET_RUNTIME SimpleCloudFoundry/`)
+6. Push the app using the appropriate manifest. Checkout [CF notes](https://github.com/aminjam/Samples/tree/sccs-vcap-binding/Configuration/src/SimpleCloudFoundry#cf-notes) for troubleshooting tips.
  (e.g. `cf push -f SimpleCloudFoundry/manifest.yml -p ./publish` or `cf push -f SimpleCloudFoundry/manifest-windows.yml -p ./publish`)
 
 Windows Note: If you are pushing to a windows stack, and you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
@@ -31,9 +38,10 @@ Windows Note: If you are pushing to a windows stack, and you are using self-sign
 1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install the ROOT CA on the windows cells and you would be good to go.
 2. Disable certificate validation for the Spring Cloud Config Server Client.  You can do this by editing `appsettings.json` and add `spring:cloud:client:validate_certificates=false`. This only works on Windows, it will not work on CoreCLR/Linux.
 
-Note: We have experienced this [problem](https://github.com/aspnet/KestrelHttpServer/issues/341) with Kestrel running behind a proxy (e.g. HAProxy/Nginx, etc.). As a result, currently this app is configured to run using the `Microsoft.AspNet.Server.WebListener`; which only runs on Windows. If you'd like to try it on Linux, you can change `project.json` to use Kestrel and see what happens. We will change this when moving to RC2 bits.
+### CF Notes:
+We have experienced this [problem](https://github.com/aspnet/KestrelHttpServer/issues/341) with Kestrel running behind a proxy (e.g. HAProxy/Nginx, etc.). As a result, currently this app is configured to run using the `Microsoft.AspNet.Server.WebListener`; which only runs on Windows. If you'd like to try it on Linux, you can change `project.json` to use Kestrel and see what happens. We will change this when moving to RC2 bits. We have successfully pushed this app only using the `coreclr` runtime.
 # What to expect
-The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
+The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`. The application name in `SimpleCloudFoundry/manifest.yml` must be `foo`, but you can change the `host` if the name is taken.
 
 The Config Servers Git repository has been set to: `https://github.com/spring-cloud-samples/config-repo`
 
