@@ -2,9 +2,9 @@
 applications:
 - name: foo
   memory: 512M
-  host: foo
-  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
-  command: export "DNX_PACKAGES=$PWD/approot/packages"; ./approot/web --server.urls "http://*:$PORT"
+  random-route: true
+  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git#dnx
+  command: export "DNX_PACKAGES=$PWD/approot/packages"; ./approot/kestrel --server.urls "http://*:$PORT"
   env:
     Hosting__Environment: development
   services:
