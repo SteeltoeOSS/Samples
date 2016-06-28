@@ -1,10 +1,8 @@
-﻿FROM microsoft/aspnet:1.0.0-rc1-update1-coreclr
-ENV DNX_PACKAGES=/root/.dnx/packages
+FROM microsoft/dotnet
+ENV NUGET_PACKAGES=/root/.nuget/packages
 COPY . /SimpleCloudFoundry/
 RUN mkdir -p /SimpleCloudFoundry/app/tmp
-COPY cloudfoundry.crt /usr/local/share/ca-certificates/cloudfoundry/cloudfoundry.crt
-RUN update-ca-certificates
 WORKDIR /SimpleCloudFoundry
-RUN ["dnu", "restore", "--runtime", "dnxcore50"]
+RUN ["dotnet", "restore"]
 EXPOSE 5004
-ENTRYPOINT ["dnx", "web", "--server.urls", "http://*:5004"]
+ENTRYPOINT ["/usr/bin/env", "TMPDIR=/tmp", "dotnet", "run", "--server.urls", "http://*:5004"]

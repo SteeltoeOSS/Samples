@@ -6,16 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Pivotal.Extensions.Caching;
 using System.Text;
 using Pivotal.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace RedisCloudFoundry.Controllers
 {
     public class HomeController : Controller
     {
         private IRedisDistributedCache _cache;
-        public HomeController(IDistributedCache cache)
+        public HomeController(IRedisDistributedCache cache)
         {
-            _cache = cache as IRedisDistributedCache;
+            _cache = cache;
         }
 
         public IActionResult Index()
