@@ -1,8 +1,9 @@
-# Caching Sample Applications
-This repo tree contains sample apps illustrating how to use the [Caching](https://github.com/pivotal-cf/spring-cloud-dotnet-caching) extension provider packages. These packages enable using Redis and Gemfire as distributed caches. See [here](https://github.com/aspnet/Caching) for more information on Microsoft Caching extensions.
+# Connector Sample Applications
+This repo tree contains sample apps illustrating how to use the SteelToe Connectors for connecting to CloudFoundry services in your ASP.NET Core application.
  
-* RedisCloudFoundry - ASP.NET Core sample app illustrating how to use [Redis for Pivotal CloudFoundry](http://docs.pivotal.io/redis/index.html) as a distributed cache source.
-* GemfireCloudFoundry - ASP.NET Core sample app illustrating how to use [Gemfire for Pivotal CloudFoundry](http://docs.pivotal.io/gemfire-cf/index.html) as a distributed cache source.
+* MySql - ASP.NET Core sample app illustrating how to use [MySql Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.MySql) to connect your application to a MySql database on CloudFoundry.
+* MySqlEF6 - ASP.NET Core sample app illustrating how to use [MySql Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.MySql) to connect a EntityFramework6 `DbContext` to a MySql database on CloudFoundry.
+* Redis - ASP.NET Core sample app illustrating how to use [Redis](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.Redis) to connect a [Microsoft Redis Cache Extension](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) to a Redis cache on CloudFoundry.
 
 # Building & Running
 See the Readme for instructions on building and running each app.
