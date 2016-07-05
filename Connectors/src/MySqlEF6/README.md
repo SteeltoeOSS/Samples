@@ -4,7 +4,7 @@ ASP.NET Core sample app illustrating how to use the EntityFramework 6 together w
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7
-2. Installed DiegoWindows support 
+2. Installed DiegoWindows support (Greenhouse)
 3. Installed MySql marketplace service
 4. Install .NET Core SDK
 5. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
