@@ -18,12 +18,12 @@ This default configuration of the Config Server uses [this github repo]( https:/
 1. Clone this repo. (i.e. git clone https://github.com/SteelToeOSS/Samples)
 2. Startup Visual Studio 2015
 3. Open the Samples/Configuration/Configuration.sln
-4. Select the Simple4 project in the solution and build it.
-5. Select the Simple4 as the Startup project.
+4. Select the AspDotNet4/Simple project in the solution and build it.
+5. Select the AspDotNet4/Simple as the Startup project.
 6. Ctl+F5 or F5
 
 # What to expect
-After building and running the app, you should see a browser pop up with the home page of the Simple4 sample app.
+After building and running the app, you should see a browser pop up with the home page of the Simple sample app.
 Once on the home page, navigate to the `Config Server Data` tab and you'll see the values stored in the github repo used for the Spring Cloud Config Server samples.
 If you navigate to the "Config Server Settings" tab you will see the settings used by the Spring Cloud Config server client.
 
