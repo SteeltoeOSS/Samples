@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple", "src\AspDotNet4\Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCloudFoundry", "src\AspDotNet4\SimpleCloudFoundry\SimpleCloudFoundry.csproj", "{71E24401-2ACE-468E-AE4E-0A64D3F6C503}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspDotNetCore", "AspDotNetCore", "{FF43AF70-EEBC-4079-BEB2-7D81DFAA5780}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{1650C522-91F7-4E5E-A0C6-8F7D6F3C486B} = {FF43AF70-EEBC-4079-BEB2-7D81DFAA5780}
+		{05283A13-B517-4BE7-8A59-6200DD60C9DB} = {FF43AF70-EEBC-4079-BEB2-7D81DFAA5780}
 		{77B17535-E662-471B-947D-31A8256CADA7} = {71E8AB2D-3D51-44B8-B2D8-E118ED66F624}
 		{71E24401-2ACE-468E-AE4E-0A64D3F6C503} = {71E8AB2D-3D51-44B8-B2D8-E118ED66F624}
 	EndGlobalSection
