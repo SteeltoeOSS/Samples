@@ -10,7 +10,7 @@ ASP.NET 4.5 sample app illustrating how to use [Config Server for Pivotal Cloud 
 You must first create an instance of the Config Server service in a org/space.
 
 1. cf target -o myorg -s development
-2. cd src\Simple4CloudFoundry
+2. cd src\AspDotNet4\SimpleCloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
 
 # Publish App & Push
