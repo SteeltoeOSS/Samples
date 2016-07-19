@@ -28,8 +28,8 @@ namespace MySqlEF6.Models
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<TestContext>();
-                AddData<TestData>(db, new TestData() { Id = 1, Data = "Test Data 1 - TestConext " });
-                AddData<TestData>(db, new TestData() { Id = 2, Data = "Test Data 2 - TestConext " });
+                AddData<TestData>(db, new TestData() { Id = 1, Data = "Test Data 1 - TestContext " });
+                AddData<TestData>(db, new TestData() { Id = 2, Data = "Test Data 2 - TestContext " });
                 await db.SaveChangesAsync();
             }
         }
