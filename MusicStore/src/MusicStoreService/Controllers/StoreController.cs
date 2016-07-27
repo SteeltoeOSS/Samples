@@ -1,0 +1,278 @@
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using MusicStore.Models;
+using System.Data.Entity;
+using System.Collections.Generic;
+
+namespace MusicStore.Controllers
+{
+    [Route("api/[controller]")]
+    public class StoreController : Controller
+    {
+        private readonly AppSettings _appSettings;
+
+        public StoreController(MusicStoreContext dbContext, IOptions<AppSettings> options)
+        {
+            DbContext = dbContext;
+            _appSettings = options.Value;
+        }
+
+        public MusicStoreContext DbContext { get; }
+
+        //
+        // GET: /api/Store/Genres
+        [HttpGet("Genres")]
+        public async Task<List<GenreJson>> GetGenres()
+        {
+            var genres = await DbContext.Genres.ToListAsync();
+            return GenreJson.From(genres);
+        }
+
+        //
+        // GET: /api/Store/Genre?name=#
+        [HttpGet("Genre")]
+        public async Task<IActionResult> GetGenre(
+          [FromQuery] int? id, [FromQuery] string name)
+        {
+            Genre genre = null;
+            if (id.HasValue)
+            {
+
+                genre = await DbContext.Genres
+                    .Where(g => g.GenreId == id.Value)
+                    .FirstOrDefaultAsync();
+            } else
+            {
+                genre = await DbContext.Genres
+                        .Where(g => g.Name == name)
+                        .FirstOrDefaultAsync();
+            }
+
+
+            if (genre == null)
+            {
+                return NotFound();
+            }
+            var result = GenreJson.From(genre);
+            return new ObjectResult(result);
+        }
+
+        //
+        // GET: /api/Store/Albums?genre=Disco
+        [HttpGet("Albums")]
+        public async Task<IActionResult> GetAlbums([FromQuery] string genre)
+        {
+            // Retrieve Genre genre and its Associated associated Albums albums from database
+            List<Album> albums = null;
+
+            if ("All".Equals(genre))
+            {
+                albums = await DbContext.Albums
+                                .ToListAsync();
+            } else
+            {
+                var genreModel = await DbContext.Genres
+                                .Include(g => g.Albums)
+                                .Where(g => g.Name == genre)
+                                .FirstOrDefaultAsync();
+
+                if (genreModel == null)
+                {
+                    return NotFound();
+                }
+
+                albums = genreModel.Albums;
+            }
+
+            var result = AlbumJson.From(albums);
+            return new ObjectResult(result);
+        }
+
+        //
+        // GET: /api/Store/Album?id=#
+        // GET: /api/Store/Album?title=#
+        [HttpGet("Album")]
+        public async Task<IActionResult> GetAlbum(
+            [FromQuery] int? id, [FromQuery] string title)
+        {
+            Album album = null;
+            if (id.HasValue)
+            {
+                album = await DbContext.Albums
+                                    .Where(a => a.AlbumId == id.Value)
+                                    .Include(a => a.Artist)
+                                    .Include(a => a.Genre)
+                                    .FirstOrDefaultAsync();
+            } else if (!string.IsNullOrEmpty(title)) {
+                album = await DbContext.Albums.Where(a => a.Title == title).FirstOrDefaultAsync();
+            }
+
+            if (album == null)
+            {
+                return NotFound();
+            }
+            var result = AlbumJson.From(album);
+            return new ObjectResult(result);
+        }
+
+        //
+        // GET: /api/Store/TopSelling?count=6
+        [HttpGet("TopSelling")]
+        public async Task<List<AlbumJson>> GetTopSelling([FromQuery] int count = 6)
+        {
+            var albumModel = await DbContext.Albums
+                .OrderByDescending(a => a.OrderCount)
+                .Take(count)
+                .ToListAsync();
+
+            return AlbumJson.From(albumModel);
+        }
+
+        //
+        // GET: /api/Store/Artists
+        [HttpGet("Artists")]
+        public async Task<List<ArtistJson>> GetArtists()
+        {
+            var artists = await DbContext.Artists.ToListAsync();
+            return ArtistJson.From(artists);
+        }
+
+        //
+        // GET: /api/Store/Artist?id=#
+        [HttpGet("Artist")]
+        public async Task<IActionResult> GetArtist(
+            [FromQuery] int id)
+        {
+            Artist artist = await DbContext.Artists
+                                    .Where(a => a.ArtistId == id)
+                                    .FirstOrDefaultAsync();
+            
+      
+
+            if (artist == null)
+            {
+                return NotFound();
+            }
+            var result = ArtistJson.From(artist);
+            return new ObjectResult(result);
+        }
+
+
+        //POST: api/Store/Album
+        [HttpPost("Album/")]
+        public async Task<IActionResult> AddAlbum([FromBody] AlbumJson json)
+        {
+            if (json == null)
+            {
+                return BadRequest();
+            }
+
+            var toAdd = Album.From(json);
+
+            var artist = await DbContext.Artists
+                                   .Where(a => a.ArtistId == toAdd.ArtistId)
+                                   .FirstOrDefaultAsync();
+
+            var genre = await DbContext.Genres
+                    .Where(g => g.GenreId == toAdd.GenreId)
+                    .FirstOrDefaultAsync();
+            if (artist == null || genre == null)
+            {
+                return BadRequest();
+            }
+
+            toAdd.Genre = genre;
+            toAdd.Genre.Albums.Add(toAdd);
+            toAdd.Artist = artist;
+
+            DbContext.Albums.Add(toAdd);
+            await DbContext.SaveChangesAsync();
+            return Ok();
+
+        }
+
+        //PUT: api/Store/Album
+        [HttpPut("Album/")]
+        public async Task<IActionResult> UpdateAlbum([FromBody] AlbumJson json)
+        {
+            if (json == null)
+            {
+                return BadRequest();
+            }
+
+            var theUpdate = Album.From(json);
+            var existing = await DbContext.Albums
+                    .Where(a => a.AlbumId == theUpdate.AlbumId)
+                    .FirstOrDefaultAsync();
+
+            // Can't update missing album
+            if (existing == null)
+            {
+                return NotFound();
+            }
+
+
+            var artist = await DbContext.Artists
+                                .Where(a => a.ArtistId == theUpdate.ArtistId)
+                                .FirstOrDefaultAsync();
+
+            var genre = await DbContext.Genres
+                    .Where(g => g.GenreId == theUpdate.GenreId)
+                    .FirstOrDefaultAsync();
+
+            // Cant update album if genre or artist doesnt exist
+            if (artist == null || genre == null)
+            {
+                return BadRequest();
+            }
+
+            // Changing genre of the existing album
+            if (existing.GenreId != theUpdate.GenreId)
+            {
+                var existingGenre = await DbContext.Genres.Where(g => g.GenreId == existing.GenreId).FirstOrDefaultAsync();
+                var toRemove = existingGenre.Albums.FirstOrDefault(a => a.AlbumId == theUpdate.AlbumId);
+                existingGenre.Albums.Remove(toRemove);
+                DbContext.Entry(existingGenre).State = EntityState.Modified;
+            }
+
+            existing.Genre = genre;
+            existing.Genre.Albums.Add(existing);
+            existing.GenreId = genre.GenreId;
+            existing.Artist = artist;
+            existing.ArtistId = artist.ArtistId;
+
+            existing.AlbumArtUrl = theUpdate.AlbumArtUrl;
+            existing.OrderCount = theUpdate.OrderCount;
+            existing.Title = theUpdate.Title;
+            existing.Price = theUpdate.Price;
+     
+            DbContext.Entry(existing).State = EntityState.Modified;
+
+            await DbContext.SaveChangesAsync();
+            return Ok();
+
+        }
+
+        //DELETE: api/Store/Album/{id}
+        [HttpDelete("Album/{id}")]
+        public async Task<IActionResult> DeleteAlbum(int id)
+        {
+            Album album = await DbContext.Albums
+                                    .Where(a => a.AlbumId == id)
+                                    .FirstOrDefaultAsync();
+   
+
+            if (album == null)
+            {
+                return NotFound();
+            }
+
+            DbContext.Albums.Remove(album);
+            await DbContext.SaveChangesAsync();
+            return Ok();
+        }
+    }
+}

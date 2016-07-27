@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8496BE7-B786-48C4-8E08-113C79966A4B}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16897CC4-C5A1-43D4-B507-12AF3A78371E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStoreUI", "src\MusicStoreUI\MusicStoreUI.xproj", "{1E777703-EB83-4E83-BC77-96D672A7BAD3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStoreService", "src\MusicStoreService\MusicStoreService.xproj", "{F9F40AB2-10C3-4A1A-BDBD-CAB959772D8F}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OrderService", "src\OrderService\OrderService.xproj", "{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ShoppingCartService", "src\ShoppingCartService\ShoppingCartService.xproj", "{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{671A9317-8A64-4D54-A0E6-87D7E9F8C982}"
+	ProjectSection(SolutionItems) = preProject
+		src\config\application.yml = src\config\application.yml
+		src\config\musicstore.yml = src\config\musicstore.yml
+		src\config\musicui.yml = src\config\musicui.yml
+		src\config\orderprocessing.yml = src\config\orderprocessing.yml
+		src\config\shoppingcart.yml = src\config\shoppingcart.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E777703-EB83-4E83-BC77-96D672A7BAD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E777703-EB83-4E83-BC77-96D672A7BAD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E777703-EB83-4E83-BC77-96D672A7BAD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E777703-EB83-4E83-BC77-96D672A7BAD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F40AB2-10C3-4A1A-BDBD-CAB959772D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F40AB2-10C3-4A1A-BDBD-CAB959772D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F40AB2-10C3-4A1A-BDBD-CAB959772D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F40AB2-10C3-4A1A-BDBD-CAB959772D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E777703-EB83-4E83-BC77-96D672A7BAD3} = {16897CC4-C5A1-43D4-B507-12AF3A78371E}
+		{F9F40AB2-10C3-4A1A-BDBD-CAB959772D8F} = {16897CC4-C5A1-43D4-B507-12AF3A78371E}
+		{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5} = {16897CC4-C5A1-43D4-B507-12AF3A78371E}
+		{3D93DAEE-E4BE-4C0F-A084-976A15996FD8} = {16897CC4-C5A1-43D4-B507-12AF3A78371E}
+		{671A9317-8A64-4D54-A0E6-87D7E9F8C982} = {16897CC4-C5A1-43D4-B507-12AF3A78371E}
+	EndGlobalSection
+EndGlobal
