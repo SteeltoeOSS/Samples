@@ -20,7 +20,7 @@
   },
 
   "frameworks": {
-    "net452": { }
+    "net451": {}
   },
 
   "buildOptions": {
@@ -40,5 +40,10 @@
 
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  },
+  "runtimes": {
+    "win7-x64": {},
+    "win7-x86": {}
+
   }
 }

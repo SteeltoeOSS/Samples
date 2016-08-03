@@ -4,7 +4,7 @@ eureka:
 mysql:
   client:
     database: steeltoe2
-    username: steeltoe
+    username: root
     password: steeltoe
 DefaultAdminUsername: Administrator@test.com
 DefaultAdminPassword: YouShouldChangeThisPassword1!

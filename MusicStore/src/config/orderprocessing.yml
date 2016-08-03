@@ -2,9 +2,9 @@ eureka:
   client:
     shouldFetchRegistry: false
   instance:
-    port: 8000
+    port: 7000
 mysql:
   client:
     database: steeltoe3
-    username: steeltoe
+    username: root
     password: steeltoe

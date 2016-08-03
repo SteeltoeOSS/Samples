@@ -6,5 +6,5 @@ eureka:
 mysql:
   client:
     database: steeltoe
-    username: steeltoe
+    username: root
     password: steeltoe

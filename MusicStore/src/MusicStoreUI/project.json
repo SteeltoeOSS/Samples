@@ -25,7 +25,8 @@
     "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
     "Microsoft.AspNetCore.Identity": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-    "Microsoft.AspNetCore.Authentication.Google": "1.0.0"
+    "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
+    "System.Data.Common": "4.1.0"
   },
 
   "tools": {
@@ -35,7 +36,7 @@
   },
 
   "frameworks": {
-    "net452": { }
+    "net451": {}
   },
 
   "buildOptions": {
@@ -60,5 +61,9 @@
   "scripts": {
     "prepublish": [ "bower install", "dotnet bundle" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  },
+  "runtimes": {
+    "win7-x64": {},
+    "win7-x86": {}
   }
 }

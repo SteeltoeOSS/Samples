@@ -1,0 +1,14 @@
+---
+applications:
+- name: musicstore
+  memory: 512M
+  host: musicstore
+  stack: windows2012R2
+  health-check-type: none
+  command: cmd /c .\MusicStoreService --server.urls http://*:%PORT%
+  env:
+    ASPNETCORE_ENVIRONMENT: production
+  services:
+   - mStoreRegistry
+   - mStoreConfig
+   - mStoreStoreDB

@@ -10,10 +10,10 @@ Logging:
 
 eureka:
   client:
-    serviceUrl: http://172.30.32.53:8761/eureka/
+    serviceUrl: http://localhost:8761/eureka/
 mysql:
   client:
-    server: 172.29.167.57
+    server: localhost
 redis:
   client:
-    host: 172.16.94.235
+    host: localhost

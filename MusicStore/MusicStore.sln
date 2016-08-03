@@ -5,9 +5,22 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8496BE7-B786-48C4-8E08-113C79966A4B}"
 	ProjectSection(SolutionItems) = preProject
+		config-server.json = config-server.json
+		createCloudFoundryServices.cmd = createCloudFoundryServices.cmd
+		dockerrun-configserver.cmd = dockerrun-configserver.cmd
+		dockerrun-eurekaserver.cmd = dockerrun-eurekaserver.cmd
+		dockerrun-mysqlaserver.cmd = dockerrun-mysqlaserver.cmd
 		global.json = global.json
 		nuget.config = nuget.config
+		pushMusicStoreService.cmd = pushMusicStoreService.cmd
+		pushMusicStoreUI.cmd = pushMusicStoreUI.cmd
+		pushOrderService.cmd = pushOrderService.cmd
+		pushShoppingCartService.cmd = pushShoppingCartService.cmd
 		README.md = README.md
+		runMusicStoreService.cmd = runMusicStoreService.cmd
+		runMusicStoreUI.cmd = runMusicStoreUI.cmd
+		runOrderService.cmd = runOrderService.cmd
+		runShoppingCartService.cmd = runShoppingCartService.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16897CC4-C5A1-43D4-B507-12AF3A78371E}"

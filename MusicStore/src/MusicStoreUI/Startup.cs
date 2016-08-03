@@ -10,6 +10,8 @@ using MusicStoreUI.Models;
 using SteelToe.CloudFoundry.Connector.MySql.EF6;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MusicStoreUI.Identity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
 
 namespace MusicStoreUI
 {

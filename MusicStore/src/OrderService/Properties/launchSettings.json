@@ -18,7 +18,7 @@
     },
     "OrderService": {
       "commandName": "Project",
-      "commandLineArgs": "--server.urls http://*:8000",
+      "commandLineArgs": "--server.urls http://*:7000",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000/api/values",
       "environmentVariables": {

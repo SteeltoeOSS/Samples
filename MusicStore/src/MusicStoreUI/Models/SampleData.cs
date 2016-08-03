@@ -11,7 +11,7 @@ namespace MusicStoreUI.Models
 {
     public static class SampleData
     {
-        const string defaultAdminUserName = "DefaultAdminUserName";
+        const string defaultAdminUserName = "DefaultAdminUsername";
         const string defaultAdminPassword = "DefaultAdminPassword";
 
 
