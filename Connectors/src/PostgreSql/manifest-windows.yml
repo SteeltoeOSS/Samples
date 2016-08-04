@@ -1,0 +1,12 @@
+﻿---
+applications:
+- name: postgres-connector
+  memory: 512M
+  host: postgres-connector
+  stack: windows2012R2
+  health-check-type: none
+  command: cmd /c .\PostgreSql --server.urls http://*:%PORT%
+  env:
+    ASPNETCORE_ENVIRONMENT: development
+  services:
+   - myPostgres
