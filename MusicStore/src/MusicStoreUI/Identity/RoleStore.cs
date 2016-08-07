@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿
+#if NET451 && MYSQL
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -153,3 +155,4 @@ namespace MusicStoreUI.Identity
         #endregion
     }
 }
+#endif

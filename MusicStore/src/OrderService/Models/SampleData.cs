@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+
+#if NET451 && MYSQL
 using System.Data.Entity;
+#endif
+
+#if !NET451 || POSTGRES
+using Microsoft.EntityFrameworkCore;
+#endif
 
 namespace OrderService.Models
 {
@@ -12,11 +19,15 @@ namespace OrderService.Models
    
         public static async Task InitializeOrderDatabaseAsync(IServiceProvider serviceProvider)
         {
-
+#if NET451 && MYSQL
             Database.SetInitializer<OrdersContext>(new DropCreateDatabaseAlways<OrdersContext>());
+#endif
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<OrdersContext>();
+#if !NET451 || POSTGRES
+                await db.Database.EnsureCreatedAsync();
+#endif
                 await InsertTestData(serviceProvider);
             }
         }
@@ -46,9 +57,9 @@ namespace OrderService.Models
                 var db = serviceScope.ServiceProvider.GetService<OrdersContext>();
                 foreach (var item in entities)
                 {
-                    db.Entry(item).State = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)))
-                        ? EntityState.Modified
-                        : EntityState.Added;
+                    var exists = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)));
+                    if (!exists)
+                        db.Entry(item).State = EntityState.Added;
                 }
 
                 await db.SaveChangesAsync();

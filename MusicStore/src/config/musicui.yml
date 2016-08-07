@@ -6,5 +6,10 @@ mysql:
     database: steeltoe2
     username: root
     password: steeltoe
+postgres:
+  client:
+    database: steeltoe2
+    username: steeltoe
+    password: steeltoe
 DefaultAdminUsername: Administrator@test.com
 DefaultAdminPassword: YouShouldChangeThisPassword1!

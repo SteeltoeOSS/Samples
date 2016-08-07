@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+
+#if NET451 && MYSQL
 using System.Data.Entity;
+#endif
+
+#if !NET451 || POSTGRES
+using Microsoft.EntityFrameworkCore;
+#endif
 
 namespace ShoppingCartService.Models
 {
@@ -11,11 +18,15 @@ namespace ShoppingCartService.Models
     {
         public static async Task InitializeShoppingCartDatabaseAsync(IServiceProvider serviceProvider)
         {
-
+#if NET451 && MYSQL
             Database.SetInitializer<ShopingCartContext>(new DropCreateDatabaseAlways<ShopingCartContext>());
+#endif
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<ShopingCartContext>();
+#if !NET451 || POSTGRES
+                await db.Database.EnsureCreatedAsync();
+#endif
                 await InsertTestData(serviceProvider);
             }
         }
@@ -45,9 +56,9 @@ namespace ShoppingCartService.Models
                 var db = serviceScope.ServiceProvider.GetService<ShopingCartContext>();
                 foreach (var item in entities)
                 {
-                    db.Entry(item).State = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)))
-                        ? EntityState.Modified
-                        : EntityState.Added;
+                    var exists = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)));
+                    if (!exists)
+                        db.Entry(item).State = EntityState.Added;
                 }
 
                 await db.SaveChangesAsync();

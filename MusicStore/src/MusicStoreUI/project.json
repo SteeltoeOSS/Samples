@@ -15,18 +15,15 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Pivotal.Discovery.Client": "1.0.0-master-*",
-    "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-master-*",
-    "SteelToe.CloudFoundry.Connector.Redis": "1.0.0-master-*",
-    "SteelToe.CloudFoundry.Connector.MySql": "1.0.0-master-*",
+    "Pivotal.Discovery.Client": "1.0.0-dev-*",
+    "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-dev-*",
+    "SteelToe.CloudFoundry.Connector.PostgreSql": "1.0.0-dev-*",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Microsoft.Extensions.Caching.Memory": "1.0.0",
     "Microsoft.AspNetCore.Session": "1.0.0",
-    "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
     "Microsoft.AspNetCore.Identity": "1.0.0",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-    "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
-    "System.Data.Common": "4.1.0"
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
   },
 
   "tools": {
@@ -36,16 +33,32 @@
   },
 
   "frameworks": {
-    "net451": {}
+    "net451": {
+      "dependencies": {
+        "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
+        "System.Data.Common": "4.1.0",
+        "Microsoft.NETCore.Platforms": "1.0.1-*",
+        "SteelToe.CloudFoundry.Connector.Redis": "1.0.0-dev-*",
+        "SteelToe.CloudFoundry.Connector.MySql": "1.0.0-dev-*"
+      }
+    },
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0-*"
+        }
+      },
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8",
+        "dnxcore50"
+      ]
+    }
   },
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
-    "define": [
-      "DEMO",
-      "TESTING"
-    ]
+    "define": [ "DEMO", "TESTING", "MYSQL" ]
   },
 
   "publishOptions": {
@@ -64,6 +77,11 @@
   },
   "runtimes": {
     "win7-x64": {},
-    "win7-x86": {}
+    "win7-x86": {},
+    "osx.10.10-x64": {},
+    "osx.10.11-x64": {},
+    "ubuntu.14.04-x64": {},
+    "ubuntu.15.04-x64": {},
+    "debian.8-x64": {}
   }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿
+#if NET451 && MYSQL
+using Microsoft.AspNetCore.Identity;
 using MusicStoreUI.Models;
 using System;
 using System.Collections.Generic;
@@ -557,3 +559,4 @@ namespace MusicStoreUI.Identity
         }
     }
 }
+#endif

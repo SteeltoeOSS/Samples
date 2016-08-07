@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Data.Entity;
+
 using System.Security.Claims;
 using System.Threading.Tasks;
+
+
+#if NET451 && MYSQL
+using System.Data.Entity;
+#endif
+#if !NET451 || POSTGRES
+using Microsoft.EntityFrameworkCore;
+#endif
 
 namespace MusicStoreUI.Models
 {
@@ -17,10 +25,16 @@ namespace MusicStoreUI.Models
 
         public static async Task InitializeAccountsDatabaseAsync(IServiceProvider serviceProvider, IConfiguration configuration)
         {
+
+#if NET451 && MYSQL
             Database.SetInitializer<AccountsContext>(new DropCreateDatabaseAlways<AccountsContext>());
+#endif
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
+#if !NET451 || POSTGRES
+                await db.Database.EnsureCreatedAsync();
+#endif
                 await CreateAdminUser(serviceProvider, configuration);
 
             }

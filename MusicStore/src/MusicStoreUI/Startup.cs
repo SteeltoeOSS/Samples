@@ -4,14 +4,26 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
+
+#if NET451 && USE_REDIS_CACHE
 using SteelToe.CloudFoundry.Connector.Redis;
+#endif
+
 using MusicStoreUI.Services;
 using MusicStoreUI.Models;
-using SteelToe.CloudFoundry.Connector.MySql.EF6;
-using Microsoft.AspNet.Identity.EntityFramework;
-using MusicStoreUI.Identity;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
+
+#if NET451 && MYSQL
+using Microsoft.AspNet.Identity.EntityFramework;
+using MusicStoreUI.Identity;
+using SteelToe.CloudFoundry.Connector.MySql.EF6;
+#endif
+
+#if !NET451 || POSTGRES
+using SteelToe.CloudFoundry.Connector.PostgreSql.EFCore;
+#endif
 
 namespace MusicStoreUI
 {
@@ -36,7 +48,7 @@ namespace MusicStoreUI
             // Add framework services.
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-
+#if NET451 && MYSQL
             services.AddDbContext<AccountsContext>(Configuration);
 
             var builder = services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
@@ -46,7 +58,16 @@ namespace MusicStoreUI
 
             builder.AddEntityFrameworkStores().AddDefaultTokenProviders();
 
-       
+#endif
+#if !NET451 || POSTGRES
+            services.AddDbContext<AccountsContext>(options => options.UseNpgsql(Configuration));
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+                    {
+                        options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
+                    })
+                    .AddEntityFrameworkStores<AccountsContext>()
+                    .AddDefaultTokenProviders();
+#endif
             services.AddDiscoveryClient(Configuration);
 
             services.AddSingleton<IMusicStore, MusicStoreService>();
@@ -60,7 +81,7 @@ namespace MusicStoreUI
             // Add memory cache services
             services.AddMemoryCache();
 
-#if USE_REDIS_CACHE
+#if NET451 && USE_REDIS_CACHE
             services.AddDistributedRedisCache(Configuration);
 #else
             services.AddDistributedMemoryCache();
@@ -104,13 +125,6 @@ namespace MusicStoreUI
 
             // Add cookie-based authentication to the request pipeline
             app.UseIdentity();
-
-
-            app.UseGoogleAuthentication(new GoogleOptions
-            {
-                ClientId = "995291875932-0rt7417v5baevqrno24kv332b7d6d30a.apps.googleusercontent.com",
-                ClientSecret = "J_AT57H5KH_ItmMdu0r6PfXm"
-            });
 
             app.UseMvc(routes =>
             {

@@ -4,7 +4,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MusicStore.Models;
+
+#if !NET451 || POSTGRES
+using Microsoft.EntityFrameworkCore;
+#endif
+
+#if NET451 && MYSQL
 using System.Data.Entity;
+#endif
+
 using System.Collections.Generic;
 
 namespace MusicStore.Controllers
@@ -27,7 +35,9 @@ namespace MusicStore.Controllers
         [HttpGet("Genres")]
         public async Task<List<GenreJson>> GetGenres()
         {
-            var genres = await DbContext.Genres.ToListAsync();
+            var genres = await DbContext.Genres
+                .Include(g => g.Albums)
+                .ToListAsync();
             return GenreJson.From(genres);
         }
 
@@ -42,13 +52,15 @@ namespace MusicStore.Controllers
             {
 
                 genre = await DbContext.Genres
+                    .Include(g => g.Albums)
                     .Where(g => g.GenreId == id.Value)
                     .FirstOrDefaultAsync();
             } else
             {
                 genre = await DbContext.Genres
-                        .Where(g => g.Name == name)
-                        .FirstOrDefaultAsync();
+                    .Include(g => g.Albums)
+                    .Where(g => g.Name == name)
+                    .FirstOrDefaultAsync();
             }
 
 
@@ -71,12 +83,14 @@ namespace MusicStore.Controllers
             if ("All".Equals(genre))
             {
                 albums = await DbContext.Albums
-                                .ToListAsync();
+                    .Include(g => g.Artist)
+                    .Include(g => g.Genre)
+                    .ToListAsync();
             } else
             {
                 var genreModel = await DbContext.Genres
-                                .Include(g => g.Albums)
                                 .Where(g => g.Name == genre)
+                                .Include(g => g.Albums)
                                 .FirstOrDefaultAsync();
 
                 if (genreModel == null)
@@ -84,7 +98,20 @@ namespace MusicStore.Controllers
                     return NotFound();
                 }
 
-                albums = genreModel.Albums;
+                albums = new List<Album>();
+                foreach(var a in genreModel.Albums)
+                {
+                    var album = await DbContext.Albums
+                        .Where(g => g.AlbumId == a.AlbumId)
+                        .Include(g => g.Artist)
+                        .Include(g => g.Genre)
+                        .FirstOrDefaultAsync();
+                    if (album != null)
+                    {
+                        albums.Add(album);
+                    }
+                }
+       
             }
 
             var result = AlbumJson.From(albums);
@@ -102,12 +129,15 @@ namespace MusicStore.Controllers
             if (id.HasValue)
             {
                 album = await DbContext.Albums
-                                    .Where(a => a.AlbumId == id.Value)
-                                    .Include(a => a.Artist)
-                                    .Include(a => a.Genre)
-                                    .FirstOrDefaultAsync();
+                                .Where(a => a.AlbumId == id.Value)
+                                .Include(a => a.Artist)
+                                .Include(a => a.Genre)
+                                .FirstOrDefaultAsync();
             } else if (!string.IsNullOrEmpty(title)) {
-                album = await DbContext.Albums.Where(a => a.Title == title).FirstOrDefaultAsync();
+                album = await DbContext.Albums
+                                .Include(a => a.Artist)
+                                .Include(a => a.Genre)
+                                .Where(a => a.Title == title).FirstOrDefaultAsync();
             }
 
             if (album == null)
@@ -125,6 +155,8 @@ namespace MusicStore.Controllers
         {
             var albumModel = await DbContext.Albums
                 .OrderByDescending(a => a.OrderCount)
+                .Include(a => a.Artist)
+                .Include(a => a.Genre)
                 .Take(count)
                 .ToListAsync();
 
@@ -147,8 +179,8 @@ namespace MusicStore.Controllers
             [FromQuery] int id)
         {
             Artist artist = await DbContext.Artists
-                                    .Where(a => a.ArtistId == id)
-                                    .FirstOrDefaultAsync();
+                                .Where(a => a.ArtistId == id)
+                                .FirstOrDefaultAsync();
             
       
 
@@ -173,11 +205,12 @@ namespace MusicStore.Controllers
             var toAdd = Album.From(json);
 
             var artist = await DbContext.Artists
-                                   .Where(a => a.ArtistId == toAdd.ArtistId)
-                                   .FirstOrDefaultAsync();
+                                .Where(a => a.ArtistId == toAdd.ArtistId)
+                                .FirstOrDefaultAsync();
 
             var genre = await DbContext.Genres
                     .Where(g => g.GenreId == toAdd.GenreId)
+                    .Include(g => g.Albums)
                     .FirstOrDefaultAsync();
             if (artist == null || genre == null)
             {
@@ -232,7 +265,7 @@ namespace MusicStore.Controllers
             // Changing genre of the existing album
             if (existing.GenreId != theUpdate.GenreId)
             {
-                var existingGenre = await DbContext.Genres.Where(g => g.GenreId == existing.GenreId).FirstOrDefaultAsync();
+                var existingGenre = await DbContext.Genres.Where(g => g.GenreId == existing.GenreId).Include(g=> g.Albums).FirstOrDefaultAsync();
                 var toRemove = existingGenre.Albums.FirstOrDefault(a => a.AlbumId == theUpdate.AlbumId);
                 existingGenre.Albums.Remove(toRemove);
                 DbContext.Entry(existingGenre).State = EntityState.Modified;

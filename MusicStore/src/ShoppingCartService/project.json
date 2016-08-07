@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -11,7 +11,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Pivotal.Discovery.Client": "1.0.0-dev-*",
     "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-dev-*",
-    "SteelToe.CloudFoundry.Connector.MySql": "1.0.0-dev-*",
+    "SteelToe.CloudFoundry.Connector.PostgreSql": "1.0.0-dev-*",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0"
   },
 
@@ -20,12 +20,29 @@
   },
 
   "frameworks": {
-    "net451": {}
+    "net451": {
+      "dependencies": {
+        "Microsoft.NETCore.Platforms": "1.0.1-*",
+        "SteelToe.CloudFoundry.Connector.MySql": "1.0.0-dev-*"
+      }
+    },
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0-*"
+        }
+      },
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8",
+        "dnxcore50"
+      ]
+    }
   },
-
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "define": [ "MYSQL" ]
   },
 
   "publishOptions": {
@@ -43,6 +60,11 @@
   },
   "runtimes": {
     "win7-x64": {},
-    "win7-x86": {}
+    "win7-x86": {},
+    "osx.10.10-x64": {},
+    "osx.10.11-x64": {},
+    "ubuntu.14.04-x64": {},
+    "ubuntu.15.04-x64": {},
+    "debian.8-x64": {}
   }
 }

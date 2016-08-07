@@ -5,7 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShoppingCartService.Models;
+
+#if NET451 && MYSQL
 using System.Data.Entity;
+#endif
+
+#if !NET451 || POSTGRES
+using Microsoft.EntityFrameworkCore;
+#endif
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -32,6 +39,7 @@ namespace ShoppingCartService.Controllers
     
             var cart = await DbContext.Carts
                 .Where(c => c.CartId == cartId)
+                .Include(g => g.CartItems)
                 .FirstOrDefaultAsync();
 
             if (cart == null)
@@ -92,6 +100,7 @@ namespace ShoppingCartService.Controllers
         {
             var cart = await DbContext.Carts
                        .Where(c => c.CartId == cartId)
+                       .Include(g => g.CartItems)
                        .FirstOrDefaultAsync();
 
             if (cart == null)
@@ -131,6 +140,7 @@ namespace ShoppingCartService.Controllers
         {
             var cart = await DbContext.Carts
                             .Where(c => c.CartId == cartId)
+                            .Include(g => g.CartItems)
                             .FirstOrDefaultAsync();
 
             if (cart == null)

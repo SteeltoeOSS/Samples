@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
+#if NET451 && MYSQL
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.AspNetCore.Identity;
 using MusicStoreUI.Models;
@@ -26,3 +28,4 @@ namespace MusicStoreUI.Identity
         }
     }
 }
+#endif

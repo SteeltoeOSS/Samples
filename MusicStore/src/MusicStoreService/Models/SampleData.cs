@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+
+
+#if NET451 && MYSQL
 using System.Data.Entity;
+#endif
+
+#if !NET451 || POSTGRES
+using Microsoft.EntityFrameworkCore;
+#endif
 
 namespace MusicStore.Models
 {
@@ -15,11 +23,16 @@ namespace MusicStore.Models
 
         public static async Task InitializeMusicStoreDatabaseAsync(IServiceProvider serviceProvider)
         {
-
+#if NET451 && MYSQL
             Database.SetInitializer<MusicStoreContext>(new DropCreateDatabaseAlways<MusicStoreContext>());
+#endif
+
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
+#if !NET451 || POSTGRES
+                await db.Database.EnsureCreatedAsync();
+#endif
                 await InsertTestData(serviceProvider);
             }
             artists = null;
@@ -30,10 +43,11 @@ namespace MusicStore.Models
         private static async Task InsertTestData(IServiceProvider serviceProvider)
         {
             var albums = GetAlbums(imgUrl, Genres, Artists);
-
-            //await AddOrUpdateAsync(serviceProvider, g => g.GenreId, Genres.Select(genre => genre.Value));
-            //await AddOrUpdateAsync(serviceProvider, a => a.ArtistId, Artists.Select(artist => artist.Value));
-            await AddOrUpdateAsync(serviceProvider, a => a.AlbumId, albums);
+#if !NET451 || POSTGRES
+            await AddOrUpdateAsync(serviceProvider, g => g.Name, Genres.Select(genre => genre.Value));
+            await AddOrUpdateAsync(serviceProvider, a => a.Name, Artists.Select(artist => artist.Value));
+#endif
+            await AddOrUpdateAsync(serviceProvider, a => a.Title, albums);
         }
 
         // TODO [EF] This may be replaced by a first class mechanism in EF
@@ -55,9 +69,9 @@ namespace MusicStore.Models
                 var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
                 foreach (var item in entities)
                 {
-                    db.Entry(item).State = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)))
-                        ? EntityState.Modified
-                        : EntityState.Added;
+                    var exists = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)));
+                    if (!exists)
+                        db.Entry(item).State = EntityState.Added;
                 }
 
                 await db.SaveChangesAsync();

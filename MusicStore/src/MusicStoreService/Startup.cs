@@ -7,9 +7,14 @@ using Microsoft.Extensions.Logging;
 
 using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
-using SteelToe.CloudFoundry.Connector.MySql.EF6;
 using MusicStore.Models;
 
+#if NET451 && MYSQL
+using SteelToe.CloudFoundry.Connector.MySql.EF6;
+#endif
+#if !NET451 || POSTGRES
+using SteelToe.CloudFoundry.Connector.PostgreSql.EFCore;
+#endif
 
 namespace MusicStore
 {
@@ -39,8 +44,12 @@ namespace MusicStore
             services.AddMvc();
 
             services.AddDiscoveryClient(Configuration);
-
+#if NET451 && MYSQL
             services.AddDbContext<MusicStoreContext>(Configuration);
+#endif
+#if !NET451 || POSTGRES
+            services.AddDbContext<MusicStoreContext>(options => options.UseNpgsql(Configuration));
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

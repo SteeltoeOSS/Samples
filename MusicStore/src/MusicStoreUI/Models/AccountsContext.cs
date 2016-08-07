@@ -1,11 +1,21 @@
 ﻿
+#if NET451 && MYSQL
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
-using System;
 using System.Data.Entity;
+#endif
+
+#if !NET451 || POSTGRES
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+#endif
+
+using System;
 
 namespace MusicStoreUI.Models
 {
+
+#if NET451 && MYSQL
     public class ApplicationUser : IdentityUser {
    
         public virtual string NormalizedUserName { get; set; }
@@ -41,4 +51,30 @@ namespace MusicStoreUI.Models
             modelBuilder.Entity<IdentityRole>().Property(r => r.Name).HasMaxLength(128);
         }
     }
+#endif
+
+#if !NET451 || POSTGRES
+    public class ApplicationUser : IdentityUser { }
+    public class ApplicationRole : IdentityRole {
+        public ApplicationRole() : base()
+        {
+
+        }
+        public ApplicationRole(string role) : base(role)
+        {
+
+        }
+    }
+
+    public class AccountsContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    {
+        public AccountsContext(DbContextOptions<AccountsContext> options)
+            : base(options)
+        {
+
+        }
+   
+    }
+#endif
+
 }
