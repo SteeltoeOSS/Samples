@@ -1,0 +1,13 @@
+---
+applications:
+- name: orderprocessing
+  memory: 512M
+  host: orderprocessing
+  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
+  command: ./OrderService --server.urls http://*:%PORT%
+  env:
+    ASPNETCORE_ENVIRONMENT: production
+  services:
+   - mStoreRegistry
+   - mStoreConfig
+   - mStoreOrdersDB

@@ -12,10 +12,12 @@ Note: The OrderService and ShoppingCartService are independent from the Music ap
 This application makes use of the following SteelToe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
-* SteelToe Connectors for connecting to MySql using EF6 or Postgres using EFCore 
+* SteelToe Connectors for connecting to MySql using EF6 OR Postgres using EFCore 
 * Optionally using SteelToe Connector to connect to a Redis cache
 
-Note: The MySql and Redis connectors only support .NET 451+ and as such when using them you must target a windows runtime. The Postgres connector supports both .NET 451+ and .NET Core.  The default for the application is to use MySql and no Redis cache.
+Note: The MySql and Redis connectors only support .NET 451+ and as such when using them you must target a windows runtime. 
+The Postgres connector supports both .NET 451+ and .NET Core.  The default for the application is to use MySql when running locally on Windows and to use Postgres when running on MacOS/Linux.
+Also, the default is to not use Redis cache.
 
 # Getting Started
 
@@ -29,7 +31,7 @@ Note: The MySql and Redis connectors only support .NET 451+ and as such when usi
 * Spring Cloud Config Server - @ `http://localhost:8888` 
 * Spring Cloud Eureka Server - @ `http://localhost:8761/eureka/`
 * MySql Database Server - @ `localhost:3306` username: `root`, password: `steeltoe` or Postgres Database Server @ `localhost:5432` username: `steeltoe`, password: `steeltoe`
-* Redis Cache - Optional, can be used for Session state backing store cache.
+* Redis Cache - Optional, can be used for Session state backing store.
 
 You have a three options to choose from in order to get these services up and running locally:
 
@@ -46,14 +48,14 @@ If you don't have Docker installed on your local machine, you can use:
 * MacOS - [Docker for Mac](https://docs.docker.com/docker-for-mac/)
 
 After installing either of the above, you need to enable `File Sharing` between your Docker VM and your local machine. 
-On Windows 10, share the `C:` drive from you local machine with the VM. On MacOS, share your Home directory with the VM. 
+On Windows 10, share the `C:` drive from you local machine with the VM. On MacOS, share your Home directory with the VM. This is necessary as the Config Server has been pre-configured to read its configuration data from `~/steeltoe/config-repo` or `C:\steeltoe\config-repo` off of the local machine.
 
 Once you have Docker installed and running you can use the provided command files to startup the various services.  For example to startup a Spring Cloud Config Server:
 
 1. cd Samples/MusicStore
 2. start dockerrun-configserver.cmd or ./dockerrun-configserver.sh
 
-This will create a directory `~/steeltoe/config-repo` if it doesn't exist and then fire up a Spring Cloud Config Server listening on port 8888. The Config Server has been pre-configured to read its configuration data from `~/steeltoe/config-repo` off of the Local machine.
+This will create a directory `~/steeltoe/config-repo` or `c:\steeltoe\config-repo` if it doesn't exist and then fire up a Spring Cloud Config Server listening on port 8888. 
 
 Likewise to startup a Spring Cloud Eureka Server:
 
@@ -62,32 +64,30 @@ Likewise to startup a Spring Cloud Eureka Server:
 
 This will fire up a Spring Cloud Eureka Server listening on port 8761.
 
-And finally to startup a MySql Server:
+And finally to startup a MySql Server.  Note: On MacOS you can NOT use MySQL. Instead, you must use Postgres as there currently are no MySql .NET providers supported on .NET Core. 
 
 1. cd Samples/MusicStore
 2. start dockerrun-mysqlserver.cmd or ./dockerrun-mysqlserver.sh
 
 This will fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
 
-You can also use a Postgres Server, but you will have to compile the application services with POSTGRES defined instead of MYSQL. 
+To startup a Postres Server: 
 1. cd Samples/MusicStore
 2. start dockerrun-postgresserver.cmd or ./dockerrun-postgresserver.sh
 
 This will fire up a Postgres Server listening on port `5432` with username: `steeltoe` and password: `steeltoe`.
 
-
 ### Pre-requisites - Using Windows Containers
 Details to be provided!
-
 
 # Building & Running MusicStore App - Local
 
 Once you have the pre-requisite services up and running then you are ready to build and run the various application services locally. Before starting up any of the services you first need to copy the MusicStore configuration files to the `\steeltoe\config-repo' so the running Config Server will have access to them.
 
-1. cd Samples/MusicStore/config
+1. cd Samples/MusicStore/src/config
 2. copy *.* c:/steeltoe/config-repo or cp *.* ~/steeltoe/config-repo
 
-Once thats complete, then you are ready to fire up the individual services. The simplest way to get these up and running is to use the provided `run-*.cmd` files.
+Once thats complete, then you are ready to fire up the individual services. The simplest way to get these up and running is to use the provided `run*.cmd or run*.sh` files.
 
 For example, to startup the MusicStoreService simply:
 
@@ -104,7 +104,7 @@ If all the services startup cleanly, you should be able to hit: http://localhost
 2. Install Spring Cloud Services 1.0.11.
 3. Install .NET Core SDK.
 4. Install Postgres database service if you want to use Postgress instead of MySQL.
-4. Web tools installed and on Path.  If you have VS2015 Update 3 installed then add this to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`
+4. Web tools installed and on Path.  On Windows, if you have VS2015 Update 3 installed then add this to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`
 
 # Setup Services on CloudFoundry
 
@@ -133,7 +133,7 @@ This will create all of the services needed by the application.  Specifically, i
 Note: The Spring Cloud Config Server instance created by the above script configures the Config Server instance to use the git repo: https://github.com/SteelToeOSS/musicStore-config.git.  This repo contains the same configuration files as those found in `Samples/MusicStore/config`.
 No changes are required to the application configuration files before pushing the app to CloudFoundry. 
 
-Note: If you wish to change what github repo the Config server instance uses, you can modify config-server.json before using the script above.
+Note: If you wish to change what github repo the Config server instance uses, you can modify config-server.json before using the `createCloudFoundryServices` script above.
 
 # Building & Pushing App - CloudFoundry
 
@@ -142,8 +142,4 @@ Once the services have been created on CloudFoundry then you can use the provide
 1. cd Samples/MusicStore
 2. pushShoppingCartService.cmd or ./pushShoppingCartService.sh
 
-Each of the `push*.*` scripts publish the MusicStore service targeting `net451` and `win7-x64`  and then push the MusicStore service using the `manifest-windows.yml` found in the projects directory.
-
-
-
-
+Each of the `push*.*` scripts publish the MusicStore service targeting `net451` and `win7-x64`  and then push the MusicStore service using the `manifest-windows.yml` found in the projects directory. If you wish to push to a Linux container, you will have to recompile the application for Postgres and publish the app targeting the `netcoreapp1.0` framework and `ubuntu` runtime.  Then use the `manifest.yml` file when pushing the app services.
