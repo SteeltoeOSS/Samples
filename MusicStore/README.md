@@ -36,7 +36,7 @@ Also, the default is to not use Redis cache.
 You have a three options to choose from in order to get these services up and running locally:
 
 * Use pre-built SteelToe Docker images. 
-* On Windows 10, use pre-built SteelToe Windows Container images. (Note: Windows containers on Windows 10 and Windows Server 2016 is still in Beta. Consider it experimental)
+* On Windows 10, use pre-built SteelToe Windows Container images. (Note: Windows containers on Windows 10 and Windows Server 2016 is still in Beta. Consider it experimental). If you'd like to use the Windows Container Images on Windows 10 Pro, ensure that your OS version is at least 1607. Then, follow [Microsoft's instructions] (https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10) to turn on the container functionality.
 * Install each service manually.
 
 Currently, the simplest way to get these up and running is to use the first option above together with the provided `dockerrun-*.cmd, dockerrun-*.sh` files to startup those services.  
