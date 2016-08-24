@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Rabbit.Controllers
+namespace RabbitDemo.Controllers
 {
     public class RabbitController : Controller
     {
