@@ -2,8 +2,8 @@
 This repo tree contains a sample app illustrating how to use all of the SteelToe components together in a ASP.NET Core application. This application is based on the ASP.NET Core reference app [MusicStore](https://github.com/aspnet/MusicStore) provided by Microsoft.
 
 In creating this application, we took the Microsoft reference application and broke it up into multiple independent services:
-* MusicStoreService - provides a RESTful API to the MusicStore and its backend Music database.
 * MusicStoreUI - provides the UI to the MusicStore application and all of its services.
+* MusicStoreService - provides a RESTful API to the MusicStore and its backend Music database.
 * OrderService - provides a RESTful API for Order processing service and its backend Order database. 
 * ShoppingCartService - provides a RESTful api to a ShoppingCart service and its backend ShoppingCart database.
 
@@ -13,7 +13,7 @@ This application makes use of the following SteelToe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
 * SteelToe Connectors for connecting to MySql using EF6 OR Postgres using EFCore 
-* Optionally using SteelToe Connector to connect to a Redis cache
+* Optionally using SteelToe Connector to connect to a Redis cache for Session storage.
 
 Note: The MySql and Redis connectors only support .NET 451+ and as such when using them you must target a windows runtime. 
 The Postgres connector supports both .NET 451+ and .NET Core.  The default for the application is to use MySql when running locally on Windows and to use Postgres when running on MacOS/Linux.
@@ -47,7 +47,7 @@ If you don't have Docker installed on your local machine, you can use:
 * Windows 10 - [Docker for Windows](https://docs.docker.com/docker-for-windows/) 
 * MacOS - [Docker for Mac](https://docs.docker.com/docker-for-mac/)
 
-After installing either of the above, you need to enable `File Sharing` between your Docker VM and your local machine. 
+After installing either of the above, you need to enable [`File Sharing`](https://docs.docker.com/docker-for-windows/#/shared-drives) between your Docker VM and your local machine. 
 On Windows 10, share the `C:` drive from you local machine with the VM. On MacOS, share your Home directory with the VM. This is necessary as the Config Server has been pre-configured to read its configuration data from `~/steeltoe/config-repo` or `C:\steeltoe\config-repo` off of the local machine.
 
 Once you have Docker installed and running you can use the provided command files to startup the various services.  For example to startup a Spring Cloud Config Server:
@@ -72,6 +72,7 @@ And finally to startup a MySql Server.  Note: On MacOS you can NOT use MySQL. In
 This will fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
 
 To startup a Postres Server: 
+
 1. cd Samples/MusicStore
 2. start dockerrun-postgresserver.cmd or ./dockerrun-postgresserver.sh
 
@@ -116,6 +117,7 @@ As mentioned above, the application is dependent on the following services:
 * Redis Cache - Optional, can be used for Session state backing store cache.
 
 Before pushing the application to CloudFoundry we need to create those services:
+
 1. cf target -o myOrg -s mySpace
 2. cd Samples/MusicStore
 3. start createCloudFoundryServices.cmd or ./createCloudFoundryServices.sh
