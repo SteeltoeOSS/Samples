@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Send Data";
+}
+<h2>@ViewData["Title"].</h2>
+
+<form asp-controller="Rabbit"
+      asp-action="Send"
+      method="post">
+    Message:
+    <input type="text" name="Message" value="" />
+    <br />
+    <input type="submit" value="Send" />
+</form>
