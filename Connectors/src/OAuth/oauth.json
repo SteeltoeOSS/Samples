@@ -1,0 +1,5 @@
+{
+  "client_id": "myTestApp",
+  "client_secret": "myTestApp",
+  "uri": "uaa://login.system.testcloud.com"
+}
