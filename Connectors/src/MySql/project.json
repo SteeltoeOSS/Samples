@@ -30,6 +30,7 @@
 
   "frameworks": {
     "net451": {
+      "platform":"standalone",
       "dependencies": {
         "Microsoft.NETCore.Platforms": "1.0.1-*"
       }
