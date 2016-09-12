@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SteelToe.Security.Authentication.CloudFoundry;
-using SteelToe.CloudFoundry.Connector.OAuth;
 using SteelToe.Extensions.Configuration;
-using Microsoft.AspNetCore.Http;
 
-namespace CloudFoundrySingleSignon
+namespace CloudFoundryJwtAuthentication
 {
     public class Startup
     {
@@ -23,61 +20,50 @@ namespace CloudFoundrySingleSignon
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddCloudFoundry()
-                .AddEnvironmentVariables();
+                .AddCloudFoundry();
 
+            if (env.IsEnvironment("Development"))
+            {
+                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
+                builder.AddApplicationInsightsSettings(developerMode: true);
+            }
 
+            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddCloudFoundryAuthentication(Configuration);
+            services.AddCloudFoundryJwtAuthentication(Configuration);
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("testgroup", policy => policy.RequireClaim("scope", "testgroup"));
                 options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
             });
 
-            services.AddMvc();
+            // Add framework services.
+            services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseApplicationInsightsRequestTelemetry();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            app.UseApplicationInsightsExceptionTelemetry();
 
+            app.UseCloudFoundryJwtAuthentication();
 
-            app.UseStaticFiles();
-
-            app.UseCloudFoundryAuthentication(new CloudFoundryOptions()
-            {
-                AccessDeniedPath = new PathString("/Home/AccessDenied")
-            });
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }

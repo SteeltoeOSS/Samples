@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E9938863-9AC
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CloudFoundrySingleSignon", "src\CloudFoundrySingleSignon\CloudFoundrySingleSignon.xproj", "{1A0FE0FD-867E-4E81-A728-44380B52E715}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CloudFoundryJwtAuthentication", "src\CloudFoundryJwtAuthentication\CloudFoundryJwtAuthentication.xproj", "{F42BEA65-6246-465E-9B77-F7404320DF5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,11 +22,16 @@ Global
 		{1A0FE0FD-867E-4E81-A728-44380B52E715}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A0FE0FD-867E-4E81-A728-44380B52E715}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A0FE0FD-867E-4E81-A728-44380B52E715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42BEA65-6246-465E-9B77-F7404320DF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42BEA65-6246-465E-9B77-F7404320DF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42BEA65-6246-465E-9B77-F7404320DF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42BEA65-6246-465E-9B77-F7404320DF5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A0FE0FD-867E-4E81-A728-44380B52E715} = {E9938863-9AC3-45F3-BC69-E39D5C70D36F}
+		{F42BEA65-6246-465E-9B77-F7404320DF5A} = {E9938863-9AC3-45F3-BC69-E39D5C70D36F}
 	EndGlobalSection
 EndGlobal
