@@ -4,8 +4,8 @@ applications:
   memory: 512M
   host: postgres-connector
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
-  command: cmd /c .\PostgreEFCore --server.urls http://*:%PORT%
+  command: ./PostgreEFCore --server.urls http://*:$PORT
   env:
     ASPNETCORE_ENVIRONMENT: development
   services:
-   - myPostgres
+   - myOAuthService
