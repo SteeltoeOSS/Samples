@@ -1,8 +1,11 @@
-﻿using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace RabbitDemo
+namespace Rabbit
 {
     public class Program
     {
@@ -10,12 +13,25 @@ namespace RabbitDemo
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://0.0.0.0:8080")
+                .UseUrls(GetServerUrls(args))
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseStartup(typeof(Program).GetTypeInfo().Assembly.GetName().Name)
+                .UseIISIntegration()
+                .UseStartup<Startup>()
                 .Build();
 
             host.Run();
+        }
+        private static string[] GetServerUrls(string[] args)
+        {
+            List<string> urls = new List<string>();
+            for (int i = 0; i < args.Length; i++)
+            {
+                if ("--server.urls".Equals(args[i], StringComparison.OrdinalIgnoreCase))
+                {
+                    urls.Add(args[i + 1]);
+                }
+            }
+            return urls.ToArray();
         }
     }
 }

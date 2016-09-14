@@ -1,9 +1,8 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 
-namespace RabbitDemo.Controllers
+namespace Rabbit.Controllers
 {
     public class RabbitController : Controller
     {
