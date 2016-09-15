@@ -2,7 +2,6 @@
 applications:
 - name: postgres-connector
   memory: 512M
-  host: postgres-connector
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: cmd /c .\PostgreSql --server.urls http://*:%PORT%
   env:

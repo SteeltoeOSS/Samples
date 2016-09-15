@@ -2,7 +2,6 @@
 applications:
 - name: musicstore
   memory: 512M
-  host: musicstore
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: ./MusicStoreService --server.urls http://*:%PORT%
   env:

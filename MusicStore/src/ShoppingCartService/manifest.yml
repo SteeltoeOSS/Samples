@@ -2,7 +2,6 @@
 applications:
 - name: shoppingcart
   memory: 512M
-  host: shoppingcart
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: ./ShoppingCartService --server.urls http://*:%PORT%
   env:
