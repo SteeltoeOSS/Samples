@@ -19,8 +19,8 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Authorization": "1.0.0",
-    "SteelToe.Security.Authentication.CloudFoundry": "1.0.0-*",
-    "SteelToe.Extensions.Configuration.CloudFoundry": "1.0.0-*"
+    "Steeltoe.Security.Authentication.CloudFoundry": "1.0.0-*",
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*"
   },
 
   "tools": {

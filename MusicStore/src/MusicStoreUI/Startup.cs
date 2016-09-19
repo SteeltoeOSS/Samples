@@ -6,7 +6,7 @@ using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
 
 #if NET451 && USE_REDIS_CACHE
-using SteelToe.CloudFoundry.Connector.Redis;
+using Steeltoe.CloudFoundry.Connector.Redis;
 #endif
 
 using MusicStoreUI.Services;
@@ -18,11 +18,11 @@ using Microsoft.Extensions.Logging;
 #if NET451 && MYSQL
 using Microsoft.AspNet.Identity.EntityFramework;
 using MusicStoreUI.Identity;
-using SteelToe.CloudFoundry.Connector.MySql.EF6;
+using Steeltoe.CloudFoundry.Connector.MySql.EF6;
 #endif
 
 #if !NET451 || POSTGRES
-using SteelToe.CloudFoundry.Connector.PostgreSql.EFCore;
+using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
 #endif
 
 namespace MusicStoreUI

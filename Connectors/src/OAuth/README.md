@@ -1,6 +1,6 @@
 ﻿# OAuth Connector Sample App - 
 ASP.NET Core sample app illustrating how to use the OAuth Connector to automatically bind to a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) and expose the services configuration data as injectable ASP.NET Core `IOptions`.
-This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://github.com/SteelToeOSS/Security).
+This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://github.com/SteeltoeOSS/Security).
 # Pre-requisites - CloudFoundry
 
 1. Install Pivotal CloudFoundry 1.7

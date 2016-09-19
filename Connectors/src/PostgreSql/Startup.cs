@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SteelToe.CloudFoundry.Connector.PostgreSql;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.PostgreSql;
+using Steeltoe.Extensions.Configuration;
 using PostgreSql.Models;
 
 namespace PostgreSql

@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SteelToe.Security.Authentication.CloudFoundry;
-using SteelToe.CloudFoundry.Connector.OAuth;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.Security.Authentication.CloudFoundry;
+using Steeltoe.CloudFoundry.Connector.OAuth;
+using Steeltoe.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 
 namespace CloudFoundrySingleSignon

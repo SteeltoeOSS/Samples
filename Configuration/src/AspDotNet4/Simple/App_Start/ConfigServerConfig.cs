@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration;
 using System;
 using Microsoft.Extensions.FileProviders;
 using System.IO;

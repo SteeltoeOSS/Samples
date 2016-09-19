@@ -9,11 +9,11 @@ using Pivotal.Discovery.Client;
 using ShoppingCartService.Models;
 
 #if NET451 && MYSQL
-using SteelToe.CloudFoundry.Connector.MySql.EF6;
+using Steeltoe.CloudFoundry.Connector.MySql.EF6;
 #endif
 
 #if !NET451 || POSTGRES
-using SteelToe.CloudFoundry.Connector.PostgreSql.EFCore;
+using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
 #endif
 
 namespace ShoppingCartService

@@ -12,7 +12,7 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Pivotal.Discovery.Client": "1.0.0-*",
     "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-*",
-    "SteelToe.CloudFoundry.Connector.PostgreSql": "1.0.0-dev-*"
+    "Steeltoe.CloudFoundry.Connector.PostgreSql": "1.0.0-dev-*"
   },
 
   "tools": {
@@ -23,7 +23,7 @@
     "net451": {
       "dependencies": {
         "Microsoft.NETCore.Platforms": "1.0.1-*",
-        "SteelToe.CloudFoundry.Connector.MySql": "1.0.0-dev-*"
+        "Steeltoe.CloudFoundry.Connector.MySql": "1.0.0-dev-*"
       }
     },
     "netcoreapp1.0": {

@@ -1,5 +1,5 @@
 ﻿using SimpleCloudFoundry4.ViewModels;
-using SteelToe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using System.Web.Mvc;
 
 namespace SimpleCloudFoundry4.Controllers

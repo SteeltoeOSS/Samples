@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SteelToe.CloudFoundry.Connector.OAuth;
+using Steeltoe.CloudFoundry.Connector.OAuth;
 using System.Text;
 using Microsoft.Extensions.Options;
 

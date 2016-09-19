@@ -1,5 +1,5 @@
-# SteelToe Sample Applications
-This repo contains several sample applications illustrating how to use the SteelToe frameworks. 
+# Steeltoe Sample Applications
+This repo contains several sample applications illustrating how to use the Steeltoe frameworks. 
 
 AppVeyor Master:  Coming soon!
 

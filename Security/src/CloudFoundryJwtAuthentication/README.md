@@ -1,13 +1,13 @@
 ﻿# CloudFoundry JWT Bearer Token Security Sample App 
-ASP.NET Core Web API sample app illustrating how to make use of the SteelToe [CloudFoundry External Security Provider](https://github.com/SteelToeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) using JWT Bearer tokens.
+ASP.NET Core Web API sample app illustrating how to make use of the Steeltoe [CloudFoundry External Security Provider](https://github.com/SteelToeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) using JWT Bearer tokens.
 
 This sample illustrates how you can secure your web api endpoints using JWT Bearer tokens issued by the CloudFoundry UAA server. 
 
-Note: This application is intended to be used in conjunction with the [CloudFoundrySingleSignon](https://github.com/SteelToeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon) sample app.  You should FIRST get that sample up and running on CloudFoundry and then follow these instructions after that.
+Note: This application is intended to be used in conjunction with the [CloudFoundrySingleSignon](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon) sample app.  You should FIRST get that sample up and running on CloudFoundry and then follow these instructions after that.
 
 # Pre-requisites - CloudFoundry
 
-1. [CloudFoundrySingleSignon](https://github.com/SteelToeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon) already up and running
+1. [CloudFoundrySingleSignon](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon) already up and running
 
 # Publish App & Push to CloudFoundry
 
@@ -19,7 +19,7 @@ Note: This application is intended to be used in conjunction with the [CloudFoun
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 
-Note: The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to the CUPS service `myOAuthService`.  Note: The CUPS service: `myOAuthService` is created when you follow the instructions for [CloudFoundrySingleSignon](https://github.com/SteelToeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon).
+Note: The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to the CUPS service `myOAuthService`.  Note: The CUPS service: `myOAuthService` is created when you follow the instructions for [CloudFoundrySingleSignon](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon).
 
 Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
@@ -38,4 +38,4 @@ On a Windows cell, you should see something like this during startup:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
-At this point the app is up and running.  To access it, you should use the app: [CloudFoundrySingleSignon](https://github.com/SteelToeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon).
+At this point the app is up and running.  To access it, you should use the app: [CloudFoundrySingleSignon](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon).

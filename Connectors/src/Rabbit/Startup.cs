@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SteelToe.CloudFoundry.Connector.Rabbit;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.Rabbit;
+using Steeltoe.Extensions.Configuration;
 
 namespace Rabbit
 {

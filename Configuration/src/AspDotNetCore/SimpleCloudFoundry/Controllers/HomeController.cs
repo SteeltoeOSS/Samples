@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleCloudFoundry.Model;
 using Microsoft.Extensions.Options;
-using SteelToe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using SimpleCloudFoundry.ViewModels.Home;
 using Pivotal.Extensions.Configuration.ConfigServer;
 using Microsoft.Extensions.Configuration;

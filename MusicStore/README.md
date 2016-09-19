@@ -1,5 +1,5 @@
-# SteelToe MusicStore Sample Application
-This repo tree contains a sample app illustrating how to use all of the SteelToe components together in a ASP.NET Core application. This application is based on the ASP.NET Core reference app [MusicStore](https://github.com/aspnet/MusicStore) provided by Microsoft.
+# Steeltoe MusicStore Sample Application
+This repo tree contains a sample app illustrating how to use all of the Steeltoe components together in a ASP.NET Core application. This application is based on the ASP.NET Core reference app [MusicStore](https://github.com/aspnet/MusicStore) provided by Microsoft.
 
 In creating this application, we took the Microsoft reference application and broke it up into multiple independent services:
 * MusicStoreUI - provides the UI to the MusicStore application and all of its services.
@@ -9,11 +9,11 @@ In creating this application, we took the Microsoft reference application and br
 
 Note: The OrderService and ShoppingCartService are independent from the Music application and could be used in any other application requiring those basic services.
 
-This application makes use of the following SteelToe components:
+This application makes use of the following Steeltoe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
-* SteelToe Connectors for connecting to MySql using EF6 OR Postgres using EFCore 
-* Optionally using SteelToe Connector to connect to a Redis cache for Session storage.
+* Steeltoe Connectors for connecting to MySql using EF6 OR Postgres using EFCore 
+* Optionally using Steeltoe Connector to connect to a Redis cache for Session storage.
 
 Note: The MySql and Redis connectors only support .NET 451+ and as such when using them you must target a windows runtime. 
 The Postgres connector supports both .NET 451+ and .NET Core.  The default for the application is to use MySql when running locally on Windows and to use Postgres when running on MacOS/Linux.
@@ -21,7 +21,7 @@ Also, the default is to not use Redis cache.
 
 # Getting Started
 
-* Clone the Samples repo. (i.e.  git clone https://github.com/SteelToeOSS/Samples)
+* Clone the Samples repo. (i.e.  git clone https://github.com/SteeltoeOSS/Samples)
 
 ## Pre-requisites - Local
 
@@ -35,13 +35,13 @@ Also, the default is to not use Redis cache.
 
 You have a three options to choose from in order to get these services up and running locally:
 
-* Use pre-built SteelToe Docker images. 
-* On Windows 10, use pre-built SteelToe Windows Container images. (Note: Windows containers on Windows 10 and Windows Server 2016 is still in Beta. Consider it experimental)
+* Use pre-built Steeltoe Docker images. 
+* On Windows 10, use pre-built Steeltoe Windows Container images. (Note: Windows containers on Windows 10 and Windows Server 2016 is still in Beta. Consider it experimental)
 * Install each service manually.
 
 Currently, the simplest way to get these up and running is to use the first option above together with the provided `dockerrun-*.cmd, dockerrun-*.sh` files to startup those services.  
 
-### Pre-requisites - Using SteelToe Docker images
+### Pre-requisites - Using Steeltoe Docker images
 
 If you don't have Docker installed on your local machine, you can use:
 * Windows 10 - [Docker for Windows](https://docs.docker.com/docker-for-windows/) 
@@ -132,7 +132,7 @@ This will create all of the services needed by the application.  Specifically, i
 * mStoreCartDB - MySql database instance for ShoppingCarts
 * mStoreStoreDB - MySql database instance for Music
 
-Note: The Spring Cloud Config Server instance created by the above script configures the Config Server instance to use the git repo: https://github.com/SteelToeOSS/musicStore-config.git.  This repo contains the same configuration files as those found in `Samples/MusicStore/config`.
+Note: The Spring Cloud Config Server instance created by the above script configures the Config Server instance to use the git repo: https://github.com/SteeltoeOSS/musicStore-config.git.  This repo contains the same configuration files as those found in `Samples/MusicStore/config`.
 No changes are required to the application configuration files before pushing the app to CloudFoundry. 
 
 Note: If you wish to change what github repo the Config server instance uses, you can modify config-server.json before using the `createCloudFoundryServices` script above.

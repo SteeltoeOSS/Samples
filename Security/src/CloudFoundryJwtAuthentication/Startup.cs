@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SteelToe.Security.Authentication.CloudFoundry;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.Security.Authentication.CloudFoundry;
+using Steeltoe.Extensions.Configuration;
 
 namespace CloudFoundryJwtAuthentication
 {

@@ -1,6 +1,6 @@
 ﻿# Rabbit Connector Sample App - RabbitConnection
 
-ASP.NET Core sample app illustrating how to use [SteelToe Rabbit Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.Rabbit) for connecting to a Rabbit service on CloudFoundry using [RabbitMQ.Client - 4.0.0](https://www.rabbitmq.com/dotnet-api-guide.html). This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound rabbitmq service.
+ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.Rabbit) for connecting to a Rabbit service on CloudFoundry using [RabbitMQ.Client - 4.0.0](https://www.rabbitmq.com/dotnet-api-guide.html). This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound rabbitmq service.
 
 # Pre-requisites - CloudFoundry
 

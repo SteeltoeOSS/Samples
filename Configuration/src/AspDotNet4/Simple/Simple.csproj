@@ -129,8 +129,8 @@
       <HintPath>..\..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SteelToe.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SteelToe.Extensions.Configuration.ConfigServer.1.0.0-master-00029\lib\net451\SteelToe.Extensions.Configuration.ConfigServer.dll</HintPath>
+    <Reference Include="Steeltoe.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-master-00029\lib\net451\SteelToe.Extensions.Configuration.ConfigServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

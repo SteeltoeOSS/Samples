@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using SteelToe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Pivotal.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using System;
