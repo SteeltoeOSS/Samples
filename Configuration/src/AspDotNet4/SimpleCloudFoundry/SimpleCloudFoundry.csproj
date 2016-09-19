@@ -134,11 +134,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-master-00029\lib\net451\SteelToe.Extensions.Configuration.CloudFoundry.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-master-00029\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-master-00029\lib\net451\SteelToe.Extensions.Configuration.ConfigServer.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-master-00029\lib\net451\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

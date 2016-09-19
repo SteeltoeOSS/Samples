@@ -1,5 +1,5 @@
 ﻿# Postgres Connector Sample App - EntityFramework Core
-ASP.NET Core sample app illustrating how to use the EntityFramework Core together with  [Steeltoe Postgres Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.PostgreSql) and [Npgsql - 3.1.5](http://www.npgsql.org/) for connecting to a Postgres database service on CloudFoundry. There is also an additional sample which illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
+ASP.NET Core sample app illustrating how to use the EntityFramework Core together with  [Steeltoe Postgres Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.PostgreSql) and [Npgsql - 3.1.5](http://www.npgsql.org/) for connecting to a Postgres database service on CloudFoundry. There is also an additional sample which illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
 
 # Pre-requisites - CloudFoundry
 
