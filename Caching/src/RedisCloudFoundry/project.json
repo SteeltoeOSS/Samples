@@ -16,7 +16,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Pivotal.Extensions.Caching.Redis": "1.0.0-*",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*"  },
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*"  },
 
   "tools": {
     "BundlerMinifier.Core": "2.0.238",

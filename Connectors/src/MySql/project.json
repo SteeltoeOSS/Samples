@@ -17,8 +17,8 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "MySql.Data": "6.9.8",
-    "Steeltoe.CloudFoundry.Connector.MySql": "1.0.0-*",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*",
+    "Steeltoe.CloudFoundry.Connector.MySql": "1.0.0-dev-*",
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*",
     "System.Data.Common": "4.1.0"
   },
 

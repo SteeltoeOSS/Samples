@@ -49,8 +49,8 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "Steeltoe.CloudFoundry.Connector.Rabbit": "1.0.0-*",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*"
+    "Steeltoe.CloudFoundry.Connector.Rabbit": "1.0.0-dev-*",
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*"
   },
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]

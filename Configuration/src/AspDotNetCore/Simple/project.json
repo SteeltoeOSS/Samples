@@ -44,7 +44,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "Steeltoe.Extensions.Configuration.ConfigServer": "1.0.0-*"
+    "Steeltoe.Extensions.Configuration.ConfigServer": "1.0.0-dev-*"
   },
 
   "publishOptions": {
