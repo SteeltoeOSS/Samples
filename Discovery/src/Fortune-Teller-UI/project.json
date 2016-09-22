@@ -21,8 +21,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Pivotal.Discovery.Client": "1.0.0-*",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*",
-    "Steeltoe.Discovery.Client": "1.0.0-dev-*"
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*",
+    "Steeltoe.Discovery.Client": "1.0.0-*"
   },
   "frameworks": {
     "net451": {

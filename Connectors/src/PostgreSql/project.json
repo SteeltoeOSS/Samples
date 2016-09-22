@@ -14,8 +14,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*",
-    "Steeltoe.CloudFoundry.Connector.PostgreSql": "1.0.0-dev-*"
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*",
+    "Steeltoe.CloudFoundry.Connector.PostgreSql": "1.0.0-*"
   },
 
   "tools": {

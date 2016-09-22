@@ -45,7 +45,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Pivotal.Discovery.Client": "1.0.0-*",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*"
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*"
   },
 
   "tools": {
