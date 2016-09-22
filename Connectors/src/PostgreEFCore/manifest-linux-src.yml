@@ -1,0 +1,12 @@
+﻿---
+applications:
+- name: postgres-connector
+  memory: 2G
+  disk_quota: 2G
+  buildpack: https://github.com/cloudfoundry-community/dotnet-core-buildpack
+  command: ruby -e 'require "json"; j=JSON.load(File.read("project.json").gsub(/^\xEF\xBB\xBF/,"")); j["frameworks"].delete("net451"); File.write("project.json", JSON.pretty_generate(j))' && cat project.json && dotnet restore && dotnet run --project . --server.urls http://0.0.0.0:$PORT
+  random-route: true
+  env:
+    ASPNETCORE_ENVIRONMENT: development
+  services:
+   - myPostgres

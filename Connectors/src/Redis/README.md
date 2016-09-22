@@ -1,5 +1,5 @@
 ﻿# Redis Connector Sample App
-ASP.NET Core sample app illustrating how to use [SteelToe Redis Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.Redis) for connecting a [RedisCache](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) to a Redis Cache service on CloudFoundry.
+ASP.NET Core sample app illustrating how to use [Steeltoe Redis Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Redis) for connecting a [RedisCache](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) to a Redis Cache service on CloudFoundry.
 
 # Pre-requisites - CloudFoundry
 

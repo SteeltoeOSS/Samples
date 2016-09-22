@@ -14,7 +14,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 
 # Building & Running - Local
 
-1. Clone this repo. (i.e. git clone https://github.com/SteelToeOSS/Samples)
+1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Discovery/src/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
 4. dotnet run --server.urls http://*:5000
@@ -70,11 +70,11 @@ To see the logs as you startup and use the app: `cf logs fortuneservice`
 
 On a Windows cell, you should see something like this during startup:
 ```
-2016-05-14T06:22:39.54-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+2016-05-14T06:22:39.54-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
 2016-05-14T06:22:39.54-0600 [APP/0]      OUT       GetRequestContent generated JSON: ......
-2016-05-14T06:22:39.57-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+2016-05-14T06:22:39.57-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
 2016-05-14T06:22:39.58-0600 [APP/0]      OUT       RegisterAsync .....
-2016-05-14T06:22:39.58-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.DiscoveryClient[0]
+2016-05-14T06:22:39.58-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
 2016-05-14T06:22:39.58-0600 [APP/0]      OUT       Register FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: NoContent
 2016-05-14T06:22:41.07-0600 [APP/0]      OUT info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
 2016-05-14T06:22:41.07-0600 [APP/0]      OUT       Saved 50 entities to in-memory store.
@@ -89,9 +89,9 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:22:41.31-0600 [APP/0]      OUT Hosting environment: development
 2016-05-14T06:22:41.32-0600 [APP/0]      OUT Now listening on: http://*:57991
 2016-05-14T06:22:41.32-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
-2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT       SendHeartbeatAsync ......., status: OK, instanceInfo: null
-2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.DiscoveryClient[0]
+2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT       Renew FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: OK
 ```
 At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.

@@ -15,7 +15,7 @@ This default configuration of the Config Server uses [this github repo]( https:/
 
 # Building & Running
 
-1. Clone this repo. (i.e. git clone https://github.com/SteelToeOSS/Samples)
+1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Configuration/src/Simple
 3. Install .NET Core SDK 
 4. dotnet restore --configfile nuget.config

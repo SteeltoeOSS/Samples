@@ -2,7 +2,6 @@
 applications:
 - name: shoppingcart
   memory: 512M
-  host: shoppingcart
   stack: windows2012R2
   health-check-type: none
   command: cmd /c .\ShoppingCartService --server.urls http://*:%PORT%

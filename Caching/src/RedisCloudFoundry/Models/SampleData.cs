@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Pivotal.Extensions.Caching;
 using System.Text;
-using Microsoft.Extensions.Caching.Distributed;
+using Pivotal.Extensions.Caching.Distributed;
 
 namespace RedisCloudFoundry.Models
 {
@@ -19,7 +16,7 @@ namespace RedisCloudFoundry.Models
             }
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var cache = serviceScope.ServiceProvider.GetService<IDistributedCache>();
+                var cache = serviceScope.ServiceProvider.GetService<IRedisDistributedCache>();
                 if (cache != null)
                 {
                   

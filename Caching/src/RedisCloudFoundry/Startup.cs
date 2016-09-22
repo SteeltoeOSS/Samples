@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using Pivotal.Extensions.Caching;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration;
 using RedisCloudFoundry.Models;
 
 namespace RedisCloudFoundry

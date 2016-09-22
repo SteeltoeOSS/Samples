@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Fortune_Teller_UI.Services;
 using Pivotal.Discovery.Client;
-using SteelToe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration;
 
 
 namespace Fortune_Teller_UI

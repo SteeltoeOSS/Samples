@@ -5,19 +5,16 @@
   },
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true,
-    "copyToOutput": {
-      "include": [
-        "Views",
-        "wwwroot",
-        "appsettings.json",
-        "web.config"
-      ]
-    }
+    "preserveCompilationContext": true
   },
   "publishOptions": {
-    "include": [ "wwwroot", "Views"],
-    "includeFiles" :["appsettings.json", "web.config"]
+    "include": [
+      "wwwroot",
+      "Views",
+      "Areas/**/Views",
+      "appsettings.json",
+      "web.config"
+    ]
   },
   "frameworks": {
     "net451": {
@@ -42,7 +39,7 @@
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Razor.Tools": {
-      "version": "1.0.0-preview1-final",
+      "version": "1.0.0-preview2-final",
       "type": "build"
     },
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -54,28 +51,24 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-*"  },
+    "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-*"
+  },
   "scripts": {
-    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ],
+    "prepublish": [ "bower install", "dotnet bundle" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
   "tools": {
-    "Microsoft.AspNetCore.Razor.Tools": {
-      "version": "1.0.0-preview1-final",
-      "imports": "portable-net45+win8+dnxcore50"
-    },
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
-      "version": "1.0.0-preview1-final",
-      "imports": "portable-net45+win8+dnxcore50"
-    }
+    "BundlerMinifier.Core": "2.0.238",
+    "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
   },
   "runtimes": {
-    "win7-x64": { },
-    "win7-x86": { },
-    "osx.10.10-x64": { },
-    "osx.10.11-x64": { },
-    "ubuntu.14.04-x64": { },
-    "ubuntu.15.04-x64": { },
-    "debian.8-x64": { }
+    "win7-x64": {},
+    "win7-x86": {},
+    "osx.10.10-x64": {},
+    "osx.10.11-x64": {},
+    "ubuntu.14.04-x64": {},
+    "ubuntu.15.04-x64": {},
+    "debian.8-x64": {}
   }
 }

@@ -14,7 +14,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 
 # Building & Running - Local
 
-1. Clone this repo. (i.e. git clone https://github.com/SteelToeOSS/Samples)
+1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Discovery/src/Fortune-Teller-UI
 3. dotnet restore --configfile nuget.config
 4. dotnet run --server.urls http://*:5555
@@ -71,11 +71,11 @@ On a Windows cell, you should see something like this during startup:
 ```
 2016-05-14T06:38:21.67-0600 [CELL/0]     OUT Successfully created container
 2016-05-14T06:38:27.78-0600 [APP/0]      OUT Running cmd /c SET "DNX_PACKAGES=%CD%\approot\packages" & approot\web.cmd --server.urls http://*:%PORT%
-2016-05-14T06:38:47.90-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+2016-05-14T06:38:47.90-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
 2016-05-14T06:38:47.90-0600 [APP/0]      OUT       DoGetApplicationsAsync .....
-2016-05-14T06:38:47.91-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.DiscoveryClient[0]
+2016-05-14T06:38:47.91-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
 2016-05-14T06:38:47.91-0600 [APP/0]      OUT       FetchFullRegistry returned: OK, Applications[Application[Name=FORTUNESERVICE ....
-2016-05-14T06:38:47.91-0600 [APP/0]      OUT dbug: SteelToe.Discovery.Eureka.DiscoveryClient[0]
+2016-05-14T06:38:47.91-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
 2016-05-14T06:38:47.91-0600 [APP/0]      OUT       FetchRegistry succeeded
 2016-05-14T06:38:47.99-0600 [APP/0]      OUT verb: Microsoft.AspNet.Hosting.Internal.HostingEngine[4]
 2016-05-14T06:38:47.99-0600 [APP/0]      OUT       Hosting starting

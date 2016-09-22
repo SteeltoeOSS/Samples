@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SteelToe.Extensions.Configuration;
-using SteelToe.CloudFoundry.Connector.Redis;
+using Steeltoe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.Redis;
 using Redis.Models;
 
 namespace Redis
@@ -38,7 +38,7 @@ namespace Redis
 
             // Add the Redis distributed cache.
 
-            // We are using the SteelToe Redis Connector to pickup the CloudFoundry
+            // We are using the Steeltoe Redis Connector to pickup the CloudFoundry
             // Redis Service binding and use it to configure the underlying RedisCache
             services.AddDistributedRedisCache(Configuration);
         }

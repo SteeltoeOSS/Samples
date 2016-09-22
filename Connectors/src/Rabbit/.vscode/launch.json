@@ -6,10 +6,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/Rabbit.dll",
+            "program": "${workspaceRoot}/bin/Debug/net451/Rabbit.exe",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
                 "enabled": true,
                 "args": "${auto-detect-url}",
@@ -25,8 +26,7 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
-                "VCAP_SERVICES": "{\"cloudamqp\": [{\"credentials\": {\"http_api_uri\": \"https://dazkziit:lq1VgLw-uHf3dzb6YYfZxRJ_TtA-GV7D@reindeer.rmq.cloudamqp.com/api/\",     \"uri\": \"amqp://dazkziit:lq1VgLw-uHf3dzb6YYfZxRJ_TtA-GV7D@reindeer.rmq.cloudamqp.com/dazkziit\"},    \"label\":\"cloudamqp\",    \"name\": \"myRabbitService\"   }]}"
+                "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceRoot}/Views"

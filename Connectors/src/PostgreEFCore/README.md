@@ -1,5 +1,5 @@
 ﻿# Postgres Connector Sample App - EntityFramework Core
-ASP.NET Core sample app illustrating how to use the EntityFramework Core together with  [SteelToe Postgres Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.PostgreSql) and [Npgsql - 3.1.5](http://www.npgsql.org/) for connecting to a Postgres database service on CloudFoundry. There is also an additional sample which illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
+ASP.NET Core sample app illustrating how to use the EntityFramework Core together with  [Steeltoe Postgres Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.PostgreSql) and [Npgsql - 3.1.5](http://www.npgsql.org/) for connecting to a Postgres database service on CloudFoundry. There is also an additional sample which illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
 
 # Pre-requisites - CloudFoundry
 
@@ -8,7 +8,7 @@ ASP.NET Core sample app illustrating how to use the EntityFramework Core togethe
 3. Install .NET Core SDK
 4. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
 
-# Create MySql Service Instance on CloudFoundry
+# Create PostgreSQL Service Instance on CloudFoundry
 You must first create an instance of the Postgres database service in a org/space.
 
 1. cf target -o myorg -s development

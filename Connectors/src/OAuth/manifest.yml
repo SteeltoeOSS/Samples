@@ -1,0 +1,10 @@
+﻿---
+applications:
+- name: oauth
+  memory: 512M
+  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
+  command: ./OAuth --server.urls http://*:$PORT
+  env:
+    ASPNETCORE_ENVIRONMENT: development
+  services:
+   - myOAuthService

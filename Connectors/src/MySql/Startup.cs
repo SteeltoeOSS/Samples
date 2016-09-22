@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SteelToe.Extensions.Configuration;
-using SteelToe.CloudFoundry.Connector.MySql;
+using Steeltoe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.MySql;
 using MySql.Models;
 
 namespace MySql

@@ -1,11 +1,10 @@
 ---
 applications:
-- name: rabbit-demo
-  memory: 2G
-  disk_quota: 2G
-  buildpack: https://github.com/cloudfoundry-community/dotnet-core-buildpack.git
-  random-route: true
+- name: rabbit
+  memory: 512M
+  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
+  command: ./Rabbit --server.urls "http://*:$PORT"
   env:
     ASPNETCORE_ENVIRONMENT: development
   services:
-    - myRabbitService
+   - myRabbitService

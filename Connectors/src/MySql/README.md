@@ -1,5 +1,5 @@
 ﻿# MySql Connector Sample App - MySqlConnection
-ASP.NET Core sample app illustrating how to use [SteelToe MySql Connector](https://github.com/SteelToeOSS/Connectors/tree/master/src/SteelToe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry using [Connector/NET - 6.9.8](https://dev.mysql.com/downloads/connector/net/). This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EF6.
+ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry using [Connector/NET - 6.9.8](https://dev.mysql.com/downloads/connector/net/). This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EF6.
 
 # Pre-requisites - CloudFoundry
 

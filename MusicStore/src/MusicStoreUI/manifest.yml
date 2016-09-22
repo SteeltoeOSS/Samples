@@ -2,7 +2,6 @@
 applications:
 - name: musicui
   memory: 1G
-  host: musicui
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: ./MusicStoreUI --server.urls http://*:%PORT%
   env:

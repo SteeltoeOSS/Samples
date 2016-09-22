@@ -15,7 +15,7 @@ This default configuration of the Config Server uses [this github repo]( https:/
 
 # Building & Running on Windows
 
-1. Clone this repo. (i.e. git clone https://github.com/SteelToeOSS/Samples)
+1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. Startup Visual Studio 2015
 3. Open the Samples/Configuration/Configuration.sln
 4. Select the AspDotNet4/Simple project in the solution and build it.

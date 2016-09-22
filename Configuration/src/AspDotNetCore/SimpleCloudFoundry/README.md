@@ -53,13 +53,13 @@ On a Linux cell, you should see something like this during startup:
 2016-06-01T09:14:14.38-0600 [CELL/0]     OUT Creating container
 2016-06-01T09:14:15.93-0600 [CELL/0]     OUT Successfully created container
 2016-06-01T09:14:17.14-0600 [CELL/0]     OUT Starting health monitoring of container
-2016-06-01T09:14:18.01-0600 [APP/0]      OUT info: SteelToe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
+2016-06-01T09:14:18.01-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
 2016-06-01T09:14:18.01-0600 [APP/0]      OUT       Fetching config from server at: https://config-92e894b5-17e2-4b94-941e-a544c6488de7.apps.testcloud.com
-2016-06-01T09:14:19.59-0600 [APP/0]      OUT info: SteelToe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
+2016-06-01T09:14:19.59-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
 2016-06-01T09:14:19.59-0600 [APP/0]      OUT       Located environment: foo, development, master, 
-2016-06-01T09:14:19.59-0600 [APP/0]      OUT info: SteelToe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
+2016-06-01T09:14:19.59-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
 2016-06-01T09:14:19.59-0600 [APP/0]      OUT       Fetching config from server at: https://config-92e894b5-17e2-4b94-941e-a544c6488de7.apps.testcloud.com
-2016-06-01T09:14:20.46-0600 [APP/0]      OUT info: SteelToe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
+2016-06-01T09:14:20.46-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
 2016-06-01T09:14:20.46-0600 [APP/0]      OUT       Located environment: foo, development, master, 
 2016-06-01T09:14:20.93-0600 [APP/0]      OUT dbug: Microsoft.AspNetCore.Hosting.Internal.WebHost[3]
 2016-06-01T09:14:20.93-0600 [APP/0]      OUT       Hosting starting

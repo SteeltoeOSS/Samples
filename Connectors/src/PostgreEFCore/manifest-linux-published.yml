@@ -1,0 +1,10 @@
+﻿---
+applications:
+- name: postgres-connector
+  memory: 2G
+  disk_quota: 2G
+  buildpack: https://github.com/cloudfoundry-community/dotnet-core-buildpack
+  path: publish
+  random-route: true
+  services:
+   - myPostgres
