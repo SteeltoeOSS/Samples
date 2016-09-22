@@ -2,7 +2,6 @@
 applications:
 - name: jwtauth
   memory: 512M
-  host: jwtauth
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: ./CloudFoundryJwtAuthentication --server.urls http://*:$PORT
   env:

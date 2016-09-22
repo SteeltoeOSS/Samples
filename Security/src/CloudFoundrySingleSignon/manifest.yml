@@ -2,7 +2,6 @@
 applications:
 - name: single-signon
   memory: 512M
-  host: single-signon
   buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
   command: ./CloudFoundrySingleSignon --server.urls http://*:$PORT
   env:
