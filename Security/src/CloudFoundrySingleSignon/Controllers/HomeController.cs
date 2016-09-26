@@ -96,15 +96,25 @@ namespace CloudFoundrySingleSignon.Controllers
         }
 
         const string JWTAPPS_HOSTNAME = "jwtauth";
+        const string SSO_HOSTNAME = "single-signon";
         private string GetJwtSamplesUrl(HttpContext httpContext)
         {
             string hostName = httpContext.Request.Host.Host;
-            int indx = hostName.IndexOf('.');
-            if (indx < 0)
-            {
-                return hostName;
+            string jwtappsHostname = hostName;
+            int indx = hostName.IndexOf(SSO_HOSTNAME);
+            if (indx >= 0) {
+                var prefix = hostName.Substring(indx + 13, 0);
+                var suffix = hostName.Substring(indx + 13, hostName.Length - indx - 13);
+                jwtappsHostname = prefix + JWTAPPS_HOSTNAME + suffix;
+            } else {
+                indx = hostName.IndexOf('.');
+                if (indx < 0)
+                {
+                    return hostName;
+                }
+                jwtappsHostname = JWTAPPS_HOSTNAME + hostName.Substring(indx);
             }
-            return "http://" + JWTAPPS_HOSTNAME + hostName.Substring(indx) + "/api/values";
+            return "http://" + jwtappsHostname + "/api/values";
         }
     }
 }
