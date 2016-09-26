@@ -35,7 +35,7 @@ Next we will add a new `user` and `group` to the UAA Server database. Do NOT cha
 ### Add New Client for our App
 Once complete we are ready to add our application as a new client to the UAA server. This will establish our applications credentials and enable it to interact with the UAA server. To do this you can use the line below, but you must replace the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with your setups domain.
 
-1. uaac client add myTestApp --name myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
+1. uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
  
 ### Add CUPs based OAuth Service
 Last, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `credentials.json` file when creating your CUPS service, but you will FIRST need to edit it and replace the `YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` with your setups domain. Once done you can do the following:
