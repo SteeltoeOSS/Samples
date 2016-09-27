@@ -65,7 +65,7 @@
     "include": [
       "wwwroot",
       "Views",
-      "Areas/Admin/Views",
+      "Areas",
       "appsettings.json",
       "web.config"
     ]
