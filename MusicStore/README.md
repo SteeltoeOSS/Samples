@@ -35,7 +35,7 @@ Also, the default is to not use Redis cache.
 
 You have a three options to choose from in order to get these services up and running locally:
 
-* Use pre-built Steeltoe Docker images. 
+* Use pre-built [Steeltoe Docker images](https://hub.docker.com/r/steeltoeoss/servers/). 
 * On Windows 10, use pre-built Steeltoe Windows Container images. (Note: Windows containers on Windows 10 and Windows Server 2016 is still in Beta. Consider it experimental)
 * Install each service manually.
 
