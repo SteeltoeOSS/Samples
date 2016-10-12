@@ -130,15 +130,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Pivotal.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Pivotal.Extensions.Configuration.ConfigServer.1.0.0-master-00020\lib\net451\Pivotal.Extensions.Configuration.ConfigServer.dll</HintPath>
+      <HintPath>..\..\..\packages\Pivotal.Extensions.Configuration.ConfigServer.1.0.0-rc1\lib\net451\Pivotal.Extensions.Configuration.ConfigServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-master-00029\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-rc1\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-master-00029\lib\net451\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-rc1\lib\net451\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -248,6 +248,7 @@
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <Content Include="README.md" />
     <None Include="Properties\PublishProfiles\Folder.pubxml" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
