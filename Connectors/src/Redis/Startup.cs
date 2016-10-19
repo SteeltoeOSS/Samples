@@ -40,7 +40,11 @@ namespace Redis
 
             // We are using the Steeltoe Redis Connector to pickup the CloudFoundry
             // Redis Service binding and use it to configure the underlying RedisCache
+            // This adds a IDistributedCache to the container
             services.AddDistributedRedisCache(Configuration);
+
+            // This works like the above, but adds a ConnectionMultiplexer to the container
+            services.AddRedisConnectionMultiplexer(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

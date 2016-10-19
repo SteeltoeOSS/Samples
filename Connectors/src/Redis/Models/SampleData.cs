@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
+using StackExchange.Redis;
 
 namespace Redis.Models
 {
@@ -24,6 +24,13 @@ namespace Redis.Models
 
                     await cache.SetAsync("Key1", Encoding.Default.GetBytes("Key1Value"));
                     await cache.SetAsync("Key2", Encoding.Default.GetBytes("Key2Value"));
+                }
+                var conn = serviceScope.ServiceProvider.GetService<ConnectionMultiplexer>();
+                if (conn != null)
+                {
+                    var db = conn.GetDatabase();
+                    db.StringSet("Key1", "Key1Value via ConnectionMultiplexor");
+                    db.StringSet("Key2", "Key2Value via ConnectionMultiplexor");
                 }
             }
         }
