@@ -54,11 +54,11 @@ namespace Redis.Controllers
         {
             IDatabase db = _conn.GetDatabase();
 
-            string key1 = db.StringGet("Key1");
-            string key2 = db.StringGet("Key2");
+            string key1 = db.StringGet("ConnectionMultiplexorKey1");
+            string key2 = db.StringGet("ConnectionMultiplexorKey2");
 
-            ViewData["Key1"] = key1;
-            ViewData["Key2"] = key2;
+            ViewData["ConnectionMultiplexorKey1"] = key1;
+            ViewData["ConnectionMultiplexorKey2"] = key2;
 
             return View();
         }

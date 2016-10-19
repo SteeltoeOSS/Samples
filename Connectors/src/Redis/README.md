@@ -1,5 +1,5 @@
 ﻿# Redis Connector Sample App
-ASP.NET Core sample app illustrating how to use [Steeltoe Redis Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Redis) for connecting a [RedisCache](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) to a Redis Cache service on CloudFoundry.
+ASP.NET Core sample app illustrating how to use [Steeltoe Redis Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Redis) for connecting a Microsoft [RedisCache](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) to a Redis service on CloudFoundry. The sample also illustrates how to use the same Connector in connecting a [StackExchange](https://github.com/StackExchange/StackExchange.Redis) `ConnectionMultiplexer` to the same Redis service.
 
 # Pre-requisites - CloudFoundry
 
@@ -44,4 +44,8 @@ On a Windows cell, you should see something like this during startup:
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Now listening on: http://*:57540
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
-At this point the app is up and running.  Upon startup the app inserts a couple key/values into the bound Redis Cache. To display those values click on the `Cache Data` link in the menu and you should see the key/values displayed.
+At this point the app is up and running.  Upon startup the app inserts a key/values into the bound Redis Cache. 
+
+To display those values click on the `Cache Data` link in the menu and you should see the key/values displayed using the Microsoft RedisCache. 
+
+You can click on the `ConnectionMultiplexer Data` link to view data using the StackExchange CollectionMultiplexor.

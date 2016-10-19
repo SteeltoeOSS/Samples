@@ -29,8 +29,8 @@ namespace Redis.Models
                 if (conn != null)
                 {
                     var db = conn.GetDatabase();
-                    db.StringSet("Key1", "Key1Value via ConnectionMultiplexor");
-                    db.StringSet("Key2", "Key2Value via ConnectionMultiplexor");
+                    db.StringSet("ConnectionMultiplexorKey1", "Key1Value via ConnectionMultiplexor");
+                    db.StringSet("ConnectionMultiplexorKey2", "Key2Value via ConnectionMultiplexor");
                 }
             }
         }
