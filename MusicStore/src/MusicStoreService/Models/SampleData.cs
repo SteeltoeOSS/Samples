@@ -23,20 +23,24 @@ namespace MusicStore.Models
 
         public static async Task InitializeMusicStoreDatabaseAsync(IServiceProvider serviceProvider)
         {
-#if NET451 && MYSQL
-            Database.SetInitializer<MusicStoreContext>(new DropCreateDatabaseAlways<MusicStoreContext>());
-#endif
-
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            if (ShouldDropCreateDatabase())
             {
-                var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
-#if !NET451 || POSTGRES
-                await db.Database.EnsureCreatedAsync();
+
+#if NET451 && MYSQL
+                Console.WriteLine("Inializing DB");
+                Database.SetInitializer<MusicStoreContext>(new DropCreateDatabaseAlways<MusicStoreContext>());
 #endif
-                await InsertTestData(serviceProvider);
+                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
+#if !NET451 || POSTGRES
+                    await db.Database.EnsureCreatedAsync();
+#endif
+                    await InsertTestData(serviceProvider);
+                }
+                artists = null;
+                genres = null;
             }
-            artists = null;
-            genres = null;
 
         }
 
@@ -916,6 +920,20 @@ namespace MusicStore.Models
 
                 return genres;
             }
+        }
+        private static bool ShouldDropCreateDatabase()
+        {
+            string index = Environment.GetEnvironmentVariable("CF_INSTANCE_INDEX");
+            if (string.IsNullOrEmpty(index))
+            {
+                return true;
+            }
+            int indx = -1;
+            if (int.TryParse(index, out indx))
+            {
+                if (indx > 0) return false;
+            }
+            return true;
         }
     }
 }

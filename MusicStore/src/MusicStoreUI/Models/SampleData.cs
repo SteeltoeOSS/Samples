@@ -25,18 +25,20 @@ namespace MusicStoreUI.Models
 
         public static async Task InitializeAccountsDatabaseAsync(IServiceProvider serviceProvider, IConfiguration configuration)
         {
-
-#if NET451 && MYSQL
-            Database.SetInitializer<AccountsContext>(new DropCreateDatabaseAlways<AccountsContext>());
-#endif
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            if (ShouldDropCreateDatabase())
             {
-                var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
-#if !NET451 || POSTGRES
-                await db.Database.EnsureCreatedAsync();
+#if NET451 && MYSQL
+                Database.SetInitializer<AccountsContext>(new DropCreateDatabaseAlways<AccountsContext>());
 #endif
-                await CreateAdminUser(serviceProvider, configuration);
+                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
+#if !NET451 || POSTGRES
+                    await db.Database.EnsureCreatedAsync();
+#endif
+                    await CreateAdminUser(serviceProvider, configuration);
 
+                }
             }
         }
 
@@ -75,6 +77,20 @@ namespace MusicStoreUI.Models
                 }
             }
 #endif
+        }
+        private static bool ShouldDropCreateDatabase()
+        {
+            string index = Environment.GetEnvironmentVariable("CF_INSTANCE_INDEX");
+            if (string.IsNullOrEmpty(index))
+            {
+                return true;
+            }
+            int indx = -1;
+            if (int.TryParse(index, out indx))
+            {
+                if (indx > 0) return false;
+            }
+            return true;
         }
 
     }

@@ -19,16 +19,19 @@ namespace OrderService.Models
    
         public static async Task InitializeOrderDatabaseAsync(IServiceProvider serviceProvider)
         {
-#if NET451 && MYSQL
-            Database.SetInitializer<OrdersContext>(new DropCreateDatabaseAlways<OrdersContext>());
-#endif
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            if (ShouldDropCreateDatabase())
             {
-                var db = serviceScope.ServiceProvider.GetService<OrdersContext>();
+#if NET451 && MYSQL
+                Database.SetInitializer<OrdersContext>(new DropCreateDatabaseAlways<OrdersContext>());
+#endif
+                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var db = serviceScope.ServiceProvider.GetService<OrdersContext>();
 #if !NET451 || POSTGRES
                 await db.Database.EnsureCreatedAsync();
 #endif
-                await InsertTestData(serviceProvider);
+                    await InsertTestData(serviceProvider);
+                }
             }
         }
 
@@ -73,8 +76,21 @@ namespace OrderService.Models
         }
 
         public static Dictionary<int, OrderDetail> Details { get; set; } = new Dictionary<int, OrderDetail>();
-    
+        private static bool ShouldDropCreateDatabase()
+        {
+            string index = Environment.GetEnvironmentVariable("CF_INSTANCE_INDEX");
+            if (string.IsNullOrEmpty(index))
+            {
+                return true;
+            }
+            int indx = -1;
+            if (int.TryParse(index, out indx))
+            {
+                if (indx > 0) return false;
+            }
+            return true;
         }
+    }
 }
 
 

@@ -19,6 +19,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MusicStoreUI.Identity;
 using Steeltoe.CloudFoundry.Connector.MySql.EF6;
+using Steeltoe.Security.DataProtection;
+using Microsoft.AspNetCore.DataProtection;
 #endif
 
 #if !NET451 || POSTGRES
@@ -29,8 +31,10 @@ namespace MusicStoreUI
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(LogLevel.Debug);
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -45,7 +49,18 @@ namespace MusicStoreUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             // Add framework services.
+#if NET451 && USE_REDIS_CACHE
+            services.AddRedisConnectionMultiplexer(Configuration);
+            services.AddDataProtection()
+                .PersistKeysToRedis()
+                .SetApplicationName("MusicStoreUI");
+            services.AddDistributedRedisCache(Configuration);
+#else
+            services.AddDistributedMemoryCache();
+#endif
+
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
 #if NET451 && MYSQL
@@ -81,14 +96,8 @@ namespace MusicStoreUI
             // Add memory cache services
             services.AddMemoryCache();
 
-#if NET451 && USE_REDIS_CACHE
-            services.AddDistributedRedisCache(Configuration);
-#else
-            services.AddDistributedMemoryCache();
-#endif
-
             // Add session related services.
-            services.AddSession();
+            services.AddSession((options) => options.CookieName = "JSESSIONID");
 
             // Configure Auth
             services.AddAuthorization(options =>
