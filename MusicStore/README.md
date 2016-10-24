@@ -181,11 +181,11 @@ Each of the `push*.*` scripts `dotnet publish` the MusicStore service targeting 
 # Known Limitations
 
 ## Redis caching 
-This can only be used when targeting Windows. This is due to the fact that ASP.NET Core Redis Cache implementation only supports NET451.
+This can only be used when targeting Windows. This is due to the fact that ASP.NET Core Redis Cache implementation currently only supports NET451. This will be changed in 1.1 of ASP.NET Core.
 
 ## MySQL database
 This can only be used when targeting Windows. This is due to the fact that the MySql provider we use currently only supports NET451. (Note: Recent milestones of the provider have started supporting NETCoreApp1.0. We will soon make changes to start using the new provider.) 
 
 Until then, if you want to run the sample on a *nix*, you will have to use Postgres.
 ## Sample Databases
-All MusicStore services (i.e. MusicStoreUI, OrderService, etc.) have their own database instance they use for persisting data.  When a MusicStore service is started locally, it will always drop and recreate its database upon startup. When a MusicStore service is started on CloudFoundry, only the first instance (i.e. CF_INSTANCE_INDEX=0) will drop and recreate its database.  As such, the service is not fully ready until the first instance has finished initializing its database.
+All MusicStore services (i.e. MusicStoreUI, OrderService, etc.) have their own database instance for persisting data.  When a MusicStore service is started locally, it will always drop and recreate its database upon startup. When a MusicStore service is started on CloudFoundry, only the first instance (i.e. CF_INSTANCE_INDEX=0) will drop and recreate its database.  Note then, the service is not fully ready until the first instance has finished initializing its database, even though other instances are ready.
