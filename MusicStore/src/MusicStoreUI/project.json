@@ -59,7 +59,7 @@
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
-    "define": [ "DEMO", "TESTING", "MYSQL", "USE_REDIS_CACHE" ]
+    "define": [ "DEMO", "TESTING", "MYSQL" ]
   },
 
   "publishOptions": {

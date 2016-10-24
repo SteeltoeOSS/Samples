@@ -13,12 +13,17 @@ This application makes use of the following Steeltoe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
 * Steeltoe Connectors for connecting to MySql using EF6 OR Postgres using EFCore 
-* Optionally using Steeltoe Redis Connector to connect to a Redis cache for Session storage. Note: This is required when pushing to CloudFoundry if you want to scale the MusicStoreUI component to multiple instances (e.g. cf scale musicui -i 2+)
+* Optionally using Steeltoe Redis Connector to connect to a Redis cache for Session storage. Note: This is required if you want to scale the MusicStoreUI component to multiple instances.
 
 Note: The MySql and Redis connectors only support .NET 451+ and as such when using them you must target a windows runtime (e.g. win7-x64). 
 
-The Postgres connector supports both .NET 451+ and .NET Core and therefore must be used when targeting MacOS or Linux.  The application components are built to use MySql when running locally on Windows and to use Postgres when running locally on MacOS/Linux.
-Also, the default is to NOT use Redis cache for Session storage.
+The Postgres connector supports both .NET 451+ and .NET Core. 
+
+If you plan on running any of the MusicStore components on MacOS or Linux, then you must use Postgres.
+
+By default, the application components are compiled to use MySql when targeting Windows and to use Postgres when targeting on MacOS/Linux.
+
+The default is to NOT use a Redis cache for Session storage; instead it uses a memory cache.
 
 # Getting Started
 
@@ -110,8 +115,8 @@ You should have no problem using the provided solution to launch the individual 
 1. Install Pivotal CloudFoundry 1.7
 2. Install Spring Cloud Services 1.1.x.
 3. Install .NET Core SDK.
-4. Install Postgres database service if you want to use Postgress instead of MySQL.
-5. Install Redis service if you want to use Redis for Sesion storage.
+4. Install Postgres database service if you want to use Postgress instead of MySQL. (Posgres required for Linux containers)
+5. Install Redis service if you want to use Redis for Sesion storage. (Windows containers only)
 6. Web tools installed and on Path.  On Windows, if you have VS2015 Update 3 installed then add this to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`
 
 # Setup Services on CloudFoundry
@@ -120,19 +125,19 @@ As mentioned above, the application is dependent on the following services:
 * Spring Cloud Config Server 
 * Spring Cloud Eureka Server 
 * MySql Database Server - Default database used by all MusicStore services.
-* Postgres Database Server - Optional - Note you have to specifically build/publish MusicStore services to use Postgres (Details below).
-* Redis Cache - Optional, can be used for Session state backing store. Note you have to specifically build/publish MusicStoreUI service to use Redis (Details below).
+* Postgres Database Server - Optional on Windows - but required for Linux containers.
+* Redis Cache - Optional, but only on Windows. Note you have to specifically build/publish MusicStoreUI service to use Redis (Details below).
  
 Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+)
 
-Before pushing the application to CloudFoundry you need to create those services.   If you plan on using Redis to store Session state, set the environment varialble USE_REDIS_CACHE=true before running these command.
+Before pushing the application to CloudFoundry you need to create those services.  If you plan on using Redis to store Session state, set the environment varialble USE_REDIS_CACHE=true before running these command.
 
 1. `cf target -o myOrg -s mySpace`
 2. `cd Samples/MusicStore`
 3. Optionally - `SET USE_REDIS_CACHE=true` or `export USE_REDIS_CACHE=true`
 3. `start createCloudFoundryServices.cmd` or `./createCloudFoundryServices.sh`
 
-Note: If you wish to use Postgres on CloudFoundry for one or more of the MusicStore services, you will have to modify the above script, as it currently creates MySQL services.
+Note: If you wish to use Postgres on CloudFoundry for one or more of the MusicStore services, you will have to provide the `service_name` and `service_plan` as arguments to the above script, as it creates MySQL database services by default. For example, if you are using the `EDB Postgres` service broker on Pivotal CloudFoundry, you would specify `./createCloudFoundryServices EDB-Shared-PostgreSQL "Basic PostgreSQL Plan"`.
 
 This will create all of the services needed by the application.  Specifically, it creates:
 * mStoreConfig - Spring Cloud Config Server instance
@@ -153,7 +158,7 @@ Note: If you wish to change what github repo the Config server instance uses, yo
 Once the services have been created and ready on CloudFoundry (i.e. check via `cf services`) then you can use the provided `push*.cmd or push*.sh` commands to startup the individual application services on CloudFoundry. For example to start the ShoppingCart service:
 
 1. `cd Samples/MusicStore`
-2. `pushShoppingCartService.cmd win7-x64 net451` or `./pushShoppingCartService.sh win7-x64 net451`
+2. `pushShoppingCartService.cmd win7-x64 net451` or `./pushShoppingCartService.sh ubuntu.14.04-x64 netcoreapp1.0`
 
 Note: If you wish to use the Redis cache for storing Session state, you will have to set ENVIRONMENT variable `USE_REDIS_CACHE=true` AND modify the [`project.json`](https://github.com/SteeltoeOSS/Samples/blob/master/MusicStore/src/MusicStoreUI/project.json) file for the `MusicStoreUI` application before pushing it. 
 
