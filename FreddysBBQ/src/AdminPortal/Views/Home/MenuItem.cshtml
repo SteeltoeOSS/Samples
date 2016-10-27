@@ -1,0 +1,11 @@
+﻿@model Common.Models.MenuItem
+<h2>@ViewData["menuTitle"]</h2>
+<form method="POST" action="/Home/SaveMenuItem/@Model.Id">
+    <p><label for="name">Name:</label><input type="text" value="@Model.Name" name="Name" id="Name" /></p>
+    <p><label for="name">Price:</label><input type="text" value="@Model.Price" name="Price" id="Price" /></p>
+    <input type="submit" value="Save" />
+</form>
+<form method="POST" action="/Home/DeleteMenuItem/@Model.Id">
+    <input type="submit" value="Delete" />
+</form>
+<a href="..">Back</a>

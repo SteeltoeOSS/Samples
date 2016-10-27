@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Common.Models.Order>
+<h1>Current Orders</h1>
+@foreach (var order in Model)
+{
+<ul>
+    <li>
+        <table>
+            <tr>
+                <td>
+                    <table border="1">
+                        <tr>
+                            <td>Order number</td>
+                            <td>@order.Id</td>
+                        </tr>
+                        <tr>
+                            <td>Order placed</td>
+                            <td>@order.Placed</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>$ @order.Total</td>
+                        </tr>
+                        <tr>
+                            <td>First Name</td>
+                            <td>@order.FirstName</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td>@order.LastName</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>@order.Email</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <td>Item</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+@foreach (var item in order.OrderItems)
+{
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>$ @item.Price</td>
+                                <td>@item.Quantity</td>
+                            </tr>
+}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <form method="post" action="DeleteOrder/@order.Id">
+            <input type="submit" value="Close this order" />
+        </form>
+    </li>
+</ul>
+}
+<a href="/">Back to home</a>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Common.Models.MenuItem>
+<h2>@ViewData["menuTitle"]</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <td>Item</td>
+            <td>Price</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Name</td>
+            <td>$@item.Price</td>
+            <td><a href="MenuItem/@item.Id">Edit</a></td>
+        </tr>
+}
+    </tbody>
+</table>
+<a href="MenuItem/-1">Add a new Item</a><br />
+<a href="/">Back to home</a>
