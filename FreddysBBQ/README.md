@@ -13,9 +13,9 @@ This application makes use of the following Steeltoe components:
 
 This repo contains two of the four components that make up Freddys BBQ application  ( i.e.`Admin Portal UI` and `Order REST API`). These two components have been rewriten using .NET and ASP.NET Core and will be used to illustrate interoperability between Java and .NET based microservices running on CloudFoundry.
 
-To proceed you will first deploy the Java version of Freddys BBQ on CloudFoundry. To do this, you should follow the [deployment instructions](https://github.com/william-tran/freddys-bbq) for the Java version of Freddys BBQ first and verify that this version of the application is up and running properly.
+To proceed you will first deploy the Java version of Freddys BBQ on CloudFoundry. To do this, you should first follow the [deployment instructions](https://github.com/william-tran/freddys-bbq) for the Java version of Freddys BBQ and verify that this version of the application is up and running properly.
 
-Once that is complete then the next step will be to replace the tow Java services, `Admin Portal UI` and `Order REST API` with the .NET versions found in this repo. 
+Once that is complete then the next step will be to replace the two Java services, `Admin Portal UI` and `Order REST API` with the .NET versions found in this repo. 
 
 After that is complete you will have a running example of a Java and .NET based microservices based app running on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
@@ -25,11 +25,11 @@ Once you have finished deploying and verifing the Java version, you are then rea
 
 ## Add MySQL Order Database
 
-First you will need to create a new MySql service for our .NET version of the Order REST API service. Run the following commands:
+First you will need to create a new MySql service for our .NET version of the `Order REST API` service. Run the following commands:
 ```
 cf create-service p-mysql 100mb mysql-orders
 ```
-## Update admin-portal SSO Setting
+## Update admin-portal SSO Settings
 Next, we have to make one small change to `Redirect URIs` for the admin-portal component in the SSO dashboard. To do this we need to access the `SSO` service dashboard. In order to access the dashboard, run the following command and go to the URL listed in `Dashboard` property:
 
 ```
@@ -75,5 +75,5 @@ cf push -f manifest-windows.yml -p %CD%\publish
 ```
 
 At this point the app should continue to work as it did before.  Any orders you might have had before, will be gone as you are now starting with a new clean order database. 
-_
+
 
