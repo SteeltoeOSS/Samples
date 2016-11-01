@@ -18,8 +18,8 @@
     "Newtonsoft.Json": "9.0.1",
     "Pivotal.Discovery.Client": "1.0.0-rc1",
     "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-rc1",
-    "Steeltoe.Security.Authentication.CloudFoundry": "1.0.0-rc1",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+    "Steeltoe.Security.Authentication.CloudFoundry": "1.0.0-dev-*"
   },
 
   "tools": {

@@ -104,6 +104,7 @@ namespace AdminPortal.Controllers
             ViewData["token"] = await this.HttpContext.Authentication.GetTokenAsync("access_token");
             return View();
         }
+        [AllowAnonymous]
         public IActionResult AccessDenied()
         {
             ViewData["Message"] = "Insufficient permissions.";

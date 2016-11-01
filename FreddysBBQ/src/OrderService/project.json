@@ -14,7 +14,7 @@
     "Pivotal.Discovery.Client": "1.0.0-rc1",
     "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-rc1",
     "Steeltoe.CloudFoundry.Connector.MySql": "1.0.0-rc1",
-    "Steeltoe.Security.Authentication.CloudFoundry": "1.0.0-rc1"
+    "Steeltoe.Security.Authentication.CloudFoundry": "1.0.0-dev-*"
   },
 
   "tools": {

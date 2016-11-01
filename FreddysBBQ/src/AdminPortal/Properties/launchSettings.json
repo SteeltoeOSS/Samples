@@ -17,8 +17,9 @@
     },
     "AdminPortal": {
       "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:8000",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000",
+      "launchUrl": "http://localhost:8000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

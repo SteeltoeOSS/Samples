@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Common.Services;
 using System.Security.Claims;
 using System.Security.Principal;
-
+using System;
 
 namespace OrderService.Controllers
 {
@@ -49,7 +49,8 @@ namespace OrderService.Controllers
         [Authorize(Policy = "Orders")]
         public async Task<IActionResult> Post([FromBody]Dictionary<long, int> itemsAndQuantities)
         {
- 
+
+            LogClaims(this.HttpContext.User.Identity);
             Order order = new Order();
             order.CustomerId = GetCustomerId(this.HttpContext.User.Identity);
             order.Email = GetEmail(this.HttpContext.User.Identity);
@@ -101,6 +102,20 @@ namespace OrderService.Controllers
  
         }
 
+        private void LogClaims(IIdentity identity)
+        {
+            var claims = identity as ClaimsIdentity;
+            if (claims == null)
+            {
+                _logger.LogError("Unable to access ClaimsIdentity");
+                return;
+            }
+            foreach(Claim c in claims.Claims)
+            {
+                _logger.LogInformation(string.Format("Claim: {0}/{1}/{2}", c.Type, c.Value, c.ValueType));
+            }
+        }
+
         private string GetLastName(IIdentity identity)
         {
             return string.Empty;
@@ -113,7 +128,7 @@ namespace OrderService.Controllers
 
         private string GetEmail(IIdentity identity)
         {
-            return GetClaim(identity, "email");
+            return GetClaim(identity, ClaimTypes.Email);
         }
 
         private string GetCustomerId(IIdentity identity)
