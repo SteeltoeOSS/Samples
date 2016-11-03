@@ -1,19 +1,20 @@
 ﻿# MySql Connector Sample App - MySqlConnection
-ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry using [Connector/NET - 6.9.8](https://dev.mysql.com/downloads/connector/net/). This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EF6.
+ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry using [Connector/NET - 7.0.x](https://dev.mysql.com/downloads/connector/net/). This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional samples which illustrate how to use EF6 and EFCore.
 
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7
-2. Installed DiegoWindows support (Greenhouse)
+2. Optional - Installed DiegoWindows support (Greenhouse)
 3. Installed MySql marketplace service
 4. Install .NET Core SDK
-5. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
+5. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
+
 
 # Create MySql Service Instance on CloudFoundry
 You must first create an instance of the MySql service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service p-mysql 100mb-dev myMySqlService 
+2. cf create-service p-mysql 100mb myMySqlService 
 
 # Publish App & Push to CloudFoundry
 
@@ -21,7 +22,7 @@ You must first create an instance of the MySql service in a org/space.
 2. cd samples/Connectors/src/MySql
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --runtime win7-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
 
