@@ -31,8 +31,10 @@
       }
     },
     "netcoreapp1.0": {
-      "Microsoft.NETCore.App": {
-        "version": "1.0.0"
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0"
+        }
       },
       "imports": [
         "dotnet5.6",
