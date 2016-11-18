@@ -14,6 +14,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCloudFoundry", "src\AspDotNet4\SimpleCloudFoundry\SimpleCloudFoundry.csproj", "{71E24401-2ACE-468E-AE4E-0A64D3F6C503}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspDotNetCore", "AspDotNetCore", "{FF43AF70-EEBC-4079-BEB2-7D81DFAA5780}"
+	ProjectSection(SolutionItems) = preProject
+		src\AspDotNetCore\global.json = src\AspDotNetCore\global.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
