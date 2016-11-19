@@ -12,19 +12,19 @@ namespace Simple.Controllers
 {
     public class HomeController : Controller
     {
-        private ConfigServerData ConfigServerData { get; set; }
+        private IOptionsSnapshot<ConfigServerData> IConfigServerData { get; set; }
 
         private ConfigServerClientSettingsOptions ConfigServerClientSettingsOptions { get; set; }
 
         private IConfigurationRoot Config { get; set; }
 
-        public HomeController(IConfigurationRoot config, IOptions<ConfigServerData> configServerData, IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
+        public HomeController(IConfigurationRoot config, IOptionsSnapshot<ConfigServerData> configServerData, IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
         {
             // The ASP.NET DI mechanism injects the data retrieved from the Spring Cloud Config Server 
-            // as an IOptions<ConfigServerData>. This happens because we added the call to:
+            // as an IOptionsSnapshot<ConfigServerData>. This happens because we added the call to:
             // "services.Configure<ConfigServerData>(Configuration);" in the StartUp class
             if (configServerData != null)
-                ConfigServerData = configServerData.Value;
+                IConfigServerData = configServerData;
 
             // The settings used in communicating with the Spring Cloud Config Server
             if (confgServerSettings != null)
@@ -68,15 +68,6 @@ namespace Simple.Controllers
             if (Config != null)
             {
                 Config.Reload();
- 
-
-                // TODO: When moving to RC2 use Options track change feature
-                // CreateConfigServerDataViewData();
-                ViewData["Bar"] = Config["bar"] ?? "Not returned";
-                ViewData["Foo"] = Config["foo"] ?? "Not returned";
-
-                ViewData["Info.Url"] = Config["info:url"] ?? "Not returned";
-                ViewData["Info.Description"] = Config["info:description"] ??"Not returned";
             }
 
             return View();
@@ -85,20 +76,22 @@ namespace Simple.Controllers
         private void CreateConfigServerDataViewData()
         {
 
-            // ConfigServerData property is set to a ConfigServerData POCO that has been
+
+            // IConfigServerData property is set to a IOptionsSnapshot<ConfigServerData> that has been
             // initialized with the configuration data returned from the Spring Cloud Config Server
-            if (ConfigServerData != null)
+            if (IConfigServerData != null && IConfigServerData.Value != null)
             {
-                ViewData["Bar"] = ConfigServerData.Bar ?? "Not returned";
-                ViewData["Foo"] = ConfigServerData.Foo ?? "Not returned";
+                var data = IConfigServerData.Value;
+                ViewData["Bar"] = data.Bar ?? "Not returned";
+                ViewData["Foo"] = data.Foo ?? "Not returned";
 
                 ViewData["Info.Url"] = "Not returned";
                 ViewData["Info.Description"] = "Not returned";
 
-                if (ConfigServerData.Info != null)
+                if (data.Info != null)
                 {
-                    ViewData["Info.Url"] = ConfigServerData.Info.Url ?? "Not returned";
-                    ViewData["Info.Description"] = ConfigServerData.Info.Description ?? "Not returned";
+                    ViewData["Info.Url"] = data.Info.Url ?? "Not returned";
+                    ViewData["Info.Description"] = data.Info.Description ?? "Not returned";
                 }
             }
             else {
