@@ -4,6 +4,7 @@ using Steeltoe.Extensions.Configuration;
 using System;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Simple4
 {
@@ -20,20 +21,20 @@ namespace Simple4
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables()
 
                 // Adds the Spring Cloud Configuration Server as a configuration source.
                 // The settings used in contacting the Server will be picked up from
-                // appsettings.json, and then overriden from any environment variables. 
-                // Defaults will be used for any settings not present in either of those sources.
-                // See ConfigServerClientSettings for defaults. 
+                // appsettings.json, and then overriden from any environment variables, and then
+                // overriden from the CloudFoundry environment variable settings. 
+                // Defaults will be used for any settings not present in any of the earlier added 
+                // sources.  See ConfigServerClientSettings for defaults.
                 .AddConfigServer(env);
 
-            // Save configuration for future access
             Configuration = builder.Build();
-
 
         }
     }
@@ -42,46 +43,15 @@ namespace Simple4
         public HostingEnvironment(string env)
         {
             EnvironmentName = env;
+            ApplicationName = PlatformServices.Default.Application.ApplicationName;
+            ContentRootPath = PlatformServices.Default.Application.ApplicationBasePath;
         }
 
-        public string ApplicationName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public string ApplicationName { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IFileProvider ContentRootFileProvider { get; set; }
 
-        public IFileProvider ContentRootFileProvider
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string ContentRootPath
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string ContentRootPath { get; set; }
 
         public string EnvironmentName { get; set; }
 
@@ -89,17 +59,6 @@ namespace Simple4
 
         public string WebRootPath { get; set; }
 
-        IFileProvider IHostingEnvironment.WebRootFileProvider
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        IFileProvider IHostingEnvironment.WebRootFileProvider { get; set; }
     }
 }
