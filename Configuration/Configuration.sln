@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspDotNetCore", "AspDotNetC
 		src\AspDotNetCore\global.json = src\AspDotNetCore\global.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacCloudFoundry", "src\AspDotNet4\AutofacCloudFoundry\AutofacCloudFoundry.csproj", "{561931E3-B967-46D7-BF5C-50621334442F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +55,6 @@ Global
 		{05283A13-B517-4BE7-8A59-6200DD60C9DB} = {FF43AF70-EEBC-4079-BEB2-7D81DFAA5780}
 		{77B17535-E662-471B-947D-31A8256CADA7} = {71E8AB2D-3D51-44B8-B2D8-E118ED66F624}
 		{71E24401-2ACE-468E-AE4E-0A64D3F6C503} = {71E8AB2D-3D51-44B8-B2D8-E118ED66F624}
+		{561931E3-B967-46D7-BF5C-50621334442F} = {71E8AB2D-3D51-44B8-B2D8-E118ED66F624}
 	EndGlobalSection
 EndGlobal

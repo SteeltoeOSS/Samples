@@ -1,0 +1,10 @@
+---
+applications:
+- name: foo
+  memory: 1G
+  stack: windows2012R2
+  health-check-type: none
+  env:
+    Hosting__Environment: development
+  services:
+   - myConfigServer

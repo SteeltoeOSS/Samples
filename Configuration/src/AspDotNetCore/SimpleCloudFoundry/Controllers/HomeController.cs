@@ -25,7 +25,7 @@ namespace SimpleCloudFoundry.Controllers
             IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
         {
             // The ASP.NET DI mechanism injects the data retrieved from the
-            // Spring Cloud Config Server as an IOptions<ConfigServerData>
+            // Spring Cloud Config Server as an IOptionsSnapshot<ConfigServerData>
             // since we added "services.Configure<ConfigServerData>(Configuration);"
             // in the StartUp class
             if (configServerData != null)
