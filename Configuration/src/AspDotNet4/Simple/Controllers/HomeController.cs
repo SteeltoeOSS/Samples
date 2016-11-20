@@ -59,6 +59,16 @@ namespace Simple4.Controllers
             }
             return View();
         }
+        public ActionResult Reload()
+        {
+            if (ConfigServerConfig.Configuration != null)
+            {
+                ConfigServerConfig.Configuration.Reload();
+            }
+
+            return View();
+        }
+
         public ActionResult ConfigServerData()
         {
 

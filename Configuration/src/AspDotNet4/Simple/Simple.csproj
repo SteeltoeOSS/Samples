@@ -272,6 +272,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ConfigServerData.cshtml" />
     <Content Include="Views\Home\ConfigServerSettings.cshtml" />
+    <Content Include="Views\Home\Reload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -112,6 +112,16 @@ namespace AutofacCloudFoundry.Controllers
                 CloudFoundryServices == null ? new CloudFoundryServicesOptions() : CloudFoundryServices));
         }
 
+        public ActionResult Reload()
+        {
+            if (Config != null)
+            {
+                Config.Reload();
+            }
+
+            return View();
+        }
+
         private void CreateConfigServerDataViewData()
         {
 

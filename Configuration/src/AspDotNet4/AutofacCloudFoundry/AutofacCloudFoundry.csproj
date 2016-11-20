@@ -264,6 +264,7 @@
     <Content Include="manifest.yml" />
     <Content Include="README.md" />
     <Content Include="config-server.json" />
+    <None Include="Properties\PublishProfiles\AutofacCloudFoundry.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -293,6 +294,7 @@
     <Content Include="Views\Home\CloudFoundry.cshtml" />
     <Content Include="Views\Home\ConfigServerData.cshtml" />
     <Content Include="Views\Home\ConfigServerSettings.cshtml" />
+    <Content Include="Views\Home\Reload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

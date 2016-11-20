@@ -63,6 +63,15 @@ namespace SimpleCloudFoundry4.Controllers
             }
             return View();
         }
+        public ActionResult Reload()
+        {
+            if (ServerConfig.Configuration != null)
+            {
+                ServerConfig.Configuration.Reload();
+            }
+
+            return View();
+        }
 
         public ActionResult ConfigServerData()
         {
