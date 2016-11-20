@@ -3,14 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fortune-Teller-Service", "src\Fortune-Teller-Service\Fortune-Teller-Service.xproj", "{EF56DF29-3138-483E-BC96-CCD0E368CAA4}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fortune-Teller-Service", "src\AspDotNetCore\Fortune-Teller-Service\Fortune-Teller-Service.xproj", "{EF56DF29-3138-483E-BC96-CCD0E368CAA4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fortune-Teller-UI", "src\Fortune-Teller-UI\Fortune-Teller-UI.xproj", "{E1A1D29A-C62E-44D5-A87B-5966DEB93292}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspDotNetCore", "AspDotNetCore", "{308D6A3A-1132-4BD0-98E1-2B909A60F88C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{71B66694-5957-42B6-BC3B-E1788DB1658D}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fortune-Teller-UI", "src\AspDotNetCore\Fortune-Teller-UI\Fortune-Teller-UI.xproj", "{E1A1D29A-C62E-44D5-A87B-5966DEB93292}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +26,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF56DF29-3138-483E-BC96-CCD0E368CAA4} = {308D6A3A-1132-4BD0-98E1-2B909A60F88C}
+		{E1A1D29A-C62E-44D5-A87B-5966DEB93292} = {308D6A3A-1132-4BD0-98E1-2B909A60F88C}
 	EndGlobalSection
 EndGlobal
