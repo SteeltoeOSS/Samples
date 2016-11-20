@@ -262,6 +262,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="appsettings.json" />
     <Content Include="manifest.yml" />
+    <Content Include="README.md" />
+    <Content Include="config-server.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

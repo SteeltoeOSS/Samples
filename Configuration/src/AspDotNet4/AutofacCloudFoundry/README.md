@@ -1,5 +1,5 @@
-# SimpleCloudFoundry - ASP.NET 4.5 Sample Application 
-ASP.NET 4.5 sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
+# AutofacCloudFoundry - ASP.NET 4.5 Sample Application 
+ASP.NET 4.5 sample app built using the Autofac IOC container and illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
 
 # Pre-requisites
 1. Installed Pivotal CloudFoundry 1.7+
@@ -10,13 +10,13 @@ ASP.NET 4.5 sample app illustrating how to use [Config Server for Pivotal Cloud 
 You must first create an instance of the Config Server service in a org/space.
 
 1. cf target -o myorg -s development
-2. cd src\AspDotNet4\SimpleCloudFoundry
+2. cd src\AspDotNet4\AutofacCloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
 
 # Publish App & Push
 
 1. Open \Samples\Configuration\Configuration.sln in Visual Studio 2015.
-2. Select SimpleCloudFoundry project in Solution Explorer.
+2. Select AutofacCloudFoundry project in Solution Explorer.
 3. Right-click and select Publish
 4. Publish the App to a folder. (e.g. c:\publish)
 5. cd publish_folder (e.g. cd c:\publish)

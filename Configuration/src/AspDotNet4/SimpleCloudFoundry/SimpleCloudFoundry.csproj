@@ -250,6 +250,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="appsettings.json" />
     <Content Include="manifest.yml" />
+    <Content Include="config-server.json" />
     <None Include="Properties\PublishProfiles\CloudFoundry.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <Content Include="README.md" />
