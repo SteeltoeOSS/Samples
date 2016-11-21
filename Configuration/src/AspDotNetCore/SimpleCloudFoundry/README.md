@@ -7,7 +7,7 @@ ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud
 2. Installed Spring Cloud Services 1.0.9+
 3. .NET Core SDK 1.1
 4. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
-Note: If your on Windows and you have VS2015 Update 3, you can add these to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`.
+Note: If you're on Windows and you have VS2015 Update 3, you can add these to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`.
 
 # Setup Config Server
 You must first create an instance of the Config Server service in a org/space.

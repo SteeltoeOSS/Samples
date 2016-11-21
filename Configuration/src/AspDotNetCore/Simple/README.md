@@ -25,7 +25,7 @@ This default configuration of the Config Server uses [this github repo]( https:/
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Configuration/src/Simple
-$ dnx web
+$ dotnet run
 Hosting environment: Production
 Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.
