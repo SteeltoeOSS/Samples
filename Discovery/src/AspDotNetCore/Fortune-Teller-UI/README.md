@@ -1,5 +1,5 @@
-# Fortune-Teller-UI - ASP.NET 5 MVC Application
-ASP.NET 5 sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
+# Fortune-Teller-UI - ASP.NET Core MVC Application
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
 # Pre-requisites - Local
 
@@ -15,7 +15,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 # Building & Running - Local
 
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
-2. cd samples/Discovery/src/Fortune-Teller-UI
+2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
 3. dotnet restore --configfile nuget.config
 4. dotnet run --server.urls http://*:5555
 
@@ -23,7 +23,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 # What to expect - Local
 After building and running the app, you should see something like the following:
 ```
-$ cd samples/Discovery/src/Fortune-Teller-UI
+$ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
 $ dotnet run --server.urls http://*:5555
 Hosting environment: Production
 Now listening on: http://*:5555
@@ -48,7 +48,7 @@ You must first create an instance of the Service Registry service in a org/space
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Discovery/src/Fortune-Teller-UI
+2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.0 --runtime ubuntu.14.04-x64`)

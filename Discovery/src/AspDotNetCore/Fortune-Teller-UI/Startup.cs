@@ -48,7 +48,6 @@ namespace Fortune_Teller_UI
 
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
