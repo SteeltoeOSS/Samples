@@ -1,0 +1,8 @@
+﻿---
+applications:
+- name: fortuneUI
+  memory: 512M
+  stack: windows2012R2
+  health-check-type: none
+  services:
+   - myDiscoveryService
