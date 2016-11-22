@@ -3,7 +3,7 @@ ASP.NET Core sample app illustrating how to use the EntityFramework 6 together w
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7
+1. Installed Pivotal CloudFoundry 1.7+
 2. Installed DiegoWindows support (Greenhouse)
 3. Installed MySql marketplace service
 4. Install .NET Core SDK
@@ -26,8 +26,6 @@ You must first create an instance of the MySql service in a org/space.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
 
 Note: The provided manifest will create an app named `mysqlef6-connector` and attempt to bind to the the app to MySql service `myMySqlService`.
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 
