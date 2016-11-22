@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.PlatformAbstractions;
+using PA = Microsoft.Extensions.PlatformAbstractions;
 using Pivotal.Extensions.Configuration;
 using Pivotal.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
@@ -63,8 +63,8 @@ namespace AutofacCloudFoundry
         public HostingEnvironment(string env)
         {
             EnvironmentName = env;
-            ApplicationName = PlatformServices.Default.Application.ApplicationName;
-            ContentRootPath = PlatformServices.Default.Application.ApplicationBasePath;
+            ApplicationName = PA.PlatformServices.Default.Application.ApplicationName;
+            ContentRootPath = PA.PlatformServices.Default.Application.ApplicationBasePath;
         }
 
         public string ApplicationName { get; set; }
