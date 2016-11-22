@@ -37,7 +37,7 @@ At this point the Fortune Teller UI is up and running and ready for displaying y
 2. Installed Spring Cloud Services 1.0.9
 3. Install .NET Core SDK
 4. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
-Note: If your on Windows and you have VS2015 Update 1, you can add these to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\WebTemplates\DNX\CSharp\1033\StarterWeb\node_modules\.bin` and `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Web Tools\External` and you should get what you need.
+Note: If you're on Windows and you have VS2015 Update 3, you can add these to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External.
 
 # Setup Service Registry on CloudFoundry
 You must first create an instance of the Service Registry service in a org/space.
@@ -58,9 +58,7 @@ You must first create an instance of the Service Registry service in a org/space
 Windows Note: If you are pushing to a windows stack, and you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
 
 1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install the ROOT CA on the windows cells and you would be good to go.
-2. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `spring:cloud:client:validate_certificates=false`. This only works on Windows, it will not work on CoreCLR/Linux.
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RC2 SDK and when publishing to a relative directory... workaround is to use full path.
+2. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `eureka:client:validate_certificates=false`.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 
