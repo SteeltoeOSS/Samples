@@ -1,9 +1,9 @@
 ﻿# Postgres Connector Sample App - NpgsqlConnection
-ASP.NET Core sample app illustrating how to use [Steeltoe Postgres Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.PostgreSql) for connecting to a Postgres database service on CloudFoundry using [Npgsql - 3.1.5](http://www.npgsql.org/). This specific sample illustrates how to use a `NpgsqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EFCore.
+ASP.NET Core sample app illustrating how to use [Steeltoe Postgres Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.PostgreSql) for connecting to a Postgres database service on CloudFoundry using [Npgsql - 3.1.9](http://www.npgsql.org/). This specific sample illustrates how to use a `NpgsqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EFCore.
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7
+1. Install Pivotal CloudFoundry 1.7+
 2. Install Postgres database service (e.g. EDB Postgres)
 3. Install .NET Core SDK
 4. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
@@ -26,8 +26,6 @@ You must first create an instance of the Postgres database service in a org/spac
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 
 Note: The provided manifest(s) will create an app named `postgres-connector` and attempt to bind to the the app to PostgreSql service `myPostgres`.
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 

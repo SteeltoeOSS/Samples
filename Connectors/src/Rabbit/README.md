@@ -1,10 +1,10 @@
 ﻿# Rabbit Connector Sample App - RabbitConnection
 
-ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Rabbit) for connecting to a Rabbit service on CloudFoundry using [RabbitMQ.Client - 4.0.0](https://www.rabbitmq.com/dotnet-api-guide.html). This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound rabbitmq service.
+ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Rabbit) for connecting to a Rabbit service on CloudFoundry using [RabbitMQ.Client - 4.1.x](https://www.rabbitmq.com/dotnet-api-guide.html). This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound rabbitmq service.
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7
+1. Installed Pivotal CloudFoundry 1.7+
 2. Installed Rabbit marketplace service
 3. Install .NET Core SDK
 
@@ -12,16 +12,18 @@ ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](http
 You must first create an instance of the Rabbit service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service cloudamqp lemur myRabbitService 
+2. cf create-service p-rabbitmq standard myRabbitService 
 
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
 2. cd samples/Connectors/src/Rabbit
-3. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest.yml`)
+3. dotnet restore --configfile nuget.config
+4. dotnet publish -o $PWD/publish -f net451 -r win7-x64
+5. Push the app using the provided manifest.
+ (e.g.  `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish )
 
-Note: The provided manifest will create an app named `rabbit-demo` and attempt to bind to the the app to Rabbit service `myRabbitService`.
+Note: The provided manifest will create an app named `rabbit` and attempt to bind to the the app to Rabbit service `myRabbitService`.
 
 # What to expect - CloudFoundry
 
