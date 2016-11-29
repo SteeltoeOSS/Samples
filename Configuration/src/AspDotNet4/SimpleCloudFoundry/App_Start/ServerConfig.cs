@@ -5,6 +5,7 @@ using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Pivotal.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using System;
+using PA = Microsoft.Extensions.PlatformAbstractions;
 
 namespace SimpleCloudFoundry4
 {
@@ -60,8 +61,8 @@ namespace SimpleCloudFoundry4
         public HostingEnvironment(string env)
         {
             EnvironmentName = env;
-            ApplicationName = PlatformServices.Default.Application.ApplicationName;
-            ContentRootPath = PlatformServices.Default.Application.ApplicationBasePath;
+            ApplicationName = PA.PlatformServices.Default.Application.ApplicationName;
+            ContentRootPath = PA.PlatformServices.Default.Application.ApplicationBasePath;
         }
 
         public string ApplicationName { get; set; }

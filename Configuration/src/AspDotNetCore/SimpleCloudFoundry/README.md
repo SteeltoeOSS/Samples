@@ -13,14 +13,14 @@ Note: If you're on Windows and you have VS2015 Update 3, you can add these to yo
 You must first create an instance of the Config Server service in a org/space.
 
 1. cf target -o myorg -s development
-2. cd src/SimpleCloudFoundry
+2. cd src/AspDotNetCore/SimpleCloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
 4. Wait for service to become ready (i.e. cf services )
 
 # Publish App & Push
 
 1. cf target -o myorg -s development
-2. cd src/SimpleCloudFoundry
+2. cd src/AspDotNetCore/SimpleCloudFoundry
 3. dotnet restore --configfile nuget.config 
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)

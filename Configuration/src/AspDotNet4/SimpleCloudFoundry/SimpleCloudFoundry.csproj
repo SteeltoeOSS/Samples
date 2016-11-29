@@ -130,15 +130,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Pivotal.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Pivotal.Extensions.Configuration.ConfigServer.1.0.0-dev-00031\lib\net451\Pivotal.Extensions.Configuration.ConfigServer.dll</HintPath>
+      <HintPath>..\..\..\packages\Pivotal.Extensions.Configuration.ConfigServer.1.0.0-dev-00035\lib\net451\Pivotal.Extensions.Configuration.ConfigServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-dev-00057\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-dev-00061\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.ConfigServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-dev-00057\lib\net451\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.0.0-dev-00061\lib\net451\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

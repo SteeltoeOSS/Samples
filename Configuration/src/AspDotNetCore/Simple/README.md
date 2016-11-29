@@ -16,7 +16,7 @@ This default configuration of the Config Server uses [this github repo]( https:/
 # Building & Running
 
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
-2. cd samples/Configuration/src/Simple
+2. cd samples/Configuration/src/AspDotNetCore/Simple
 3. Install .NET Core SDK 
 4. dotnet restore --configfile nuget.config
 5. dotnet run 
@@ -24,12 +24,15 @@ This default configuration of the Config Server uses [this github repo]( https:/
 # What to expect
 After building and running the app, you should see something like the following:
 ```
-$ cd samples/Configuration/src/Simple
+$ cd samples/Configuration/src/AspDotNetCore/Simple
 $ dotnet run
 Hosting environment: Production
 Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.
 ```
 Fire up a browser and hit http://localhost:5000.  Once on the home page, navigate to the `Config Server Data` tab and you'll see the values stored in the github repo used for the Spring Cloud Config Server samples.
+
 If you navigate to the "Config Server Settings" tab you will see the settings used by the Spring Cloud Config server client.
+
+Change the Hosting environment setting to `development` (i.e. export ASPNETCORE_ENVIRONMENT=development), then restart the application. You will see different configuration data returned for that profile/hosting environment.
 
