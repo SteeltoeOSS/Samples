@@ -1,0 +1,10 @@
+---
+applications:
+- name: redis-connector
+  memory: 512M
+  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
+  command: ./Redis --server.urls "http://*:$PORT"
+  env:
+    ASPNETCORE_ENVIRONMENT: development
+  services:
+   - myRedisService

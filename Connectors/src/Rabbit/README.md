@@ -29,7 +29,7 @@ Note: The provided manifest will create an app named `rabbit` and attempt to bin
 
 After building and running the app, you should see something like the following in the logs. 
 
-To see the logs as you startup and use the app: `cf logs rabbit-demo`
+To see the logs as you startup and use the app: `cf logs rabbit`
 
 On a Linux cell, you should see something like this during startup:
 ```

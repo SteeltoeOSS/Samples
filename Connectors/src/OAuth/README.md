@@ -3,12 +3,12 @@ ASP.NET Core sample app illustrating how to use the OAuth Connector to automatic
 This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://github.com/SteeltoeOSS/Security).
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7
+1. Install Pivotal CloudFoundry 1.7+
 2. Install .NET Core SDK
 3. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
 
 # Create OAuth2 Service Instance on CloudFoundry
-You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. In this example we will use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service. To do this, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `oauth.json` file in creating your CUPS service.
+You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. In this example we will use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service. To do this, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `oauth.json` file in creating your CUPS service. Note that you will likely have to modify its contents to match your CloudFoundry setup.
 
 1. cf target -o myorg -s development
 2. cf cups myOAuthService -p oauth.json
@@ -26,8 +26,6 @@ If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identit
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 
 Note: The provided manifest(s) will create an app named `oauth` and attempt to bind to the the app the CUPS service `myOAuthService`.
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 

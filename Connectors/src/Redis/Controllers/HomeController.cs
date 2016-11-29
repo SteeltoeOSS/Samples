@@ -41,8 +41,8 @@ namespace Redis.Controllers
 
         public IActionResult CacheData()
         {
-            string key1 = Encoding.Default.GetString(_cache.Get("Key1"));
-            string key2 = Encoding.Default.GetString(_cache.Get("Key2"));
+            string key1 = Encoding.UTF8.GetString(_cache.Get("Key1"));
+            string key2 = Encoding.UTF8.GetString(_cache.Get("Key2"));
 
             ViewData["Key1"] = key1;
             ViewData["Key2"] = key2;

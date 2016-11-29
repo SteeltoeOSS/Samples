@@ -21,8 +21,8 @@ You must first create an instance of the MySql service in a org/space.
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
-5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest.yml -p $PWD/publish`)
+5. Push the app using the appropriate provided manifest.
+ (e.g.  `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish` )
 
 Note: The provided manifest will create an app named `mysqlefcore-connector` and attempt to bind to the the app to MySql service `myMySqlService`.
 

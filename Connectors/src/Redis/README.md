@@ -3,11 +3,11 @@ ASP.NET Core sample app illustrating how to use [Steeltoe Redis Connector](https
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7
-2. Installed DiegoWindows support (Greenhouse) 
+1. Installed Pivotal CloudFoundry 1.7+
+2. Optionaly, installed DiegoWindows support (Greenhouse) 
 3. Installed Redis Cache marketplace service
 4. Install .NET Core SDK
-5. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
+5. Web tools installed and on PATH, (e.g. npm, gulp, etc).  If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External 
 
 # Create Redis Service Instance on CloudFoundry
 You must first create an instance of the Redis service in a org/space.
@@ -21,13 +21,11 @@ You must first create an instance of the Redis service in a org/space.
 2. cd samples/Connectors/src/Redis
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --runtime win7-x64`)
-5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
+5. Push the app using the appropriate provided manifest.
+ (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish`)
 
 Note: The provided manifest will create an app named `redis-connector` and attempt to bind to the the app to Redis service `myRedisService`.
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 
