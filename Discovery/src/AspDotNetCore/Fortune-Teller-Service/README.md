@@ -1,7 +1,9 @@
 # Fortune-Teller-Service - ASP.NET Core Microservice
 ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
 
-# Pre-requisites - Local
+Note: You can run this either locally or on CloudFoundry.
+
+# Pre-requisites - Running Local
 
 This sample assumes that there is a running Spring Cloud Eureka Server on your machine. To make this happen:
 
@@ -35,9 +37,10 @@ At this point the Fortune Teller Service is up and running and ready for the [Fo
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
-2. Installed Spring Cloud Services 1.0.9+
-3. Install .NET Core SDK
-4. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
+2. Optionally install DiegoWindows support (Greenhouse)
+3. Installed Spring Cloud Services 1.0.9+
+4. Install .NET Core SDK
+5. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
 Note: If you're on Windows and you have VS2015 Update 3, you can add these to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External.
 
 # Setup Service Registry on CloudFoundry
@@ -45,6 +48,7 @@ You must first create an instance of the Service Registry service in a org/space
 
 1. cf target -o myorg -s development
 2. cf create-service p-service-registry standard myDiscoveryService 
+3. Wait for the service to become ready! (i.e. cf services)
 
 # Publish App & Push to CloudFoundry
 

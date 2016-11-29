@@ -137,23 +137,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Pivotal.Discovery.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Pivotal.Discovery.Client.1.0.0-dev-00034\lib\net451\Pivotal.Discovery.Client.dll</HintPath>
+      <HintPath>..\..\..\packages\Pivotal.Discovery.Client.1.0.0-dev-00037\lib\net451\Pivotal.Discovery.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.Connector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.CloudFoundry.Connector.1.0.0-dev-00079\lib\net451\Steeltoe.CloudFoundry.Connector.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.CloudFoundry.Connector.1.0.0-dev-00082\lib\net451\Steeltoe.CloudFoundry.Connector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Discovery.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Discovery.Client.1.0.0-dev-00042\lib\net451\Steeltoe.Discovery.Client.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Discovery.Client.1.0.0-dev-00045\lib\net451\Steeltoe.Discovery.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Discovery.Eureka.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Discovery.Eureka.Client.1.0.0-dev-00042\lib\net451\Steeltoe.Discovery.Eureka.Client.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Discovery.Eureka.Client.1.0.0-dev-00045\lib\net451\Steeltoe.Discovery.Eureka.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-dev-00057\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
+      <HintPath>..\..\..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-dev-00061\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
