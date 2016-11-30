@@ -5,8 +5,7 @@ using Common.Models;
 using OrderService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using System.Data.Entity;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace OrderService.Controllers
 {

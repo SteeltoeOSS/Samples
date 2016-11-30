@@ -6,16 +6,18 @@ To fully understand how this application is structured, you should have a good l
 This application makes use of the following Steeltoe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
-* Steeltoe Connectors for connecting to MySql using EF6  
+* Steeltoe Connectors for connecting to MySql using EF Core  
 * Steeltoe CloudFoundry Security Provider for SSO and REST endpoint protection
 
 # Getting Started
 
-This repo contains two of the four components that make up Freddys BBQ application  ( i.e.`Admin Portal UI` and `Order REST API`). These two components have been rewriten using .NET and ASP.NET Core and will be used to illustrate interoperability between Java and .NET based microservices running on CloudFoundry.
+This repo contains two of the four components that make up [Freddys BBQ](https://github.com/william-tran/freddys-bbq) application  ( i.e.`Admin Portal UI` and `Order REST API`). These two components have been rewriten using .NET and ASP.NET Core and will be used to illustrate interoperability between Java and .NET based microservices running on CloudFoundry.
 
 To proceed you will first deploy the Java version of Freddys BBQ on CloudFoundry. To do this, you should first follow the [deployment instructions](https://github.com/william-tran/freddys-bbq) for the Java version of Freddys BBQ and verify that this version of the application is up and running properly.
 
-Once that is complete then the next step will be to replace the two Java services, `Admin Portal UI` and `Order REST API` with the .NET versions found in this repo. 
+Note: At one point in the deployment of the Java version of Freddy's BBQ, you are asked to run some scripts to configure the UAA Single Signon service.  Included with this sample are some example windows command files you can use/edit to make things easier.
+
+Once the Java version is up and running then the next step will be to replace the two Java services, `Admin Portal UI` and `Order REST API` with the .NET versions found in this repo. 
 
 After that is complete you will have a running example of a Java and .NET based microservices based app running on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
@@ -62,18 +64,17 @@ Save your changes  .... (i.e. `Save Config`)
 
 At this point you are ready to replace the existing Java based services with the .NET versions. To do this enter the following commands:
 ```
-cf delete admin-portal
-cf delete order-service
 cd Samples\FreddysBBQ\src\OrderService
 dotnet restore --configfile nuget.config
-dotnet publish -out %CD%\publish -c Debug -f net451 -r win7-x64
-cf push -f manifest-windows.yml -p %CD%\publish
+dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
+cf push -f manifest-windows.yml -p %CD%\publish OR cf push -f manifest.yml -p %CD%\publish
 cd ..\AdminPortal
 dotnet restore --configfile nuget.config
-dotnet publish -out %CD%\publish -c Debug -f net451 -r win7-x64
-cf push -f manifest-windows.yml -p %CD%\publish
+dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
+cf push -f manifest-windows.yml -p %CD%\publish OR cf push -f manifest.yml -p %CD%\publish
 ```
-
 At this point the app should continue to work as it did before.  Any orders you might have had before, will be gone as you are now starting with a new clean order database. 
+
+Note: If you happen to delete the services before pushing the new .NET services, you will have to configure the SSO service again for each of those two components.
 
 

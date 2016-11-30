@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OrderService.Models
 {
@@ -12,7 +11,12 @@ namespace OrderService.Models
         {
             if (ShouldDropCreateDatabase())
             {
-                Database.SetInitializer<OrderContext>(new DropCreateDatabaseAlways<OrderContext>());
+                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    var db = serviceScope.ServiceProvider.GetService<OrderContext>();
+                    db.Database.EnsureCreated();
+
+                }
             }
         }
 

@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
-using System.Net.Security;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -25,117 +24,95 @@ namespace Common.Services
         public AbstractService(IDiscoveryClient client, ILogger logger, IHttpContextAccessor context)
         {
             _handler = new DiscoveryHttpClientHandler(client);
+            _handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             _logger = logger;
             _context = context;
         }
         public async Task DoRequest(HttpClient client, HttpRequestMessage request)
         {
-            RemoteCertificateValidationCallback prevValidator = ServicePointManager.ServerCertificateValidationCallback;
-            ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-            try
+  
+            using (HttpResponseMessage response = await client.SendAsync(request))
             {
-                using (HttpResponseMessage response = await client.SendAsync(request))
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    if (response.StatusCode != HttpStatusCode.OK)
-                    {
-                        if (response.StatusCode == HttpStatusCode.NotFound)
-                            return;
-
-                        // Log status
-                        var message = string.Format("Service request returned status: {0} invoking path: {1}",
-                            response.StatusCode, request.RequestUri);
-
-                        _logger?.LogInformation(message);
-
+                    if (response.StatusCode == HttpStatusCode.NotFound)
                         return;
-                    }
+
+                    // Log status
+                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
+                        response.StatusCode, request.RequestUri);
+
+                    _logger?.LogInformation(message);
+
                     return;
                 }
+                return;
             }
-            finally
-            {
-                ServicePointManager.ServerCertificateValidationCallback = prevValidator;
-            }
+    
         }
 
         public async Task<T> DoRequest<T>(HttpClient client, HttpRequestMessage request)
         {
 
-            RemoteCertificateValidationCallback prevValidator = ServicePointManager.ServerCertificateValidationCallback;
-            ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-            try
+            using (HttpResponseMessage response = await client.SendAsync(request))
             {
-                using (HttpResponseMessage response = await client.SendAsync(request))
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    if (response.StatusCode != HttpStatusCode.OK)
-                    {
-                        if (response.StatusCode == HttpStatusCode.NotFound)
-                            return default(T);
-
-                        // Log status
-                        var message = string.Format("Service request returned status: {0} invoking path: {1}",
-                            response.StatusCode, request.RequestUri);
-
-                        _logger?.LogInformation(message);
-
+                    if (response.StatusCode == HttpStatusCode.NotFound)
                         return default(T);
-                    }
 
-                    Stream stream = await response.Content.ReadAsStreamAsync();
-                    return Deserialize<T>(stream);
+                    // Log status
+                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
+                        response.StatusCode, request.RequestUri);
+
+                    _logger?.LogInformation(message);
+
+                    return default(T);
                 }
-            } finally
-            {
-                ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+
+                Stream stream = await response.Content.ReadAsStreamAsync();
+                return Deserialize<T>(stream);
             }
 
         }
         public async Task<T> DoHateoasRequest<T>(HttpClient client, HttpRequestMessage request, string key)
         {
 
-            RemoteCertificateValidationCallback prevValidator = ServicePointManager.ServerCertificateValidationCallback;
-            ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-            try
+
+            using (HttpResponseMessage response = await client.SendAsync(request))
             {
-                using (HttpResponseMessage response = await client.SendAsync(request))
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    if (response.StatusCode != HttpStatusCode.OK)
-                    {
-                        if (response.StatusCode == HttpStatusCode.NotFound)
-                            return default(T);
-
-                        // Log status
-                        var message = string.Format("Service request returned status: {0} invoking path: {1}",
-                            response.StatusCode, request.RequestUri);
-
-                        _logger?.LogInformation(message);
-
+                    if (response.StatusCode == HttpStatusCode.NotFound)
                         return default(T);
-                    }
 
-                    string json = await response.Content.ReadAsStringAsync();
-                    if (string.IsNullOrEmpty(json))
-                    {
-                        return default(T);
-                    }
-                    var parsed = JObject.Parse(json);
-                    if (parsed == null)
-                    {
-                        return default(T);
-                    }
-                    var items = parsed["_embedded"]?[key];
-                    if (items == null)
-                    {
-                        return default(T);
-                    }
-                    return items.ToObject<T>();
+                    // Log status
+                    var message = string.Format("Service request returned status: {0} invoking path: {1}",
+                        response.StatusCode, request.RequestUri);
 
-                    //return Deserialize<T>(stream);
+                    _logger?.LogInformation(message);
+
+                    return default(T);
                 }
-            }
-            finally
-            {
-                ServicePointManager.ServerCertificateValidationCallback = prevValidator;
+
+                string json = await response.Content.ReadAsStringAsync();
+                if (string.IsNullOrEmpty(json))
+                {
+                    return default(T);
+                }
+                var parsed = JObject.Parse(json);
+                if (parsed == null)
+                {
+                    return default(T);
+                }
+                var items = parsed["_embedded"]?[key];
+                if (items == null)
+                {
+                    return default(T);
+                }
+                return items.ToObject<T>();
+
+                //return Deserialize<T>(stream);
             }
 
         }

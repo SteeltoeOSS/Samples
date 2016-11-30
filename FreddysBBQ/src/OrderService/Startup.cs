@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
 using OrderService.Models;
-using Steeltoe.CloudFoundry.Connector.MySql.EF6;
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Microsoft.AspNetCore.Http;
 using Steeltoe.Security.Authentication.CloudFoundry;
 using Common.Services;
@@ -47,7 +44,8 @@ namespace OrderService
 
             services.AddDiscoveryClient(Configuration);
 
-            services.AddDbContext<OrderContext>(Configuration);
+            services.AddDbContext<OrderContext>(options => options.UseMySql(Configuration));
+       
             services.AddSingleton<IMenuService, MenuService>();
 
             // Add framework services.

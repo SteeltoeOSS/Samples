@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Common.Models;
 using OrderService.Models;
-using System.Data.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Common.Services;
 using System.Security.Claims;
 using System.Security.Principal;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace OrderService.Controllers
 {
