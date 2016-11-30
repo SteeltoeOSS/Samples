@@ -11,15 +11,15 @@ This application makes use of the following Steeltoe components:
 
 # Getting Started
 
-This repo contains two of the four components that make up [Freddys BBQ](https://github.com/william-tran/freddys-bbq) application  ( i.e.`Admin Portal UI` and `Order REST API`). These two components have been rewriten using .NET and ASP.NET Core and will be used to illustrate interoperability between Java and .NET based microservices running on CloudFoundry.
+This repo contains two of the four components that make up the [Freddys BBQ](https://github.com/william-tran/freddys-bbq) application  ( i.e.`Admin Portal UI` and `Order REST API`). These two components have been writen using .NET and ASP.NET Core and will be used to illustrate interoperability between Java and .NET based microservices running on CloudFoundry.
 
-To proceed you will first deploy the Java version of Freddys BBQ on CloudFoundry. To do this, you should first follow the [deployment instructions](https://github.com/william-tran/freddys-bbq) for the Java version of Freddys BBQ and verify that this version of the application is up and running properly.
+To proceed you will first deploy the Java version of the app on CloudFoundry. To do this, follow the [deployment instructions](https://github.com/william-tran/freddys-bbq) for the Java version of Freddys BBQ and verify that this version of the application is up and running properly.
 
-Note: At one point in the deployment of the Java version of Freddy's BBQ, you are asked to run some scripts to configure the UAA Single Signon service.  Included with this sample are some example windows command files you can use/edit to make things easier.
+Note: At one point in the deployment of the Java version, you are asked to run some scripts to configure the UAA Single Signon service.  If you are on a windows machine, you will wish you had the `.cmd` versions of those scripts. You can find some in `\scripts` folder that you can edit and use.
 
 Once the Java version is up and running then the next step will be to replace the two Java services, `Admin Portal UI` and `Order REST API` with the .NET versions found in this repo. 
 
-After that is complete you will have a running example of a Java and .NET based microservices based app running on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
+Once thats complete, you will have a running example of a Java and .NET based microservices based app running on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
 # Replace Java Services with .NET Services
 
@@ -66,11 +66,13 @@ At this point you are ready to replace the existing Java based services with the
 ```
 cd Samples\FreddysBBQ\src\OrderService
 dotnet restore --configfile nuget.config
-dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
+dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR 
+         dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
 cf push -f manifest-windows.yml -p %CD%\publish OR cf push -f manifest.yml -p %CD%\publish
 cd ..\AdminPortal
 dotnet restore --configfile nuget.config
-dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
+dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR 
+         dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
 cf push -f manifest-windows.yml -p %CD%\publish OR cf push -f manifest.yml -p %CD%\publish
 ```
 At this point the app should continue to work as it did before.  Any orders you might have had before, will be gone as you are now starting with a new clean order database. 
