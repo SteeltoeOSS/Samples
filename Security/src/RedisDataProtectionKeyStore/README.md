@@ -4,7 +4,7 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtec
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
-2. Installed DiegoWindows support (Greenhouse) 
+2. Optionally, installed DiegoWindows support (Greenhouse) 
 3. Installed Redis Cache marketplace service
 4. Install .NET Core SDK
 5. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
@@ -22,12 +22,10 @@ You must first create an instance of the Redis service in a org/space.
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
-5. Push the app using the provided manifest.
+5. Push the app using the appropriate provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
 
 Note: The provided manifest will create an app named `keystore` and attempt to bind to the Redis service `myRedisService`.
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 
@@ -44,7 +42,7 @@ On a Windows cell, you should see something like this during startup:
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Now listening on: http://*:57540
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
-At this point the app is up and running.  Click on the `Protected` link in the menu and you should see something like the following:
+At this point the app is up and running. Bring up the home page of the app and click on the `Protected` link in the menu and you should see something like the following:
 ```
 Protected Data.
 InstanceIndex=0
@@ -56,3 +54,7 @@ At this point the app has created a new Session with the ProtectedData encrypted
 Next, scale the app to multi-instance (eg. `cf scale keystore -i 2`). Wait for the new instance to startup.
 
 Using the same browser session, click on the `Protected` menu item a couple more times. It may take a couple clicks to get routed to the second app instance. When this happens, you should see the InstanceId changing but the SessionId and the ProtectedData remaining the same.
+
+A couple things to note at this point about this app:
+* The app is using the CloudFoundry Redis service to store session data.  As a result, the session data is available to all instances of the app.
+* The `session handle` that is in the session cookie and the data that is stored in the session in Redis is encrypted using keys that are now stored in the keyring which is also stored in the CloudFoundry Redis service. So when you scale the app to multiple instances the same keyring is used by all instances and therefore the `session handle` and the session data can be decrypted by any instance of the application.

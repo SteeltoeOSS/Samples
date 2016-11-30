@@ -31,13 +31,13 @@ namespace RedisDataProtectionKeyStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            // Use Redis cache on CloudFoundry to store keyring
             services.AddRedisConnectionMultiplexer(Configuration);
             services.AddDataProtection()
                 .PersistKeysToRedis()
                 .SetApplicationName("redis-keystore");
 
-
+            // Use Redis cache on CloudFoundry to store session data
             services.AddDistributedRedisCache(Configuration);
             services.AddSession();
 
@@ -58,7 +58,6 @@ namespace RedisDataProtectionKeyStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {

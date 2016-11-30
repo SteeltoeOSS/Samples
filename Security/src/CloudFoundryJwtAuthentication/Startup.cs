@@ -22,11 +22,6 @@ namespace CloudFoundryJwtAuthentication
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddCloudFoundry();
 
-            if (env.IsEnvironment("Development"))
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -45,9 +40,6 @@ namespace CloudFoundryJwtAuthentication
                 options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
             });
 
-            // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
-
             services.AddMvc();
         }
 
@@ -56,10 +48,6 @@ namespace CloudFoundryJwtAuthentication
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseApplicationInsightsRequestTelemetry();
-
-            app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseCloudFoundryJwtAuthentication();
 
