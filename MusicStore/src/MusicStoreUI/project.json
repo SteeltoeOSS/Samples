@@ -15,16 +15,16 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Pivotal.Discovery.Client": "1.0.0-dev-*",
-    "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-dev-*",
-    "Steeltoe.CloudFoundry.Connector.MySql": "1.0.0-dev-*",
+    "Pivotal.Discovery.Client": "1.0.0-*",
+    "Pivotal.Extensions.Configuration.ConfigServer": "1.0.0-*",
+    "Steeltoe.CloudFoundry.Connector.MySql": "1.0.0-*",
     "Microsoft.Extensions.Caching.Memory": "1.1.0",
     "Microsoft.AspNetCore.Session": "1.1.0",
     "Microsoft.AspNetCore.Identity": "1.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-    "Steeltoe.CloudFoundry.Connector.Redis": "1.0.0-dev-*",
-    "Steeltoe.Security.DataProtection.Redis": "1.0.0-dev-*"
+    "Steeltoe.CloudFoundry.Connector.Redis": "1.0.0-*",
+    "Steeltoe.Security.DataProtection.Redis": "1.0.0-*"
   },
 
   "tools": {

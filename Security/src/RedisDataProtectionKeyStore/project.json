@@ -15,10 +15,10 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-dev-*",
-    "Steeltoe.CloudFoundry.Connector.Redis": "1.0.0-dev-*",
+    "Steeltoe.Extensions.Configuration.CloudFoundry": "1.0.0-*",
+    "Steeltoe.CloudFoundry.Connector.Redis": "1.0.0-*",
     "Microsoft.AspNetCore.Session": "1.1.0",
-    "Steeltoe.Security.DataProtection.Redis": "1.0.0-dev-*"
+    "Steeltoe.Security.DataProtection.Redis": "1.0.0-*"
   },
 
   "tools": {
