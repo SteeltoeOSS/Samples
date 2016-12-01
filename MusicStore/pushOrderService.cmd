@@ -14,5 +14,5 @@ exit /b
 echo USAGE: 
 echo pushOrderService [runtime] [framework]
 echo runtime - target runtime to publish (e.g. win7-x64, ubuntu.14.04-x64)
-echo framework - target framework to publish (e.g. net451, netcoreapp1.0)
+echo framework - target framework to publish (e.g. net451, netcoreapp1.1)
 exit /b

@@ -6,13 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShoppingCartService.Models;
 
-#if NET451 && MYSQL
-using System.Data.Entity;
-#endif
-
-#if !NET451 || POSTGRES
 using Microsoft.EntityFrameworkCore;
-#endif
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

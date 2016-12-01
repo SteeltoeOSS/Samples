@@ -4,14 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-
-#if NET451 && MYSQL
-using System.Data.Entity;
-#endif
-
-#if !NET451 || POSTGRES
 using Microsoft.EntityFrameworkCore;
-#endif
 
 namespace MusicStore.Models
 {
@@ -21,22 +14,17 @@ namespace MusicStore.Models
         const string defaultAdminUserName = "DefaultAdminUserName";
         const string defaultAdminPassword = "DefaultAdminPassword";
 
-        public static async Task InitializeMusicStoreDatabaseAsync(IServiceProvider serviceProvider)
+        public static void InitializeMusicStoreDatabase(IServiceProvider serviceProvider)
         {
             if (ShouldDropCreateDatabase())
             {
 
-#if NET451 && MYSQL
-                Console.WriteLine("Inializing DB");
-                Database.SetInitializer<MusicStoreContext>(new DropCreateDatabaseAlways<MusicStoreContext>());
-#endif
                 using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
-#if !NET451 || POSTGRES
-                    await db.Database.EnsureCreatedAsync();
-#endif
-                    await InsertTestData(serviceProvider);
+
+                    db.Database.EnsureCreated();
+                    InsertTestData(serviceProvider);
                 }
                 artists = null;
                 genres = null;
@@ -44,18 +32,16 @@ namespace MusicStore.Models
 
         }
 
-        private static async Task InsertTestData(IServiceProvider serviceProvider)
+        private static void InsertTestData(IServiceProvider serviceProvider)
         {
             var albums = GetAlbums(imgUrl, Genres, Artists);
-#if !NET451 || POSTGRES
-            await AddOrUpdateAsync(serviceProvider, g => g.Name, Genres.Select(genre => genre.Value));
-            await AddOrUpdateAsync(serviceProvider, a => a.Name, Artists.Select(artist => artist.Value));
-#endif
-            await AddOrUpdateAsync(serviceProvider, a => a.Title, albums);
+            AddOrUpdateAsync(serviceProvider, g => g.Name, Genres.Select(genre => genre.Value));
+            AddOrUpdateAsync(serviceProvider, a => a.Name, Artists.Select(artist => artist.Value));
+            AddOrUpdateAsync(serviceProvider, a => a.Title, albums);
         }
 
         // TODO [EF] This may be replaced by a first class mechanism in EF
-        private static async Task AddOrUpdateAsync<TEntity>(
+        private static void AddOrUpdateAsync<TEntity>(
             IServiceProvider serviceProvider,
             Func<TEntity, object> propertyToMatch, IEnumerable<TEntity> entities)
             where TEntity : class
@@ -78,7 +64,7 @@ namespace MusicStore.Models
                         db.Entry(item).State = EntityState.Added;
                 }
 
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
         }
 

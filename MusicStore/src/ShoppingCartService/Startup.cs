@@ -8,13 +8,8 @@ using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
 using ShoppingCartService.Models;
 
-#if NET451 && MYSQL
-using Steeltoe.CloudFoundry.Connector.MySql.EF6;
-#endif
 
-#if !NET451 || POSTGRES
-using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
-#endif
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 
 namespace ShoppingCartService
 {
@@ -40,13 +35,8 @@ namespace ShoppingCartService
             services.AddMvc();
 
             services.AddDiscoveryClient(Configuration);
-#if NET451 && MYSQL
-            services.AddDbContext<ShopingCartContext>(Configuration);
-#endif
-#if !NET451 || POSTGRES
-            services.AddDbContext<ShopingCartContext>(options => options.UseNpgsql(Configuration));
-#endif
 
+            services.AddDbContext<ShopingCartContext>(options => options.UseMySql(Configuration));
 
         }
 
@@ -60,7 +50,7 @@ namespace ShoppingCartService
 
             app.UseDiscoveryClient();
 
-            SampleData.InitializeShoppingCartDatabaseAsync(app.ApplicationServices).Wait();
+            SampleData.InitializeShoppingCartDatabase(app.ApplicationServices);
         }
     }
 }

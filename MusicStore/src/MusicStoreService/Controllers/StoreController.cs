@@ -5,13 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MusicStore.Models;
 
-#if !NET451 || POSTGRES
 using Microsoft.EntityFrameworkCore;
-#endif
-
-#if NET451 && MYSQL
-using System.Data.Entity;
-#endif
 
 using System.Collections.Generic;
 
@@ -151,16 +145,36 @@ namespace MusicStore.Controllers
         //
         // GET: /api/Store/TopSelling?count=6
         [HttpGet("TopSelling")]
-        public async Task<List<AlbumJson>> GetTopSelling([FromQuery] int count = 6)
+        // public async Task<List<AlbumJson>> GetTopSelling([FromQuery] int count = 6)
+        public List<AlbumJson> GetTopSelling([FromQuery] int count = 6)
         {
-            var albumModel = await DbContext.Albums
+            // TODO: Current MySQL provider has a Take() bug
+            // See: http://forums.mysql.com/read.php?38,650020,650020#msg-650020
+
+            //var albumModel = await DbContext.Albums
+            //    .OrderByDescending(a => a.OrderCount)
+            //    .Include(a => a.Artist)
+            //    .Include(a => a.Genre)
+            //    .Take(count)
+            //    .ToListAsync();
+            //return AlbumJson.From(albumModel);
+
+            var ordered = DbContext.Albums
                 .OrderByDescending(a => a.OrderCount)
                 .Include(a => a.Artist)
-                .Include(a => a.Genre)
-                .Take(count)
-                .ToListAsync();
+                .Include(a => a.Genre);
 
-            return AlbumJson.From(albumModel);
+            List<Album> results = new List<Album>();
+            
+            foreach(var a in ordered.AsEnumerable())
+            {
+                results.Add(a);
+                count--;
+                if (count == 0)
+                    break;
+            }
+
+            return AlbumJson.From(results);
         }
 
         //

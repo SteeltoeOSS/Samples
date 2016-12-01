@@ -7,14 +7,6 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-
-#if NET451 && MYSQL
-using System.Data.Entity;
-#endif
-#if !NET451 || POSTGRES
-using Microsoft.EntityFrameworkCore;
-#endif
-
 namespace MusicStoreUI.Models
 {
     public static class SampleData
@@ -23,20 +15,16 @@ namespace MusicStoreUI.Models
         const string defaultAdminPassword = "DefaultAdminPassword";
 
 
-        public static async Task InitializeAccountsDatabaseAsync(IServiceProvider serviceProvider, IConfiguration configuration)
+        public static void InitializeAccountsDatabase(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             if (ShouldDropCreateDatabase())
             {
-#if NET451 && MYSQL
-                Database.SetInitializer<AccountsContext>(new DropCreateDatabaseAlways<AccountsContext>());
-#endif
+
                 using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
-#if !NET451 || POSTGRES
-                    await db.Database.EnsureCreatedAsync();
-#endif
-                    await CreateAdminUser(serviceProvider, configuration);
+                    db.Database.EnsureCreated();
+                    CreateAdminUser(serviceProvider, configuration).Wait();
 
                 }
             }

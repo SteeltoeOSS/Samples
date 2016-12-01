@@ -5,8 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
 
-#if NET451 && USE_REDIS_CACHE
+#if USE_REDIS_CACHE
 using Steeltoe.CloudFoundry.Connector.Redis;
+using Steeltoe.Security.DataProtection;
+using Microsoft.AspNetCore.DataProtection;
 #endif
 
 using MusicStoreUI.Services;
@@ -15,17 +17,9 @@ using MusicStoreUI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 
-#if NET451 && MYSQL
-using Microsoft.AspNet.Identity.EntityFramework;
-using MusicStoreUI.Identity;
-using Steeltoe.CloudFoundry.Connector.MySql.EF6;
-using Steeltoe.Security.DataProtection;
-using Microsoft.AspNetCore.DataProtection;
-#endif
 
-#if !NET451 || POSTGRES
-using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
-#endif
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+
 
 namespace MusicStoreUI
 {
@@ -51,7 +45,7 @@ namespace MusicStoreUI
         {
 
             // Add framework services.
-#if NET451 && USE_REDIS_CACHE
+#if USE_REDIS_CACHE
             services.AddRedisConnectionMultiplexer(Configuration);
             services.AddDataProtection()
                 .PersistKeysToRedis()
@@ -63,26 +57,14 @@ namespace MusicStoreUI
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-#if NET451 && MYSQL
-            services.AddDbContext<AccountsContext>(Configuration);
-
-            var builder = services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-            {
-                options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
-            });
-
-            builder.AddEntityFrameworkStores().AddDefaultTokenProviders();
-
-#endif
-#if !NET451 || POSTGRES
-            services.AddDbContext<AccountsContext>(options => options.UseNpgsql(Configuration));
+            services.AddDbContext<AccountsContext>(options => options.UseMySql(Configuration));
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
                     {
                         options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
                     })
                     .AddEntityFrameworkStores<AccountsContext>()
                     .AddDefaultTokenProviders();
-#endif
+
             services.AddDiscoveryClient(Configuration);
 
             services.AddSingleton<IMusicStore, MusicStoreService>();
@@ -123,7 +105,6 @@ namespace MusicStoreUI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
@@ -149,7 +130,7 @@ namespace MusicStoreUI
 
             app.UseDiscoveryClient();
 
-            SampleData.InitializeAccountsDatabaseAsync(app.ApplicationServices, Configuration).Wait();
+            SampleData.InitializeAccountsDatabase(app.ApplicationServices, Configuration);
 
         }
     }

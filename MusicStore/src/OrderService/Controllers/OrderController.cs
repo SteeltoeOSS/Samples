@@ -6,12 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using OrderService.Models;
 using Microsoft.Extensions.Logging;
 
-#if NET451 && MYSQL
-using System.Data.Entity;
-#endif
-#if !NET451 || POSTGRES
 using Microsoft.EntityFrameworkCore;
-#endif
+
 
 namespace OrderService.Controllers
 {

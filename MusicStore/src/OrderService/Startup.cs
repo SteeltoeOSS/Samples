@@ -2,13 +2,9 @@
 using Pivotal.Extensions.Configuration;
 using Pivotal.Discovery.Client;
 
-#if NET451 && MYSQL
-using Steeltoe.CloudFoundry.Connector.MySql.EF6;
-#endif
 
-#if !NET451 || POSTGRES
-using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
-#endif
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,12 +41,9 @@ namespace OrderService
             services.AddMvc();
 
             services.AddDiscoveryClient(Configuration);
-#if NET451 && MYSQL
-            services.AddDbContext<OrdersContext>(Configuration);
-#endif
-#if !NET451 || POSTGRES
-            services.AddDbContext<OrdersContext>(options => options.UseNpgsql(Configuration));
-#endif
+
+            services.AddDbContext<OrdersContext>(options => options.UseMySql(Configuration));
+
 
         }
 
@@ -64,7 +57,7 @@ namespace OrderService
 
             app.UseDiscoveryClient();
 
-            SampleData.InitializeOrderDatabaseAsync(app.ApplicationServices).Wait();
+            SampleData.InitializeOrderDatabase(app.ApplicationServices);
         }
     }
 }

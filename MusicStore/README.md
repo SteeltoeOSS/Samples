@@ -12,18 +12,11 @@ Note: The OrderService and ShoppingCartService are independent from the Music ap
 This application makes use of the following Steeltoe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
-* Steeltoe Connectors for connecting to MySql using EF6 OR Postgres using EFCore 
-* Optionally using Steeltoe Redis Connector to connect to a Redis cache for Session storage. Note: This is required if you want to scale the MusicStoreUI component to multiple instances.
+* Steeltoe Connector for connecting to MySql using EFCore 
+* Optionally uses Steeltoe Redis Connector to connect to a Redis cache for Session storage. Note: This is required if you want to scale the MusicStoreUI component to multiple instances.
+* Optionally uses Steeltoe Redis DataProtection provider to the cause the DataProtection KeyRing to be stored in a Redis cache. Note: This is also required if you want to scale the MusicStoreUI component to multiple instances.
 
-Note: The MySql and Redis connectors only support .NET 451+ and as such when using them you must target a windows runtime (e.g. win7-x64). 
-
-The Postgres connector supports both .NET 451+ and .NET Core. 
-
-If you plan on running any of the MusicStore components on MacOS or Linux, then you must use Postgres.
-
-By default, the application components are compiled to use MySql when targeting Windows and to use Postgres when targeting on MacOS/Linux.
-
-The default is to NOT use a Redis cache for Session storage; instead it uses a memory cache.
+The default is to NOT use a Redis cache for Session storage or DataProtection KeyRing storage. Details on how to enable Redis usage are provided below.
 
 # Getting Started
 
@@ -36,8 +29,8 @@ The default is to NOT use a Redis cache for Session storage; instead it uses a m
 
 * Spring Cloud Config Server - listening @ `http://localhost:8888` 
 * Spring Cloud Eureka Server - listening @ `http://localhost:8761/eureka/`
-* MySql Database Server - listening @ `localhost:3306` username: `root`, password: `steeltoe` or Postgres Database Server listening @ `localhost:5432` username: `steeltoe`, password: `steeltoe`
-* Redis Cache - Optional, can be used for Session state backing store.
+* MySql Database Server - listening @ `localhost:3306` username: `root`, password: `steeltoe` 
+* Redis Cache - Optional, can be used for Session state backing store and KeyRing storage.
 
 You have a three options to choose from in order to get these services up and running locally:
 
@@ -77,13 +70,6 @@ And finally to startup a MySql Server.  Note: On MacOS you can NOT use MySQL. In
 
 This will fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
 
-To startup a Postres Server: 
-
-1. `cd Samples/MusicStore`
-2. `start dockerrun-postgresserver.cmd` or `./dockerrun-postgresserver.sh`
-
-This will fire up a Postgres Server listening on port `5432` with username: `steeltoe` and password: `steeltoe`.
-
 ### Pre-requisites - Using Windows Containers
 Details to be provided when Windows containers stabilize! 
 
@@ -103,7 +89,7 @@ For example, to startup the MusicStoreService:
 
 Its probably best to startup the` MusicStoreService`, `OrderService` and `ShoppingCartService` first and then follow up with the` MusicStoreUI` last.
 
-The `run*.cmd` commands will `dotnet run -f net451` (i.e. target .NET451) while the `run*.sh` will `dotnet run -f netcoreapp1.0` (i.e. target .NET Core)
+The `run*.*` commands will `dotnet run -f netcoreapp1.1` (i.e. target .NET Core)
 
 If all the services startup cleanly, you should be able to hit: http://localhost:5555/ to see the Music Store.
 
@@ -112,12 +98,11 @@ You should have no problem using the provided solution to launch the individual 
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7
-2. Install Spring Cloud Services 1.1.x.
+1. Install Pivotal CloudFoundry 1.7+
+2. Install Spring Cloud Services 1.1.x+.
 3. Install .NET Core SDK.
-4. Install Postgres database service if you want to use Postgress instead of MySQL. (Posgres required for Linux containers)
-5. Install Redis service if you want to use Redis for Sesion storage. (Windows containers only)
-6. Web tools installed and on Path.  On Windows, if you have VS2015 Update 3 installed then add this to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`
+4. Install Redis service if you want to use Redis for Sesion storage and KeyRing storage.
+5. Web tools installed and on Path.  On Windows, if you have VS2015 Update 3 installed then add this to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`
 
 # Setup Services on CloudFoundry
 
@@ -125,19 +110,16 @@ As mentioned above, the application is dependent on the following services:
 * Spring Cloud Config Server 
 * Spring Cloud Eureka Server 
 * MySql Database Server - Default database used by all MusicStore services.
-* Postgres Database Server - Optional on Windows - but required for Linux containers.
-* Redis Cache - Optional, but only on Windows. Note you have to specifically build/publish MusicStoreUI service to use Redis (Details below).
+* Redis Cache - Optional! Note you have to specifically build/publish MusicStoreUI service to use Redis (Details below).
  
-Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+)
+Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+). It is not required to scale the other microservices.
 
-Before pushing the application to CloudFoundry you need to create those services.  If you plan on using Redis to store Session state, set the environment varialble USE_REDIS_CACHE=true before running these command.
+Before pushing the application to CloudFoundry you need to create those services.  If you plan on using Redis, set the environment varialble USE_REDIS_CACHE=true before running these command.
 
 1. `cf target -o myOrg -s mySpace`
 2. `cd Samples/MusicStore`
 3. Optionally - `SET USE_REDIS_CACHE=true` or `export USE_REDIS_CACHE=true`
-3. `start createCloudFoundryServices.cmd` or `./createCloudFoundryServices.sh`
-
-Note: If you wish to use Postgres on CloudFoundry for one or more of the MusicStore services, you will have to provide the `service_name` and `service_plan` as arguments to the above script, as it creates MySQL database services by default. For example, if you are using the `EDB Postgres` service broker on Pivotal CloudFoundry, you would specify `./createCloudFoundryServices EDB-Shared-PostgreSQL "Basic PostgreSQL Plan"`.
+4. `start createCloudFoundryServices.cmd` or `./createCloudFoundryServices.sh`
 
 This will create all of the services needed by the application.  Specifically, it creates:
 * mStoreConfig - Spring Cloud Config Server instance
@@ -158,39 +140,23 @@ Note: If you wish to change what github repo the Config server instance uses, yo
 Once the services have been created and ready on CloudFoundry (i.e. check via `cf services`) then you can use the provided `push*.cmd or push*.sh` commands to startup the individual application services on CloudFoundry. For example to start the ShoppingCart service:
 
 1. `cd Samples/MusicStore`
-2. `pushShoppingCartService.cmd win7-x64 net451` or `./pushShoppingCartService.sh ubuntu.14.04-x64 netcoreapp1.0`
+2. `pushShoppingCartService.cmd win7-x64 netcoreapp1.1` or `./pushShoppingCartService.sh ubuntu.14.04-x64 netcoreapp1.1`
 
 Note: If you wish to use the Redis cache for storing Session state, you will have to set ENVIRONMENT variable `USE_REDIS_CACHE=true` AND modify the [`project.json`](https://github.com/SteeltoeOSS/Samples/blob/master/MusicStore/src/MusicStoreUI/project.json) file for the `MusicStoreUI` application before pushing it. 
 
-To define `USE_REDIS_CACHE` at build/publish time modify the `buildOptions` section as follows:
+To define `USE_REDIS_CACHE` at build/publish time modify the `buildOptions` section in [`project.json`](https://github.com/SteeltoeOSS/Samples/blob/master/MusicStore/src/MusicStoreUI/project.json) as follows:
 ```
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
-    "define": [ "DEMO", "TESTING", "MYSQL", "USE_REDIS_CACHE" ]
+    "define": [ "DEMO", "TESTING", "USE_REDIS_CACHE" ]
   },
 ```
 https://github.com/SteeltoeOSS/musicStore-config.git
-
-Note: If you wish to push to a Linux container you will first have to build/publish the application to use Postgres instead of MySQL. To do this modify the `project.json` files for each of the MusicStore components and define `POSTGRES` instead of `MYSQL`. Do this before using the `push*.*` commands.
-```
-  "buildOptions": {
-    "emitEntryPoint": true,
-    "preserveCompilationContext": true,
-    "define": [ "DEMO", "TESTING", "POSTGRES" ]
-  },
-```
 
 Each of the `push*.*` scripts `dotnet publish` the MusicStore service targeting the `framework` and `runtime` you specify.  They then push the MusicStore service using the appropriate CloudFoundry manifest found in the projects directory (e.g. `manifest-windows.yml`, `manifest.yml` ). 
 
 # Known Limitations
 
-## Redis caching 
-This can only be used when targeting Windows. This is due to the fact that ASP.NET Core Redis Cache implementation currently only supports NET451. This will be changed in 1.1 of ASP.NET Core.
-
-## MySQL database
-This can only be used when targeting Windows. This is due to the fact that the MySql provider we use currently only supports NET451. (Note: Recent milestones of the provider have started supporting NETCoreApp1.0. We will soon make changes to start using the new provider.) 
-
-Until then, if you want to run the sample on a *nix*, you will have to use Postgres.
 ## Sample Databases
 All MusicStore services (i.e. MusicStoreUI, OrderService, etc.) have their own database instance for persisting data.  When a MusicStore service is started locally, it will always drop and recreate its database upon startup. When a MusicStore service is started on CloudFoundry, only the first instance (i.e. CF_INSTANCE_INDEX=0) will drop and recreate its database.  Note then, the service is not fully ready until the first instance has finished initializing its database, even though other instances are ready.
