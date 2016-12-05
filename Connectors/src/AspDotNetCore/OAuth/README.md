@@ -18,7 +18,7 @@ If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identit
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Connectors/src/OAuth
+2. cd samples/Connectors/src/AspDotNetCore/OAuth
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)

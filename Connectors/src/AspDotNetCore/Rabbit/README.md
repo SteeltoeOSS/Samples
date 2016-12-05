@@ -17,7 +17,7 @@ You must first create an instance of the Rabbit service in a org/space.
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Connectors/src/Rabbit
+2. cd samples/Connectors/src/AspDotNetCore/Rabbit
 3. dotnet restore --configfile nuget.config
 4. dotnet publish -o $PWD/publish -f net451 -r win7-x64
 5. Push the app using the provided manifest.

@@ -17,7 +17,7 @@ You must first create an instance of the MySql service in a org/space.
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Connectors/src/MySqlCore
+2. cd samples/Connectors/src/AspDotNetCore/MySqlCore
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
