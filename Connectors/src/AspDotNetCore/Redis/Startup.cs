@@ -43,7 +43,7 @@ namespace Redis
             // This adds a IDistributedCache to the container
             services.AddDistributedRedisCache(Configuration);
 
-            // This works like the above, but adds a ConnectionMultiplexer to the container
+            // This works like the above, but adds a IConnectionMultiplexer to the container
             services.AddRedisConnectionMultiplexer(Configuration);
         }
 

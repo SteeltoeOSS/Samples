@@ -12,6 +12,7 @@ You must first create an instance of the Config Server service in a org/space.
 1. cf target -o myorg -s development
 2. cd src\AspDotNet4\AutofacCloudFoundry
 3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
+4. Wait for service to be available. (e.g. cf services)
 
 # Publish App & Push
 

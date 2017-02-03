@@ -9,8 +9,8 @@ namespace Redis.Controllers
     public class HomeController : Controller
     {
         private IDistributedCache _cache;
-        private ConnectionMultiplexer _conn;
-        public HomeController(IDistributedCache cache, ConnectionMultiplexer conn)
+        private IConnectionMultiplexer _conn;
+        public HomeController(IDistributedCache cache, IConnectionMultiplexer conn)
         {
             _cache = cache;
             _conn = conn;
