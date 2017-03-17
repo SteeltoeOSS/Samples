@@ -6,7 +6,6 @@ ASP.NET Core sample app illustrating how to use the EntityFramework Core togethe
 1. Installed Pivotal CloudFoundry 1.7+
 2. Installed MySql marketplace service
 3. Install .NET Core SDK
-4. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
 
 # Create MySql Service Instance on CloudFoundry
 You must first create an instance of the MySql service in a org/space.

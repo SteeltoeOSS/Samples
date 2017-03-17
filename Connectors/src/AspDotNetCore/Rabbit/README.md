@@ -5,7 +5,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](http
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
-2. Installed Rabbit marketplace service
+2. Installed Rabbit CloudFoundry service
 3. Install .NET Core SDK
 
 # Create Rabbit Service Instance on CloudFoundry
@@ -19,9 +19,9 @@ You must first create an instance of the Rabbit service in a org/space.
 1. cf target -o myorg -s development
 2. cd samples/Connectors/src/AspDotNetCore/Rabbit
 3. dotnet restore --configfile nuget.config
-4. dotnet publish -o $PWD/publish -f net451 -r win7-x64
+4. dotnet publish -o $PWD/publish -f net462 -r win10-x64
 5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish )
+ (e.g.  `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish` )
 
 Note: The provided manifest will create an app named `rabbit` and attempt to bind to the the app to Rabbit service `myRabbitService`.
 

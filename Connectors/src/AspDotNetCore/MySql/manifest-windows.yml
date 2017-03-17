@@ -6,6 +6,6 @@ applications:
   health-check-type: none
   command: cmd /c .\MySql --server.urls http://*:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development
   services:
    - myMySqlService

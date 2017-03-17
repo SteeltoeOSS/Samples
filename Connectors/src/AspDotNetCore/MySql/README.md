@@ -5,9 +5,8 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https
 
 1. Installed Pivotal CloudFoundry 1.7+
 2. Optional - Installed DiegoWindows support (Greenhouse)
-3. Installed MySql marketplace service
+3. Installed MySql CloudFoundry service
 4. Install .NET Core SDK
-5. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
 
 
 # Create MySql Service Instance on CloudFoundry
@@ -22,7 +21,7 @@ You must first create an instance of the MySql service in a org/space.
 2. cd samples/Connectors/src/AspDotNetCore/MySql
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
 5. Push the app using the provided manifest depending on your target.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 

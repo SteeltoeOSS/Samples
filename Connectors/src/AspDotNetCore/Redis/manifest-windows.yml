@@ -6,6 +6,6 @@ applications:
   health-check-type: none
   command: cmd /c .\Redis --server.urls http://*:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development
   services:
    - myRedisService
