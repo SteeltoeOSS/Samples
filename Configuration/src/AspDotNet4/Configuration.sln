@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple", "Simple\Simple.csproj", "{77B17535-E662-471B-947D-31A8256CADA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCloudFoundry", "SimpleCloudFoundry\SimpleCloudFoundry.csproj", "{71E24401-2ACE-468E-AE4E-0A64D3F6C503}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacCloudFoundry", "AutofacCloudFoundry\AutofacCloudFoundry.csproj", "{561931E3-B967-46D7-BF5C-50621334442F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77B17535-E662-471B-947D-31A8256CADA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B17535-E662-471B-947D-31A8256CADA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B17535-E662-471B-947D-31A8256CADA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B17535-E662-471B-947D-31A8256CADA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71E24401-2ACE-468E-AE4E-0A64D3F6C503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561931E3-B967-46D7-BF5C-50621334442F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
