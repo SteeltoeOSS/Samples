@@ -6,7 +6,6 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFound
 1. Install Pivotal CloudFoundry 1.7+
 2. Install .NET Core SDK
 3. Optionally, Single Signon for CloudFoundry if you wish use it as your OAuth Security server.
-4. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
 
 # Create OAuth2 Service Instance on CloudFoundry
 You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. You can directly use the CloudFoundry [UAA Server](https://github.com/cloudfoundry/uaa) or you can use the [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/). In the steps that follow we will directly use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service.
@@ -50,7 +49,7 @@ Last, we create a CUPS service providing the appropriate UAA server configuratio
 2. cd samples/Security/src/CloudFoundrySingleSignon
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 

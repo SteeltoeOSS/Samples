@@ -15,13 +15,11 @@ Note: This application is intended to be used in conjunction with the [CloudFoun
 2. cd samples/Security/src/CloudFoundryJwtAuthentication
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 
 Note: The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to the CUPS service `myOAuthService`.  Note: The CUPS service: `myOAuthService` is created when you follow the instructions for [CloudFoundrySingleSignon](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon).
-
-Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RTM SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect - CloudFoundry
 After building and running the app, you should see something like the following in the logs. 

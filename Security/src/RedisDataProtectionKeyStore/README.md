@@ -7,7 +7,6 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtec
 2. Optionally, installed DiegoWindows support (Greenhouse) 
 3. Installed Redis Cache marketplace service
 4. Install .NET Core SDK
-5. Web tools installed and on Path. If you have VS2015 Update 3 installed then add this to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External
 
 # Create Redis Service Instance on CloudFoundry
 You must first create an instance of the Redis service in a org/space.
@@ -21,7 +20,7 @@ You must first create an instance of the Redis service in a org/space.
 2. cd samples/Security/src/RedisDataProtectionKeyStore
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net451 --runtime win7-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
 5. Push the app using the appropriate provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
 

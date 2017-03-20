@@ -7,6 +7,6 @@ applications:
   health-check-type: none
   command: cmd /c .\CloudFoundryJwtAuthentication --server.urls http://*:%PORT%
   env:
-     ASPNETCORE_ENVIRONMENT: development
+     ASPNETCORE_ENVIRONMENT: Development
   services:
    - myOAuthService

@@ -40,8 +40,7 @@ At this point the Fortune Teller Service is up and running and ready for the [Fo
 2. Optionally install DiegoWindows support (Greenhouse)
 3. Installed Spring Cloud Services 1.0.9+
 4. Install .NET Core SDK
-5. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
-Note: If you're on Windows and you have VS2015 Update 3, you can add these to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External.
+
 
 # Setup Service Registry on CloudFoundry
 You must first create an instance of the Service Registry service in a org/space.
