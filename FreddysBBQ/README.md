@@ -66,12 +66,12 @@ At this point you are ready to replace the existing Java based services with the
 ```
 cd Samples\FreddysBBQ\src\OrderService
 dotnet restore --configfile nuget.config
-dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR 
+dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win10-x64 OR 
          dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
 cf push -f manifest-windows.yml -p %CD%\publish OR cf push -f manifest.yml -p %CD%\publish
 cd ..\AdminPortal
 dotnet restore --configfile nuget.config
-dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win7-x64 OR 
+dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r win10-x64 OR 
          dotnet publish -o %CD%\publish -c Debug -f netcoreapp1.1 -r ubuntu.14.04-x64
 cf push -f manifest-windows.yml -p %CD%\publish OR cf push -f manifest.yml -p %CD%\publish
 ```

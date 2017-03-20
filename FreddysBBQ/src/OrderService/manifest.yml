@@ -1,11 +1,8 @@
 ---
 applications:
 - name: order-service
-  memory: 512M
-  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
-  command: ./OrderService --server.urls http://*:$PORT
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development
     GRANT_TYPE: client_credentials
   services:
    - service-registry

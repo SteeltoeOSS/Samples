@@ -6,7 +6,7 @@ applications:
   health-check-type: none
   command: cmd /c .\OrderService --server.urls http://*:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development
     GRANT_TYPE: client_credentials
   services:
    - service-registry
