@@ -25,10 +25,9 @@ You must first create an instance of the Config Server service in a org/space.
 5. Push the app using the appropriate manifest.
  (e.g. `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish`)
 
-Windows Note: If you are pushing to a windows stack, and you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
+Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
-1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install the ROOT CA on the windows cells and you would be good to go.
-2. Disable certificate validation for the Spring Cloud Config Server Client.  You can do this by editing `appsettings.json` and add `spring:cloud:config:validate_certificates=false`. 
+1. Disable certificate validation for the Spring Cloud Config Client.  You can do this by editing `appsettings.json` and add `spring:cloud:config:validate_certificates=false`.
 
 # What to expect
 The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.

@@ -11,7 +11,7 @@ This sample assumes that there is a running Spring Cloud Config Server on your m
 4. Go to the config server directory (`spring-cloud-config/spring-cloud-config-server`) and fire it up with `mvn spring-boot:run`
 5. This sample will default to looking for its spring cloud config server on localhost, so it should all connect.
 
-This default configuration of the Config Server uses [this github repo]( https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
+The default configuration of the Config Server uses [this github repo]( https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
 
 # Building & Running
 
@@ -19,13 +19,13 @@ This default configuration of the Config Server uses [this github repo]( https:/
 2. cd samples/Configuration/src/AspDotNetCore/Simple
 3. Install .NET Core SDK 
 4. dotnet restore --configfile nuget.config
-5. dotnet run 
+5. dotnet run -f netcoreapp1.1 or dotnet run -f net462
 
 # What to expect
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Configuration/src/AspDotNetCore/Simple
-$ dotnet run
+$ dotnet run -f netcoreapp1.1
 Hosting environment: Production
 Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.

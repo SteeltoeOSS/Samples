@@ -6,7 +6,7 @@ applications:
   health-check-type: none
   command: cmd /c .\OrderService --server.urls http://*:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: production
+    ASPNETCORE_ENVIRONMENT: Production
   services:
    - mStoreRegistry
    - mStoreConfig

@@ -17,14 +17,14 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
 3. dotnet restore --configfile nuget.config
-4. dotnet run --server.urls http://*:5555
+4. dotnet run -f netcoreapp1.1 --server.urls http://*:5555
 
 
 # What to expect - Local
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
-$ dotnet run --server.urls http://*:5555
+$ dotnet run -f netcoreapp1.1 --server.urls http://*:5555
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.
@@ -49,7 +49,7 @@ You must first create an instance of the Service Registry service in a org/space
 2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.0 --runtime ubuntu.14.04-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
 5. Push the app using the appropriate manifest.
  (e.g. `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish`)
 

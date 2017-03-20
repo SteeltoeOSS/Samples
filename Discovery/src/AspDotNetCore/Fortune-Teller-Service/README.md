@@ -25,7 +25,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-$ dotnet run --server.urls http://*:5000
+$ dotnet run -f netcoreapp1.1 --server.urls http://*:5000
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production

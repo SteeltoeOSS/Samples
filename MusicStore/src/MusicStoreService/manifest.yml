@@ -2,10 +2,8 @@
 applications:
 - name: musicstore
   memory: 1G
-  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
-  command: ./MusicStoreService --server.urls http://*:$PORT
   env:
-    ASPNETCORE_ENVIRONMENT: production
+    ASPNETCORE_ENVIRONMENT: Production
   services:
    - mStoreRegistry
    - mStoreConfig
