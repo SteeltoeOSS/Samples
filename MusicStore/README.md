@@ -102,7 +102,6 @@ You should have no problem using the provided solution to launch the individual 
 2. Install Spring Cloud Services 1.1.x+.
 3. Install .NET Core SDK.
 4. Install Redis service if you want to use Redis for Sesion storage and KeyRing storage.
-5. Web tools installed and on Path.  On Windows, if you have VS2015 Update 3 installed then add this to your path: `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External`
 
 # Setup Services on CloudFoundry
 
@@ -155,6 +154,10 @@ To define `USE_REDIS_CACHE` at build/publish time modify the `buildOptions` sect
 https://github.com/SteeltoeOSS/musicStore-config.git
 
 Each of the `push*.*` scripts `dotnet publish` the MusicStore service targeting the `framework` and `runtime` you specify.  They then push the MusicStore service using the appropriate CloudFoundry manifest found in the projects directory (e.g. `manifest-windows.yml`, `manifest.yml` ). 
+
+Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing these apps. The simplest way to fix this:
+
+1. Disable certificate validation for the Spring Cloud Config Client.  You can do this by editing `appsettings.json` and add `spring:cloud:config:validate_certificates=false`. You will need to do this for each of the applications.
 
 # Known Limitations
 
