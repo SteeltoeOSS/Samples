@@ -1,0 +1,5 @@
+---
+applications:
+- name: cloud
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
