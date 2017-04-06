@@ -21,7 +21,7 @@ namespace MySql.Models
                 await service.OpenAsync();
                 DropCreateTable(service);
                 InsertSampleData(service);
-                await service.CloseAsync();
+                service.Close();
             }
         }
 
