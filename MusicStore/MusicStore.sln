@@ -38,11 +38,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16897CC4-C5A1-43D4-B507-12AF3A78371E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStoreUI", "src\MusicStoreUI\MusicStoreUI.xproj", "{1E777703-EB83-4E83-BC77-96D672A7BAD3}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStoreUI", "src\MusicStoreUI\MusicStoreUI.csproj", "{1E777703-EB83-4E83-BC77-96D672A7BAD3}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OrderService", "src\OrderService\OrderService.xproj", "{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OrderService", "src\OrderService\OrderService.csproj", "{926FEC44-EDA9-43C8-9589-CD1AF3EE3FE5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ShoppingCartService", "src\ShoppingCartService\ShoppingCartService.xproj", "{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ShoppingCartService", "src\ShoppingCartService\ShoppingCartService.csproj", "{3D93DAEE-E4BE-4C0F-A084-976A15996FD8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{671A9317-8A64-4D54-A0E6-87D7E9F8C982}"
 	ProjectSection(SolutionItems) = preProject
@@ -53,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{671A93
 		src\config\shoppingcart.yml = src\config\shoppingcart.yml
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStoreService", "src\MusicStoreService\MusicStoreService.xproj", "{15373AC7-AB32-4391-8C8E-2672E64CAC48}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicStoreService", "src\MusicStoreService\MusicStoreService.csproj", "{15373AC7-AB32-4391-8C8E-2672E64CAC48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
