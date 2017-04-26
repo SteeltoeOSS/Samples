@@ -47,5 +47,11 @@ namespace FortuneTellerService4
             // Start the Discovery client background thread
             _client = container.Resolve<IDiscoveryClient>();
         }
+
+        protected void Application_End()
+        {
+            // Unregister current app with Service Discovery server
+            _client.ShutdownAsync();
+        }
     }
 }
