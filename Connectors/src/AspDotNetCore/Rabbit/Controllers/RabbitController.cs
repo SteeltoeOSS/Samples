@@ -2,6 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 
+#if SSL
+using System.Security.Authentication;
+using System.Net.Security;
+#endif
+
 namespace Rabbit.Controllers
 {
     public class RabbitController : Controller
@@ -11,6 +16,15 @@ namespace Rabbit.Controllers
         public RabbitController([FromServices] ConnectionFactory rabbitConnection)
         {
             _rabbitConnection = rabbitConnection;
+#if SSL
+            SslOption opt = new SslOption();
+            opt.Version = SslProtocols.Tls12;
+            opt.Enabled = true;
+            // Only needed if want to disable certificate validations
+            //opt.AcceptablePolicyErrors = SslPolicyErrors.RemoteCertificateChainErrors | 
+            //    SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateNotAvailable;
+            _rabbitConnection.Ssl = opt;
+#endif
         }
 
     
