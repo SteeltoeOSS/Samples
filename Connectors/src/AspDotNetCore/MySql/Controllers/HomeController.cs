@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
+using System.Data.Common;
+
 namespace MySql.Controllers
 {
     public class HomeController : Controller
@@ -39,14 +41,13 @@ namespace MySql.Controllers
             dbConnection.Open();
 
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM TestData;", dbConnection);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            DbDataReader rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
             {
                 ViewData["Key" + rdr[0]] = rdr[1];
             }
 
-            rdr.Close();
             dbConnection.Close();
 
             return View();

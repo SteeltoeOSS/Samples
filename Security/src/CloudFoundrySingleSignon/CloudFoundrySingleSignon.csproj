@@ -12,8 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.0.0-*" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.0.0-*" />
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.0.1-*" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.0.1-*" />
   </ItemGroup>
 
 

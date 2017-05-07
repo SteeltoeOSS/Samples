@@ -14,7 +14,7 @@ namespace MySql4
         {
             MySqlProviderConnectorOptions mySqlConfig = new MySqlProviderConnectorOptions(config);
             MySqlServiceInfo info = config.GetSingletonServiceInfo<MySqlServiceInfo>();
-            MySqlProviderConnectorFactory factory = new MySqlProviderConnectorFactory(info, mySqlConfig);
+            MySqlProviderConnectorFactory factory = new MySqlProviderConnectorFactory(info, mySqlConfig, typeof(MySqlConnection));
             container.Register<MySqlConnection>(c => (MySqlConnection)factory.Create(null)).InstancePerLifetimeScope();
         }
     }
