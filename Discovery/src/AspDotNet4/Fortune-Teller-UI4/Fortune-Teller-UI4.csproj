@@ -137,24 +137,24 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Pivotal.Discovery.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pivotal.Discovery.Client.1.0.0-rc2\lib\net451\Pivotal.Discovery.Client.dll</HintPath>
+    <Reference Include="Pivotal.Discovery.Client, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pivotal.Discovery.Client.1.0.1\lib\net452\Pivotal.Discovery.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Steeltoe.CloudFoundry.Connector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.1.0.0-rc2\lib\net451\Steeltoe.CloudFoundry.Connector.dll</HintPath>
+    <Reference Include="Steeltoe.CloudFoundry.Connector, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.1.0.1\lib\net452\Steeltoe.CloudFoundry.Connector.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Steeltoe.Discovery.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Discovery.Client.1.0.0-rc2\lib\net451\Steeltoe.Discovery.Client.dll</HintPath>
+    <Reference Include="Steeltoe.Discovery.Client, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Discovery.Client.1.0.1\lib\net452\Steeltoe.Discovery.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Steeltoe.Discovery.Eureka.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Discovery.Eureka.Client.1.0.0-rc2\lib\net451\Steeltoe.Discovery.Eureka.Client.dll</HintPath>
+    <Reference Include="Steeltoe.Discovery.Eureka.Client, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Discovery.Eureka.Client.1.0.1\lib\net452\Steeltoe.Discovery.Eureka.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.0-rc2\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
+    <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.1\lib\net452\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

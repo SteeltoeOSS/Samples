@@ -178,15 +178,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.Connector, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.1.0.1-dev-00095\lib\net451\Steeltoe.CloudFoundry.Connector.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.1.0.1\lib\net452\Steeltoe.CloudFoundry.Connector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.Connector.MySql, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.MySql.1.0.1-dev-00095\lib\net451\Steeltoe.CloudFoundry.Connector.MySql.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.MySql.1.0.1\lib\net452\Steeltoe.CloudFoundry.Connector.MySql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.1-dev-00076\lib\net451\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.0.1\lib\net452\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
