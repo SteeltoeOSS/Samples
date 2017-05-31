@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using 
+using CloudFoundry.ViewModels.Home;
+
 namespace CloudFoundry.Controllers
 {
     public class HomeController : Controller
