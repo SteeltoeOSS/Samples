@@ -1,0 +1,8 @@
+---
+applications:
+- name: fortuneui
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+    - myDiscoveryService
+    - myHystrixService

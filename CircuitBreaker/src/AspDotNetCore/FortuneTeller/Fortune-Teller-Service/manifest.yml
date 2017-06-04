@@ -1,0 +1,7 @@
+﻿---
+applications:
+- name: fortuneService
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myDiscoveryService
