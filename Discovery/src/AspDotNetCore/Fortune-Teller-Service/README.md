@@ -95,3 +95,17 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT       Renew FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: OK
 ```
 At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.
+
+# Using Container-to-Container on Cloud Foundry
+
+If you wish to use Container-to-Container (C2C) communications between the UI and the Fortune Service, look at the comments in the files listed below.  You will need to make modifications to those files.  Also, you are encouraged to read the Cloud Foundry [C2C documentation](https://docs.pivotal.io/pivotalcf/1-10/devguide/deploy-apps/cf-networking.html) FIRST, before trying to use it with the Fortune Teller app.
+
+1. `appsettings.json` - Eureka registration option settings
+
+# Enabling SSL usage on Cloud Foundry
+
+If you wish to use SSL communications between the Fortune Teller UI and the Fortune Teller Service, have a look at the comments in the files listed below.  You will need to make modifications to one or more of those files. Also, you are encouraged to read the [Cloud Foundry documentation](https://docs.pivotal.io/pivotalcf/1-10/adminguide/securing-traffic.html) on how SSL is configured, used and implemented before trying to use it with the Fortune Teller app.
+
+1. `appsettings.json` - Eureka registration option settings
+2. `Program.cs` - Changes needed to enable SSL usage with Kestrel (Note: These changes are only required if using Containter-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).
+3. `manifest.yml` - Startup command line change (Note: This change is only required if using Containter-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).

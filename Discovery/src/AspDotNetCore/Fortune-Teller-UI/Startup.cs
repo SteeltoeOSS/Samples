@@ -20,6 +20,7 @@ namespace Fortune_Teller_UI
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddCloudFoundry()
                 .AddEnvironmentVariables();
             Configuration = builder.Build();

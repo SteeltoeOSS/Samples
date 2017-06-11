@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+// Remove comments to enable SSL settings for 
+// using System.Security.Cryptography.X509Certificates;
+// using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 namespace FortuneTellerService
 {
@@ -10,8 +13,16 @@ namespace FortuneTellerService
     {
         public static void Main(string[] args)
         {
+            // var cert = new X509Certificate2("testcert.pfx", "password");
             var host = new WebHostBuilder()
-                .UseKestrel()
+               .UseKestrel()
+            //Use these kestrel settings if wanting to use HTTPS AND C2C networking on Cloud Foundry
+            //    .UseKestrel(cfg => cfg.UseHttps(new HttpsConnectionFilterOptions()
+            //    {
+            //        ServerCertificate = cert,
+            //        ClientCertificateValidation = (a, b, c) => { return true; },
+            //        ClientCertificateMode = ClientCertificateMode.AllowCertificate
+            //    }))
                 .UseUrls(GetServerUrls(args))
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()

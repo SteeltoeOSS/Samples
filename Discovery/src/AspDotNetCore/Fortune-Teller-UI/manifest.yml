@@ -2,9 +2,7 @@
 applications:
 - name: fortuneui
   memory: 512M
-  buildpack: https://github.com/cloudfoundry-community/asp.net5-buildpack.git
-  command: ./Fortune-Teller-UI --server.urls "http://*:$PORT"
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development
   services:
     - myDiscoveryService
