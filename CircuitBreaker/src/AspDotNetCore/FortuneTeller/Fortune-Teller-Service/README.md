@@ -1,30 +1,34 @@
 # Fortune-Teller-Service - ASP.NET Core Microservice
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_circuit_breaker_hystrix_clients) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
+
+This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_circuit_breaker_hystrix_dashboard) to gather status and metrics of the Hystrix command used in communications.
 
 Note: You can run this either locally or on CloudFoundry.
 
 # Pre-requisites - Running Local
 
-This sample assumes that there is a running Spring Cloud Eureka Server on your machine. To make this happen:
+This sample assumes that there is a running Spring Cloud Eureka Server and a Hystrix dashboard on your machine. To make this happen:
 
 1. Install Java 8 JDK.
 2. Install Maven 3.x.
 3. Clone the Spring Cloud Samples Eureka repository. (https://github.com/spring-cloud-samples/eureka.git)
 4. Go to the eureka server directory (`eureka`) and fire it up with `mvn spring-boot:run`
 5. When running locally, this sample will default to looking for its eurka server on http://localhost:8761/eureka, so it should all connect.
-6. Install .NET Core SDK 
+6. Clone the Spring Cloud Samples Hystrix dashboard. (https://github.com/spring-cloud-samples/hystrix-dashboard.git)
+7. Go to the hystrix dashboard directory (`hystix-dashboard`) and fire it up with `mvn spring-boot:run`
+8. Install .NET Core SDK 
 
 # Building & Running - Local
 
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
-2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
+2. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
 4. dotnet run -f netcoreapp1.1 --server.urls http://*:5000
 
 # What to expect - Local
 After building and running the app, you should see something like the following:
 ```
-$ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
+$ cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
 $ dotnet run -f netcoreapp1.1 --server.urls http://*:5000
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
@@ -52,7 +56,7 @@ You must first create an instance of the Service Registry service in a org/space
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
+2. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
@@ -95,3 +99,17 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT       Renew FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: OK
 ```
 At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.
+
+# Using Container-to-Container on Cloud Foundry
+
+If you wish to use Container-to-Container (C2C) communications between the UI and the Fortune Service, look at the comments in the files listed below.  You will need to make modifications to those files.  Also, you are encouraged to read the Cloud Foundry [C2C documentation](https://docs.pivotal.io/pivotalcf/1-10/devguide/deploy-apps/cf-networking.html) FIRST, before trying to use it with the Fortune Teller app.
+
+1. `appsettings.json` - Eureka registration option settings
+
+# Enabling SSL usage on Cloud Foundry
+
+If you wish to use SSL communications between the Fortune Teller UI and the Fortune Teller Service, have a look at the comments in the files listed below.  You will need to make modifications to one or more of those files. Also, you are encouraged to read the [Cloud Foundry documentation](https://docs.pivotal.io/pivotalcf/1-10/adminguide/securing-traffic.html) on how SSL is configured, used and implemented before trying to use it with the Fortune Teller app.
+
+1. `appsettings.json` - Eureka registration option settings
+2. `Program.cs` - Changes needed to enable SSL usage with Kestrel (Note: These changes are only required if using Containter-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).
+3. `manifest.yml` - Startup command line change (Note: This change is only required if using Containter-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).

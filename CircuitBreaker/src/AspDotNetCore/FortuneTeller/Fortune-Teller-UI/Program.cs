@@ -11,6 +11,7 @@ namespace Fortune_Teller_UI
     {
         public static void Main(string[] args)
         {
+
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseUrls(GetServerUrls(args))

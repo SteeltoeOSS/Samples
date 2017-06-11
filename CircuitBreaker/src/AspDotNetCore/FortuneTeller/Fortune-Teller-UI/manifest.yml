@@ -2,7 +2,7 @@
 applications:
 - name: fortuneui
   env:
-    ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: Production
   services:
     - myDiscoveryService
     - myHystrixService
