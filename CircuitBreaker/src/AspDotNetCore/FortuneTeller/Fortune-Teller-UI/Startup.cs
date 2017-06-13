@@ -13,7 +13,6 @@ namespace Fortune_Teller_UI
 {
     public class Startup
     {
-        private readonly static IHystrixCommandGroupKey groupKey = HystrixCommandGroupKeyDefault.AsKey("FortuneService");
         public Startup(IHostingEnvironment env, ILoggerFactory factory)
         {
 
@@ -36,7 +35,7 @@ namespace Fortune_Teller_UI
 
             services.AddDiscoveryClient(Configuration);
 
-            services.AddHystrixCommand<IFortuneService, FortuneService>(groupKey, Configuration);
+            services.AddHystrixCommand<IFortuneService, FortuneService>("FortuneService", Configuration);
 
             // Add framework services.
             services.AddMvc();

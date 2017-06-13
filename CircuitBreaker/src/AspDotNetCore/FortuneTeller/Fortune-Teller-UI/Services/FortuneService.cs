@@ -28,12 +28,6 @@ namespace Fortune_Teller_UI.Services
             return result;
         }
 
-        private HttpClient GetClient()
-        {
-            var client = new HttpClient(_handler, false);
-            return client;
-        }
-
         protected override string Run()
         {
             var client = GetClient();
@@ -46,6 +40,12 @@ namespace Fortune_Teller_UI.Services
         {
             _logger.LogInformation("RunFallback");
             return "{\"id\":1,\"text\":\"You will have a happy day!\"}";
+        }
+
+        private HttpClient GetClient()
+        {
+            var client = new HttpClient(_handler, false);
+            return client;
         }
     }
 }
