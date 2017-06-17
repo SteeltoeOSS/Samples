@@ -16,6 +16,8 @@ namespace SimpleCloudFoundry.Model
         public string Foo { get; set; }
         public Info Info { get; set; }
 
+        // Optional data from vault
+        public string Vault { get; set; }
     }
 
     public class Info

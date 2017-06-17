@@ -143,12 +143,14 @@ namespace SimpleCloudFoundry.Controllers
                     ViewData["Info.Url"] = data.Info.Url ?? "Not returned";
                     ViewData["Info.Description"] = data.Info.Description ?? "Not returned";
                 }
+                ViewData["Vault"] = data.Vault ?? "Not returned";
             }
             else {
                 ViewData["Bar"] = "Not Available";
                 ViewData["Foo"] = "Not Available";
                 ViewData["Info.Url"] = "Not Available";
                 ViewData["Info.Description"] = "Not Available";
+                ViewData["Vault"] = "Not Available";
             }
 
         }

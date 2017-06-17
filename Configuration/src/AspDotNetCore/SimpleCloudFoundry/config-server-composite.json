@@ -1,0 +1,19 @@
+{
+  "composite": [
+    {
+      "git": {
+        "uri": "https://github.com/spring-cloud-samples/config-repo"
+      }
+    },
+    {
+      "vault": {
+        "host": "x.x.x.x",
+        "port": 8200,
+        "scheme": "http",
+        "backend": "secret",
+        "defaultKey": "application",
+        "profileSeparator": ","
+      }
+    }
+  ]
+}
