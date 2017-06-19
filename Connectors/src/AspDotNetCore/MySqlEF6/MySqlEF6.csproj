@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net46</TargetFramework>
     <RuntimeIdentifiers>win10-x64;win10-x86</RuntimeIdentifiers>
   </PropertyGroup>
 
@@ -12,8 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version= "1.0.1-*"/>
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version= "1.0.1-*"/>
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version= "1.1.0-*"/>
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version= "1.1.0-*"/>
     <PackageReference Include="MySql.Data.Entity" Version= "6.9.9"/>
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1;net462</TargetFrameworks>
+    <TargetFrameworks>netcoreapp1.1;net46</TargetFrameworks>
     <RuntimeIdentifiers>win10-x64;osx.10.11-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
   </PropertyGroup>
 

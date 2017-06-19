@@ -42,6 +42,7 @@ You must first create an instance of the Service Registry service in a org/space
 
 1. cf target -o myorg -s development
 2. cf create-service p-service-registry standard myDiscoveryService 
+3. Wait for the service to become ready! (i.e. cf services)
 
 # Publish App & Push to CloudFoundry
 
