@@ -3,9 +3,11 @@ using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Reactive;
 
 namespace Fortune_Teller_UI.Services
 {
+
     public class FortuneService : HystrixCommand<string>, IFortuneService
     {
         DiscoveryHttpClientHandler _handler;
@@ -28,18 +30,19 @@ namespace Fortune_Teller_UI.Services
             return result;
         }
 
-        protected override string Run()
+   
+        protected override async Task<string> RunAsync()
         {
             var client = GetClient();
-            var result =  client.GetStringAsync(RANDOM_FORTUNE_URL).Result;
+            var result =  await client.GetStringAsync(RANDOM_FORTUNE_URL);
             _logger.LogInformation("Run: {0}", result);
             return result;
         }
 
-        protected override string RunFallback()
+        protected override async Task<string> RunFallbackAsync()
         {
             _logger.LogInformation("RunFallback");
-            return "{\"id\":1,\"text\":\"You will have a happy day!\"}";
+            return await Task.FromResult("{\"id\":1,\"text\":\"You will have a happy day!\"}");
         }
 
         private HttpClient GetClient()

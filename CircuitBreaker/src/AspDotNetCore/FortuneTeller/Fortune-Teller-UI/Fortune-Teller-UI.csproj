@@ -13,18 +13,18 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix" Version="1.1.0-*" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix" Version="1.1.0-dev-*" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == ''">
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStream" Version="1.1.0-*" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStream" Version="1.1.0-dev-*" />
     <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-*" />
     <PackageReference Include="RabbitMQ.Client" Version="4.1.3" />
 
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == 'LOCAL'">
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEvents" Version="1.1.0-*" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEvents" Version="1.1.0-dev-*" />
   </ItemGroup>
 
 </Project>
