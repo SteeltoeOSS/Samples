@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp1.1;net46</TargetFrameworks>
@@ -12,11 +12,11 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-rc2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.0" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="7.0.7-m61" />
-    <!--<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.0" />-->
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-dev-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.8-dmr" /> 
+    <!--<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2" />-->
   </ItemGroup>
 
 
