@@ -21,13 +21,13 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.0" />
-    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-rc2" />
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.Redis" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.Redis" Version="1.1.0-rc2" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="7.0.7-m61" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-dev-*" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.Redis" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.Security.DataProtection.Redis" Version="1.1.0-dev-*" />
+     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2"/> 
 
   </ItemGroup>
 

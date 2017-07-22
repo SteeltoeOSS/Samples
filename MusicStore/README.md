@@ -35,7 +35,7 @@ The default is to NOT use a Redis cache for Session storage or DataProtection Ke
 You have a three options to choose from in order to get these services up and running locally:
 
 * Use pre-built [Steeltoe Docker images](https://hub.docker.com/r/steeltoeoss/servers/). 
-* On Windows 10, use pre-built Steeltoe Windows Container images. (Note: Windows containers on Windows 10 and Windows Server 2016 is still in Beta. Consider it experimental)
+* On Windows 10, use pre-built Steeltoe Windows Container images.
 * Install each service manually.
 
 Currently, the simplest way to get these up and running is to use the first option above together with the provided `dockerrun-*.cmd, dockerrun-*.sh` files to startup those services locally on your machine.  
@@ -98,10 +98,10 @@ You should have no problem using the provided solution to launch the individual 
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7+
-2. Install Spring Cloud Services 1.1.x+.
+1. Install Pivotal CloudFoundry
+2. Install Spring Cloud Services
 3. Install .NET Core SDK.
-4. Install Redis service if you want to use Redis for Sesion storage and KeyRing storage.
+4. Install Redis service if you want to use Redis for Session storage and KeyRing storage.
 
 # Setup Services on CloudFoundry
 
@@ -111,9 +111,9 @@ As mentioned above, the application is dependent on the following services:
 * MySql Database Server - Default database used by all MusicStore services.
 * Redis Cache - Optional! Note you have to specifically build/publish MusicStoreUI service to use Redis (Details below).
  
-Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+). It is not required to scale the other microservices.
+Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+). Redis is not required to scale the other micro-services.
 
-Before pushing the application to CloudFoundry you need to create those services.  If you plan on using Redis, set the environment varialble USE_REDIS_CACHE=true before running these command.
+Before pushing the application to CloudFoundry you need to create those services.  If you plan on using Redis, set the environment variable USE_REDIS_CACHE=true before running these command.
 
 1. `cf target -o myOrg -s mySpace`
 2. `cd Samples/MusicStore`
@@ -141,17 +141,7 @@ Once the services have been created and ready on CloudFoundry (i.e. check via `c
 1. `cd Samples/MusicStore`
 2. `pushShoppingCartService.cmd win7-x64 netcoreapp1.1` or `./pushShoppingCartService.sh ubuntu.14.04-x64 netcoreapp1.1`
 
-Note: If you wish to use the Redis cache for storing Session state, you will have to set ENVIRONMENT variable `USE_REDIS_CACHE=true` AND modify the [`project.json`](https://github.com/SteeltoeOSS/Samples/blob/master/MusicStore/src/MusicStoreUI/project.json) file for the `MusicStoreUI` application before pushing it. 
-
-To define `USE_REDIS_CACHE` at build/publish time modify the `buildOptions` section in [`project.json`](https://github.com/SteeltoeOSS/Samples/blob/master/MusicStore/src/MusicStoreUI/project.json) as follows:
-```
-  "buildOptions": {
-    "emitEntryPoint": true,
-    "preserveCompilationContext": true,
-    "define": [ "DEMO", "TESTING", "USE_REDIS_CACHE" ]
-  },
-```
-https://github.com/SteeltoeOSS/musicStore-config.git
+Note: If you wish to use the Redis cache for storing Session state, you will have to set ENVIRONMENT variable `DefineConstants=USE_REDIS_CACHE` before building and pushing the MusicUI application. 
 
 Each of the `push*.*` scripts `dotnet publish` the MusicStore service targeting the `framework` and `runtime` you specify.  They then push the MusicStore service using the appropriate CloudFoundry manifest found in the projects directory (e.g. `manifest-windows.yml`, `manifest.yml` ). 
 
