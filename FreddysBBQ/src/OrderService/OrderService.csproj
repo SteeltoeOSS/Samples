@@ -15,12 +15,12 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
-    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-rc2" />
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-rc2" />
+    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-dev-*" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-dev-*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.0" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="7.0.7-m61" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2"/> 
   </ItemGroup>
 
 </Project>
