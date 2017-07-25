@@ -33,8 +33,8 @@ At this point the Fortune Teller UI is up and running and ready for displaying y
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7
-2. Installed Spring Cloud Services 1.0.9
+1. Installed Pivotal CloudFoundry 
+2. Installed Spring Cloud Services 
 3. Install .NET Core SDK
 
 # Setup Service Registry on CloudFoundry

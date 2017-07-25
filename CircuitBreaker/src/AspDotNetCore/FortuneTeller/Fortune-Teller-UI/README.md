@@ -88,7 +88,6 @@ To see the logs as you startup and use the app: `cf logs fortuneui`
 On a Windows cell, you should see something like this during startup:
 ```
 2016-05-14T06:38:21.67-0600 [CELL/0]     OUT Successfully created container
-2016-05-14T06:38:27.78-0600 [APP/0]      OUT Running cmd /c SET "DNX_PACKAGES=%CD%\approot\packages" & approot\web.cmd --server.urls http://*:%PORT%
 2016-05-14T06:38:47.90-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
 2016-05-14T06:38:47.90-0600 [APP/0]      OUT       DoGetApplicationsAsync .....
 2016-05-14T06:38:47.91-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
@@ -113,7 +112,7 @@ At this point the Fortune Teller UI is up and running and ready for displaying y
 
 Once you have the two applications communicating, you can make use of the Hystrix dashboard by following the instructions below.  
 
-1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. https://apps.system.testcloud.com:7979)
+1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. https://apps.system.testcloud.com)
 2. Follow [these instructions](http://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
 3. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the Hystrix dashboard.  Click the refresh button on the UI app quickly to see the dashboard update.
 

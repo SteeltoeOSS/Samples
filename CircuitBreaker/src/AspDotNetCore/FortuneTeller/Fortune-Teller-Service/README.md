@@ -36,14 +36,13 @@ Hosting environment: Production
 Now listening on: http://*:5000
 Application started. Press Ctrl+C to shut down.
 ```
-At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.
+At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+
-2. Optionally install DiegoWindows support (Greenhouse)
-3. Installed Spring Cloud Services 1.0.9+
-4. Install .NET Core SDK
+1. Installed Pivotal CloudFoundry 
+2. Installed Spring Cloud Services 
+3. Install .NET Core SDK
 
 
 # Setup Service Registry on CloudFoundry
@@ -98,7 +97,7 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT       Renew FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: OK
 ```
-At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.
+At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.
 
 # Using Container-to-Container on Cloud Foundry
 
