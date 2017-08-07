@@ -13,6 +13,10 @@ This repo contains several sample applications illustrating how to use the Steel
 
 All new development is done on the dev branch. More stable versions of the samples can be found on the master branch.
 
+# Documentation
+
+If you are looking for documentation on how to use the Steeltoe components, you can find that [here](http://steeltoe.io/docs/).
+
 # Building & Running
 
 See the Readmes for each sample for instructions on how to build and run.

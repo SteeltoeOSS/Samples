@@ -1,0 +1,6 @@
+﻿---
+applications:
+- name: actuator
+  memory: 512M
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
