@@ -13,7 +13,6 @@ namespace CloudFoundry
     {
         public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -22,6 +21,8 @@ namespace CloudFoundry
                 .AddCloudFoundry()
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -29,8 +30,7 @@ namespace CloudFoundry
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-
+   
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
 

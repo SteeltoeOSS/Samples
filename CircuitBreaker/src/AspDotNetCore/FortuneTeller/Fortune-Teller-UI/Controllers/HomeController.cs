@@ -29,5 +29,11 @@ namespace Fortune_Teller_UI.Controllers
             return await _fortunes.RandomFortuneAsync();
         }
 
+        [HttpGet("gc")]
+        public string GCOperation()
+        {
+            return "Done! " + GC.GetTotalMemory(true);
+        }
+
     }
 }

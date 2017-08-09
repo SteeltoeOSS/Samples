@@ -13,6 +13,7 @@ namespace CloudFoundry
     {
         public static void AddCloudFoundryActuators(this IServiceCollection services, IConfiguration config)
         {
+            services.AddCors();
             services.AddCloudFoundryActuator(config);
             services.AddInfoActuator(config);
             services.AddHealthActuator(config);
@@ -21,6 +22,13 @@ namespace CloudFoundry
         }
         public static void UseCloudFoundryActuators(this IApplicationBuilder app)
         {
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                .WithMethods("GET", "POST")
+                .WithHeaders("Authorization", "X-Cf-App-Instance", "Content-Type");
+            });
+
             app.UseCloudFoundrySecurity();
             app.UseCloudFoundryActuator();
             app.UseInfoActuator();
