@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Logging.CloudFoundry;
 using Steeltoe.Extensions.Configuration;
+using Steeltoe.CloudFoundry.Connector.MySql;
+using Steeltoe.Management.Endpoint.Health;
+using Steeltoe.Management.CloudFoundry;
 
 namespace CloudFoundry
 {
@@ -30,7 +33,12 @@ namespace CloudFoundry
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-   
+
+            services.AddMySqlConnection(Configuration);
+
+            // Add custom health check contributor
+            services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
+
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
 

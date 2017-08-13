@@ -18,12 +18,10 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-dev-*" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Management.Endpoint.CloudFoundry" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Management.Endpoint.Health" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Management.Endpoint.Info" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Management.Endpoint.Loggers" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Management.Endpoint.Trace" Version="1.1.0-dev-*" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundry" Version="1.1.0-dev-*" />
+    <PackageReference Include="MySql.Data" Version="8.0.8-dmr" />
   </ItemGroup>
   
   <ItemGroup>
