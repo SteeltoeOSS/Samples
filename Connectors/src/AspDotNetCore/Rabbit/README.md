@@ -1,12 +1,13 @@
 ﻿# Rabbit Connector Sample App - RabbitConnection
 
-ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Rabbit) for connecting to a Rabbit service on CloudFoundry using [RabbitMQ.Client - 4.1.x](https://www.rabbitmq.com/dotnet-api-guide.html). This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound rabbitmq service.
+ASP.NET Core sample app illustrating how to use [Steeltoe Rabbit Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.Rabbit) for connecting to a Rabbit service on CloudFoundry. This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound rabbitmq service.
 
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
-2. Installed Rabbit CloudFoundry service
-3. Install .NET Core SDK
+2. Optionaly, installed Windows support (Greenhouse) 
+3. Installed Rabbit CloudFoundry service
+4. Install .NET Core SDK
 
 # Create Rabbit Service Instance on CloudFoundry
 You must first create an instance of the Rabbit service in a org/space.
@@ -19,7 +20,7 @@ You must first create an instance of the Rabbit service in a org/space.
 1. cf target -o myorg -s development
 2. cd samples/Connectors/src/AspDotNetCore/Rabbit
 3. dotnet restore --configfile nuget.config
-4. dotnet publish -o $PWD/publish -f net462 -r win10-x64
+4. dotnet publish -o $PWD/publish -f netcoreapp2.0 -r win10-x64
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish` )
 
