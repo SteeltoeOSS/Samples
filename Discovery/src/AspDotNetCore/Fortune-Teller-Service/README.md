@@ -19,13 +19,13 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
-4. dotnet run -f netcoreapp1.1 --server.urls http://*:5000
+4. dotnet run -f netcoreapp2.0 --server.urls http://*:5000
 
 # What to expect - Local
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-$ dotnet run -f netcoreapp1.1 --server.urls http://*:5000
+$ dotnet run -f netcoreapp2.0 --server.urls http://*:5000
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production
@@ -37,7 +37,7 @@ At this point the Fortune Teller Service is up and running and ready for the [Fo
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 
-2. Optionally install DiegoWindows support (Greenhouse)
+2. Optionally install Windows support (Greenhouse)
 3. Installed Spring Cloud Services 
 4. Install .NET Core SDK
 
@@ -55,7 +55,7 @@ You must first create an instance of the Service Registry service in a org/space
 2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp2.0 --runtime ubuntu.14.04-x64`)
 5. Push the app using the appropriate manifest.
  (e.g. `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish`)
 

@@ -14,7 +14,10 @@
 
     <PackageReference Include="System.Net.Sockets" Version="4.3.0" /> 
     <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" /> 
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-00089" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-*" />
+    
+    <!-- 4.3.0 of this package has problems on net46+, by default that version gets included, so we have to force using 4.3.1+ in apps -->
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
   </ItemGroup>
 
 
