@@ -1,30 +1,36 @@
 ﻿# CloudFoundry Single Signon Security Sample App 
+
 ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFoundry External Security Provider](https://github.com/SteeltoeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/)).
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7+
+1. Install Pivotal CloudFoundry 
 2. Install .NET Core SDK
 3. Optionally, Single Signon for CloudFoundry if you wish use it as your OAuth Security server.
 
 # Create OAuth2 Service Instance on CloudFoundry
+
 You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. You can directly use the CloudFoundry [UAA Server](https://github.com/cloudfoundry/uaa) or you can use the [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/). In the steps that follow we will directly use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service.
 
 If instead, you want to use the [Pivotal SSO Service](https://docs.pivotal.io/p-identity/1-8/getting-started.html), follow the installation and configuration instructions [here](https://docs.pivotal.io/p-identity/installation.html). Note that you will still need to add a User and Group `testgroup` as mentioned below to the SSO Internal Store.  But the process you use to do this is different when using the SSO tile, so you should follow [Add Users to SSO Internal User Store](http://docs.pivotal.io/p-identity/configure-id-providers.html#add-to-int) to accomplish this. Also, when you create your OAuth service instance you should name it `myOAuthService` as the provided `manifest-*.yml` files will bind the pushed apps to that service instance name.
+
 ### Using UAA Server - Install UAA Command Line
+
 Before creating the OAuth2 service instance, we first need to use the UAA command line tool to establish some security credentials for our sample app. To install the UAA command line tool and target it to your UAA server:
 
 1. Install Ruby if you don't already have it.
 2. gem install cf-uaac
 3. uaac target uaa.`YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` (e.g. `uaac target uaa.system.testcloud.com`)
 
-### Using UAA Server - Obtain Admin Client Access Token 
+### Using UAA Server - Obtain Admin Client Access Token
+
 Next we need to authenticate and obtain an access token for the `admin client` from the UAA server so that we can add our new application/user credentials. You will need the `Admin Client Secret` for your installation of CloudFoundry in order to accomplish this. If you are using Pivotal CloudFoundry (PCF), you can obtain this from the `Ops Manager/Elastic Runtime` credentials page under the `UAA` section.  Look for `Admin Client Credentials` and then use it as follows:
 
 1. uaac token client get admin -s `ADMIN_CLIENT_SECRET`
 2. uaac contexts
 
 ### Using UAA Server - Add User and Group
+
 Next we will add a new `user` and `group` to the UAA Server database. Do NOT change the groupname: `testgroup` as that is used for policy based authorization in the sample application. Of course you can change the username and password to anything you would like.
 
 1. uaac group add testgroup
@@ -32,11 +38,13 @@ Next we will add a new `user` and `group` to the UAA Server database. Do NOT cha
 3. uaac member add testgroup dave 
 
 ### Using UAA Server - Add New Client for our App
+
 Once complete we are ready to add our application as a new client to the UAA server. This will establish our applications credentials and enable it to interact with the UAA server. To do this you can use the line below, but you must replace the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with your setups domain.
 
 1. uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
  
 ### Using UAA Server - Add CUPs based OAuth Service
+
 Last, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `credentials.json` file when creating your CUPS service, but you will FIRST need to edit it and replace the `YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` with your setups domain. Once done you can do the following:
 
 1. cf target -o myorg -s development
@@ -49,7 +57,7 @@ Last, we create a CUPS service providing the appropriate UAA server configuratio
 2. cd samples/Security/src/CloudFoundrySingleSignon
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net461 --runtime win10-x64`)
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 

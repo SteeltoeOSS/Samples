@@ -3,8 +3,8 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtec
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+
-2. Optionally, installed DiegoWindows support (Greenhouse) 
+1. Installed Pivotal CloudFoundry 
+2. Optionally, installed Windows support (Greenhouse) 
 3. Installed Redis Cache marketplace service
 4. Install .NET Core SDK
 
@@ -20,7 +20,7 @@ You must first create an instance of the Redis service in a org/space.
 2. cd samples/Security/src/RedisDataProtectionKeyStore
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net461 --runtime win10-x64`)
 5. Push the app using the appropriate provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
 
@@ -42,12 +42,14 @@ On a Windows cell, you should see something like this during startup:
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
 At this point the app is up and running. Bring up the home page of the app and click on the `Protected` link in the menu and you should see something like the following:
+
 ```
 Protected Data.
 InstanceIndex=0
 SessionId=989f8693-b43b-d8f0-f48f-187460f2aa02
 ProtectedData=My Protected String - 6f954faa-e06d-41b9-b88c-6e387a921420
 ```
+
 At this point the app has created a new Session with the ProtectedData encrypted and saved in the Session.
 
 Next, scale the app to multi-instance (eg. `cf scale keystore -i 2`). Wait for the new instance to startup.

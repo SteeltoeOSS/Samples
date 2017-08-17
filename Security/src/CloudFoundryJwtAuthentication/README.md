@@ -15,7 +15,7 @@ Note: This application is intended to be used in conjunction with the [CloudFoun
 2. cd samples/Security/src/CloudFoundryJwtAuthentication
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net461 --runtime win10-x64`)
 5. Push the app using the provided manifest.
  (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 
