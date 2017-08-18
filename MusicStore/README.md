@@ -66,7 +66,7 @@ This will fire up a Spring Cloud Eureka Server listening on port 8761.
 And finally to startup a MySql Server.  Note: On MacOS you can NOT use MySQL. Instead, you must use Postgres as there currently are no MySql .NET providers supported on .NET Core. 
 
 1. `cd Samples/MusicStore`
-2. `start dockerrun-mysqlserver.cmd` or `./dockerrun-mysqlserver.sh`
+2. `start dockerrun-mysqlaserver.cmd` or `./dockerrun-mysqlaserver.sh`
 
 This will fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
 
