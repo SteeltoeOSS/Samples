@@ -19,7 +19,9 @@ using Microsoft.Extensions.Logging;
 
 
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-
+using Steeltoe.Extensions.Logging.CloudFoundry;
+using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Health;
 
 namespace MusicStoreUI
 {
@@ -27,7 +29,6 @@ namespace MusicStoreUI
     {
         public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(LogLevel.Debug);
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -36,6 +37,8 @@ namespace MusicStoreUI
                 .AddEnvironmentVariables()
                 .AddConfigServer(env);
             Configuration = builder.Build();
+
+            loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -54,6 +57,11 @@ namespace MusicStoreUI
 #else
             services.AddDistributedMemoryCache();
 #endif
+            // Add custom health check contributor
+            services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
+
+            // Add managment endpoint services
+            services.AddCloudFoundryActuators(Configuration);
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
@@ -96,11 +104,10 @@ namespace MusicStoreUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // Add management endpoints into pipeline
+            app.UseCloudFoundryActuators();
 
             app.UseSession();
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {

@@ -13,10 +13,11 @@ This application makes use of the following Steeltoe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
 * Steeltoe Connector for connecting to MySql using EFCore 
+* Steeltoe Management for enabling management actuator endpoints that can be used by the Pivotal Apps Manager
 * Optionally uses Steeltoe Redis Connector to connect to a Redis cache for Session storage. Note: This is required if you want to scale the MusicStoreUI component to multiple instances.
 * Optionally uses Steeltoe Redis DataProtection provider to the cause the DataProtection KeyRing to be stored in a Redis cache. Note: This is also required if you want to scale the MusicStoreUI component to multiple instances.
 
-The default is to NOT use a Redis cache for Session storage or DataProtection KeyRing storage. Details on how to enable Redis usage are provided below.
+The default is to NOT use a Redis cache for Session storage or DataProtection KeyRing storage. Details on how to enable it are provided below.
 
 # Getting Started
 
@@ -98,10 +99,11 @@ You should have no problem using the provided solution to launch the individual 
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry
+1. Install Pivotal Cloud Foundry
 2. Install Spring Cloud Services
 3. Install .NET Core SDK.
 4. Install Redis service if you want to use Redis for Session storage and KeyRing storage.
+5. Install Pivotal Apps Manager 1.11+ if you want to access Management endpoints from Apps Manager.
 
 # Setup Services on CloudFoundry
 
@@ -139,7 +141,7 @@ Note: If you wish to change what github repo the Config server instance uses, yo
 Once the services have been created and ready on CloudFoundry (i.e. check via `cf services`) then you can use the provided `push*.cmd or push*.sh` commands to startup the individual application services on CloudFoundry. For example to start the ShoppingCart service:
 
 1. `cd Samples/MusicStore`
-2. `pushShoppingCartService.cmd win7-x64 netcoreapp1.1` or `./pushShoppingCartService.sh ubuntu.14.04-x64 netcoreapp1.1`
+2. `pushShoppingCartService.cmd win10-x64 netcoreapp2.0` or `./pushShoppingCartService.sh ubuntu.14.04-x64 netcoreapp2.0`
 
 Note: If you wish to use the Redis cache for storing Session state, you will have to set ENVIRONMENT variable `DefineConstants=USE_REDIS_CACHE` before building and pushing the MusicUI application. 
 
@@ -148,6 +150,20 @@ Each of the `push*.*` scripts `dotnet publish` the MusicStore service targeting 
 Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing these apps. The simplest way to fix this:
 
 1. Disable certificate validation for the Spring Cloud Config Client.  You can do this by editing `appsettings.json` and add `spring:cloud:config:validate_certificates=false`. You will need to do this for each of the applications.
+
+Once you have pushed all the applications to Cloud Foundry, if you do a `cf a`, you should see the following applications:
+* musicui - Music store User Interface 
+* musicstore - Music store database micro-service
+* orderprocessing - Order processing micro-service
+* shoppingcart - Shopping cart micro-service
+
+```
+name              requested state   instances   memory   disk   urls
+musicstore        started           1/1         1G       1G     musicstore.apps.testcloud.com
+musicui           started           1/1         1G       1G     musicui.apps.testcloud.com
+orderprocessing   started           1/1         1G       1G     orderprocessing.apps.testcloud.com
+shoppingcart      started           1/1         1G       1G     shoppingcart.apps.testcloud.com
+```
 
 # Known Limitations
 

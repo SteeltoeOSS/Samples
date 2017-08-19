@@ -17,7 +17,7 @@ namespace ShoppingCartService.Models
             {
                 using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    var db = serviceScope.ServiceProvider.GetService<ShopingCartContext>();
+                    var db = serviceScope.ServiceProvider.GetService<ShoppingCartContext>();
 
                     db.Database.EnsureCreated();
 
@@ -42,13 +42,13 @@ namespace ShoppingCartService.Models
             List<TEntity> existingData;
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var db = serviceScope.ServiceProvider.GetService<ShopingCartContext>();
+                var db = serviceScope.ServiceProvider.GetService<ShoppingCartContext>();
                 existingData = db.Set<TEntity>().ToList();
             }
 
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var db = serviceScope.ServiceProvider.GetService<ShopingCartContext>();
+                var db = serviceScope.ServiceProvider.GetService<ShoppingCartContext>();
                 foreach (var item in entities)
                 {
                     var exists = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)));
