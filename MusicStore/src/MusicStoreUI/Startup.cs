@@ -87,7 +87,11 @@ namespace MusicStoreUI
             services.AddMemoryCache();
 
             // Add session related services.
-            services.AddSession((options) => options.CookieName = "JSESSIONID");
+
+            // Use call below if you want sticky Sessions on Cloud Foundry
+            // services.AddSession((options) => options.CookieName = "JSESSIONID");
+
+            services.AddSession();
 
             // Configure Auth
             services.AddAuthorization(options =>
