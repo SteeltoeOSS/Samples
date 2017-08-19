@@ -35,7 +35,7 @@ namespace MusicStoreUI
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables()
-                .AddConfigServer(env);
+                .AddConfigServer(env, loggerFactory);
             Configuration = builder.Build();
 
             loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));

@@ -31,6 +31,7 @@
     <PackageReference Include="Steeltoe.Security.DataProtection.Redis" Version="1.1.0-dev-*" />
     <PackageReference Include="Steeltoe.Management.CloudFoundry" Version="1.1.0-dev-*" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2"/> 
+    <PackageReference Include="System.Net.Http" Version="4.3.2"/>
 
   </ItemGroup>
 
