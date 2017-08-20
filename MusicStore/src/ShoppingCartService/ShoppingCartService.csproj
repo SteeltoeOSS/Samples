@@ -8,7 +8,11 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="git.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="GitInfo" Version="1.1.72" />  
