@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -131,8 +132,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.ConfigServer, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.1.0-rc2\lib\net452\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.ConfigServer.1.1.0-dev-00140\lib\net452\Steeltoe.Extensions.Configuration.ConfigServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
