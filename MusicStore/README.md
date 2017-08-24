@@ -64,8 +64,6 @@ Likewise to startup a Spring Cloud Eureka Server:
 
 This will fire up a Spring Cloud Eureka Server listening on port 8761.
 
-And finally to startup a MySql Server.  Note: On MacOS you can NOT use MySQL. Instead, you must use Postgres as there currently are no MySql .NET providers supported on .NET Core. 
-
 1. `cd Samples/MusicStore`
 2. `start dockerrun-mysqlserver.cmd` or `./dockerrun-mysqlserver.sh`
 
@@ -90,9 +88,11 @@ For example, to startup the MusicStoreService:
 
 Its probably best to startup the` MusicStoreService`, `OrderService` and `ShoppingCartService` first and then follow up with the` MusicStoreUI` last.
 
-The `run*.*` commands will `dotnet run -f netcoreapp1.1` (i.e. target .NET Core)
+The `run*.*` commands will `dotnet run -f netcoreapp2.0` (i.e. target .NET Core).  See note below regarding MusicStoreUI only runs on .NET Core 1.1.
 
 If all the services startup cleanly, you should be able to hit: http://localhost:5555/ to see the Music Store.
+
+Note: The MusicStoreUI currently will only run on .Net Core 1.1 or .NET Framework 4.6. If you try and run it on .NET Core 2.0, you will likely run into this [problem](https://github.com/aspnet/EntityFrameworkCore/issues/8021) when you register and log in to the Music Store.  The problem occurs when EFCore 1.1 is used with .NET Core 2.0.
 
 ## Debugging/Developing Locally on Windows
 You should have no problem using the provided solution to launch the individual services in the debugger and set break points and walk through code as needed.

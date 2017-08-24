@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp1.1</TargetFrameworks>
     <RuntimeIdentifiers>win10-x64;osx.10.11-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
     <DefineConstants>$(DefineConstants);DEMO;TESTING</DefineConstants>
   </PropertyGroup>
@@ -30,13 +30,16 @@
     <PackageReference Include="System.Net.Sockets" Version="4.3.0" /> 
     <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" />     
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.2" />
-    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-dev-*" />
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.Redis" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.Redis" Version="1.1.0-dev-*" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundry" Version="1.1.0-dev-*" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2"/> 
+
+    <PackageReference Include="Steeltoe.Management.CloudFoundry" Version="1.1.0-dev-00015" />
+    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-dev-00097" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-00094" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.MySql" Version="1.1.0-dev-00161" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.Redis" Version="1.1.0-dev-00161" />
+    <PackageReference Include="Steeltoe.Security.DataProtection.Redis" Version="1.1.0-dev-00063" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2"/>    
+    
+    <!-- 4.3.0 of this package has problems on net46+, by default that version gets included, so we have to force using 4.3.1+ in apps -->
     <PackageReference Include="System.Net.Http" Version="4.3.2"/>
 
   </ItemGroup>
