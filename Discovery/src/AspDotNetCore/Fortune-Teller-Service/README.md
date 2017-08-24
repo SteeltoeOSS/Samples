@@ -37,7 +37,7 @@ At this point the Fortune Teller Service is up and running and ready for the [Fo
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 
-2. Optionally install Windows support (Greenhouse)
+2. Optionally install Windows support 
 3. Installed Spring Cloud Services 
 4. Install .NET Core SDK
 

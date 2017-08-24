@@ -34,7 +34,7 @@ At this point the Fortune Teller UI is up and running and ready for displaying y
 # Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry
-2. Optionally install Windows support (Greenhouse) 
+2. Optionally install Windows support 
 3. Installed Spring Cloud Services 
 4. Install .NET Core SDK
 

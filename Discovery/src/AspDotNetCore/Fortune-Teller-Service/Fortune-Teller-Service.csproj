@@ -18,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-dev-*" />
@@ -27,6 +27,9 @@
 
     <!-- 4.3.0 of this package has problems on net46+, by default that version gets included, so we have to force using 4.3.1+ in apps -->
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
+
+   <!-- Workaround for: https://github.com/dotnet/core-setup/issues/3081 , can't 'dotnet run' aspnet 1.1 MVC app on Core 2.0 -->
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.0"/>
   </ItemGroup>
 
 </Project>
