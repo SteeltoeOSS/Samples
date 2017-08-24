@@ -3,7 +3,7 @@ ASP.NET Core sample app illustrating how to use the Steeltoe [CloudFoundry](http
 
 # Pre-requisites
 
-1. Installed Pivotal CloudFoundry 1.10+
+1. Installed Pivotal CloudFoundry 
 2. .NET Core SDK 2.0
 
 # Publish App & Push
