@@ -2,7 +2,7 @@
 ASP.NET 4.x sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
 
 # Pre-requisites
-1. Installed Pivotal CloudFoundry 
+1. Installed Pivotal CloudFoundry with Windows support
 2. Installed Spring Cloud Services 
 3. Visual Studio 2017
 
