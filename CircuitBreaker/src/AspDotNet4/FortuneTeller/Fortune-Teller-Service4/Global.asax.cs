@@ -19,6 +19,7 @@ namespace FortuneTellerService4
         protected void Application_Start()
         {
 
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             var config = GlobalConfiguration.Configuration;

@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
 using Steeltoe.CircuitBreaker.Hystrix.Metric.Consumer;
@@ -79,6 +79,8 @@ namespace FortuneTellerUI4
         }
         private static string[] rabbitAssemblies = new string[] { "RabbitMQ.Client" };
         private static string[] rabbitTypeNames = new string[] { "RabbitMQ.Client.ConnectionFactory" };
+        private const string HYSTRIX_STREAM_PREFIX = "hystrix:stream";
+
         public static void RegisterHystrixMetricsStream(this ContainerBuilder container, IConfiguration config)
         {
             if (container == null)
@@ -91,14 +93,30 @@ namespace FortuneTellerUI4
             {
                 throw new ConnectorException("Unable to find ConnectionFactory, are you missing RabbitMQ assembly");
             }
+            container.RegisterOptions();
+            container.RegisterInstance(HystrixDashboardStream.GetInstance()).SingleInstance();
 
             HystrixRabbitServiceInfo info = config.GetSingletonServiceInfo<HystrixRabbitServiceInfo>();
             HystrixProviderConnectorOptions hystrixConfig = new HystrixProviderConnectorOptions(config);
             HystrixProviderConnectorFactory factory = new HystrixProviderConnectorFactory(info, hystrixConfig, rabbitFactory);
             container.Register(c => (HystrixConnectionFactory)factory.Create(null)).SingleInstance();
-            container.RegisterInstance(HystrixDashboardStream.GetInstance()).SingleInstance();
+
+            container.Configure<HystrixMetricsStreamOptions>(config.GetSection(HYSTRIX_STREAM_PREFIX));
+
             container.RegisterType<HystrixMetricsStreamPublisher>().SingleInstance();
 
+        }
+        public static void RegisterOptions(this ContainerBuilder container)
+        {
+            container.RegisterGeneric(typeof(OptionsManager<>)).As(typeof(IOptions<>)).SingleInstance();
+            container.RegisterGeneric(typeof(OptionsMonitor<>)).As(typeof(IOptionsMonitor<>)).SingleInstance();
+            container.RegisterGeneric(typeof(OptionsSnapshot<>)).As(typeof(IOptionsSnapshot<>)).InstancePerRequest();
+        }
+
+        public static void Configure<TOption>(this ContainerBuilder container, IConfiguration config) where TOption : class
+        {
+            container.RegisterInstance(new ConfigurationChangeTokenSource<TOption>(config)).As<IOptionsChangeTokenSource<TOption>>().SingleInstance();
+            container.RegisterInstance(new ConfigureFromConfigurationOptions<TOption>(config)).As<IConfigureOptions<TOption>>().SingleInstance();
         }
 
 

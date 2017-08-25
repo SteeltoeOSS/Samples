@@ -1,7 +1,7 @@
 # Fortune-Teller-Service - ASP.NET Core Microservice
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_circuit_breaker_hystrix_clients) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
 
-This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_circuit_breaker_hystrix_dashboard) to gather status and metrics of the Hystrix command used in communications.
+This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
 
 Note: You can run this either locally or on CloudFoundry.
 
@@ -23,13 +23,13 @@ This sample assumes that there is a running Spring Cloud Eureka Server and a Hys
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
-4. dotnet run -f netcoreapp1.1 --server.urls http://*:5000
+4. dotnet run -f netcoreapp2.0 --server.urls http://*:5000
 
 # What to expect - Local
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
-$ dotnet run -f netcoreapp1.1 --server.urls http://*:5000
+$ dotnet run -f netcoreapp2.0 --server.urls http://*:5000
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production
@@ -58,7 +58,7 @@ You must first create an instance of the Service Registry service in a org/space
 2. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
+(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp2.0 --runtime ubuntu.14.04-x64`)
 5. Push the app using the appropriate manifest.
  (e.g. `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish`)
 
