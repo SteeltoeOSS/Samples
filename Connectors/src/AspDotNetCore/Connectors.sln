@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql", "MySql\MySql.csproj", "{DB37AA9C-28EB-480F-AF53-F6C3F1C9829C}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbit", "Rabbit\Rabbit.csproj", "{DD4878E3-43AD-4A86-89E6-6D018A89D584}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redis", "Redis\Redis.csproj", "{F829A220-1EE1-4E82-A807-0FB11F73FE21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerEFCore", "SqlServerEFCore\SqlServerEFCore.csproj", "{0D565A7E-221F-4271-8876-1A4A223F6B7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -124,8 +126,23 @@ Global
 		{F829A220-1EE1-4E82-A807-0FB11F73FE21}.Release|x64.Build.0 = Release|Any CPU
 		{F829A220-1EE1-4E82-A807-0FB11F73FE21}.Release|x86.ActiveCfg = Release|Any CPU
 		{F829A220-1EE1-4E82-A807-0FB11F73FE21}.Release|x86.Build.0 = Release|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Debug|x64.Build.0 = Debug|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Debug|x86.Build.0 = Debug|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Release|x64.ActiveCfg = Release|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Release|x64.Build.0 = Release|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D565A7E-221F-4271-8876-1A4A223F6B7D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20A5E3F4-9F66-4130-BB2B-F1BBE8BB4FCB}
 	EndGlobalSection
 EndGlobal
