@@ -71,9 +71,10 @@ You must first create an instance of the Circuit Breaker service in a org/space.
 3. Make sure environment variable `BUILD` is not set to `LOCAL` (i.e. SET BUILD=, unset BUILD)
 4. dotnet restore --configfile nuget.config
 5. Publish app to a directory selecting the framework and runtime you want to run on. 
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp2.0 --runtime ubuntu.14.04-x64`)
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
 6. Push the app using the appropriate manifest.
- (e.g. `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish`)
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 

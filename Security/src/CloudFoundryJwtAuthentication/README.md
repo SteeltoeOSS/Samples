@@ -14,10 +14,11 @@ Note: This application is intended to be used in conjunction with the [CloudFoun
 1. cf target -o myorg -s development
 2. cd samples/Security/src/CloudFoundryJwtAuthentication
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net461 --runtime win10-x64`)
-5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
+4. Publish app to a directory selecting the framework and runtime you want to run on. 
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+5. Push the app using the appropriate manifest.
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to the CUPS service `myOAuthService`.  Note: The CUPS service: `myOAuthService` is created when you follow the instructions for [CloudFoundrySingleSignon](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundrySingleSignon).
 

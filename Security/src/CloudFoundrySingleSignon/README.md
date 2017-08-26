@@ -4,9 +4,10 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFound
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 
-2. Install .NET Core SDK
-3. Optionally, Single Signon for CloudFoundry if you wish use it as your OAuth Security server.
+1. Install Pivotal Cloud Foundry
+2. Optionally, installed Windows support on Cloud Foundry
+3. Install .NET Core SDK
+4. Optionally, Single Signon for CloudFoundry if you wish use it as your OAuth Security server.
 
 # Create OAuth2 Service Instance on CloudFoundry
 
@@ -57,10 +58,11 @@ cf cups myOAuthService -p "{\"client_id\": \"myTestApp\",\"client_secret\": \"my
 1. cf target -o myorg -s development
 2. cd samples/Security/src/CloudFoundrySingleSignon
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net461 --runtime win10-x64`)
-5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
+4. Publish app to a directory selecting the framework and runtime you want to run on. 
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+5. Push the app using the appropriate manifest.
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the CUPS service `myOAuthService`.
 
