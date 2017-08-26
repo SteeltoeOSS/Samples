@@ -3,8 +3,8 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtec
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 
-2. Optionally, installed Windows support (Greenhouse) 
+1. Installed Pivotal Cloud Foundry 
+2. Optionally, installed Windows support on Cloud Foundry
 3. Installed Redis Cache marketplace service
 4. Install .NET Core SDK
 
@@ -22,7 +22,7 @@ You must first create an instance of the Redis service in a org/space.
 4. Publish app to a directory  
 (e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net461 --runtime win10-x64`)
 5. Push the app using the appropriate provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish`)
+ (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
 
 Note: The provided manifest will create an app named `keystore` and attempt to bind to the Redis service `myRedisService`.
 

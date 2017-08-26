@@ -47,9 +47,10 @@ Once complete we are ready to add our application as a new client to the UAA ser
 
 Last, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `credentials.json` file when creating your CUPS service, but you will FIRST need to edit it and replace the `YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` with your setups domain. Once done you can do the following:
 
-1. cf target -o myorg -s development
-2. cf cups myOAuthService -p credentials.json
-
+```
+cf target -o myorg -s development
+cf cups myOAuthService -p "{\"client_id\": \"myTestApp\",\"client_secret\": \"myTestApp\",\"uri\": \"uaa://login.system.testcloud.com\"}"
+```
 
 # Publish App & Push to CloudFoundry
 
