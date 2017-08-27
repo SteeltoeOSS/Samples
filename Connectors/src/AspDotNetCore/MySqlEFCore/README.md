@@ -1,11 +1,12 @@
 ﻿# MySql Connector Sample App - EntityFramework Core
-ASP.NET Core sample app illustrating how to use the EntityFramework Core together with [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) and [Connector/NET - 7.0.x](https://dev.mysql.com/downloads/connector/net/) for connecting to a MySql service on CloudFoundry. There is also an additional sample which illustrates how to use a `MySqlConnection` to issue commands to the bound database.
+ASP.NET Core sample app illustrating how to use the EntityFramework Core together with [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry. There is also an additional sample which illustrates how to use a `MySqlConnection` to issue commands to the bound database.
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+
-2. Installed MySql marketplace service
-3. Install .NET Core SDK
+1. Installed Pivotal CloudFoundry 
+2. Optionaly, installed Windows support (Greenhouse) 
+3. Installed MySql marketplace service
+4. Install .NET Core SDK
 
 # Create MySql Service Instance on CloudFoundry
 You must first create an instance of the MySql service in a org/space.
@@ -16,12 +17,13 @@ You must first create an instance of the MySql service in a org/space.
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Connectors/src/AspDotNetCore/MySqlCore
+2. cd samples/Connectors/src/AspDotNetCore/MySqlEFCore
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
-5. Push the app using the appropriate provided manifest.
- (e.g.  `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish` )
+4. Publish app to a directory selecting the framework and runtime you want to run on. 
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+5. Push the app using the appropriate manifest.
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: The provided manifest will create an app named `mysqlefcore-connector` and attempt to bind to the the app to MySql service `myMySqlService`.
 

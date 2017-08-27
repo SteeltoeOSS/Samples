@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Pivotal.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector;
@@ -13,7 +14,12 @@ namespace FortuneTellerService4
 {
     public static class DiscoveryContainerBuilderExtensions
     {
-        public static void RegisterDiscoveryClient(this ContainerBuilder container, IConfigurationRoot config)
+        public static void RegisterLoggingFactory(this ContainerBuilder container, ILoggerFactory factory)
+        {
+            container.RegisterInstance<ILoggerFactory>(factory).SingleInstance();
+        }
+
+        public static void RegisterDiscoveryClient(this ContainerBuilder container, IConfigurationRoot config, ILoggerFactory loggerFactory)
         {
             EurekaServiceInfo info = config.GetSingletonServiceInfo<EurekaServiceInfo>();
             DiscoveryOptions configOptions = new DiscoveryOptions(config)
@@ -22,7 +28,7 @@ namespace FortuneTellerService4
             };
 
             DiscoveryClientFactory factory = new DiscoveryClientFactory(info, configOptions);
-            container.Register<IDiscoveryClient>(c => (IDiscoveryClient)factory.CreateClient()).SingleInstance();
+            container.Register<IDiscoveryClient>(c => (IDiscoveryClient)factory.CreateClient(null, loggerFactory)).SingleInstance();
         }
 
     }

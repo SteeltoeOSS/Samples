@@ -17,13 +17,13 @@ namespace ShoppingCartService.Controllers
     {
         private readonly ILogger<ShoppingCartController> _logger;
 
-        public ShoppingCartController(ShopingCartContext dbContext, ILogger<ShoppingCartController> logger)
+        public ShoppingCartController(ShoppingCartContext dbContext, ILogger<ShoppingCartController> logger)
         {
             DbContext = dbContext;
             _logger = logger;
         }
 
-        public ShopingCartContext DbContext { get; }
+        public ShoppingCartContext DbContext { get; }
 
         //
         // GET: api/ShoppingCart/cartId

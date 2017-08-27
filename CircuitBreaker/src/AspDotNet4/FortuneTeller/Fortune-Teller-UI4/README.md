@@ -1,7 +1,7 @@
 # Fortune-Teller-UI - ASP.NET 4 MVC Application
-ASP.NET 4 MVC sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services  and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_circuit_breaker_hystrix_clients) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
+ASP.NET 4 MVC sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for discovering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
 
-This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_circuit_breaker_hystrix_dashboard) to gather status and metrics of the Hystrix command used in communications.
+This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
 
  The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
@@ -9,7 +9,7 @@ Note: This application is built using the Autofac IOC container.
 
 # Pre-requisites - Running on CloudFoundry
 
-1. Installed Pivotal CloudFoundry with Greenhouse (i.e. Windows cell)
+1. Installed Pivotal CloudFoundry with Windows support
 2. Installed Spring Cloud Services 
 
 # Setup Service Registry on CloudFoundry
@@ -27,7 +27,7 @@ You must first create an instance of the Circuit Breaker service in a org/space.
 
 # Publish App & Push to CloudFoundry
 
-1. Open Samples\Discovery\Discovery.sln in Visual Studio 2017.
+1. Open Samples\CircuitBreaker\src\AspDotNet4\FortuneTeller.sln in Visual Studio.
 2. Select Fortune-Teller-UI4 project in Solution Explorer.
 3. Right-click and select Publish
 4. Publish the App to a folder. (e.g. c:\publish)

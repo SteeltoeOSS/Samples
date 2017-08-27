@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeIdentifiers>win10-x64;osx.10.11-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
@@ -11,11 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+
+    <PackageReference Include="System.Net.Sockets" Version="4.3.0" /> 
+    <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" /> 
+    
     <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-dev-*" />
     <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServer" Version="1.1.0-dev-*" />
     <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.1.0-dev-*" />

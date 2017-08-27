@@ -6,6 +6,8 @@ using Pivotal.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using System;
 using PA = Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace SimpleCloudFoundry4
 {
@@ -35,6 +37,9 @@ namespace SimpleCloudFoundry4
 
         public static void RegisterConfig(string environment)
         {
+            ILoggerFactory factory = new LoggerFactory();
+            factory.AddProvider(new ConsoleLoggerProvider((category, logLevel) => logLevel >= LogLevel.Debug, false));
+
             var env = new HostingEnvironment(environment);
 
             // Set up configuration sources.
@@ -50,7 +55,7 @@ namespace SimpleCloudFoundry4
                 // overriden from the CloudFoundry environment variable settings. 
                 // Defaults will be used for any settings not present in any of the earlier added 
                 // sources.  See ConfigServerClientSettings for defaults.
-                .AddConfigServer(env);
+                .AddConfigServer(env, factory);
 
             Configuration = builder.Build();
 

@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 namespace ShoppingCartService.Models
 {
 
-    public class ShopingCartContext : DbContext
+    public class ShoppingCartContext : DbContext
     {
-        public ShopingCartContext(DbContextOptions options)
+        public ShoppingCartContext(DbContextOptions options)
             : base(options)
         {
         }

@@ -3,8 +3,8 @@ ASP.NET Core sample app illustrating how to use [Steeltoe Redis Connector](https
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+
-2. Optionaly, installed DiegoWindows support (Greenhouse) 
+1. Installed Pivotal CloudFoundry 
+2. Optionaly, installed Windows support (Greenhouse) 
 3. Installed Redis Cache service
 4. Install .NET Core SDK
 
@@ -20,10 +20,11 @@ You must first create an instance of the Redis service in a org/space.
 1. cf target -o myorg -s development
 2. cd samples/Connectors/src/AspDotNetCore/Redis
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
-5. Push the app using the appropriate provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish`)
+4. Publish app to a directory selecting the framework and runtime you want to run on. 
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+5. Push the app using the appropriate manifest.
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: The provided manifest will create an app named `redis-connector` and attempt to bind to the the app to Redis service `myRedisService`.
 
