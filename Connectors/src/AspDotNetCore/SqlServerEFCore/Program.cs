@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,12 +9,7 @@ namespace SqlServerEFCore
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return new WebHostBuilder()
+            var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseUrls(GetServerUrls(args))
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -23,11 +17,7 @@ namespace SqlServerEFCore
                 .UseStartup<Startup>()
                 .Build();
 
-            //return WebHost.CreateDefaultBuilder(args)
-            //        .UseKestrel()
-            //        .UseUrls(GetServerUrls(args))
-            //        .UseStartup<Startup>()
-            //        .Build();
+            host.Run();
         }
 
         private static string[] GetServerUrls(string[] args)
