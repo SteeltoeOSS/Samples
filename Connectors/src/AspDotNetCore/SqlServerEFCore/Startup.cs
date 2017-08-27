@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 
 namespace SqlServerEFCore
 {
@@ -21,6 +19,9 @@ namespace SqlServerEFCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Context and use SqlServer as provider ... provider will be configured from VCAP_ info
+            services.AddDbContext<TestContext>(options => options.UseSqlServer(Configuration));
+
             services.AddMvc();
         }
 
@@ -45,6 +46,8 @@ namespace SqlServerEFCore
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SampleData.InitializeMyContexts(app.ApplicationServices);
         }
     }
 }
