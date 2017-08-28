@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Extensions.Configuration;
+using System.Linq;
 
 namespace SqlServerEFCore
 {
@@ -31,7 +33,13 @@ namespace SqlServerEFCore
             // Add Context and use SqlServer as provider ... provider will be configured from VCAP_ info
             services.AddDbContext<TestContext>(options => options.UseSqlServer(Configuration));
 
-            services.AddMvc();
+            services.AddMvc()
+                .ConfigureApplicationPartManager(manager =>
+                {
+                    var oldMetadataReferenceFeatureProvider = manager.FeatureProviders.First(f => f is MetadataReferenceFeatureProvider);
+                    manager.FeatureProviders.Remove(oldMetadataReferenceFeatureProvider);
+                    manager.FeatureProviders.Add(new ReferencesMetadataReferenceFeatureProvider());
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
