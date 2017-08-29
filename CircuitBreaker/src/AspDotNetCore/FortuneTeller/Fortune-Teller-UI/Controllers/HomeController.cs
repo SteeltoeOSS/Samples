@@ -10,11 +10,13 @@ namespace Fortune_Teller_UI.Controllers
     [Route("/")]
     public class HomeController : Controller
     {
-        IFortuneService _fortunes;
+        FortuneServiceCommand _fortuneServiceCommand;
+        IFakeService1 _service1;
 
-        public HomeController(IFortuneService fortunes)
+        public HomeController(FortuneServiceCommand fortuneServiceCommand, IFakeService1 service1)
         {
-            _fortunes = fortunes;
+            _fortuneServiceCommand = fortuneServiceCommand;
+            _service1 = service1;
         }
 
         [HttpGet]
@@ -24,16 +26,15 @@ namespace Fortune_Teller_UI.Controllers
         }
 
         [HttpGet("random")]
-        public async Task<string> Random()
+        public async Task<Fortune> Random()
         {
-            return await _fortunes.RandomFortuneAsync();
+            return await _fortuneServiceCommand.RandomFortune();
         }
 
-        [HttpGet("gc")]
-        public string GCOperation()
+        [HttpGet("multirandom")]
+        public async Task<List<Fortune>> MultiRandom()
         {
-            return "Done! " + GC.GetTotalMemory(true);
+            return await _service1.RandomFortunes();
         }
-
     }
 }

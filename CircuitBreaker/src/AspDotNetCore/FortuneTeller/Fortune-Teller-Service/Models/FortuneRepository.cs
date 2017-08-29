@@ -19,6 +19,13 @@ namespace FortuneTellerService.Models
             return _db.Fortunes.AsEnumerable();
         }
 
+        public IEnumerable<Fortune> GetSome(List<string> list)
+        {
+            return _db.Fortunes.Where((f) =>
+                list.Contains(f.Id.ToString())
+            );
+        }
+
         public Fortune RandomFortune()
         {
             int count = _db.Fortunes.Count();

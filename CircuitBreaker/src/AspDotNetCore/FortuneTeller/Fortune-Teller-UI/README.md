@@ -1,5 +1,7 @@
 # Fortune-Teller-UI - ASP.NET Core MVC Application
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix Command with fallback ability when communicating with the Fortune service.  
+
+In addition, the Fortune-Teller-UI also illustrates how to use a Hystrix Collapser to combine, or 'batch up', multiple requests to backend micro-services endpoints. 
 
 This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
 
@@ -107,6 +109,8 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:38:48.12-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
 At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit http://fortuneui.x.y.z/ to see it!
+
+In addition to hitting http://fortuneui.x.y.z/, you can also hit: http://fortuneui.x.y.z/#/multiple to cause the UI to make use of a Hystrix Collapser to obtain multiple fortunes.
 
 # Using the Hystrix Dashboard - Cloud Foundry
 

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Services
 {
-    public interface IFortuneService
+    public interface IFortuneServiceCollapser
     {
-        Task<Fortune> RandomFortuneAsync();
-        Task<List<Fortune>> GetFortunesAsync(List<int> fortuneIds);
+        Task<Fortune> ExecuteAsync();
+        int FortuneId { get; set; }
     }
 }
