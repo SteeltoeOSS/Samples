@@ -1,5 +1,5 @@
-# Simple - ASP.NET 4.5 Sample Application
-ASP.NET 4.5 sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config) as a configuration source.
+# Simple - ASP.NET 4.x Sample Application
+ASP.NET 4.x sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/) as a configuration source.
 
 # Pre-requisites
 
@@ -7,20 +7,20 @@ This sample assumes that there is a running Spring Cloud Config Server on your m
 
 1. Install Java 8 JDK.
 2. Install Maven 3.x.
-3. Visual Stuido 2015 Update 3
+3. Visual Stuido 2017
 4. Clone the Spring Cloud Config Server repository. (https://github.com/spring-cloud/spring-cloud-config)
 5. Go to the config server directory (`spring-cloud-config/spring-cloud-config-server`) and fire it up with `mvn spring-boot:run`
 6. This sample will default to looking for its spring cloud config server on localhost, so it should all connect.
 
-This default configuration of the Config Server uses [this github repo]( https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
+The default configuration of the Config Server uses [this github repo]( https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
 
 # Building & Running on Windows
 
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
-2. Startup Visual Studio 2015
-3. Open the Samples/Configuration/Configuration.sln
-4. Select the AspDotNet4/Simple project in the solution and build it.
-5. Select the AspDotNet4/Simple as the Startup project.
+2. Startup Visual Studio
+3. Open the src/AspDotNet4/Configuration.sln
+4. Select the Simple project in the solution and build it.
+5. Select the Simple as the Startup project.
 6. Ctl+F5 or F5
 
 # What to expect

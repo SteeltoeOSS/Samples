@@ -1,7 +1,8 @@
 # Fortune-Teller-Service - ASP.NET 4 WebApi Microservice
-ASP.NET 4 WebApi sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
+ASP.NET 4 WebApi sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
 
 Note: This application is built using the Autofac IOC container.
+
 # Pre-requisites - Running Local
 
 This sample assumes that there is a running Spring Cloud Eureka Server on your machine. To make this happen:
@@ -16,20 +17,19 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 # Building & Running Locally
 
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
-2. Startup Visual Studio 2015
-3. Open samples/Discovery/Discovery.sln
-4. Select AspDotNet4/Fortune-Teller-Service4 and build it
-5. Select AspDotNet4/Fortune-Teller-Service4 as the Startup project.
+2. Startup Visual Studio 2017
+3. Open src/AspDotNet4/Discovery.sln 
+4. Select Fortune-Teller-Service4 and build it
+5. Select Fortune-Teller-Service4 as the Startup project.
 6. Ctrl+F5 or F5
 
-At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes. The `fortuneService` is registered with the Eureka server @ http://localhost:5000/.
+At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes. The `fortuneService` is registered with the Eureka server located at http://localhost:5000/.
 
 # Pre-requisites - Running on CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+ with Greenhouse (i.e. Windows cell)
-2. Installed Spring Cloud Services 1.0.9+
-3. Web tools installed and on PATH, (e.g. npm, gulp, etc).  
-Note: If you're on Windows and you have VS2015 Update 3, you can add these to your path: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External.
+1. Installed Pivotal CloudFoundry with Windows support
+2. Installed Spring Cloud Services 
+
 
 # Setup Service Registry on CloudFoundry
 You must first create an instance of the Service Registry service in a org/space.
@@ -40,7 +40,7 @@ You must first create an instance of the Service Registry service in a org/space
 
 # Publish App & Push to CloudFoundry
 
-1. Open Samples\Discovery\Discovery.sln in Visual Studio 2015.
+1. Open src/AspDotNet4/Discovery.sln 
 2. Select Fortune-Teller-Service4 project in Solution Explorer.
 3. Right-click and select Publish
 4. Publish the App to a folder. (e.g. c:\publish)
@@ -82,4 +82,4 @@ You should see something like this during startup:
 2016-11-22T09:31:51.72-0700 [APP/0]      OUT 2016-11-22 16:31:51Z|INFO|Starting web server instance...
 2016-11-22T09:31:51.83-0700 [APP/0]      OUT Server Started.... press CTRL + C to stop
 ```
-At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.
+At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.

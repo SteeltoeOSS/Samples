@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -178,16 +179,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.Connector, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.1.1.0-rc2\lib\net452\Steeltoe.CloudFoundry.Connector.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.1.1.0-rc3\lib\net452\Steeltoe.CloudFoundry.Connector.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.Connector.MySql, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.MySql.1.1.0-rc2\lib\net452\Steeltoe.CloudFoundry.Connector.MySql.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.Connector.MySql.1.1.0-rc3\lib\net452\Steeltoe.CloudFoundry.Connector.MySql.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundry, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.1.0-rc2\lib\net452\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundry.1.1.0-rc3\lib\net452\Steeltoe.Extensions.Configuration.CloudFoundry.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

@@ -1,11 +1,12 @@
 ﻿# Postgres Connector Sample App - NpgsqlConnection
-ASP.NET Core sample app illustrating how to use [Steeltoe Postgres Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.PostgreSql) for connecting to a Postgres database service on CloudFoundry using [Npgsql - 3.1.9](http://www.npgsql.org/). This specific sample illustrates how to use a `NpgsqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EFCore.
+ASP.NET Core sample app illustrating how to use [Steeltoe Postgres Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.PostgreSql) for connecting to a Postgres database service on CloudFoundry. This specific sample illustrates how to use a `NpgsqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use EFCore.
 
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7+
-2. Install Postgres database service (e.g. EDB Postgres)
-3. Install .NET Core SDK
+1. Install Pivotal CloudFoundry
+2. Optionaly, installed Windows support (Greenhouse)  
+3. Install Postgres database service (e.g. EDB Postgres)
+4. Install .NET Core SDK
 
 
 # Create Postgres Service Instance on CloudFoundry
@@ -19,10 +20,11 @@ You must first create an instance of the Postgres database service in a org/spac
 1. cf target -o myorg -s development
 2. cd samples/Connectors/src/AspDotNetCore/PostgreSql
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
-5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
+4. Publish app to a directory selecting the framework and runtime you want to run on. 
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+5. Push the app using the appropriate manifest.
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: The provided manifest(s) will create an app named `postgres-connector` and attempt to bind to the the app to PostgreSql service `myPostgres`.
 

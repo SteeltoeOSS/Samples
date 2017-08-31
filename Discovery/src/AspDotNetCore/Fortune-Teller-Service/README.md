@@ -19,13 +19,13 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
-4. dotnet run -f netcoreapp1.1 --server.urls http://*:5000
+4. dotnet run -f netcoreapp2.0 --server.urls http://*:5000
 
 # What to expect - Local
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-$ dotnet run -f netcoreapp1.1 --server.urls http://*:5000
+$ dotnet run -f netcoreapp2.0 --server.urls http://*:5000
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production
@@ -36,9 +36,9 @@ At this point the Fortune Teller Service is up and running and ready for the [Fo
 
 # Pre-requisites - CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+
-2. Optionally install DiegoWindows support (Greenhouse)
-3. Installed Spring Cloud Services 1.0.9+
+1. Installed Pivotal CloudFoundry 
+2. Optionally install Windows support 
+3. Installed Spring Cloud Services 
 4. Install .NET Core SDK
 
 
@@ -55,9 +55,10 @@ You must first create an instance of the Service Registry service in a org/space
 2. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
 3. dotnet restore --configfile nuget.config
 4. Publish app to a directory selecting the framework and runtime you want to run on. 
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework netcoreapp1.1 --runtime ubuntu.14.04-x64`)
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
 5. Push the app using the appropriate manifest.
- (e.g. `cf push -f manifest.yml -p $PWD/publish` or `cf push -f manifest-windows.yml -p $PWD/publish`)
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
@@ -94,7 +95,7 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
 2016-05-14T06:23:09.76-0600 [APP/0]      OUT       Renew FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: OK
 ```
-At this point the Fortune Teller Service is up and running and ready for the [Fortune Teller UI]() to ask for fortunes.
+At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.
 
 # Using Container-to-Container on Cloud Foundry
 

@@ -19,7 +19,9 @@ using Microsoft.Extensions.Logging;
 
 
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-
+using Steeltoe.Extensions.Logging.CloudFoundry;
+using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Health;
 
 namespace MusicStoreUI
 {
@@ -27,15 +29,16 @@ namespace MusicStoreUI
     {
         public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(LogLevel.Debug);
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables()
-                .AddConfigServer(env);
+                .AddConfigServer(env, loggerFactory);
             Configuration = builder.Build();
+
+            loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -54,6 +57,11 @@ namespace MusicStoreUI
 #else
             services.AddDistributedMemoryCache();
 #endif
+            // Add custom health check contributor
+            services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
+
+            // Add managment endpoint services
+            services.AddCloudFoundryActuators(Configuration);
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
@@ -79,7 +87,11 @@ namespace MusicStoreUI
             services.AddMemoryCache();
 
             // Add session related services.
-            services.AddSession((options) => options.CookieName = "JSESSIONID");
+
+            // Use call below if you want sticky Sessions on Cloud Foundry
+            // services.AddSession((options) => options.CookieName = "JSESSIONID");
+
+            services.AddSession();
 
             // Configure Auth
             services.AddAuthorization(options =>
@@ -96,11 +108,10 @@ namespace MusicStoreUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // Add management endpoints into pipeline
+            app.UseCloudFoundryActuators();
 
             app.UseSession();
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {

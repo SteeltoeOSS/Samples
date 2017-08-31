@@ -3,8 +3,9 @@ ASP.NET Core sample app illustrating how to use the OAuth Connector to automatic
 This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://github.com/SteeltoeOSS/Security).
 # Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry 1.7+
-2. Install .NET Core SDK
+1. Install Pivotal CloudFoundry
+2. Optionaly, installed Windows support (Greenhouse)  
+3. Install .NET Core SDK
 
 # Create OAuth2 Service Instance on CloudFoundry
 You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. In this example we will use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service. To do this, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `oauth.json` file in creating your CUPS service. Note that you will likely have to modify its contents to match your CloudFoundry setup.
@@ -19,10 +20,11 @@ If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identit
 1. cf target -o myorg -s development
 2. cd samples/Connectors/src/AspDotNetCore/OAuth
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory  
-(e.g. `dotnet publish --output $PWD/publish --configuration Release --framework net462 --runtime win10-x64`)
-5. Push the app using the provided manifest.
- (e.g.  `cf push -f manifest-windows.yml -p $PWD/publish` or `cf push -f manifest.yml -p $PWD/publish` )
+4. Publish app to a directory selecting the framework and runtime you want to run on. 
+(e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+5. Push the app using the appropriate manifest.
+ (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+
 
 Note: The provided manifest(s) will create an app named `oauth` and attempt to bind to the the app the CUPS service `myOAuthService`.
 

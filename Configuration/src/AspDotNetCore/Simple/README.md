@@ -1,5 +1,5 @@
 # Simple - ASP.NET Core Sample Application
-ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config) as a configuration source.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud) as a configuration source.
 
 # Pre-requisites
 
@@ -17,15 +17,15 @@ The default configuration of the Config Server uses [this github repo]( https://
 
 1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
 2. cd samples/Configuration/src/AspDotNetCore/Simple
-3. Install .NET Core SDK 
+3. Install .NET Core SDK 2.0
 4. dotnet restore --configfile nuget.config
-5. dotnet run -f netcoreapp1.1 or dotnet run -f net462
+5. dotnet run -f netcoreapp2.0 or dotnet run -f net461
 
 # What to expect
 After building and running the app, you should see something like the following:
 ```
 $ cd samples/Configuration/src/AspDotNetCore/Simple
-$ dotnet run -f netcoreapp1.1
+$ dotnet run -f netcoreapp2.0
 Hosting environment: Production
 Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.

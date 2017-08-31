@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using FortuneTellerService4.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Pivotal.Discovery.Client;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace FortuneTellerService4
 
         protected void Application_Start()
         {
+            ILoggerFactory factory = new LoggerFactory();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
@@ -26,14 +29,24 @@ namespace FortuneTellerService4
             // Build application configuration
             ServerConfig.RegisterConfig("development");
 
+            // Add Console logging provider
+            var settings = new ConfigurationConsoleLoggerSettings(ServerConfig.Configuration.GetSection("Logging"));
+            factory.AddProvider(new ConsoleLoggerProvider(settings));
+
+            ILogger<WebApiApplication> logger = factory.CreateLogger<WebApiApplication>();
+            logger.LogInformation("Starting to build container");
+
             // Create IOC container builder
             var builder = new ContainerBuilder();
+
+            // Register logger factory
+            builder.RegisterLoggingFactory(factory);
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Register IDiscoveryClient, etc.
-            builder.RegisterDiscoveryClient(ServerConfig.Configuration);
+            builder.RegisterDiscoveryClient(ServerConfig.Configuration, factory);
 
             // Initialize and Register FortuneContext
             builder.RegisterInstance(SampleData.InitializeFortunes()).SingleInstance();
@@ -44,8 +57,12 @@ namespace FortuneTellerService4
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
+            logger.LogInformation("Finished container build, starting background services");
+
             // Start the Discovery client background thread
             _client = container.Resolve<IDiscoveryClient>();
+
+            logger.LogInformation("Finished starting background services");
         }
 
         protected void Application_End()

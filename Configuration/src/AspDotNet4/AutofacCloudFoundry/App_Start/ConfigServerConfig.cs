@@ -8,6 +8,8 @@ using Pivotal.Extensions.Configuration;
 using Pivotal.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using System;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace AutofacCloudFoundry
 {
@@ -17,7 +19,11 @@ namespace AutofacCloudFoundry
 
         public static void RegisterConfig(string environment)
         {
+            ILoggerFactory factory = new LoggerFactory();
+            factory.AddProvider(new ConsoleLoggerProvider((category, logLevel) => logLevel >= LogLevel.Debug, false));
+
             var env = new HostingEnvironment(environment);
+
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -31,7 +37,7 @@ namespace AutofacCloudFoundry
                 // overriden from the CloudFoundry environment variable settings. 
                 // Defaults will be used for any settings not present in any of the earlier added 
                 // sources.  See ConfigServerClientSettings for defaults.
-                .AddConfigServer(env);
+                .AddConfigServer(env, factory);
 
             Configuration = builder.Build();
         }
