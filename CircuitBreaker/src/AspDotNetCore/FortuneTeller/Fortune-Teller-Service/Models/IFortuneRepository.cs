@@ -10,5 +10,6 @@ namespace FortuneTellerService.Models
         IEnumerable<Fortune> GetAll();
 
         Fortune RandomFortune();
+        IEnumerable<Fortune> GetSome(List<string> list);
     }
 }

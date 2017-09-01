@@ -16,7 +16,8 @@
       }
     },
     "Fortune-Teller-Service": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:5000"
     }
   }
 }

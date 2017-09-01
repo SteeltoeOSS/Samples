@@ -15,6 +15,7 @@ namespace Fortune_Teller_UI
     {
         public Startup(IHostingEnvironment env, ILoggerFactory factory)
         {
+            //factory.AddConsole(minLevel: LogLevel.Debug);
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
@@ -35,7 +36,23 @@ namespace Fortune_Teller_UI
 
             services.AddDiscoveryClient(Configuration);
 
-            services.AddHystrixCommand<IFortuneService, FortuneService>("FortuneService", Configuration);
+            // The Fortune service itself, calls the REST APIs to get random fortunes
+            services.AddSingleton<IFortuneService, FortuneService>();
+
+            // A Hystrix command that makes use of the FortuneService
+            services.AddHystrixCommand<FortuneServiceCommand>("FortuneService", Configuration);
+
+            // Some pretend services that make use of the FortuneServiceCollaper to return multiple fortunes
+            // Each pretend service receives an injected FortuneServiceCollaper to retrieve a fortune and also
+            // calls on another FakeServices to get Fortunes from it.  All of this is done async and in parallel.
+            // Due to the use of the FortuneServiceCollapser, all of the Fortune requests are batched up by 
+            // the collapser and issued in a single request to the backend service
+            services.AddTransient<IFakeService1, FakeService1>();
+            services.AddTransient<IFakeService2, FakeService2>();
+            services.AddTransient<IFakeServices3, FakeService3>();
+
+            // A Hystrix collapser that makes use of the FortuneService above to get a Fortune.
+            services.AddHystrixCollapser<IFortuneServiceCollapser, FortuneServiceCollapser>("FortuneServiceCollapser", Configuration);
 
             // Add framework services.
             services.AddMvc();

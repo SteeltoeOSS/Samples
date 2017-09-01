@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using FortuneTellerService.Models;
 using Microsoft.Extensions.Logging;
+using System.Linq;
+using Microsoft.Extensions.Primitives;
 
 namespace FortuneTellerService.Controllers
 {
@@ -23,6 +25,14 @@ namespace FortuneTellerService.Controllers
         public IEnumerable<Fortune> Get()
         {
             _logger?.LogInformation("GET api/fortunes");
+            if (HttpContext.Request.Query?.Count > 0)
+            {
+                StringValues values;
+                if (HttpContext.Request.Query.TryGetValue("Ids", out values))
+                {
+                    return _fortunes.GetSome(values.ToList());
+                }
+            }
             return _fortunes.GetAll();
         }
 

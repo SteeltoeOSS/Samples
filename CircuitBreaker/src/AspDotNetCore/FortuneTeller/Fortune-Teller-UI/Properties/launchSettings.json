@@ -16,7 +16,8 @@
       }
     },
     "Fortune-Teller-UI": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:5555"
     }
   }
 }
