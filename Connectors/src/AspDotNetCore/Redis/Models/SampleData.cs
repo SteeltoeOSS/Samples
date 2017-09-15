@@ -25,7 +25,7 @@ namespace Redis.Models
                     await cache.SetAsync("Key1", Encoding.UTF8.GetBytes("Key1Value"));
                     await cache.SetAsync("Key2", Encoding.UTF8.GetBytes("Key2Value"));
                 }
-                var conn = serviceScope.ServiceProvider.GetService<ConnectionMultiplexer>();
+                var conn = serviceScope.ServiceProvider.GetService<IConnectionMultiplexer>();
                 if (conn != null)
                 {
                     var db = conn.GetDatabase();
