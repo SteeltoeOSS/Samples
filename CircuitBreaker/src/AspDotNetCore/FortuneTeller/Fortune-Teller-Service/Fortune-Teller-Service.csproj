@@ -23,8 +23,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="1.1.2" />
-    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0-rc3" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0-rc3" />
+    <PackageReference Include="Pivotal.Discovery.Client" Version="1.1.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.1" />
     
     <!-- 4.3.0 of this package has problems on net46+, by default that version gets included, so we have to force using 4.3.1+ in apps -->
     <PackageReference Include="System.Net.Http" Version="4.3.2" />

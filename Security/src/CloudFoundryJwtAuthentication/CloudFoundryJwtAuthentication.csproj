@@ -13,8 +13,8 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0-rc3" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.1.0-rc3" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0" />
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundry" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
