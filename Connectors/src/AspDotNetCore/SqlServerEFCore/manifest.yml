@@ -1,0 +1,7 @@
+﻿---
+applications:
+- name: sqlserverefcore-connector
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - mySqlServerService
