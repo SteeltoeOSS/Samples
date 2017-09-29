@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql", "MySql\MySql.csproj", "{DB37AA9C-28EB-480F-AF53-F6C3F1C9829C}"
 EndProject
@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rabbit", "Rabbit\Rabbit.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redis", "Redis\Redis.csproj", "{F829A220-1EE1-4E82-A807-0FB11F73FE21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerEFCore", "SqlServerEFCore\SqlServerEFCore.csproj", "{0D565A7E-221F-4271-8876-1A4A223F6B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlServerEFCore", "SqlServerEFCore\SqlServerEFCore.csproj", "{0D565A7E-221F-4271-8876-1A4A223F6B7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

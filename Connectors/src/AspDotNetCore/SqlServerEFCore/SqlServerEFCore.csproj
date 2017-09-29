@@ -12,18 +12,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector" Version="1.1.0-rc2" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="1.1.0-rc2" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.SqlServer" Version="2.0.0-dev-00187" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="2.0.0-dev-00166" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Steeltoe.CloudFoundry.Connector.SqlServer">
-      <HintPath>..\..\..\..\..\Connectors\src\Steeltoe.CloudFoundry.Connector.SqlServer\bin\Debug\netstandard1.5\Steeltoe.CloudFoundry.Connector.SqlServer.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
