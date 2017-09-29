@@ -1,0 +1,25 @@
+﻿@model MsSql4.Data.Blog
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>@Model.Name</h1>
+</div>
+@foreach (var p in Model.Posts)
+{
+<div class="row">
+    <div class="col-md-12">
+        <h2>@p.Title</h2>
+        <p>
+            @p.Content
+        </p>
+        <p>
+            Post Id: @p.PostId
+            @*<a class="btn btn-default" href="/post/@p.PostId">Read more...</a>*@
+        </p>
+    </div>
+</div>
+}
+<h5>DataSource: @ViewBag.DataSource</h5>
+<h5>Database: @ViewBag.Database</h5>
