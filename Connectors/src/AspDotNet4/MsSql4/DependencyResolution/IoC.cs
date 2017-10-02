@@ -21,7 +21,14 @@ namespace MsSql4.DependencyResolution {
 	
     public static class IoC {
         public static IContainer Initialize() {
-            return new Container(c => c.AddRegistry<DefaultRegistry>());
+
+            ServerConfig.RegisterConfig("development");
+
+            var container = new Container(c => c.AddRegistry<DefaultRegistry>());
+
+            SqlServerContainerBuilderExtensions.RegisterSqlServerConnection(container, ServerConfig.Configuration);
+
+            return container;
         }
     }
 }
