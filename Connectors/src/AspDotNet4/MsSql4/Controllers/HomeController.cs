@@ -1,5 +1,4 @@
 ﻿using MsSql4.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -7,15 +6,19 @@ namespace MsSql4.Controllers
 {
     public class HomeController : Controller
     {
+        private IBloggingContext _context;
+
+        public HomeController(IBloggingContext context)
+        {
+            _context = context;
+        }
+
         public ActionResult Index()
         {
             var viewModel = new Blog { Name = "Not Initialized" };
-            using (var db = new BloggingContext())
-            {
-                ViewBag.DataSource = db.Database.Connection.DataSource;
-                ViewBag.Database = db.Database.Connection.Database;
-                viewModel = db.Blogs.Include(p => p.Posts).First();
-            }
+            ViewBag.DataSource = _context.GetDatasource();
+            ViewBag.Database = _context.GetDatabase();
+            viewModel = _context.GetBlogs().First();
 
             return View(viewModel);
         }
