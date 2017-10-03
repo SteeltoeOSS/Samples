@@ -23,3 +23,8 @@
 }
 <h5>DataSource: @ViewBag.DataSource</h5>
 <h5>Database: @ViewBag.Database</h5>
+@if (ViewBag.ConnectionString != null)
+{
+    <h3>Sorry, looks like something went wrong</h3>
+    <h5>ConnectionString: @ViewBag.ConnectionString</h5>
+}

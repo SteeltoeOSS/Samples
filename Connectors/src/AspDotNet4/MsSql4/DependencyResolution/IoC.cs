@@ -24,7 +24,7 @@ namespace MsSql4.DependencyResolution {
 
             ServerConfig.RegisterConfig("development");
 
-            var container = new Container(c => c.AddRegistry<DefaultRegistry>());
+            var container = new Container();
 
             SqlServerContainerBuilderExtensions.RegisterSqlServerConnection(container, ServerConfig.Configuration);
 

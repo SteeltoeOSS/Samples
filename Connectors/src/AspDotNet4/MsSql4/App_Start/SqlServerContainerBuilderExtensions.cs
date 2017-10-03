@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MsSql4.Data;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.CloudFoundry.Connector.SqlServer;
@@ -14,7 +15,7 @@ namespace MsSql4
             SqlServerProviderConnectorOptions SqlServerConfig = new SqlServerProviderConnectorOptions(config);
             SqlServerServiceInfo info = config.GetSingletonServiceInfo<SqlServerServiceInfo>();
             SqlServerProviderConnectorFactory factory = new SqlServerProviderConnectorFactory(info, SqlServerConfig, typeof(SqlConnection));
-            container.Inject<SqlConnection>((SqlConnection)factory.Create(null));
+            container.Inject<IBloggingContext>(new BloggingContext((SqlConnection)factory.Create(null)));
         }
     }
 }
