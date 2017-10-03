@@ -65,7 +65,7 @@ Likewise to startup a Spring Cloud Eureka Server:
 This will fire up a Spring Cloud Eureka Server listening on port 8761.
 
 1. `cd Samples/MusicStore`
-2. `start dockerrun-mysqlaserver.cmd` or `./dockerrun-mysqlaserver.sh`
+2. `start dockerrun-mysqlserver.cmd` or `./dockerrun-mysqlserver.sh`
 
 This will fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
 
