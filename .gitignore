@@ -202,3 +202,5 @@ project.lock.json
 .vscode/
 .idea/
 
+# vi/vim
+*.swp
