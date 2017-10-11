@@ -1,28 +1,32 @@
-# SimpleCloudFoundry - ASP.NET 4.x Sample Application 
+# SimpleCloudFoundry - ASP.NET 4.x Sample Application
+
 ASP.NET 4.x sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
 
-# Pre-requisites
-1. Installed Pivotal CloudFoundry with Windows support
-2. Installed Spring Cloud Services 
-3. Visual Studio 2017
+## Pre-requisites
 
-# Setup Config Server
+1. Installed Pivotal CloudFoundry with Windows support
+1. Installed Spring Cloud Services 
+1. Visual Studio 2017
+
+## Setup Config Server
+
 You must first create an instance of the Config Server service in a org/space.
 
 1. cf target -o myorg -s development
-2. cd src\AspDotNet4\SimpleCloudFoundry
-3. cf create-service p-config-server standard myConfigServer -c ./config-server.json
+1. cd src\AspDotNet4\SimpleCloudFoundry
+1. cf create-service p-config-server standard myConfigServer -c ./config-server.json
 
-# Publish App & Push
+## Publish App & Push
 
 1. Open src\AspDotNet4\Configuration.sln in Visual Studio.
-2. Select SimpleCloudFoundry project in Solution Explorer.
-3. Right-click and select Publish
-4. Publish the App to a folder. (e.g. c:\publish)
-5. cd publish_folder (e.g. cd c:\publish)
-6. cf push 
+1. Select SimpleCloudFoundry project in Solution Explorer.
+1. Right-click and select Publish
+1. Publish the App to a folder. (e.g. c:\publish)
+1. cd publish_folder (e.g. cd c:\publish)
+1. cf push 
 
-# What to expect
+## What to expect
+
 The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
 
 The Config Servers Git repository has been set to: `https://github.com/spring-cloud-samples/config-repo`
@@ -34,11 +38,13 @@ Use the menus at the top of the app to see various output:
 * `Config Server Data` - this is the configuration data returned from the Config Servers Git Repo. It will be some of the data from `foo.properties`, `foo-development.properties` and `application.yml` found in the Git repo.
 * `Reload` - will cause a reload of the configuration data from the server.
 
-# Observe Logs
+## Observe Logs
+
 To see the logs as you startup and use the app: `cf logs foo`
 
 You should see something like this during startup:
-```
+
+```text
 2016-05-03T12:21:41.30-0600 [STG/0]      OUT Successfully created container
 2016-05-03T12:21:41.31-0600 [STG/0]      OUT Downloading app package...
 2016-05-03T12:21:44.80-0600 [STG/0]      OUT Downloaded app package (6M)
