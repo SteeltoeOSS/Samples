@@ -7,6 +7,7 @@ using System.IO;
 
 namespace AutofacCloudFoundry
 {
+    public static class ApplicationConfig
     {
         public static IConfiguration Configuration { get; set; }
 
