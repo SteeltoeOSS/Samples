@@ -27,7 +27,7 @@ namespace SimpleCloudFoundry4.Controllers
 
         public ActionResult ConfigServerSettings()
         {
-            var config = ServerConfig.Configuration;
+            var config = ApplicationConfig.Configuration;
   
             if (config != null)
             {
@@ -65,9 +65,9 @@ namespace SimpleCloudFoundry4.Controllers
         }
         public ActionResult Reload()
         {
-            if (ServerConfig.Configuration != null)
+            if (ApplicationConfig.Configuration != null)
             {
-                ServerConfig.Configuration.Reload();
+                ApplicationConfig.Configuration.Reload();
             }
 
             return View();
@@ -76,7 +76,7 @@ namespace SimpleCloudFoundry4.Controllers
         public ActionResult ConfigServerData()
         {
 
-            var config = ServerConfig.Configuration;
+            var config = ApplicationConfig.Configuration;
             if (config != null)
             {
                 ViewBag.Bar = config["bar"] ?? "Not returned";
@@ -92,8 +92,8 @@ namespace SimpleCloudFoundry4.Controllers
         public ActionResult CloudFoundry()
         {
 
-            var cloudFoundryApplication = ServerConfig.CloudFoundryApplication;
-            var cloudFoundryServices = ServerConfig.CloudFoundryServices;
+            var cloudFoundryApplication = ApplicationConfig.CloudFoundryApplication;
+            var cloudFoundryServices = ApplicationConfig.CloudFoundryServices;
             return View(new CloudFoundryViewModel(
                 cloudFoundryApplication == null ? new CloudFoundryApplicationOptions() : cloudFoundryApplication,
                 cloudFoundryServices == null ? new CloudFoundryServicesOptions() : cloudFoundryServices));

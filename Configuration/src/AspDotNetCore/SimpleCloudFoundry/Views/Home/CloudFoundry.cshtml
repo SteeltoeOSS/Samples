@@ -25,7 +25,7 @@
 
 <h3>Configuration Data from VCAP_SERVICES</h3>
 
-@foreach (var service in Model.CloudFoundryServices.Services)
+@foreach (var service in Model.CloudFoundryServices.ServicesList)
 {
     <h4>vcap:services:@(service.Label):label = @service.Label</h4>
     <h4>vcap:services:@(service.Label):plan = @service.Plan</h4>

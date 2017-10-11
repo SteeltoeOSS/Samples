@@ -2,4 +2,4 @@
 applications:
 - name: cloud
   env:
-    ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: development
