@@ -17,7 +17,7 @@ You must first create an instance of the MySql service in a org/space.
  
 # Publish App & Push to CloudFoundry
 
-1. Open Samples\Discovery\Discovery.sln in Visual Studio 2015.
+1. Open Samples\Connectors\src\AspDotNet4\Connectors.sln in Visual Studio 2017.
 2. Select MySql4 project in Solution Explorer.
 3. Right-click and select Publish
 4. Publish the App to a folder. (e.g. c:\publish)

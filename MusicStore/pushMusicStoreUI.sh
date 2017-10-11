@@ -17,7 +17,7 @@ fi
 r=$1
 nixmanifest=manifest.yml
 winmanifest=manifest-windows.yml
-if [ "USE_REDIS_CACHE" == "true" ]; then
+if [ "$USE_REDIS_CACHE" == "true" ]; then
 	nixmanifest=manifest-redis.yml
 	winmanifest=manifest-windows-redis.yml
 fi

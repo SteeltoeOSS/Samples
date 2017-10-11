@@ -111,6 +111,9 @@ If you try and access the `About` menu item you should see the `About` page as u
 
 If you try and access the `Contact` menu item you should see `Access Denied, Insufficent permissions` as `dave` is not a member of the `testgroup1` and therefore can not access the end point.
 
-If you access the `InvokeJwtSample` menu item, you will find the app will attempt to invoke a secured endpoint in a second Security sample app [CloudFoundryJwtAuthentication](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundryJwtAuthentication). In order for this to be functional you must first push the [CloudFoundryJwtAuthentication](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundryJwtAuthentication) sample using the Readme instructions you can find [here](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundryJwtAuthentication).
+If you access the `InvokeJwtSample` menu item, you will find the app will attempt to invoke a secured endpoint in a second Security sample app [CloudFoundryJwtAuthentication][jwt]. In order for this to be functional you must first push the [CloudFoundryJwtAuthentication][jwt] sample using the Readme instructions you can find [here][jwt].
 
-Once you have [CloudFoundryJwtAuthentication](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundryJwtAuthentication) up and running, then if you access the `InvokeJwtSample` menu item when you are logged in, you should see some `values` returned from the [CloudFoundryJwtAuthentication](https://github.com/SteeltoeOSS/Samples/tree/dev/Security/src/CloudFoundryJwtAuthentication) app.  If you are logged out, then you will see a `401 (Unauthorized)` message.
+Once you have [CloudFoundryJwtAuthentication][jwt] up and running, then if you access the `InvokeJwtSample` menu item when you are logged in, you should see some `values` returned from the [CloudFoundryJwtAuthentication][jwt] app.  If you are logged out, then you will see a `401 (Unauthorized)` message.
+
+
+[jwt]: ../CloudFoundryJwtAuthentication
