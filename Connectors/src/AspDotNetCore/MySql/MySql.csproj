@@ -13,6 +13,6 @@
     <!-- This nuget from nuget.org has problems on net46, assembly is self/delayed signed -->
     <!--<PackageReference Include="MySql.Data" Version="8.0.8-dmr" />-->
     <PackageReference Include="MySqlConnector" Version="0.28.2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00190" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00191" />
   </ItemGroup>
 </Project>

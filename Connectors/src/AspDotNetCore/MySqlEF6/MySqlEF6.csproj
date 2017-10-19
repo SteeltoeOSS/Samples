@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="MySql.Data" Version="6.9.9" />
     <PackageReference Include="MySql.Data.Entity" Version="6.9.9" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00190" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00191" />
   </ItemGroup>
 
 </Project>

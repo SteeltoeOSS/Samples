@@ -4,14 +4,17 @@ ASP.NET Core sample app illustrating how to use the EntityFramework Core togethe
 # Pre-requisites - CloudFoundry
 1. Installed Pivotal CloudFoundry 
 1. Optionally, installed Windows support (Greenhouse) 
-1. Sql Server Connector installed in CloudFoundry **- Not publicly available yet**
+1. A Sql Server Instance (and optionally the Sql Server Connector installed in CloudFoundry **- Not publicly available yet**)
 1. Install .NET Core SDK
 
 # Create Sql Service Instance on CloudFoundry
-You must first create an instance of the Sql Server service in a org/space.
+You must first create an instance of the Sql Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the Sql Server Connector
 
 1. cf target -o myorg -s development
-1. cf create-service SqlServer sharedVM mySqlServerService
+- cf cups sqlServerCUPS -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'   
+or
+- cf create-service SqlServer sharedVM mySqlServerService
+   
 
 # Publish App & Push to CloudFoundry
 1. cf target -o myorg -s development
