@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration;
-using Steeltoe.CloudFoundry.Connector.Redis;
 using Redis.Models;
+using Steeltoe.CloudFoundry.Connector.Redis;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace Redis
 {

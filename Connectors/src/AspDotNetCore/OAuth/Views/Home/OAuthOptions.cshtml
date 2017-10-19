@@ -1,15 +1,16 @@
-﻿@{
+﻿@model Steeltoe.CloudFoundry.Connector.OAuth.OAuthServiceOptions
+@{
     ViewData["Title"] = "CloudFoundry OAuth data from VCAP_SERVICES";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>ClientId = @ViewData["ClientId"]</h4>
-<h4>Client Secret = @ViewData["ClientSecret"]</h4>
-<h4>UserAuthorizationUrl = @ViewData["UserAuthorizationUrl"]</h4>
-<h4>AccessTokenUrl = @ViewData["AccessTokenUrl"]</h4>
-<h4>UserInfoUrl = @ViewData["UserInfoUrl"]</h4>
-<h4>TokenInfoUrl = @ViewData["TokenInfoUrl"]</h4>
-<h4>JwtKeyUrl = @ViewData["JwtKeyUrl"]</h4>
-<h4>ValidateCertificates = @ViewData["ValidateCertificates"]</h4>
-<h4>Scopes = @ViewData["Scopes"]</h4>
+<h4>ClientId = @Model.ClientId</h4>
+<h4>Client Secret = @Model.ClientSecret</h4>
+<h4>UserAuthorizationUrl = @Model.UserAuthorizationUrl</h4>
+<h4>AccessTokenUrl = @Model.AccessTokenUrl</h4>
+<h4>UserInfoUrl = @Model.UserInfoUrl</h4>
+<h4>TokenInfoUrl = @Model.TokenInfoUrl</h4>
+<h4>JwtKeyUrl = @Model.JwtKeyUrl</h4>
+<h4>ValidateCertificates = @Model.ValidateCertificates</h4>
+<h4>Scopes = @string.Join(", ", Model.Scope)</h4>

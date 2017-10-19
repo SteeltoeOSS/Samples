@@ -1,11 +1,10 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-using Steeltoe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace MySqlEFCore
 {
@@ -45,7 +44,6 @@ namespace MySqlEFCore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-         
             }
             else
             {

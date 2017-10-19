@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using System;
-
 using System.Text;
 using System.Threading.Tasks;
-using StackExchange.Redis;
 
 namespace Redis.Models
 {
@@ -29,8 +28,8 @@ namespace Redis.Models
                 if (conn != null)
                 {
                     var db = conn.GetDatabase();
-                    db.StringSet("ConnectionMultiplexorKey1", "Key1Value via ConnectionMultiplexor");
-                    db.StringSet("ConnectionMultiplexorKey2", "Key2Value via ConnectionMultiplexor");
+                    db.StringSet("ConnectionMultiplexerKey1", "Key1Value via ConnectionMultiplexer");
+                    db.StringSet("ConnectionMultiplexerKey2", "Key2Value via ConnectionMultiplexer");
                 }
             }
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 
@@ -14,27 +11,9 @@ namespace PostgreSql.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult PostgresData([FromServices] NpgsqlConnection dbConnection)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-        public IActionResult PostgresData(
-                [FromServices] NpgsqlConnection dbConnection)
-        {
+            var viewData = new Dictionary<string, string>();
             dbConnection.Open();
 
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM TestData;", dbConnection);
@@ -42,13 +21,13 @@ namespace PostgreSql.Controllers
 
             while (rdr.Read())
             {
-                ViewData["Key" + rdr[0]] = rdr[1];
+                viewData.Add(rdr[0].ToString(), rdr[1].ToString());
             }
-
+            ViewBag.Database = dbConnection.Database;
+            ViewBag.DataSource = dbConnection.DataSource;
             rdr.Close();
             dbConnection.Close();
-
-            return View();
+            return View(viewData);
         }
     }
 }

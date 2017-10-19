@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PostgreEFCore.Controllers
@@ -13,35 +10,9 @@ namespace PostgreEFCore.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult PostgresData([FromServices] TestContext context)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-        public IActionResult PostgresData(
-                [FromServices] TestContext context)
-        {
-
-            var td = context.TestData.ToList();
-            foreach (var d in td)
-            {
-                ViewData["Key" + d.Id] = d.Data;
-            }
-
-            return View();
+            return View(context.TestData.ToList());
         }
     }
 }

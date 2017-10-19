@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace PostgreEFCore
 {
@@ -32,11 +28,11 @@ namespace PostgreEFCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
-
             // Add Context and use Postgres as provider ... provider will be configured from VCAP_ info
             services.AddDbContext<TestContext>(options => options.UseNpgsql(Configuration));
+
+            // Add framework services.
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +59,7 @@ namespace PostgreEFCore
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            SampleData.InitializeMyContexts(app.ApplicationServices).Wait();
+            SampleData.InitializeMyContexts(app.ApplicationServices);
         }
     }
 }

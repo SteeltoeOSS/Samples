@@ -4,24 +4,24 @@ ASP.NET Core sample app illustrating how to use the EntityFramework Core togethe
 # Pre-requisites - CloudFoundry
 
 1. Install Pivotal CloudFoundry
-2. Optionaly, installed Windows support (Greenhouse)  
-3. Install Postgres database service (e.g. EDB Postgres)
-4. Install .NET Core SDK
+1. Optionally, installed Windows support (Greenhouse)  
+1. Install Postgres database service (e.g. EDB Postgres)
+1. Install .NET Core SDK
 
 # Create PostgreSQL Service Instance on CloudFoundry
 You must first create an instance of the Postgres database service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
+1. cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
 
 # Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
-2. cd samples/Connectors/src/AspDotNetCore/PostgreEFCore
-3. dotnet restore --configfile nuget.config
-4. Publish app to a directory selecting the framework and runtime you want to run on. 
+1. cd samples/Connectors/src/AspDotNetCore/PostgreEFCore
+1. dotnet restore --configfile nuget.config
+1. Publish app to a directory selecting the framework and runtime you want to run on. 
 (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-5. Push the app using the appropriate manifest.
+1. Push the app using the appropriate manifest.
  (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
 
 

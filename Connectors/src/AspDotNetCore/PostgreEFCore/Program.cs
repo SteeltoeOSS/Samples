@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 
 namespace PostgreEFCore
 {
@@ -11,10 +10,10 @@ namespace PostgreEFCore
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
+            var host = WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseUrls(GetServerUrls(args))
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
