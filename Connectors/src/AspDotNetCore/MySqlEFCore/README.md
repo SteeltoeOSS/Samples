@@ -2,26 +2,24 @@
 ASP.NET Core sample app illustrating how to use the EntityFramework Core together with [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry. There is also an additional sample which illustrates how to use a `MySqlConnection` to issue commands to the bound database.
 
 # Pre-requisites - CloudFoundry
-
 1. Installed Pivotal CloudFoundry 
-2. Optionaly, installed Windows support (Greenhouse) 
-3. Installed MySql marketplace service
-4. Install .NET Core SDK
+1. Optionally, installed Windows support (Greenhouse) 
+1. Installed MySql marketplace service
+1. Install .NET Core SDK
 
 # Create MySql Service Instance on CloudFoundry
 You must first create an instance of the MySql service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service p-mysql 100mb myMySqlService 
+1. cf create-service p.mysql 100-mb myMySqlService 
 
 # Publish App & Push to CloudFoundry
-
 1. cf target -o myorg -s development
-2. cd samples/Connectors/src/AspDotNetCore/MySqlEFCore
-3. dotnet restore --configfile nuget.config
-4. Publish app to a directory selecting the framework and runtime you want to run on. 
+1. cd samples/Connectors/src/AspDotNetCore/MySqlEFCore
+1. dotnet restore --configfile nuget.config
+1. Publish app to a directory selecting the framework and runtime you want to run on. 
 (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-5. Push the app using the appropriate manifest.
+1. Push the app using the appropriate manifest.
  (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
 
 

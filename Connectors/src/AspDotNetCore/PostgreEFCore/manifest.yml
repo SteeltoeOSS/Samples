@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: postgres-connector
+- name: postgresefcore-connector
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

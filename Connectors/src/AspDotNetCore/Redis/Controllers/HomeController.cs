@@ -20,20 +20,6 @@ namespace Redis.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
         public IActionResult Error()
         {
             return View();
@@ -54,11 +40,11 @@ namespace Redis.Controllers
         {
             IDatabase db = _conn.GetDatabase();
 
-            string key1 = db.StringGet("ConnectionMultiplexorKey1");
-            string key2 = db.StringGet("ConnectionMultiplexorKey2");
+            string key1 = db.StringGet("ConnectionMultiplexerKey1");
+            string key2 = db.StringGet("ConnectionMultiplexerKey2");
 
-            ViewData["ConnectionMultiplexorKey1"] = key1;
-            ViewData["ConnectionMultiplexorKey2"] = key2;
+            ViewData["ConnectionMultiplexerKey1"] = key1;
+            ViewData["ConnectionMultiplexerKey2"] = key2;
 
             return View();
         }

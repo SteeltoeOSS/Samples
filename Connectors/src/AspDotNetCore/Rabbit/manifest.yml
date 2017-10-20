@@ -1,6 +1,6 @@
 ---
 applications:
-- name: rabbit
+- name: rabbit-connector
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

@@ -1,6 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Cache Data";
+﻿@model Dictionary<string, string>
+@{
+    ViewData["Title"] = "Steeltoe PostgreSQL Sample";
 }
 <h2>@ViewData["Title"].</h2>
-<h3>Key1=@ViewData["Key1"]</h3>
-<h3>Key2=@ViewData["Key2"]</h3>
+<h4>Data stored in PostgreSQL:</h4>
+@foreach (var item in Model)
+{
+    <h5>Key @item.Key = @item.Value</h5>
+}
+<h4>Server Info:</h4>
+<h5>Database: @ViewBag.Database</h5>
+@{ #if DEBUG }
+<h5>DataSource: @Html.ViewBag.DataSource</h5>
+@{ #endif }

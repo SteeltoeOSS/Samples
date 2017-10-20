@@ -1,6 +1,6 @@
 ---
 applications:
-- name: rabbit
+- name: rabbit-connector
   memory: 512M
   stack: windows2012R2
   health-check-type: none

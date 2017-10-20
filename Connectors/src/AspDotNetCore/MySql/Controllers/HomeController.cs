@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-
-using System.Data.Common;
 
 namespace MySql.Controllers
 {
@@ -16,28 +12,9 @@ namespace MySql.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult MySqlData([FromServices] MySqlConnection dbConnection)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-
-        public IActionResult MySqlData(
-            [FromServices] MySqlConnection dbConnection)
-        {
+            var viewData = new Dictionary<string, string>();
             dbConnection.Open();
 
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM TestData;", dbConnection);
@@ -45,11 +22,18 @@ namespace MySql.Controllers
 
             while (rdr.Read())
             {
-                ViewData["Key" + rdr[0]] = rdr[1];
+                viewData.Add(rdr[0].ToString(), rdr[1].ToString());
             }
+            ViewBag.Database = dbConnection.Database;
+            ViewBag.DataSource = dbConnection.DataSource;
 
             dbConnection.Close();
 
+            return View(viewData);
+        }
+
+        public IActionResult Error()
+        {
             return View();
         }
     }

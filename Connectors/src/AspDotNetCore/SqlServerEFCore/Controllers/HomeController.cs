@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SqlServerEFCore.Models;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SqlServerEFCore.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index([FromServices] TestContext context)
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult SqlServerData([FromServices] TestContext context)
         {
             return View(context.TestData.ToList());
         }

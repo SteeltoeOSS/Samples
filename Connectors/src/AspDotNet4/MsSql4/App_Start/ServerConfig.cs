@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
-using Steeltoe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using PA = Microsoft.Extensions.PlatformAbstractions;
 
 namespace MsSql4

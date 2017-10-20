@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.Rabbit;
-using Steeltoe.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace Rabbit
 {

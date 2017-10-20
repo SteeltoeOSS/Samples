@@ -1,6 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Postgres Data";
+﻿@model IEnumerable<TestData>
+@{
+    ViewData["Title"] = "Steeltoe EF Core PostgreSQL Sample";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>Key1=@ViewData["Key1"]</h3>
-<h3>Key2=@ViewData["Key2"]</h3>
+<h2>Test data from PostgreSQL:</h2>
+<ul>
+    @foreach (var td in Model)
+    {
+        <li>@td.Id: @td.Data</li>
+    }
+</ul>

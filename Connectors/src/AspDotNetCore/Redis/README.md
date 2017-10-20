@@ -47,4 +47,4 @@ At this point the app is up and running.  Upon startup the app inserts a key/val
 
 To display those values click on the `Cache Data` link in the menu and you should see the key/values displayed using the Microsoft RedisCache. 
 
-You can click on the `ConnectionMultiplexer Data` link to view data using the StackExchange CollectionMultiplexor.
+You can click on the `ConnectionMultiplexer Data` link to view data using the StackExchange CollectionMultiplexer.

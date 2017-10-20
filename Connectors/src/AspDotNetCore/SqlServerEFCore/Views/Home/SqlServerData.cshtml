@@ -1,0 +1,11 @@
+﻿@model IEnumerable<TestData>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Test data from Sql Server:</h2>
+<ul>
+    @foreach(var td in Model)
+    {
+        <li>@td.Id: @td.Data</li>
+    }
+</ul>

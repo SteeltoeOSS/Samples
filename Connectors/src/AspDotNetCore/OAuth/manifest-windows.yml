@@ -1,6 +1,6 @@
 ---
 applications:
-- name: oauth
+- name: oauth-connector
   memory: 512M
   stack: windows2012R2
   health-check-type: none
