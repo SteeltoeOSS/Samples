@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Logging.CloudFoundry;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.AspNetCore.Hosting;
 
 namespace CloudFoundry
 {
@@ -16,10 +19,19 @@ namespace CloudFoundry
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .ConfigureAppConfiguration((builderContext, config) => 
+                {
+                    config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
+                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{builderContext.HostingEnvironment.EnvironmentName}.json", optional: true)
+                        .AddCloudFoundry()
+                        .AddEnvironmentVariables();
+                })
                 .Build();
 
             host.Run();
         }
+
         private static string[] GetServerUrls(string[] args)
         {
             List<string> urls = new List<string>();

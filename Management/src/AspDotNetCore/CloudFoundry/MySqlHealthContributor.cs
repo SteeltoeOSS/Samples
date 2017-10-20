@@ -2,9 +2,6 @@
 using MySql.Data.MySqlClient;
 using Steeltoe.Management.Endpoint.Health;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CloudFoundry
 {
@@ -36,13 +33,15 @@ namespace CloudFoundry
                 result.Status = HealthStatus.UP;
                 _logger.LogInformation("MySql connection up!");
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 _logger.LogInformation("MySql connection down!");
                 result.Details.Add("error", e.GetType().Name + ": " + e.Message);
                 result.Details.Add("status", HealthStatus.DOWN.ToString());
                 result.Status = HealthStatus.DOWN;
-            } finally
+            }
+            finally
             {
                 _connection.Close();
             }

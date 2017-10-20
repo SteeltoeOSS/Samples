@@ -1,39 +1,27 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Logging.CloudFoundry;
-using Steeltoe.Extensions.Configuration;
 using Steeltoe.CloudFoundry.Connector.MySql;
-using Steeltoe.Management.Endpoint.Health;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Health;
 
 namespace CloudFoundry
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
-
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddCloudFoundry()
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
-
-            loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddMySqlConnection(Configuration);
 
             // Add custom health check contributor
@@ -49,12 +37,9 @@ namespace CloudFoundry
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-      
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {

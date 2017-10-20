@@ -46,7 +46,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 Once the app is up and running then you can access the management endpoints exposed by Steeltoe using the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/1-11/console/index.html). 
 
-The Steeltoe Management framework exposes Spring Boot Actuator compatable Endpoints which can be used using the Pivotal Apps Manager. By using the Apps Manager, you can view the Apps Health, Build Information (e.g. Git info, etc), and recent Request/Response Traces, as well as manage/change the applications logging levels.  
+The Steeltoe Management framework exposes Spring Boot Actuator compatible Endpoints which can be used using the Pivotal Apps Manager. By using the Apps Manager, you can view the Apps Health, Build Information (e.g. Git info, etc), and recent Request/Response Traces, as well as manage/change the applications logging levels.  
 
 Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.pivotal.io/pivotalcf/1-11/console/using-actuators.html) for more information.
 
