@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
-using System;
+using Steeltoe.Common.Discovery;
 using System.Net.Http;
 using System.Threading.Tasks;
 

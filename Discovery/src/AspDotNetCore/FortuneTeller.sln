@@ -1,10 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-Service", "Fortune-Teller-Service\Fortune-Teller-Service.csproj", "{47CC1025-CDA0-4DBF-A19D-D71F61CA45A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fortune-Teller-Service", "Fortune-Teller-Service\Fortune-Teller-Service.csproj", "{47CC1025-CDA0-4DBF-A19D-D71F61CA45A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-UI", "Fortune-Teller-UI\Fortune-Teller-UI.csproj", "{F215C9E4-EE4B-4ADC-9099-ABABE475F9B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fortune-Teller-UI", "Fortune-Teller-UI\Fortune-Teller-UI.csproj", "{F215C9E4-EE4B-4ADC-9099-ABABE475F9B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,5 +43,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FB89CF5-2B0E-492B-86D1-44400683E4B2}
 	EndGlobalSection
 EndGlobal

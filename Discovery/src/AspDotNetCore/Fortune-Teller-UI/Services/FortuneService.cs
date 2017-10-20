@@ -1,7 +1,7 @@
-﻿using Pivotal.Discovery.Client;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Discovery;
 
 namespace Fortune_Teller_UI.Services
 {

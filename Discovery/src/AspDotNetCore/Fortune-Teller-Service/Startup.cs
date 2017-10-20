@@ -3,41 +3,28 @@ using FortuneTellerService.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
 using Pivotal.Discovery.Client;
-using Steeltoe.Extensions.Configuration;
-using System;
 
 namespace FortuneTellerService
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, ILoggerFactory factory)
+        public Startup(IConfiguration configuration)
         {
-            factory.AddConsole(minLevel: LogLevel.Debug);
-            
-            // Set up configuration sources.
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddCloudFoundry()
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; private set; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFramework()
-                .AddDbContext<FortuneContext>(options => options.UseInMemoryDatabase());
+  
+            services.AddEntityFrameworkInMemoryDatabase().AddDbContext<FortuneContext>(
+                options => options.UseInMemoryDatabase("Fortunes"), ServiceLifetime.Singleton);
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
