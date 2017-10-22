@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Reactive;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 using System.Text;
 using Newtonsoft.Json;
+using Steeltoe.Common.Discovery;
 
 namespace Fortune_Teller_UI.Services
 {

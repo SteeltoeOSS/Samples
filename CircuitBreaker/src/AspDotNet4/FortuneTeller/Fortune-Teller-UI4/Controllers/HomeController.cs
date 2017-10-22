@@ -29,7 +29,9 @@ namespace FortuneTellerUI4.Controllers
         public async Task<string> Random()
         {
             _logger?.LogInformation("Random");
-            return  await _fortunes.RandomFortuneAsync();
+            var result= await _fortunes.RandomFortuneAsync();
+            _logger?.LogInformation("Random returning: " + result);
+            return result;
         }
     }
 }
