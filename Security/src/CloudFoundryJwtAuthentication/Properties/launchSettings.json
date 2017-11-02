@@ -16,7 +16,8 @@
       }
     },
     "CloudFoundryJwtAuthentication": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:5555"
     }
   }
 }

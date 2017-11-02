@@ -6,6 +6,6 @@ applications:
   health-check-type: none
   command: cmd /c .\RedisDataProtectionKeyStore --server.urls http://0.0.0.0:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: Production
   services:
    - myRedisService

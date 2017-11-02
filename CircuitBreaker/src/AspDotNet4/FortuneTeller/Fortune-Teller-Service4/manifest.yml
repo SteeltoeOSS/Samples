@@ -3,6 +3,7 @@ applications:
 - name: fortuneService
   memory: 512M
   stack: windows2012R2
-  health-check-type: none
+  health-check-type: http
+  health-check-http-endpoint: /api/Fortunes/health
   services:
    - myDiscoveryService

@@ -2,6 +2,6 @@
 applications:
 - name: keystore
   env:
-    ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: Production
   services:
    - myRedisService

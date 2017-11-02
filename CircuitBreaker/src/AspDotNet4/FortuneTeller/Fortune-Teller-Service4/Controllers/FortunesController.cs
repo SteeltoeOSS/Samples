@@ -18,6 +18,13 @@ namespace FortuneTellerService4.Controllers
             _logger = logFactory?.CreateLogger<FortunesController>();
         }
 
+        // GET: api/health
+        [HttpGet]
+        public IHttpActionResult Health()
+        {
+            return Ok();
+        }
+
         // GET: api/fortunes
         [HttpGet]
         public IEnumerable<Fortune> Get()

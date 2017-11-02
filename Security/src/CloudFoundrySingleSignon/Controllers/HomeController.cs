@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 
 namespace CloudFoundrySingleSignon.Controllers
 {
@@ -43,7 +43,8 @@ namespace CloudFoundrySingleSignon.Controllers
 
         public async Task<IActionResult> InvokeJwtSample()
         {
-            var token = await HttpContextAccessor.HttpContext.Authentication.GetTokenAsync("access_token");
+            var token = await HttpContext.GetTokenAsync("access_token");
+            //var token = await HttpContextAccessor.HttpContext.Authentication.GetTokenAsync("access_token");
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -71,7 +72,7 @@ namespace CloudFoundrySingleSignon.Controllers
         [HttpPost]
         public async Task<IActionResult> LogOff()
         {
-            await HttpContext.Authentication.SignOutAsync(CloudFoundryOptions.AUTHENTICATION_SCHEME);
+            await HttpContext.SignOutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -102,11 +103,14 @@ namespace CloudFoundrySingleSignon.Controllers
             string hostName = httpContext.Request.Host.Host;
             string jwtappsHostname = hostName;
             int indx = hostName.IndexOf(SSO_HOSTNAME);
-            if (indx >= 0) {
+            if (indx >= 0)
+            {
                 var prefix = hostName.Substring(indx + 13, 0);
                 var suffix = hostName.Substring(indx + 13, hostName.Length - indx - 13);
                 jwtappsHostname = prefix + JWTAPPS_HOSTNAME + suffix;
-            } else {
+            }
+            else
+            {
                 indx = hostName.IndexOf('.');
                 if (indx < 0)
                 {
@@ -115,6 +119,7 @@ namespace CloudFoundrySingleSignon.Controllers
                 jwtappsHostname = JWTAPPS_HOSTNAME + hostName.Substring(indx);
             }
             return "http://" + jwtappsHostname + "/api/values";
+            //return "http://localhost:5555/api/values";
         }
     }
 }

@@ -4,49 +4,46 @@ using FortuneTellerService4.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Pivotal.Discovery.Client;
+using Steeltoe.Common.Discovery;
+using Steeltoe.Common.Logging.Autofac;
+using Steeltoe.Common.Options.Autofac;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Reflection;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
+
 
 namespace FortuneTellerService4
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        private IDiscoveryClient _client;
-
+       
         protected void Application_Start()
         {
-            ILoggerFactory factory = new LoggerFactory();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             var config = GlobalConfiguration.Configuration;
 
             // Build application configuration
-            ServerConfig.RegisterConfig("development");
+            ApplicationConfig.RegisterConfig("development");
 
-            // Add Console logging provider
-            var settings = new ConfigurationConsoleLoggerSettings(ServerConfig.Configuration.GetSection("Logging"));
-            factory.AddProvider(new ConsoleLoggerProvider(settings));
-
-            ILogger<WebApiApplication> logger = factory.CreateLogger<WebApiApplication>();
-            logger.LogInformation("Starting to build container");
-
-            // Create IOC container builder
             var builder = new ContainerBuilder();
 
-            // Register logger factory
-            builder.RegisterLoggingFactory(factory);
+            // Add Microsoft Options to container
+            builder.RegisterOptions();
+
+            // Add Microsoft Logging to container
+            builder.RegisterLogging(ApplicationConfig.Configuration);
+
+            // Add Console logger to container
+            builder.RegisterConsoleLogging();
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Register IDiscoveryClient, etc.
-            builder.RegisterDiscoveryClient(ServerConfig.Configuration, factory);
+            builder.RegisterDiscoveryClient(ApplicationConfig.Configuration);
 
             // Initialize and Register FortuneContext
             builder.RegisterInstance(SampleData.InitializeFortunes()).SingleInstance();
@@ -57,18 +54,22 @@ namespace FortuneTellerService4
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
+            // Get a logger from container
+            var logger = container.Resolve <ILogger<WebApiApplication>>();
+
             logger.LogInformation("Finished container build, starting background services");
 
             // Start the Discovery client background thread
-            _client = container.Resolve<IDiscoveryClient>();
+            container.StartDiscoveryClient();
 
             logger.LogInformation("Finished starting background services");
+
         }
 
         protected void Application_End()
         {
             // Unregister current app with Service Discovery server
-            _client.ShutdownAsync();
+            //_client.ShutdownAsync();
         }
     }
 }

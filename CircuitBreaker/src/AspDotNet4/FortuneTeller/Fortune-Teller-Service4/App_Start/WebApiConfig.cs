@@ -15,6 +15,12 @@ namespace FortuneTellerService4
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "HealthApi",
+                routeTemplate: "api/{controller}/health",
+                defaults: new { controller = "Fortunes", action = "Health" }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}",
                 defaults: new { controller = "Fortunes", action = "Get" }

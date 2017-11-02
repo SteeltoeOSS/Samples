@@ -1,10 +1,6 @@
 ﻿using FortuneTellerUI4.Services;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace FortuneTellerUI4.Controllers
