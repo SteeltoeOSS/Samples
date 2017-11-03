@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Logging.CloudFoundry;
 using System;
 using System.Collections.Generic;
 using System.IO;
