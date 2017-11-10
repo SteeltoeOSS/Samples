@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,7 @@ namespace CloudFoundry
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
-                .ConfigureAppConfiguration((builderContext, config) => 
+                .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -26,6 +27,7 @@ namespace CloudFoundry
                         .AddCloudFoundry()
                         .AddEnvironmentVariables();
                 })
+                .ConfigureLogging((builderContext, loggingBuilder) => loggingBuilder.AddDynamicLoggerProvider(builderContext.Configuration))
                 .Build();
 
             host.Run();

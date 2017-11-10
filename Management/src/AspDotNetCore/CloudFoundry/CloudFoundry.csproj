@@ -14,9 +14,9 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
     <PackageReference Include="MySqlConnector" Version="0.28.2" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00193" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="2.0.0-dev-00181" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundry" Version="2.0.0-dev-00044" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0-dev-00044" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundry" Version="2.0.0-dev-00184" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundry" Version="2.0.0-dev-00045" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0-dev-00045" />
   </ItemGroup>
   
   <ItemGroup>
