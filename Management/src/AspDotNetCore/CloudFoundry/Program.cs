@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
 using System;
@@ -27,7 +28,11 @@ namespace CloudFoundry
                         .AddCloudFoundry()
                         .AddEnvironmentVariables();
                 })
-                .ConfigureLogging((builderContext, loggingBuilder) => loggingBuilder.AddDynamicLoggerProvider(builderContext.Configuration))
+                .ConfigureLogging((builderContext, loggingBuilder) =>
+                {
+                    loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
+                    loggingBuilder.AddDynamicConsole();
+                })
                 .Build();
 
             host.Run();
