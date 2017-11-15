@@ -5,28 +5,32 @@ resources:
     source:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
-      path: Configuration/src/AspDotNetCore/CloudFoundry
+      paths:
+        - Configuration/src/AspDotNetCore/CloudFoundry
 
   - name: cfg-simple-src
     type: git
     source:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
-      path: Configuration/src/AspDotNetCore/Simple
+      paths:
+        - Configuration/src/AspDotNetCore/Simple
 
   - name: cfg-simplecloudfoundry-src
     type: git
     source:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
-      path: Configuration/src/AspDotNetCore/SimpleCloudFoundry
+      paths:
+        - Configuration/src/AspDotNetCore/SimpleCloudFoundry
 
   - name: cnn-redis-src
     type: git
     source:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
-      path: Connectors/src/AspDotNetCore/Redis
+      paths:
+        - Connectors/src/AspDotNetCore/Redis
 
 jobs:
 
