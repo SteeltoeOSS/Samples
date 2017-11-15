@@ -1,13 +1,20 @@
 resources:
 
-  - name: cfg-core-simple-src
+  - name: cfg-cloudfoundry-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev
+      path: Configuration/src/AspDotNetCore/CloudFoundry
+
+  - name: cfg-simple-src
     type: git
     source:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       path: Configuration/src/AspDotNetCore/Simple
 
-  - name: cfg-core-simplecloudfoundry-src
+  - name: cfg-simplecloudfoundry-src
     type: git
     source:
       uri: https://github.com/SteeltoeOSS/Samples
@@ -16,10 +23,27 @@ resources:
 
 jobs:
 
-  - name: cfg-core-simple
+  - name: cfg-cloudfoundry
     plan:
       - get: Samples
-        resource: cfg-core-simple-src
+        resource: cfg-cloudfoundry-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Configuration/src/AspDotNetCore/CloudFoundry
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+        on_failure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
+
+  - name: cfg-simple
+    plan:
+      - get: Samples
+        resource: cfg-simple-src
         trigger: true
       - task: behave
         file: Samples/ci/tasks/behave.yml
@@ -29,10 +53,10 @@ jobs:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
-  - name: cfg-core-simplecloudfoundry
+  - name: cfg-simplecloudfoundry
     plan:
       - get: Samples
-        resource: cfg-core-simplecloudfoundry-src
+        resource: cfg-simplecloudfoundry-src
         trigger: true
       - task: behave
         file: Samples/ci/tasks/behave.yml
