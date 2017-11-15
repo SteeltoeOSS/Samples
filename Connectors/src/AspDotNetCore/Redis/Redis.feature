@@ -14,7 +14,7 @@ Feature: Redis Connector Samples
         And you run: dotnet publish -f netcoreapp2.0 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish -s windows2012R2
         And you wait until CloudFoundry app redis-connector is started
-        When you open http://redis-connector.x.y.z/Home/CacheData
+        When you get http://redis-connector.x.y.z/Home/CacheData
         Then you should see "Key1=Key1Value"
         And you should see "Key2=Key2Value"
 
@@ -30,6 +30,6 @@ Feature: Redis Connector Samples
         And you run: dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64
         And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish
         And you wait until CloudFoundry app redis-connector is started
-        When you open http://redis-connector.x.y.z/Home/CacheData
+        When you get http://redis-connector.x.y.z/Home/CacheData
         Then you should see "Key1=Key1Value"
         And you should see "Key2=Key2Value"

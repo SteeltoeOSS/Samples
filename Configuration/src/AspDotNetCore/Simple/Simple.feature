@@ -15,7 +15,7 @@ Feature: Simple Configuration Samples
         And you set env var <env_name> to "<env_value>"
         And you run in the background: dotnet run -f netcoreapp2.0
         And you wait until process listening on port 5000
-        When you open http://localhost:5000/Home/ConfigServerSettings
+        When you get http://localhost:5000/Home/ConfigServerSettings
         Then you should see "spring:cloud:config:name = foo"
         And you should see "spring:cloud:config:env = <env_text>"
 
@@ -37,7 +37,7 @@ Feature: Simple Configuration Samples
         And you set env var <env_name> to "<env_value>"
         And you run in the background: dotnet run -f net461
         And you wait until process listening on port 5000
-        When you open http://localhost:5000/Home/ConfigServerSettings
+        When you get http://localhost:5000/Home/ConfigServerSettings
         Then you should see "spring:cloud:config:name = foo"
         And you should see "spring:cloud:config:env = <env_text>"
 

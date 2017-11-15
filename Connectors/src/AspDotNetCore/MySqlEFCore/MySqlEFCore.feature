@@ -14,7 +14,7 @@ Feature: MySqlEFCore Connector Samples
         And you run: dotnet publish -f netcoreapp2.0 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish -s windows2012R2
         And you wait until CloudFoundry app mysqlefcore-connector is started
-        When you open http://mysqlefcore-connector.x.y.z/Home/MySqlData
+        When you get http://mysqlefcore-connector.x.y.z/Home/MySqlData
         Then you should see "1: Test Data 1 - EF Core TestContext A"
         And you should see "2: Test Data 2 - EF Core TestContext B"
 
@@ -30,6 +30,6 @@ Feature: MySqlEFCore Connector Samples
         And you run: dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64
         And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish
         And you wait until CloudFoundry app mysqlefcore-connector is started
-        When you open http://mysqlefcore-connector.x.y.z/Home/MySqlData
+        When you get http://mysqlefcore-connector.x.y.z/Home/MySqlData
         Then you should see "1: Test Data 1 - EF Core TestContext A"
         And you should see "2: Test Data 2 - EF Core TestContext B"
