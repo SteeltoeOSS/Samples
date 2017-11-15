@@ -46,9 +46,9 @@ def step_impl(context):
         cmd.wait()
     context.cleanups.append(cleanup)
 
-@given(u'you have Spring Cloud Services installed')
-def step_impl(context):
+@given(u'you have CloudFoundry service {service} installed')
+def step_impl(context, service):
     cmd = command.Command(context, "cf marketplace")
     cmd.run()
     actual = cmd.stdout
-    actual.should.match(r'^p-config-server\s', re.MULTILINE)
+    actual.should.match(r'^{}\s'.format(service), re.MULTILINE)
