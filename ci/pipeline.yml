@@ -48,6 +48,14 @@ resources:
       paths:
         - Connectors/src/AspDotNetCore/MySqlEFCore
 
+  - name: cnn-postgreefcore-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev
+      paths:
+        - Connectors/src/AspDotNetCore/PostgreEFCore
+
   - name: cnn-postgresql-src
     type: git
     source:
@@ -164,6 +172,23 @@ jobs:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
+  - name: cnn-postgreefcore
+    plan:
+      - get: Samples
+        resource: cnn-postgreefcore-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Connectors/src/AspDotNetCore/PostgreEFCore
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+        on_failure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
+
   - name: cnn-postgresql
     plan:
       - get: Samples
@@ -211,5 +236,6 @@ groups:
       - cnn-mysql
       - cnn-mysqlef6
       - cnn-mysqlefcore
+      - cnn-postgreefcore
       - cnn-postgresql
       - cnn-redis
