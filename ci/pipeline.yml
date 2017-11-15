@@ -32,6 +32,14 @@ resources:
       paths:
         - Connectors/src/AspDotNetCore/MySql
 
+  - name: cnn-mysqlef6-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev
+      paths:
+        - Connectors/src/AspDotNetCore/MySqlEF6
+
   - name: cnn-redis-src
     type: git
     source:
@@ -106,6 +114,23 @@ jobs:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
+  - name: cnn-mysqlef6
+    plan:
+      - get: Samples
+        resource: cnn-mysqlef6-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Connectors/src/AspDotNetCore/MySqlEF6
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+        on_failure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
+
   - name: cnn-redis
     plan:
       - get: Samples
@@ -134,4 +159,5 @@ groups:
   - name: cnn
     jobs:
       - cnn-mysql
+      - cnn-mysqlef6
       - cnn-redis
