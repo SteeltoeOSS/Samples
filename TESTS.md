@@ -130,12 +130,31 @@ cf_org = myorg
 
 _Note: it's assumed your Python 3 virtual environment is activated._
 
-Run the tests.
-
-#### Windows, Ubuntu, OS X
+Run all the tests.
 
 ```
 $ behave
+```
+
+Run tests for a specific set of samples.
+
+_Example: Run tests for simple CloudFoundry configuration._
+```
+$ behave Configuration/src/AspDotNetCore/CloudFoundry
+```
+
+Run tests for a specific framework.
+
+_Example: Run tests for the `ubuntu.14.04-x64` framework._
+```
+$ behave -t ubuntu.14.04-x64
+```
+
+Run tests for a specific runtime.
+
+_Example: Run tests for the `win-10-x64` runtime._
+```
+$ behave -t win-10-x64
 ```
 
 ### Options
