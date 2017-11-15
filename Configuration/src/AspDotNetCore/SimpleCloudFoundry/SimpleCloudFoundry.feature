@@ -1,10 +1,10 @@
-Feature: Simple Configuration Examples
+Feature: Simple CloudFoundry Configuration Samples
     In order to show you how to use Steeltoe for simple CloudFoundry configurations
-    You can run a some simple CloudFoundry configuration examples
+    You can run a some simple CloudFoundry configuration samples
 
     @netcoreapp2.0
     @win10-x64
-    Scenario: Simple CloudFoundry Configuration Example for .Net Core 2.0 (win10-x64)
+    Scenario: Simple CloudFoundry Configuration Sample for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
         And you are logged into CloudFoundry
         And you have Spring Cloud Services installed
@@ -19,7 +19,7 @@ Feature: Simple Configuration Examples
 
     @netcoreapp2.0
     @ubuntu.14.04-x64
-    Scenario: Simple CloudFoundry Configuration Example for .Net Core 2.0 (ubuntu.14.04-x64)
+    Scenario: Simple CloudFoundry Configuration Sample for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
         And you are logged into CloudFoundry
         And you have Spring Cloud Services installed
@@ -34,7 +34,7 @@ Feature: Simple Configuration Examples
 
     @net461
     @win10-x64
-    Scenario: Simple CloudFoundry Configuration Example for .Net Framework 4.6.1 (win10-x64)
+    Scenario: Simple CloudFoundry Configuration Sample for .Net Framework 4.6.1 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
         And you are logged into CloudFoundry
         And you have Spring Cloud Services installed

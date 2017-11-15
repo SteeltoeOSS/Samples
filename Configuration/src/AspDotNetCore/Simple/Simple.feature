@@ -1,9 +1,9 @@
-Feature: Simple Configuration Examples
+Feature: Simple Configuration Samples
     In order to show you how to use Steeltoe for simple configurations
-    You can run a some simple configuration examples
+    You can run a some simple configuration samples
 
     @netcoreapp2.0
-    Scenario Outline: Simple Configuration Example for .Net Core 2.0
+    Scenario Outline: Simple Configuration Sample for .Net Core 2.0
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have Apache Maven 3 installed
@@ -25,7 +25,7 @@ Feature: Simple Configuration Examples
             | ASPNETCORE_ENVIRONMENT | Development | Development |
 
     @net461
-    Scenario Outline: Simple Configuration Example for .Net Framework 4.6.1
+    Scenario Outline: Simple Configuration Sample for .Net Framework 4.6.1
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have Apache Maven 3 installed
