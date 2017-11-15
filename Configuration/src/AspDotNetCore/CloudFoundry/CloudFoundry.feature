@@ -1,6 +1,6 @@
 Feature: CloudFoundry Configuration Samples
     In order to show you how to use Steeltoe for CloudFoundry configurations
-    You can run a some CloudFoundry configuration samples
+    You can run some CloudFoundry configuration samples
 
     @netcoreapp2.0
     @win10-x64
