@@ -4,13 +4,17 @@ import requests
 
 @when(u'you open {url}')
 def step_impl(context, url):
-    if 'foo.x.y.z' in url:
-        cmd = command.Command(context, 'cf app foo')
+    pseudo = re.match('https?://(([^.]+).x.y.z)/', url)
+    if pseudo:
+        hostname = pseudo.group(1)
+        appname = pseudo.group(2)
+        cmd = command.Command(context, 'cf app {}'.format(appname))
         cmd.run()
-        match = re.search(r'^routes:\s+(.*)', cmd.stdout, re.MULTILINE)
-        assert match, 'could not determine app route'
-        hostname = match.group(1)
-        url = url.replace('foo.x.y.z', hostname)
+        route = re.search(r'^routes:\s+(.*)', cmd.stdout, re.MULTILINE)
+        assert route, 'could not determine app route'
+        real_hostname = route.group(1)
+        url = url.replace(hostname, real_hostname)
+    context.log.info('opening url {}'.format(url))
     response = requests.get(url)
     response.status_code.should.equal(200)
     context.browser_text = response.text

@@ -21,7 +21,7 @@ class Command(object):
         if self.context.platform == 'windows':
             self.command = self.command.replace('/', '\\\\')
         if self.command.startswith('cf push'):
-            self.command += ' --hostname foo-{}'.format(context.cf_space)
+            self.command += ' --hostname {}'.format(context.cf_space)
         self.windowed = windowed
         self.logf = logf if logf else context.log.info
 
