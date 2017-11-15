@@ -16,7 +16,6 @@ Feature: CloudFoundry Configuration Samples
 
     @netcoreapp2.0
     @ubuntu.14.04-x64
-    @wip
     Scenario: CloudFoundry Configuration Sample for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
         And you are logged into CloudFoundry
@@ -36,5 +35,5 @@ Feature: CloudFoundry Configuration Samples
         And you run: dotnet publish -f net461 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish -s windows2012R2
         And you wait until CloudFoundry app cloud is started
-        When you open http://cloud.x.y.z/Home/ConfigServerSettings
+        When you open http://cloud.x.y.z/Home/CloudFoundry
         Then you should see "vcap:application:application_name = cloud"
