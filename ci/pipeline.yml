@@ -21,6 +21,13 @@ resources:
       branch: dev
       path: Configuration/src/AspDotNetCore/SimpleCloudFoundry
 
+  - name: cnn-redis-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev
+      path: Connectors/src/AspDotNetCore/Redis
+
 jobs:
 
   - name: cfg-cloudfoundry
@@ -69,3 +76,32 @@ jobs:
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
+
+  - name: cnn-redis
+    plan:
+      - get: Samples
+        resource: cnn-redis-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Connectors/src/AspDotNetCore/Redis
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+        on_failure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
+
+groups:
+
+  - name: cfg
+    jobs:
+      - cfg-cloudfoundry
+      - cfg-simple
+      - cfg-simplecloudfoundry
+
+  - name: cnn
+    jobs:
+      - cnn-redis
