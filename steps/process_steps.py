@@ -20,7 +20,13 @@ def step_impl(context, command):
 
 @when(u'you run in the background: {command}')
 def step_impl(context, command):
+    orig_env = None
+    if command.startswith('cf '):
+        orig_env = context.env.copy()
+        context.env['CF_COLOR'] = 'true'
     cmd = Command(context, command, windowed=True)
+    if orig_env:
+        context.env = orig_env
     cmd.exec()
     def cleanup():
         cmd.kill()

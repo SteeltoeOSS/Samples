@@ -16,6 +16,7 @@ class Command(object):
             Command.COUNT += 1
             self.command_id = Command.COUNT
         self.context = context
+        self.env = self.context.env.copy()
         self.command = command
         if self.context.platform == 'windows':
             self.command = self.command.replace('/', '\\\\')
@@ -38,11 +39,11 @@ class Command(object):
         popen_args += args
         cwd = self.context.project_dir if args[0] in Command.PROJECT_COMMANDS else self.context.sandbox_dir
         env = os.environ.copy()
-        env.update(self.context.env)
+        env.update(self.env)
         pipe = None if self.windowed else subprocess.PIPE
         self.logf("command[{}] cmd: {}".format(self.command_id, ' '.join(popen_args)))
         self.logf("command[{}] cwd: {}".format(self.command_id, cwd))
-        self.logf("command[{}] env: {}".format(self.command_id, self.context.env))
+        self.logf("command[{}] env: {}".format(self.command_id, self.env))
         self.proc = subprocess.Popen(popen_args, cwd=cwd, env=env, stdin=pipe, stdout=pipe, stderr=pipe)
         self.logf("command[{}] pid: {}".format(self.command_id, self.proc.pid))
 
