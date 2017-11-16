@@ -80,6 +80,14 @@ resources:
       paths:
         - Connectors/src/AspDotNetCore/Redis
 
+  - name: sec-cloudfoundrysinglesignon-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev
+      paths:
+        - Security/src/CloudFoundrySingleSignon
+
 jobs:
 
   - name: cfg-cloudfoundry
@@ -248,6 +256,23 @@ jobs:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
+  - name: sec-cloudfoundrysinglesignon
+    plan:
+      - get: Samples
+        resource: sec-cloudfoundrysinglesignon-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Security/src/CloudFoundrySingleSignon
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+        on_failure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
+
 groups:
 
   - name: cfg
@@ -265,3 +290,7 @@ groups:
       - cnn-postgresql
       - cnn-rabbit
       - cnn-redis
+
+  - name: sec
+    jobs:
+      - sec-cloudfoundrysinglesignon
