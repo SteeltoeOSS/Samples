@@ -1,39 +1,23 @@
-﻿
-using Pivotal.Extensions.Configuration;
-using Pivotal.Discovery.Client;
-
-
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-using Steeltoe.Management.Endpoint.Health;
-using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Extensions.Logging.CloudFoundry;
-
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
 using OrderService.Models;
+using Pivotal.Discovery.Client;
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Health;
 
 namespace OrderService
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables()
-                .AddConfigServer(env, loggerFactory);
-            Configuration = builder.Build();
-
-            loggerFactory.AddCloudFoundry(Configuration.GetSection("Logging"));
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -53,22 +37,17 @@ namespace OrderService
             services.AddDiscoveryClient(Configuration);
 
             services.AddDbContext<OrdersContext>(options => options.UseMySql(Configuration));
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
- 
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
             
             app.UseMvc();
 
             app.UseDiscoveryClient();
-
-            SampleData.InitializeOrderDatabase(app.ApplicationServices);
         }
     }
 }

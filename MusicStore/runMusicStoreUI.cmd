@@ -1,4 +1,4 @@
 cd src\MusicStoreUI
 dotnet restore --configfile nuget.config
-start dotnet run --framework netcoreapp1.1 --server.urls http://*:5555
+start "Music Store UI" dotnet run --framework netcoreapp2.0 --server.urls http://*:5555
 cd ..\..

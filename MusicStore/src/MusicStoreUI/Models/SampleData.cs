@@ -25,7 +25,6 @@ namespace MusicStoreUI.Models
                     var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
                     db.Database.EnsureCreated();
                     CreateAdminUser(serviceProvider, configuration).Wait();
-
                 }
             }
         }

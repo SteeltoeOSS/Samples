@@ -19,12 +19,15 @@ namespace MusicStore.Models
             if (ShouldDropCreateDatabase())
             {
 
-                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                using (var serviceScope = serviceProvider.CreateScope())
                 {
+                    var scopeServiceProvider = serviceScope.ServiceProvider;
                     var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
 
-                    db.Database.EnsureCreated();
-                    InsertTestData(serviceProvider);
+                    if (db.Database.EnsureCreated())
+                    {
+                        InsertTestData(serviceProvider);
+                    }
                 }
                 artists = null;
                 genres = null;
@@ -35,13 +38,13 @@ namespace MusicStore.Models
         private static void InsertTestData(IServiceProvider serviceProvider)
         {
             var albums = GetAlbums(imgUrl, Genres, Artists);
-            AddOrUpdateAsync(serviceProvider, g => g.Name, Genres.Select(genre => genre.Value));
-            AddOrUpdateAsync(serviceProvider, a => a.Name, Artists.Select(artist => artist.Value));
-            AddOrUpdateAsync(serviceProvider, a => a.Title, albums);
+            AddOrUpdate(serviceProvider, g => g.Name, Genres.Select(genre => genre.Value));
+            AddOrUpdate(serviceProvider, a => a.Name, Artists.Select(artist => artist.Value));
+            AddOrUpdate(serviceProvider, a => a.Title, albums);
         }
 
         // TODO [EF] This may be replaced by a first class mechanism in EF
-        private static void AddOrUpdateAsync<TEntity>(
+        private static void AddOrUpdate<TEntity>(
             IServiceProvider serviceProvider,
             Func<TEntity, object> propertyToMatch, IEnumerable<TEntity> entities)
             where TEntity : class
@@ -59,9 +62,9 @@ namespace MusicStore.Models
                 var db = serviceScope.ServiceProvider.GetService<MusicStoreContext>();
                 foreach (var item in entities)
                 {
-                    var exists = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)));
-                    if (!exists)
-                        db.Entry(item).State = EntityState.Added;
+                    db.Entry(item).State = existingData.Any(g => propertyToMatch(g).Equals(propertyToMatch(item)))
+                        ? EntityState.Modified
+                        : EntityState.Added;
                 }
 
                 db.SaveChanges();
