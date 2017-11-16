@@ -51,10 +51,15 @@ def before_scenario(context, scenario):
     context.sandbox_dir = os.path.join(context.sandboxes_dir, sandbox_name)
     context.log.info('sandbox directory: {}'.format(context.sandbox_dir))
     os.makedirs(context.sandbox_dir)
-    os.environ['CF_HOME'] = context.sandbox_dir
-    os.environ['CF_COLOR'] = 'false'
-    context.env = {}
     context.cleanups = []
+    setup_env(context, scenario)
+    context.cf_space = context.options.cf_space
+
+def setup_env(context, scenario):
+    context.env = {}
+    context.env['CF_HOME'] = context.sandbox_dir
+    context.env['CF_COLOR'] = 'false'
+
 
 def after_scenario(context, scenario):
     '''
@@ -107,16 +112,23 @@ def setup_options(context):
     context.log.info("option: use windowed? -> {}".format(context.options.use_windowed))
     context.options.max_attempts = context.config.userdata.getint('max_attempts')
     context.log.info("option: max attempts -> {}".format(context.options.max_attempts))
-    context.options.cf_apiurl = context.config.userdata.get('cf_apiurl')
     context.options.debug_on_error = context.config.userdata.getbool('debug_on_error')
     context.log.info("option: debug on error? -> {}".format(context.options.debug_on_error))
+    context.options.cf_apiurl = context.config.userdata.get('cf_apiurl')
+    assert context.options.cf_apiurl, 'CloudFoundry API URL not set (option: cf_apiurl)'
     context.log.info("option: CloudFoundry API URL -> {}".format(context.options.cf_apiurl))
     context.options.cf_username = context.config.userdata.get('cf_username')
+    assert context.options.cf_username, 'CloudFoundry username not set (option: cf_username)'
     context.log.info("option: CloudFoundry username -> {}".format(context.options.cf_username))
     context.options.cf_password = context.config.userdata.get('cf_password')
-    context.log.info("option: CloudFoundry password -> {}".format(context.options.cf_password))
+    assert context.options.cf_password, 'CloudFoundry password not set (option: cf_password)'
+    context.log.info("option: CloudFoundry password -> *")
     context.options.cf_org = context.config.userdata.get('cf_org')
+    assert context.options.cf_org, 'CloudFoundry org not set (option: cf_org)'
     context.log.info("option: CloudFoundry org -> {}".format(context.options.cf_org))
+    context.options.cf_domain = context.config.userdata.get('cf_domain')
+    assert context.options.cf_domain, 'CloudFoundry domain not set (option: cf_domain)'
+    context.log.info("option: CloudFoundry domain -> {}".format(context.options.cf_domain))
     context.options.cf_space = context.config.userdata.get('cf_space')
     context.log.info("option: CloudFoundry space -> {}".format(context.options.cf_space))
     context.options.cf_max_attempts = context.config.userdata.getint('cf_max_attempts')

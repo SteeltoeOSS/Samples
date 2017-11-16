@@ -16,6 +16,13 @@ def step_impl(context, version):
     actual = cmd.stderr
     actual.should.match(r'{}.*'.format(version))
 
+@given(u'you have UAA Client {version} installed')
+def step_impl(context, version):
+    cmd = command.Command(context, "uaac --version")
+    cmd.run()
+    actual = cmd.stdout
+    actual.should.match(r'{}.*'.format(version))
+
 @given(u'you have Apache Maven {version} installed')
 def step_impl(context, version):
     cmd = command.Command(context, "mvn --version")
@@ -26,13 +33,9 @@ def step_impl(context, version):
 @given(u'you are logged into CloudFoundry')
 def step_impl(context):
     apiurl = context.options.cf_apiurl
-    assert apiurl, 'CloudFoundry API URL not set (option: cf_apiurl)'
     username = context.options.cf_username
-    assert username, 'CloudFoundry username not set (option: cf_username)'
     password = context.options.cf_password
-    assert password, 'CloudFoundry password not set (option: cf_password)'
     org = context.options.cf_org
-    assert org, 'CloudFoundry org not set (option: cf_org)'
     context.cf_space = context.options.cf_space
     if not context.cf_space:
         context.cf_space = uuid.uuid4()
