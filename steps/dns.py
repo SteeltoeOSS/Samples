@@ -7,6 +7,8 @@ def hostname(context, name):
     if FQDN, then return name unless the domain is x.y.x
     if domain is x.y.z, return the hostname per the CloudFoundry route
     '''
+    if re.search('^localhost(:\d+)$', name):
+        return name
     if '.' in name:
         host, domain = name.split('.', 1)
         domain = domainname(context, domain)
