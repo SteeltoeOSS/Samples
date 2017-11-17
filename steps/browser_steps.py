@@ -1,16 +1,16 @@
-import dns
 import mechanicalsoup
+import resolve
 
 @when(u'you get {url}')
 def step_impl(context, url):
-    url = dns.url(context, url)
+    url = resolve.url(context, url)
     context.log.info('getting url {}'.format(url))
     context.browser = mechanicalsoup.StatefulBrowser()
     context.browser.open(url).status_code.should.equal(200)
 
 @when(u'you post "{data}" to {url}')
 def step_impl(context, data, url):
-    url = dns.url(context, url)
+    url = resolve.url(context, url)
     fields = data.split('=')
     assert len(fields) == 2, 'Invalid data format: {}'.format(data)
     payload = { fields[0]: fields[1] }
@@ -27,7 +27,7 @@ def step_impl(context, username, password):
 
 @then(u'you should be at {url}')
 def step_impl(context, url):
-    context.browser.get_url().should.match(r'{}(\?.*)?'.format(dns.url(context, url)))
+    context.browser.get_url().should.match(r'{}(\?.*)?'.format(resolve.url(context, url)))
 
 @then(u'you should see "{text}"')
 def step_impl(context, text):

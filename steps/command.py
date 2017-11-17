@@ -1,7 +1,7 @@
-import dns
 import os
 import psutil
 import re
+import resolve
 import shlex
 import subprocess
 import threading
@@ -109,7 +109,7 @@ def resolve_args(context, args, cwd):
         match =re.search('- name:\s+(\S+)', doc)
         if match:
             app = match.group(1)
-            resolved += ['--hostname', dns.hostname(context, app)]
+            resolved += ['--hostname', resolve.hostname(context, app)]
     # scope 'cf cups' embedded URLs in payload
     if resolved[0:2] == ['cf', 'cups'] and '-p' in resolved:
         payload_idx = resolved.index('-p') + 1
@@ -117,21 +117,21 @@ def resolve_args(context, args, cwd):
         match = re.search('"(uaa://[^"]+)', payload)
         if match:
             url = match.group(1)
-            resolved[payload_idx] = payload.replace(url, dns.url(context, url))
+            resolved[payload_idx] = payload.replace(url, resolve.url(context, url))
     # scope 'uaac target' URL
     if resolved[0:2] == ['uaac', 'target']:
-        resolved[2] = dns.url(context, resolved[2])
+        resolved[2] = resolve.url(context, resolved[2])
     # scope 'uaac client' redirect URI
     if resolved[0:2] == ['uaac', 'client'] and '--redirect_uri' in resolved:
         uri_idx = resolved.index('--redirect_uri') + 1
         uri = resolved[uri_idx]
-        resolved[uri_idx] = dns.url(context, uri)
+        resolved[uri_idx] = resolve.url(context, uri)
     # scope gradle arguments -Dapp= and -Dapp-domain=
     for i in range(len(resolved)):
         if resolved[i].startswith('-Dapp='):
             app = resolved[i].split('=', 1)[1]
-            resolved[i] = '-Dapp={}'.format(dns.hostname(context, app))
+            resolved[i] = '-Dapp={}'.format(resolve.hostname(context, app))
         if resolved[i].startswith('-Dapp-domain='):
             domain = resolved[i].split('=', 1)[1]
-            resolved[i] = '-Dapp-domain={}'.format(dns.domainname(context, domain))
+            resolved[i] = '-Dapp-domain={}'.format(resolve.domainname(context, domain))
     return resolved
