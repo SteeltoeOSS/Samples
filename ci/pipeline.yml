@@ -103,6 +103,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -133,6 +134,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -150,6 +152,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -167,6 +170,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -184,6 +188,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -201,6 +206,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -218,6 +224,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -235,6 +242,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -252,6 +260,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
@@ -269,6 +278,7 @@ jobs:
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
         on_failure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
