@@ -103,9 +103,7 @@ Install the Python 3 packages needed to run the Samples project tests.
 $ pip install -r pyenv.pkgs
 ```
 
-### CloudFoundry Credentials
-
-Testing samples that use CloudFoundry need credentials to access a CloudFoundry instance.
+### CloudFoundry
 
 _**Note**: There must be a space named `development` associated with the credentials.
 Nothing is created in the `development` space; it's needed solely for the login process._
@@ -114,8 +112,16 @@ Create a DOS INI file named `user.ini` in the repository root.
 
 In the file, add a section named `behave.userdata`.
 
-In that section, configure the CloudFoundry credentials using the following attributes:
-`cf_apiurl`, `cf_username`, `cf_password`, `cf_org`, `cf_domain`.
+#### Credentials
+
+If you don't specify credentials, it is assumed you are already logged in to CloudFoundry endpoint.
+
+To specify credentials, define the following attributes:
+
+* `cf_apiurl`
+* `cf_username`
+* `cf_password`
+* `cf_org`
 
 _Example: CloudFoundry credentials_
 ```
@@ -124,8 +130,11 @@ cf_apiurl = api.mypcf
 cf_username = myusername
 cf_password = mypassword
 cf_org = myorg
-cf_domain = my.domain
 ```
+
+#### Other
+
+TODO: describe *`cf_domain`, `cf_space`
 
 ## Run
 

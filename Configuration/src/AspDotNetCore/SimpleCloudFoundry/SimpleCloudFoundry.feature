@@ -1,3 +1,4 @@
+@cloud
 Feature: Simple CloudFoundry Configuration Samples
     In order to show you how to use Steeltoe for simple CloudFoundry configurations
     You can run some simple CloudFoundry configuration samples
@@ -6,7 +7,6 @@ Feature: Simple CloudFoundry Configuration Samples
     @win10-x64
     Scenario: Simple CloudFoundry Configuration Sample for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-config-server installed
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created
@@ -21,7 +21,6 @@ Feature: Simple CloudFoundry Configuration Samples
     @ubuntu.14.04-x64
     Scenario: Simple CloudFoundry Configuration Sample for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-config-server installed
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created
@@ -36,7 +35,6 @@ Feature: Simple CloudFoundry Configuration Samples
     @win10-x64
     Scenario: Simple CloudFoundry Configuration Sample for .Net Framework 4.6.1 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-config-server installed
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created

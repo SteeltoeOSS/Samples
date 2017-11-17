@@ -55,7 +55,7 @@ def step_impl(context, service):
         status = match.group(1)
         context.log.info('service "{}" status: "{}"'.format(service, status))
         return status == 'create succeeded'
-    try_until(context, service_available, context.options.cf_max_attempts)
+    try_until(context, service_available, context.options.cf.max_attempts)
 
 @when(u'you wait until CloudFoundry app {app} is started')
 def step_impl(context, app):
@@ -74,7 +74,7 @@ def step_impl(context, app):
         status = match.group(1)
         context.log.info('app "{}" status: "{}"'.format(app, status))
         return status == 'running'
-    try_until(context, app_started, context.options.cf_max_attempts)
+    try_until(context, app_started, context.options.cf.max_attempts)
 
 def try_until(context, function, max_attempts):
     attempts = 0

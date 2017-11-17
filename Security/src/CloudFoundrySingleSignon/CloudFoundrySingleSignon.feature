@@ -1,3 +1,4 @@
+@cloud
 Feature: CloudFoundry Single SignOn Samples
     In order to show you how to use Steeltoe with CloudFoundry Single SignOn
     You can run some CloudFoundry Single SignOn samples
@@ -8,7 +9,6 @@ Feature: CloudFoundry Single SignOn Samples
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
-        And you are logged into CloudFoundry
         # build/deploy UAA server
         When you run: git clone https://github.com/cloudfoundry/uaa.git
         And you run: git -C uaa checkout 4.7.1
@@ -45,7 +45,6 @@ Feature: CloudFoundry Single SignOn Samples
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
-        And you are logged into CloudFoundry
         # build/deploy UAA server
         When you run: git clone https://github.com/cloudfoundry/uaa.git
         And you run: git -C uaa checkout 4.7.1
@@ -82,7 +81,6 @@ Feature: CloudFoundry Single SignOn Samples
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
-        And you are logged into CloudFoundry
         # build/deploy UAA server
         When you run: git clone https://github.com/cloudfoundry/uaa.git
         And you run: git -C uaa checkout 4.7.1

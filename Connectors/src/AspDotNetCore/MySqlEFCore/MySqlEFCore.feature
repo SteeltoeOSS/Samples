@@ -1,3 +1,4 @@
+@cloud
 Feature: MySqlEFCore Connector Samples
     In order to show you how to use Steeltoe for connecting to MySql using EntityFramework Core
     You can run some MySql using EntityFramework Core connection samples
@@ -6,7 +7,6 @@ Feature: MySqlEFCore Connector Samples
     @win10-x64
     Scenario: MySqlEFCore Connector Sample for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
@@ -22,7 +22,6 @@ Feature: MySqlEFCore Connector Samples
     @ubuntu.14.04-x64
     Scenario: MySqlEFCore Connector Sample for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created

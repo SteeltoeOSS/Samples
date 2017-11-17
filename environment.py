@@ -4,6 +4,10 @@ import shutil
 import stat
 import sure
 import sys
+import uuid
+
+sys.path.append(os.path.join(os.getcwd(), 'pylib'))
+import command
 
 PLATFORM_SUPPORT = {
         'netcoreapp2.0': ['windows', 'linux', 'osx'],
@@ -41,7 +45,8 @@ def before_scenario(context, scenario):
     behave hook called before running test scenario
     '''
     context.log.info('[---] {}'.format(scenario.name))
-    for tag in scenario.tags + scenario.feature.tags:
+    tags = scenario.tags + scenario.feature.tags
+    for tag in tags:
         if tag in PLATFORM_SUPPORT:
             if context.platform not in PLATFORM_SUPPORT[tag]:
                 context.log.info("{} not supported on {}".format(tag, context.platform))
@@ -53,13 +58,35 @@ def before_scenario(context, scenario):
     os.makedirs(context.sandbox_dir)
     context.cleanups = []
     setup_env(context, scenario)
-    context.cf_space = context.options.cf_space
+    if 'cloud' in tags:
+        setup_cloud(context, scenario)
 
 def setup_env(context, scenario):
     context.env = {}
-    context.env['CF_HOME'] = context.sandbox_dir
     context.env['CF_COLOR'] = 'false'
 
+def setup_cloud(context, scenario):
+    context.cf_space = context.options.cf.space
+    if not context.cf_space:
+        context.cf_space = uuid.uuid4()
+    if context.options.cf.apiurl:
+        context.env['CF_HOME'] = context.sandbox_dir
+        command.Command(context, 'cf login -a {} -u {} -p {} -o {} -s development'.format(
+            context.options.cf.apiurl,
+            context.options.cf.username,
+            context.options.cf.password,
+            context.options.cf.org
+            )).run()
+    else:
+        context.log.info('CloudFoundry credentials not provided, assuming already logged in')
+        command.Command(context, 'cf target -s development').run()
+    command.Command(context, 'cf create-space {}'.format(context.cf_space)).run()
+    command.Command(context, 'cf target -s {}'.format(context.cf_space)).run()
+    def cleanup():
+        cmd = command.Command(context, 'cf delete-space -f {}'.format(context.cf_space))
+        cmd.exec()
+        cmd.wait()
+    context.cleanups.append(cleanup)
 
 def after_scenario(context, scenario):
     '''
@@ -114,25 +141,21 @@ def setup_options(context):
     context.log.info("option: max attempts -> {}".format(context.options.max_attempts))
     context.options.debug_on_error = context.config.userdata.getbool('debug_on_error')
     context.log.info("option: debug on error? -> {}".format(context.options.debug_on_error))
-    context.options.cf_apiurl = context.config.userdata.get('cf_apiurl')
-    assert context.options.cf_apiurl, 'CloudFoundry API URL not set (option: cf_apiurl)'
-    context.log.info("option: CloudFoundry API URL -> {}".format(context.options.cf_apiurl))
-    context.options.cf_username = context.config.userdata.get('cf_username')
-    assert context.options.cf_username, 'CloudFoundry username not set (option: cf_username)'
-    context.log.info("option: CloudFoundry username -> {}".format(context.options.cf_username))
-    context.options.cf_password = context.config.userdata.get('cf_password')
-    assert context.options.cf_password, 'CloudFoundry password not set (option: cf_password)'
-    context.log.info("option: CloudFoundry password -> *")
-    context.options.cf_org = context.config.userdata.get('cf_org')
-    assert context.options.cf_org, 'CloudFoundry org not set (option: cf_org)'
-    context.log.info("option: CloudFoundry org -> {}".format(context.options.cf_org))
-    context.options.cf_domain = context.config.userdata.get('cf_domain')
-    assert context.options.cf_domain, 'CloudFoundry domain not set (option: cf_domain)'
-    context.log.info("option: CloudFoundry domain -> {}".format(context.options.cf_domain))
-    context.options.cf_space = context.config.userdata.get('cf_space')
-    context.log.info("option: CloudFoundry space -> {}".format(context.options.cf_space))
-    context.options.cf_max_attempts = context.config.userdata.getint('cf_max_attempts')
-    context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf_max_attempts))
+    context.options.cf = type("", (), {})()
+    context.options.cf.apiurl = context.config.userdata.get('cf_apiurl')
+    context.log.info("option: CloudFoundry API URL -> {}".format(context.options.cf.apiurl))
+    context.options.cf.username = context.config.userdata.get('cf_username')
+    context.log.info("option: CloudFoundry username -> {}".format(context.options.cf.username))
+    context.options.cf.password = context.config.userdata.get('cf_password')
+    context.log.info("option: CloudFoundry password -> {}".format('*' if context.options.cf.password else None))
+    context.options.cf.org = context.config.userdata.get('cf_org')
+    context.log.info("option: CloudFoundry org -> {}".format(context.options.cf.org))
+    context.options.cf.domain = context.config.userdata.get('cf_domain')
+    context.log.info("option: CloudFoundry domain -> {}".format(context.options.cf.domain))
+    context.options.cf.space = context.config.userdata.get('cf.space')
+    context.log.info("option: CloudFoundry space -> {}".format(context.options.cf.space))
+    context.options.cf.max_attempts = context.config.userdata.getint('cf_max_attempts')
+    context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf.max_attempts))
 
 def setup_logging(context):
     '''

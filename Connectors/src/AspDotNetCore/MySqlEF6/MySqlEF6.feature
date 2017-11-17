@@ -1,3 +1,4 @@
+@cloud
 Feature: MySqlEF6 Connector Samples
     In order to show you how to use Steeltoe for connecting to MySql using EntityFramework 6
     You can run some MySql using EntityFramework 6 connection samples
@@ -6,7 +7,6 @@ Feature: MySqlEF6 Connector Samples
     @win10-x64
     Scenario: MySqlEF6 Connector Sample for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created

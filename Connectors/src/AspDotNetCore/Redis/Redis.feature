@@ -1,3 +1,4 @@
+@cloud
 Feature: Redis Connector Samples
     In order to show you how to use Steeltoe for connecting to Redis
     You can run some Redis connection samples
@@ -6,7 +7,6 @@ Feature: Redis Connector Samples
     @win10-x64
     Scenario: Redis Connector Sample for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-redis installed
         When you run: cf create-service p-redis shared-vm myRedisService
         And you wait until CloudFoundry service myRedisService is created
@@ -22,7 +22,6 @@ Feature: Redis Connector Samples
     @ubuntu.14.04-x64
     Scenario: Redis Connector Sample for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
-        And you are logged into CloudFoundry
         And you have CloudFoundry service p-redis installed
         When you run: cf create-service p-redis shared-vm myRedisService
         And you wait until CloudFoundry service myRedisService is created
