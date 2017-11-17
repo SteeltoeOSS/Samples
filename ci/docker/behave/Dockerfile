@@ -6,8 +6,10 @@ RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install apt-utils
 RUN apt-get -y install apt-transport-https
 RUN apt-get -y install curl
+RUN apt-get -y install g++
 RUN apt-get -y install gcc
 RUN apt-get -y install git
+RUN apt-get -y install make
 RUN apt-get -y install wget
 
 # DotNet
@@ -25,6 +27,14 @@ RUN apt-get -y install cf-cli
 # Java
 RUN apt-get -y install openjdk-8-jdk
 RUN apt-get -y install maven
+
+# Ruby
+RUN apt-get -y install ruby
+RUN apt-get -y install ruby-dev
+RUN echo 'gem: --no-ri --no-rdoc'
+
+# UAAC
+RUN gem install cf-uaac
 
 # Behave et al
 RUN apt-get -y install python3
