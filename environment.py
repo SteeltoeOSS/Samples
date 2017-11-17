@@ -138,7 +138,7 @@ def setup_logging(context):
     '''
     load logging config
     '''
-    context.config.setup_logging(configfile=os.path.join(context.repo_dir, 'logging.cfg'))
+    context.config.setup_logging(configfile=os.path.join(context.repo_dir, 'logging.ini'))
     context.log = logging.getLogger('pivotal')
 
 def setup_platform(context):
