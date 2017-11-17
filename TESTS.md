@@ -114,8 +114,8 @@ Create a DOS INI file named `user.ini` in the repository root.
 
 In the file, add a section named `behave.userdata`.
 
-In that section, configure the CloudFoundry credentials using the following 4 attributes:
-`cf_apiurl`, `cf_username`, `cf_password`, `cf_org`.
+In that section, configure the CloudFoundry credentials using the following attributes:
+`cf_apiurl`, `cf_username`, `cf_password`, `cf_org`, `cf_domain`.
 
 _Example: CloudFoundry credentials_
 ```
@@ -124,6 +124,7 @@ cf_apiurl = api.mypcf
 cf_username = myusername
 cf_password = mypassword
 cf_org = myorg
+cf_domain = my.domain
 ```
 
 ## Run
