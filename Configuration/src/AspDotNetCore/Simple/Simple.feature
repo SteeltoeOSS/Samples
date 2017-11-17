@@ -1,3 +1,5 @@
+@win10-x64
+@ubuntu.14.04-x64
 Feature: Simple Configuration Samples
     In order to show you how to use Steeltoe for simple configurations
     You can run a some simple configuration samples
