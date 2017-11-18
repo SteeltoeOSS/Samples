@@ -80,6 +80,14 @@ resources:
       paths:
         - Connectors/src/AspDotNetCore/Redis
 
+  - name: mgt-cloudfoundry-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev
+      paths:
+        - Management/src/AspDotNetCore/CloudFoundry
+
   - name: sec-cloudfoundrysinglesignon-src
     type: git
     source:
@@ -265,6 +273,24 @@ jobs:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
+  - name: mgt-cloudfoundry
+    plan:
+      - get: Samples
+        resource: mgt-cloudfoundry-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Management/src/AspDotNetCore/CloudFoundry
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
+        ensure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
+
   - name: sec-cloudfoundrysinglesignon
     plan:
       - get: Samples
@@ -300,6 +326,10 @@ groups:
       - cnn-postgresql
       - cnn-rabbit
       - cnn-redis
+
+  - name: mgt
+    jobs:
+      - mgt-cloudfoundry
 
   - name: sec
     jobs:
