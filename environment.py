@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import shutil
 import stat
 import sure
@@ -66,9 +67,6 @@ def setup_env(context, scenario):
     context.env['CF_COLOR'] = 'false'
 
 def setup_cloud(context, scenario):
-    context.cf_space = context.options.cf.space
-    if not context.cf_space:
-        context.cf_space = uuid.uuid4()
     creds = [context.options.cf.apiurl, context.options.cf.username, context.options.cf.password, context.options.cf.org]
     if [cred for cred in creds if cred]:
         if None in creds:
@@ -82,9 +80,17 @@ def setup_cloud(context, scenario):
             )).run()
     else:
         context.log.info('CloudFoundry credentials not provided, assuming already logged in')
-        command.Command(context, 'cf target -s development').run()
+    context.cf_space = context.options.cf.space
+    if not context.cf_space:
+        context.cf_space = uuid.uuid4()
     command.Command(context, 'cf create-space {}'.format(context.cf_space)).run()
-    command.Command(context, 'cf target -s {}'.format(context.cf_space)).run()
+    cmd = command.Command(context, 'cf target -s {}'.format(context.cf_space))
+    cmd.run()
+    context.cf_domain = context.options.cf.domain
+    if not context.cf_domain:
+        match = re.search('^api endpoint:\s+https?://api.run.(.*)', cmd.stdout)
+        assert match, 'Cannot determine API url'
+        context.cf_domain = match.group(1)
     def cleanup():
         cmd = command.Command(context, 'cf delete-space -f {}'.format(context.cf_space))
         cmd.exec()
