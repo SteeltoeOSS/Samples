@@ -12,7 +12,7 @@ Feature: MySqlEFCore Connector
         And you wait until CloudFoundry service myMySqlService is created
         And you run: dotnet restore --configfile nuget.config
         And you run: dotnet publish -f netcoreapp2.0 -r win10-x64
-        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish -s windows2012R2
+        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish
         And you wait until CloudFoundry app mysqlefcore-connector is started
         When you get https://mysqlefcore-connector.x.y.z/Home/MySqlData
         Then you should see "1: Test Data 1 - EF Core TestContext A"

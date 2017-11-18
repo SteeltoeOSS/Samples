@@ -12,7 +12,7 @@ Feature: Rabbit Connector
         And you wait until CloudFoundry service myRabbitService is created
         And you run: dotnet restore --configfile nuget.config
         And you run: dotnet publish -f netcoreapp2.0 -r win10-x64
-        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish -s windows2012R2
+        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish
         And you wait until CloudFoundry app rabbit-connector is started
         When you post "Message=HEY THERE" to https://rabbit-connector.x.y.z/Rabbit/Send
         And you get https://rabbit-connector.x.y.z/Rabbit/Receive
