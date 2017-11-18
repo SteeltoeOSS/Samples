@@ -14,6 +14,6 @@ Feature: MySqlEF6 Connector Samples
         And you run: dotnet publish -f net461 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish -s windows2012R2
         And you wait until CloudFoundry app mysqlef6-connector is started
-        When you get http://mysqlef6-connector.x.y.z/Home/MySqlData
+        When you get https://mysqlef6-connector.x.y.z/Home/MySqlData
         Then you should see "Key 1 = Test Data 1"
         And you should see "Key 2 = Test Data 2"
