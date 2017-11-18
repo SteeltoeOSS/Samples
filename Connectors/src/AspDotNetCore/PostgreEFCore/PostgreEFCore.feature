@@ -1,11 +1,11 @@
 @cloud
-Feature: PostgreEFCore Connector Samples
+Feature: PostgreEFCore Connector
     In order to show you how to use Steeltoe for connecting to PostgreSql using EntityFramework Core
     You can run some PostgreSql using EntityFramework Core connection samples
 
     @netcoreapp2.0
     @win10-x64
-    Scenario: PostgreEFCore Connector Sample for .Net Core 2.0 (win10-x64)
+    Scenario: PostgreEFCore Connector for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have CloudFoundry service EDB-Shared-PostgreSQL installed
         When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
@@ -20,7 +20,7 @@ Feature: PostgreEFCore Connector Samples
 
     @netcoreapp2.0
     @ubuntu.14.04-x64
-    Scenario: PostgreEFCore Connector Sample for .Net Core 2.0 (ubuntu.14.04-x64)
+    Scenario: PostgreEFCore Connector for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have CloudFoundry service EDB-Shared-PostgreSQL installed
         When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres

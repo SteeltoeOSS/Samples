@@ -1,11 +1,11 @@
 @cloud
-Feature: Rabbit Connector Samples
+Feature: Rabbit Connector
     In order to show you how to use Steeltoe for connecting to RabbitMQ
     You can run some RabbitMQ connection samples
 
     @netcoreapp2.0
     @win10-x64
-    Scenario: Rabbit Connector Sample for .Net Core 2.0 (win10-x64)
+    Scenario: Rabbit Connector for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have CloudFoundry service p-rabbitmq installed
         When you run: cf create-service p-rabbitmq standard myRabbitService
@@ -20,7 +20,7 @@ Feature: Rabbit Connector Samples
 
     @netcoreapp2.0
     @ubuntu.14.04-x64
-    Scenario: Rabbit Connector Sample for .Net Core 2.0 (ubuntu.14.04-x64)
+    Scenario: Rabbit Connector for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have CloudFoundry service p-rabbitmq installed
         When you run: cf create-service p-rabbitmq standard myRabbitService

@@ -1,11 +1,11 @@
 @cloud
-Feature: CloudFoundry Single SignOn Samples
+Feature: CloudFoundry Single SignOn
     In order to show you how to use Steeltoe with CloudFoundry Single SignOn
     You can run some CloudFoundry Single SignOn samples
 
     @netcoreapp2.0
     @win10-x64
-    Scenario: CloudFoundry Single SignOn Sample for .Net Core 2.0 (win10-x64)
+    Scenario: CloudFoundry Single SignOn for .Net Core 2.0 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
@@ -41,7 +41,7 @@ Feature: CloudFoundry Single SignOn Samples
 
     @netcoreapp2.0
     @ubuntu.14.04-x64
-    Scenario: CloudFoundry Single SignOn Sample for .Net Core 2.0 (ubuntu.14.04-x64)
+    Scenario: CloudFoundry Single SignOn for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
@@ -77,7 +77,7 @@ Feature: CloudFoundry Single SignOn Samples
 
     @net461
     @win10-x64
-    Scenario: CloudFoundry Single SignOn Sample for .Net Framework 4.6.1 (win10-x64)
+    Scenario: CloudFoundry Single SignOn for .Net Framework 4.6.1 (win10-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
