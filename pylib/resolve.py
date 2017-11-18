@@ -19,7 +19,7 @@ def hostname(context, name):
 def domainname(context, name):
     if name != 'x.y.z':
         return name
-    return context.options.cf.domain
+    return context.cf_domain
 
 def url(context, url):
     '''
