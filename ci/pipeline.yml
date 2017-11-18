@@ -104,7 +104,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -117,7 +117,7 @@ jobs:
         file: Samples/ci/tasks/behave.yml
         params:
           FEATURES: Configuration/src/AspDotNetCore/Simple
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -135,7 +135,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -153,7 +153,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -171,7 +171,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -189,7 +189,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -207,7 +207,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -225,7 +225,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -243,7 +243,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -261,7 +261,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
@@ -279,7 +279,7 @@ jobs:
           CF_PASSWORD: {{cf_password}}
           CF_ORG: {{cf_org}}
           CF_DOMAIN: {{cf_domain}}
-        on_failure:
+        ensure:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
