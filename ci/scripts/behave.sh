@@ -19,10 +19,7 @@ pushd Samples
   RC=$?
 popd
 
-if [[ $RC != 0 ]]
-then
-  cp Samples/test.log logs/$LOGFILE
-fi
+cp Samples/test.log logs/$LOGFILE
 
 exit $RC
 
