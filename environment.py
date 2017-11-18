@@ -69,7 +69,10 @@ def setup_cloud(context, scenario):
     context.cf_space = context.options.cf.space
     if not context.cf_space:
         context.cf_space = uuid.uuid4()
-    if context.options.cf.apiurl:
+    creds = [context.options.cf.apiurl, context.options.cf.username, context.options.cf.password, context.options.cf.org]
+    if [cred for cred in creds if cred]:
+        if None in creds:
+            raise Exception('if setting CloudFoundry credentials, all of cf_apiurl, cf_username, cf_password, cf_org must be set')
         context.env['CF_HOME'] = context.sandbox_dir
         command.Command(context, 'cf login -a {} -u {} -p {} -o {} -s development'.format(
             context.options.cf.apiurl,
