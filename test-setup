@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+basedir=$(dirname $0)
+cd $basedir
+
+[[ -d pyenv ]] && rm -rf pyenv
+virtualenv pyenv  --python=python3
+source pyenv/bin/activate
+pip install -r pyenv.pkgs

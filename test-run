@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+basedir=$(dirname $0)
+cd $basedir
+
+if [[ ! -d pyenv ]]
+then
+  echo "test environment not found; run test-setup" >&2
+  exit 1
+fi
+
+source pyenv/bin/activate
+behave $*
