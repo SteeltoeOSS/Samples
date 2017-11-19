@@ -100,38 +100,53 @@ def resolve_args(context, args, cwd):
     '''
     resolve app names, hostnames, etc
     '''
-    resolved = args.copy()
-    # scope 'cf push' hostname
-    if resolved[0:2] == ['cf', 'push'] and '-f' in resolved:
-        manifest = os.path.join(cwd, resolved[ resolved.index('-f') + 1 ])
-        with open(manifest, 'r', encoding='utf-8-sig') as f:
-            doc = f.read()
-        match =re.search('- name:\s+(\S+)', doc)
-        if match:
-            app = match.group(1)
-            resolved += ['--hostname', resolve.hostname(context, app)]
-    # scope 'cf cups' embedded URLs in payload
-    if resolved[0:2] == ['cf', 'cups'] and '-p' in resolved:
-        payload_idx = resolved.index('-p') + 1
-        payload = resolved[payload_idx]
-        match = re.search('"(uaa://[^"]+)', payload)
-        if match:
-            url = match.group(1)
-            resolved[payload_idx] = payload.replace(url, resolve.url(context, url))
-    # scope 'uaac target' URL
-    if resolved[0:2] == ['uaac', 'target']:
-        resolved[2] = resolve.url(context, resolved[2])
-    # scope 'uaac client' redirect URI
-    if resolved[0:2] == ['uaac', 'client'] and '--redirect_uri' in resolved:
-        uri_idx = resolved.index('--redirect_uri') + 1
-        uri = resolved[uri_idx]
-        resolved[uri_idx] = resolve.url(context, uri)
-    # scope gradle arguments -Dapp= and -Dapp-domain=
-    for i in range(len(resolved)):
-        if resolved[i].startswith('-Dapp='):
-            app = resolved[i].split('=', 1)[1]
-            resolved[i] = '-Dapp={}'.format(resolve.hostname(context, app))
-        if resolved[i].startswith('-Dapp-domain='):
-            domain = resolved[i].split('=', 1)[1]
-            resolved[i] = '-Dapp-domain={}'.format(resolve.domainname(context, domain))
-    return resolved
+    arg_resolvers = {
+            'cf': resolve_cf_args,
+            'gradle': resolve_gradle_args,
+            'gradlew': resolve_gradle_args,
+            'uaac': resolve_uaac_args,
+            }
+    cmd = os.path.split(args[0])[-1]
+    try:
+        arg_resolvers[cmd](context, args, cwd)
+    except KeyError:
+        pass
+    return args
+
+def resolve_cf_args(context, args, cwd):
+    if args[1] == 'push':
+        if '-f' in args:
+            manifest = os.path.join(cwd, args[args.index('-f') + 1 ])
+            with open(manifest, 'r', encoding='utf-8-sig') as f:
+                doc = f.read()
+            match =re.search('- name:\s+(\S+)', doc)
+            if match:
+                app = match.group(1)
+                args += ['--hostname', resolve.hostname(context, app)]
+    elif args[1] == 'cups':
+        if '-p' in args:
+            creds_idx = args.index('-p') + 1
+            creds = args[creds_idx]
+            match = re.search('"(uaa://[^"]+)', creds)
+            if match:
+                url = match.group(1)
+                args[creds_idx] = creds.replace(url, resolve.url(context, url))
+
+def resolve_gradle_args(context, args, cwd):
+    args.append('-Dorg.gradle.daemon=false')
+    for i in range(len(args)):
+        if args[i].startswith('-Dapp='):
+            app = args[i].split('=', 1)[1]
+            args[i] = '-Dapp={}'.format(resolve.hostname(context, app))
+        if args[i].startswith('-Dapp-domain='):
+            domain = args[i].split('=', 1)[1]
+            args[i] = '-Dapp-domain={}'.format(resolve.domainname(context, domain))
+
+def resolve_uaac_args(context, args, cwd):
+    if args[1] == 'target':
+        args[2] = resolve.url(context, args[2])
+    elif args[1] == 'client':
+        if '--redirect_uri' in args:
+            uri_idx = args.index('--redirect_uri') + 1
+            uri = args[uri_idx]
+            args[uri_idx] = resolve.url(context, uri)
