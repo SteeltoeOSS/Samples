@@ -72,6 +72,8 @@ def step_impl(context, app):
             context.log.info('app "{}" status not yet available'.format(app))
             return False
         status = match.group(1)
+        if status == 'crashed':
+            raise Exception('CloudFoundry app {} has crashed'.format(app))
         context.log.info('app "{}" status: "{}"'.format(app, status))
         return status == 'running'
     try_until(context, app_started, context.options.cf.max_attempts)
