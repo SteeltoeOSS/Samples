@@ -6,7 +6,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Configuration/src/AspDotNetCore/CloudFoundry
+        - Configuration/src/AspDotNetCore/CloudFoundry/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cfg-simple-src
     type: git
@@ -14,7 +19,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Configuration/src/AspDotNetCore/Simple
+        - Configuration/src/AspDotNetCore/Simple/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cfg-simplecloudfoundry-src
     type: git
@@ -22,7 +32,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Configuration/src/AspDotNetCore/SimpleCloudFoundry
+        - Configuration/src/AspDotNetCore/SimpleCloudFoundry/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-mysql-src
     type: git
@@ -30,7 +45,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/MySql
+        - Connectors/src/AspDotNetCore/MySql/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-mysqlef6-src
     type: git
@@ -38,7 +58,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/MySqlEF6
+        - Connectors/src/AspDotNetCore/MySqlEF6/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-mysqlefcore-src
     type: git
@@ -46,7 +71,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/MySqlEFCore
+        - Connectors/src/AspDotNetCore/MySqlEFCore/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-postgreefcore-src
     type: git
@@ -54,7 +84,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/PostgreEFCore
+        - Connectors/src/AspDotNetCore/PostgreEFCore/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-postgresql-src
     type: git
@@ -62,7 +97,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/PostgreSql
+        - Connectors/src/AspDotNetCore/PostgreSql/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-rabbit-src
     type: git
@@ -70,7 +110,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/Rabbit
+        - Connectors/src/AspDotNetCore/Rabbit/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: cnn-redis-src
     type: git
@@ -78,7 +123,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/Redis
+        - Connectors/src/AspDotNetCore/Redis/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: mgt-cloudfoundry-src
     type: git
@@ -86,7 +136,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Management/src/AspDotNetCore/CloudFoundry
+        - Management/src/AspDotNetCore/CloudFoundry/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
   - name: sec-cloudfoundrysinglesignon-src
     type: git
@@ -94,7 +149,12 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Security/src/CloudFoundrySingleSignon
+        - Security/src/CloudFoundrySingleSignon/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
 
 jobs:
 
