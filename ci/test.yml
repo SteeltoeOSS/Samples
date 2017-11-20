@@ -1,0 +1,34 @@
+resources:
+
+  - name: sec-cloudfoundrysinglesignon-src
+    type: git
+    source:
+      uri: https://github.com/SteeltoeOSS/Samples
+      branch: dev-test
+      paths:
+        - Security/src/CloudFoundrySingleSignon/
+        - steps/
+        - pylib/
+        - environment.py
+        - behave.ini
+        - pyenv.pks
+
+jobs:
+
+  - name: sec-cloudfoundrysinglesignon
+    plan:
+      - get: Samples
+        resource: sec-cloudfoundrysinglesignon-src
+        trigger: true
+      - task: behave
+        file: Samples/ci/tasks/behave.yml
+        params:
+          FEATURES: Security/src/CloudFoundrySingleSignon
+          CF_APIURL: {{cf_apiurl}}
+          CF_USERNAME: {{cf_username}}
+          CF_PASSWORD: {{cf_password}}
+          CF_ORG: {{cf_org}}
+          CF_DOMAIN: {{cf_domain}}
+        ensure:
+          task: behavelog
+          file: Samples/ci/tasks/showlog.yml
