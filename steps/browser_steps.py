@@ -1,12 +1,24 @@
 import mechanicalsoup
 import resolve
+import time
 
 @when(u'you get {url}')
 def step_impl(context, url):
     url = resolve.url(context, url)
     context.log.info('getting url {}'.format(url))
     context.browser = mechanicalsoup.StatefulBrowser()
-    context.browser.open(url).status_code.should.equal(200)
+    attempt = 0
+    while True:
+        attempt += 1
+        resp = context.browser.open(url)
+        if resp.status_code == 200:
+            context.log.info('opened {}'.format(url))
+            break
+        context.log.info('failed to open {} [{}]'.format(url, resp.status_code))
+        if resp.status_code >= 500 and attempt <= 5:
+            time.sleep(1)
+            continue
+        raise Exception('Unable to open page {} [{}]'.format(url, resp.status_code))
 
 @when(u'you post "{data}" to {url}')
 def step_impl(context, data, url):
