@@ -1,0 +1,287 @@
+= Steeltoe Sample Application Tests
+How to setup and run the sample tests.
+:toc: preamble
+:!toc-title:
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:linkattrs:
+:uri-behave-cli: http://pythonhosted.org/behave/behave.html
+:uri-behave-ini: link:behave.ini
+:uri-brew: https://brew.sh/
+:uri-choco: https://chocolatey.org/
+:uri-pydown-win: https://www.python.org/downloads/windows/
+:uri-user-ini: link:user.ini.example
+
+Table of Contents
+
+== Pre-Requisites
+
+Running the Samples tests requires Python 3.
+
+A convenience script is provided to setup a Python 3 environment for the tests.
+The script assumes Python 3 and its associated package installer, `pip`, have been installed.
+
+The following sections detail how to install Python 3 and `pip` for supoorted platforms.
+
+=== Windows
+
+Install {uri-choco}[choco] if needed.
+
+.Start a PowerShell as Administrator, run:
+[source,bat]
+----
+PS C:\WINDOWS\system32> choco install -y python3
+PS C:\WINDOWS\system32> refreshenv
+PS C:\WINDOWS\system32> pip install virtualenv
+----
+
+=== OS X
+
+Install {uri-brew}[brew] if needed.
+
+.In a terminal, run:
+[source,sh]
+----
+$ brew install python3
+$ pip3 install virtualenv
+----
+
+=== Ubuntu
+
+.In a terminal, run:
+[source,sh]
+----
+$ sudo apt install python3 python3-pip
+$ sudo pip3 install virtualenv
+----
+
+== Setup
+
+=== Test Environment
+
+Change to the root directory of the Sample repo.
+
+.Windows
+[source,bat]
+----
+C:> test-setup
+----
+.Posix
+[source,sh]
+----
+$ ./test-setup
+----
+
+=== user.ini
+
+Create a `user.ini` file in the roject root directory.
+An example file, {uri-user-ini}[`user.ini.example`], is provided as a convenience.
+
+.Windows
+[source,bat]
+----
+C:> copy user.ini.example user.ini
+----
+.Posix
+[source,sh]
+----
+$ cp user.ini.example user.ini
+----
+
+The example file's options are commented with descriptions.
+
+The one option you probably want to enable is `windowed = yes`.
+Setting this option will run backgrounded processes in their own dedicated windows, making it easier to follow a test's progress.
+
+=== CloudFoundry
+
+==== Credentials and Bootstrap Space
+
+If you don't specify credentials, it is assumed you are already logged in to a CloudFoundry endpoint.
+The current target will be used to create additional spaces for running tests.
+
+You can configure the tests to use their own credentials by setting the following options in `user.ini`:
+
+* `cf_apiurl`
+* `cf_username`
+* `cf_password`
+* `cf_org`
+
+Set `cf_domain` if the target CloudFoundry domain has been changed from its default.
+
+It is expected that a CloudFoundry space named `development` exists for the configured credentials.
+The `development` space will be used as the target from which to create additional spaces for running tests.
+
+.Example: CloudFoundry credentials in user.ini
+[source]
+----
+[behave.userdata]
+cf_apiurl = api.run.pez.pivotal.io
+cf_username = myuser
+cf_password = mypass
+cf_org = p-steeltoe
+cf_domain = cfapps.pez.pivotal.io
+----
+
+== Run
+
+Change to the root directory of the Sample repo.
+
+.Windows
+[source,bat]
+----
+C:> test-run ...
+----
+.Posix
+[source,sh]
+----
+$ ./test-run ...
+----
+
+The `test-run` script is wrapper that loads the local Python envionment and then runs `behave`.
+Any arguments passed to `test-run` are passed on to `behave`.
+Available arguments can be see by running `test-run -h` or viewing {uri-behave-cli}[online documentation].
+
+=== Examples
+
+.Example: Run all tests
+[source,bat]
+----
+C:> test-run
+----
+
+.Example: Run tests for simple CloudFoundry configuration
+[source,bat]
+----
+C:> test-run Configuration/src/AspDotNetCore/CloudFoundry
+----
+
+=== Tags
+
+Tags can be used to specify a subset of tests to run.  Tags are specified using `-t` or `--tags`.
+
+* Framework Tags
+** `netcoreapp2.0`
+** `net461`
+
+* Runtime Tags
+** `win-10-x64`
+** `ubuntu.14.04-x64`
+
+* Runtime Environment Tags
+** `cloud`
+** `local`
+
+.Example: Run tests for .NET Core App 2.0 framework targeting the Ubuntu runtime
+[source,bat]
+----
+C:> test-run -t netcoreapp2.0 -t ubuntu.14.04-x64
+----
+
+.Example: Run tests that run locally
+[source,bat]
+----
+C:> test-run -t local
+----
+
+==== Tracker Tags
+
+If a tracker issue is associated with a test, that test will be tagged with the issue number.
+
+.Example: run the test or tests associated with the tracker issue 152883475
+[source,bat]
+----
+C:> test-run -t #152883475
+----
+
+=== Options
+
+Option defaults are defined in {uri-behave-ini}[`behave.ini`].
+
+Options can be specified using command line arguments or the file `user.ini`.
+
+Command line options take precedent over those defined in `user.ini`.
+
+To set a boolean option to `true`, specify a value equal to one of `1`, `yes`, `true`, `on`.
+
+To set a boolean option to `false`, specify a value equal to one of `0`, `no`, `false`, `off`.
+
+==== Command Line Options
+
+Command line arguments take the form of: `-Dname[=value]`
+
+Specifying a command line option with no value results in a value of `true` regardless of the option type.
+
+.Example: set an option using a command line switch
+[source,bat]
+----
+C:> test-run -Dfoo=bar
+----
+
+==== Available Options
+
+[cols="0,0,0,100%"]
+|===
+
+| Option | Type | Default | Descritpion
+
+| `cf_api_url`
+| _string_
+|
+| CloudFoundry API endpoint
+
+| `cf_domain`
+| _string_
+|
+| CloudFoundry domain; if not set, domain derived from the API endpoint
+
+| `cf_max_attempts`
+| _integer_
+| `120`
+| how may attempts to determine if a CloudFoundry service or app is available; specify a negative value to try _ad infinitum_
+
+| `cf_org`
+| _string_
+|
+| CloudFoundry org
+
+| `cf_password`
+| _string_
+|
+| CloudFoundry password
+
+| `cf_space`
+| _string_
+|
+| CloudFoundry space to be used for tests; if not set, a random unique name is generated for each test
+
+| `cf_username`
+| _string_
+|
+| CloudFoundry username
+
+| `cleanup`
+| _boolean_
+| `true`
+| if `true`, test artifacts (such as CloudFoundry spaces) are torn down upon test completion
+
+| `debug_on_error`
+| _boolean_
+| `false`
+| if `true`, enter debugger upon test failure
+
+| `output`
+| _string_
+| `test.out`
+| directory into which output is written; useful on Windows to circumvent _file too long_ errors
+
+| `max_attempts`
+| _integer_
+| `30`
+| how may attempts to determine if a local service or app is available; specify a negative value to try _ad infinitum_
+
+| `windowed`
+| _boolean_
+| `false`
+| if `true`, run background processes in their own window
+
+|===
