@@ -20,6 +20,7 @@ class Command(object):
         self.context = context
         self.env = self.context.env.copy()
         self.command = command
+        self.sandbox_dir = context.sandbox_dir
         if self.context.platform == 'windows':
             self.command = self.command.replace('/', '\\\\')
         self.args = shlex.split(command)
@@ -41,21 +42,32 @@ class Command(object):
         popen_args += self.args
         env = os.environ.copy()
         env.update(self.env)
-        pipe = None if self.windowed else subprocess.PIPE
+        if self.windowed:
+            stdout = None
+            stderr = None
+        else:
+            cmd = os.path.split(self.args[0])[-1]
+            self.stdout_path = os.path.join(self.sandbox_dir, '{}-{}.out'.format(self.command_id, cmd))
+            self.stdout_f = open(self.stdout_path, 'w')
+            stdout = self.stdout_f
+            self.stderr_path = os.path.join(self.sandbox_dir, '{}-{}.err'.format(self.command_id, cmd))
+            self.stderr_f = open(self.stderr_path, 'w')
+            stderr = self.stderr_f
         self.logf("command[{}] cmd: {}".format(self.command_id, ' '.join(popen_args)))
         self.logf("command[{}] cwd: {}".format(self.command_id, self.cwd))
         self.logf("command[{}] env: {}".format(self.command_id, self.env))
-        self.proc = subprocess.Popen(popen_args, cwd=self.cwd, env=env, stdin=pipe, stdout=pipe, stderr=pipe)
+        self.proc = subprocess.Popen(popen_args, cwd=self.cwd, env=env, stdin=None, stdout=stdout, stderr=stderr)
         self.logf("command[{}] pid: {}".format(self.command_id, self.proc.pid))
 
     def wait(self):
         self.rc = self.proc.wait()
         self.logf("command[{}] rc: {}".format(self.command_id, self.rc))
-        if self.proc.stdout:
-            self.stdout = self.proc.stdout.read().decode('utf-8')
+        if not self.windowed:
+            self.stdout_f.close()
+            self.stdout = open(self.stdout_path).read()
             self.logf("command[{}] stdout:\n | {}".format(self.command_id, self.stdout.strip().replace('\n', '\n | ')))
-        if self.proc.stderr:
-            self.stderr = self.proc.stderr.read().decode('utf-8')
+            self.stderr_f.close()
+            self.stderr = open(self.stderr_path).read()
             self.logf("command[{}] stderr:\n | {}".format(self.command_id, self.stderr.strip().replace('\n', '\n | ')))
 
     def run(self):
