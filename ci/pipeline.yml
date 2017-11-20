@@ -7,6 +7,7 @@ resources:
       branch: dev
       paths:
         - Configuration/src/AspDotNetCore/CloudFoundry/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -20,6 +21,7 @@ resources:
       branch: dev
       paths:
         - Configuration/src/AspDotNetCore/Simple/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -33,6 +35,7 @@ resources:
       branch: dev
       paths:
         - Configuration/src/AspDotNetCore/SimpleCloudFoundry/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -46,6 +49,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/MySql/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -59,6 +63,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/MySqlEF6/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -72,6 +77,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/MySqlEFCore/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -85,6 +91,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/PostgreEFCore/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -98,6 +105,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/PostgreSql/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -111,6 +119,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/Rabbit/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -124,6 +133,7 @@ resources:
       branch: dev
       paths:
         - Connectors/src/AspDotNetCore/Redis/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -137,6 +147,7 @@ resources:
       branch: dev
       paths:
         - Management/src/AspDotNetCore/CloudFoundry/
+        - ci/
         - steps/
         - pylib/
         - environment.py
@@ -150,6 +161,7 @@ resources:
       branch: dev
       paths:
         - Security/src/CloudFoundrySingleSignon/
+        - ci/
         - steps/
         - pylib/
         - environment.py
