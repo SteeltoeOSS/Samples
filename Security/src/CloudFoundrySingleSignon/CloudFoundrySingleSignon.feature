@@ -39,6 +39,7 @@ Feature: CloudFoundry Single SignOn
         Then you should be at https://single-signon.x.y.z/Home/About
         And you should see "Your About page."
 
+    @#153028887
     @netcoreapp2.0
     @ubuntu.14.04-x64
     Scenario: CloudFoundry Single SignOn for .Net Core 2.0 (ubuntu.14.04-x64)
