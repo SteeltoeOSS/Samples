@@ -1,12 +1,12 @@
-﻿using Pivotal.Discovery.Client;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.IO;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Logging;
+using Pivotal.Discovery.Client;
+using System;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MusicStoreUI.Services
 {

@@ -12,10 +12,12 @@ Note: The OrderService and ShoppingCartService are independent from the Music ap
 This application makes use of the following Steeltoe components:
 * Spring Cloud Config Server Client for centralized application configuration
 * Spring Cloud Eureka Server Client for service discovery
-* Steeltoe Connector for connecting to MySql using EFCore 
+* Steeltoe Connector for connecting to MySql using EFCore
+* Steeltoe CircuitBreaker to help prevent cascading failures from lower level service failures
 * Steeltoe Management for enabling management actuator endpoints that can be used by the Pivotal Apps Manager
 * Optionally uses Steeltoe Redis Connector to connect to a Redis cache for Session storage. Note: This is required if you want to scale the MusicStoreUI component to multiple instances.
 * Optionally uses Steeltoe Redis DataProtection provider to the cause the DataProtection KeyRing to be stored in a Redis cache. Note: This is also required if you want to scale the MusicStoreUI component to multiple instances.
+* Optionally uses Hystrix Dashboard for monitoring Circuit Breakers
 
 The default is to NOT use a Redis cache for Session storage or DataProtection KeyRing storage. Details on how to enable it are provided below.
 

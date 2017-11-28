@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using MusicStoreUI.Models;
 using MusicStoreUI.Services;
+using MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI.Controllers
 {
@@ -18,7 +19,7 @@ namespace MusicStoreUI.Controllers
         {
             _appSettings = options.Value;
         }
-        //
+
         // GET: /Home/
         public async Task<IActionResult> Index(
             [FromServices] IMusicStore musicStore,
@@ -26,12 +27,12 @@ namespace MusicStoreUI.Controllers
         {
             // Get most popular albums
             var cacheKey = "topselling";
-            List<Album> albums;
-            if (!cache.TryGetValue(cacheKey, out albums))
+            if (!cache.TryGetValue(cacheKey, out List<Album> albums))
             {
-                albums = await musicStore.GetTopSellingAlbumsAsync(6);
+                var albumCommand = new AlbumsTopCommand("TopAlbums", musicStore, 6);
+                albums = await albumCommand.ExecuteAsync();
 
-                if (albums != null && albums.Count > 0)
+                if (albums != null && albums.Count > 0 && !albumCommand.IsResponseFromFallback)
                 {
                     if (_appSettings.CacheDbResults)
                     {

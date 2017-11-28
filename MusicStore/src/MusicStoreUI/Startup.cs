@@ -17,6 +17,7 @@ using Steeltoe.Security.DataProtection;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.Endpoint.Health;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.CircuitBreaker.Hystrix;
 
 namespace MusicStoreUI
 {
@@ -87,6 +88,9 @@ namespace MusicStoreUI
                         authBuilder.RequireAuthenticatedUser();
                     });
             });
+
+            // Add Hystrix metrics stream to enable monitoring 
+            services.AddHystrixMetricsStream(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,6 +128,12 @@ namespace MusicStoreUI
             });
 
             app.UseDiscoveryClient();
+
+            // Add Hystrix Metrics context to pipeline
+            app.UseHystrixRequestContext();
+
+            // Startup Hystrix metrics stream
+            app.UseHystrixMetricsStream();
         }
     }
 }

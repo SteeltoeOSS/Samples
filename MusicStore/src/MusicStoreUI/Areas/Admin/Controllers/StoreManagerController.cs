@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +5,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using MusicStoreUI.Models;
-using MusicStoreUI.ViewModels;
 using MusicStoreUI.Services;
+using MusicStoreUI.Services.HystrixCommands;
+using MusicStoreUI.ViewModels;
+using Steeltoe.CircuitBreaker.Hystrix;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MusicStoreUI.Areas.Admin.Controllers
 {
@@ -20,11 +21,15 @@ namespace MusicStoreUI.Areas.Admin.Controllers
     {
         private readonly AppSettings _appSettings;
         private readonly IMusicStore MusicStoreService;
+        private GenresCommand _genres;
+        private ArtistsAllCommand _artists;
 
         public StoreManagerController(IMusicStore musicStore, IOptions<AppSettings> options)
         {
             MusicStoreService = musicStore;
             _appSettings = options.Value;
+            _genres = new GenresCommand(HystrixCommandGroupKeyDefault.AsKey("MusicStoreGenres"), MusicStoreService);
+            _artists = new ArtistsAllCommand("MuscStoreArtists", MusicStoreService);
         }
 
 
@@ -32,7 +37,8 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         // GET: /StoreManager/
         public async Task<IActionResult> Index()
         {
-            var albums = await MusicStoreService.GetAllAlbumsAsync();
+            var albumsCommand = new AlbumsAllCommand("GetAlbum", MusicStoreService);
+            var albums = await albumsCommand.ExecuteAsync();
             return View(albums);
         }
 
@@ -44,12 +50,12 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         {
             var cacheKey = GetCacheKey(id);
 
-            Album album;
-            if (!cache.TryGetValue(cacheKey, out album))
+            if (!cache.TryGetValue(cacheKey, out Album album))
             {
-                album = await MusicStoreService.GetAlbumAsync(id);
+                var albumCommand = new AlbumCommand("GetAlbum", MusicStoreService, id);
+                album = await albumCommand.ExecuteAsync();
 
-                if (album != null)
+                if (album != null && !albumCommand.IsResponseFromFallback)
                 {
                     if (_appSettings.CacheDbResults)
                     {
@@ -75,8 +81,8 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         // GET: /StoreManager/Create
         public async Task<IActionResult> Create()
         {
-            var genres = await MusicStoreService.GetGenresAsync();
-            var artists = await MusicStoreService.GetAllArtistsAsync();
+            var genres = await _genres.ExecuteAsync();
+            var artists = await _artists.ExecuteAsync();
 
             ViewBag.GenreId = new SelectList(genres, "GenreId", "Name");
             ViewBag.ArtistId = new SelectList(artists, "ArtistId", "Name");
@@ -86,15 +92,14 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         // POST: /StoreManager/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-            Album album,
-            [FromServices] IMemoryCache cache,
-            CancellationToken requestAborted)
+        public async Task<IActionResult> Create(Album album, [FromServices] IMemoryCache cache, CancellationToken requestAborted)
         {
             if (ModelState.IsValid)
             {
                 album.Artist = await MusicStoreService.GetArtistAsync(album.ArtistId);
-                album.Genre = await MusicStoreService.GetGenreAsync(album.GenreId);
+
+                var genreCommand = new GenreCommand("MusicStoreGenre", MusicStoreService, album.GenreId);
+                album.Genre = await genreCommand.ExecuteAsync();
 
                 await MusicStoreService.AddAlbumAsync(album);
       
@@ -112,8 +117,8 @@ namespace MusicStoreUI.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            var genres = await MusicStoreService.GetGenresAsync();
-            var artists = await MusicStoreService.GetAllArtistsAsync();
+            var genres = await _genres.ExecuteAsync();
+            var artists = await _artists.ExecuteAsync();
 
             ViewBag.GenreId = new SelectList(genres, "GenreId", "Name", album.GenreId);
             ViewBag.ArtistId = new SelectList(artists, "ArtistId", "Name", album.ArtistId);
@@ -130,8 +135,8 @@ namespace MusicStoreUI.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var genres = await MusicStoreService.GetGenresAsync();
-            var artists = await MusicStoreService.GetAllArtistsAsync();
+            var genres = await _genres.ExecuteAsync();
+            var artists = await _artists.ExecuteAsync();
 
             ViewBag.GenreId = new SelectList(genres, "GenreId", "Name", album.GenreId);
             ViewBag.ArtistId = new SelectList(artists, "ArtistId", "Name", album.ArtistId);
@@ -142,23 +147,21 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         // POST: /StoreManager/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(
-            [FromServices] IMemoryCache cache,
-            Album album,
-            CancellationToken requestAborted)
+        public async Task<IActionResult> Edit([FromServices] IMemoryCache cache, Album album, CancellationToken requestAborted)
         {
             if (ModelState.IsValid)
             {
                 album.Artist = await MusicStoreService.GetArtistAsync(album.ArtistId);
-                album.Genre = await MusicStoreService.GetGenreAsync(album.GenreId);
+                var genreCommand = new GenreCommand("MusicStoreGenre", MusicStoreService, album.GenreId);
+                album.Genre = await genreCommand.ExecuteAsync();
                 await MusicStoreService.UpdateAlbumAsync(album);
                 //Invalidate the cache entry as it is modified
                 cache.Remove(GetCacheKey(album.AlbumId));
                 return RedirectToAction("Index");
             }
 
-            var genres = await MusicStoreService.GetGenresAsync();
-            var artists = await MusicStoreService.GetAllArtistsAsync();
+            var genres = await _genres.ExecuteAsync();
+            var artists = await _artists.ExecuteAsync();
 
             ViewBag.GenreId = new SelectList(genres, "GenreId", "Name", album.GenreId);
             ViewBag.ArtistId = new SelectList(artists, "ArtistId", "Name", album.ArtistId);
@@ -169,7 +172,8 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         // GET: /StoreManager/RemoveAlbum/5
         public async Task<IActionResult> RemoveAlbum(int id)
         {
-            var album = await MusicStoreService.GetAlbumAsync(id);
+            var albumCommand = new AlbumCommand("GetAlbum", MusicStoreService, id);
+            var album = await albumCommand.ExecuteAsync();
             if (album == null)
             {
                 return NotFound();
@@ -214,7 +218,8 @@ namespace MusicStoreUI.Areas.Admin.Controllers
         [EnableCors("CorsPolicy")]
         public async Task<IActionResult> GetAlbumIdFromName(string albumName)
         {
-            var album = await MusicStoreService.GetAlbumAsync(albumName);
+            var albumCommand = new AlbumCommand("GetAlbum", MusicStoreService, albumName);
+            var album = await albumCommand.ExecuteAsync();
 
             if (album == null)
             {

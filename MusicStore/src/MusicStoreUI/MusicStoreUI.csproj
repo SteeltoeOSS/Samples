@@ -15,25 +15,34 @@
     <None Include="git.properties">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
+  </ItemGroup>  <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="GitInfo" Version="2.0.6" />  
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.1" />
     <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.0.0-dev-00118" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.0.0-dev-00083" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0-dev-00193" />
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.0.0-dev-00031" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0-dev-00052" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Pivotal.Discovery.Client" Version="2.0.0-dev-00109" />
     <PackageReference Include="Steeltoe.Security.DataProtection.Redis" Version="2.0.0-dev-00077" />    
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BUILD)' == ''">
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="2.0.0-dev-00081" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BUILD)' == 'LOCAL'">
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="2.0.0-dev-00081" />
   </ItemGroup>
 
   <Target Name="_GitProperties" AfterTargets="CoreCompile">

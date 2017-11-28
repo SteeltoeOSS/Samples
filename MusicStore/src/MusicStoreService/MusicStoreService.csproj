@@ -16,11 +16,11 @@
   <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="GitInfo" Version="2.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.0.0-dev-00118" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0-dev-00193" />
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.0.0-dev-00031" />
     <PackageReference Include="Pivotal.Discovery.Client" Version="2.0.0-dev-00109" />
