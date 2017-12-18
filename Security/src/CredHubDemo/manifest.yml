@@ -1,0 +1,5 @@
+﻿---
+applications:
+- name: CredHubDemo
+  env:
+    ASPNETCORE_ENVIRONMENT: Development

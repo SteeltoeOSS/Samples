@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1020DC28-405A-4520-8354-B5BCC5CC46C2}"
 EndProject
@@ -9,6 +9,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundrySingleSignon", "src\CloudFoundrySingleSignon\CloudFoundrySingleSignon.csproj", "{742A8B2E-49F4-4497-8BEE-30FF5D95007B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDataProtectionKeyStore", "src\RedisDataProtectionKeyStore\RedisDataProtectionKeyStore.csproj", "{3393201D-0A45-4812-9888-5BFB89F5F76D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredHubDemo", "src\CredHubDemo\CredHubDemo.csproj", "{7DC7077F-E876-4F1C-92A3-7B161C93A762}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,18 @@ Global
 		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x64.Build.0 = Release|Any CPU
 		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x86.ActiveCfg = Release|Any CPU
 		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x86.Build.0 = Release|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x64.Build.0 = Debug|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x86.Build.0 = Debug|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x64.ActiveCfg = Release|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x64.Build.0 = Release|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x86.ActiveCfg = Release|Any CPU
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +78,7 @@ Global
 		{7C45D011-F900-42B9-A975-DF5239A32450} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
 		{742A8B2E-49F4-4497-8BEE-30FF5D95007B} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
 		{3393201D-0A45-4812-9888-5BFB89F5F76D} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
+		{7DC7077F-E876-4F1C-92A3-7B161C93A762} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F256B56E-02D0-4538-A7F3-A3337E4B3C57}

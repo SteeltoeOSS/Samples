@@ -1,0 +1,12 @@
+﻿@model Dictionary<string, string>
+@{
+    ViewData["Title"] = "Interpolate";
+}
+
+<h2>Interpolation results:</h2>
+<ul>
+    @foreach (var i in Model)
+    {
+        <li>@i.Key: <pre>@Html.Raw(i.Value)</pre></li>
+    }
+</ul>
