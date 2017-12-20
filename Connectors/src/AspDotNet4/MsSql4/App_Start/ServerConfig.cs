@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.FileProviders;
+﻿using Microsoft.Extensions.Configuration;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using PA = Microsoft.Extensions.PlatformAbstractions;
+using System;
+using System.IO;
 
 namespace MsSql4
 {
@@ -13,40 +12,21 @@ namespace MsSql4
 
         public static void RegisterConfig(string environment)
         {
-            var env = new HostingEnvironment(environment);
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+                .SetBasePath(GetContentRoot())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{environment}.json", optional: true)
                 .AddCloudFoundry()
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
         }
-    }
-    public class HostingEnvironment : IHostingEnvironment
-    {
-        public HostingEnvironment(string env)
+        public static string GetContentRoot()
         {
-            EnvironmentName = env;
-
-            ApplicationName = PA.PlatformServices.Default.Application.ApplicationName;
-            ContentRootPath = PA.PlatformServices.Default.Application.ApplicationBasePath;
+            var basePath = (string)AppDomain.CurrentDomain.GetData("APP_CONTEXT_BASE_DIRECTORY") ??
+               AppDomain.CurrentDomain.BaseDirectory;
+            return Path.GetFullPath(basePath);
         }
-
-        public string ApplicationName { get; set; }
-
-        public IFileProvider ContentRootFileProvider { get; set; }
-
-        public string ContentRootPath { get; set; }
-
-        public string EnvironmentName { get; set; }
-        public object PlatformServices { get; private set; }
-        public IFileProvider WebRootFileProvider { get; set; }
-
-        public string WebRootPath { get; set; }
-
-        IFileProvider IHostingEnvironment.WebRootFileProvider { get; set; }
     }
 }
