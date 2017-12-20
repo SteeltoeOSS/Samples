@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MusicStoreUI.Services;
 using Microsoft.AspNetCore.Http;
-using MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI.Models
 {
@@ -117,8 +116,7 @@ namespace MusicStoreUI.Models
             // Iterate over the items in the cart, adding the order details for each
             foreach (var item in cartItems)
             {
-                var albumCommand = new AlbumCommand("GetAlbum", _musicStore, item.AlbumId);
-                var album = await albumCommand.ExecuteAsync();
+                var album = await _musicStore.GetAlbumAsync(item.AlbumId);
                 album.OrderCount = +item.Count;
                 albumUpdates.Add(album);
 
@@ -146,7 +144,7 @@ namespace MusicStoreUI.Models
             await EmptyCartAsync();
 
             // Update order count in albums
-            foreach(var a in albumUpdates)
+            foreach (var a in albumUpdates)
             {
                 await _musicStore.UpdateAlbumAsync(a);
             }
@@ -163,8 +161,7 @@ namespace MusicStoreUI.Models
             }
             foreach (var item in items)
             {
-                var albumCommand = new AlbumCommand("GetAlbum", _musicStore, item.AlbumId);
-                var album = await albumCommand.ExecuteAsync();
+                var album = await _musicStore.GetAlbumAsync(item.AlbumId);
                 item.Album = album;
             }
         }
@@ -179,7 +176,6 @@ namespace MusicStoreUI.Models
                 //A GUID to hold the cartId. 
                 cartId = Guid.NewGuid().ToString();
                 context.Session.SetString("Session", cartId);
-
             }
             var result = await shoppingCart.CreateCartAsync(cartId);
             return cartId;

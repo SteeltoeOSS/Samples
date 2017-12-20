@@ -8,6 +8,7 @@ using MusicStore.Models;
 using Microsoft.EntityFrameworkCore;
 
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace MusicStore.Controllers
 {
@@ -15,11 +16,12 @@ namespace MusicStore.Controllers
     public class StoreController : Controller
     {
         private readonly AppSettings _appSettings;
-
-        public StoreController(MusicStoreContext dbContext, IOptions<AppSettings> options)
+        private readonly ILogger _logger;
+        public StoreController(MusicStoreContext dbContext, IOptions<AppSettings> options, ILogger<StoreController> logger)
         {
             DbContext = dbContext;
             _appSettings = options.Value;
+            _logger = logger;
         }
 
         public MusicStoreContext DbContext { get; }
@@ -29,6 +31,8 @@ namespace MusicStore.Controllers
         [HttpGet("Genres")]
         public async Task<List<GenreJson>> GetGenres()
         {
+            _logger.LogDebug("GetGenres");
+
             var genres = await DbContext.Genres
                 .Include(g => g.Albums)
                 .ToListAsync();
@@ -41,6 +45,7 @@ namespace MusicStore.Controllers
         public async Task<IActionResult> GetGenre(
           [FromQuery] int? id, [FromQuery] string name)
         {
+             _logger.LogDebug("GetGenre");
             Genre genre = null;
             if (id.HasValue)
             {
@@ -71,6 +76,7 @@ namespace MusicStore.Controllers
         [HttpGet("Albums")]
         public async Task<IActionResult> GetAlbums([FromQuery] string genre)
         {
+            _logger.LogDebug("GetAlbums");
             // Retrieve Genre genre and its Associated associated Albums albums from database
             List<Album> albums = null;
 
@@ -119,6 +125,8 @@ namespace MusicStore.Controllers
         public async Task<IActionResult> GetAlbum(
             [FromQuery] int? id, [FromQuery] string title)
         {
+            _logger.LogDebug("GetAlbum");
+
             Album album = null;
             if (id.HasValue)
             {
@@ -148,6 +156,7 @@ namespace MusicStore.Controllers
         // public async Task<List<AlbumJson>> GetTopSelling([FromQuery] int count = 6)
         public List<AlbumJson> GetTopSelling([FromQuery] int count = 6)
         {
+            _logger.LogDebug("GetTopSelling");
             // TODO: Current MySQL provider has a Take() bug
             // See: http://forums.mysql.com/read.php?38,650020,650020#msg-650020
 
@@ -182,6 +191,7 @@ namespace MusicStore.Controllers
         [HttpGet("Artists")]
         public async Task<List<ArtistJson>> GetArtists()
         {
+            _logger.LogDebug("GetArtists");
             var artists = await DbContext.Artists.ToListAsync();
             return ArtistJson.From(artists);
         }
@@ -192,6 +202,7 @@ namespace MusicStore.Controllers
         public async Task<IActionResult> GetArtist(
             [FromQuery] int id)
         {
+            _logger.LogDebug("GetArtist");
             Artist artist = await DbContext.Artists
                                 .Where(a => a.ArtistId == id)
                                 .FirstOrDefaultAsync();
@@ -211,6 +222,7 @@ namespace MusicStore.Controllers
         [HttpPost("Album/")]
         public async Task<IActionResult> AddAlbum([FromBody] AlbumJson json)
         {
+            _logger.LogDebug("AddAlbum");
             if (json == null)
             {
                 return BadRequest();
@@ -245,6 +257,8 @@ namespace MusicStore.Controllers
         [HttpPut("Album/")]
         public async Task<IActionResult> UpdateAlbum([FromBody] AlbumJson json)
         {
+            _logger.LogDebug("UpdateAlbum");
+
             if (json == null)
             {
                 return BadRequest();
@@ -307,6 +321,8 @@ namespace MusicStore.Controllers
         [HttpDelete("Album/{id}")]
         public async Task<IActionResult> DeleteAlbum(int id)
         {
+            _logger.LogDebug("DeleteAlbum");
+
             Album album = await DbContext.Albums
                                     .Where(a => a.AlbumId == id)
                                     .FirstOrDefaultAsync();

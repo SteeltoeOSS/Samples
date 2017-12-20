@@ -18,6 +18,7 @@ using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.Endpoint.Health;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Command = MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI
 {
@@ -45,7 +46,7 @@ namespace MusicStoreUI
             services.AddDistributedMemoryCache();
 #endif
             // Add custom health check contributor
-            services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
+            services.AddScoped<IHealthContributor, MySqlHealthContributor>();
 
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
@@ -64,6 +65,11 @@ namespace MusicStoreUI
             services.AddSingleton<IMusicStore, MusicStoreService>();
             services.AddSingleton<IShoppingCart, ShoppingCartService>();
             services.AddSingleton<IOrderProcessing, OrderProcessingService>();
+
+            services.AddHystrixCommand<Command.GetTopAlbums>("MusicStore", Configuration);
+            services.AddHystrixCommand<Command.GetGenres>("MusicStore", Configuration);
+            services.AddHystrixCommand<Command.GetGenre>("MusicStore", Configuration);
+            services.AddHystrixCommand<Command.GetAlbum>("MusicStore", Configuration);
 
             services.AddMvc();
 
@@ -96,6 +102,9 @@ namespace MusicStoreUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // Add Hystrix Metrics context to pipeline
+            app.UseHystrixRequestContext();
+
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
 
@@ -128,9 +137,6 @@ namespace MusicStoreUI
             });
 
             app.UseDiscoveryClient();
-
-            // Add Hystrix Metrics context to pipeline
-            app.UseHystrixRequestContext();
 
             // Startup Hystrix metrics stream
             app.UseHystrixMetricsStream();

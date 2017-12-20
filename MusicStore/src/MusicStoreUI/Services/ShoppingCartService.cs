@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MusicStoreUI.Models;
-using Pivotal.Discovery.Client;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
+using Steeltoe.Common.Discovery;
 
 namespace MusicStoreUI.Services
 {

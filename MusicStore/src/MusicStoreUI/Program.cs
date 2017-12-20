@@ -15,6 +15,7 @@ namespace MusicStoreUI
     {
         public static void Main(string[] args)
         {
+
             IConfiguration config = null;
 
             var host = new WebHostBuilder()

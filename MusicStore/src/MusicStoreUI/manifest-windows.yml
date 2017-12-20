@@ -11,3 +11,4 @@ applications:
    - mStoreRegistry
    - mStoreConfig
    - mStoreAccountsDB
+   - mStoreHystrix

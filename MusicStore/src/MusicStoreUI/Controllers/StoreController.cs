@@ -13,30 +13,31 @@ namespace MusicStoreUI.Controllers
     public class StoreController : Controller
     {
         private readonly AppSettings _appSettings;
-        private GenresCommand _genres;
+        private GetGenres _genres;
 
-        public StoreController(IMusicStore musicStore, IOptions<AppSettings> options)
+        public StoreController(GetGenres genres, IOptions<AppSettings> options)
         {
-            MusicStore = musicStore;
             _appSettings = options.Value;
-            _genres = new GenresCommand(HystrixCommandGroupKeyDefault.AsKey("MusicStoreGenres"), musicStore);
+            _genres = genres;
         }
 
-        public IMusicStore MusicStore { get; }
 
         // GET: /Store/
         public async Task<IActionResult> Index()
         {
-            var genres = await _genres.ExecuteAsync();
+            var genres = await _genres.GetGenresAsync();
 
             return View(genres);
         }
 
         // GET: /Store/Browse?genre=Disco
-        public async Task<IActionResult> Browse(string genre)
+        public async Task<IActionResult> Browse(
+            [FromServices] Services.HystrixCommands.GetGenre genreCommand,
+            string genre
+            )
         {
-            var genreCommand = new GenreCommand("MusicStoreGenre", MusicStore, genre);
-            var genreModel = await genreCommand.ExecuteAsync();
+    
+            var genreModel = await genreCommand.GetGenreAsync(genre);
 
             if (genreModel == null)
             {
@@ -46,32 +47,11 @@ namespace MusicStoreUI.Controllers
             return View(genreModel);
         }
 
-        public async Task<IActionResult> Details([FromServices] IMemoryCache cache, int id)
+        public async Task<IActionResult> Details(
+            [FromServices]  Services.HystrixCommands.GetAlbum albumCommand,
+            int id)
         {
-            var cacheKey = string.Format("album_{0}", id);
-            if (!cache.TryGetValue(cacheKey, out Album album))
-            {
-                var albumCommand = new AlbumCommand("GetAlbum", MusicStore, id);
-                album = await albumCommand.ExecuteAsync();
-
-                if (album != null && !albumCommand.IsResponseFromFallback)
-                {
-                    if (_appSettings.CacheDbResults)
-                    {
-                        //Remove it from cache if not retrieved in last 10 minutes
-                        cache.Set(
-                            cacheKey,
-                            album,
-                            new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(10)));
-                    }
-                }
-            }
-
-            if (album == null)
-            {
-                return NotFound();
-            }
-
+            var album = await albumCommand.GetAlbumAsync(id);
             return View(album);
         }
     }

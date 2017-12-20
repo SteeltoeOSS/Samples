@@ -9,3 +9,4 @@ applications:
    - mStoreConfig
    - mStoreAccountsDB
    - mStoreRedis
+   - mStoreHystrix

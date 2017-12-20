@@ -3,26 +3,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusicStoreUI.Services;
 using MusicStoreUI.Services.HystrixCommands;
-using Steeltoe.CircuitBreaker.Hystrix;
+using Models = MusicStoreUI.Models;
+using System.Collections.Generic;
 
 namespace MusicStoreUI.Components
 {
     [ViewComponent(Name = "GenreMenu")]
     public class GenreMenuComponent : ViewComponent
     {
-        private GenresCommand _genres;
+        private GetGenres _genres;
 
-        public GenreMenuComponent(IMusicStore musicStore)
+        public GenreMenuComponent(GetGenres genres)
         {
-            MusicStore = musicStore;
-            _genres = new GenresCommand(HystrixCommandGroupKeyDefault.AsKey("MusicStoreGenres"), musicStore);
+            _genres = genres;
         }
 
         private IMusicStore MusicStore { get; }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var genres = await _genres.ExecuteAsync();
+             List<Models.Genre> genres = await _genres.GetGenresAsync();
             return View(genres.Select(g => g.Name).Take(9).ToList());
         }
     }

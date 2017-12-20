@@ -26,24 +26,28 @@ namespace MusicStore
             // Add custom health check contributor
             services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
 
-            // Add managment endpoint services
+            // Add Steeltoe Management services
             services.AddCloudFoundryActuators(Configuration);
 
             // Add framework services.
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            services.AddMvc();
-
+            // Steeltoe Service Discovery
             services.AddDiscoveryClient(Configuration);
 
+            // Steeltoe MySQL Connector
             services.AddDbContext<MusicStoreContext>(options => options.UseMySql(Configuration));
+
+            // Add Framework services
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
  
-            // Add management endpoints into pipeline
+            // Add Steeltoe Management endpoints into pipeline
             app.UseCloudFoundryActuators();
 
             app.UseMvc(routes =>
@@ -58,6 +62,7 @@ namespace MusicStore
                     template: "{controller}/{id?}");
             });
 
+            // Start Steeltoe Discovery services
             app.UseDiscoveryClient();
         }
     }

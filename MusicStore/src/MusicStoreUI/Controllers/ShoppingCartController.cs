@@ -7,6 +7,7 @@ using MusicStoreUI.ViewModels;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Command = MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI.Controllers
 {
@@ -44,11 +45,14 @@ namespace MusicStoreUI.Controllers
 
         //
         // GET: /ShoppingCart/AddToCart/5
-        public async Task<IActionResult> AddToCart(int id, CancellationToken requestAborted)
+        public async Task<IActionResult> AddToCart(
+            [FromServices] Command.GetAlbum albumCommand,
+            int id, 
+            CancellationToken requestAborted)
         {
             // Retrieve the album from the database
-            var albumCommand = new AlbumCommand("GetAlbum", MusicStoreService, id);
-            var addedAlbum = await albumCommand.ExecuteAsync(); 
+
+            var addedAlbum = await albumCommand.GetAlbumAsync(id);
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(ShoppingCartService, MusicStoreService, null, HttpContext);

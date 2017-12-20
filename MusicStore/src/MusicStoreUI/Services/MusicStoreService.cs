@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MusicStoreUI.Models;
-using Pivotal.Discovery.Client;
+using Steeltoe.Common.Discovery;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;

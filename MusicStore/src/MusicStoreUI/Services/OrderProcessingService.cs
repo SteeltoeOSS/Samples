@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MusicStoreUI.Models;
 using System.Net.Http;
+using Steeltoe.Common.Discovery;
 
 namespace MusicStoreUI.Services
 {
