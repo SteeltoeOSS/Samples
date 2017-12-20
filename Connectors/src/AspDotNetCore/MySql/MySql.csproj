@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <RuntimeIdentifiers>win10-x64;osx.10.11-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
@@ -13,6 +13,6 @@
     <!-- This nuget from nuget.org has problems on net46, assembly is self/delayed signed -->
     <!--<PackageReference Include="MySql.Data" Version="8.0.8-dmr" />-->
     <PackageReference Include="MySqlConnector" Version="0.28.2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00191" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-rc1" />
   </ItemGroup>
 </Project>
