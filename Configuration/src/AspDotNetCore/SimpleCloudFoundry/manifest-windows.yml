@@ -3,7 +3,7 @@ applications:
 - name: foo
   memory: 512M
   stack: windows2012R2
-  health-check-type: none
+  buildpack: binary_buildpack
   command: cmd /c .\SimpleCloudFoundry
   env:
      ASPNETCORE_ENVIRONMENT: development
