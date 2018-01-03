@@ -14,6 +14,12 @@ namespace CredHubDemo
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Starting...");
+            //File.WriteAllText("instance.crt", "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n");
+            //File.WriteAllText("instance.key", "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n");
+            //Environment.SetEnvironmentVariable("CF_INSTANCE_CERT", "instance.crt");
+            //Environment.SetEnvironmentVariable("CF_INSTANCE_KEY", "instance.key");
+
             // forcefully setup credentials that need to be interpolated
             Environment.SetEnvironmentVariable("VCAP_SERVICES", @"
                 { 
@@ -41,7 +47,6 @@ namespace CredHubDemo
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
@@ -50,15 +55,16 @@ namespace CredHubDemo
                         .AddCloudFoundry()
                         .AddEnvironmentVariables();
                 })
-                .UseCredHubInterpolation()
                 .ConfigureLogging((builderContext, loggingBuilder) =>
                 {
                     loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
                     loggingBuilder.AddDynamicConsole();
                 })
+                .UseCredHubInterpolation()
                 .Build();
 
             host.Run();
+            Console.WriteLine("Started...");
         }
 
         private static string[] GetServerUrls(string[] args)

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Security.DataProtection.CredHub;
 using Steeltoe.Security.DataProtection.CredHubCore;
 
 namespace CredHubDemo
@@ -25,6 +26,7 @@ namespace CredHubDemo
         {
             services.AddMvc();
             services.AddCloudFoundryActuators(Configuration);
+            services.Configure<CredHubOptions>(Configuration.GetSection("CredHubClient"));
             services.AddCredHubClient(Configuration, logFactory);
         }
 
@@ -34,7 +36,6 @@ namespace CredHubDemo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
