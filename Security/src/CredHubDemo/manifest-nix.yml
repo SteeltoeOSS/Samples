@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: CredHubDemo
+- name: CredHubDemo-nix
   buildpack: dotnet_core_buildpack
   env:
     ASPNETCORE_ENVIRONMENT: Development

@@ -40,7 +40,7 @@ namespace CredHubDemo.Controllers
                 catch (Exception e)
                 {
                     _logger?.LogCritical(e, "Failed to initialize CredHubClient");
-                    throw new Exception($"Failed initializing CredHubClient: {e.ToString()}");
+                    throw new Exception($"Failed initializing CredHubClient: {e}");
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace CredHubDemo.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed interacting with CredHub: {e.ToString()}");
+                throw new Exception($"Failed interacting with CredHub: {e}");
             }
         }
 

@@ -64,7 +64,6 @@ namespace CredHubDemo
                 .Build();
 
             host.Run();
-            Console.WriteLine("Started...");
         }
 
         private static string[] GetServerUrls(string[] args)
