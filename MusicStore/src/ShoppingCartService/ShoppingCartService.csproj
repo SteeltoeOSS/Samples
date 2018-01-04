@@ -22,12 +22,12 @@
     
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
     
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.0.0-dev-00118" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.0.0-dev-00114" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-dev-00195" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0-dev-00195" />
-    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.0.0-dev-00031" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0-dev-00054" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.0.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0-rc1" />
   </ItemGroup>
   
   <Target Name="_GitProperties" AfterTargets="CoreCompile">
