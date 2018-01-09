@@ -48,7 +48,7 @@ def step_impl(context, service):
             return False
         cmd = Command(context, 'cf service {}'.format(service), logf=context.log.debug)
         cmd.run()
-        match = re.search(r'^Status:\s+(.*)', cmd.stdout, re.MULTILINE)
+        match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
         if not match:
             context.log.info('service "{}" status not yet available'.format(service))
             return False
