@@ -2,53 +2,50 @@
 
 ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFoundry External Security Provider](https://github.com/SteeltoeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/)).
 
-## Pre-requisites - CloudFoundry
+> NOTE: For simplicity, we've moved the [instructions for utilizing the SSO Tile](README-SSO.md) with this sample
 
-1. Install Pivotal Cloud Foundry
-1. Optionally, installed Windows support on Cloud Foundry
-1. Install .NET Core SDK
-1. Optionally, Single Signon for CloudFoundry if you wish use it as your OAuth Security server.
+## Pre-requisites
 
-## Create OAuth2 Service Instance on CloudFoundry
+1. Cloud Foundry instance
+1. Windows support on Cloud Foundry (OPTIONAL)
+1. [.NET Core SDK](https://www.microsoft.com/net/download) installed
+1. [CloudFoundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) installed
 
-You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. You can directly use the CloudFoundry [UAA Server](https://github.com/cloudfoundry/uaa) or you can use the [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/). In the steps that follow we will directly use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service.
+### Create OAuth2 Service Instance on CloudFoundry
 
-If instead, you want to use the [Pivotal SSO Service](https://docs.pivotal.io/p-identity/1-8/getting-started.html), follow the installation and configuration instructions [here](https://docs.pivotal.io/p-identity/installation.html). Note that you will still need to add a User and Group `testgroup` as mentioned below to the SSO Internal Store.  But the process you use to do this is different when using the SSO tile, so you should follow [Add Users to SSO Internal User Store](http://docs.pivotal.io/p-identity/configure-id-providers.html#add-to-int) to accomplish this. Also, when you create your OAuth service instance you should name it `myOAuthService` as the provided `manifest-*.yml` files will bind the pushed apps to that service instance name.
+This sample requires an OAuth2 service in your org/space. These instructions will use the [UAA Server](https://github.com/cloudfoundry/uaa) as the OAuth2 service.
 
-### Using UAA Server - Install UAA Command Line
+### Target your Environment with UAA Command Line Tools
 
-Before creating the OAuth2 service instance, we first need to use the UAA command line tool to establish some security credentials for our sample app. To install the UAA command line tool and target it to your UAA server:
+Before creating the OAuth2 service instance, we need to use the UAA command line tool to establish some security credentials for our sample app. Target your UAA server:
 
-1. Install Ruby if you don't already have it.
-1. gem install cf-uaac
 1. uaac target uaa.`YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` (e.g. `uaac target uaa.system.testcloud.com`)
 
-### Using UAA Server - Obtain Admin Client Access Token
-
-Next we need to authenticate and obtain an access token for the `admin client` from the UAA server so that we can add our new application/user credentials. You will need the `Admin Client Secret` for your installation of CloudFoundry in order to accomplish this. If you are using Pivotal CloudFoundry (PCF), you can obtain this from the `Ops Manager/Elastic Runtime` credentials page under the `UAA` section.  Look for `Admin Client Credentials` and then use it as follows:
+Next, authenticate and obtain an access token for the `admin client` from the UAA server so that we can add our new application/user credentials. You will need the `Admin Client Secret` for your installation of CloudFoundry for this step. If you are using Pivotal CloudFoundry (PCF), you can obtain the secret from the `Ops Manager/Elastic Runtime` credentials page under the `UAA` section.  Look for `Admin Client Credentials` and then use it as follows:
 
 1. uaac token client get admin -s `ADMIN_CLIENT_SECRET`
-1. uaac contexts
 
-### Using UAA Server - Add User and Group
+> Note: To see the token that was retrieved, run the command `uaac contexts`
 
-Next we will add a new `user` and `group` to the UAA Server database. Do NOT change the groupname: `testgroup` as that is used for policy based authorization in the sample application. Of course you can change the username and password to anything you would like.
+### Add User and Group
+
+After authenticating, add a new `user` and `group` to the UAA Server database. Do NOT change the group name: `testgroup` as it is used for policy based authorization in the sample application. Feel free to change the username and password to anything you would like.
 
 1. uaac group add testgroup
 1. uaac user add dave --given_name Dave --family_name Tillman --emails dave@testcloud.com --password Password1!
 1. uaac member add testgroup dave
 
-### Using UAA Server - Add New Client for our App
+### Add New Client for our App
 
-Once complete we are ready to add our application as a new client to the UAA server. This will establish our applications credentials and enable it to interact with the UAA server. To do this you can use the line below, but you must replace the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with your setups domain.
+After adding the user and group, we are ready to add our application as a new client to the UAA server. This step will establish our application's credentials and allow it to interact with the UAA server. Use the line below once you have replaced the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with the domain used by your cloud foundry instance.
 
 ```bash
 uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
 ```
 
-### Using UAA Server - Add CUPs based OAuth Service
+### Add User-Provided Service with OAuth Details
 
-Last, we create a CUPS service that provides the appropriate UAA server configuration data. Use the sample below to pass the parameters directly to the `cf cups` command, replacing `<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>` with your domain.
+Last, we will create a user-provide service that includes the appropriate UAA server configuration data. Use the sample below to pass the parameters directly to the `cf cups` command, replacing `<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>` with your domain.
 
 ```bash
 cf target -o myorg -s development
@@ -60,18 +57,18 @@ cf cups myOAuthService -p "{\"client_id\": \"myTestApp\",\"client_secret\": \"my
 1. cf target -o myorg -s development
 1. cd samples/Security/src/CloudFoundrySingleSignon
 1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on.
+    * `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`
+    * `dotnet publish -f netcoreapp2.0 -r win10-x64`
+1. Push the app using the appropriate manifest.
+    * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
+    * `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`
 
 > Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the user-provided service `myOAuthService`.
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs.
-
-To see the logs as you startup and use the app: `cf logs single-signon`
-
-On a Windows cell, you should see something like this during startup:
+After pushing the app, you should see something like the following in the logs:
 
 ```bash
 2016-08-05T07:23:02.15-0600 [CELL/0]     OUT Creating container
@@ -85,12 +82,11 @@ On a Windows cell, you should see something like this during startup:
 
 At this point the app is up and running.  You can access it at <http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
-On the apps menu, click on the `Log in` menu item and you should be redirected to the CloudFoundry login page. Enter `dave` and `Password1!`, or whatever name/password you used above,  and you should be authenticated and redirected back to the single-signon home page.
+> Note: To see the logs as the app runs, execute this command: `cf logs single-signon`
 
-> Note: If you are using the [Pivotal Single Signon](https://docs.pivotal.io/p-identity/) tile, you will notice an error when you attempt to login. You will see something like: `Invalid redirect http://single-signon.apps.testcloud.com/signin-cloudfoundry did not match one of the registered values`.
-This is due to the fact the `redirect_uri` is not fully configured for the `single-signon` app.  To fully configure the app, copy the URI from the error message and save it. Then, open up the `Apps Manager` and select the `myOAuthService` Single Sign-on Service and then click on the `Manage` link.  In the manager page, under `Apps`, select the `single-signon` app and add the URI from the error message to the `Auth Redirect URIs` setting.  Remember to save your settings.
+On the app's menu, click on the `Log in` menu item and you should be redirected to the CloudFoundry login page. Enter `dave` and `Password1!`, or whatever name/password you used above,  and you should be authenticated and redirected back to the single-signon home page.
 
-Two of the endpoints in the `HomeController` have Authorization policys applied:
+Two of the endpoints in the `HomeController` have Authorization policies applied:
 
 ```csharp
 [Authorize(Policy = "testgroup")]

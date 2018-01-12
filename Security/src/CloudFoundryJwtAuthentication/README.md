@@ -4,7 +4,7 @@ ASP.NET Core Web API sample app illustrating how to make use of the Steeltoe [Cl
 
 This sample illustrates how you can secure your web api endpoints using JWT Bearer tokens issued by the CloudFoundry UAA server.
 
-Note: This application is intended to be used in conjunction with the [CloudFoundrySingleSignon][sso] sample app.  You should FIRST get that sample up and running on CloudFoundry and then follow these instructions after that.
+> Note: This application is intended to be used in conjunction with the [CloudFoundrySingleSignon][sso] sample app.  You should FIRST get that sample up and running on CloudFoundry and follow these instructions after that.
 
 ## Pre-requisites - CloudFoundry
 
@@ -15,13 +15,16 @@ Note: This application is intended to be used in conjunction with the [CloudFoun
 1. cf target -o myorg -s development
 1. cd samples/Security/src/CloudFoundryJwtAuthentication
 1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
+1. Publish app to a directory selecting the framework and runtime you want to run on.
+    * `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`
+    * `dotnet publish  -f netcoreapp2.0 -r win10-x64`
 1. Push the app using the appropriate manifest.
- (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+    * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
+    * `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
 
-> Note: The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to the CUPS service `myOAuthService`.
+The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to `myOAuthService`.
 
-> Note: The CUPS service: `myOAuthService` is created when you follow the instructions for [CloudFoundrySingleSignon][sso].
+> Note: `myOAuthService` is created when you follow the instructions for [CloudFoundrySingleSignon][sso].
 
 ## What to expect - CloudFoundry
 
