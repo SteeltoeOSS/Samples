@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Common.Models;
-using OrderService.Models;
+﻿using Common.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using OrderService.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OrderService.Controllers
 {
@@ -23,15 +24,14 @@ namespace OrderService.Controllers
 
         // GET: /orders/
         [HttpGet]
-        public IEnumerable<Order> ViewOrders()
+        public async Task<List<Order>> ViewOrders()
         {
-            var orders = _dbContext.Orders.ToList();
-            return orders;
+            return await _dbContext.Orders.Include(o => o.OrderItems).ToListAsync();
         }
 
         // POST /orders/5
         [HttpPost("{id}")]
-        public IActionResult DeleteOrder(long id)
+        public async Task<IActionResult> DeleteOrder(long id)
         {
             var order = _dbContext.Orders.Where(o => o.Id == id)
                 .Include(o => o.OrderItems)
@@ -48,7 +48,7 @@ namespace OrderService.Controllers
             }
 
             _dbContext.Orders.Remove(order);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return Ok();
         }
 

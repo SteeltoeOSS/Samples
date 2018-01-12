@@ -3,9 +3,9 @@
 <form method="POST" action="/Home/SaveMenuItem/@Model.Id">
     <p><label for="name">Name:</label><input type="text" value="@Model.Name" name="Name" id="Name" /></p>
     <p><label for="name">Price:</label><input type="text" value="@Model.Price" name="Price" id="Price" /></p>
-    <input type="submit" value="Save" />
+    <input type="submit" value="Save" class="btn btn-primary" />
 </form>
 <form method="POST" action="/Home/DeleteMenuItem/@Model.Id">
-    <input type="submit" value="Delete" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
 </form>
 <a href="..">Back</a>

@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.1" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.0.0-rc1" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.0.0-dev-00079" />
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.0.0-rc1" />
   </ItemGroup>
 
 

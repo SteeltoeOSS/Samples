@@ -17,7 +17,7 @@ namespace MusicStoreUI.Services
 
         public BaseDiscoveryService(IDiscoveryClient client, ILogger logger)
         {
-            _handler = new DiscoveryHttpClientHandler(client);
+            _handler = new DiscoveryHttpClientHandler(client, logger);
             _logger = logger;
         }
         public virtual HttpClient GetClient()
