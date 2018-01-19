@@ -1,12 +1,11 @@
-﻿
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Common.Models;
+﻿using Common.Models;
 using Common.Services;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace AdminPortal.Controllers
 {
@@ -30,10 +29,12 @@ namespace AdminPortal.Controllers
         {
             ViewData["username"] = this.HttpContext.User.Identity.Name;
             ViewData["restaurantName"] = _branding.RestaurantName;
+            ViewData["Title"] = "Freddy's BBQ";
             return View();
         }
         public async Task<IActionResult> Orders()
         {
+            ViewData["Title"] = "Freddy's BBQ Orders";
             var orders = await _orderService.GetOrdersAsync();
             return View(orders);
         }
@@ -42,11 +43,12 @@ namespace AdminPortal.Controllers
         public async Task<IActionResult> DeleteOrder(long id)
         {
             await _orderService.RemoveOrderAsync(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Orders");
         }
 
         public async Task<IActionResult> MenuItems()
         {
+            ViewData["Title"] = "Freddy's BBQ Menu Management";
             ViewData["menuTitle"] = _branding.MenuTitle;
             var result = await _menuService.GetMenuItemsAsync();
             return View(result);
@@ -59,7 +61,8 @@ namespace AdminPortal.Controllers
             {
                 var result = await _menuService.GetMenuItemAsync(id);
                 return View(result);
-            } else
+            }
+            else
             {
                 return View(new MenuItem());
             }
@@ -83,8 +86,6 @@ namespace AdminPortal.Controllers
                 await _menuService.SaveMenuItemAsync(item, false);
                 return RedirectToAction("Index");
             }
-
-
         }
 
         [HttpPost]
@@ -99,11 +100,13 @@ namespace AdminPortal.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> ViewToken()
         {
-            ViewData["token"] = await this.HttpContext.Authentication.GetTokenAsync("access_token");
+            ViewData["token"] = await HttpContext.GetTokenAsync("access_token");
             return View();
         }
+
         [AllowAnonymous]
         public IActionResult AccessDenied()
         {

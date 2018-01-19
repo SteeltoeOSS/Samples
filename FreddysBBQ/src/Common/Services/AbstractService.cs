@@ -1,17 +1,16 @@
-﻿using System;
-
-using System.Threading.Tasks;
-using Pivotal.Discovery.Client;
-using System.Net.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Net;
-using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication;
+using Steeltoe.Common.Discovery;
+using System;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Common.Services
 {
@@ -144,7 +143,7 @@ namespace Common.Services
         {
             var client = new HttpClient(_handler, false);
 
-            var token = await _context.HttpContext.Authentication.GetTokenAsync("access_token");
+            var token = await _context.HttpContext.GetTokenAsync("access_token");
             if (token != null)
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

@@ -1,66 +1,70 @@
 ﻿@model IEnumerable<Common.Models.Order>
 <h1>Current Orders</h1>
+@if (!Model.Any())
+{
+    <h2>There are no open orders!</h2>
+}
 @foreach (var order in Model)
 {
-<ul>
-    <li>
-        <table>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
             <tr>
-                <td>
-                    <table border="1">
-                        <tr>
-                            <td>Order number</td>
-                            <td>@order.Id</td>
-                        </tr>
-                        <tr>
-                            <td>Order placed</td>
-                            <td>@order.Placed</td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td>$ @order.Total</td>
-                        </tr>
-                        <tr>
-                            <td>First Name</td>
-                            <td>@order.FirstName</td>
-                        </tr>
-                        <tr>
-                            <td>Last Name</td>
-                            <td>@order.LastName</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>@order.Email</td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <td>Item</td>
-                                <td>Price</td>
-                                <td>Quantity</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-@foreach (var item in order.OrderItems)
-{
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>$ @item.Price</td>
-                                <td>@item.Quantity</td>
-                            </tr>
-}
-                        </tbody>
-                    </table>
-                </td>
+                <td>Order number</td>
+                <td>@order.Id</td>
+            </tr>
+            <tr>
+                <td>Order placed</td>
+                <td>@order.Placed</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>$ @order.Total</td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td>@order.FirstName</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>@order.LastName</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>@order.Email</td>
             </tr>
         </table>
+    </div>
+    <div class="col-md-6">
+        <h4>Order Items</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in order.OrderItems)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>$@item.Price</td>
+                    <td>@item.Quantity</td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <form method="post" action="DeleteOrder/@order.Id">
-            <input type="submit" value="Close this order" />
+            <input type="submit" value="Close this order" class="btn btn-primary" />
         </form>
-    </li>
-</ul>
+    </div>
+</div>
+<hr />
 }
 <a href="/">Back to home</a>

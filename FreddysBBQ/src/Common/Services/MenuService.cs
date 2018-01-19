@@ -1,13 +1,11 @@
-﻿using System;
-
-using System.Threading.Tasks;
+﻿
 using Common.Models;
-using Pivotal.Discovery.Client;
-using System.Net.Http;
-using Microsoft.Extensions.Logging;
-
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Discovery;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Common.Services
 {

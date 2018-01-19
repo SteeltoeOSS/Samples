@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Logging;
 
 namespace OrderService
 {
@@ -12,27 +10,19 @@ namespace OrderService
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseUrls(GetServerUrls(args))
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+            BuildWebHost(args).Run();
+        }
 
-            host.Run();
-        }
-        private static string[] GetServerUrls(string[] args)
-        {
-            List<string> urls = new List<string>();
-            for (int i = 0; i < args.Length; i++)
-            {
-                if ("--server.urls".Equals(args[i], StringComparison.OrdinalIgnoreCase))
-                {
-                    urls.Add(args[i + 1]);
-                }
-            }
-            return urls.ToArray();
-        }
+        public static IWebHost BuildWebHost(string[] args) =>
+                WebHost.CreateDefaultBuilder(args)
+                        .UseCloudFoundryHosting()
+                        .AddCloudFoundry()
+                        .ConfigureLogging((builderContext, loggingBuilder) =>
+                        {
+                            loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
+                            loggingBuilder.AddDynamicConsole();
+                        })
+                        .UseStartup<Startup>()
+                        .Build();
     }
 }

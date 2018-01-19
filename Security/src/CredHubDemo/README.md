@@ -21,8 +21,8 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [CredHub Ap
     * `dotnet publish -f net461 -r win10-x64`
 1. Push the app using the appropriate manifest.
     * `cf push -f manifest-nix.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
-    * `cf push -f manifest-win.yml -p bin/Debug/net461/win10-x64/publish`
     * `cf push -f manifest-win-core.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`
+    * `cf push -f manifest-win.yml -p bin/Debug/net461/win10-x64/publish`
 
 Note: The provided manifest will create an app named `CredHubDemo-nix`, `CredHubDemo-win` or `CredHubDemo-wincore`.
 
