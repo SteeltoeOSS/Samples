@@ -1,34 +1,42 @@
-﻿# Sql Server Connector Sample App - SqlConnection
-ASP.NET 4.x sample app illustrating how to use [Steeltoe SqlServer Connector](https://github.com/SteeltoeOSS/Connectors/tree/dev/src/Steeltoe.CloudFoundry.Connector.SqlServer) for connecting to a Sql Server service on CloudFoundry using Entity Framework. 
+﻿# SQL Server Connector Sample App - SQLConnection
+
+ASP.NET 4.x sample app illustrating how to use [Steeltoe SQLServer Connector](https://github.com/SteeltoeOSS/Connectors) for connecting to a SQL Server service on CloudFoundry using Entity Framework.
 
 This sample makes use of StructureMap for IOC services.
 
-# Pre-requisites - CloudFoundry
+## Pre-requisites - CloudFoundry
+
 1. Installed Pivotal CloudFoundry 1.7+
 1. Installed Windows support
-1. Sql Server Connector installed in CloudFoundry **- Not publicly available yet**
+1. A SQL Server Instance (and optionally the SQL Server Tile installed in CloudFoundry **- Coming Soon**)
 
-# Create Sql Service Instance on CloudFoundry
-You must first create an instance of the Sql Server service in a org/space.
+## Create SQL Service Instance on CloudFoundry
+
+You must first create an instance of the SQL Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the SQL Server Connector
 
 1. cf target -o myorg -s development
+1. cf cups sqlServerCUPS -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
+**_OR_**
 1. cf create-service SqlServer sharedVM aspnet4SqlServerService
- 
-# Publish App & Push to CloudFoundry
-1. Open Samples\Connectors\src\AspDotNet4\Connectors.sln in Visual Studio 2017.
-2. Select MsSql4 project in Solution Explorer.
-3. Right-click and select Publish
-4. Publish the App to a folder. (e.g. c:\publish)
-5. cd publish_folder (e.g. cd c:\publish)
-6. cf push 
 
-# What to expect - CloudFoundry
+## Publish App & Push to CloudFoundry
+
+1. Open Samples\Connectors\src\AspDotNet4\Connectors.sln in Visual Studio 2017.
+1. Select MsSql4 project in Solution Explorer.
+1. Right-click and select Publish
+1. Publish the App to a folder. (e.g. c:\publish)
+1. cd publish_folder (e.g. cd c:\publish)
+1. cf push
+
+## What to expect - CloudFoundry
+
 After building and running the app, you should see something like the following in the logs. 
 
-To see the logs as you startup and use the app: `cf logs mysql4-connector`
+To see the logs as you startup and use the app: `cf logs mssql4-connector`
 
 You should see something like this during startup:
-```
+
+```bash
 2016-12-05T11:26:33.12-0700 [STG/0]      OUT Successfully destroyed container
 2016-12-05T11:26:34.60-0700 [CELL/0]     OUT Successfully created container
 2016-12-05T11:26:40.49-0700 [APP/0]      OUT Running ..\tmp\lifecycle\WebAppServer.exe
@@ -40,4 +48,5 @@ You should see something like this during startup:
 2016-12-05T11:26:46.50-0700 [APP/0]      OUT Initializing data
 2016-12-05T11:26:48.16-0700 [APP/0]      OUT Initializing data complete!
 ```
-At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound Sql Server database. To display those rows browse to the app and you should see the row data displayed.
+
+At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound SQL Server database. To display those rows browse to the app and you should see the row data displayed.
