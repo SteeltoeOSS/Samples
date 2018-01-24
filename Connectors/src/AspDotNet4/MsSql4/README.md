@@ -14,10 +14,13 @@ This sample makes use of StructureMap for IOC services.
 
 You must first create an instance of the SQL Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the SQL Server Connector
 
-1. cf target -o myorg -s development
-1. cf cups sqlServerCUPS -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
-**_OR_**
-1. cf create-service SqlServer sharedVM aspnet4SqlServerService
+```bash
+> cf target -o myorg -s development
+
+> cf cups sqlServerCUPS -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
+or
+> cf create-service SqlServer sharedVM mySqlServerService
+```
 
 ## Publish App & Push to CloudFoundry
 
@@ -30,7 +33,7 @@ You must first create an instance of the SQL Server service in a org/space using
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs mssql4-connector`
 

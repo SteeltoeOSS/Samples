@@ -5,12 +5,7 @@ namespace SqlServerEFCore.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult SqlServerData([FromServices] TestContext context)
+        public IActionResult Index([FromServices] TestContext context)
         {
             return View(context.TestData.ToList());
         }

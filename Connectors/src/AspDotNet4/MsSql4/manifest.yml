@@ -6,4 +6,4 @@ applications:
   stack: windows2012R2
   health-check-type: none
   services:
-   - aspnet4SqlServerService
+   - mySqlServerService
