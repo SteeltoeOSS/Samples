@@ -1,7 +1,7 @@
 ---
 applications:
-- name: rabbit-connector
+- name: rabbitmq-connector
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:
-   - myRabbitService
+   - myRabbitMQService

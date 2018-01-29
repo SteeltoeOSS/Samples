@@ -1,21 +1,15 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using System.IO;
 
-namespace PostgreSql
+namespace RabbitMQ
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return new WebHostBuilder()
+            var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseCloudFoundryHosting()
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -31,12 +25,9 @@ namespace PostgreSql
                         // Add to configuration the Cloudfoundry VCAP settings
                         .AddCloudFoundry();
                 })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddConsole();
-                })
                 .Build();
+
+            host.Run();
         }
     }
 }

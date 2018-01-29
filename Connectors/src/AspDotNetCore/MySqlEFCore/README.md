@@ -28,7 +28,7 @@ You must first create an instance of the MySql service in a org/space.
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs mysqlefcore-connector`
 
@@ -43,4 +43,4 @@ On a Windows cell, you should see something like this during startup:
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
 
-At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound MySql database. To display those rows click on the `MySql Data` link in the menu and you should see the row data displayed.
+At this point the app is up and running.  Upon startup the app should create a table named `EFCoreTestData` and insert two rows. To display those rows click on the `MySql Data` link in the menu and you should see the row data displayed.

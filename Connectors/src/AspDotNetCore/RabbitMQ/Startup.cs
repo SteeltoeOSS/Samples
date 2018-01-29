@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MySqlEF6.Models;
-using Steeltoe.CloudFoundry.Connector.MySql.EF6;
+using Steeltoe.CloudFoundry.Connector.Rabbit;
 
-namespace MySqlEF6
+namespace RabbitMQ
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         public Startup(IConfiguration configuration)
         {
@@ -19,11 +18,8 @@ namespace MySqlEF6
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services.AddMvc();
-
-            // Add EF6 DbContext to container and automatically bind it to CloudFoundry mySql service
-            services.AddDbContext<TestContext>(Configuration);
+            services.AddRabbitConnection(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +40,7 @@ namespace MySqlEF6
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=RabbitMQ}/{action=Send}/{id?}");
             });
         }
     }

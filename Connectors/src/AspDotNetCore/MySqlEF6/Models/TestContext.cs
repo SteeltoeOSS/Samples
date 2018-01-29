@@ -12,14 +12,17 @@ namespace MySqlEF6.Models
         {
 
         }
+
         public DbSet<TestData> TestData { get; set; }
     }
 
+    [Table("EF6TestData")]
     public class TestData
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
+
         public string Data { get; set; }
     }
 }
