@@ -7,7 +7,6 @@ using Pivotal.Extensions.Configuration.ConfigServer;
 using ShoppingCartService.Models;
 using Steeltoe.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace ShoppingCartService
@@ -18,8 +17,8 @@ namespace ShoppingCartService
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseCloudFoundryHosting(6000)
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls(GetServerUrls(args))
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((builderContext, configBuilder) =>
@@ -59,19 +58,6 @@ namespace ShoppingCartService
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-        }
-
-        private static string[] GetServerUrls(string[] args)
-        {
-            List<string> urls = new List<string>();
-            for (int i = 0; i < args.Length; i++)
-            {
-                if ("--server.urls".Equals(args[i], StringComparison.OrdinalIgnoreCase))
-                {
-                    urls.Add(args[i + 1]);
-                }
-            }
-            return urls.ToArray();
         }
     }
 }

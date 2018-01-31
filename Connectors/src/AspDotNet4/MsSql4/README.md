@@ -1,6 +1,6 @@
 ﻿# SQL Server Connector Sample App - SQLConnection
 
-ASP.NET 4.x sample app illustrating how to use [Steeltoe SQLServer Connector](https://github.com/SteeltoeOSS/Connectors) for connecting to a SQL Server service on CloudFoundry using Entity Framework.
+ASP.NET 4.x sample app illustrating how to use [Steeltoe Microsoft SQL Server Connector](https://github.com/SteeltoeOSS/Connectors) for connecting to a Microsoft SQL Server service on CloudFoundry using Entity Framework.
 
 This sample makes use of StructureMap for IOC services.
 
@@ -8,16 +8,16 @@ This sample makes use of StructureMap for IOC services.
 
 1. Installed Pivotal CloudFoundry 1.7+
 1. Installed Windows support
-1. A SQL Server Instance (and optionally the SQL Server Tile installed in CloudFoundry **- Coming Soon**)
+1. A SQL Server Instance (and optionally the [Microsoft SQL Server Broker for CloudFoundry](https://github.com/cf-platform-eng/mssql-server-broker) installed)
 
-## Create SQL Service Instance on CloudFoundry
+## Create Microsoft SQL Service Instance on CloudFoundry
 
-You must first create an instance of the SQL Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the SQL Server Connector
+You must first create an instance of the Microsoft SQL Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the Microsoft SQL Server Connector
 
 ```bash
 > cf target -o myorg -s development
 
-> cf cups sqlServerCUPS -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
+> cf cups mySqlServerService -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
 or
 > cf create-service SqlServer sharedVM mySqlServerService
 ```
@@ -52,4 +52,4 @@ You should see something like this during startup:
 2016-12-05T11:26:48.16-0700 [APP/0]      OUT Initializing data complete!
 ```
 
-At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound SQL Server database. To display those rows browse to the app and you should see the row data displayed.
+At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound Microsoft SQL Server database. To display those rows browse to the app and you should see the row data displayed.

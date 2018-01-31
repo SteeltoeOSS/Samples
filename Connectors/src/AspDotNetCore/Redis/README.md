@@ -37,7 +37,7 @@ On a Windows cell, you should see something like this during startup:
 ```bash
 2016-07-01T07:27:49.73-0600 [CELL/0]     OUT Creating container
 2016-07-01T07:27:51.11-0600 [CELL/0]     OUT Successfully created container
-2016-07-01T07:27:54.49-0600 [APP/0]      OUT Running cmd /c .\Redis --server.urls http://*:%PORT%
+2016-07-01T07:27:54.49-0600 [APP/0]      OUT Running .\Redis
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Hosting environment: development
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Content root path: C:\containerizer\3737940917E4D13A25\user\app
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Now listening on: http://*:57540

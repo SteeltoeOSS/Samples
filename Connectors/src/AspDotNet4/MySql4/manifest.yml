@@ -3,6 +3,5 @@ applications:
 - name: mysql4-connector
   memory: 512M
   stack: windows2012R2
-  health-check-type: none
   services:
    - myMySqlService

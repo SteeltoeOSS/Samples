@@ -3,8 +3,7 @@ applications:
 - name: orderprocessing
   memory: 512M
   stack: windows2012R2
-  health-check-type: none
-  command: cmd /c .\OrderService --server.urls http://0.0.0.0:%PORT%
+  command: .\OrderService
   env:
     ASPNETCORE_ENVIRONMENT: Production
   services:

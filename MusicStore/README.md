@@ -24,7 +24,7 @@ This application makes use of the following Steeltoe components:
 
 The default is to NOT use a Redis cache for Session storage or DataProtection KeyRing storage. Details on how to enable it are provided below.
 
-# Getting Started
+## Getting Started
 
 * Clone the Samples repo. (i.e.  git clone <https://github.com/SteeltoeOSS/Samples>)
 
@@ -56,37 +56,37 @@ If you don't have Docker installed on your local machine, you can use:
 After installing either of the above, you need to enable [`File Sharing`](https://docs.docker.com/docker-for-windows/#/shared-drives) between your Docker VM and your local machine.
 On Windows 10, share the `C:` drive from you local machine with the VM. On MacOS, share your Home directory with the VM. This is necessary as the pre-built Config Server image has been pre-configured to read its configuration data from `~/steeltoe/config-repo` or `C:\steeltoe\config-repo` off of the local machine.
 
-Once you have Docker installed and running you can use the provided command files to startup the various services.  For example to startup a Spring Cloud Config Server:
+Once you have Docker installed and running, use the provided command files to start the various services. To startup a Spring Cloud Config Server:
 
 1. `cd Samples/MusicStore`
 1. `start dockerrun-configserver.cmd` or `./dockerrun-configserver.sh`
 
-This will create a directory `~/steeltoe/config-repo` or `c:\steeltoe\config-repo` if it doesn't exist and then fire up a Spring Cloud Config Server listening on port 8888.
+This script will create a directory `~/steeltoe/config-repo` or `c:\steeltoe\config-repo` if it doesn't exist and then fire up a Spring Cloud Config Server listening on port 8888. Copy the MusicStore configuration files to `\steeltoe\config-repo' so the running Config Server will have access to them.
 
-Likewise to startup a Spring Cloud Eureka Server:
+1. `cd Samples/MusicStore/src/config`
+1. `copy *.* c:/steeltoe/config-repo` or `cp *.* ~/steeltoe/config-repo`
+
+> Note: The first symptom you missed this step (or have docker configuration issues affecting the drive share) is likely to be the error `Discovery client type UNKNOWN, check configuration`
+
+Similarly, start a Spring Cloud Eureka Server (listening on port 8761):
 
 1. `cd Samples/MusicStore`
 1. `start dockerrun-eurekaserver.cmd or ./dockerrun-eurekaserver.sh`
 
-This will fire up a Spring Cloud Eureka Server listening on port 8761.
+Next, fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
 
 1. `cd Samples/MusicStore`
 1. `start dockerrun-mysqlserver.cmd` or `./dockerrun-mysqlserver.sh`
 
-This will fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
+> Note: if you are not using the docker image, modify the username and password values in the *.yml files the config server is using to match your environment
 
 ### Pre-requisites - Using Windows Containers
 
 Details to be provided when Windows containers stabilize!
 
-# Building & Running MusicStore App - Locally
+## Building & Running MusicStore App - Locally
 
-Once you have the pre-requisite services up and running then you are ready to build and run the various MusicStore services locally. Before starting up any of the services you first need to copy the MusicStore configuration files to the `\steeltoe\config-repo' so the running Config Server will have access to them.
-
-1. `cd Samples/MusicStore/src/config`
-1. `copy *.* c:/steeltoe/config-repo` or `cp *.* ~/steeltoe/config-repo`
-
-Once thats complete, then you are ready to fire up the individual services. The simplest way to get these up and running is to use the provided `run*.cmd or run*.sh` files.
+Once you have the pre-requisite services up and running then you are ready to build and run the various MusicStore services locally. The simplest way is to use the provided `run*.cmd or run*.sh` files.
 
 For example, to startup the MusicStoreService:
 
@@ -103,7 +103,7 @@ If all the services startup cleanly, you should be able to hit: <http://localhos
 
 You should have no problem using the provided solution to launch the individual services in the debugger and set break points and walk through code as needed.
 
-# Pre-requisites - CloudFoundry
+## Pre-requisites - CloudFoundry
 
 1. Install Pivotal Cloud Foundry
 1. Install Spring Cloud Services
@@ -111,7 +111,7 @@ You should have no problem using the provided solution to launch the individual 
 1. Install Redis service if you want to use Redis for Session storage and KeyRing storage.
 1. Install Pivotal Apps Manager 1.11+ if you want to access Management endpoints from Apps Manager.
 
-# Setup Services on CloudFoundry
+## Setup Services on CloudFoundry
 
 As mentioned above, the application is dependent on the following services:
 
@@ -146,7 +146,7 @@ No changes are required to the application configuration files before pushing th
 
 > Note: If you wish to change what github repo the Config server instance uses, you can modify config-server.json before using the `createCloudFoundryServices` script above.
 
-# Building & Pushing App - CloudFoundry
+## Building & Pushing App - CloudFoundry
 
 Once the services have been created and ready on CloudFoundry (i.e. check via `cf services`) then you can use the provided `push*.cmd or push*.sh` commands to startup the individual application services on CloudFoundry. For example to start the ShoppingCart service:
 
@@ -176,7 +176,7 @@ orderprocessing   started           1/1         1G       1G     orderprocessing.
 shoppingcart      started           1/1         1G       1G     shoppingcart.apps.testcloud.com
 ```
 
-# Known Limitations
+## Known Limitations
 
 ## Sample Databases
 

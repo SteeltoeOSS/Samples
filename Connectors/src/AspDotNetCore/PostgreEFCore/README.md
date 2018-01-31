@@ -46,7 +46,7 @@ On a Windows cell, you should see something like this during startup:
 ```bash
 2016-08-05T07:23:02.15-0600 [CELL/0]     OUT Creating container
 2016-08-05T07:23:03.81-0600 [CELL/0]     OUT Successfully created container
-2016-08-05T07:23:09.07-0600 [APP/0]      OUT Running cmd /c .\PostgreEFCore --server.urls http://*:%PORT%
+2016-08-05T07:23:09.07-0600 [APP/0]      OUT Running .\PostgreEFCore
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Hosting environment: development
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Content root path: C:\containerizer\75E10B9301D2D9B4A8\user\app
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.

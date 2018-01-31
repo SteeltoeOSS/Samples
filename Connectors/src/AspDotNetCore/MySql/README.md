@@ -38,7 +38,7 @@ You must first create an instance of the MySql service in a org/space.
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs mysql-connector`
 
@@ -47,7 +47,7 @@ On a Windows cell, you should see something like this during startup:
 ```bash
 2016-07-01T07:27:49.73-0600 [CELL/0]     OUT Creating container
 2016-07-01T07:27:51.11-0600 [CELL/0]     OUT Successfully created container
-2016-07-01T07:27:54.49-0600 [APP/0]      OUT Running cmd /c .\MySql --server.urls http://*:%PORT%
+2016-07-01T07:27:54.49-0600 [APP/0]      OUT Running .\MySql
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Hosting environment: development
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Content root path: C:\containerizer\3737940917E4D13A25\user\app
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Now listening on: http://*:57540

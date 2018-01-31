@@ -25,7 +25,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI
 1. Set the `BUILD` environment variable to `LOCAL` (i.e. SET BUILD=LOCAL, export BUILD=LOCAL)
 1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp2.0 --server.urls http://*:5555
+1. dotnet run -f netcoreapp2.0
 
 ## What to expect - Local
 
@@ -33,7 +33,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI
-$ dotnet run -f netcoreapp2.0 --server.urls http://*:5555
+$ dotnet run -f netcoreapp2.0
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.
@@ -62,7 +62,7 @@ You must first create an instance of the Service Registry service in a org/space
 
 1. cf target -o myorg -s development
 1. cf create-service p-service-registry standard myDiscoveryService
-1. Wait for the service to become ready! (i.e. cf services) 
+1. Wait for the service to become ready! (i.e. cf services)
 
 ## Setup Circuit Breaker Dashboard service on CloudFoundry
 
@@ -70,7 +70,7 @@ You must first create an instance of the Circuit Breaker service in a org/space.
 
 1. cf target -o myorg -s development
 1. cf create-service p-circuit-breaker-dashboard standard myHystrixService
-1. Wait for the service to become ready! (i.e. cf services) 
+1. Wait for the service to become ready! (i.e. cf services)
 
 ## Publish App & Push to CloudFoundry
 
@@ -87,7 +87,7 @@ You must first create an instance of the Circuit Breaker service in a org/space.
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs fortuneui`
 
@@ -114,15 +114,15 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:38:48.12-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
 
-At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit http://fortuneui.x.y.z/ to see it!
+At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit <http://fortuneui.x.y.z/> to see it!
 
-In addition to hitting http://fortuneui.x.y.z/, you can also hit: http://fortuneui.x.y.z/#/multiple to cause the UI to make use of a Hystrix Collapser to obtain multiple fortunes.
+In addition to hitting <http://fortuneui.x.y.z/>, you can also hit: <http://fortuneui.x.y.z/#/multiple> to cause the UI to make use of a Hystrix Collapser to obtain multiple fortunes.
 
 ## Using the Hystrix Dashboard - Cloud Foundry
 
 Once you have the two applications communicating, you can make use of the Hystrix dashboard by following the instructions below.
 
-1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. https://apps.system.testcloud.com)
+1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. <https://apps.system.testcloud.com>)
 1. Follow [these instructions](http://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
 1. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the Hystrix dashboard.  Click the refresh button on the UI app quickly to see the dashboard update.
 

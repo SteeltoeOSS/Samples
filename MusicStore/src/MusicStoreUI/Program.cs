@@ -6,7 +6,6 @@ using MusicStoreUI.Models;
 using Pivotal.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace MusicStoreUI
@@ -15,12 +14,11 @@ namespace MusicStoreUI
     {
         public static void Main(string[] args)
         {
-
             IConfiguration config = null;
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls(GetServerUrls(args))
+                .UseCloudFoundryHosting(5555)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
@@ -62,19 +60,6 @@ namespace MusicStoreUI
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-        }
-
-        private static string[] GetServerUrls(string[] args)
-        {
-            List<string> urls = new List<string>();
-            for (int i = 0; i < args.Length; i++)
-            {
-                if ("--server.urls".Equals(args[i], StringComparison.OrdinalIgnoreCase))
-                {
-                    urls.Add(args[i + 1]);
-                }
-            }
-            return urls.ToArray();
         }
     }
 }

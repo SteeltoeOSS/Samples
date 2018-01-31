@@ -22,7 +22,7 @@
 
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
     
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.0.0-dev-00141" />
     <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.0.0-rc1" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-rc1" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0-rc1" />

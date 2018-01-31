@@ -3,8 +3,7 @@ applications:
 - name: musicstore
   memory: 1G
   stack: windows2012R2
-  health-check-type: none
-  command: cmd /c .\MusicStoreService --server.urls http://0.0.0.0:%PORT%
+  command: .\MusicStoreService
   env:
     ASPNETCORE_ENVIRONMENT: Production
   services:

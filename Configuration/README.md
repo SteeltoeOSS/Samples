@@ -1,4 +1,5 @@
 # Steeltoe Configuration Sample Applications
+
 This repo tree contains sample apps illustrating how to use the Steeltoe [Configuration](https://github.com/SteeltoeOSS/Configuration) provider packages.
 
 * src/AspDotNetCore/Simple - ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/) as a configuration source.
@@ -8,5 +9,6 @@ This repo tree contains sample apps illustrating how to use the Steeltoe [Config
 * src/AspDotNet4/SimpleCloudFoundry - same as AspDotNetCore/SimpleCloudFoundry, but built for ASP.NET 4.x.
 * src/AspDotNet4/AutofacCloudFoundry -same as AspDotNet4/SimpleCloudFoundry, but built using Autofac IOC container.
 
-# Building & Running
+## Building & Running
+
 See the Readme for instructions on building and running each app.

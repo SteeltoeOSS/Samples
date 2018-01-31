@@ -7,7 +7,6 @@ using OrderService.Models;
 using Pivotal.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace OrderService
@@ -18,7 +17,7 @@ namespace OrderService
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls(GetServerUrls(args))
+                .UseCloudFoundryHosting(7000)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
@@ -59,20 +58,6 @@ namespace OrderService
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-        }
-
-
-        private static string[] GetServerUrls(string[] args)
-        {
-            List<string> urls = new List<string>();
-            for (int i = 0; i < args.Length; i++)
-            {
-                if ("--server.urls".Equals(args[i], StringComparison.OrdinalIgnoreCase))
-                {
-                    urls.Add(args[i + 1]);
-                }
-            }
-            return urls.ToArray();
         }
     }
 }

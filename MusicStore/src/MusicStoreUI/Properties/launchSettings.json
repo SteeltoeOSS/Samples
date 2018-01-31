@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:61777/",
+      "applicationUrl": "http://localhost:5555/",
       "sslPort": 0
     }
   },
@@ -17,12 +17,11 @@
     },
     "MusicStoreUI": {
       "commandName": "Project",
-      "commandLineArgs": "--server.urls http://0.0.0.0:5555",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:61779/"
+      "applicationUrl": "http://localhost:5555/"
     }
   }
 }
