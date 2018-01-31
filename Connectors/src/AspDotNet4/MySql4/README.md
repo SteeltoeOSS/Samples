@@ -7,24 +7,24 @@ This sample makes use of Autofac 4.0 for IOC services.
 ## Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
-2. Installed Windows support
-3. Installed MySql marketplace service
+1. Installed Windows support
+1. Installed MySql marketplace service
 
 ## Create MySql Service Instance on CloudFoundry
 
 You must first create an instance of the MySql service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service p-mysql 100mb myMySqlService
+1. cf create-service p-mysql 100mb myMySqlService
 
 ## Publish App & Push to CloudFoundry
 
 1. Open Samples\Connectors\src\AspDotNet4\Connectors.sln in Visual Studio 2017.
-2. Select MySql4 project in Solution Explorer.
-3. Right-click and select Publish
-4. Publish the App to a folder. (e.g. c:\publish)
-5. cd publish_folder (e.g. cd c:\publish)
-6. cf push
+1. Select MySql4 project in Solution Explorer.
+1. Right-click and select Publish
+1. Publish the App to a folder. (e.g. c:\publish)
+1. cd publish_folder (e.g. cd c:\publish)
+1. cf push
 
 ## What to expect - CloudFoundry
 
@@ -48,3 +48,7 @@ You should see something like this during startup:
 ```
 
 At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound MySql database. To display those rows click on the `MySql Data` link in the menu and you should see the row data displayed.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

@@ -1,11 +1,11 @@
-# AutofacCloudFoundry - ASP.NET 4.x Sample Application 
+# AutofacCloudFoundry - ASP.NET 4.x Sample Application
 
 ASP.NET 4.x sample app built using the Autofac IOC container and illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
 
 ## Pre-requisites
 
 1. Installed Pivotal CloudFoundry with Windows support
-1. Installed Spring Cloud Services 
+1. Installed Spring Cloud Services
 1. Visual Studio 2017
 
 ## Setup Config Server
@@ -68,3 +68,7 @@ You should see something like this during startup:
 2016-05-03T12:22:20.33-0600 [APP/0]      OUT Server Started.... press CTRL + C to stop
 
 ```
+
+---
+
+### See the Official [Steeltoe Configuration Documentation](https://steeltoe.io/docs/steeltoe-configuration) for a more in-depth walkthrough of the samples and more detailed information

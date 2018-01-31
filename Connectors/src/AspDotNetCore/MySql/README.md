@@ -10,7 +10,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https
 
 1. Installed (or use a networked) MySQL Server
 1. Create MySQL database and user with appropriate access level
-1. Set [ASPNETCORE_ENVIRONMENT=Development] (https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments)
+1. Set [ASPNETCORE_ENVIRONMENT=Development] (<https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments>)
 1. Add your connection string to appsettings.development.json under mysql:client:ConnectionString
 
 ## Running on CloudFoundry
@@ -55,3 +55,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 
 At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound MySql database. To display those rows click on the `MySql Data` link in the menu and you should see the row data displayed.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

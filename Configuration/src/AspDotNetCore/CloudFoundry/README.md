@@ -41,3 +41,7 @@ On a Linux cell, you should see something like this during startup:
    2017-08-15T09:59:17.69-0600 [CELL/0] OUT Container became healthy
 
 ```
+
+---
+
+### See the Official [Steeltoe Configuration Documentation](https://steeltoe.io/docs/steeltoe-configuration) for a more in-depth walkthrough of the samples and more detailed information

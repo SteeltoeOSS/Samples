@@ -28,7 +28,7 @@ You must first create an instance of the Postgres database service in a org/spac
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs postgres-connector`
 
@@ -45,3 +45,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 
 At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound Postgres database. To display those rows click on the `Postgres Data` link in the menu and you should see the row data displayed.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

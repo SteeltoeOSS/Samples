@@ -13,30 +13,38 @@ ASP.NET Core sample app illustrating how to use the EntityFramework Core togethe
 
 You must first create an instance of the SQL Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the SQL Server Connector
 
-1. cf target -o myorg -s development
-1. cf cups sqlServerCUPS -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
-**_OR_**
-1. cf create-service SqlServer sharedVM mySqlServerService
+```bash
+> cf target -o myorg -s development
+> cf cups mySqlServerService -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'
+# or
+> cf create-service SqlServer sharedVM mySqlServerService
+```
 
 ## Publish App & Push to CloudFoundry
 
-1. cf target -o myorg -s development
-1. cd samples/Connectors/src/AspDotNetCore/SqlServerEFCore
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+```bash
+> cf target -o myorg -s development
+> cd samples/Connectors/src/AspDotNetCore/SqlServerEFCore
+> dotnet restore --configfile nuget.config
+# Publish app to a directory selecting the framework and runtime you want to run on
+> dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64
+# Push the app using the appropriate manifest.
+> cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish
+# or
+> cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish
+```
 
-Note: The provided manifest will create an app named `sqlserverefcore-connector` and attempt to bind to the the app to SQL Server service `mySqlServerService`.
+> Note: The provided manifest will create an app named `sqlserverefcore-connector` and attempt to bind to the the app to SQL Server service `mySqlServerService`.
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs sqlserverefcore-connector`
 
 On a Windows cell, you should see something like this during startup:
 
-```bash
+```text
 2016-07-01T07:27:49.73-0600 [CELL/0]     OUT Creating container
 2016-07-01T07:27:51.11-0600 [CELL/0]     OUT Successfully created container
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Hosting environment: development
@@ -46,3 +54,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 
 At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound SQL Server database. Those rows are displayed on the home page of the application.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

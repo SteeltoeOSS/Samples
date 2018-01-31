@@ -54,3 +54,7 @@ On a Linux cell, you should see something like this during startup:
 ```
 
 At this point the app is up and running. To send a message click "Send" and send a message over RabbitMQ. Having sent a message, click "Receive" and you will start seeing those messages.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

@@ -30,7 +30,7 @@ If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identit
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs oauth`
 
@@ -47,3 +47,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 
 At this point the app is up and running.  You can access the app at <http://oauth.x.y.z/>.  On the apps menu, click on the `OAuth Options` menu item and you should see meaningful configuration data for the bound OAuth service.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

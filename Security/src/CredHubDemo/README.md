@@ -57,3 +57,7 @@ At startup, this application adds a CredHub client to the injection pipeline usi
 ```
 
 > When using UAA credentials, the CredHub Client will retrieve the address of the UAA server from the CredHub server's `/info` endpoint. Should that address prove inaccessible, you may override it by setting the environment variable `UAA_Server_Override`
+
+---
+
+### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/steeltoe-security) for a more in-depth walkthrough of the samples and more detailed information

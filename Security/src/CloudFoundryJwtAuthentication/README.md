@@ -47,3 +47,7 @@ On a Windows cell, you should see something like this during startup:
 At this point the app is up and running.  To access it, you should use the app: [CloudFoundrySingleSignon][sso].
 
 [sso]: ../CloudFoundrySingleSignon
+
+---
+
+### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/steeltoe-security) for a more in-depth walkthrough of the samples and more detailed information

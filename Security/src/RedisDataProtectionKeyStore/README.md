@@ -64,3 +64,7 @@ A couple things to note at this point about this app:
 
 * The app is using the CloudFoundry Redis service to store session data.  As a result, the session data is available to all instances of the app.
 * The `session handle` that is in the session cookie and the data that is stored in the session in Redis is encrypted using keys that are now stored in the keyring which is also stored in the CloudFoundry Redis service. So when you scale the app to multiple instances the same keyring is used by all instances and therefore the `session handle` and the session data can be decrypted by any instance of the application.
+
+---
+
+### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/steeltoe-security) for a more in-depth walkthrough of the samples and more detailed information

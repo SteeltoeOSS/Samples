@@ -1,43 +1,47 @@
 # Fortune-Teller-Service - ASP.NET 4 WebApi Microservice
+
 ASP.NET 4 WebApi sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services  and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
 
 This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
 
 Note: This application is built using the Autofac IOC container.
 
-# Pre-requisites - Running on CloudFoundry
+## Pre-requisites - Running on CloudFoundry
 
 1. Installed Pivotal CloudFoundry with Windows support
-2. Installed Spring Cloud Services 
+1. Installed Spring Cloud Services
 
-# Setup Service Registry on CloudFoundry
+## Setup Service Registry on CloudFoundry
+
 You must first create an instance of the Service Registry service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service p-service-registry standard myDiscoveryService
-3. Wait for service to be ready. (i.e. cf services .. shows ready) 
+1. cf create-service p-service-registry standard myDiscoveryService
+1. Wait for service to be ready. (use `cf services` to check the status)
 
-# Publish App & Push to CloudFoundry
+## Publish App & Push to CloudFoundry
 
 1. Open Samples\CircuitBreaker\src\AspDotNet4\FortuneTeller.sln in Visual Studio.
-2. Select Fortune-Teller-Service4 project in Solution Explorer.
-3. Right-click and select Publish
-4. Publish the App to a folder. (e.g. c:\publish)
-5. cd publish_folder (e.g. cd c:\publish)
-6. cf push 
+1. Select Fortune-Teller-Service4 project in Solution Explorer.
+1. Right-click and select Publish
+1. Publish the App to a folder. (e.g. c:\publish)
+1. cd publish_folder (e.g. cd c:\publish)
+1. cf push
 
 Windows Note: If you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
 
 1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install the ROOT CA on the windows cells and you would be good to go.
-2. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `eureka:client:validate_certificates=false`.
+1. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `eureka:client:validate_certificates=false`.
 
-# What to expect - CloudFoundry
-After building and running the app, you should see something like the following in the logs. 
+## What to expect - CloudFoundry
+
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs fortuneservice`
 
 You should see something like this during startup:
-```
+
+```text
 2016-11-22T09:31:32.48-0700 [STG/0]      OUT Successfully created container
 2016-11-22T09:31:32.49-0700 [STG/0]      OUT Downloading app package...
 2016-11-22T09:31:35.02-0700 [STG/0]      OUT Staging...
@@ -61,4 +65,9 @@ You should see something like this during startup:
 2016-11-22T09:31:51.72-0700 [APP/0]      OUT 2016-11-22 16:31:51Z|INFO|Starting web server instance...
 2016-11-22T09:31:51.83-0700 [APP/0]      OUT Server Started.... press CTRL + C to stop
 ```
+
 At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.
+
+---
+
+### See the Official [Steeltoe Circuit Breaker Documentation](https://steeltoe.io/docs/steeltoe-circuitbreaker) for a more in-depth walkthrough of the samples and more detailed information

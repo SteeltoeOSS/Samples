@@ -25,8 +25,7 @@ You must first create an instance of the Config Server service in a org/space.
 1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
 1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
 
-
-Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
+> Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
 1. Disable certificate validation for the Spring Cloud Config Client.  You can do this by editing `appsettings.json` and add `spring:cloud:config:validate_certificates=false`.
 
@@ -56,11 +55,11 @@ On a Linux cell, you should see something like this during startup:
 2016-06-01T09:14:18.01-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
 2016-06-01T09:14:18.01-0600 [APP/0]      OUT       Fetching config from server at: https://config-92e894b5-17e2-4b94-941e-a544c6488de7.apps.testcloud.com
 2016-06-01T09:14:19.59-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
-2016-06-01T09:14:19.59-0600 [APP/0]      OUT       Located environment: foo, development, master, 
+2016-06-01T09:14:19.59-0600 [APP/0]      OUT       Located environment: foo, development, master,
 2016-06-01T09:14:19.59-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
 2016-06-01T09:14:19.59-0600 [APP/0]      OUT       Fetching config from server at: https://config-92e894b5-17e2-4b94-941e-a544c6488de7.apps.testcloud.com
 2016-06-01T09:14:20.46-0600 [APP/0]      OUT info: Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerConfigurationProvider[0]
-2016-06-01T09:14:20.46-0600 [APP/0]      OUT       Located environment: foo, development, master, 
+2016-06-01T09:14:20.46-0600 [APP/0]      OUT       Located environment: foo, development, master,
 2016-06-01T09:14:20.93-0600 [APP/0]      OUT dbug: Microsoft.AspNetCore.Hosting.Internal.WebHost[3]
 2016-06-01T09:14:20.93-0600 [APP/0]      OUT       Hosting starting
 2016-06-01T09:14:21.04-0600 [APP/0]      OUT dbug: Microsoft.AspNetCore.Hosting.Internal.WebHost[4]
@@ -72,3 +71,7 @@ On a Linux cell, you should see something like this during startup:
 2016-06-01T09:14:21.41-0600 [CELL/0]     OUT Container became healthy
 
 ```
+
+---
+
+### See the Official [Steeltoe Configuration Documentation](https://steeltoe.io/docs/steeltoe-configuration) for a more in-depth walkthrough of the samples and more detailed information

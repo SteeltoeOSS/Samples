@@ -10,3 +10,7 @@ This repo tree contains  sample apps illustrating how to make use of the Steelto
 ## Building & Running
 
 See the Readme for instructions on building and running each app.
+
+---
+
+### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/steeltoe-security) for a more in-depth walkthrough of the samples and more detailed information

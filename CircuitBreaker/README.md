@@ -10,3 +10,7 @@ This repo tree contains sample apps illustrating how to use the Steeltoe [Circui
 ## Building & Running
 
 See the Readme for instructions on building and running each app.  Instructions for running the apps both locally and on CloudFoundry are provided.
+
+---
+
+### See the Official [Steeltoe Circuit Breaker Documentation](https://steeltoe.io/docs/steeltoe-circuitbreaker) for a more in-depth walkthrough of the samples and more detailed information

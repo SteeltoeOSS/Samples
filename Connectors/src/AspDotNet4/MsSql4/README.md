@@ -16,9 +16,8 @@ You must first create an instance of the Microsoft SQL Server service in a org/s
 
 ```bash
 > cf target -o myorg -s development
-
 > cf cups mySqlServerService -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'<br>
-or
+# or
 > cf create-service SqlServer sharedVM mySqlServerService
 ```
 
@@ -28,8 +27,11 @@ or
 1. Select MsSql4 project in Solution Explorer.
 1. Right-click and select Publish
 1. Publish the App to a folder. (e.g. c:\publish)
-1. cd publish_folder (e.g. cd c:\publish)
-1. cf push
+
+```bash
+> cd publish_folder #(e.g. cd c:\publish)
+> cf push
+```
 
 ## What to expect - CloudFoundry
 
@@ -39,7 +41,7 @@ To see the logs as you startup and use the app: `cf logs mssql4-connector`
 
 You should see something like this during startup:
 
-```bash
+```text
 2016-12-05T11:26:33.12-0700 [STG/0]      OUT Successfully destroyed container
 2016-12-05T11:26:34.60-0700 [CELL/0]     OUT Successfully created container
 2016-12-05T11:26:40.49-0700 [APP/0]      OUT Running ..\tmp\lifecycle\WebAppServer.exe
@@ -53,3 +55,7 @@ You should see something like this during startup:
 ```
 
 At this point the app is up and running.  Upon startup the app inserts a couple rows into the bound Microsoft SQL Server database. To display those rows browse to the app and you should see the row data displayed.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

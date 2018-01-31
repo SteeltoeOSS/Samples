@@ -21,3 +21,7 @@ This repo tree contains sample apps illustrating how to use the Steeltoe Connect
 ## Building & Running
 
 See the Readme for instructions on building and running each app.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

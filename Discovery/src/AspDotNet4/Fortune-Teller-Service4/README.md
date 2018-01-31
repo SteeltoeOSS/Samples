@@ -1,64 +1,66 @@
 # Fortune-Teller-Service - ASP.NET 4 WebApi Microservice
+
 ASP.NET 4 WebApi sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
 
 Note: This application is built using the Autofac IOC container.
 
-# Pre-requisites - Running Local
+## Pre-requisites - Running Local
 
 This sample assumes that there is a running Spring Cloud Eureka Server on your machine. To make this happen:
 
 1. Install Java 8 JDK.
-2. Install Maven 3.x.
-3. Clone the Spring Cloud Samples Eureka repository. (https://github.com/spring-cloud-samples/eureka.git)
-4. Go to the eureka server directory (`eureka`) and fire it up with `mvn spring-boot:run`
-5. When running locally, this sample will default to looking for its eurka server on http://localhost:8761/eureka, so it should all connect.
+1. Install Maven 3.x.
+1. Clone the Spring Cloud Samples Eureka repository. (<https://github.com/spring-cloud-samples/eureka.git>)
+1. Go to the eureka server directory (`eureka`) and fire it up with `mvn spring-boot:run`
+1. When running locally, this sample will default to looking for its eurka server on <http://localhost:8761/eureka>, so it should all connect.
 
+## Building & Running Locally
 
-# Building & Running Locally
+1. Clone this repo. (e.g. `git clone https://github.com/SteeltoeOSS/Samples`)
+1. Startup Visual Studio 2017
+1. Open src/AspDotNet4/Discovery.sln
+1. Select Fortune-Teller-Service4 and build it
+1. Select Fortune-Teller-Service4 as the Startup project.
+1. Ctrl+F5 or F5
 
-1. Clone this repo. (i.e. git clone https://github.com/SteeltoeOSS/Samples)
-2. Startup Visual Studio 2017
-3. Open src/AspDotNet4/Discovery.sln 
-4. Select Fortune-Teller-Service4 and build it
-5. Select Fortune-Teller-Service4 as the Startup project.
-6. Ctrl+F5 or F5
+At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes. The `fortuneService` is registered with the Eureka server located at <http://localhost:5000/>.
 
-At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes. The `fortuneService` is registered with the Eureka server located at http://localhost:5000/.
-
-# Pre-requisites - Running on CloudFoundry
+## Pre-requisites - Running on CloudFoundry
 
 1. Installed Pivotal CloudFoundry with Windows support
-2. Installed Spring Cloud Services 
+1. Installed Spring Cloud Services
 
+## Setup Service Registry on CloudFoundry
 
-# Setup Service Registry on CloudFoundry
 You must first create an instance of the Service Registry service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service p-service-registry standard myDiscoveryService
-3. Wait for service to be ready. (i.e. cf services .. shows ready) 
+1. cf create-service p-service-registry standard myDiscoveryService
+1. Wait for service to be ready. (i.e. cf services .. shows ready)
 
-# Publish App & Push to CloudFoundry
+## Publish App & Push to CloudFoundry
 
-1. Open src/AspDotNet4/Discovery.sln 
-2. Select Fortune-Teller-Service4 project in Solution Explorer.
-3. Right-click and select Publish
-4. Publish the App to a folder. (e.g. c:\publish)
-5. cd publish_folder (e.g. cd c:\publish)
-6. cf push 
+1. Open src/AspDotNet4/Discovery.sln
+1. Select Fortune-Teller-Service4 project in Solution Explorer.
+1. Right-click and select Publish
+1. Publish the App to a folder. (e.g. c:\publish)
+1. cd publish_folder (e.g. cd c:\publish)
+1. cf push
 
-Windows Note: If you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
+> Windows Note: If you are using self-signed certificates you are likely to run into SSL certificate validation issues when pushing this app. You have two choices to fix this:
 
 1. If you have created your own ROOT CA and from it created a certificate that you have installed in HAProxy/Ext LB, then you can install the ROOT CA on the windows cells and you would be good to go.
 2. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `eureka:client:validate_certificates=false`.
 
-# What to expect - CloudFoundry
-After building and running the app, you should see something like the following in the logs. 
+## What to expect - CloudFoundry
+
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs fortuneservice`
 
 You should see something like this during startup:
-```
+
+```bash
 2016-11-22T09:31:32.48-0700 [STG/0]      OUT Successfully created container
 2016-11-22T09:31:32.49-0700 [STG/0]      OUT Downloading app package...
 2016-11-22T09:31:35.02-0700 [STG/0]      OUT Staging...
@@ -82,4 +84,7 @@ You should see something like this during startup:
 2016-11-22T09:31:51.72-0700 [APP/0]      OUT 2016-11-22 16:31:51Z|INFO|Starting web server instance...
 2016-11-22T09:31:51.83-0700 [APP/0]      OUT Server Started.... press CTRL + C to stop
 ```
+
 At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.
+
+### See the Official [Steeltoe Service Discovery Documentation](https://steeltoe.io/docs/steeltoe-service-discovery) for a more in-depth walkthrough of the samples and more detailed information

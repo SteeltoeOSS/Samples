@@ -5,7 +5,7 @@ ASP.NET 4.x sample app illustrating how to use [Config Server for Pivotal Cloud 
 ## Pre-requisites
 
 1. Installed Pivotal CloudFoundry with Windows support
-1. Installed Spring Cloud Services 
+1. Installed Spring Cloud Services
 1. Visual Studio 2017
 
 ## Setup Config Server
@@ -23,7 +23,7 @@ You must first create an instance of the Config Server service in a org/space.
 1. Right-click and select Publish
 1. Publish the App to a folder. (e.g. c:\publish)
 1. cd publish_folder (e.g. cd c:\publish)
-1. cf push 
+1. cf push
 
 ## What to expect
 
@@ -67,3 +67,7 @@ You should see something like this during startup:
 2016-05-03T12:22:20.33-0600 [APP/0]      OUT Server Started.... press CTRL + C to stop
 
 ```
+
+---
+
+### See the Official [Steeltoe Configuration Documentation](https://steeltoe.io/docs/steeltoe-configuration) for a more in-depth walkthrough of the samples and more detailed information

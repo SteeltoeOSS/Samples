@@ -44,3 +44,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 
 At this point the app is up and running.  Upon startup the app should create a table named `EFCoreTestData` and insert two rows. To display those rows click on the `MySql Data` link in the menu and you should see the row data displayed.
+
+---
+
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information

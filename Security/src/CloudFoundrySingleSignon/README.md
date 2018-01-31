@@ -116,3 +116,7 @@ If you access the `InvokeJwtSample` menu item, you will find the app will attemp
 Once you have [CloudFoundryJwtAuthentication][jwt] up and running, then if you access the `InvokeJwtSample` menu item when you are logged in, you should see some `values` returned from the [CloudFoundryJwtAuthentication][jwt] app.  If you are logged out, then you will see a `401 (Unauthorized)` message.
 
 [jwt]: ../CloudFoundryJwtAuthentication
+
+---
+
+### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/steeltoe-security) for a more in-depth walkthrough of the samples and more detailed information
