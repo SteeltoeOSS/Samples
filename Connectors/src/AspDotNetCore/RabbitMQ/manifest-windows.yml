@@ -1,11 +1,11 @@
 ---
 applications:
-- name: rabbit-connector
+- name: rabbitmq-connector
   memory: 512M
   stack: windows2012R2
   health-check-type: none
-  command: cmd /c .\Rabbit --server.urls http://0.0.0.0:%PORT%
+  command: cmd /c .\RabbitMQ --server.urls http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:
-    - myRabbitService
+    - myRabbitMQService

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using System.Text;
 using StackExchange.Redis;
 
-
 namespace Redis.Controllers
 {
     public class HomeController : Controller

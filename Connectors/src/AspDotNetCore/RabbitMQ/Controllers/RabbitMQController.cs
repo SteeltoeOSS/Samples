@@ -7,13 +7,13 @@ using System.Security.Authentication;
 using System.Net.Security;
 #endif
 
-namespace Rabbit.Controllers
+namespace RabbitMQ.Controllers
 {
-    public class RabbitController : Controller
+    public class RabbitMQController : Controller
     {
         ConnectionFactory _rabbitConnection;
 
-        public RabbitController([FromServices] ConnectionFactory rabbitConnection)
+        public RabbitMQController([FromServices] ConnectionFactory rabbitConnection)
         {
             _rabbitConnection = rabbitConnection;
 #if SSL

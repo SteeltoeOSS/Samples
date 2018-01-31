@@ -3,29 +3,19 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using System.Linq;
 
 namespace SqlServerEFCore
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables()
-
-                // Add to configuration the Cloudfoundry VCAP settings
-                .AddCloudFoundry();
-            Configuration = builder.Build();
-        }
-
         public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,11 +33,8 @@ namespace SqlServerEFCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,8 +52,6 @@ namespace SqlServerEFCore
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            SampleData.InitializeMyContexts(app.ApplicationServices);
         }
     }
 }

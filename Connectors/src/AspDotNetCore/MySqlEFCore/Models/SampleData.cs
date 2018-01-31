@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -15,8 +17,14 @@ namespace MySqlEFCore
             }
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                Console.WriteLine("Ensuring database has been created...");
                 var db = serviceScope.ServiceProvider.GetService<TestContext>();
-                db.Database.EnsureCreated();
+                if (!db.Database.EnsureCreated())
+                {
+                    Console.WriteLine("There may be another table in this database already, attempting to create with a workaround");
+                    RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)db.Database.GetService<IDatabaseCreator>();
+                    databaseCreator.CreateTables();
+                }
             }
             InitializeContext(serviceProvider);
         }
