@@ -17,13 +17,14 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. When running locally, this sample will default to looking for its eureka server on <http://localhost:8761/eureka>, so it should all connect.
 1. Clone the [Spring Cloud Samples Hystrix dashboard](https://github.com/spring-cloud-samples/hystrix-dashboard.git)
 1. Go to the hystrix dashboard directory (`hystix-dashboard`) and fire it up with `mvn spring-boot:run`
-1. Install .NET Core SDK
+1. Install .NET Core SDK 2.0+
 
 ## Building & Running - Local
 
-1. Clone this repo. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
+1. Clone this repository. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI
 1. Set the `BUILD` environment variable to `LOCAL` (i.e. SET BUILD=LOCAL, export BUILD=LOCAL)
+1. Set PORT to listen on (i.e SET PORT=5555, export PORT=5555)
 1. dotnet restore --configfile nuget.config
 1. dotnet run -f netcoreapp2.0
 
@@ -54,7 +55,7 @@ Once you have the two applications communicating, you can make use of the Hystri
 
 1. Installed Pivotal CloudFoundry
 1. Installed Spring Cloud Services
-1. Install .NET Core SDK
+1. Install .NET Core SDK 2.0+
 
 ## Setup Service Registry on CloudFoundry
 
@@ -125,12 +126,6 @@ Once you have the two applications communicating, you can make use of the Hystri
 1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. <https://apps.system.testcloud.com>)
 1. Follow [these instructions](http://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
 1. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the Hystrix dashboard.  Click the refresh button on the UI app quickly to see the dashboard update.
-
-## Enabling SSL usage on Cloud Foundry
-
-If you wish to use SSL communications between the Fortune Teller UI and the Fortune Teller Service, have a look at the comments in the files listed below.  You will need to make modifications to one or more of those files. Also, you are encouraged to read the [Cloud Foundry documentation](https://docs.pivotal.io/pivotalcf/1-10/adminguide/securing-traffic.html) on how SSL is configured, used and implemented before trying to use it with the Fortune Teller app.
-
-1. `FortuneService.cs` - Changes needed to enable SSL usage when the Fortune Teller Service (i.e. Kestrel) is presenting Self-Signed certificates to the client.
 
 ---
 
