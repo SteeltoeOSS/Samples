@@ -1,8 +1,6 @@
 ﻿---
 applications:
 - name: fortuneService
-  # Uncomment to use C2C networking with SSL connections
-  # command: ./Fortune-Teller-Service --server.urls "https://0.0.0.0:$PORT"
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

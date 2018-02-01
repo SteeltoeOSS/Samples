@@ -1,10 +1,10 @@
 ---
 applications:
-- name: fortuneUI
+- name: fortuneui
   memory: 512M
   stack: windows2012R2
   command: .\Fortune-Teller-UI
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development
   services:
    - myDiscoveryService
