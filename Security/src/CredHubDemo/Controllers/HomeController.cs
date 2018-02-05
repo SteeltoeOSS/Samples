@@ -120,7 +120,7 @@ namespace CredHubDemo.Controllers
 
             // certificates
             // generate a CA
-            var generatedCA = await _credHub.GenerateAsync<CertificateCredential>(new CertificateGenerationRequest("/testGeneratedCA", new CertificateGenerationParameters { IsCertificateAuthority = true, CommonName = "generator.ca" }));
+            var generatedCA = await _credHub.GenerateAsync<CertificateCredential>(new CertificateGenerationRequest("testGeneratedCA", new CertificateGenerationParameters { IsCertificateAuthority = true, CommonName = "generator.ca" }));
             // generate a cert signed by the generated CA
             var generatedCert = await _credHub.GenerateAsync<CertificateCredential>(new CertificateGenerationRequest("testGeneratedCert", new CertificateGenerationParameters { CommonName = "generated.cert", CertificateAuthority = "/testGeneratedCA" }));
             // write the generated cert under another name
@@ -143,6 +143,7 @@ namespace CredHubDemo.Controllers
             var regeneratedRsa = await _credHub.RegenerateAsync<RsaCredential>(generatedRsa.Name);
             var getRsaByNameWithHistory = await _credHub.GetByNameWithHistoryAsync<RsaCredential>(generatedRsa.Name, 2);
             var deleteRsa = await _credHub.DeleteByNameAsync(setRsa.Name);
+            var deleteGeneratedRsa = await _credHub.DeleteByNameAsync(generatedRsa.Name);
 
             // SSH
             var generatedSsh = await _credHub.GenerateAsync<SshCredential>(new SshGenerationRequest("generatedSsh", sshComment: "this is a comment"));
@@ -152,11 +153,29 @@ namespace CredHubDemo.Controllers
             var regeneratedSsh = await _credHub.RegenerateAsync<SshCredential>(generatedSsh.Name);
             var getSshByNameWithHistory = await _credHub.GetByNameWithHistoryAsync<SshCredential>(generatedSsh.Name, 2);
             var deleteSsh = await _credHub.DeleteByNameAsync(setSsh.Name);
+            var deleteGeneratedSsh = await _credHub.DeleteByNameAsync(generatedSsh.Name);
 
             // User
             var generatedUser = await _credHub.GenerateAsync<UserCredential>(new UserGenerationRequest("generatedUser", new UserGenerationParameters()));
+            var regeneratedUser = await _credHub.RegenerateAsync<UserCredential>("generatedUser");
             var deletedUser = await _credHub.DeleteByNameAsync(generatedUser.Name);
 
+            // comment out one or more Delete operations above to see more results in Find requests:
+            var paths = await _credHub.FindAllPathsAsync();
+            foreach (var p in paths)
+            {
+                Console.WriteLine($"Found path {p.Path}");
+            }
+            var foundByPath = await _credHub.FindByPathAsync("/");
+            foreach(var f in foundByPath)
+            {
+                Console.WriteLine($"Found credential {f.Name} by path");
+            }
+            var foundByName = await _credHub.FindByNameAsync("generated");
+            foreach (var f in foundByName)
+            {
+                Console.WriteLine($"Found credential {f.Name} by name");
+            }
             return Json("Look at Controllers/HomeController.cs to see what just completed successfully");
         }
     }

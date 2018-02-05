@@ -1,12 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Security.Authentication.CloudFoundry;
-using Microsoft.AspNetCore.Http;
 
 namespace CloudFoundrySingleSignon
 {
@@ -35,7 +34,6 @@ namespace CloudFoundrySingleSignon
             .AddCookie((options) =>
             {
                 options.AccessDeniedPath = new PathString("/Home/AccessDenied");
-                
             })
             .AddCloudFoundryOAuth(Configuration);
 
@@ -47,7 +45,6 @@ namespace CloudFoundrySingleSignon
             });
 
             services.AddMvc();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +52,6 @@ namespace CloudFoundrySingleSignon
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
 
             if (env.IsDevelopment())
             {
@@ -66,11 +62,9 @@ namespace CloudFoundrySingleSignon
                 app.UseExceptionHandler("/Home/Error");
             }
 
-
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
 
             app.UseMvc(routes =>
             {

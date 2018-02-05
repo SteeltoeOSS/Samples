@@ -30,17 +30,15 @@ namespace AdminPortal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CloudFoundryDefaults.AuthenticationScheme;
-            })
-            .AddCookie((options) =>
-            {
-                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
-
-            })
-            .AddCloudFoundryOAuth(Configuration);
-
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CloudFoundryDefaults.AuthenticationScheme;
+                })
+                .AddCookie((options) =>
+                {
+                    options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+                })
+                .AddCloudFoundryOAuth(Configuration);
 
             services.AddAuthorization(options =>
             {

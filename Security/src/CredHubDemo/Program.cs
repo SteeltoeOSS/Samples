@@ -60,7 +60,7 @@ namespace CredHubDemo
                     loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
                     loggingBuilder.AddDynamicConsole();
                 })
-                .UseCredHubInterpolation()
+                .UseCredHubInterpolation(new LoggerFactory().AddConsole())
                 .Build();
 
             host.Run();

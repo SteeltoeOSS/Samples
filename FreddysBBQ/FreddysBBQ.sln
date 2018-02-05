@@ -1,12 +1,23 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{69941B37-30A6-4301-9705-A91CC58F3237}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPortal", "src\AdminPortal\AdminPortal.csproj", "{C90ABB0A-4E9E-472F-9A27-7078D31FB605}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "src\OrderService\OrderService.csproj", "{DD3451E8-F707-4FF2-88CE-F2CFE5768F66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{327438BE-9706-4F0E-8EA3-7395F118A8A4}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{45E8AF9B-E05E-4F82-910E-FAFF28F33105}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\zoneadmin.cmd = scripts\zoneadmin.cmd
+		scripts\zoneusers.cmd = scripts\zoneusers.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,5 +60,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C90ABB0A-4E9E-472F-9A27-7078D31FB605} = {69941B37-30A6-4301-9705-A91CC58F3237}
 		{DD3451E8-F707-4FF2-88CE-F2CFE5768F66} = {69941B37-30A6-4301-9705-A91CC58F3237}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B759E399-9704-422E-9229-68C3FBFDB58A}
 	EndGlobalSection
 EndGlobal
