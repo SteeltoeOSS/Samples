@@ -118,28 +118,28 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Pivotal.Discovery.ClientAutofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pivotal.Discovery.ClientAutofac.2.0.0-rc1\lib\netstandard2.0\Pivotal.Discovery.ClientAutofac.dll</HintPath>
+      <HintPath>..\packages\Pivotal.Discovery.ClientAutofac.2.0.0-dev-00125\lib\netstandard2.0\Pivotal.Discovery.ClientAutofac.dll</HintPath>
     </Reference>
-    <Reference Include="Pivotal.Discovery.Eureka.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pivotal.Discovery.Eureka.Client.2.0.0-rc1\lib\netstandard2.0\Pivotal.Discovery.Eureka.Client.dll</HintPath>
+    <Reference Include="Pivotal.Discovery.EurekaBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pivotal.Discovery.EurekaBase.2.0.0-dev-00125\lib\netstandard2.0\Pivotal.Discovery.EurekaBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.0.0-rc1\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.0.0-dev-00211\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.2.0.0-rc1\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.2.0.0-dev-00045\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Autofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Autofac.2.0.0-rc1\lib\netstandard2.0\Steeltoe.Common.Autofac.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Autofac.2.0.0-dev-00045\lib\netstandard2.0\Steeltoe.Common.Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Http, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Http.2.0.0-rc1\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Http.2.0.0-dev-00045\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Discovery.Eureka.Client, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Discovery.Eureka.Client.2.0.0-rc1\lib\netstandard2.0\Steeltoe.Discovery.Eureka.Client.dll</HintPath>
+    <Reference Include="Steeltoe.Discovery.EurekaBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Discovery.EurekaBase.2.0.0-dev-00156\lib\netstandard2.0\Steeltoe.Discovery.EurekaBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.0.0-rc1\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.0.0-dev-00208\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
