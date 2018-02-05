@@ -1,11 +1,8 @@
-﻿using System.Text;
+﻿using System.Security.Authentication;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
-
-#if SSL
-using System.Security.Authentication;
 using System.Net.Security;
-#endif
 
 namespace RabbitMQ.Controllers
 {
@@ -16,15 +13,15 @@ namespace RabbitMQ.Controllers
         public RabbitMQController([FromServices] ConnectionFactory rabbitConnection)
         {
             _rabbitConnection = rabbitConnection;
-#if SSL
-            SslOption opt = new SslOption();
-            opt.Version = SslProtocols.Tls12;
-            opt.Enabled = true;
-            // Only needed if want to disable certificate validations
-            //opt.AcceptablePolicyErrors = SslPolicyErrors.RemoteCertificateChainErrors | 
-            //    SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateNotAvailable;
-            _rabbitConnection.Ssl = opt;
-#endif
+            SslOption opt = _rabbitConnection.Ssl;
+            if (opt != null && opt.Enabled)
+            {
+                opt.Version = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
+
+                // Only needed if want to disable certificate validations
+                opt.AcceptablePolicyErrors = SslPolicyErrors.RemoteCertificateChainErrors | 
+                    SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateNotAvailable;
+            }
         }
 
     
