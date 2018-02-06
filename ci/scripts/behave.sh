@@ -15,7 +15,7 @@ EOF
 cat Samples/user.ini | grep -v 'password='
 
 pushd Samples
-  behave --format plain $FEATURES
+  behave $FEATURES
   RC=$?
 popd
 
