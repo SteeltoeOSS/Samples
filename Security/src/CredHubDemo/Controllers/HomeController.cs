@@ -63,7 +63,7 @@ namespace CredHubDemo.Controllers
 
         public async Task<IActionResult> Injected([FromServices]ICredHubClient credHub)
         {
-            var newPassword = await credHub.GenerateAsync<PasswordCredential>(new PasswordGenerationRequest("generated-password", new PasswordGenerationParameters { Length = 20 }, true));
+            var newPassword = await credHub.GenerateAsync<PasswordCredential>(new PasswordGenerationRequest("generated-password", new PasswordGenerationParameters { Length = 20 }, null, OverwiteMode.overwrite));
             ViewBag.Deleted = await credHub.DeleteByNameAsync("generated-password");
 
             return View(newPassword);
@@ -75,7 +75,7 @@ namespace CredHubDemo.Controllers
 
             var creds = "{\"key\": 123,\"key_list\": [\"val1\",\"val2\"],\"is_true\": true}";
             _logger.LogTrace("Setting credentials...");
-            await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest("/config-server/credentials", creds, overwrite: true));
+            await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest("/config-server/credentials", creds, null, OverwiteMode.overwrite));
 
             _logger.LogTrace("Setting up ViewModel and calling Interpolate...");
             var interpolated = await _credHub.InterpolateServiceDataAsync(_cfSettings.ServicesJson);
@@ -146,7 +146,7 @@ namespace CredHubDemo.Controllers
             var deleteGeneratedRsa = await _credHub.DeleteByNameAsync(generatedRsa.Name);
 
             // SSH
-            var generatedSsh = await _credHub.GenerateAsync<SshCredential>(new SshGenerationRequest("generatedSsh", sshComment: "this is a comment"));
+            var generatedSsh = await _credHub.GenerateAsync<SshCredential>(new SshGenerationRequest("generatedSsh", new SshGenerationParameters { SshComment = "this is a comment"}));
             var setSsh = await _credHub.WriteAsync<SshCredential>(new SshSetRequest("testWriteSsh", generatedSsh.Value.PublicKey, generatedSsh.Value.PublicKey));
             var getSshById = await _credHub.GetByIdAsync<SshCredential>(setSsh.Id);
             var getSshByName = await _credHub.GetByNameAsync<SshCredential>(setSsh.Name);
