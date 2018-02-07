@@ -11,7 +11,8 @@ if  [ "$1" == "" ]; then
 	printUsage 
 fi
 cd Fortune-Teller-Service
-dotnet run --framework $1 --runtime ubuntu.14.04-x64 --force &
+dotnet run -f $1 --force &
 cd ../Fortune-Teller-UI
-dotnet run --framework $1 --runtime ubuntu.14.04-x64 --force &
+export BUILD=LOCAL
+dotnet run -f $1 --force &
 cd ..
