@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 
-
 namespace Fortune_Teller_UI
 {
     public class Program
@@ -13,7 +12,7 @@ namespace Fortune_Teller_UI
         }
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                    .UseCloudFoundryHosting()
+                    .UseCloudFoundryHosting(5555)
                     .AddCloudFoundry()
                     .UseStartup<Startup>()
                     .Build();
