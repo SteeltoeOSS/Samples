@@ -13,7 +13,5 @@ fi
 cd Fortune-Teller-Service
 dotnet run -f $1 --force &
 cd ../Fortune-Teller-UI
-export BUILD=LOCAL
 dotnet run -f $1 --force &
 cd ..
-export BUILD=
