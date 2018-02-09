@@ -1,4 +1,4 @@
-# Managment Sample Applications
+# Management Sample Applications
 
 This repo tree contains sample apps illustrating how to use the Steeltoe Actuator Endpoints for managing and monitoring your ASP.NET Core and/or ASP.NET 4.x application. Steeltoe Actuator endpoints can be used to expose services for checking health, adjusting logging, etc. of your applications. The endpoints also seemlessly integrate with the Pivotal Applications Manager for Cloud Foundry providing more information on how your application is behaving.
 
