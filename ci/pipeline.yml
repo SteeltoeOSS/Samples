@@ -118,7 +118,7 @@ resources:
       uri: https://github.com/SteeltoeOSS/Samples
       branch: dev
       paths:
-        - Connectors/src/AspDotNetCore/Rabbit/
+        - Connectors/src/AspDotNetCore/RabbitMQ/
         - ci/
         - steps/
         - pylib/
@@ -317,7 +317,7 @@ jobs:
       - task: behave
         file: Samples/ci/tasks/behave.yml
         params:
-          FEATURES: Connectors/src/AspDotNetCore/Rabbit
+          FEATURES: Connectors/src/AspDotNetCore/RabbitMQ
           CF_APIURL: {{cf_apiurl}}
           CF_USERNAME: {{cf_username}}
           CF_PASSWORD: {{cf_password}}
