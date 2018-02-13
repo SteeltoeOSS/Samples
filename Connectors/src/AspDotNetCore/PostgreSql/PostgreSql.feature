@@ -33,7 +33,6 @@ Feature: PostgreSql Connector
         Then you should see "Key 1 = Row1 Text"
         And you should see "Key 2 = Row2 Text"
 
-        @wip
     @net461
     @win10-x64
     Scenario: PostgreSql Connector for .Net Framework 4.6.1 (win10-x64)
