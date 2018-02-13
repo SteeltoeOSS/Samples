@@ -381,28 +381,28 @@ jobs:
           task: behavelog
           file: Samples/ci/tasks/showlog.yml
 
-groups:
+# groups:
 
-  - name: cfg
-    jobs:
-      - cfg-cloudfoundry
-      - cfg-simple
-      - cfg-simplecloudfoundry
+#   - name: cfg
+#     jobs:
+#       - cfg-cloudfoundry
+#       - cfg-simple
+#       - cfg-simplecloudfoundry
 
-  - name: cnn
-    jobs:
-      - cnn-mysql
-      - cnn-mysqlef6
-      - cnn-mysqlefcore
-      - cnn-postgreefcore
-      - cnn-postgresql
-      - cnn-rabbit
-      - cnn-redis
+#   - name: cnn
+#     jobs:
+#       - cnn-mysql
+#       - cnn-mysqlef6
+#       - cnn-mysqlefcore
+#       - cnn-postgreefcore
+#       - cnn-postgresql
+#       - cnn-rabbit
+#       - cnn-redis
 
-  - name: mgt
-    jobs:
-      - mgt-cloudfoundry
+#   - name: mgt
+#     jobs:
+#       - mgt-cloudfoundry
 
-  - name: sec
-    jobs:
-      - sec-cloudfoundrysinglesignon
+#   - name: sec
+#     jobs:
+#       - sec-cloudfoundrysinglesignon
