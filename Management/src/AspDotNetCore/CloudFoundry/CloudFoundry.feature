@@ -1,5 +1,5 @@
-@wip
 # TODO: how to verify management endpoint
+
 @cloud
 Feature: Cloud Foundry Samples
     In order to show you how to use Steeltoe Management Endpoint
