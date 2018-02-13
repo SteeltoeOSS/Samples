@@ -20,7 +20,6 @@ Feature: RabbitMQ Connector
 
     @netcoreapp2.0
     @ubuntu.14.04-x64
-    @wip
     Scenario: Rabbit Connector for .Net Core 2.0 (ubuntu.14.04-x64)
         Given you have .NET Core SDK 2.0 installed
         And you have CloudFoundry service p-rabbitmq installed
