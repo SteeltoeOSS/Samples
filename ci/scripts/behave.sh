@@ -15,6 +15,8 @@ EOF
 cat Samples/user.ini | grep -v 'password='
 
 pushd Samples
+  cp logging.ini logging.ini.orig
+  sed -i 's/INFO/DEBUG/' logging.ini
   behave --format plain $FEATURES
   RC=$?
 popd
