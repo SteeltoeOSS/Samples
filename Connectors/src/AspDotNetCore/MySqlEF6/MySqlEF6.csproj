@@ -12,8 +12,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="MySql.Data" Version="6.9.11" />
     <PackageReference Include="MySql.Data.Entity" Version="6.9.11" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EF6Core" Version="2.0.0-rc1" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EF6Core" Version="2.0.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

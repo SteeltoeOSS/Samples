@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Npgsql" Version="3.2.6" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0-rc1" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

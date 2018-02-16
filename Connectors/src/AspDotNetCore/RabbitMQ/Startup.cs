@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.Rabbit;
+using Steeltoe.CloudFoundry.Connector.RabbitMQ;
 
 namespace RabbitMQ
 {
@@ -19,7 +19,7 @@ namespace RabbitMQ
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddRabbitConnection(Configuration);
+            services.AddRabbitMQConnection(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

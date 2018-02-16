@@ -124,40 +124,43 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Pivotal.Discovery.ClientAutofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pivotal.Discovery.ClientAutofac.2.0.0-dev-00125\lib\netstandard2.0\Pivotal.Discovery.ClientAutofac.dll</HintPath>
+      <HintPath>..\packages\Pivotal.Discovery.ClientAutofac.2.0.0\lib\netstandard2.0\Pivotal.Discovery.ClientAutofac.dll</HintPath>
     </Reference>
     <Reference Include="Pivotal.Discovery.EurekaBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Pivotal.Discovery.EurekaBase.2.0.0-dev-00125\lib\netstandard2.0\Pivotal.Discovery.EurekaBase.dll</HintPath>
+      <HintPath>..\packages\Pivotal.Discovery.EurekaBase.2.0.0\lib\netstandard2.0\Pivotal.Discovery.EurekaBase.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamAutofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CircuitBreaker.Hystrix.MetricsStreamAutofac.2.0.0-dev-00092\lib\netstandard2.0\Steeltoe.CircuitBreaker.Hystrix.MetricsStreamAutofac.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CircuitBreaker.Hystrix.MetricsStreamAutofac.2.0.0\lib\netstandard2.0\Steeltoe.CircuitBreaker.Hystrix.MetricsStreamAutofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CircuitBreaker.HystrixAutofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CircuitBreaker.HystrixAutofac.2.0.0-dev-00092\lib\net461\Steeltoe.CircuitBreaker.HystrixAutofac.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CircuitBreaker.HystrixAutofac.2.0.0\lib\net461\Steeltoe.CircuitBreaker.HystrixAutofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CircuitBreaker.HystrixBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CircuitBreaker.HystrixBase.2.0.0-dev-00092\lib\netstandard2.0\Steeltoe.CircuitBreaker.HystrixBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CircuitBreaker.HystrixBase.2.0.0\lib\netstandard2.0\Steeltoe.CircuitBreaker.HystrixBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Steeltoe.CloudFoundry.ConnectorAutofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorAutofac.2.0.0\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorAutofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.0.0-dev-00211\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.0.0\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.2.0.0-dev-00045\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.2.0.0\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Autofac, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Autofac.2.0.0-dev-00045\lib\netstandard2.0\Steeltoe.Common.Autofac.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Autofac.2.0.0\lib\netstandard2.0\Steeltoe.Common.Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Http, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Http.2.0.0-dev-00045\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Http.2.0.0\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Discovery.EurekaBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Discovery.EurekaBase.2.0.0-dev-00156\lib\netstandard2.0\Steeltoe.Discovery.EurekaBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Discovery.EurekaBase.2.0.0\lib\netstandard2.0\Steeltoe.Discovery.EurekaBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.0.0-dev-00208\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.0.0\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -243,8 +246,8 @@
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.3.0\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.4.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
