@@ -1,8 +1,8 @@
 ﻿---
 applications:
-- name: mssql4-connector
-  buildpack: hwc_buildpack
+- name: mssql-connector-4x
   memory: 512M
   stack: windows2012R2
+  buildpack: hwc_buildpack
   services:
    - mySqlServerService

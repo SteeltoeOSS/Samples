@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "CloudFoundry OAuth data from VCAP_SERVICES";
+}
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+</div>
+
+<h4>ClientId = @Model.ClientId</h4>
+<h4>Client Secret = @Model.ClientSecret</h4>
+<h4>UserAuthorizationUrl = @Model.UserAuthorizationUrl</h4>
+<h4>AccessTokenUrl = @Model.AccessTokenUrl</h4>
+<h4>UserInfoUrl = @Model.UserInfoUrl</h4>
+<h4>TokenInfoUrl = @Model.TokenInfoUrl</h4>
+<h4>JwtKeyUrl = @Model.JwtKeyUrl</h4>
+<h4>ValidateCertificates = @Model.ValidateCertificates</h4>
+<h4>Scopes = @string.Join(", ", Model.Scope)</h4>

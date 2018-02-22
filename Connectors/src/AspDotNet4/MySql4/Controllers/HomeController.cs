@@ -1,19 +1,18 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Data;
 using System.Web.Mvc;
 
 namespace MySql4.Controllers
 {
     public class HomeController : Controller
     {
-        private MySqlConnection _dbConnection;
-        public HomeController(MySqlConnection dbConnection)
+        private IDbConnection _dbConnection;
+
+        public HomeController(IDbConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }
+
         public ActionResult Index()
         {
             return View();
@@ -37,7 +36,7 @@ namespace MySql4.Controllers
         {
             _dbConnection.Open();
 
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM TestData;", _dbConnection);
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM TestData;", (MySqlConnection)_dbConnection);
             MySqlDataReader rdr = cmd.ExecuteReader();
 
             while (rdr.Read())

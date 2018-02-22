@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Send Data";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form asp-controller="Home" asp-action="Send" method="post">
+    Message:
+    <input type="text" name="Message" value="" /><br />
+    <input type="submit" value="Send" />
+</form>
+@if (ViewBag.MessageSent != null)
+{
+    <h5>Your message was sent, @Html.ActionLink("Receive it now", "receive")</h5>
+}

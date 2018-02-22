@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using MySql4.Models;
+using Steeltoe.CloudFoundry.ConnectorAutofac;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;

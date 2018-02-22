@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql4", "MySql4\MySql4.csproj", "{EA1146DC-984F-44DA-82B8-1DE562CC4655}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsSql4", "MsSql4\MsSql4.csproj", "{E7EA128B-B57F-4F99-BBCA-892529673B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSql4", "PostgreSQL4\PostgreSql4.csproj", "{6D3FE0D8-16B0-4B17-ADED-A1B918D1CE1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis4", "Redis4\Redis4.csproj", "{44376FE2-866F-4781-A3A8-A1177165C88D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ4", "RabbitMQ4\RabbitMQ4.csproj", "{E93CCAD0-3FE7-448A-8D16-84D77593808A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth4", "OAuth4\OAuth4.csproj", "{D38D9538-947A-433E-853E-18138DB786B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{E7EA128B-B57F-4F99-BBCA-892529673B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7EA128B-B57F-4F99-BBCA-892529673B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7EA128B-B57F-4F99-BBCA-892529673B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D3FE0D8-16B0-4B17-ADED-A1B918D1CE1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D3FE0D8-16B0-4B17-ADED-A1B918D1CE1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D3FE0D8-16B0-4B17-ADED-A1B918D1CE1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D3FE0D8-16B0-4B17-ADED-A1B918D1CE1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44376FE2-866F-4781-A3A8-A1177165C88D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44376FE2-866F-4781-A3A8-A1177165C88D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44376FE2-866F-4781-A3A8-A1177165C88D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44376FE2-866F-4781-A3A8-A1177165C88D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E93CCAD0-3FE7-448A-8D16-84D77593808A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E93CCAD0-3FE7-448A-8D16-84D77593808A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E93CCAD0-3FE7-448A-8D16-84D77593808A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E93CCAD0-3FE7-448A-8D16-84D77593808A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38D9538-947A-433E-853E-18138DB786B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38D9538-947A-433E-853E-18138DB786B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38D9538-947A-433E-853E-18138DB786B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38D9538-947A-433E-853E-18138DB786B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

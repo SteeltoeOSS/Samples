@@ -5,30 +5,32 @@ ASP.NET Core sample app illustrating how to use the EntityFramework Core togethe
 ## Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry
-1. Optionally, installed Windows support
+1. (Optional) installed Windows support
 1. Installed MySql marketplace service
-1. Install .NET Core SDK
+1. Installed .NET Core SDK
 
 ## Create MySql Service Instance on CloudFoundry
 
 You must first create an instance of the MySql service in a org/space.
 
-1. cf target -o myorg -s development
-1. cf create-service p.mysql 100-mb myMySqlService
+1. `cf target -o myorg -s development`
+1. `cf create-service p.mysql 100-mb myMySqlService`
 
 ## Publish App & Push to CloudFoundry
 
-1. cf target -o myorg -s development
-1. cd samples/Connectors/src/AspDotNetCore/MySqlEFCore
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+1. `cf target -o myorg -s development`
+1. `cd samples/Connectors/src/AspDotNetCore/MySqlEFCore`
+1. `dotnet restore --configfile nuget.config`
+1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
+   * `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`
+   * `dotnet publish -f net461 -r win10-x64`
+1. Push the app using the appropriate manifest (select ONE of these commands):
+   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
+   * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
 
-> Note: The provided manifest will create an app named `mysqlefcore-connector` and attempt to bind to the the app to MySql service `myMySqlService`.
+> Note: The provided manifest will create an app named `mysqlefcore-connector` and attempt to bind the app to MySql service `myMySqlService`.
 
 ## What to expect - CloudFoundry
-
-After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs mysqlefcore-connector`
 
@@ -43,7 +45,9 @@ On a Windows cell, you should see something like this during startup:
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
 
-At this point the app is up and running.  Upon startup the app should create a table named `EFCoreTestData` and insert two rows. To display those rows click on the `MySql Data` link in the menu and you should see the row data displayed.
+This sample will be available at <http://mysqlefcore-connector.[your-cf-apps-domain]/>.
+
+Upon startup the app should create a table named `EFCoreTestData` and insert two rows. To display those rows, click on the `MySql Data` link in the menu.
 
 ---
 

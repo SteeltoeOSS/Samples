@@ -1,38 +1,40 @@
 ﻿# OAuth Connector Sample App
 
-ASP.NET Core sample app illustrating how to use the OAuth Connector to automatically bind to a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) and expose the services configuration data as injectable ASP.NET Core `IOptions`.
+This ASP.NET Core sample app uses the OAuth Connector to bind to a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) and expose the service's configuration data as ASP.NET Core `IOptions`.
 This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://github.com/SteeltoeOSS/Security).
 
 ## Pre-requisites - CloudFoundry
 
-1. Install Pivotal CloudFoundry
-1. Optionally, installed Windows support
-1. Install .NET Core SDK
+1. Installed Pivotal CloudFoundry
+1. (Optional) installed Windows support
+1. Installed .NET Core SDK
 
 ## Create OAuth2 Service Instance on CloudFoundry
 
-You must first create an instance of a OAuth2 service in a org/space. As mentioned above there are a couple to choose from. In this example we will use the [UAA Server](https://github.com/cloudfoundry/uaa) as an OAuth2 service. To do this, we create a CUPS service providing the appropriate UAA server configuration data. You can use the provided `oauth.json` file in creating your CUPS service. Note that you will likely have to modify its contents to match your CloudFoundry setup.
+You must first create an instance of a OAuth2 service in a org/space. As mentioned above, there are two to choose from. This example uses the [UAA Server](https://github.com/cloudfoundry/uaa). To do this, create a User Provided service with the appropriate UAA server configuration data. You can use the provided `oauth.json` file in creating your User Provided service after modifying its contents to match your CloudFoundry environment.
 
-1. cf target -o myorg -s development
-1. cf cups myOAuthService -p oauth.json
+1. `cf target -o myorg -s development`
+1. `cf cups myOAuthService -p oauth.json`
 
 If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) service for your OAuth2 server, follow the installation and configuration instructions [here](https://docs.pivotal.io/p-identity/installation.html).
 
 ## Publish App & Push to CloudFoundry
 
-1. cf target -o myorg -s development
-1. cd samples/Connectors/src/AspDotNetCore/OAuth
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+1. `cf target -o myorg -s development`
+1. `cd samples/Connectors/src/AspDotNetCore/OAuth`
+1. `dotnet restore --configfile nuget.config`
+1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
+   * `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`
+   * `dotnet publish -f net461 -r win10-x64`
+1. Push the app using the appropriate manifest (select ONE of these commands):
+   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
+   * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
 
-> Note: The provided manifest(s) will create an app named `oauth` and attempt to bind to the the app the CUPS service `myOAuthService`.
+> Note: The provided manifest(s) will create an app named `oauth-connector` and attempt to bind the app to User Provided service `myOAuthService`.
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs.
-
-To see the logs as you startup and use the app: `cf logs oauth`
+To see the logs as you startup and use the app: `cf logs oauth-connector`
 
 On a Windows cell, you should see something like this during startup:
 
@@ -46,7 +48,9 @@ On a Windows cell, you should see something like this during startup:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
 
-At this point the app is up and running.  You can access the app at <http://oauth.x.y.z/>.  On the apps menu, click on the `OAuth Options` menu item and you should see meaningful configuration data for the bound OAuth service.
+This sample will be available at <http://oauth-connector.[your-cf-apps-domain]/>.
+
+On the app's menu, click on `OAuth Options` to see meaningful configuration data for the bound OAuth service.
 
 ---
 

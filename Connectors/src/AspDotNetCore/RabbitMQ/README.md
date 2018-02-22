@@ -5,30 +5,32 @@ ASP.NET Core sample app illustrating how to use [Steeltoe RabbitMQ Connector](ht
 ## Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
-1. Optionally, installed Windows support
+1. (Optional) installed Windows support
 1. Installed RabbitMQ CloudFoundry service
-1. Install .NET Core SDK
+1. Installed .NET Core SDK
 
 ## Create RabbitMQ Service Instance on CloudFoundry
 
 You must first create an instance of the RabbitMQ service in a org/space.
 
-1. cf target -o myorg -s development
-1. cf create-service p-rabbitmq standard myRabbitMQService
+1. `cf target -o myorg -s development`
+1. `cf create-service p-rabbitmq standard myRabbitMQService`
 
 ## Publish App & Push to CloudFoundry
 
-1. cf target -o myorg -s development
-1. cd samples/Connectors/src/AspDotNetCore/RabbitMQ
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+1. `cf target -o myorg -s development`
+1. `cd samples/Connectors/src/AspDotNetCore/RabbitMQ`
+1. `dotnet restore --configfile nuget.config`
+1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
+   * `dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64`
+   * `dotnet publish -f net461 -r win10-x64`
+1. Push the app using the appropriate manifest (select ONE of these commands):
+   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
+   * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
 
-> Note: The provided manifest will create an app named `rabbitmq-connector` and attempt to bind to the the app to RabbitMQ service `myRabbitMQService`.
+> Note: The provided manifest will create an app named `rabbitmq-connector` and attempt to bind the app to RabbitMQ service `myRabbitMQService`.
 
 ## What to expect - CloudFoundry
-
-After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs rabbitmq-connector`
 
@@ -53,7 +55,10 @@ On a Linux cell, you should see something like this during startup:
 2016-08-24T12:23:02.89-0400 [CELL/0]     OUT Container became healthy
 ```
 
-At this point the app is up and running. To send a message click "Send" and send a message over RabbitMQ. Having sent a message, click "Receive" and you will start seeing those messages.
+This sample will be available at <http://rabbitmq-connector.[your-cf-apps-domain]/>.
+
+To send a message over RabbitMQ: click "Send" in the menu, enter text and click the Send button.
+To receive a RabbitMQ message that you have sent: click "Receive" in the menu, and messages will be retrieved from the queue one at a time (per page view).
 
 ---
 

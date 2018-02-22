@@ -1,0 +1,9 @@
+﻿@model Dictionary<string, string>
+<h2>@ViewBag.Title</h2>
+<h3>Data retrieved with @ViewBag.RedisClass</h3>
+<ul>
+    @foreach(var entry in Model)
+    {
+        <li>@entry.Key: @entry.Value</li>
+    }
+</ul>

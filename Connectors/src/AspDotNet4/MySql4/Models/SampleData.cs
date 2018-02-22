@@ -2,6 +2,7 @@
 using Autofac;
 using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 
 namespace MySql4.Models
 {
@@ -15,11 +16,11 @@ namespace MySql4.Models
             }
 
             Console.WriteLine("Initializing data");
-            using (var service = serviceProvider.Resolve<MySqlConnection>())
+            using (var service = serviceProvider.Resolve<IDbConnection>())
             {
                 service.Open();
-                DropCreateTable(service);
-                InsertSampleData(service);
+                DropCreateTable(service as MySqlConnection);
+                InsertSampleData(service as MySqlConnection);
                 service.Close();
                 Console.WriteLine("Initializing data complete!");
             }
