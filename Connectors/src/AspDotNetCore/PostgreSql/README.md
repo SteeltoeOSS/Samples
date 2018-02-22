@@ -16,8 +16,17 @@ There is another sample using [PostgreSQL with EFCore](./PostgreEFCore).
 
 You must first create an instance of the PostgreSQL database service in a org/space.
 
-1. `cf target -o myorg -s development`
-1. `cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres`
+```bash
+cf target -o myorg -s development
+
+# for EDB PostgreSQL:
+cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
+
+# for CrunchyPostgres:
+cf create-service postgresql-9.5-odb small myPostgres -c '{"db_name":"EFCoreSample", "db_username": "steeltoe", "owner_name":"<your name>", "owner_email":"<your email>"}'
+# or with escaped double quotes for Powershell:
+cf create-service postgresql-9.5-odb small myPostgres -c '{\"db_name\":\"EFCoreSample\", \"db_username\": \"steeltoe\", \"owner_name\":\"<your name>\", \"owner_email\":\"<your email>\"}'
+```
 
 ## Publish App & Push to CloudFoundry
 
