@@ -11,4 +11,5 @@ cf_username = `echo $STEELTOE_PCF_CREDENTIALS | cut -d: -f1`
 cf_password = `echo $STEELTOE_PCF_CREDENTIALS | cut -d: -f2`
 EOF
 
-exec $basedir/test-run $*
+$basedir/test-setup
+$basedir/test-run $*
