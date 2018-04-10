@@ -9,7 +9,7 @@ FOR /F "tokens=1,2 delims=:" %%a in ("%STEELTOE_PCF_CREDENTIALS%") do (
 
 SET PYTHON_HOME=C:\Python36
 SET DOTNET_HOME=C:\Program Files\dotnet
-SET MAVEN_HOME=C:\opt\apache\apache-maven-3.3.9
+SET MAVEN_HOME=C:\opt\apache-maven-3.3.9
 
 ECHO [behave.userdata] > %USERINI%
 ECHO cf_apiurl = api.run.pcfbeta.io >> %USERINI%
