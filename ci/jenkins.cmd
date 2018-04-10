@@ -23,5 +23,6 @@ ECHO output = %TEST_OUT% >> %USERINI%
 
 SET PATH=%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAVEN_HOME%\bin;%PATH%
 
+RMDIR /S /Q %TEST_OUT%
 CALL %BASEDIR%\test-setup
 CALL %BASEDIR%\test-run %*
