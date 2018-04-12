@@ -11,6 +11,7 @@ cf_apiurl = api.run.pcfbeta.io
 cf_org = STEELTOE
 cf_username = `echo $STEELTOE_PCF_CREDENTIALS | cut -d: -f1`
 cf_password = `echo $STEELTOE_PCF_CREDENTIALS | cut -d: -f2`
+cf_max_attempts = 250
 EOF
 
 

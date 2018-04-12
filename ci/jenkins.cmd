@@ -20,6 +20,7 @@ ECHO cf_apiurl = api.run.pcfbeta.io >> %USERINI%
 ECHO cf_org = STEELTOE >> %USERINI%
 ECHO cf_username = %CF_USER% >> %USERINI%
 ECHO cf_password = %CF_PASS% >> %USERINI%
+ECHO cf_max_attempts = 250 >> %USERINI%
 ECHO output = %TEST_OUT% >> %USERINI%
 
 SET PATH=%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAVEN_HOME%\bin;%PATH%;%CF_HOME%
@@ -27,3 +28,6 @@ SET PATH=%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAV
 RMDIR /S /Q %TEST_OUT%
 CALL %BASEDIR%\test-setup
 CALL %BASEDIR%\test-run %*
+
+
+https://hooks.slack.com/services/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
