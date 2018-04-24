@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="CloudFoundryWcf.ValueService" CodeBehind="ValueService.svc.cs" %>

@@ -1,0 +1,11 @@
+﻿---
+applications:
+- name: jwtauth
+  memory: 512M
+  host: jwtauth
+  stack: windows2012R2
+  command: .\CloudFoundryJwtAuthentication
+  env:
+     ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myOAuthService

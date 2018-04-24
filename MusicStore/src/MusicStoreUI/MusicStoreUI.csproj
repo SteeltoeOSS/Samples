@@ -41,8 +41,7 @@
     <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.0.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.1" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="2.0.0" />
 
   </ItemGroup>
