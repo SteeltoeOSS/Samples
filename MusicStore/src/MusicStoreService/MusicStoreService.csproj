@@ -26,8 +26,7 @@
     <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.0.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.0.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.0" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.0.1" />
   </ItemGroup>
 
   <Target Name="_GitProperties" AfterTargets="CoreCompile">

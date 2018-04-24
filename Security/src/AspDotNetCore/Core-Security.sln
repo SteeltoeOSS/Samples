@@ -2,15 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1020DC28-405A-4520-8354-B5BCC5CC46C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundryJwtAuthentication", "CloudFoundryJwtAuthentication\CloudFoundryJwtAuthentication.csproj", "{7C45D011-F900-42B9-A975-DF5239A32450}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundryJwtAuthentication", "src\CloudFoundryJwtAuthentication\CloudFoundryJwtAuthentication.csproj", "{7C45D011-F900-42B9-A975-DF5239A32450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundrySingleSignon", "CloudFoundrySingleSignon\CloudFoundrySingleSignon.csproj", "{742A8B2E-49F4-4497-8BEE-30FF5D95007B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundrySingleSignon", "src\CloudFoundrySingleSignon\CloudFoundrySingleSignon.csproj", "{742A8B2E-49F4-4497-8BEE-30FF5D95007B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDataProtectionKeyStore", "RedisDataProtectionKeyStore\RedisDataProtectionKeyStore.csproj", "{3393201D-0A45-4812-9888-5BFB89F5F76D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDataProtectionKeyStore", "src\RedisDataProtectionKeyStore\RedisDataProtectionKeyStore.csproj", "{3393201D-0A45-4812-9888-5BFB89F5F76D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredHubDemo", "src\CredHubDemo\CredHubDemo.csproj", "{7DC7077F-E876-4F1C-92A3-7B161C93A762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredHubDemo", "CredHubDemo\CredHubDemo.csproj", "{7DC7077F-E876-4F1C-92A3-7B161C93A762}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,12 +71,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7C45D011-F900-42B9-A975-DF5239A32450} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
-		{742A8B2E-49F4-4497-8BEE-30FF5D95007B} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
-		{3393201D-0A45-4812-9888-5BFB89F5F76D} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762} = {1020DC28-405A-4520-8354-B5BCC5CC46C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F256B56E-02D0-4538-A7F3-A3337E4B3C57}

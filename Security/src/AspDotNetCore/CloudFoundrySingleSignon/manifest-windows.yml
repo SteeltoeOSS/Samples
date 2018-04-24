@@ -1,0 +1,10 @@
+﻿---
+applications:
+- name: single-signon
+  memory: 512M
+  stack: windows2012R2
+  command: .\CloudFoundrySingleSignon
+  env:
+     ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myOAuthService

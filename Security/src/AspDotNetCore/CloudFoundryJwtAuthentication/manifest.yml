@@ -1,0 +1,7 @@
+﻿---
+applications:
+- name: jwtauth
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myOAuthService
