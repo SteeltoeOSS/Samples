@@ -19,7 +19,6 @@ parso==0.2.0
 pbr==4.0.2
 pexpect==4.5.0
 pickleshare==0.7.4
-pip==10.0.1
 prompt-toolkit==1.0.15
 psutil==5.4.5
 ptyprocess==0.5.2
