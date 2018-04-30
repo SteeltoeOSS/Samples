@@ -28,6 +28,3 @@ SET PATH=%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAV
 RMDIR /S /Q %TEST_OUT%
 CALL %BASEDIR%\test-setup
 CALL %BASEDIR%\test-run %*
-
-
-https://hooks.slack.com/services/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
