@@ -23,7 +23,7 @@ ECHO cf_password = %CF_PASS% >> %USERINI%
 ECHO cf_max_attempts = 250 >> %USERINI%
 ECHO output = %TEST_OUT% >> %USERINI%
 
-SET PATH=%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAVEN_HOME%\bin;%PATH%;%CF_HOME%
+SET PATH=%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%CF_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAVEN_HOME%\bin;%PATH%
 
 RMDIR /S /Q %TEST_OUT%
 CALL %BASEDIR%\test-setup
