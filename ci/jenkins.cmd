@@ -27,5 +27,6 @@ SET PATH=%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%CF_HOME%;%JAVA_HOME%
 PATH
 
 RMDIR /S /Q %TEST_OUT%
-CALL %BASEDIR%\test-setup
-CALL %BASEDIR%\test-run %*
+REM CALL %BASEDIR%\test-setup
+REM CALL %BASEDIR%\test-run %*
+behave %*
