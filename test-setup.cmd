@@ -11,7 +11,7 @@ RMDIR /S /Q pyenv
 
 virtualenv pyenv
 CALL pyenv\Scripts\activate
-python -m pip install -r pyenv.pkgs
+python -m pip install -r pyenv.pkgs --no-cache-dir
 CALL pyenv\Scripts\deactivate
 
 POPD
