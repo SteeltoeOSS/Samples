@@ -24,6 +24,7 @@ ECHO cf_max_attempts = 250 >> %USERINI%
 ECHO output = %TEST_OUT% >> %USERINI%
 
 SET PATH=%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%CF_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAVEN_HOME%\bin;%PATH%
+PATH
 
 RMDIR /S /Q %TEST_OUT%
 CALL %BASEDIR%\test-setup
