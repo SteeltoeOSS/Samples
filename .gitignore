@@ -211,3 +211,6 @@ test.out/
 user.ini
 
 git.properties
+
+# generated docs
+*.html

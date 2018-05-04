@@ -1,0 +1,52 @@
+= Simple - ASP.NET Core Sample Application
+:toc: preamble
+:toclevels: 1
+:!toc-title:
+:sccs: Spring Cloud Config Server
+:uri-sample: http://localhost:5000
+
+ASP.NET Core sample app illustrating how to use https://cloud.spring.io/spring-cloud-config/[{sccs}, window="_blank"] as a configuration source.
+
+
+== Running
+
+.Clone this repo
+----
+$ git clone https://github.com/SteeltoeOSS/Samples
+$ cd samples/Configuration/src/AspDotNetCore/Simple
+----
+
+.Start the Spring Cloud Config Server
+----
+$ docker-compose up
+----
+
+The above {sccs} uses https://github.com/spring-cloud-samples/config-repo for its configuration data.
+
+.Run the Sample
+----
+$ dotnet restore
+$ dotnet run -f netcoreapp2.0
+----
+
+== What to Expect
+
+After building and running the app, you should see something like the following:
+
+----
+$ dotnet run -f netcoreapp2.0
+Using launch settings from ...
+Hosting environment: development
+Content root path: ....
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+----
+
+Fire up a browser and open {uri-sample}[window="_blank"].  Once on the home page, navigate to the {uri-sample}/Home/ConfigServer[Config Server Data, window="_blank"] tab and you'll see the values stored in the github repository used for the Spring Cloud Config Server samples.
+
+If you navigate to the {uri-sample}/Home/ConfigServerSettings[Config Server Settings, window="_blank"] tab, you will see the settings used by the Spring Cloud Config server client.
+
+Change the Hosting environment setting to `development` (i.e., set `ASPNETCORE_ENVIRONMENT=development`), then restart the application. You will see different configuration data returned for that profile/hosting environment.
+
+[NOTE]
+_See the Official https://steeltoe.io/docs/steeltoe-configuration[Steeltoe Configuration Documentation] for a more in-depth walkthrough of the samples and more detailed information._
