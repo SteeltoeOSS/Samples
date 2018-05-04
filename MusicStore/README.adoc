@@ -2,6 +2,7 @@
 :toc: preamble
 :toclevels: 1
 :!toc-title:
+:linkattrs:
 
 Sample app illustrating how to use all of the Steeltoe components together in a ASP.NET Core application. This application is based on the ASP.NET Core reference app https://github.com/aspnet/MusicStore[MusicStore, window="_blank"] provided by Microsoft.
 

@@ -2,6 +2,7 @@
 :toc: preamble
 :toclevels: 1
 :!toc-title:
+:linkattrs:
 :sccs: Spring Cloud Config Server
 :uri-sample: http://localhost:5000
 
