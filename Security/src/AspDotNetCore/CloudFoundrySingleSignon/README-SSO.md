@@ -18,7 +18,7 @@ In order to use the SSO tile in an application, you must first [create a service
 
 ### Create a Service Instance
 
-In order to bind SSO configuration information to our application, create a service instance: `cf create-service p-identity auth myOAuthService`
+In order to bind SSO configuration information to our application, create a service instance: `cf create-service p-identity auth mySSOService`
 
 ### Execute Script to Configure new User and Group
 
@@ -36,16 +36,16 @@ Next, locate the sso-setup script you'd like to execute (.cmd/.sh) from the scri
     * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish`
     * `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`
 
-> Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the user-provided service `myOAuthService`.
+> Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the SSO service `mySSOService`.
 
 ### Configure SSO RedirectUri and Scope access
 
 For the application to access group information and handle login redirects correctly, you must configure two properties in the `sso` service dashboard. In order to access the `sso` dashboard, run the following command and go to the URL listed in `Dashboard` property:
 
 ```bash
-$ cf service myOAuthService
+$ cf service mySSOService
 
-Service instance: myOAuthService
+Service instance: mySSOService
 Service: p-identity
 bound apps: single-signon
 Tags:

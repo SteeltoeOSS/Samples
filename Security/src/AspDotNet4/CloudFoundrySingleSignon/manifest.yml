@@ -1,7 +1,0 @@
-﻿---
-applications:
-- name: single-signon
-  env:
-    ASPNETCORE_ENVIRONMENT: Development
-  services:
-   - myOAuthService

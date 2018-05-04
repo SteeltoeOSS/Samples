@@ -17,14 +17,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Steeltoe SSO Sample", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("testgroup", "testgroup", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("testgroup1", "testgroup1", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("JWT Sample", "TestJwtSample", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("WCF Sample", "TestWcfsample", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("testgroup", "testgroup", "Home")</li>
+                    <li>@Html.ActionLink("testgroup1", "testgroup1", "Home")</li>
+                    <li>@Html.ActionLink("JWT Sample", "TestJwtSample", "Home")</li>
+                    <li>@Html.ActionLink("WCF Sample", "TestWcfsample", "Home")</li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div> 
     </div>
