@@ -1,6 +1,11 @@
-﻿using System;
+﻿using CloudFoundrySingleSignon.App_Start;
+using Steeltoe.Security.Authentication.CloudFoundry.Wcf;
+using System;
+using System.IdentityModel.Claims;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,80 +17,130 @@ namespace CloudFoundrySingleSignon.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.Title = "Steeltoe Legacy ASP.NET Security Samples";
             return View();
         }
 
         [Authorize]
+        public ActionResult Secure()
+        {
+            ViewBag.Title = "Steeltoe Legacy ASP.NET Security Samples";
+            ViewBag.Message = "You're now logged in as " + User.Identity.Name;
+            return View("Index");
+        }
+
+        [CustomClaimsAuthorize("testgroup")]
         public ActionResult TestGroup()
         {
-            return View();
+            ViewBag.Title = "Steeltoe Legacy ASP.NET Security Samples";
+            ViewBag.Message = "Congratulations, you have access to 'testgroup'";
+            return View("Index");
+        }
+
+        [CustomClaimsAuthorize("testgroup1")]
+        public ActionResult TestGroup1()
+        {
+            return View("Index");
         }
 
         [Authorize]
-        public ActionResult TestGroup1()
-        {
-            return View();
-        }
-
         public async Task<ActionResult> TestJwtSample()
         {
-            //var token = await HttpContext.GetTokenAsync("access_token");
-            //var token = await HttpContextAccessor.HttpContext.Authentication.GetTokenAsync("access_token");
+            Console.WriteLine("Recieved authorized request to test REST + JWT Sample");
+            ViewBag.Title = "Test JWT Sample";
 
+            var token = Request.GetOwinContext().Authentication.User.Claims.First(c => c.Type == ClaimTypes.Authentication)?.Value;
             var client = new HttpClient();
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            string response = null;
-            string jwtSamplesUrl = GetJwtSamplesUrl(HttpContext);
+            string jwtSamplesUrl = GetServiceUrl(HttpContext, "jwt") + "/api/values";
 
             try
             {
-                response = await client.GetStringAsync(jwtSamplesUrl);
+                ViewBag.Message = await client.GetStringAsync(jwtSamplesUrl);
             }
             catch (Exception e)
             {
-                response = "Request failed: " + e.Message + " , expect JWT Sample app to be listening at: " + jwtSamplesUrl;
+                if (e.Message.Contains("401 (Unauthorized)"))
+                {
+                    ViewBag.Message = "Request failed, you are not authorized!";
+                }
+                else
+                {
+                    ViewBag.Message = "Request failed: " + e.Message + " expect JWT Sample app to be listening at: " + jwtSamplesUrl;
+                }
             }
-            return View((object)response);
+            return View("Index");
         }
 
+        [Authorize]
         public async Task<ActionResult> TestWcfSample()
         {
-            var sRef = new ValueServiceReference.ValueServiceClient();
-            var response = await sRef.GetDataAsync();
-            return View((object)response);
+            Console.WriteLine("Recieved authorized request to test WCF + JWT Sample");
+            ViewBag.Title = "Test WCF Sample";
+            var token = Request.GetOwinContext().Authentication.User.Claims.First(c => c.Type == ClaimTypes.Authentication)?.Value;
+
+            // Specify the address to be used for the client.
+            BasicHttpBinding binding = new BasicHttpBinding();
+            EndpointAddress address = new EndpointAddress(GetServiceUrl(HttpContext, "wcf") + "/valueservice.svc");
+            var sRef = new ValueService.ValueServiceClient(binding, address);
+            sRef.Endpoint.EndpointBehaviors.Add(new JwtHeaderEndpointBehavior(new CloudFoundryOptions(ApplicationConfig.Configuration), token));
+            try
+            {
+                ViewBag.Message = await sRef.GetDataAsync();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                if (e.Message == "Unauthorized")
+                {
+                    ViewBag.Message = "Request failed, you are not authorized!";
+                }
+                else
+                {
+                    ViewBag.Message = e.Message;
+                }
+            }
+
+            return View("Index");
         }
 
-        public ActionResult AccessDenied()
-        {
-            ViewData["Message"] = "Insufficient permissions.";
-            return View();
-        }
+        const string SSO_HOSTNAME = "single-signon-4x";
+        const string JWT_HOSTNAME = "jwtauth-4x";
+        const string WCF_HOSTNAME = "wcf-jwt-4x";
 
-        const string JWTAPPS_HOSTNAME = "jwtauth";
-        const string SSO_HOSTNAME = "single-signon";
-        private string GetJwtSamplesUrl(HttpContextBase httpContext)
+        private string GetServiceUrl(HttpContextBase httpContext, string service)
         {
-            //string hostName = httpContext.Request.Url.Host;
-            //string jwtappsHostname = hostName;
-            //int indx = hostName.IndexOf(SSO_HOSTNAME);
-            //if (indx >= 0)
-            //{
-            //    var prefix = hostName.Substring(indx + 13, 0);
-            //    var suffix = hostName.Substring(indx + 13, hostName.Length - indx - 13);
-            //    jwtappsHostname = prefix + JWTAPPS_HOSTNAME + suffix;
-            //}
-            //else
-            //{
-            //    indx = hostName.IndexOf('.');
-            //    if (indx < 0)
-            //    {
-            //        return hostName;
-            //    }
-            //    jwtappsHostname = JWTAPPS_HOSTNAME + hostName.Substring(indx);
-            //}
-            //return "http://" + jwtappsHostname + "/api/values";
-            return "http://localhost:23993/api/values";
+            string hostName = httpContext.Request.Url.Host;
+
+            int indx = hostName.IndexOf(SSO_HOSTNAME);
+
+            // if on cloud foundry...
+            if (hostName.Contains(SSO_HOSTNAME))
+            {
+                var suffix = hostName.Substring(indx + 16, hostName.Length - indx - 16);
+                if (service == "jwt")
+                {
+                    hostName = JWT_HOSTNAME + suffix;
+                }
+                else
+                {
+                    hostName = WCF_HOSTNAME + suffix;
+                }
+            }
+            else
+            {
+                if (service == "jwt")
+                {
+                    hostName = "localhost:44330";
+                }
+                else
+                {
+                    hostName = "localhost:44314";
+                }
+            }
+            Console.WriteLine($"Resolved remote service hostname request for {service} as {hostName}");
+            return "http://" + hostName;
         }
     }
 }

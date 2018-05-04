@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: single-signon-4x
+- name: wcf-jwt-4x
   buildpack: hwc_buildpack
   memory: 512M
   stack: windows2012R2

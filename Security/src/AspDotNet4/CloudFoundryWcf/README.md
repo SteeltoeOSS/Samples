@@ -1,8 +1,8 @@
-﻿# OWIN WebAPI Sample App for Cloud Foundry Security
+﻿# WCF Sample App for Cloud Foundry Security
 
-Legacy ASP.NET/OWIN WebAPI sample app using the Steeltoe [CloudFoundry External Security Provider](https://github.com/SteeltoeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) using JWT Bearer tokens.
+Legacy ASP.NET/WCF sample app using the Steeltoe [CloudFoundry External Security Provider](https://github.com/SteeltoeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) using JWT Bearer tokens.
 
-This sample illustrates how you can secure your web api endpoints using JWT Bearer tokens issued by the CloudFoundry UAA server.
+This sample illustrates how you can secure your WCF services using JWT Bearer tokens issued by the CloudFoundry UAA server.
 
 > Note: This application is intended to be used in conjunction with the [CloudFoundrySingleSignon][sso] sample app. You should FIRST get that sample up and running on CloudFoundry and follow these instructions after that.
 
@@ -13,7 +13,7 @@ This sample illustrates how you can secure your web api endpoints using JWT Bear
 ## Publish App & Push to CloudFoundry
 
 1. Open Samples\Security\src\AspDotNet4\4x-Security.sln in Visual Studio
-1. Right click on the CloudFoundryJwtAuthentication project, select "Publish"
+1. Right click on the CloudFoundryWcf project, select "Publish"
 1. Use the included `FolderProfile` to publish to `bin/Debug/net461/win10-x64/publish`
 1. Use the CF CLI to push the app
 
@@ -23,7 +23,7 @@ This sample illustrates how you can secure your web api endpoints using JWT Bear
 > cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
 ```
 
-The provided manifest(s) will create an app named `jwtauth-4x` and attempt to bind it to `mySSOService`. Alter the manifest to bind to `myOAuthService` if you are using UAA instead of the SSO tile.
+The provided manifest(s) will create an app named `wcf-jwt-4x` and attempt to bind it to `mySSOService`. Alter the manifest to bind to `myOAuthService` if you are using UAA instead of the SSO tile.
 
 > Note: `mySSOService` is created when you follow the Pivotal SSO instructions for [CloudFoundrySingleSignon][sso].
 
@@ -31,7 +31,7 @@ The provided manifest(s) will create an app named `jwtauth-4x` and attempt to bi
 
 After building and running the app, you should see something like the following in the logs.
 
-To see the logs as you startup and use the app: `cf logs jwtauth-4x`
+To see the logs as you startup and use the app: `cf logs wcf-jwt-4x`
 
 On a Windows cell, you should see something like this during startup:
 

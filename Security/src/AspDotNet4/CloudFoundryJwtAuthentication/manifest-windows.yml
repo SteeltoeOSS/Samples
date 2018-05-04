@@ -1,11 +1,8 @@
 ﻿---
 applications:
-- name: jwtauth
+- name: jwtauth-4x
+  buildpack: hwc_buildpack
   memory: 512M
-  host: jwtauth
   stack: windows2012R2
-  command: .\CloudFoundryJwtAuthentication
-  env:
-     ASPNETCORE_ENVIRONMENT: Development
   services:
-   - myOAuthService
+   - mySSOService

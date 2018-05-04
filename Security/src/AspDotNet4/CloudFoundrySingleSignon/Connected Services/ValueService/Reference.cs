@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CloudFoundrySingleSignon.ValueServiceReference {
+namespace CloudFoundrySingleSignon.ValueService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ValueServiceReference.IValueService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ValueService.IValueService")]
     public interface IValueService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IValueService/GetData", ReplyAction="http://tempuri.org/IValueService/GetDataResponse")]
@@ -23,12 +23,12 @@ namespace CloudFoundrySingleSignon.ValueServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IValueServiceChannel : CloudFoundrySingleSignon.ValueServiceReference.IValueService, System.ServiceModel.IClientChannel {
+    public interface IValueServiceChannel : CloudFoundrySingleSignon.ValueService.IValueService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ValueServiceClient : System.ServiceModel.ClientBase<CloudFoundrySingleSignon.ValueServiceReference.IValueService>, CloudFoundrySingleSignon.ValueServiceReference.IValueService {
+    public partial class ValueServiceClient : System.ServiceModel.ClientBase<CloudFoundrySingleSignon.ValueService.IValueService>, CloudFoundrySingleSignon.ValueService.IValueService {
         
         public ValueServiceClient() {
         }
