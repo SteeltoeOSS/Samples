@@ -7,14 +7,15 @@
 
 ASP.NET Core sample app illustrating how to use https://cloud.spring.io/spring-cloud-config/[{sccs}, window="_blank"] as a configuration source.
 
-
-== Running
+== Prepare
 
 .Clone this repo
 ----
 $ git clone https://github.com/SteeltoeOSS/Samples
 $ cd samples/Configuration/src/AspDotNetCore/Simple
 ----
+
+== Running
 
 .Start the Spring Cloud Config Server
 ----
