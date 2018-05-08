@@ -1,2 +1,0 @@
-[NOTE]
-_See the Official https://steeltoe.io/docs/steeltoe-configuration[Steeltoe Configuration Documentation] for a more in-depth walkthrough of the samples and more detailed information._
