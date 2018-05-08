@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   config:
-    image: "steeltoeoss/configserver:0.0.2-SNAPSHOT"
+    image: "steeltoeoss/configserver"
     command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
     volumes:
       - type: bind
@@ -10,7 +10,7 @@ services:
     ports:
       - "8888:8888"
   eureka:
-    image: "steeltoeoss/eurekaserver:0.0.2-SNAPSHOT"
+    image: "steeltoeoss/eurekaserver"
     ports:
       - "8761:8761"
   mysql:
