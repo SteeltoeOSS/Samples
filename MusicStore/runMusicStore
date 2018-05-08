@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if ! type xterm >/dev/null 2>&1; then
+    echo
+    echo "  This script requires xterm to launch the services into their own windows."
+    echo "  However, you can run the following yourself in separate terminals:"
+    echo
+    echo "    runMusicStoreService"
+    echo "    runOrderService"
+    echo "    runShoppingCartService"
+    echo "    runMusicStoreUI"
+    echo
+    exit
+fi
+
+basedir=$(dirname $0)
+xterm -T "MusicStore Service" -e $basedir/runMusicStoreService &
+xterm -T "Order Service" -e $basedir/runOrderService &
+xterm -T "ShoppingCart Service" -e $basedir/runShoppingCartService &
+xterm -T "MusicStore UI" -e $basedir/runMusicStoreUI &

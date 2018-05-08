@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if ! type xterm >/dev/null 2>&1; then
+    echo
+    echo "  This script requires xterm to launch the services into their own window."
+    echo "  However, you can run the following yourself in separate terminal:"
+    echo
+    echo "    docker-compose up"
+    echo
+    exit
+fi
+
+cd $(dirname $0)
+xterm -T "Backend Services" -e docker-compose up &

@@ -1,5 +1,5 @@
-#!/bin/bash
-cd src/MusicStoreUI
-dotnet restore --configfile nuget.config
+#!/usr/bin/env bash
+
+cd $(dirname $0)/src/MusicStoreUI
+dotnet restore
 dotnet run --framework netcoreapp2.0
-cd ../..

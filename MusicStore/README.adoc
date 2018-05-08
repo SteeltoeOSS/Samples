@@ -45,15 +45,12 @@ $ cd MusicStore
 
 .Start the Spring Cloud Config Server, Spring Cloud Eureka Server, and MySQL
 ----
-$ docker-compose up
+$ runBackendServices
 ----
 
 .Run the MusicStore components
 ----
-$ runMusicStoreService
-$ runOrderService
-$ runShoppingCartService
-$ runMusicStoreUI
+$ runMusicStore
 ----
 
 If all the services startup cleanly, you should be able to hit: <http://localhost:5555/> to see the Music Store.
