@@ -140,5 +140,4 @@ shoppingcart      started           1/1         1G       1G     shoppingcart.app
 
 All MusicStore services (i.e. MusicStoreUI, OrderService, etc.) have their own database instance for persisting data.  When a MusicStore service is started locally, it will always drop and recreate its database upon startup. When a MusicStore service is started on CloudFoundry, only the first instance (i.e. CF_INSTANCE_INDEX=0) will drop and recreate its database.  Note then, the service is not fully ready until the first instance has finished initializing its database, even though other instances are ready.
 
-[NOTE]
-_See the Official https://steeltoe.io/docs/steeltoe-configuration[Steeltoe Configuration Documentation] for a more in-depth walkthrough of the samples and more detailed information._
+include::../src/docs/footer.adoc[]

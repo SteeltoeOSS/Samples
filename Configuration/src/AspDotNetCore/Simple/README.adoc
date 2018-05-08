@@ -44,11 +44,10 @@ Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.
 ----
 
-Fire up a browser and open {uri-sample}[window="_blank"].  Once on the home page, navigate to the {uri-sample}/Home/ConfigServer[Config Server Data, window="_blank"] tab and you'll see the values stored in the github repository used for the Spring Cloud Config Server samples.
+Fire up a browser and open {uri-sample}.  Once on the home page, navigate to the {uri-sample}/Home/ConfigServer[Config Server Data, window="_blank"] tab and you'll see the values stored in the github repository used for the Spring Cloud Config Server samples.
 
 If you navigate to the {uri-sample}/Home/ConfigServerSettings[Config Server Settings, window="_blank"] tab, you will see the settings used by the Spring Cloud Config server client.
 
 Change the Hosting environment setting to `development` (i.e., set `ASPNETCORE_ENVIRONMENT=development`), then restart the application. You will see different configuration data returned for that profile/hosting environment.
 
-[NOTE]
-_See the Official https://steeltoe.io/docs/steeltoe-configuration[Steeltoe Configuration Documentation] for a more in-depth walkthrough of the samples and more detailed information._
+include::../../../../src/docs/footer.adoc[]
