@@ -51,6 +51,8 @@ $ runBackendServices
 .Run the MusicStore components
 ----
 $ runMusicStore
+# wait until MusicStore services running
+$ runMusicStoreUI
 ----
 
 If all the services startup cleanly, you should be able to hit: <http://localhost:5555/> to see the Music Store.
