@@ -17,4 +17,8 @@ basedir=$(dirname $0)
 xterm -T "MusicStore Service" -e $basedir/runMusicStoreService &
 xterm -T "Order Service" -e $basedir/runOrderService &
 xterm -T "ShoppingCart Service" -e $basedir/runShoppingCartService &
-xterm -T "MusicStore UI" -e $basedir/runMusicStoreUI &
+
+echo
+echo "When MusicStore services started, run:"
+echo "  xterm -T \"MusicStore UI\" -e $basedir/runMusicStoreUI &"
+echo
