@@ -1,12 +1,12 @@
 = Simple - ASP.NET Core Sample Application
 :toc: preamble
-:toclevels: 1
+:toclevels: 2
 :!toc-title:
 :linkattrs:
 :sccs: Spring Cloud Config Server
-:uri-sample: http://localhost:5000
+:uri-localapp: http://localhost:5000
 
-ASP.NET Core sample app illustrating how to use https://cloud.spring.io/spring-cloud-config/[{sccs}, window="_blank"] as a configuration source.
+ASP.NET Core sample app illustrating how to use https://cloud.spring.io/spring-cloud-config/[{sccs}] as a configuration source.
 
 == Prepare
 
@@ -44,9 +44,9 @@ Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.
 ----
 
-Fire up a browser and open {uri-sample}[window="_blank"].  Once on the home page, navigate to the {uri-sample}/Home/ConfigServer[Config Server Data, window="_blank"] tab and you'll see the values stored in the github repository used for the Spring Cloud Config Server samples.
+Fire up a browser and open {uri-localapp}.  Once on the home page, navigate to the {uri-localapp}/Home/ConfigServer[Config Server Data] tab and you'll see the values stored in the github repository used for the Spring Cloud Config Server samples.
 
-If you navigate to the {uri-sample}/Home/ConfigServerSettings[Config Server Settings, window="_blank"] tab, you will see the settings used by the Spring Cloud Config server client.
+If you navigate to the {uri-localapp}/Home/ConfigServerSettings[Config Server Settings] tab, you will see the settings used by the Spring Cloud Config server client.
 
 Change the Hosting environment setting to `development` (i.e., set `ASPNETCORE_ENVIRONMENT=development`), then restart the application. You will see different configuration data returned for that profile/hosting environment.
 
