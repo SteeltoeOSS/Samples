@@ -1,0 +1,8 @@
+---
+applications:
+- name: fortuneui
+  memory: 512M
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+    - myDiscoveryService

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fortune-Teller-Service", "Fortune-Teller-Service\Fortune-Teller-Service.csproj", "{C56DF1BF-8504-4832-9DED-8E346DAB1EDE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fortune-Teller-UI", "Fortune-Teller-UI\Fortune-Teller-UI.csproj", "{6024C864-1F30-4911-864F-D291EF6E9D7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C56DF1BF-8504-4832-9DED-8E346DAB1EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56DF1BF-8504-4832-9DED-8E346DAB1EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56DF1BF-8504-4832-9DED-8E346DAB1EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56DF1BF-8504-4832-9DED-8E346DAB1EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6024C864-1F30-4911-864F-D291EF6E9D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6024C864-1F30-4911-864F-D291EF6E9D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6024C864-1F30-4911-864F-D291EF6E9D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6024C864-1F30-4911-864F-D291EF6E9D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59974A75-CA57-490F-9F12-5FAD5E969D08}
+	EndGlobalSection
+EndGlobal
