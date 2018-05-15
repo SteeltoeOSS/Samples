@@ -1,0 +1,347 @@
+Microsoft (R) Build Engine version 15.7.177.53362 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 88.57 ms for C:\workspace\Management\src\Steeltoe.Management.ExporterBase\Steeltoe.Management.ExporterBase.csproj.
+  Restore completed in 88.57 ms for C:\workspace\Management\src\Steeltoe.Management.OpenCensus\Steeltoe.Management.OpenCensus.csproj.
+  Restore completed in 88.58 ms for C:\workspace\Management\src\Steeltoe.Management.TracingBase\Steeltoe.Management.TracingBase.csproj.
+  Restore completed in 88.58 ms for C:\workspace\Management\src\Steeltoe.Management.ExporterCore\Steeltoe.Management.ExporterCore.csproj.
+  Restore completed in 88.79 ms for C:\workspace\Management\src\Steeltoe.Management.TracingCore\Steeltoe.Management.TracingCore.csproj.
+  Restore completed in 15.38 ms for C:\workspace\Samples\Management\src\AspDotNetCore\Tracing\Fortune-Teller-UI\Fortune-Teller-UI.csproj.
+Using launch settings from C:\workspace\Samples\Management\src\AspDotNetCore\Tracing\Fortune-Teller-UI\Properties\launchSettings.json...
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[0]
+      User profile is available. Using 'C:\Users\dtillman\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+      DoGetApplicationsAsync http://localhost:8761/eureka/apps/, status: OK, applications: Applications[Application[Name=FORTUNESERVICE,Instances=Instance[InstanceId=DESKTOP-D0GL5GA:fortuneService:5000,HostName=DESKTOP-D0GL5GA,IpAddr=10.0.75.1,Status=UP,IsUnsecurePortEnabled=True,Port=5000,IsSecurePortEnabled=False,SecurePort=443,VipAddress=fortuneService,SecureVipAddress=fortuneService,ActionType=ADDED],]]
+dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
+      FetchFullRegistry returned: OK, Applications[Application[Name=FORTUNESERVICE,Instances=Instance[InstanceId=DESKTOP-D0GL5GA:fortuneService:5000,HostName=DESKTOP-D0GL5GA,IpAddr=10.0.75.1,Status=UP,IsUnsecurePortEnabled=True,Port=5000,IsSecurePortEnabled=False,SecurePort=443,VipAddress=fortuneService,SecureVipAddress=fortuneService,ActionType=ADDED],]]
+dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
+      FetchRegistry succeeded
+info: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      DiagnosticObserver HttpClientCoreObserver Subscribed to HttpHandlerDiagnosticListener
+info: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      DiagnosticObserver AspNetCoreHostingDiagnosticObserver Subscribed to Microsoft.AspNetCore
+info: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      DiagnosticObserver AspNetCoreMvcActionDiagnosticObserver Subscribed to Microsoft.AspNetCore
+info: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      DiagnosticObserver AspNetCoreMvcViewDiagnosticObserver Subscribed to Microsoft.AspNetCore
+Hosting environment: Development
+Content root path: C:\workspace\Samples\Management\src\AspDotNetCore\Tracing\Fortune-Teller-UI
+Now listening on: http://[::]:5555
+Application started. Press Ctrl+C to shut down.
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent start 9
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent finish 9
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5555/  
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleBeforeActionEvent start 9
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleBeforeActionEvent finish 9
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
+      Route matched with {action = "Index", controller = "Home"}. Executing action Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI)
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
+      Executing action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI) - Validation state: Valid
+dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
+      LookupService(http://fortuneservice/api/fortunes/random)
+dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
+      GetInstances returning: Instance[InstanceId=DESKTOP-D0GL5GA:fortuneService:5000,HostName=DESKTOP-D0GL5GA,IpAddr=10.0.75.1,Status=UP,IsUnsecurePortEnabled=True,Port=5000,IsSecurePortEnabled=False,SecurePort=443,VipAddress=fortuneService,SecureVipAddress=fortuneService,ActionType=ADDED]
+dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
+      LookupService() returning http://desktop-d0gl5ga:5000/api/fortunes/random 
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 9
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 9
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 7
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 7
+info: Fortune_Teller_UI.Services.FortuneService[0]
+      RandomFortuneAsync: {"id":1020,"text":"You can make your own happiness."}
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
+      Executed action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2051.4374ms.
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"5c5ed95138709c24a4b5824b85f6bb35","parentId":"16c94814418c9d64","id":"255c3b47f9c7748e","kind":"CLIENT","name":"httpclient:/api/fortunes/random","timestamp":1526414222696000,"duration":1019000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:03 GMT","span.kind":"client","http.url":"http://desktop-d0gl5ga:5000/api/fortunes/random","http.response.Server":"Kestrel","http.path":"/api/fortunes/random","http.status_code":"200","http.host":"desktop-d0gl5ga","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 8
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 8
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleBeforeViewEvent start 7
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleBeforeViewEvent finish 7
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleAfterViewEvent start 7
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleAfterViewEvent finish 7
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"5c5ed95138709c24a4b5824b85f6bb35","parentId":"16c94814418c9d64","id":"760d51ad81da297a","kind":"SERVER","name":"view:/Views/Home/Index.cshtml","timestamp":1526414228039000,"duration":985000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"mvc.view.FilePath":"/Views/Home/Index.cshtml","span.kind":"server","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 10
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 10
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 5333.4235ms.
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
+      Executed action Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI) in 7454.7319ms
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleAfterActionEvent start 7
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleAfterActionEvent finsih 7
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"5c5ed95138709c24a4b5824b85f6bb35","parentId":"c1bc86fca95084a5","id":"16c94814418c9d64","kind":"SERVER","name":"action:Home/Index","timestamp":1526414221630000,"duration":7463000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"span.kind":"server","mvc.controller.method":"System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index()","mvc.controller.class":"Fortune_Teller_UI.Controllers.HomeController","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 17
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 17
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 7790.7872ms 200 text/html; charset=utf-8
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent start 7
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent finish 7
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"5c5ed95138709c24a4b5824b85f6bb35","parentId":null,"id":"c1bc86fca95084a5","kind":"SERVER","name":"http:/","timestamp":1526414221299000,"duration":7821000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.request.User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36","http.request.Cache-Control":"max-age=0","http.path":"/","http.request.Connection":"keep-alive","http.response.Server":"Kestrel","http.method":"GET","http.request.Host":"localhost:5555","span.kind":"server","http.request.Upgrade-Insecure-Requests":"1","http.response.Content-Type":"text/html; charset=utf-8","http.request.Accept-Encoding":"gzip, deflate, br","http.request.Accept-Language":"en-US,en;q=0.9","http.request.Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8","http.response.Transfer-Encoding":"chunked","http.response.Date":"Tue, 15 May 2018 19:57:08 GMT","http.status_code":"200","http.url":"http://localhost:5555/","http.host":"localhost:5555","http.request.Cookie":"_ga=GA1.1.1776942282.1504707814","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 7
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 7
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent start 17
+dbug: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent: Ignoring path: /favicon.ico
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent finish 17
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5555/favicon.ico  
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[2]
+      Sending file. Request path: '/favicon.ico'. Physical path: 'C:\workspace\Samples\Management\src\AspDotNetCore\Tracing\Fortune-Teller-UI\wwwroot\favicon.ico'
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 45.3062ms 200 image/x-icon
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent start 7
+dbug: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent finish 7
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent start 9
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent finish 9
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5555/  
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleBeforeActionEvent start 9
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleBeforeActionEvent finish 9
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
+      Route matched with {action = "Index", controller = "Home"}. Executing action Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI)
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
+      Executing action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI) - Validation state: Valid
+dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
+      LookupService(http://fortuneservice/api/fortunes/random)
+dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
+      GetInstances returning: Instance[InstanceId=DESKTOP-D0GL5GA:fortuneService:5000,HostName=DESKTOP-D0GL5GA,IpAddr=10.0.75.1,Status=UP,IsUnsecurePortEnabled=True,Port=5000,IsSecurePortEnabled=False,SecurePort=443,VipAddress=fortuneService,SecureVipAddress=fortuneService,ActionType=ADDED]
+dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
+      LookupService() returning http://desktop-d0gl5ga:5000/api/fortunes/random 
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 9
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 9
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 28
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 28
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"0150e5df086f64d0c1752cdb35552bdc","parentId":"40f4d477a40eb43b","id":"a0cec3119233c3d6","kind":"CLIENT","name":"httpclient:/api/fortunes/random","timestamp":1526414234404000,"duration":1005000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:15 GMT","span.kind":"client","http.url":"http://desktop-d0gl5ga:5000/api/fortunes/random","http.response.Server":"Kestrel","http.path":"/api/fortunes/random","http.status_code":"200","http.host":"desktop-d0gl5ga","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+info: Fortune_Teller_UI.Services.FortuneService[0]
+      RandomFortuneAsync: {"id":1027,"text":"Now is the time to try something new."}
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
+      Executed action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2006.2136ms.
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[1]
+      Executing ViewResult, running view Index.
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleBeforeViewEvent start 28
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleBeforeViewEvent finish 28
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleAfterViewEvent start 28
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      HandleAfterViewEvent finish 28
+info: Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor[4]
+      Executed ViewResult - view Index executed in 6.5746ms.
+info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
+      Executed action Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI) in 2013.5709ms
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleAfterActionEvent start 28
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      HandleAfterActionEvent finsih 28
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"0150e5df086f64d0c1752cdb35552bdc","parentId":"40f4d477a40eb43b","id":"cd6f45a9e1948507","kind":"SERVER","name":"view:/Views/Home/Index.cshtml","timestamp":1526414235414000,"duration":2000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"mvc.view.FilePath":"/Views/Home/Index.cshtml","span.kind":"server","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 2015.8599ms 200 text/html; charset=utf-8
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent start 28
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"0150e5df086f64d0c1752cdb35552bdc","parentId":"5130f969a04e8fcb","id":"40f4d477a40eb43b","kind":"SERVER","name":"action:Home/Index","timestamp":1526414233403000,"duration":2014000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"span.kind":"server","mvc.controller.method":"System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index()","mvc.controller.class":"Fortune_Teller_UI.Controllers.HomeController","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent finish 28
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"0150e5df086f64d0c1752cdb35552bdc","parentId":null,"id":"5130f969a04e8fcb","kind":"SERVER","name":"http:/","timestamp":1526414233401000,"duration":2017000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.request.User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36","http.request.Cache-Control":"max-age=0","http.path":"/","http.request.Connection":"keep-alive","http.response.Server":"Kestrel","http.method":"GET","http.request.Host":"localhost:5555","span.kind":"server","http.request.Upgrade-Insecure-Requests":"1","http.response.Content-Type":"text/html; charset=utf-8","http.request.Accept-Encoding":"gzip, deflate, br","http.request.Accept-Language":"en-US,en;q=0.9","http.request.Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8","http.response.Transfer-Encoding":"chunked","http.response.Date":"Tue, 15 May 2018 19:57:14 GMT","http.status_code":"200","http.url":"http://localhost:5555/","http.host":"localhost:5555","http.request.Cookie":"_ga=GA1.1.1776942282.1504707814","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 8
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 8
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 17
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 17
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 8
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 8
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 28
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 28
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent start 30
+dbug: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent: Ignoring path: /favicon.ico
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStartEvent finish 30
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
+      Request starting HTTP/1.1 GET http://localhost:5555/favicon.ico  
+info: Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware[2]
+      Sending file. Request path: '/favicon.ico'. Physical path: 'C:\workspace\Samples\Management\src\AspDotNetCore\Tracing\Fortune-Teller-UI\wwwroot\favicon.ico'
+info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
+      Request finished in 0.9127ms 200 image/x-icon
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent start 10
+dbug: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      HandleStopEvent finish 10
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 30
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 30
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 7
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 7
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      GetRequestContent generated JSON: [{"traceId":"051c29ac7a1726f29baa3f3aac533d8d","parentId":null,"id":"a981eb0bae4d44fc","kind":"CLIENT","name":"httpclient:/eureka/apps/delta","timestamp":1526414240745000,"duration":16000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:20 GMT","span.kind":"client","http.url":"http://localhost:8761/eureka/apps/delta","http.request.Accept":"application/json","http.path":"/eureka/apps/delta","http.response.Server":"Apache-Coyote/1.1","http.status_code":"200","http.host":"localhost","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent start 13
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent: Ignoring path: /api/v2/spans
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStartEvent finished 13
+dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+      DoGetApplicationsAsync http://localhost:8761/eureka/apps/delta, status: OK, applications: Applications[]
+dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
+      FetchRegistryDelta returned: OK
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent start 10
+dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent: Missing span context
+trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      HandleStopEvent finished 10
+dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
+      DoPost http://localhost:9411/api/v2/spans, status: Accepted
+dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
+      FetchRegistry succeeded
+Application is shutting down...
+info: Steeltoe.Management.Tracing.Observer.AspNetCoreHostingObserver[0]
+      DiagnosticObserver AspNetCoreHostingDiagnosticObserver Disposed
+info: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcActionObserver[0]
+      DiagnosticObserver AspNetCoreMvcActionDiagnosticObserver Disposed
+info: Steeltoe.Management.Tracing.Observer.AspNetCoreMvcViewObserver[0]
+      DiagnosticObserver AspNetCoreMvcViewDiagnosticObserver Disposed
+info: Steeltoe.Management.Tracing.Observer.HttpClientDesktopObserver[0]
+      DiagnosticObserver HttpDesktopObserver Disposed
+info: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
+      DiagnosticObserver HttpClientCoreObserver Disposed
