@@ -25,6 +25,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /et
 RUN echo "deb https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list
 RUN apt-get update
 RUN apt-get -y install dotnet-sdk-2.0.0
+RUN apt-get -y install dotnet-sdk-2.1.300-rc1-008673
 
 # CloudFoundry
 RUN curl https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add -

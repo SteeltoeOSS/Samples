@@ -23,7 +23,6 @@ namespace Common.Services
             var client = await GetClientAsync();
             var request = GetRequest(HttpMethod.Get, ORDERS_URL);
             return await DoRequest<List<Order>>(client, request);
-
         }
 
         public async Task RemoveOrderAsync(long id)

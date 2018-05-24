@@ -1,5 +1,6 @@
 ---
 applications:
 - name: cloud
+  buildpack: dotnet_core_buildpack
   env:
     ASPNETCORE_ENVIRONMENT: development

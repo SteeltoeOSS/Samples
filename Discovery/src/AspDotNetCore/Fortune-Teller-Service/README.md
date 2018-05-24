@@ -20,7 +20,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. Clone this repo. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
 1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp2.0
+1. dotnet run -f netcoreapp2.1
 
 ## What to expect - Local
 
@@ -28,7 +28,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-$ dotnet run -f netcoreapp2.0
+$ dotnet run -f netcoreapp2.1
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production
@@ -50,7 +50,7 @@ At this point the Fortune Teller Service is up and running and ready for the For
 You must first create an instance of the Service Registry service in a org/space.
 
 1. cf target -o myorg -s development
-1. cf create-service p-service-registry standard myDiscoveryService 
+1. cf create-service p-service-registry standard myDiscoveryService
 1. Wait for the service to become ready! (i.e. cf services)
 
 ## Publish App & Push to CloudFoundry
@@ -58,8 +58,8 @@ You must first create an instance of the Service Registry service in a org/space
 1. cf target -o myorg -s development
 1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
 1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish  -f netcoreapp2.0 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.0/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.0/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
 
 > Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
@@ -67,7 +67,7 @@ You must first create an instance of the Service Registry service in a org/space
 
 ## What to expect - CloudFoundry
 
-After building and running the app, you should see something like the following in the logs. 
+After building and running the app, you should see something like the following in the logs.
 
 To see the logs as you startup and use the app: `cf logs fortuneservice`
 
@@ -112,8 +112,8 @@ If you wish to use Container-to-Container (C2C) communications between the UI an
 If you wish to use SSL communications between the Fortune Teller UI and the Fortune Teller Service, have a look at the comments in the files listed below.  You will need to make modifications to one or more of those files. Also, you are encouraged to read the [Cloud Foundry documentation](https://docs.pivotal.io/pivotalcf/1-10/adminguide/securing-traffic.html) on how SSL is configured, used and implemented before trying to use it with the Fortune Teller app.
 
 1. `appsettings.json` - Eureka registration option settings
-2. `Program.cs` - Changes needed to enable SSL usage with Kestrel (Note: These changes are only required if using Containter-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).
-3. `manifest.yml` - Startup command line change (Note: This change is only required if using Containter-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).
+2. `Program.cs` - Changes needed to enable SSL usage with Kestrel (Note: These changes are only required if using Container-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).
+3. `manifest.yml` - Startup command line change (Note: This change is only required if using Container-to-Container (C2C) networking, together with SSL, between the UI and the fortune service).
 
 ---
 

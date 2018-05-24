@@ -1,6 +1,7 @@
 ---
 applications:
 - name: foo
+  buildpack: dotnet_core_buildpack
   env:
     ASPNETCORE_ENVIRONMENT: development
   services:

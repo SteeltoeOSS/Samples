@@ -18,9 +18,9 @@ The default configuration of the Config Server uses [this github repo](https://g
 
 1. Clone this repo. (e.g. `git clone https://github.com/SteeltoeOSS/Samples`)
 1. cd samples/Configuration/src/AspDotNetCore/Simple
-1. Install .NET Core SDK 2.0
+1. Install .NET Core SDK 2.1.300
 1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp2.0 or dotnet run -f net461
+1. dotnet run -f netcoreapp2.1 or dotnet run -f net461
 
 ## What to expect
 
@@ -28,7 +28,7 @@ After building and running the app, you should see something like the following:
 
 ```text
 $ cd samples/Configuration/src/AspDotNetCore/Simple
-$ dotnet run -f netcoreapp2.0
+$ dotnet run -f netcoreapp2.1
 Hosting environment: Production
 Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.

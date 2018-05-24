@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FortuneTellerService.Models
@@ -21,10 +19,8 @@ namespace FortuneTellerService.Models
                 if (await db.Database.EnsureCreatedAsync())
                 {
                     await InsertFortunes(db);
-
                 }
             }
-
         }
 
         private static async Task InsertFortunes(FortuneContext db)
@@ -34,6 +30,7 @@ namespace FortuneTellerService.Models
             {
                 db.Fortunes.Add(fortune);
             }
+
             await db.SaveChangesAsync();
         }
 
@@ -90,12 +87,10 @@ namespace FortuneTellerService.Models
                 new Fortune { Id =1046, Text="The man on the top of the mountain did not fall there."},
                 new Fortune { Id =1047, Text="You will conquer obstacles to achieve success."},
                 new Fortune { Id =1048, Text="Joys are often the shadows, cast by sorrows."},
-                new Fortune { Id =1049, Text="Fortune favors the brave."},
-
+                new Fortune { Id =1049, Text="Fortune favors the brave."}
             };
 
             return fortunes;
         }
     }
 }
-

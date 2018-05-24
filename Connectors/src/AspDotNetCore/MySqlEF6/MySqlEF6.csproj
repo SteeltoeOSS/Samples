@@ -1,19 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <RuntimeIdentifiers>win10-x64;win10-x86</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
-    <PackageReference Include="MySql.Data" Version="6.9.11" />
-    <PackageReference Include="MySql.Data.Entity" Version="6.9.11" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EF6Core" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0-rc1-final" />
+    <PackageReference Include="MySql.Data" Version="6.10.7" />
+    <PackageReference Include="MySql.Data.Entity" Version="6.10.7" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EF6Core" Version="2.1.0-dev-00245" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00225" />
   </ItemGroup>
 
 </Project>

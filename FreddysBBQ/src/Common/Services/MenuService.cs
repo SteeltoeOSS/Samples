@@ -46,7 +46,6 @@ namespace Common.Services
             {
                 method = HttpMethod.Post;
                 requestUri = MENUITEMS_URL.Replace("/{id}", string.Empty);
-
             } 
 
             var request = GetRequest(method, requestUri);

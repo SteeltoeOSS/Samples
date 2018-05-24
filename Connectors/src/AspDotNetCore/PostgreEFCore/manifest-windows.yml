@@ -1,8 +1,10 @@
 ﻿---
 applications:
-- name: postgres-connector
-  memory: 512M
+- name: postgresefcore-connector
+  memory: 256M
+  disk_quota: 100M
   stack: windows2012R2
+  buildpack: hwc_buildpack
   command: .\PostgreEFCore
   env:
     ASPNETCORE_ENVIRONMENT: Development

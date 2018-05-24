@@ -1,10 +1,10 @@
 ﻿---
 applications:
-- name: jwtauth
+- name: single-signon
   memory: 256M
   stack: windows2012R2
-  command: .\CloudFoundryJwtAuthentication
+  command: .\CloudFoundrySingleSignon
   env:
      ASPNETCORE_ENVIRONMENT: Development
   services:
-   - myOAuthService
+   - mySSOService

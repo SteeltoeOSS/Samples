@@ -7,4 +7,4 @@ applications:
   env:
      ASPNETCORE_ENVIRONMENT: Development
   services:
-   - myOAuthService
+   - mySSOService

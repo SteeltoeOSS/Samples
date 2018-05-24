@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using Pivotal.Extensions.Configuration.ConfigServer;
 
 namespace SimpleCloudFoundry
@@ -14,7 +15,7 @@ namespace SimpleCloudFoundry
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .UseCloudFoundryHosting()
-                    .AddConfigServer()
+                    .ConfigureAppConfiguration(b => b.AddConfigServer(new LoggerFactory().AddConsole(LogLevel.Trace)))
                     .UseStartup<Startup>()
                     .Build();
 

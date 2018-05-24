@@ -95,7 +95,7 @@ For example, to startup the MusicStoreService:
 
 Its probably best to startup the `MusicStoreService`, `OrderService` and `ShoppingCartService` first and then follow up with the `MusicStoreUI` last.
 
-The `run*.*` commands will `dotnet run -f netcoreapp2.0` (i.e. target .NET Core).
+The `run*.*` commands will `dotnet run -f netcoreapp2.1` (i.e. target .NET Core).
 
 If all the services startup cleanly, you should be able to hit: <http://localhost:5555/> to see the Music Store.
 
@@ -120,7 +120,7 @@ As mentioned above, the application is dependent on the following services:
 * MySql Database Server - Default database used by all MusicStore services.
 * Redis Cache - Optional! Note you have to specifically build/publish MusicStoreUI service to use Redis (Details below).
 
-> Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+). Redis is not required to scale the other micro-services.
+> Note: Redis Cache is required if you want to scale the MusicStoreUI app to multiple instances (e.g. cf scale musicui -i 2+). Redis is not required to scale the other microservices.
 
 Before pushing the application to CloudFoundry you need to create those services.  If you plan on using Redis, set the environment variable USE_REDIS_CACHE=true before running these command.
 

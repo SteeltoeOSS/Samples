@@ -1,7 +1,9 @@
 ---
 applications:
 - name: musicui
-  memory: 1G
+  buildpack: dotnet_core_buildpack
+  memory: 256M
+  command: cd ${HOME} && ./MusicStoreUI --server.urls http://0.0.0.0:${PORT}
   env:
     ASPNETCORE_ENVIRONMENT: Production
   services:

@@ -11,7 +11,7 @@ This application makes use of the following Steeltoe components:
 * Steeltoe Connectors for connecting to MySql using EF Core
 * Steeltoe CloudFoundry Security Provider for SSO and REST endpoint protection
 
-# Getting Started
+## Getting Started
 
 This repo contains two of the four components that make up the [Freddys BBQ](https://github.com/william-tran/freddys-bbq) application  ( i.e.`Admin Portal UI` and `Order REST API`). These two components have been writen using .NET and ASP.NET Core and will be used to illustrate interoperability between Java and .NET based microservices running on CloudFoundry.
 
@@ -23,7 +23,7 @@ Once the Java version is up and running then the next step will be to replace th
 
 Once thats complete, you will have a running example of a Java and .NET based microservices based app running on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
-# Replace Java Services with .NET Services
+## Replace Java Services with .NET Services
 
 Once you have finished deploying and verifing the Java version, you are then ready to proceed with this section.
 
@@ -76,16 +76,21 @@ At this point you are ready to replace the existing Java based services with the
 ```bash
 cd Samples\FreddysBBQ\src\OrderService
 cf delete order-service -f
-dotnet restore --configfile nuget.config
-dotnet publish -f netcoreapp2.0 -r win10-x64 OR
-         dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64
-cf push -f manifest-windows.yml -p bin\Debug\netcoreapp2.0\win10-x64\publish OR cf push -f manifest.yml -p bin\Debug\netcoreapp2.0\ubuntu.14.04-x64\publish
+# Publish & Push to run on Windows
+dotnet publish -f netcoreapp2.1 -r win10-x64
+cf push -f manifest-windows.yml -p bin\Debug\netcoreapp2.1\win10-x64\publish
+# OR for Linux
+dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
+cf push -f manifest.yml -p bin\Debug\netcoreapp2.1\ubuntu.14.04-x64\publish
+
 cd ..\AdminPortal
 cf delete admin-portal -f
-dotnet restore --configfile nuget.config
-dotnet publish  -f netcoreapp2.0 -r win10-x64 OR 
-         dotnet publish -f netcoreapp2.0 -r ubuntu.14.04-x64
-cf push -f manifest-windows.yml -p bin\Debug\netcoreapp2.0\win10-x64\publish OR cf push -f manifest.yml -p bin\Debug\netcoreapp2.0\ubuntu.14.04-x64\publish
+# Publish & Push to run on Windows
+dotnet publish -f netcoreapp2.1 -r win10-x64
+cf push -f manifest-windows.yml -p bin\Debug\netcoreapp2.1\win10-x64\publish
+# OR for Linux
+dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
+cf push -f manifest.yml -p bin\Debug\netcoreapp2.1\ubuntu.14.04-x64\publish
 ```
 
 At this point the app should continue to work as it did before.  Any orders you might have had before, will be gone as you are now starting with a new clean order database. 

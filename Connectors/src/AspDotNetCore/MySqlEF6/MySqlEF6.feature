@@ -5,8 +5,8 @@ Feature: MySqlEF6 Connector
 
     @net461
     @win10-x64
-    Scenario: MySqlEF6 Connector for .Net Core 2.0 (win10-x64)
-        Given you have .NET Core SDK 2.0 installed
+    Scenario: MySqlEF6 Connector for .Net Core 2.1 (win10-x64)
+        Given you have .Net Core SDK 2.1.300 installed
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created

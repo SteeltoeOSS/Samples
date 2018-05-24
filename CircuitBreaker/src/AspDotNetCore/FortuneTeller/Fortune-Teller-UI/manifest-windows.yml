@@ -1,6 +1,7 @@
 ---
 applications:
 - name: fortuneui
+  buildpack: hwc_buildpack
   stack: windows2012R2
   command: .\Fortune-Teller-UI
   env:

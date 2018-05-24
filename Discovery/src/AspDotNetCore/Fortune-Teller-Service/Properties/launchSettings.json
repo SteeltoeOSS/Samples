@@ -18,7 +18,6 @@
     "Fortune-Teller-Service": {
       "commandName": "Project",
       "environmentVariables": {
-        "Key": "Value",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }

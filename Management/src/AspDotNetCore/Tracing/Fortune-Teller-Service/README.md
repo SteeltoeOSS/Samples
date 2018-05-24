@@ -40,7 +40,7 @@ If you have a running docker environment installed on your system, the you shoul
 
 1. Clone this repository. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-1. dotnet run -f netcoreapp2.0
+1. dotnet run -f netcoreapp2.1
 
 ## What to expect - Locally
 
@@ -48,7 +48,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-$ dotnet run -f netcoreapp2.0
+$ dotnet run -f netcoreapp2.1
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production

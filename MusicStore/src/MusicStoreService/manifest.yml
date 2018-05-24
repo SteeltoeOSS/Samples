@@ -1,7 +1,8 @@
 ---
 applications:
 - name: musicstore
-  memory: 1G
+  buildpack: dotnet_core_buildpack
+  memory: 256M
   env:
     ASPNETCORE_ENVIRONMENT: Production
   services:

@@ -1,6 +1,8 @@
 ---
 applications:
 - name: order-service
+  buildpack: dotnet_core_buildpack
+  memory: 256M
   env:
     ASPNETCORE_ENVIRONMENT: Development
     GRANT_TYPE: client_credentials

@@ -22,8 +22,10 @@ namespace Common.Services
 
         public AbstractService(IDiscoveryClient client, ILogger logger, IHttpContextAccessor context)
         {
-            _handler = new DiscoveryHttpClientHandler(client);
-            _handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            _handler = new DiscoveryHttpClientHandler(client)
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
             _logger = logger;
             _context = context;
         }
@@ -143,11 +145,18 @@ namespace Common.Services
         {
             var client = new HttpClient(_handler, false);
 
-            var token = await _context.HttpContext.GetTokenAsync("access_token");
-            if (token != null)
+            string authHeader = await Task.FromResult(_context.HttpContext.Request.Headers["Authorization"]);
+            if (authHeader != null)
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authHeader.Replace("bearer ", string.Empty));
             }
+
+            // this broke in AspNet2.1, will be fixed in 2.2
+            //var token = await _context.HttpContext.GetTokenAsync("access_token");
+            //if (token != null)
+            //{
+            //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            //}
 
             return client;
         }

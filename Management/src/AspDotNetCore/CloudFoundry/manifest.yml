@@ -1,7 +1,10 @@
 ﻿---
 applications:
 - name: actuator
-  memory: 512M
+  buildpack: dotnet_core_buildpack
+  memory: 256M
+  disk_quota: 200M
+  command: cd ${HOME} && ./CloudFoundry --server.urls http://0.0.0.0:${PORT}
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

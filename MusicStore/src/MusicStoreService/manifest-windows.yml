@@ -1,7 +1,7 @@
 ---
 applications:
 - name: musicstore
-  memory: 1G
+  memory: 256M
   stack: windows2012R2
   command: .\MusicStoreService
   env:

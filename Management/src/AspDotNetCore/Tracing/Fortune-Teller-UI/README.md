@@ -14,7 +14,7 @@ Note: You can run all of this either locally or on CloudFoundry.
 
 1. Clone this repository. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
-1. dotnet run -f netcoreapp2.0
+1. dotnet run -f netcoreapp2.1
 
 ## What to expect - Locally
 
@@ -22,7 +22,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
-$ dotnet run -f netcoreapp2.0
+$ dotnet run -f netcoreapp2.1
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.

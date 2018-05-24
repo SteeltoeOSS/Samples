@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AdminPortal.Controllers
@@ -36,7 +37,7 @@ namespace AdminPortal.Controllers
         {
             ViewData["Title"] = "Freddy's BBQ Orders";
             var orders = await _orderService.GetOrdersAsync();
-            return View(orders);
+            return View(orders ?? new List<Order>());
         }
 
         [HttpPost]
