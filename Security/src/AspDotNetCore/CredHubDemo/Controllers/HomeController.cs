@@ -23,19 +23,10 @@ namespace CredHubDemo.Controllers
             _loggerFactory = loggerFactory;
             if (_credHub == null && Request?.Path.Value.Contains("Injected") != true)
             {
-                // if a username and password were supplied, use that auth method, otherwise expect Diego to provide credentials on PCF
                 try
                 {
-                    if (!string.IsNullOrEmpty(credHubOptions.Value.CredHubUser) && !string.IsNullOrEmpty(credHubOptions.Value.CredHubPassword))
-                    {
-                        _logger?.LogTrace("Getting CredHub UAA Client...");
-                        _credHub = CredHubClient.CreateUAAClientAsync(credHubOptions.Value, _loggerFactory.CreateLogger<CredHubClient>()).Result;
-                    }
-                    else
-                    {
-                        _logger?.LogTrace("Getting CredHub mTLS Client...");
-                        _credHub = CredHubClient.CreateMTLSClientAsync(credHubOptions.Value, _loggerFactory.CreateLogger<CredHubClient>()).Result;
-                    }
+                    _logger?.LogTrace("Getting CredHub UAA Client...");
+                    _credHub = CredHubClient.CreateUAAClientAsync(credHubOptions.Value, _loggerFactory.CreateLogger<CredHubClient>()).Result;
                 }
                 catch (Exception e)
                 {
@@ -75,7 +66,7 @@ namespace CredHubDemo.Controllers
 
             var creds = "{\"key\": 123,\"key_list\": [\"val1\",\"val2\"],\"is_true\": true}";
             _logger.LogTrace("Setting credentials...");
-            await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest("/config-server/credentials", creds, null, OverwiteMode.overwrite));
+            await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest($"/credhubdemo-config-server/credentials", creds, null, OverwiteMode.overwrite));
 
             _logger.LogTrace("Setting up ViewModel and calling Interpolate...");
             var interpolated = await _credHub.InterpolateServiceDataAsync(_cfSettings.ServicesJson);

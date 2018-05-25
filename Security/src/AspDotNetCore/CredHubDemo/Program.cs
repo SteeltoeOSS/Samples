@@ -15,18 +15,13 @@ namespace CredHubDemo
         public static void Main(string[] args)
         {
             Console.WriteLine("Starting...");
-            //File.WriteAllText("instance.crt", "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n");
-            //File.WriteAllText("instance.key", "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n");
-            //Environment.SetEnvironmentVariable("CF_INSTANCE_CERT", "instance.crt");
-            //Environment.SetEnvironmentVariable("CF_INSTANCE_KEY", "instance.key");
-
             // forcefully setup credentials that need to be interpolated
             Environment.SetEnvironmentVariable("VCAP_SERVICES", @"
                 { 
                     ""p-demo-resource"": [
                     {
                     ""credentials"": {
-                        ""credhub-ref"": ""((/config-server/credentials))""
+                        ""credhub-ref"": ""((/credhubdemo-config-server/credentials))""
                     },
                     ""label"": ""p-config-server"",
                     ""name"": ""config-server"",
