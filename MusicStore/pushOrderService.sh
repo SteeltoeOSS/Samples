@@ -4,7 +4,7 @@ function printUsage()
 echo "USAGE:" 
 echo "pushOrderService [runtime] [framework]"
 echo "runtime - target runtime to publish (e.g. win10-x64, ubuntu.14.04-x64)"
-echo "framework - target framework to publish (e.g. net461, netcoreapp2.0)"
+echo "framework - target framework to publish (e.g. net461, netcoreapp2.1)"
 exit
 }
 #
