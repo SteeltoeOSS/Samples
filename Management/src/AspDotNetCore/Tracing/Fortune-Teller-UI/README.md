@@ -1,4 +1,4 @@
-# Fortune-Teller-UI - ASP.NET Core Micro-service
+# Fortune-Teller-UI - ASP.NET Core Microservice
 
 ASP.NET Core sample app illustrating how to use the Tracing features found in the Steeltoe Management framework. This sample requires running two additional services in order for it to run properly.
 
