@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Fortune_Teller_UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Fortune_Teller_UI.Services;
+using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Controllers
 {
@@ -28,6 +25,5 @@ namespace Fortune_Teller_UI.Controllers
         {
             return await _fortunes.RandomFortuneAsync();
         }
-
     }
 }

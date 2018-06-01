@@ -16,6 +16,5 @@ namespace Fortune_Teller_UI
                     .AddCloudFoundry()
                     .UseStartup<Startup>()
                     .Build();
-
     }
 }

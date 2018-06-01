@@ -1,12 +1,12 @@
-﻿
+﻿using Fortune_Teller_UI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Fortune_Teller_UI.Services;
 using Pivotal.Discovery.Client;
-
+using Steeltoe.Common.Http.Discovery;
+using System;
 
 namespace Fortune_Teller_UI
 {
@@ -24,7 +24,14 @@ namespace Fortune_Teller_UI
         {
             services.AddDiscoveryClient(Configuration);
 
-            services.AddSingleton<IFortuneService, FortuneService>();
+            services.AddTransient<DiscoveryHttpMessageHandler>();
+
+            services.AddHttpClient("fortunes", c =>
+                {
+                    c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
+                })
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
+                .AddTypedClient<IFortuneService, FortuneService>();
 
             // Add framework services.
             services.AddMvc();
