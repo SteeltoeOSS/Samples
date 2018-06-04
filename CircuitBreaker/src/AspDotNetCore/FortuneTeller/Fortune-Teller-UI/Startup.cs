@@ -1,12 +1,10 @@
-﻿
+﻿using Fortune_Teller_UI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Fortune_Teller_UI.Services;
 using Pivotal.Discovery.Client;
-using Steeltoe.Extensions.Configuration;
 using Steeltoe.CircuitBreaker.Hystrix;
 
 namespace Fortune_Teller_UI

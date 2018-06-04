@@ -10,15 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00168" />
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.1.0-dev-00167" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00177" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.1.0-dev-00173" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.1.0-dev-00054" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.1.0-dev-00138" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.1.0-dev-00246" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.1.0-dev-00055" />
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.1.0-dev-00145" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.1.0-dev-00250" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" /> 
   </ItemGroup>

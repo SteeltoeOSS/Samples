@@ -3,7 +3,7 @@ Feature: CloudFoundry Single SignOn
     In order to show you how to use Steeltoe with CloudFoundry Single SignOn
     You can run some CloudFoundry Single SignOn samples
 
-    @netcoreapp2.0
+    @netcoreapp2.1
     @win10-x64
     Scenario: CloudFoundry Single SignOn for .Net Core 2.1 (win10-x64)
         Given you have .Net Core SDK 2.1.300 installed
@@ -40,7 +40,7 @@ Feature: CloudFoundry Single SignOn
         And you should see "Your About page."
 
     @#153028887
-    @netcoreapp2.0
+    @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: CloudFoundry Single SignOn for .Net Core 2.1 (ubuntu.14.04-x64)
         Given you have .Net Core SDK 2.1.300 installed

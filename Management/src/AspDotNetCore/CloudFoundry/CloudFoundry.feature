@@ -5,7 +5,7 @@ Feature: Cloud Foundry Samples
     In order to show you how to use Steeltoe Management Endpoint
     You can run some Steeltoe Management Endpoint samples
 
-    @netcoreapp2.0
+    @netcoreapp2.1
     @win10-x64
     Scenario: CloudFoundry Management for .Net Core 2.1 (win10-x64)
         Given you have .Net Core SDK 2.1.300 installed
@@ -16,7 +16,7 @@ Feature: Cloud Foundry Samples
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
         And you wait until CloudFoundry app actuator is started
 
-    @netcoreapp2.0
+    @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: CloudFoundry Management for .Net Core 2.1 (ubuntu.14.04-x64)
         Given you have .Net Core SDK 2.1.300 installed

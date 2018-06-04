@@ -17,36 +17,36 @@
   </ItemGroup>
   <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
-    <PackageReference Include="GitInfo" Version="2.0.10" /> 
+    <PackageReference Include="GitInfo" Version="2.0.11" /> 
 
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.3" /> 
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.0" /> 
 
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0-rc1-final" />
 
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.1.0-dev-00167" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00168" />
-    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.1.0-dev-00125" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.0.0" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.1.0-dev-00135" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="2.0.0" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.1.0-dev-00173" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00177" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.1.0-dev-00131" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.1.0-dev-00250" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.1.0-dev-00143" />
+    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="2.1.0-dev-00145" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == ''">
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="2.1.0-dev-00125" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="2.1.0-dev-00131" />
     <PackageReference Include="RabbitMQ.Client" Version="5.1.0-rc1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == 'LOCAL'">
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="2.0.0" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="2.1.0-dev-00131" />
   </ItemGroup>
 
 

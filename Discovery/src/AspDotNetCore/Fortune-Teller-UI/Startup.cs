@@ -52,9 +52,6 @@ namespace Fortune_Teller_UI
             app.UseStaticFiles();
 
             app.UseMvc();
-
-            app.UseDiscoveryClient();
         }
-
     }
 }

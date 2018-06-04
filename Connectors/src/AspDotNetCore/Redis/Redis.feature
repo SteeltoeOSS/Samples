@@ -3,7 +3,7 @@ Feature: Redis Connector
     In order to show you how to use Steeltoe for connecting to Redis
     You can run some Redis connection samples
 
-    @netcoreapp2.0
+    @netcoreapp2.1
     @win10-x64
     Scenario: Redis Connector for .Net Core 2.1 (win10-x64)
         Given you have .Net Core SDK 2.1.300 installed
@@ -18,7 +18,7 @@ Feature: Redis Connector
         Then you should see "Key1=Key1Value"
         And you should see "Key2=Key2Value"
 
-    @netcoreapp2.0
+    @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: Redis Connector for .Net Core 2.1 (ubuntu.14.04-x64)
         Given you have .Net Core SDK 2.1.300 installed

@@ -5,14 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00160" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00223" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.1.0-dev-00127" />
-    <PackageReference Include="Steeltoe.Management.TracingCore" Version="2.1.0-dev-00127" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00177" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00228" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.1.0-dev-00143" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="2.1.0-dev-00143" />
   </ItemGroup>
 
 </Project>
