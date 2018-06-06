@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Health;
+using Steeltoe.Management.Exporter.Metrics;
 
 namespace CloudFoundry
 {
@@ -28,6 +29,10 @@ namespace CloudFoundry
 
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+
+            // Add management component which forwards collected metrics to 
+            // the Cloud Foundry Metrics Forwarder service
+            services.AddMetricsForwarderExporter(Configuration);
 
             // Add framework services.
             services.AddMvc();
@@ -56,6 +61,9 @@ namespace CloudFoundry
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // Start up the metrics forwarder service added above
+            app.UseMetricsExporter();
         }
     }
 }

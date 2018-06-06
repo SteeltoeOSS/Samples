@@ -1,13 +1,17 @@
 ﻿# Management Sample App for Cloud Foundry
 
-ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](https://github.com/SteeltoeOSS/Management) together with the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/1-11/console/index.html) for monitoring and managing your applications on Cloud Foundry.
+ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](https://github.com/SteeltoeOSS/Management) together with the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/1-11/console/index.html) for monitoring and managing your applications on Cloud Foundry.  
+
+This application also illustrates how to have application metrics captured and exported to the [Metrics Forwarder for PCF](https://docs.pivotal.io/metrics-forwarder/index.html) service so that applications metrics can be viewed in any tool that is able to consume those metrics from the [Cloud Foundry Loggregator Firehose](https://docs.pivotal.io/pivotalcf/2-1/loggregator/architecture.html#firehose).  Several tools exist that can do this, including [PCF Metrics](https://docs.pivotal.io/pcf-metrics/1-4/index.html) from Pivotal.
 
 ## Pre-requisites - CloudFoundry
 
 1. Installed Pivotal Cloud Foundry
 2. Installed Apps Manager on Cloud Foundry
 3. Installed MySql CloudFoundry service
-4. Install .NET Core SDK
+4. Optionally install [Metrics Forwarder for PCF](https://network.pivotal.io/products/p-metrics-forwarder).
+5. Optionally install [PCF Metrics](https://network.pivotal.io/products/apm).
+6. Install .NET Core SDK
 
 ## Create MySql Service Instance on CloudFoundry
 
@@ -45,12 +49,23 @@ On a Windows cell, you should see something like this during startup:
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Application started. Press Ctrl+C to shut down.
 ```
 
-Once the app is up and running then you can access the management endpoints exposed by Steeltoe using the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/1-11/console/index.html).
+Once the app is up and running then you can access the management endpoints exposed by Steeltoe using the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/2-1/console/).
 
 The Steeltoe Management framework exposes Spring Boot Actuator compatible Endpoints which can be used using the Pivotal Apps Manager. By using the Apps Manager, you can view the Apps Health, Build Information (e.g. Git info, etc), and recent Request/Response Traces, as well as manage/change the applications logging levels.
 
-Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.pivotal.io/pivotalcf/1-11/console/using-actuators.html) for more information.
+Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.pivotal.io/pivotalcf/2-1/console/using-actuators.html) for more information.
+
+## View Application Metrics in PCF Metrics
+
+If you wish to collect and view applications metrics in [PCF Metrics](http://docs.pivotal.io/pcf-metrics/1-4/index.html), you first must bind an instance of the [Metrics Forwarder](https://docs.pivotal.io/metrics-forwarder/index.html) service to your application and restart it.  Once thats complete custom metrics will be collected and automatically exported to the Metrics Forwarder service.  
+
+1. cf target -o myorg -s development
+2. cf create-service metrics-forwarder unlimited my-metrics
+3. cf bind-service actuator my-metrics
+4. cf restart actuator
+
+To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/products/apm) tool from Pivotal. Follow the instructions in the [documentation](http://docs.pivotal.io/pcf-metrics/1-4/) and pay particular attention to the section on viewing [Custom Metrics](http://docs.pivotal.io/pcf-metrics/1-4/using.html).
 
 ---
 
-### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/steeltoe-management) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/steeltoe-management) for a more in-depth walk-through of the samples and more detailed information
