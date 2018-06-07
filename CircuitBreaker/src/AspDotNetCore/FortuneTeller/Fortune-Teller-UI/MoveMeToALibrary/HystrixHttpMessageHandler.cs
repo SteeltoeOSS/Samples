@@ -7,6 +7,26 @@ using System.Threading.Tasks;
 
 namespace Steeltoe.Common.Http
 {
+    public class AltHystrixHttpMessageHandler <T> : DelegatingHandler
+        where T : HystrixCommand<HttpResponseMessage>
+    {
+        /// <summary>
+        /// Overly simplified imlementation!
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            // Create an instance of developer's HystrixCommand type, passing in the inner handler of this HttpClient request
+            var command = Activator.CreateInstance(typeof(T), new object[] { base.SendAsync(request, cancellationToken) });
+
+            var result = await (command as HystrixCommand<HttpResponseMessage>).ExecuteAsync();
+
+            return result;
+        }
+    }
+
     public class HystrixHttpMessageHandler : DelegatingHandler
     {
         private readonly Func<HttpResponseMessage> _fallback;

@@ -58,7 +58,8 @@ namespace Fortune_Teller_UI
                 })
                     // QUESTION: does a fallback method make sense here? 
                     // N kinds of request will made with this client, perhaps they shouldn't ever share a fallback...
-                .AddCircuitBreaker(loggerFactory: _loggerFactory)
+                //.AddCircuitBreaker(loggerFactory: _loggerFactory)
+                .AddHystrixCommand<AltRandomFortuneCommand>()
                 .AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
                 .AddTypedClient<IFortuneService, FortuneService>();
             // Create a version of HttpClient that comes with discovery (for use inside a circuit breaker)

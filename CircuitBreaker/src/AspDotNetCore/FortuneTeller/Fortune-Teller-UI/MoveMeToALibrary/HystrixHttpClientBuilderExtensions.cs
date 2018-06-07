@@ -26,5 +26,17 @@ namespace Steeltoe.Common.Http
             builder.AddHttpMessageHandler(() => new HystrixHttpMessageHandler(commandOptions, fallback, loggerFactory));
             return builder;
         }
+
+        public static IHttpClientBuilder AddHystrixCommand<CommandType>(this IHttpClientBuilder builder)
+            where CommandType: HystrixCommand<HttpResponseMessage>
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.AddHttpMessageHandler(() => new AltHystrixHttpMessageHandler<CommandType>());
+            return builder;
+        }
     }
 }
