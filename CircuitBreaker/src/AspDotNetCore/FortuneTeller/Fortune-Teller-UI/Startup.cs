@@ -6,14 +6,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.Common.Http;
+using Steeltoe.Common.Http.Discovery;
+using System;
 
 namespace Fortune_Teller_UI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private ILoggerFactory _loggerFactory;
+
+        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
+            _loggerFactory = loggerFactory;
         }
 
         public IConfiguration Configuration { get; set; }
@@ -22,9 +28,6 @@ namespace Fortune_Teller_UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDiscoveryClient(Configuration);
-
-            // The Fortune service itself, calls the REST APIs to get random fortunes
-            services.AddSingleton<IFortuneService, FortuneService>();
 
             // A Hystrix command that makes use of the FortuneService
             services.AddHystrixCommand<FortuneServiceCommand>("FortuneService", Configuration);
@@ -40,6 +43,33 @@ namespace Fortune_Teller_UI
 
             // A Hystrix collapser that makes use of the FortuneService(s) above to get a Fortune.
             services.AddHystrixCollapser<IFortuneServiceCollapser, FortuneServiceCollapser>("FortuneServiceCollapser", Configuration);
+
+            /************************************************************************************************************************************/
+
+            // Add HttpMessageHandlers for use with HttpClientFactory
+            services.AddTransient<DiscoveryHttpMessageHandler>();
+            services.AddTransient<HystrixHttpMessageHandler>();
+
+            // Add two versions of injectible HttpClient via HttpClientFactory (new in ASP.NET Core 2.1)
+            // Create a version of HttpClient that comes with a circuit breaker and discovery
+            services.AddHttpClient("fortunesWithHystrixHandler", c =>
+                {
+                    c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
+                })
+                    // QUESTION: does a fallback method make sense here? 
+                    // N kinds of request will made with this client, perhaps they shouldn't ever share a fallback...
+                .AddCircuitBreaker(loggerFactory: _loggerFactory)
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
+                .AddTypedClient<IFortuneService, FortuneService>();
+            // Create a version of HttpClient that comes with discovery (for use inside a circuit breaker)
+            services.AddHttpClient("fortunesWithoutHystrixHandler", c =>
+                {
+                    c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
+                })
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
+                .AddTypedClient<IFortuneService, FortuneService>();
+
+            /************************************************************************************************************************************/
 
             // Add framework services.
             services.AddMvc();
@@ -67,7 +97,7 @@ namespace Fortune_Teller_UI
             app.UseHystrixRequestContext();
 
             app.UseMvc();
-
+            
             // Startup discovery client
             app.UseDiscoveryClient();
 

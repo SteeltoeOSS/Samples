@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Fortune_Teller_UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Fortune_Teller_UI.Services;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Controllers
 {
@@ -29,6 +28,16 @@ namespace Fortune_Teller_UI.Controllers
         public async Task<Fortune> Random()
         {
             return await _fortuneServiceCommand.RandomFortune();
+        }
+
+        [HttpGet("random2")]
+        public async Task<Fortune> RandomFromHttpClientFactory([FromServices]IHttpClientFactory httpClientFactory)
+        {
+            // use the new HttpClientFactory to get a named client pre-configured with handler pipeline 
+            // see startup.cs for configuration of this pipeline
+            var client = httpClientFactory.CreateClient("fortunesWithHystrixHandler");
+            var httpResponse = await client.GetAsync("random");
+            return await httpResponse.Content.ReadAsAsync<Fortune>();
         }
 
         [HttpGet("multirandom")]
