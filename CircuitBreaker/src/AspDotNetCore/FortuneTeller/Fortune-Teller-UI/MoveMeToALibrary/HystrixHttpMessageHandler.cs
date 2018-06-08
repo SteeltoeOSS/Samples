@@ -38,8 +38,11 @@ namespace Steeltoe.Common.Http
             // This is ... less than ideal and probably worse than magic strings
             var command = Activator.CreateInstance(
                 typeof(T), 
-                BindingFlags.OptionalParamBinding, 
-                new object[] { base.SendAsync(request, cancellationToken) });
+                //BindingFlags.OptionalParamBinding, 
+                new object[] {
+                    base.SendAsync(request, cancellationToken),
+                    _loggerFactory?.CreateLogger<T>()
+                });
 
             var result = await (command as HystrixCommand<HttpResponseMessage>).ExecuteAsync();
 
