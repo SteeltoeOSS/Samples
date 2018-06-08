@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Steeltoe.Common.Http
 {
     /// <summary>
-    /// Wrap HttpClient calls with your own HystrixCommand
+    /// Wrap <see cref="HttpClient"/> calls with a pre-defined <see cref="HystrixCommand{HttpResponseMessage}"/>
     /// </summary>
-    /// <typeparam name="T">The type of the HystrixCommand that should be used</typeparam>
+    /// <typeparam name="T">The type of the <see cref="HystrixCommand"/> that should be used</typeparam>
     public class HystrixHttpMessageHandler <T> : DelegatingHandler
         where T : HystrixCommand<HttpResponseMessage>
     {
@@ -25,7 +25,7 @@ namespace Steeltoe.Common.Http
         }
 
         /// <summary>
-        /// Overly simplified imlementation!
+        /// Overly simplified implementation!
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
@@ -47,6 +47,9 @@ namespace Steeltoe.Common.Http
         }
     }
 
+    /// <summary>
+    /// Wrap <see cref="HttpClient"/> calls with a generic <see cref="HystrixCommand{HttpResponseMessage}"/>
+    /// </summary>
     public class HystrixHttpMessageHandler : DelegatingHandler
     {
         private readonly Func<HttpResponseMessage> _fallback;
@@ -54,6 +57,12 @@ namespace Steeltoe.Common.Http
         private readonly ILogger _logger;
         private readonly IHystrixCommandOptions _commandOptions;
 
+        /// <summary>
+        /// Creates a <see cref="HystrixCommand"/> around outbound <see cref="HttpClient"/> requests 
+        /// </summary>
+        /// <param name="commandOptions">Configuration to use when creating the <see cref="HystrixCommand"/></param>
+        /// <param name="fallback">Function to execute if the call fails</param>
+        /// <param name="loggerFactory">For logging inside the handler and the command</param>
         public HystrixHttpMessageHandler(IHystrixCommandOptions commandOptions = null, Func<HttpResponseMessage> fallback = null, ILoggerFactory loggerFactory = null)
         {
             _commandOptions = commandOptions;

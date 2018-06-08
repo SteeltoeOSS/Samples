@@ -56,9 +56,9 @@ namespace Fortune_Teller_UI
                 {
                     c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
                 })
-                //.AddCircuitBreaker(loggerFactory: _loggerFactory)
-                //.AddHystrixCommand<AltRandomFortuneCommand>()
-                .AddHystrixCommand<HystrixHttpCommandWithRetry>()
+                //.AddHystrixCommand(loggerFactory: _loggerFactory) // create a basic HystrixCommand on the fly
+                //.AddHystrixCommand<AltRandomFortuneCommand>(_loggerFactory) // use a developer-defined HystrixCommand
+                .AddHystrixCommand<HystrixHttpCommandWithRetry>(_loggerFactory) // use a Steeltoe-defined HystrixCommand with a basic retry
                 .AddServiceDiscovery()
                 .AddTypedClient<IFortuneService, FortuneService>();
             // Create a version of HttpClient that comes with discovery (for use inside a circuit breaker)
