@@ -35,7 +35,7 @@ namespace Steeltoe.Common.Http
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.AddHttpMessageHandler(() => new AltHystrixHttpMessageHandler<CommandType>());
+            builder.AddHttpMessageHandler(() => new HystrixHttpMessageHandler<CommandType>());
             return builder;
         }
     }

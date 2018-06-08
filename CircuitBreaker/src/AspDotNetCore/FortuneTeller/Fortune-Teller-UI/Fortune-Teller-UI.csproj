@@ -19,19 +19,19 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00177" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00228" />
-    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.1.0-dev-00131" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00180" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00229" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.1.0-dev-00133" />
     
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == '' AND '$(Configuration)' != 'LOCAL'">
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="2.1.0-dev-00131" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="2.1.0-dev-00133" />
     <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == 'LOCAL' OR '$(Configuration)' == 'LOCAL'">
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="2.1.0-dev-00131" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="2.1.0-dev-00133" />
     <PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
   </ItemGroup>
 

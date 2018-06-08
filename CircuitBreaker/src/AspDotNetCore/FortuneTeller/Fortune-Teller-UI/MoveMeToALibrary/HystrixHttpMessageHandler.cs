@@ -2,14 +2,28 @@
 using Steeltoe.CircuitBreaker.Hystrix;
 using System;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Steeltoe.Common.Http
 {
-    public class AltHystrixHttpMessageHandler <T> : DelegatingHandler
+    /// <summary>
+    /// Wrap HttpClient calls with your own HystrixCommand
+    /// </summary>
+    /// <typeparam name="T">The type of the HystrixCommand that should be used</typeparam>
+    public class HystrixHttpMessageHandler <T> : DelegatingHandler
         where T : HystrixCommand<HttpResponseMessage>
     {
+        private readonly ILoggerFactory _loggerFactory;
+        private readonly ILogger _logger;
+
+        public HystrixHttpMessageHandler(ILoggerFactory loggerFactory = null)
+        {
+            _loggerFactory = loggerFactory;
+            _logger = _loggerFactory?.CreateLogger<HystrixHttpMessageHandler>();
+        }
+
         /// <summary>
         /// Overly simplified imlementation!
         /// </summary>
@@ -18,8 +32,14 @@ namespace Steeltoe.Common.Http
         /// <returns></returns>
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            _logger?.LogInformation("Creating an instance of {HystrixCommandType}", typeof(T).GetTypeInfo().Name);
+
             // Create an instance of developer's HystrixCommand type, passing in the inner handler of this HttpClient request
-            var command = Activator.CreateInstance(typeof(T), new object[] { base.SendAsync(request, cancellationToken) });
+            // This is ... less than ideal and probably worse than magic strings
+            var command = Activator.CreateInstance(
+                typeof(T), 
+                BindingFlags.OptionalParamBinding, 
+                new object[] { base.SendAsync(request, cancellationToken) });
 
             var result = await (command as HystrixCommand<HttpResponseMessage>).ExecuteAsync();
 
