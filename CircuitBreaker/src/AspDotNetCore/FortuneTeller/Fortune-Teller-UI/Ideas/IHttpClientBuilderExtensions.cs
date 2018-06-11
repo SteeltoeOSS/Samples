@@ -23,5 +23,9 @@ namespace Steeltoe.CircuitBreaker.Ideas
         {
             return builder;
         }
+        public static IHttpClientBuilder AddSecurityTokenRelay(this IHttpClientBuilder builder)
+        {
+            return builder;
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace Fortune_Teller_UI
                         .ConfigureHttpClient((client) => { client.Timeout = new System.TimeSpan(5000); })
                         .AddEurekaDiscovery()
                         .AddRibbonLoadBalancer()
+                        .AddSecurityTokenRelay()
                         .Build()
                     .Build()
                 .AddHystrixCommand<ICommand2, Command2>()
