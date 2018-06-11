@@ -15,6 +15,7 @@ namespace Fortune_Teller_UI
     public class Startup
     {
         private ILoggerFactory _loggerFactory;
+        private readonly Uri _fortuneServiceBaseUri = new Uri("http://fortuneService/api/fortunes/");
 
         public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
@@ -50,22 +51,26 @@ namespace Fortune_Teller_UI
             services.AddTransient<DiscoveryHttpMessageHandler>();
             services.AddTransient<HystrixHttpMessageHandler>();
 
-            // Add two versions of injectible HttpClient via HttpClientFactory (new in ASP.NET Core 2.1)
-            // Create a version of HttpClient that comes with a circuit breaker and discovery
-            services.AddHttpClient("fortunesWithHystrixHandler", c =>
-                {
-                    c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
-                })
-                //.AddHystrixCommand(loggerFactory: _loggerFactory) // create a basic HystrixCommand on the fly
-                //.AddHystrixCommand<AltRandomFortuneCommand>(_loggerFactory) // use a developer-defined HystrixCommand
-                .AddHystrixCommand<HystrixHttpCommandWithRetry>(_loggerFactory) // use a Steeltoe-defined HystrixCommand with a basic retry
-                .AddServiceDiscovery()
-                .AddTypedClient<IFortuneService, FortuneService>();
-            // Create a version of HttpClient that comes with discovery (for use inside a circuit breaker)
-            services.AddHttpClient("fortunesWithoutHystrixHandler", c =>
-                {
-                    c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
-                })
+            // Add several versions of injectible HttpClient via HttpClientFactory (new in ASP.NET Core 2.1)
+            // All of these come with Steeltoe Service Discovery
+
+            // use a Steeltoe-defined HystrixCommand with a basic retry
+            services.AddHttpClient(HttpClients.WithRetry, c => c.BaseAddress = _fortuneServiceBaseUri)
+                .AddHystrixCommand<HystrixHttpCommandWithRetry>(_loggerFactory)
+                .AddServiceDiscovery();
+            
+            // use a developer-defined HystrixCommand
+            services.AddHttpClient(HttpClients.WithUserCommand, c => c.BaseAddress = _fortuneServiceBaseUri)
+                .AddHystrixCommand<AltRandomFortuneCommand>(_loggerFactory)
+                .AddServiceDiscovery();
+
+            // use the base HystrixCommand
+            services.AddHttpClient(HttpClients.WithInlineCommand, c => c.BaseAddress = _fortuneServiceBaseUri)
+                .AddHystrixCommand(loggerFactory: _loggerFactory) 
+                .AddServiceDiscovery();
+
+            // Only includes Discovery (for use inside an existing command) but uses a type binding so the right HttpClient is injected into FortuneService
+            services.AddHttpClient(HttpClients.WithoutHystrix, c => c.BaseAddress = _fortuneServiceBaseUri)
                 .AddServiceDiscovery()
                 .AddTypedClient<IFortuneService, FortuneService>();
 

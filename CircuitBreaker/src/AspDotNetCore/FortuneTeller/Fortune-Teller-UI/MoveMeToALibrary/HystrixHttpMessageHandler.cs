@@ -36,7 +36,7 @@ namespace Steeltoe.Common.Http
 
             // Create an instance of developer's HystrixCommand type, passing in the inner handler of this HttpClient request
             // This is ... less than ideal and probably worse than magic strings
-            var command = Activator.CreateInstance(
+            var command = (HystrixCommand<HttpResponseMessage>)Activator.CreateInstance(
                 typeof(T), 
                 //BindingFlags.OptionalParamBinding, 
                 new object[] {
@@ -44,7 +44,7 @@ namespace Steeltoe.Common.Http
                     _loggerFactory?.CreateLogger<T>()
                 });
 
-            var result = await (command as HystrixCommand<HttpResponseMessage>).ExecuteAsync();
+            var result = await command.ExecuteAsync();
 
             return result;
         }

@@ -11,11 +11,13 @@ namespace Fortune_Teller_UI.Controllers
     {
         FortuneServiceCommand _fortuneServiceCommand;
         IFakeService1 _service1;
+        IFortuneService _fortuneService;
 
-        public HomeController(FortuneServiceCommand fortuneServiceCommand, IFakeService1 service1)
+        public HomeController(FortuneServiceCommand fortuneServiceCommand, IFakeService1 service1, IFortuneService fortuneService)
         {
             _fortuneServiceCommand = fortuneServiceCommand;
             _service1 = service1;
+            _fortuneService = fortuneService;
         }
 
         [HttpGet]
@@ -31,13 +33,24 @@ namespace Fortune_Teller_UI.Controllers
         }
 
         [HttpGet("random2")]
-        public async Task<Fortune> RandomFromHttpClientFactory([FromServices]IHttpClientFactory httpClientFactory)
+        public async Task<Fortune> RandomFromHttpClientFactory2([FromServices]IHttpClientFactory httpClientFactory)
         {
-            // use the new HttpClientFactory to get a named client pre-configured with handler pipeline 
-            // see startup.cs for configuration of this pipeline
-            var client = httpClientFactory.CreateClient("fortunesWithHystrixHandler");
-            var httpResponse = await client.GetAsync("random");
-            return await httpResponse.Content.ReadAsAsync<Fortune>();
+            // get with basic retry
+            return await _fortuneService.RandomFortuneWithRetryAsync();
+        }
+
+        [HttpGet("random3")]
+        public async Task<Fortune> RandomFromHttpClientFactory3([FromServices]IHttpClientFactory httpClientFactory)
+        {
+            // get with user-defined Hystrix Command
+            return await _fortuneService.RandomFortuneUserCommandAsync();
+        }
+
+        [HttpGet("random4")]
+        public async Task<Fortune> RandomFromHttpClientFactory4([FromServices]IHttpClientFactory httpClientFactory)
+        {
+            // get with default HystrixCommand
+            return await _fortuneService.RandomFortuneDefaultCommandAsync();
         }
 
         [HttpGet("multirandom")]

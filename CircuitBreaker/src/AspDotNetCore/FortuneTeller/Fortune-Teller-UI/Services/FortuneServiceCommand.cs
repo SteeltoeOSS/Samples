@@ -15,10 +15,12 @@ namespace Fortune_Teller_UI.Services
             _logger = logger;
             IsFallbackUserDefined = true;
         }
+
         public async Task<Fortune> RandomFortune()
         {
             return await ExecuteAsync();
         }
+
         protected override async Task<Fortune> RunAsync()
         {
             var result = await _fortuneService.RandomFortuneAsync();
@@ -29,7 +31,7 @@ namespace Fortune_Teller_UI.Services
         protected override async Task<Fortune> RunFallbackAsync()
         {
             _logger.LogInformation("RunFallback");
-            return await Task.FromResult<Fortune>(new Fortune() { Id = 9999, Text = "You will have a happy day!" });
+            return await Task.FromResult(new Fortune() { Id = 9999, Text = "You will have a happy day!" });
         }
     }
 }

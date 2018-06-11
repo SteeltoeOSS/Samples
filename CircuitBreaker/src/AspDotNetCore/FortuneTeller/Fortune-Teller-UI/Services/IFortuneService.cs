@@ -8,6 +8,13 @@ namespace Fortune_Teller_UI.Services
     public interface IFortuneService
     {
         Task<Fortune> RandomFortuneAsync();
+
         Task<List<Fortune>> GetFortunesAsync(List<int> fortuneIds);
+
+        Task<Fortune> RandomFortuneWithRetryAsync();
+
+        Task<Fortune> RandomFortuneUserCommandAsync();
+
+        Task<Fortune> RandomFortuneDefaultCommandAsync();
     }
 }
