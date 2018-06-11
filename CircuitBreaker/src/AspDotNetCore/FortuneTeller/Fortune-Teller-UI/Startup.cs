@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.CircuitBreaker.Ideas;
 
 namespace Fortune_Teller_UI
 {
@@ -40,6 +41,22 @@ namespace Fortune_Teller_UI
 
             // A Hystrix collapser that makes use of the FortuneService(s) above to get a Fortune.
             services.AddHystrixCollapser<IFortuneServiceCollapser, FortuneServiceCollapser>("FortuneServiceCollapser", Configuration);
+
+
+            // IDEAS
+            services.AddHystrixFactory()
+                .WithConfiguration(Configuration)   // Should allow various wayss to configure factory (e.g. configuration, options, action which returns options, etc) ".WithOptions(new IHystrixFactoryOptions())"
+                .AddHystrixCommand<ICommand1, Command1>()
+                    .WithConfiguration(Configuration)  // Should allow various ways to configure each command (e.g. configuration, options, action which returns options, etc) ".WithOptions(new HystrixCommandOptions())"
+                    .AddHttpClient("clientName")
+                        .ConfigureHttpClient((client) => { client.Timeout = new System.TimeSpan(5000); })
+                        .Build()
+                    .Build()
+                .AddHystrixCommand<ICommand2, Command2>()
+                    .WithOptions(new HystrixCommandOptions(HystrixCommandKeyDefault.AsKey("foobar")))
+                    .AddRabbitMQClient("rabbitName")
+                    .Build();
+
 
             // Add framework services.
             services.AddMvc();
