@@ -61,7 +61,7 @@ namespace Fortune_Teller_UI
             
             // use a developer-defined HystrixCommand
             services.AddHttpClient(HttpClients.WithUserCommand, c => c.BaseAddress = _fortuneServiceBaseUri)
-                .AddHystrixCommand<AltRandomFortuneCommand>(_loggerFactory)
+                .AddHystrixCommand<UserDefinedHystrixCommand>(_loggerFactory)
                 .AddServiceDiscovery();
 
             // use the base HystrixCommand

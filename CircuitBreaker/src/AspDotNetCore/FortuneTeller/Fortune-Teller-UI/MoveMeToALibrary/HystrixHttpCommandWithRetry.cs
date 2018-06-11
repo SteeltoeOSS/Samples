@@ -5,18 +5,21 @@ using System.Threading.Tasks;
 
 namespace Steeltoe.Common.Http
 {
+    /// <summary>
+    /// A basic HystrixCommand for sending HttpClient requests and performing a single retry
+    /// </summary>
     public class HystrixHttpCommandWithRetry : HystrixCommand<HttpResponseMessage>
     {
         private readonly Task<HttpResponseMessage> _baseRequest;
         private readonly ILogger _logger;
 
         /// <summary>
-        /// The most basic circuit breaker with retry ever created!
+        /// Create the most basic circuit breaker with retry ever created!
         /// </summary>
         /// <param name="baseRequest">The HTTP Request to use in the circuit</param>
         /// <param name="logger">An <see cref="ILogger"/></param>
         /// <remarks>If the request fails (or times out) for any reason, the included fallback method immediately retries the operation</remarks>
-        public HystrixHttpCommandWithRetry(Task<HttpResponseMessage> baseRequest, ILogger logger = null) : base(HystrixCommandGroupKeyDefault.AsKey("AltRandomFortuneCommand"))
+        public HystrixHttpCommandWithRetry(Task<HttpResponseMessage> baseRequest, ILogger logger = null) : base(HystrixCommandGroupKeyDefault.AsKey("HystrixHttpCommandWithRetry"))
         {
             _baseRequest = baseRequest;
             _logger = logger;
