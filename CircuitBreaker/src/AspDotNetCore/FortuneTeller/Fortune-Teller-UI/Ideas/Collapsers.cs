@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Fortune-Teller-UI.Ideas
+namespace Steeltoe.CircuitBreaker.Ideas
 {
-    public class Collapsers
+    public class Collapser1 : ICollapser1
     {
+    }
+
+    public interface ICollapser1
+    {
+
     }
 }

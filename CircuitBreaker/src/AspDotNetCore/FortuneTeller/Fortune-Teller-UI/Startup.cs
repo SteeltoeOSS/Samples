@@ -50,13 +50,23 @@ namespace Fortune_Teller_UI
                     .WithConfiguration(Configuration)  // Should allow various ways to configure each command (e.g. configuration, options, action which returns options, etc) ".WithOptions(new HystrixCommandOptions())"
                     .AddHttpClient("clientName")
                         .ConfigureHttpClient((client) => { client.Timeout = new System.TimeSpan(5000); })
+                        .AddEurekaDiscovery()
+                        .AddRibbonLoadBalancer()
                         .Build()
                     .Build()
                 .AddHystrixCommand<ICommand2, Command2>()
                     .WithOptions(new HystrixCommandOptions(HystrixCommandKeyDefault.AsKey("foobar")))
                     .AddRabbitMQClient("rabbitName")
+                    .Build()
+                .AddHystrixCommand<ICommand3, Command3>()
+                    .WithOptions(new HystrixCommandOptions(HystrixCommandKeyDefault.AsKey("bar")) { CircuitBreakerRequestVolumeThreshold = 10 })
+                    .WithOptions(new HystrixThreadPoolOptions(HystrixThreadPoolKeyDefault.AsKey("key1")) { CoreSize = 5 })
+                    .AddMySqlConnection("mysqlName")
+                    .Build()
+                .AddHystrixCollapser<ICollapser1, Collapser1>()
+                    .WithOptions(new HystrixCollapserOptions(HystrixCollapserKeyDefault.AsKey("foobar")) { MaxRequestsInBatch = 5 })
                     .Build();
-
+            // END IDEAS
 
             // Add framework services.
             services.AddMvc();

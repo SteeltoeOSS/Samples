@@ -22,4 +22,12 @@ namespace Steeltoe.CircuitBreaker.Ideas
     public interface ICommand2
     {
     }
+    public class Command3 : ICommand3
+    {
+
+    }
+
+    public interface ICommand3
+    {
+    }
 }
