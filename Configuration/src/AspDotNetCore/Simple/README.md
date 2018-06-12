@@ -4,23 +4,18 @@ ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](htt
 
 ## Pre-requisites
 
-This sample assumes that there is a running Spring Cloud Config Server on your machine. To make this happen:
-
-1. Install Java 8 JDK.
-1. Install Maven 3.x.
-1. Clone the Spring Cloud Config Server repository. (<https://github.com/spring-cloud/spring-cloud-config>)
-1. Go to the config server directory (`spring-cloud-config/spring-cloud-config-server`) and fire it up with `mvn spring-boot:run`
-1. This sample will default to looking for its spring cloud config server on localhost, so it should all connect.
-
-The default configuration of the Config Server uses [this github repo](https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
+* .NET Core SDK 2.1.300
+* Docker
 
 ## Building & Running
 
+The default configuration of the Config Server uses [this github repo](https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
+
 1. Clone this repo. (e.g. `git clone https://github.com/SteeltoeOSS/Samples`)
 1. cd samples/Configuration/src/AspDotNetCore/Simple
-1. Install .NET Core SDK 2.1.300
-1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp2.1 or dotnet run -f net461
+1. Start the Config Server: `docker-compose up`
+1. `dotnet restore --configfile nuget.config`
+1. `dotnet run -f netcoreapp2.1` (or `dotnet run -f net461`)
 
 ## What to expect
 

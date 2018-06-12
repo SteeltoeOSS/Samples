@@ -1,0 +1,6 @@
+version: '3.2'
+services:
+  config:
+    image: "steeltoeoss/configserver:1.3"
+    ports:
+      - "8888:8888"
