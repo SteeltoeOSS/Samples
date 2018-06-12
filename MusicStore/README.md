@@ -40,49 +40,15 @@ The default is to NOT use a Redis cache for Session storage or DataProtection Ke
 
 You have a three options to choose from in order to get these services up and running locally:
 
-* Use pre-built [Steeltoe Docker images](https://hub.docker.com/r/steeltoeoss/servers/).
-* On Windows 10, use pre-built Steeltoe Windows Container images.
+* Use Docker images
 * Install each service manually.
 
-Currently, the simplest way to get these up and running is to use the first option above together with the provided `dockerrun-*.cmd, dockerrun-*.sh` files to startup those services locally on your machine.
+Currently, the simplest way to get these up and running is to use the first option above:
 
-### Pre-requisites - Using Steeltoe Docker images
-
-If you don't have Docker installed on your local machine, you can use:
-
-* Windows 10 - [Docker for Windows](https://docs.docker.com/docker-for-windows/)
-* MacOS - [Docker for Mac](https://docs.docker.com/docker-for-mac/)
-
-After installing either of the above, you need to enable [`File Sharing`](https://docs.docker.com/docker-for-windows/#/shared-drives) between your Docker VM and your local machine.
-On Windows 10, share the `C:` drive from you local machine with the VM. On MacOS, share your Home directory with the VM. This is necessary as the pre-built Config Server image has been pre-configured to read its configuration data from `~/steeltoe/config-repo` or `C:\steeltoe\config-repo` off of the local machine.
-
-Once you have Docker installed and running, use the provided command files to start the various services. To startup a Spring Cloud Config Server:
+### Pre-requisites - Using Docker images
 
 1. `cd Samples/MusicStore`
-1. `start dockerrun-configserver.cmd` or `./dockerrun-configserver.sh`
-
-This script will create a directory `~/steeltoe/config-repo` or `c:\steeltoe\config-repo` if it doesn't exist and then fire up a Spring Cloud Config Server listening on port 8888. Copy the MusicStore configuration files to `\steeltoe\config-repo' so the running Config Server will have access to them.
-
-1. `cd Samples/MusicStore/src/config`
-1. `copy *.* c:/steeltoe/config-repo` or `cp *.* ~/steeltoe/config-repo`
-
-> Note: The first symptom you missed this step (or have docker configuration issues affecting the drive share) is likely to be the error `Discovery client type UNKNOWN, check configuration`
-
-Similarly, start a Spring Cloud Eureka Server (listening on port 8761):
-
-1. `cd Samples/MusicStore`
-1. `start dockerrun-eurekaserver.cmd or ./dockerrun-eurekaserver.sh`
-
-Next, fire up a MySql Server listening on port `3306` with username: `root` and password: `steeltoe`.
-
-1. `cd Samples/MusicStore`
-1. `start dockerrun-mysqlserver.cmd` or `./dockerrun-mysqlserver.sh`
-
-> Note: if you are not using the docker image, modify the username and password values in the *.yml files the config server is using to match your environment
-
-### Pre-requisites - Using Windows Containers
-
-Details to be provided when Windows containers stabilize!
+1. `docker-compose up` (currently only works if using Linux containers)
 
 ## Building & Running MusicStore App - Locally
 
