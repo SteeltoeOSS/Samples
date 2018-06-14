@@ -19,7 +19,6 @@ namespace CloudFoundry
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
