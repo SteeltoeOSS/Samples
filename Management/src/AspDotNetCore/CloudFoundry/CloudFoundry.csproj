@@ -6,7 +6,6 @@
   <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="GitInfo" Version="2.0.11" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
