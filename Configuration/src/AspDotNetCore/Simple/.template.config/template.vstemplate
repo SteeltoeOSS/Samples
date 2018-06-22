@@ -1,10 +1,10 @@
 
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
   <TemplateData>
-    <Name>Foo Steeltoe Configuration</Name>
-    <Description>Foo Steeltoe Configuration description</Description>
-    <TemplateID>Foo.Steeltoe.Template.Configuration.Simple.CSharp</TemplateID>
-    <DefaultName>FooSteeltoeConfigurationSimple</DefaultName>
+    <Name>Steeltoe Config Server</Name>
+    <Description>Steeltoe Configuration using Spring Cloud Config Server</Description>
+    <TemplateID>Steeltoe.Config.ConfigServer.CSharp</TemplateID>
+    <DefaultName>SteeltoeConfigServer</DefaultName>
     
     <Icon>project-icon.png</Icon>
     
@@ -21,8 +21,8 @@
     <CustomParameters>
       <CustomParameter Name = "$language$" Value="CSharp" />
       <CustomParameter Name = "$uistyle$" Value="none"/>
-      <CustomParameter Name = "$groupid$" Value="Foo.Steeltoe.Template.Configuration.Simple" />
-      <CustomParameter Name = "SideWaffleNewProjNode" Value="Foo\Steeltoe\Configuration\Simple"/>
+      <CustomParameter Name = "$groupid$" Value="Steeltoe.Config.ConfigServer" />
+      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe\ConfigServer"/>
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>
