@@ -9,9 +9,9 @@ $ dotnet new --install Simple
 $ dotnet new --install SimpleCloudFoundry
 ```
 
-There is no good way at present to uninstall.  Closest alternative is to run `dotnet new --debug:reinit` which will reset your templates to the defaults, potentially unintentionall removing other 3rd party templates.
+There is no good way at present to uninstall.  Closest alternative is to run `dotnet new --debug:reinit` which will reset your templates to the defaults, potentially unintentionally removing other 3rd party templates.
 
-After which you'll have 2 new templates:
+After running the above 2 commands, you'll have 2 new templates:
 
 ```
 $ dotnet new --list                                                                                                               
