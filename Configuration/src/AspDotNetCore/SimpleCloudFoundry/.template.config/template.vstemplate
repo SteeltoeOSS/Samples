@@ -1,0 +1,32 @@
+
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
+  <TemplateData>
+    <Name>Bar Steeltoe Cloud Foundry Configuration</Name>
+    <Description>Bar Steeltoe Cloud Foundry Configuration description</Description>
+    <TemplateID>Bar.Steeltoe.Template.Configuration.CloudFoundry.CSharp</TemplateID>
+    <DefaultName>BarSteeltoeConfigurationCloudFoundry</DefaultName>
+    
+    <Icon>project-icon.png</Icon>
+    
+    <ProjectType>CSharp</ProjectType>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <SortOrder>5000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection/>
+    <CustomParameters>
+      <CustomParameter Name = "$language$" Value="CSharp" />
+      <CustomParameter Name = "$uistyle$" Value="none"/>
+      <CustomParameter Name = "$groupid$" Value="Bar.Steeltoe.Template.Configuration.CloudFoundry" />
+      <CustomParameter Name = "SideWaffleNewProjNode" Value="Bar\Steeltoe\Configuration\CloudFoundry"/>
+    </CustomParameters>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Microsoft.VisualStudio.TemplateEngine.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>Microsoft.VisualStudio.TemplateEngine.Wizard.TemplateEngineWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

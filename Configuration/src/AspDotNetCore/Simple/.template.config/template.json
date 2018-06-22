@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Config" ],
+  "description": "Steeltoe Config using Spring Cloud Config Server",
+  "name": "Steeltoe Config Server",
+  "defaultName": "SteeltoeConfigServer",
+  "identity": "Steeltoe.Config.ConfigServer.CSharp",
+  "groupIdentity": "Steeltoe.Config.ConfigServer",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stcfgsrvr",
+  "sourceName": "Simple",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "Simple.csproj"
+    }
+  ]
+}
