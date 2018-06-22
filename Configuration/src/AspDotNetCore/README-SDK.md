@@ -34,3 +34,6 @@ $ cd MyConfigServer
 $ dotnet new stcfgsrvr
 ```
 
+## Using Visual Studio 2017
+
+Right-click the project ConfigurationTemplatePack, select "Debug->Start new instance".
