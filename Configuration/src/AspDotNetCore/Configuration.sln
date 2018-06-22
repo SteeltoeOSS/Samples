@@ -10,6 +10,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundry", "CloudFoundr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationTemplatePack", "ConfigurationTemplatePack\ConfigurationTemplatePack.csproj", "{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79CE690C-244D-49E2-8C66-667413903F18}"
+	ProjectSection(SolutionItems) = preProject
+		README-SDK.md = README-SDK.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

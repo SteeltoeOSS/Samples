@@ -2,7 +2,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
   <TemplateData>
     <Name>Steeltoe Cloud Foundry Config Server</Name>
-    <Description>Steeltoe Configuration using Cloud Foundry Spring Cloud Config Server</Description>
+    <Description>Steeltoe project using Cloud Foundry Spring Cloud Config Server as a configuration source</Description>
     <TemplateID>Steeltoe.Config.CloudFoundryConfigServer.CSharp</TemplateID>
     <DefaultName>SteeltoeCloudFoundryConfigServer</DefaultName>
 
@@ -22,7 +22,7 @@
       <CustomParameter Name = "$language$" Value="CSharp" />
       <CustomParameter Name = "$uistyle$" Value="none"/>
       <CustomParameter Name = "$groupid$" Value="Steeltoe.Config.CloudFoundryConfigServer" />
-      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe\CloudFoundryConfigServer"/>
+      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe"/>
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>
