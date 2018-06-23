@@ -1,10 +1,10 @@
 
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="ProjectGroup">
   <TemplateData>
-    <Name>Steeltoe Cloud Foundry</Name>
-    <Description>Steeltoe project using Cloud Foundry configuration as a configuration source</Description>
-    <TemplateID>Steeltoe.Template.Configuration.CloudFoundry.CSharp</TemplateID>
-    <DefaultName>SteeltoeCloudFoundry</DefaultName>
+    <Name>Steeltoe MySQL EFCore Connector</Name>
+    <Description>Steeltoe project connecting to a MySQL EFCore service running on Cloud Foundry</Description>
+    <TemplateID>Steeltoe.Connector.MySqlEFCore.CSharp</TemplateID>
+    <DefaultName>SteeltoeMySqlEFCoreConnector</DefaultName>
     <Icon>project-icon.png</Icon>
     <ProjectType>CSharp</ProjectType>
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
@@ -19,8 +19,8 @@
     <CustomParameters>
       <CustomParameter Name = "$language$" Value="CSharp" />
       <CustomParameter Name = "$uistyle$" Value="none"/>
-      <CustomParameter Name = "$groupid$" Value="Steeltoe.Template.Configuration.CloudFoundry" />
-      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe\Configuration"/>
+      <CustomParameter Name = "$groupid$" Value="Steeltoe.Connector.MySqlEFCore" />
+      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe\Connector"/>
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>

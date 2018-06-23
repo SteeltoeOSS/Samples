@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a MySQL EFCore service running on Cloud Foundry",
+  "name": "Steeltoe MySQL EFCore Connector",
+  "defaultName": "SteeltoeMySQLEFCoreConnector",
+  "identity": "Steeltoe.Connector.MySqlEFCore.CSharp",
+  "groupIdentity": "Steeltoe.Connector.MySqlEFCore",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stmysqlefcore",
+  "sourceName": "MySqlEFCore",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "MySqlEFCore.csproj"
+    }
+  ]
+}

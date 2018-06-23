@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a RabbitMQ service running on Cloud Foundry",
+  "name": "Steeltoe RabbitMQ Connector",
+  "defaultName": "SteeltoeRabbitMQConnector",
+  "identity": "Steeltoe.Connector.RabbitMQ.CSharp",
+  "groupIdentity": "Steeltoe.Connector.RabbitMQ",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "strabbitmq",
+  "sourceName": "RabbitMQ",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "RabbitMQ.csproj"
+    }
+  ]
+}

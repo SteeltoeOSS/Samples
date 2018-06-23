@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a MySQL service running on Cloud Foundry",
+  "name": "Steeltoe MySQL Connector",
+  "defaultName": "SteeltoeMySQLConnector",
+  "identity": "Steeltoe.Connector.MySql.CSharp",
+  "groupIdentity": "Steeltoe.Connector.MySql",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stmysql",
+  "sourceName": "MySql",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "MySql.csproj"
+    }
+  ]
+}

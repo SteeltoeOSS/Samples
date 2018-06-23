@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a PostgreSQL EFCore service running on Cloud Foundry",
+  "name": "Steeltoe PostgreSQL EFCore Connector",
+  "defaultName": "SteeltoPostgreSQLEFCoreConnector",
+  "identity": "Steeltoe.Connector.PostgreSqlEFCore.CSharp",
+  "groupIdentity": "Steeltoe.Connector.PostgreSqlEFCore",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stpgsqlefcore",
+  "sourceName": "PostgreEFCore",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "PostgreEFCore.csproj"
+    }
+  ]
+}
