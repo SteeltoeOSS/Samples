@@ -1,16 +1,16 @@
 {
   "author": "Steeltoe",
-  "classifications": [],
-  "description": "template description",
-  "name": "",
-  "defaultName": "MyProject",
-  "identity": "Sample.Template.CSharp",
-  "groupIdentity": "Sample.Template",
+  "classifications": [ "Steeltoe", "Configuration" ],
+  "description": "Steeltoe project using Cloud Foundry configuration as a configuration source",
+  "name": "Steeltoe Cloud Foundry",
+  "defaultName": "SteeltoeCloudFoundry",
+  "identity": "Steeltoe.Template.Configuration.CloudFoundry.CSharp",
+  "groupIdentity": "Steeltoe.Template.Configuration.CloudFoundry",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "shortName": "",
+  "shortName": "stcf",
   "sourceName": "CloudFoundry",
   "guids": [],
   "primaryOutputs": [
