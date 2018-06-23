@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a MySQL EF6 service running on Cloud Foundry",
+  "name": "Steeltoe MySQL EF6 Connector",
+  "defaultName": "SteeltoeMySQLEF6Connector",
+  "identity": "Steeltoe.Connector.MySqlEF6.CSharp",
+  "groupIdentity": "Steeltoe.Connector.MySqlEF6",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stmysqlef6",
+  "sourceName": "MySqlEF6",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "MySqlEF6.csproj"
+    }
+  ]
+}

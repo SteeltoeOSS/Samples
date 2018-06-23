@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a Redis service running on Cloud Foundry",
+  "name": "Steeltoe Redis Connector",
+  "defaultName": "SteeltoeRedisConnector",
+  "identity": "Steeltoe.Connector.Redis.CSharp",
+  "groupIdentity": "Steeltoe.Connector.Redis",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stredis",
+  "sourceName": "Redis",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "Redis.csproj"
+    }
+  ]
+}

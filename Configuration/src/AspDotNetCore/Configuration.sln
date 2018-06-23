@@ -9,9 +9,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundry", "CloudFoundry\CloudFoundry.csproj", "{3D8E61DB-F610-4546-95D9-A75202621555}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79CE690C-244D-49E2-8C66-667413903F18}"
-	ProjectSection(SolutionItems) = preProject
-		README-SDK.md = README-SDK.md
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

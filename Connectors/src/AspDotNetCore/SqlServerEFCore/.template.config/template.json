@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a SQL Server EFCore service running on Cloud Foundry",
+  "name": "Steeltoe SQL Server EFCore Connector",
+  "defaultName": "SteeltoeSQLServerEFCoreConnector",
+  "identity": "Steeltoe.Connector.SqlServerEFCore.CSharp",
+  "groupIdentity": "Steeltoe.Connector.SqlServerEFCore",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stmssqlefcore",
+  "sourceName": "SqlServerEFCore",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "SqlServerEFCore.csproj"
+    }
+  ]
+}

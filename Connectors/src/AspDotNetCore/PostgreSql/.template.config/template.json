@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [ "Steeltoe", "Connector" ],
+  "description": "Steeltoe project connecting to a PostgreSQL service running on Cloud Foundry",
+  "name": "Steeltoe PostgreSQL Connector",
+  "defaultName": "SteeltoPostgreSQLConnector",
+  "identity": "Steeltoe.Connector.PostgreSql.CSharp",
+  "groupIdentity": "Steeltoe.Connector.PostgreSql",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "stpgsql",
+  "sourceName": "PostgreSql",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "PostgreSql.csproj"
+    }
+  ]
+}
