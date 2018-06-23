@@ -14,11 +14,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}</ProjectGuid>
+    <ProjectGuid>{E18F0567-C43B-4C30-A268-9F5F61D97601}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConfigurationTemplatePack</RootNamespace>
-    <AssemblyName>ConfigurationTemplatePack</AssemblyName>
+    <RootNamespace>TemplatePack</RootNamespace>
+    <AssemblyName>TemplatePack</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -54,7 +54,7 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="template\templatepack.ConfigurationTemplatePack.proj" />
+    <None Include="template\templatepack.TemplatePack.proj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\project-icon.png" />

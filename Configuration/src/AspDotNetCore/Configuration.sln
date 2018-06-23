@@ -8,8 +8,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCloudFoundry", "Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundry", "CloudFoundry\CloudFoundry.csproj", "{3D8E61DB-F610-4546-95D9-A75202621555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationTemplatePack", "ConfigurationTemplatePack\ConfigurationTemplatePack.csproj", "{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79CE690C-244D-49E2-8C66-667413903F18}"
 	ProjectSection(SolutionItems) = preProject
 		README-SDK.md = README-SDK.md
@@ -61,18 +59,6 @@ Global
 		{3D8E61DB-F610-4546-95D9-A75202621555}.Release|x64.Build.0 = Release|Any CPU
 		{3D8E61DB-F610-4546-95D9-A75202621555}.Release|x86.ActiveCfg = Release|Any CPU
 		{3D8E61DB-F610-4546-95D9-A75202621555}.Release|x86.Build.0 = Release|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Debug|x64.Build.0 = Debug|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Debug|x86.Build.0 = Debug|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Release|x64.ActiveCfg = Release|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Release|x64.Build.0 = Release|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Release|x86.ActiveCfg = Release|Any CPU
-		{3B98D2EE-A3DE-4A39-93F3-0D6049B52D09}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
