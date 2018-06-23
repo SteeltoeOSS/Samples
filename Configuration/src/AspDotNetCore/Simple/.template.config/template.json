@@ -1,11 +1,11 @@
 {
   "author": "Steeltoe",
-  "classifications": [ "Steeltoe", "Config" ],
-  "description": "Steeltoe Config using Spring Cloud Config Server",
+  "classifications": [ "Steeltoe", "Configuration" ],
+  "description": "Steeltoe project using Spring Cloud Config Server as a configuration source",
   "name": "Steeltoe Config Server",
   "defaultName": "SteeltoeConfigServer",
-  "identity": "Steeltoe.Config.ConfigServer.CSharp",
-  "groupIdentity": "Steeltoe.Config.ConfigServer",
+  "identity": "Steeltoe.Template.Configuration.ConfigServer.CSharp",
+  "groupIdentity": "Steeltoe.Template.Configuration.ConfigServer",
   "tags": {
     "language": "C#",
     "type": "project"

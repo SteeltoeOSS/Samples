@@ -1,11 +1,11 @@
 {
   "author": "Steeltoe",
-  "classifications": [ "Steeltoe", "Config" ],
-  "description": "Steeltoe Config using Cloud Foundry Spring Cloud Config Server",
+  "classifications": [ "Steeltoe", "Configuration" ],
+  "description": "Steeltoe project using Cloud Foundry Spring Cloud Config Server as a configuration source",
   "name": "Steeltoe Cloud Foundry Config Server",
   "defaultName": "SteeltoeCloudFoundryConfigServer",
-  "identity": "Steeltoe.Config.CloudFoundryConfigServer.CSharp",
-  "groupIdentity": "Steeltoe.Config.CloudFoundryConfigServer",
+  "identity": "Steeltoe.Template.Configuration.CloudFoundryConfigServer.CSharp",
+  "groupIdentity": "Steeltoe.Template.Configuration.CloudFoundryConfigServer",
   "tags": {
     "language": "C#",
     "type": "project"
