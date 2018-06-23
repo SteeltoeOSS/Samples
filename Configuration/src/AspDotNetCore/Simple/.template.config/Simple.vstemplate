@@ -3,7 +3,7 @@
   <TemplateData>
     <Name>Steeltoe Config Server</Name>
     <Description>Steeltoe project using Spring Cloud Config Server as a configuration source</Description>
-    <TemplateID>Steeltoe.Config.ConfigServer.CSharp</TemplateID>
+    <TemplateID>Steeltoe.Template.Configuration.ConfigServer.CSharp</TemplateID>
     <DefaultName>SteeltoeConfigServer</DefaultName>
     
     <Icon>project-icon.png</Icon>
@@ -21,8 +21,8 @@
     <CustomParameters>
       <CustomParameter Name = "$language$" Value="CSharp" />
       <CustomParameter Name = "$uistyle$" Value="none"/>
-      <CustomParameter Name = "$groupid$" Value="Steeltoe.Config.ConfigServer" />
-      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe"/>
+      <CustomParameter Name = "$groupid$" Value="Steeltoe.Template.Configuration.ConfigServer" />
+      <CustomParameter Name = "SideWaffleNewProjNode" Value="Steeltoe\Configuration"/>
     </CustomParameters>
   </TemplateContent>
   <WizardExtension>

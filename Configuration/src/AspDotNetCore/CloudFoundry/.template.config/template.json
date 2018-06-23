@@ -1,0 +1,21 @@
+{
+  "author": "Steeltoe",
+  "classifications": [],
+  "description": "template description",
+  "name": "",
+  "defaultName": "MyProject",
+  "identity": "Sample.Template.CSharp",
+  "groupIdentity": "Sample.Template",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "shortName": "",
+  "sourceName": "CloudFoundry",
+  "guids": [],
+  "primaryOutputs": [
+    {
+      "path": "CloudFoundry.csproj"
+    }
+  ]
+}
