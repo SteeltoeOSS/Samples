@@ -1,0 +1,68 @@
+= Simple - ASP.NET Core Sample Application
+:toc: preamble
+:toclevels: 2
+:!toc-title:
+:sccs: Spring Cloud Config Server
+
+ASP.NET Core sample app illustrating how to use https://cloud.spring.io/spring-cloud-config/[{sccs}] as a configuration source.
+
+== Prepare
+
+.Clone this repo
+----
+$ git clone https://github.com/SteeltoeOSS/Samples
+$ cd samples/Configuration/src/AspDotNetCore/Simple
+----
+
+== Run {sccs}
+
+The default configuration of {sccs} uses https://github.com/spring-cloud-samples/config-repo for its source of configuration data.
+
+Start {sccs} using one of the following:
+
+=== Docker
+
+----
+$ docker-compose up
+----
+
+=== Build From Source
+
+Building from source requires Java 8 JDK and Maven 3.x.
+
+.Build/Run {sccs} from GitHub repository
+----
+$ git clone https://github.com/spring-cloud/spring-cloud-config
+$ cd spring-cloud-config\spring-cloud-config-server
+$ git checkout v1.3.3.RELEASE
+$ mvn spring-boot:run
+----
+
+== Run Sample
+
+----
+$ dotnet restore
+$ dotnet run -f netcoreapp2.1   # alternatively, dotnet run -f net461
+----
+
+== What to Expect
+
+After building and running the app, you should see something like the following:
+
+----
+$ dotnet run -f netcoreapp2.1
+Using launch settings from ...
+Hosting environment: development
+Content root path: ....
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+----
+
+Fire up a browser and open http://localhost:5000.  Once on the home page, navigate to http://localhost:5000/Home/ConfigServer and you'll see the values stored in the github repository used for the Spring Cloud Config Server samples.
+
+If you navigate to the http://localhost:5000/Home/ConfigServerSettings, you will see the settings used by the Spring Cloud Config server client.
+
+Change the Hosting environment setting to `development` (i.e., set `ASPNETCORE_ENVIRONMENT=development`), then restart the application. You will see different configuration data returned for that profile/hosting environment.
+
+[NOTE]
+_See the Official https://steeltoe.io/docs/steeltoe-configuration[Steeltoe Configuration Documentation] for a more in-depth walkthrough of the samples and more detailed information._
