@@ -5,8 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Management.Endpoint.Health;
-using Steeltoe.Management.Exporter.Metrics;
+
 
 namespace CloudFoundry
 {
@@ -23,9 +22,6 @@ namespace CloudFoundry
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMySqlConnection(Configuration);
-
-            // Add custom health check contributor
-            services.AddScoped<IHealthContributor, MySqlHealthContributor>();
 
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
