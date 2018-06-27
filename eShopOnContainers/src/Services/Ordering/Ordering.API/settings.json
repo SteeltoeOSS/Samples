@@ -1,0 +1,33 @@
+﻿{
+  "IdentityUrl": "https://identityapi.example.com",
+  "UseCustomizationData": false,
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Trace",
+      "System": "Debug",
+      "Microsoft": "Debug"
+    }
+  },
+  "AzureServiceBusEnabled": false,
+  "SubscriptionClientName": "Ordering",
+  "GracePeriodTime": "1",
+  "CheckUpdateTime": "30000",
+  "ApplicationInsights": {
+    "InstrumentationKey": ""
+  },
+  "EventBusRetryCount": 5,
+  "spring": {
+    "application": {
+      "name": "orderingapi"
+    }
+  },
+  "management": {
+    "endpoints": {
+      "path": "/cloudfoundryapplication",
+      "cloudfoundry": {
+        "validateCertificates": false
+      }
+    }
+  }
+}

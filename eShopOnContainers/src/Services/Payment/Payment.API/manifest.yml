@@ -1,0 +1,12 @@
+﻿applications:
+- name: paymentapi
+  buildpack: dotnet_core_buildpack
+  memory: 512M
+  health-check-http-endpoint: /liveness
+  health-check-type: http
+  random-route: true
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+  - eShopMQ
+  

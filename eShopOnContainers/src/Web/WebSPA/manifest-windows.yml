@@ -1,0 +1,12 @@
+﻿applications:
+- name: eshopcontainersspa
+  buildpack: binary_buildpack
+  memory: 512M
+  stack: windows2016
+  command: .\WebSPA
+  health-check-http-endpoint: /liveness
+  health-check-type: http
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+  - eShopCache

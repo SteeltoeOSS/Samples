@@ -1,0 +1,12 @@
+﻿{
+
+  "ExternalCatalogBaseUrl": "https://catalogapi.pcfbeta.io",
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+﻿applications:
+- name: catalogapi
+  buildpack: dotnet_core_buildpack
+  memory: 512M
+  health-check-http-endpoint: /liveness
+  health-check-type: http
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+  - eShopCatalogDb
+  - eShopMQ
+  

@@ -1,0 +1,14 @@
+﻿applications:
+- name: orderingbackground
+  buildpack: binary_buildpack
+  memory: 512M
+  stack: windows2016
+  command: .\Ordering.BackgroundTasks
+  health-check-http-endpoint: /liveness
+  health-check-type: http
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+  - eShopMQ
+  - eShopOrderingDb
+  
