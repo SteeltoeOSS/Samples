@@ -11,4 +11,4 @@ This repo tree contains sample apps illustrating how to use the Steeltoe [Discov
 
 See the Readme for instructions on building and running each app.  Instructions for running the apps both locally and on CloudFoundry are provided.
 
-### See the Official [Steeltoe Service Discovery Documentation](https://steeltoe.io/docs/steeltoe-service-discovery) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Service Discovery Documentation](https://steeltoe.io/docs/steeltoe-discovery/) for a more in-depth walkthrough of the samples and more detailed information
