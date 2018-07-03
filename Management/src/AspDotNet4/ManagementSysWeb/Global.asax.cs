@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using ManagementSysWeb.App_Start;
+using Steeltoe.CloudFoundry.ConnectorAutofac;
 using Steeltoe.Common.Configuration.Autofac;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.EndpointAutofac;
@@ -28,6 +29,7 @@ namespace ManagementSysWeb
             builder.RegisterCloudFoundryOptions(ApplicationConfig.Configuration);
             builder.RegisterConfiguration(ApplicationConfig.Configuration);
             builder.RegisterCloudFoundryModules(ApplicationConfig.Configuration);
+            builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
 
             Container = builder.Build();
         }

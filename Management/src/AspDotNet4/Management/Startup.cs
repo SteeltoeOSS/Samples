@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging.Console;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
+using Steeltoe.CloudFoundry.ConnectorAutofac;
 using Steeltoe.Common.Configuration.Autofac;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
@@ -61,6 +62,7 @@ namespace Management
             var builder = new ContainerBuilder();
             builder.RegisterCloudFoundryOptions(ApplicationConfig.Configuration);
             builder.RegisterConfiguration(ApplicationConfig.Configuration);
+            builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
             builder.UseCloudFoundryMiddlewares(ApplicationConfig.Configuration);
 
             var container = builder.Build();
