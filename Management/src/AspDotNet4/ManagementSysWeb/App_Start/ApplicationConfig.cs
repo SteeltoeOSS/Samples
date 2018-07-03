@@ -6,7 +6,7 @@ using Steeltoe.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace Management.App_Start
+namespace ManagementSysWeb.App_Start
 {
     public static class ApplicationConfig
     {
