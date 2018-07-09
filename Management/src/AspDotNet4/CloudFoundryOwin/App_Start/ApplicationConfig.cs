@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Autofac;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
@@ -6,13 +7,14 @@ using Steeltoe.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace Management.App_Start
+namespace CloudFoundryOwin.App_Start
 {
     public static class ApplicationConfig
     {
         public static IConfigurationRoot Configuration { get; set; }
         public static ILoggerFactory LoggerFactory { get; set; }
         public static ILoggerProvider LoggerProvider { get; set; }
+        public static IContainer Container { get; set; }
 
         public static void Register(string environment)
         {

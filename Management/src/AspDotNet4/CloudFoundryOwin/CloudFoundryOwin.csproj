@@ -159,9 +159,6 @@
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\management\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.1.0-dev-00231\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\management\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.1.0-dev-00057\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
-    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\management\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
@@ -326,6 +323,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\logging\src\Steeltoe.Extensions.Logging.DynamicLogger\Steeltoe.Extensions.Logging.DynamicLogger.csproj">
+      <Project>{118a7bce-9fc8-4ba4-9f15-924b7685e10d}</Project>
+      <Name>Steeltoe.Extensions.Logging.DynamicLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\..\management\src\Steeltoe.Management.EndpointAutofac\Steeltoe.Management.EndpointAutofac.csproj">
       <Project>{fcf5a911-989b-4dcd-9165-d00a66f9f11b}</Project>
       <Name>Steeltoe.Management.EndpointAutofac</Name>
