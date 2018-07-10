@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Management")]
+[assembly: AssemblyTitle("CloudFoundryOwin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Management")]
+[assembly: AssemblyProduct("CloudFoundryOwin")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e7a7eeee-ed4c-4db6-b2e4-e89e7b1bb8e5")]
+[assembly: Guid("4c4b7b65-c999-44e3-8e1c-823740846306")]
 
 // Version information for an assembly consists of the following four values:
 //

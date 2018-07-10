@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "OWIN Actuators";
 }
-<h2>Actuators</h2>
+<h2>OWIN-based Actuators</h2>
 <h3>Use your browser's back button to return to this page after visiting any of these links:</h3>
 <ul>
     <li>
@@ -19,3 +19,14 @@
         </ul>
     </li>
 </ul>
+<div><h5>Data retrieved from WebApi controller:</h5><ul id="output"><li>Retrieving....</li></ul></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $.get("/api/values", function (data) {
+            $("#output").html("");
+            $(data).each(function (i) {
+                $("#output").append("<li>" + i + "</li>");
+            })
+        })
+    });
+</script>

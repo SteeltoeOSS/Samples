@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27729.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryOwin", "CloudFoundryOwin\CloudFoundryOwin.csproj", "{E7A7EEEE-ED4C-4DB6-B2E4-E89E7B1BB8E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryOwinAutofac", "CloudFoundryOwinAutofac\CloudFoundryOwinAutofac.csproj", "{E7A7EEEE-ED4C-4DB6-B2E4-E89E7B1BB8E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementSysWeb", "ManagementSysWeb\ManagementSysWeb.csproj", "{2BBE69E0-E104-4398-BAF2-49D92BF9C32C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryOwin", "CloudFoundryOwin\CloudFoundryOwin.csproj", "{4C4B7B65-C999-44E3-8E1C-823740846306}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2BBE69E0-E104-4398-BAF2-49D92BF9C32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BBE69E0-E104-4398-BAF2-49D92BF9C32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BBE69E0-E104-4398-BAF2-49D92BF9C32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4B7B65-C999-44E3-8E1C-823740846306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4B7B65-C999-44E3-8E1C-823740846306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4B7B65-C999-44E3-8E1C-823740846306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4B7B65-C999-44E3-8E1C-823740846306}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

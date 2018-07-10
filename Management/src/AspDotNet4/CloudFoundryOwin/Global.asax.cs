@@ -1,16 +1,11 @@
-﻿using Autofac;
-using Autofac.Integration.Mvc;
-using CloudFoundryOwin.App_Start;
-using Steeltoe.CloudFoundry.ConnectorAutofac;
-using Steeltoe.Common.Configuration.Autofac;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.EndpointAutofac;
+﻿using CloudFoundryOwin;
 using System;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace CloudFoundryOwin
+namespace CloudFoundryOwinAutofac
 {
     public class Global : HttpApplication
     {
@@ -18,22 +13,11 @@ namespace CloudFoundryOwin
         {
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
             ApplicationConfig.Register("development");
             ApplicationConfig.ConfigureLogging();
-
-            var builder = new ContainerBuilder();
-
-            // Register all the controllers with Autofac
-            builder.RegisterControllers(typeof(Global).Assembly);
-            builder.RegisterCloudFoundryOptions(ApplicationConfig.Configuration);
-            builder.RegisterConfiguration(ApplicationConfig.Configuration);
-            builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
-            builder.UseCloudFoundryMiddlewares(ApplicationConfig.Configuration);
-
-            ApplicationConfig.Container = builder.Build();
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(ApplicationConfig.Container));
         }
     }
 }

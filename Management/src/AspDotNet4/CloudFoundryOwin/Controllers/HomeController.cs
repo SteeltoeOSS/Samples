@@ -1,24 +1,25 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CloudFoundryOwin;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace CloudFoundryOwin.Controllers
+namespace CloudFoundryOwinAutofac.Controllers
 {
     public class HomeController : Controller
     {
         private ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            _logger = ApplicationConfig.LoggerFactory.CreateLogger<HomeController>();
         }
 
         // GET: Home
         public ActionResult Index()
         {
             var minlvl = GetMinLogLevel(_logger);
-            Console.WriteLine("Minimum level set on _logger: {minlvl}");
+            Console.WriteLine($"Minimum level set on _logger: {minlvl}");
             Debug.WriteLine($"Minimum level set on _logger: {minlvl}");
             _logger.LogTrace("This is a {LogLevel} log", LogLevel.Trace.ToString());
             _logger.LogDebug("This is a {LogLevel} log", LogLevel.Debug.ToString());
