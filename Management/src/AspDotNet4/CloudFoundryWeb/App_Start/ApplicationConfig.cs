@@ -6,7 +6,7 @@ using Steeltoe.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace CloudFoundryOwin
+namespace CloudFoundryWeb
 {
     public class ApplicationConfig
     {

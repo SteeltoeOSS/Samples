@@ -16,7 +16,7 @@ namespace CloudFoundryOwinAutofac
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            ApplicationConfig.Register("development");
+            ApplicationConfig.Configure("development");
             ApplicationConfig.ConfigureLogging();
         }
     }
