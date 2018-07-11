@@ -21,7 +21,9 @@ using Steeltoe.Management.EndpointOwin.Metrics;
 using Steeltoe.Management.EndpointOwin.Refresh;
 using Steeltoe.Management.EndpointOwin.ThreadDump;
 using Steeltoe.Management.EndpointOwin.Trace;
+using Steeltoe.Management.EndpointOwin.Diagnostics;
 using System.Collections.Generic;
+using Steeltoe.Common.Diagnostics;
 
 [assembly: OwinStartup(typeof(CloudFoundryOwin.Startup))]
 
@@ -31,11 +33,9 @@ namespace CloudFoundryOwin
     {
         public void Configuration(IAppBuilder app)
         {
-            // create a trace repository for use in both a request tracing middleware and the middleware for the /trace endpoint that returns those traces
-            var traceRepository = new OwinTraceRepository(new TraceOptions(ApplicationConfig.Configuration), ((LoggerFactory)ApplicationConfig.LoggerFactory).CreateLogger<OwinTraceRepository>());
 
             app
-                .UseRequestTracingMiddleware(traceRepository, ApplicationConfig.LoggerFactory)
+                .UseDiagnosticSourceMiddleware(ApplicationConfig.LoggerFactory)
                 .UseCloudFoundrySecurityMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseCloudFoundryEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseEnvEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
@@ -47,7 +47,9 @@ namespace CloudFoundryOwin
                 .UseMetricsEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseRefreshEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseThreadDumpEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
-                .UseTraceEndpointMiddleware(ApplicationConfig.Configuration, traceRepository, ApplicationConfig.LoggerFactory);
+                .UseTraceEndpointMiddleware(ApplicationConfig.Configuration, null, ApplicationConfig.LoggerFactory);
+
+            DiagnosticsManager.Instance.Start();
         }
 
         private IEnumerable<IHealthContributor> GetHealthContributors()
