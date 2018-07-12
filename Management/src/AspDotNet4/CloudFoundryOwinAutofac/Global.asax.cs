@@ -20,6 +20,7 @@ namespace CloudFoundryOwinAutofac
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
             ApplicationConfig.Register("development");
             ApplicationConfig.ConfigureLogging();
 
@@ -32,9 +33,11 @@ namespace CloudFoundryOwinAutofac
             builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
             builder.RegisterCloudFoundryActuators(ApplicationConfig.Configuration);
 
-            ApplicationConfig.Container = builder.Build();
+            var container = ApplicationConfig.Container = builder.Build();
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(ApplicationConfig.Container));
+            container.StartActuators();
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }

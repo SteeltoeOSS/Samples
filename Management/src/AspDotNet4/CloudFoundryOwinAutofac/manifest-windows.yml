@@ -2,7 +2,7 @@
 applications:
 - name: actuators-owin-autofac
   memory: 512M
-  stack: windows2012R2
+  stack: windows2016
   buildpack: hwc_buildpack
   services:
    - myMySqlService
