@@ -30,7 +30,7 @@ namespace CloudFoundryOwinAutofac
             builder.RegisterCloudFoundryOptions(ApplicationConfig.Configuration);
             builder.RegisterConfiguration(ApplicationConfig.Configuration);
             builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
-            builder.UseCloudFoundryMiddlewares(ApplicationConfig.Configuration);
+            builder.RegisterCloudFoundryActuators(ApplicationConfig.Configuration);
 
             ApplicationConfig.Container = builder.Build();
 
