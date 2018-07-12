@@ -1,5 +1,4 @@
-﻿using Microsoft.Owin;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using Owin;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.MySql;
@@ -23,19 +22,14 @@ using Steeltoe.Management.EndpointOwin.Refresh;
 using Steeltoe.Management.EndpointOwin.ThreadDump;
 using Steeltoe.Management.EndpointOwin.Trace;
 using System.Collections.Generic;
-using System.Web.Http;
 
-[assembly: OwinStartup(typeof(CloudFoundryOwin.Startup))]
-
-namespace CloudFoundryOwin
+namespace CloudFoundryOwinSelfHost
 {
     public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            // create a trace repository for use in both a request tracing middleware and the middleware for the /trace endpoint that returns those traces
-            var config = GlobalConfiguration.Configuration;
-            app.UseWebApi(config);
+            WebApiConfig.RegisterRoutes(app);
 
             app
                 .UseDiagnosticSourceMiddleware(ApplicationConfig.LoggerFactory)
@@ -46,7 +40,7 @@ namespace CloudFoundryOwin
                 .UseHeapDumpEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.GetContentRoot(), ApplicationConfig.LoggerFactory)
                 .UseInfoEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseLoggersEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerProvider, ApplicationConfig.LoggerFactory)
-                .UseMappingEndpointMiddleware(ApplicationConfig.Configuration, config.Services.GetApiExplorer(), ApplicationConfig.LoggerFactory)
+                .UseMappingEndpointMiddleware(ApplicationConfig.Configuration, WebApiConfig.GetApiExplorer(), ApplicationConfig.LoggerFactory)
                 .UseMetricsEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseRefreshEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)
                 .UseThreadDumpEndpointMiddleware(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory)

@@ -6,9 +6,9 @@ using Steeltoe.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace ManagementSysWeb.App_Start
+namespace CloudFoundryOwinSelfHost
 {
-    public static class ApplicationConfig
+    public class ApplicationConfig
     {
         public static IConfigurationRoot Configuration { get; set; }
         public static ILoggerFactory LoggerFactory { get; set; }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryOwin", "CloudFo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryWeb", "CloudFoundryWeb\CloudFoundryWeb.csproj", "{00CB4174-113A-4720-9D15-B2434652FBAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryOwinSelfHost", "CloudFoundryOwinSelfHost\CloudFoundryOwinSelfHost.csproj", "{0C37C878-111B-4507-A51F-4A8C92DE65B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{4C4B7B65-C999-44E3-8E1C-823740846306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C4B7B65-C999-44E3-8E1C-823740846306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C4B7B65-C999-44E3-8E1C-823740846306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C37C878-111B-4507-A51F-4A8C92DE65B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C37C878-111B-4507-A51F-4A8C92DE65B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C37C878-111B-4507-A51F-4A8C92DE65B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C37C878-111B-4507-A51F-4A8C92DE65B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{00CB4174-113A-4720-9D15-B2434652FBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{00CB4174-113A-4720-9D15-B2434652FBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00CB4174-113A-4720-9D15-B2434652FBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU

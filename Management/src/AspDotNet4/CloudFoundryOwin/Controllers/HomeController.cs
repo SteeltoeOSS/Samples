@@ -1,10 +1,9 @@
-﻿using CloudFoundryOwin;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace CloudFoundryOwinAutofac.Controllers
+namespace CloudFoundryOwin.Controllers
 {
     public class HomeController : Controller
     {

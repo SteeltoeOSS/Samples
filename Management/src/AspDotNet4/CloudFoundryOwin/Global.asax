@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="CloudFoundryOwinAutofac.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="CloudFoundryOwin.Global" Language="C#" %>

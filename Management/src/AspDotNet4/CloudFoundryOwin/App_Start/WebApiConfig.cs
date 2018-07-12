@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace CloudFoundryOwinAutofac
+namespace CloudFoundryOwin
 {
     public static class WebApiConfig
     {
