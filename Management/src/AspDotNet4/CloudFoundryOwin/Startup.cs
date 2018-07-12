@@ -35,7 +35,6 @@ namespace CloudFoundryOwin
         {
             // create a trace repository for use in both a request tracing middleware and the middleware for the /trace endpoint that returns those traces
             var config = GlobalConfiguration.Configuration;
-            app.UseWebApi(config);
 
             app
                 .UseDiagnosticSourceMiddleware(ApplicationConfig.LoggerFactory)
