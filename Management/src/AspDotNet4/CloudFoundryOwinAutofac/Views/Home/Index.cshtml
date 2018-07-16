@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "OWIN Actuators";
+}
+<h2>OWIN-based Actuators (with Autofac)</h2>
+<h3>Use your browser's back button to return to this page after visiting any of these links:</h3>
+<ul>
+    <li>
+        <h4><a href="/cloudfoundryapplication">Cloud Foundry</a></h4>
+        <ul>
+            <li><h5><a href="/cloudfoundryapplication/health">Health</a></h5></li>
+            <li><h5><a href="/cloudfoundryapplication/heapdump">Heap Dump (might take a little while to load...)</a></h5></li>
+            <li><h5><a href="/cloudfoundryapplication/info">Info</a></h5></li>
+            <li><h5><a href="/cloudfoundryapplication/loggers">Loggers</a></h5></li>
+            <li><h5><a href="/cloudfoundryapplication/metrics">Metrics</a></h5></li>
+            <li><h5><a href="/cloudfoundryapplication/dump">Thread Dump</a></h5></li>
+            <li><h5><a href="/cloudfoundryapplication/trace">Trace</a></h5></li>
+        </ul>
+    </li>
+</ul>
+<div><h5>Data retrieved from WebApi controller:</h5><ul id="output"><li>Retrieving....</li></ul></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $.get("/api/values", function (data) {
+            $("#output").html("");
+            $(data).each(function (i) {
+                $("#output").append("<li>" + i + "</li>");
+            })
+        })
+    });
+</script>

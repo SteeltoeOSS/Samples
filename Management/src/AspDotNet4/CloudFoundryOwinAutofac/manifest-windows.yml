@@ -1,0 +1,8 @@
+﻿---
+applications:
+- name: actuators-owin-autofac
+  memory: 512M
+  stack: windows2016
+  buildpack: hwc_buildpack
+  services:
+   - myMySqlService

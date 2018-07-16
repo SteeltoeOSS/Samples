@@ -4,8 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.MySql;
+using Steeltoe.Common.HealthChecks;
 using Steeltoe.Management.CloudFoundry;
-
+using Steeltoe.Management.Endpoint.Info;
+using Steeltoe.Management.Exporter.Metrics;
 
 namespace CloudFoundry
 {
@@ -21,10 +23,17 @@ namespace CloudFoundry
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add in a MySql connection (this method also adds an IHealthContributor for it)
             services.AddMySqlConnection(Configuration);
 
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+
+            // Add your own IInfoContributor, making sure to register with the interface
+            services.AddSingleton<IInfoContributor, ArbitraryInfoContributor>();
+
+            // Add your own IHealthContributor, registered with the interface
+            services.AddSingleton<IHealthContributor, CustomHealthContributor>();
 
             // Add management component which forwards collected metrics to 
             // the Cloud Foundry Metrics Forwarder service
