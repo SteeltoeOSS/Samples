@@ -11,6 +11,7 @@ using Steeltoe.CloudFoundry.Connector.Relational;
 using Steeltoe.CloudFoundry.Connector.Relational.MySql;
 using Steeltoe.CloudFoundry.Connector.Services;
 using MySql.Data.MySqlClient;
+using Steeltoe.Management.Endpoint.Health.Contributor;
 
 namespace CloudFoundryWeb
 {
@@ -18,17 +19,17 @@ namespace CloudFoundryWeb
     {
         public static void ConfigureManagementActuators(IConfiguration configuration, ILoggerProvider dynamicLogger, IApiExplorer apiExplorer, ILoggerFactory loggerFactory = null)
         {
-            // ActuatorConfiguration.ConfigureForCloudFoundry(configuration, dynamicLogger, apiExplorer, loggerFactory);
+            ActuatorConfiguration.ConfigureForCloudFoundry(configuration, dynamicLogger, apiExplorer, loggerFactory);
 
-            ActuatorConfiguration.ConfigureSecurityService(configuration, null, loggerFactory);
-            ActuatorConfiguration.ConfigureCloudFoundryEndpoint(configuration, loggerFactory);
-            ActuatorConfiguration.ConfigureHealthEndpoint(configuration, null, GetHealthContributors(configuration), loggerFactory);
-            ActuatorConfiguration.ConfigureHeapDumpEndpoint(configuration, null, loggerFactory);
-            ActuatorConfiguration.ConfigureThreadDumpEndpoint(configuration, null, loggerFactory);
-            ActuatorConfiguration.ConfigureInfoEndpoint(configuration, null, loggerFactory);
-            ActuatorConfiguration.ConfigureLoggerEndpoint(configuration, dynamicLogger, loggerFactory);
-            ActuatorConfiguration.ConfigureTraceEndpoint(configuration, null, loggerFactory);
-            ActuatorConfiguration.ConfigureMappingsEndpoint(configuration, apiExplorer, loggerFactory);
+            //ActuatorConfiguration.ConfigureSecurityService(configuration, null, loggerFactory);
+            //ActuatorConfiguration.ConfigureCloudFoundryEndpoint(configuration, loggerFactory);
+            //ActuatorConfiguration.ConfigureHealthEndpoint(configuration, null, GetHealthContributors(configuration), loggerFactory);
+            //ActuatorConfiguration.ConfigureHeapDumpEndpoint(configuration, null, loggerFactory);
+            //ActuatorConfiguration.ConfigureThreadDumpEndpoint(configuration, null, loggerFactory);
+            //ActuatorConfiguration.ConfigureInfoEndpoint(configuration, null, loggerFactory);
+            //ActuatorConfiguration.ConfigureLoggerEndpoint(configuration, dynamicLogger, loggerFactory);
+            //ActuatorConfiguration.ConfigureTraceEndpoint(configuration, null, loggerFactory);
+            //ActuatorConfiguration.ConfigureMappingsEndpoint(configuration, apiExplorer, loggerFactory);
         }
         public static void Start()
         {

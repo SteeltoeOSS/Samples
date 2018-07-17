@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: actuators-owin
+- name: actuators-web
   memory: 512M
   stack: windows2016
   buildpack: hwc_buildpack
