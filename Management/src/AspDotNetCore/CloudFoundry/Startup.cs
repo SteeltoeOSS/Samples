@@ -7,6 +7,7 @@ using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Info;
+using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.Exporter.Metrics;
 
 namespace CloudFoundry
@@ -35,10 +36,11 @@ namespace CloudFoundry
             // Add your own IHealthContributor, registered with the interface
             services.AddSingleton<IHealthContributor, CustomHealthContributor>();
 
-            // Add management component which forwards collected metrics to 
+            // Add management components which collect and forwards metrics to 
             // the Cloud Foundry Metrics Forwarder service
-            // Remove comment below to enable
-            // services.AddMetricsForwarderExporter(Configuration);
+            // Remove comments below to enable
+            //services.AddMetricsActuator(Configuration);
+            //services.AddMetricsForwarderExporter(Configuration);
 
             // Add framework services.
             services.AddMvc();
@@ -60,6 +62,10 @@ namespace CloudFoundry
 
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
+
+            // Add metrics collection to the app
+            // Remove comment below to enable
+            // app.UseMetricsActuator();
 
             app.UseMvc(routes =>
             {
