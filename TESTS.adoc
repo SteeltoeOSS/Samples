@@ -73,7 +73,7 @@ $ ./test-setup
 
 === user.ini
 
-Create a `user.ini` file in the roject root directory.
+Create a `user.ini` file in the project root directory.
 An example file, {uri-user-ini}[`user.ini.example`], is provided as a convenience.
 
 .Windows
