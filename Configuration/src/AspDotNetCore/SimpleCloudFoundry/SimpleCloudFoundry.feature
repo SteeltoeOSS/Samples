@@ -6,7 +6,7 @@ Feature: Simple CloudFoundry Configuration
     @netcoreapp2.1
     @win10-x64
     Scenario: Simple CloudFoundry Configuration for .Net Core 2.1 (win10-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-config-server installed
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created
@@ -20,7 +20,7 @@ Feature: Simple CloudFoundry Configuration
     @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: Simple CloudFoundry Configuration for .Net Core 2.1 (ubuntu.14.04-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-config-server installed
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created
@@ -34,7 +34,7 @@ Feature: Simple CloudFoundry Configuration
     @net461
     @win10-x64
     Scenario: Simple CloudFoundry Configuration for .Net Framework 4.6.1 (win10-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-config-server installed
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created

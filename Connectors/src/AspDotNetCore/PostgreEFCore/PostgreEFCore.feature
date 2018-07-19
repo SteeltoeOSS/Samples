@@ -6,7 +6,7 @@ Feature: PostgreEFCore Connector
     @netcoreapp2.1
     @win10-x64
     Scenario: PostgreEFCore Connector for .Net Core 2.1 (win10-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service EDB-Shared-PostgreSQL installed
         When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
         And you wait until CloudFoundry service myPostgres is created
@@ -21,7 +21,7 @@ Feature: PostgreEFCore Connector
     @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: PostgreEFCore Connector for .Net Core 2.1 (ubuntu.14.04-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service EDB-Shared-PostgreSQL installed
         When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
         And you wait until CloudFoundry service myPostgres is created

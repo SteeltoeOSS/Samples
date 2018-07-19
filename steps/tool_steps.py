@@ -1,12 +1,14 @@
 import command
 import re
+from version import Version
 
-@given(u'you have .NET Core SDK {version} installed')
+@given(u'you have at least .NET Core SDK {version} installed')
 def step_impl(context, version):
+    expected = Version(version)
     cmd = command.Command(context, "dotnet --version")
     cmd.run()
-    actual = cmd.stdout
-    actual.should.match(r'{}.*'.format(version))
+    actual = Version(cmd.stdout)
+    (actual >= expected).should.be.true
 
 @given(u'you have Java {version} installed')
 def step_impl(context, version):
