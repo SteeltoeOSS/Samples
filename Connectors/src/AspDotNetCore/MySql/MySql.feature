@@ -6,7 +6,7 @@ Feature: MySql Connector
     @netcoreapp2.1
     @win10-x64
     Scenario: MySql Connector for .Net Core 2.1 (win10-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
@@ -21,7 +21,7 @@ Feature: MySql Connector
     @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: MySql Connector for .Net Core 2.1 (ubuntu.14.04-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
@@ -36,7 +36,7 @@ Feature: MySql Connector
     @net461
     @win10-x64
     Scenario: MySql Connector for .Net Framework 4.6.1 (win10-x64)
-        Given you have .NET Core SDK 2.1 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created

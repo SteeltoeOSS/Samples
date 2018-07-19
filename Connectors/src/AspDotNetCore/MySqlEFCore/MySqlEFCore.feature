@@ -6,7 +6,7 @@ Feature: MySqlEFCore Connector
     @netcoreapp2.1
     @win10-x64
     Scenario: MySqlEFCore Connector for .Net Core 2.1 (win10-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
@@ -21,7 +21,7 @@ Feature: MySqlEFCore Connector
     @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: MySqlEFCore Connector for .Net Core 2.1 (ubuntu.14.04-x64)
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service p-mysql installed
         When you run: cf create-service p-mysql 100mb myMySqlService
         And you wait until CloudFoundry service myMySqlService is created

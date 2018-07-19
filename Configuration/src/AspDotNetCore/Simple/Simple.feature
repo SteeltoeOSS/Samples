@@ -6,7 +6,7 @@ Feature: Simple Configuration
 
     @netcoreapp2.1
     Scenario Outline: Simple Configuration for .Net Core 2.1
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have Java 8 installed
         And you have Apache Maven 3 installed
         When you run: git clone https://github.com/spring-cloud/spring-cloud-config
@@ -28,7 +28,7 @@ Feature: Simple Configuration
 
     @net461
     Scenario Outline: Simple Configuration for .Net Framework 4.6.1
-        Given you have .NET Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have Java 8 installed
         And you have Apache Maven 3 installed
         When you run: git clone https://github.com/spring-cloud/spring-cloud-config
