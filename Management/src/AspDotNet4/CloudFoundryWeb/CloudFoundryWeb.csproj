@@ -120,7 +120,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.1.0-dev-00267\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.1.0-dev-00268\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Steeltoe.Common.2.1.0-dev-00073\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
@@ -135,16 +135,19 @@
       <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.1.0-dev-00061\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.Diagnostics, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.1.0-dev-00195\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.1.0-dev-00201\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.EndpointBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.1.0-dev-00195\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.1.0-dev-00201\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.EndpointWeb, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointWeb.2.1.0-dev-00195\lib\net461\Steeltoe.Management.EndpointWeb.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.EndpointWeb.2.1.0-dev-00201\lib\net461\Steeltoe.Management.EndpointWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Steeltoe.Management.ExporterBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.1.0-dev-00201\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.OpenCensus, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.1.0-dev-00195\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.1.0-dev-00201\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">

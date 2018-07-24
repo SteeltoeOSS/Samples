@@ -10,9 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="MySqlConnector" Version="0.40.4" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.1.0-dev-00257" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.1.0-dev-00161" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.1.0-dev-00161" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.1.0-rc1" />
+    <!--<PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.1.0-rc1" />-->
   </ItemGroup>
   
   <ItemGroup>
@@ -24,6 +24,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Management\src\Steeltoe.Management.CloudFoundryCore\Steeltoe.Management.CloudFoundryCore.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Management\src\Steeltoe.Management.ExporterCore\Steeltoe.Management.ExporterCore.csproj" />
+  </ItemGroup>
+  
 
   <Target Name="_GitProperties" AfterTargets="CoreCompile">
     <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRoot)" Overwrite="true" />

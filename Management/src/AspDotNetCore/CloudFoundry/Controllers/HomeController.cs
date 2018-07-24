@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading;
+using System;
 
 namespace CloudFoundry.Controllers
 {
@@ -14,6 +16,7 @@ namespace CloudFoundry.Controllers
 
         public IActionResult Index()
         {
+            Thread.Sleep(1000);
             _logger.LogCritical("Test Critical message");
             _logger.LogError("Test Error message");
             _logger.LogWarning("Test Warning message");
@@ -25,7 +28,8 @@ namespace CloudFoundry.Controllers
 
         public IActionResult Error()
         {
-            return View();
+            throw new ArgumentException();
+            //return View();
         }
     }
 }

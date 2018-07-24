@@ -39,8 +39,8 @@ namespace CloudFoundry
             // Add management components which collect and forwards metrics to 
             // the Cloud Foundry Metrics Forwarder service
             // Remove comments below to enable
-            //services.AddMetricsActuator(Configuration);
-            //services.AddMetricsForwarderExporter(Configuration);
+            services.AddMetricsActuator(Configuration);
+            services.AddMetricsForwarderExporter(Configuration);
 
             // Add framework services.
             services.AddMvc();
@@ -65,7 +65,7 @@ namespace CloudFoundry
 
             // Add metrics collection to the app
             // Remove comment below to enable
-            // app.UseMetricsActuator();
+            app.UseMetricsActuator();
 
             app.UseMvc(routes =>
             {
@@ -76,7 +76,7 @@ namespace CloudFoundry
 
             // Start up the metrics forwarder service added above
             // Remove comment below to enable
-            // app.UseMetricsExporter();
+            app.UseMetricsExporter();
         }
     }
 }
