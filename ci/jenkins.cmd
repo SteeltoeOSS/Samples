@@ -21,7 +21,7 @@ ECHO cf_org = STEELTOE >> %USERINI%
 ECHO cf_username = %CF_USER% >> %USERINI%
 ECHO cf_password = %CF_PASS% >> %USERINI%
 ECHO cf_max_attempts = 250 >> %USERINI%
-ECHO output = %TEST_OUT% >> %USERINI%
+REM ECHO output = %TEST_OUT% >> %USERINI%
 
 SET PATH=%PYTHON_HOME%;%PYTHON_HOME%\Scripts;%DOTNET_HOME%;%CF_HOME%;%JAVA_HOME%\bin;%GIT_HOME%\bin;%MAVEN_HOME%\bin;%PATH%
 PATH
