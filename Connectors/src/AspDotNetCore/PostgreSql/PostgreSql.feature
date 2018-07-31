@@ -36,7 +36,7 @@ Feature: PostgreSql Connector
     @net461
     @win10-x64
     Scenario: PostgreSql Connector for .Net Framework 4.6.1 (win10-x64)
-        Given you have .Net Core SDK 2.1.300 installed
+        Given you have at least .NET Core SDK 2.1.300 installed
         And you have CloudFoundry service EDB-Shared-PostgreSQL installed
         When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
         And you wait until CloudFoundry service myPostgres is created

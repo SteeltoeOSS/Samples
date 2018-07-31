@@ -6,7 +6,7 @@ Feature: Redis Connector
     @netcoreapp2.1
     @win10-x64
     Scenario: Redis Connector for .Net Core 2.1 (win10-x64)
-        Given you have .Net Core SDK 2.1.300 installed
+        Given you have at least .Net Core SDK 2.1.300 installed
         And you have CloudFoundry service p-redis installed
         When you run: cf create-service p-redis shared-vm myRedisService
         And you wait until CloudFoundry service myRedisService is created
@@ -21,7 +21,7 @@ Feature: Redis Connector
     @netcoreapp2.1
     @ubuntu.14.04-x64
     Scenario: Redis Connector for .Net Core 2.1 (ubuntu.14.04-x64)
-        Given you have .Net Core SDK 2.1.300 installed
+        Given you have at least .Net Core SDK 2.1.300 installed
         And you have CloudFoundry service p-redis installed
         When you run: cf create-service p-redis shared-vm myRedisService
         And you wait until CloudFoundry service myRedisService is created
@@ -36,7 +36,7 @@ Feature: Redis Connector
     @net461
     @win10-x64
     Scenario: Redis Connector for .Net Framework 4.6.1 (win10-x64)
-        Given you have .Net Core SDK 2.1.300 installed
+        Given you have at least .Net Core SDK 2.1.300 installed
         And you have CloudFoundry service p-redis installed
         When you run: cf create-service p-redis shared-vm myRedisService
         And you wait until CloudFoundry service myRedisService is created

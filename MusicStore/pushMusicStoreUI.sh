@@ -15,6 +15,7 @@ if [ "$2" == "" ]; then
 	printUsage 
 fi
 r=$1
+cd src/MusicStoreUI
 nixmanifest=manifest.yml
 winmanifest=manifest-windows.yml
 if [ "$USE_REDIS_CACHE" == "true" ]; then
