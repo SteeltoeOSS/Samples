@@ -20,12 +20,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00177" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00228" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00230" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00243" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.1.0" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.1.0-dev-00146" />
-    <PackageReference Include="Steeltoe.Management.TracingCore" Version="2.1.0-dev-00146" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.1.0-dev-00207" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="2.1.0-dev-00207" />
 
   </ItemGroup>
   

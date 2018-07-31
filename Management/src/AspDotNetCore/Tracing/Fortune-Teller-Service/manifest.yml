@@ -2,6 +2,6 @@
 applications:
 - name: fortuneService
   env:
-    ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: Production
   services:
    - myDiscoveryService
