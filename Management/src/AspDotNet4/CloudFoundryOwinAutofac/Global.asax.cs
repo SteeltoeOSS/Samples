@@ -35,17 +35,17 @@ namespace CloudFoundryOwinAutofac
             builder.RegisterCloudFoundryActuators(ApplicationConfig.Configuration);
 
             // Uncomment if you want to enable metrics actuator endpoint, it's not enabled by default
-            builder.RegisterMetricsActuator(ApplicationConfig.Configuration);
+            // builder.RegisterMetricsActuator(ApplicationConfig.Configuration);
 
-            //  Uncomment if you want to enable exporting of metrics to PCF Metrics, it's not enabled by default
-            builder.RegisterMetricsForwarderExporter(ApplicationConfig.Configuration);
+            // Uncomment if you want to enable exporting of metrics to PCF Metrics, it's not enabled by default
+            // builder.RegisterMetricsForwarderExporter(ApplicationConfig.Configuration);
 
             var container = ApplicationConfig.Container = builder.Build();
 
             container.StartActuators();
 
-            //  Uncomment if you want to enable exporting of metrics to the Cloud Foundry metrics exporter, it's not enabled by default
-            container.StartMetricsExporter();
+            // Uncomment if you want to enable exporting of metrics to the Cloud Foundry metrics exporter, it's not enabled by default
+            // container.StartMetricsExporter();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
