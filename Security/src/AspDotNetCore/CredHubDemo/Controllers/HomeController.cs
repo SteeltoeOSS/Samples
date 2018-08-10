@@ -60,6 +60,7 @@ namespace CredHubDemo.Controllers
             return View(newPassword);
         }
 
+        // interpolate VCAP_SERVICES data on-demand
         public async Task<IActionResult> Interpolate()
         {
             _logger.LogTrace("Creating CredHub Client...");
@@ -69,15 +70,27 @@ namespace CredHubDemo.Controllers
             await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest($"/credhubdemo-config-server/credentials", creds, null, OverwiteMode.overwrite));
 
             _logger.LogTrace("Setting up ViewModel and calling Interpolate...");
-            var interpolated = await _credHub.InterpolateServiceDataAsync(_cfSettings.ServicesJson);
+            var interpolated = await _credHub.InterpolateServiceDataAsync(Program.OriginalServices);
             var viewModel = new Dictionary<string, string>
             {
                 { "PUT to CredHub at /config-server/credentials", creds },
-                { "original", _cfSettings.ServicesJson },
+                { "original", Program.OriginalServices },
                 { "interpolated", JsonConvert.SerializeObject(JsonConvert.DeserializeObject(interpolated), Formatting.Indented) }
             };
 
             return View(viewModel);
+        }
+
+        // get VCAP_SERVICES as interpolated during startup
+        public IActionResult GetInterpolatedServices()
+        {
+            var viewModel = new Dictionary<string, string>
+            {
+                { "original", Program.OriginalServices },
+                { "interpolated", JsonConvert.SerializeObject(JsonConvert.DeserializeObject(_cfSettings.ServicesJson), Formatting.Indented) }
+            };
+
+            return View("Interpolate", viewModel);
         }
 
         /// <summary>

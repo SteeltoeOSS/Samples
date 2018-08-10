@@ -5,18 +5,20 @@ using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Security.DataProtection.CredHubCore;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace CredHubDemo
 {
     public class Program
     {
+        public static string OriginalServices;
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Starting...");
+            
             // forcefully setup credentials that need to be interpolated
-            Environment.SetEnvironmentVariable("VCAP_SERVICES", @"
+            string services = @"
                 { 
                     ""p-demo-resource"": [
                     {
@@ -34,7 +36,11 @@ namespace CredHubDemo
                     ],
                     ""volume_mounts"": []
                     }]
-                }");
+                }";
+
+            // comment out this line if you have your own service instance to test interpolation with
+            Environment.SetEnvironmentVariable("VCAP_SERVICES", services);
+            OriginalServices = Environment.GetEnvironmentVariable("VCAP_SERVICES");
 
             var host = new WebHostBuilder()
                 .UseKestrel()
