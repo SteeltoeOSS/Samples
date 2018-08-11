@@ -11,7 +11,7 @@ namespace CloudFoundryWeb.Controllers
 
         public HomeController()
         {
-            _logger = ApplicationConfig.LoggerFactory.CreateLogger<HomeController>();
+            _logger = LoggingConfig.LoggerFactory.CreateLogger<HomeController>();
         }
 
         // GET: Home

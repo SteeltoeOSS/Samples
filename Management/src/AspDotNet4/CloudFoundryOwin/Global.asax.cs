@@ -16,7 +16,7 @@ namespace CloudFoundryOwin
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             ApplicationConfig.Configure("development");
-            ApplicationConfig.ConfigureLogging();
+            LoggingConfig.Configure(ApplicationConfig.Configuration);
         }
     }
 }

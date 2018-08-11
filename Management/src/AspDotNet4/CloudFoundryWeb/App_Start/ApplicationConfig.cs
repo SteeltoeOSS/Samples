@@ -11,8 +11,6 @@ namespace CloudFoundryWeb
     public class ApplicationConfig
     {
         public static IConfigurationRoot Configuration { get; set; }
-        public static ILoggerFactory LoggerFactory { get; set; }
-        public static ILoggerProvider LoggerProvider { get; set; }
 
         public static void Configure(string environment)
         {
@@ -28,12 +26,7 @@ namespace CloudFoundryWeb
             Configuration = builder.Build();
         }
 
-        public static void ConfigureLogging()
-        {
-            LoggerProvider = new DynamicLoggerProvider(new ConsoleLoggerSettings().FromConfiguration(Configuration));
-            LoggerFactory = new LoggerFactory();
-            LoggerFactory.AddProvider(LoggerProvider);
-        }
+ 
 
         public static string GetContentRoot()
         {

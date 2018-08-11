@@ -1,18 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Owin;
-using MySql.Data.MySqlClient;
 using Owin;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.CloudFoundry.Connector.Relational;
-using Steeltoe.CloudFoundry.Connector.Relational.MySql;
-using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Common.Diagnostics;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Management.Endpoint.Health.Contributor;
 using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.EndpointOwin;
+using Steeltoe.Management.EndpointOwin.Health;
 using Steeltoe.Management.EndpointOwin.Metrics;
 using Steeltoe.Management.Exporter.Metrics;
 using Steeltoe.Management.Exporter.Metrics.CloudFoundryForwarder;
@@ -33,10 +29,10 @@ namespace CloudFoundryOwin
 
             app.UseCloudFoundryActuators(
                 ApplicationConfig.Configuration,
-                GetHealthContributors(),
+                GetHealthContributors(ApplicationConfig.Configuration),
                 config.Services.GetApiExplorer(),
-                ApplicationConfig.LoggerProvider,
-                ApplicationConfig.LoggerFactory);
+                LoggingConfig.LoggerProvider,
+                LoggingConfig.LoggerFactory);
 
             // Uncomment if you want to enable metrics actuator endpoint, it's not enabled by default
             // app.UseMetricsActuator(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory);
@@ -47,16 +43,12 @@ namespace CloudFoundryOwin
             Start();
         }
 
-        private IEnumerable<IHealthContributor> GetHealthContributors()
+        private static IEnumerable<IHealthContributor> GetHealthContributors(IConfiguration configuration)
         {
-            var info = ApplicationConfig.Configuration.GetSingletonServiceInfo<MySqlServiceInfo>();
-            var mySqlConfig = new MySqlProviderConnectorOptions(ApplicationConfig.Configuration);
-            var factory = new MySqlProviderConnectorFactory(info, mySqlConfig, MySqlTypeLocator.MySqlConnection);
-
             var healthContributors = new List<IHealthContributor>
             {
                 new DiskSpaceContributor(),
-                new RelationalHealthContributor(new MySqlConnection(factory.CreateConnectionString()))
+                RelationalHealthContributor.GetMySqlContributor(configuration)
             };
 
             return healthContributors;

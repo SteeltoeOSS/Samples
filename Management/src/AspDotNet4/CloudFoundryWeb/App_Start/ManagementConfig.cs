@@ -24,22 +24,21 @@ namespace CloudFoundryWeb
 
         public static void ConfigureManagementActuators(IConfiguration configuration, ILoggerProvider dynamicLogger, IApiExplorer apiExplorer, ILoggerFactory loggerFactory = null)
         {
-            ActuatorConfiguration.ConfigureForCloudFoundry(configuration, dynamicLogger, apiExplorer, loggerFactory);
+            ActuatorConfigurator.UseCloudFoundryActuators(configuration, dynamicLogger, GetHealthContributors(configuration), apiExplorer, loggerFactory);
 
             // You can individually configure actuators as shown below if you don't want all of them
-
-            //ActuatorConfiguration.ConfigureSecurityService(configuration, null, loggerFactory);
-            //ActuatorConfiguration.ConfigureCloudFoundryEndpoint(configuration, loggerFactory);
-            //ActuatorConfiguration.ConfigureHealthEndpoint(configuration, null, GetHealthContributors(configuration), loggerFactory);
-            //ActuatorConfiguration.ConfigureHeapDumpEndpoint(configuration, null, loggerFactory);
-            //ActuatorConfiguration.ConfigureThreadDumpEndpoint(configuration, null, loggerFactory);
-            //ActuatorConfiguration.ConfigureInfoEndpoint(configuration, null, loggerFactory);
-            //ActuatorConfiguration.ConfigureLoggerEndpoint(configuration, dynamicLogger, loggerFactory);
-            //ActuatorConfiguration.ConfigureTraceEndpoint(configuration, null, loggerFactory);
-            //ActuatorConfiguration.ConfigureMappingsEndpoint(configuration, apiExplorer, loggerFactory);
+            //ActuatorConfigurator.UseCloudFoundrySecurity(configuration, null, loggerFactory);
+            //ActuatorConfigurator.UseCloudFoundryActuator(configuration, loggerFactory);
+            //ActuatorConfigurator.UseHealthActuator(configuration, null, GetHealthContributors(configuration), loggerFactory);
+            //ActuatorConfigurator.UseHeapDumpActuator(configuration, null, loggerFactory);
+            //ActuatorConfigurator.UseThreadDumpActuator(configuration, null, loggerFactory);
+            //ActuatorConfigurator.UseInfoActuator(configuration, null, loggerFactory);
+            //ActuatorConfigurator.UseLoggerActuator(configuration, dynamicLogger, loggerFactory);
+            //ActuatorConfigurator.UseTraceActuator(configuration, null, loggerFactory);
+            //ActuatorConfigurator.UseMappingsActuator(configuration, apiExplorer, loggerFactory);
 
             // Uncomment if you want to enable metrics actuator endpoint, it's not enabled by default
-            // ActuatorConfiguration.ConfigureMetricsEndpoint(configuration, loggerFactory);
+            // ActuatorConfigurator.UseMetricsActuator(configuration, loggerFactory);
 
         }
 
@@ -69,14 +68,10 @@ namespace CloudFoundryWeb
 
         private static IEnumerable<IHealthContributor> GetHealthContributors(IConfiguration configuration)
         {
-            var info = ApplicationConfig.Configuration.GetSingletonServiceInfo<MySqlServiceInfo>();
-            var mySqlConfig = new MySqlProviderConnectorOptions(ApplicationConfig.Configuration);
-            var factory = new MySqlProviderConnectorFactory(info, mySqlConfig, MySqlTypeLocator.MySqlConnection);
-
             var healthContributors = new List<IHealthContributor>
             {
                 new DiskSpaceContributor(),
-                new RelationalHealthContributor(new MySqlConnection(factory.CreateConnectionString()))
+                RelationalHealthContributor.GetMySqlContributor(configuration)
             };
 
             return healthContributors;

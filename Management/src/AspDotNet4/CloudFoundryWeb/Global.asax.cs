@@ -19,19 +19,24 @@ namespace CloudFoundryWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            // Create applications configuration
             ApplicationConfig.Configure("development");
-            ApplicationConfig.ConfigureLogging();
 
+            // Create logging system using configuration
+            LoggingConfig.Configure(ApplicationConfig.Configuration);
+
+            // Add management endpoints to application
             ManagementConfig.ConfigureManagementActuators(
                 ApplicationConfig.Configuration,
-                ApplicationConfig.LoggerProvider,
+                LoggingConfig.LoggerProvider,
                 GlobalConfiguration.Configuration.Services.GetApiExplorer(),
-                ApplicationConfig.LoggerFactory);
+                LoggingConfig.LoggerFactory);
 
             // Uncomment if you want to enable metrics exporting to Cloud Foundry metrics exporter, it's not enabled by default
             // Also see ManagementConfig.ConfigureManagementActuators() for more configuration needs
             // ManagementConfig.ConfigureMetricsExporter(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory);
 
+            // Start the management endpoints
             ManagementConfig.Start();
         }
         protected void Application_Stop()
