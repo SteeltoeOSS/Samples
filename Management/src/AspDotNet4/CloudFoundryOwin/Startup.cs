@@ -35,10 +35,10 @@ namespace CloudFoundryOwin
                 LoggingConfig.LoggerFactory);
 
             // Uncomment if you want to enable metrics actuator endpoint, it's not enabled by default
-            // app.UseMetricsActuator(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory);
+            // app.UseMetricsActuator(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
 
             //  Uncomment if you want to enable exporting of metrics toCloud Foundry metrics exporter, it's not enabled by default
-            // ConfigureMetricsExporter(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory);
+            // UseCloudFoundryMetricsExporter(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
 
             Start();
         }
@@ -54,7 +54,7 @@ namespace CloudFoundryOwin
             return healthContributors;
         }
 
-        private void ConfigureMetricsExporter(IConfiguration configuration, ILoggerFactory loggerFactory = null)
+        private void UseCloudFoundryMetricsExporter(IConfiguration configuration, ILoggerFactory loggerFactory = null)
         {
             var options = new CloudFoundryForwarderOptions(configuration);
             MetricsExporter = new CloudFoundryForwarderExporter(options, OpenCensusStats.Instance, loggerFactory != null ? loggerFactory.CreateLogger<CloudFoundryForwarderExporter>() : null);

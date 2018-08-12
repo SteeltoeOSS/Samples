@@ -142,19 +142,19 @@
       <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.1.0-dev-00063\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.Diagnostics, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.1.0-dev-00209\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.1.0-dev-00210\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.EndpointBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.1.0-dev-00209\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.1.0-dev-00210\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.EndpointOwin, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointOwin.2.1.0-dev-00209\lib\net461\Steeltoe.Management.EndpointOwin.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.EndpointOwin.2.1.0-dev-00210\lib\net461\Steeltoe.Management.EndpointOwin.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.ExporterBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.1.0-dev-00209\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.1.0-dev-00210\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.OpenCensus, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.1.0-dev-00209\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.1.0-dev-00210\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>

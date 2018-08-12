@@ -42,7 +42,7 @@ namespace CloudFoundryWeb
 
         }
 
-        public static void ConfigureMetricsExporter(IConfiguration configuration, ILoggerFactory loggerFactory = null)
+        public static void UseCloudFoundryMetricsExporter(IConfiguration configuration, ILoggerFactory loggerFactory = null)
         {
             var options = new CloudFoundryForwarderOptions(configuration);
             MetricsExporter = new CloudFoundryForwarderExporter(options, OpenCensusStats.Instance, loggerFactory != null ? loggerFactory.CreateLogger<CloudFoundryForwarderExporter>() : null);

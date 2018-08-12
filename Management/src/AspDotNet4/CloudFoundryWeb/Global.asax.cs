@@ -34,7 +34,7 @@ namespace CloudFoundryWeb
 
             // Uncomment if you want to enable metrics exporting to Cloud Foundry metrics exporter, it's not enabled by default
             // Also see ManagementConfig.ConfigureManagementActuators() for more configuration needs
-            // ManagementConfig.ConfigureMetricsExporter(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory);
+            // ManagementConfig.UseCloudFoundryMetricsExporter(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
 
             // Start the management endpoints
             ManagementConfig.Start();
