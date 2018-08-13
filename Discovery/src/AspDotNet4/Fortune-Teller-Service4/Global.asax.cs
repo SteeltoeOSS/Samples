@@ -17,7 +17,8 @@ namespace FortuneTellerService4
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-       
+        private IContainer container;
+
         protected void Application_Start()
         {
 
@@ -51,7 +52,7 @@ namespace FortuneTellerService4
             // Register FortuneRepository
             builder.RegisterType<FortuneRepository>().As<IFortuneRepository>().SingleInstance();
 
-            var container = builder.Build();
+            container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             // Get a logger from container
@@ -68,8 +69,13 @@ namespace FortuneTellerService4
 
         protected void Application_End()
         {
+            var client = container.Resolve<IDiscoveryClient>();
+            var logger = container.Resolve<ILogger<WebApiApplication>>();
+
+            logger.LogInformation("Shutting down!");
+
             // Unregister current app with Service Discovery server
-            //_client.ShutdownAsync();
+            client.ShutdownAsync().Wait();
         }
     }
 }
