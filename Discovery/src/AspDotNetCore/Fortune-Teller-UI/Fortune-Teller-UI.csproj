@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00227" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00172" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.1.0-dev-00247" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00236" />
   </ItemGroup>
 </Project>
