@@ -66,7 +66,11 @@ def step_impl(context, app):
             context.log.info('waiting for app {} deployment to start'.format(app))
             return False
         cmd = Command(context, 'cf app {}'.format(app), logf=context.log.debug)
-        cmd.run()
+        try:
+            cmd.run()
+        except CommandException as e:
+            context.log.info('unexpected exception: {}'.format(e))
+            return False
         match = re.search(r'^\#0\s+(\S+)', cmd.stdout, re.MULTILINE)
         if not match:
             context.log.info('app "{}" status not yet available'.format(app))
