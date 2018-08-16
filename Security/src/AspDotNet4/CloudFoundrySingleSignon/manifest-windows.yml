@@ -1,8 +1,9 @@
 ﻿---
 applications:
-- name: single-signon-4x
+- name: single-signon
   buildpack: hwc_buildpack
+  command: .cloudfoundry\hwc.exe
   memory: 512M
   stack: windows2012R2
   services:
-   - mySSOService
+   - myOAuthService

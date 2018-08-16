@@ -29,7 +29,8 @@ namespace CloudFoundrySingleSignon
             });
 
             var serviceInfos = CloudFoundryServiceInfoCreator.Instance(ApplicationConfig.Configuration);
-            var ssoInfo = serviceInfos.GetServiceInfo<SsoServiceInfo>("mySSOService");
+            var ssoInfo = serviceInfos.GetServiceInfos<SsoServiceInfo>().FirstOrDefault()
+                            ?? throw new NullReferenceException("Service info for an SSO Provider was not found!");
 
             app.UseOpenIDConnect(new OpenIDConnectOptions()
             {
@@ -39,7 +40,8 @@ namespace CloudFoundrySingleSignon
                 AppHost = ssoInfo.ApplicationInfo.ApplicationUris.First(),
                 AppPort = 0,
                 AdditionalScopes = "testgroup",
-                ValidateCertificates = false
+                ValidateCertificates = false,
+                CallbackPath = new PathString("/signin-cloudfoundry")
             });
 
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;

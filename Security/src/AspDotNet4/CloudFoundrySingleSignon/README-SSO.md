@@ -17,7 +17,7 @@ In order to use the SSO tile in an application, you must first [create a service
 
 ### Create a Service Instance
 
-In order to bind SSO configuration information to our application, create a service instance: `cf create-service p-identity auth mySSOService`
+In order to bind SSO configuration information to our application, create a service instance: `cf create-service p-identity auth myOAuthService`
 
 ### Execute Script to Configure new User and Group
 
@@ -36,18 +36,18 @@ Next, locate the sso-setup script you'd like to execute (.cmd/.sh) from the scri
 > cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
 ```
 
-> Note: The provided manifest(s) will create an app named `single-signon-4x` and attempt to bind it to the SSO service `mySSOService`.
+> Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the SSO service `myOAuthService`.
 
 ### Configure SSO RedirectUri and Scope access
 
 For the application to access group information and handle login redirects correctly, you must configure two properties in the `sso` service dashboard. In order to access the `sso` dashboard, run the following command and go to the URL listed in `Dashboard` property:
 
 ```bash
-$ cf service mySSOService
+$ cf service myOAuthService
 
-Service instance: mySSOService
+Service instance: myOAuthService
 Service: p-identity
-bound apps: single-signon-4x
+bound apps: single-signon
 Tags:
 Plan: auth
 Description: Single Sign-On as a Service
@@ -57,9 +57,9 @@ Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_G
 
 On the dashboard, under `Apps`:
 
-1. Select the `single-signon-4x` app.
+1. Select the `single-signon` app.
 1. Click "Select Scopes" and add the `testgroup` scope
-1. Add the URI `http://single-signon-4x.<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>/signin-oidc` under "Auth Redirect URIs"
+1. Add the URI `http://single-signon.<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>/signin-oidc` under "Auth Redirect URIs"
 1. Click the "Save Config" button
 
 ## What to expect - CloudFoundry
@@ -76,9 +76,9 @@ After pushing the app, you should see something like the following in the logs:
 2018-05-04T10:18:08.928-05:00 [CELL/0] [OUT] Container became healthy
 ```
 
-At this point the app is up and running.  You can access it at <http://single-signon-4x.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
+At this point the app is up and running.  You can access it at <http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
-> Note: To see the logs as the app runs, execute this command: `cf logs single-signon-4x`
+> Note: To see the logs as the app runs, execute this command: `cf logs single-signon`
 
 On the apps menu, click on the `Log in` menu item and you should be redirected to the CloudFoundry login page. Enter `dave` and `Password1!`, or whatever name/password you used above,  and you should be authenticated and redirected back to the single-signon home page.
 

@@ -23,7 +23,7 @@ This sample illustrates how you can secure your web api endpoints using JWT Bear
 > cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
 ```
 
-The provided manifest(s) will create an app named `jwtauth-4x` and attempt to bind it to `mySSOService`. Alter the manifest to bind to `myOAuthService` if you are using UAA instead of the SSO tile.
+The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to `mySSOService`. Alter the manifest to bind to `myOAuthService` if you are using UAA instead of the SSO tile.
 
 > Note: `mySSOService` is created when you follow the Pivotal SSO instructions for [CloudFoundrySingleSignon][sso].
 
@@ -31,7 +31,7 @@ The provided manifest(s) will create an app named `jwtauth-4x` and attempt to bi
 
 After building and running the app, you should see something like the following in the logs.
 
-To see the logs as you startup and use the app: `cf logs jwtauth-4x`
+To see the logs as you startup and use the app: `cf logs jwtauth`
 
 On a Windows cell, you should see something like this during startup:
 

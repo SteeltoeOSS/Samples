@@ -1,6 +1,7 @@
 ﻿---
 applications:
 - name: jwtauth
+  buildpack: dotnet_core_buildpack
   memory: 256M
   command: cd ${HOME} && ./CloudFoundryJwtAuthentication --server.urls http://0.0.0.0:${PORT}
   env:

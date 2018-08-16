@@ -20,7 +20,7 @@ Before creating the OAuth2 service instance, we need to use the UAA command line
 
 1. uaac target uaa.`YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` (e.g. `uaac target uaa.system.testcloud.com`)
 
-Next, authenticate and obtain an access token for the `admin client` from the UAA server so that we can add our new application/user credentials. You will need the `Admin Client Secret` for your installation of CloudFoundry for this step. If you are using Pivotal CloudFoundry (PCF), you can obtain the secret from the `Ops Manager/Elastic Runtime` credentials page under the `UAA` section.  Look for `Admin Client Credentials` and then use it as follows:
+Next, authenticate and obtain an access token for the `admin client` from the UAA server so that we can add our new application/user credentials. You will need the `Admin Client Secret` for your installation of CloudFoundry for this step. If you are using Pivotal CloudFoundry (PCF), you can obtain the secret from the `Ops Manager/Pivotal Application Service` credentials page under the `UAA` section.  Look for `Admin Client Credentials` and then use it as follows:
 
 1. uaac token client get admin -s `ADMIN_CLIENT_SECRET`
 
@@ -39,7 +39,7 @@ After authenticating, add a new `user` and `group` to the UAA Server database. D
 After adding the user and group, we are ready to add our application as a new client to the UAA server. This step will establish our application's credentials and allow it to interact with the UAA server. Use the line below once you have replaced the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with the domain used by your cloud foundry instance.
 
 ```bash
-uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon-4x.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-oidc --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
+uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-oidc --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
 ```
 
 ### Add User-Provided Service with OAuth Details
@@ -64,7 +64,7 @@ cf cups myOAuthService -p "{\"client_id\": \"myTestApp\",\"client_secret\": \"my
 > cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
 ```
 
-> Note: The provided manifest(s) will create an app named `single-signon-4x` and attempt to bind it to the user-provided service `myOAuthService`.
+> Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the user-provided service `myOAuthService`.
 
 ## What to expect - CloudFoundry
 
@@ -80,9 +80,9 @@ After pushing the app, you should see something like the following in the logs:
 2018-05-04T10:18:08.928-05:00 [CELL/0] [OUT] Container became healthy
 ```
 
-At this point the app is up and running.  You can access it at <http://single-signon-4x.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
+At this point the app is up and running.  You can access it at <http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
-> Note: To see the logs as the app runs, execute this command: `cf logs single-signon-4x`
+> Note: To see the logs as the app runs, execute this command: `cf logs single-signon`
 
 On the app's menu, click on the `Log in` menu item and you should be redirected to the CloudFoundry login page. Enter `dave` and `Password1!`, or whatever name/password you used above,  and you should be authenticated and redirected back to the single-signon home page.
 

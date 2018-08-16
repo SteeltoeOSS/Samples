@@ -1,8 +1,8 @@
 ﻿---
 applications:
-- name: jwtauth-4x
+- name: jwtauth
   buildpack: hwc_buildpack
   memory: 512M
   stack: windows2012R2
   services:
-   - mySSOService
+   - myOAuthService

@@ -3,8 +3,11 @@ using Steeltoe.Security.Authentication.CloudFoundry.Wcf;
 using System;
 using System.IdentityModel.Claims;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web;
@@ -81,12 +84,16 @@ namespace CloudFoundrySingleSignon.Controllers
             var token = Request.GetOwinContext().Authentication.User.Claims.First(c => c.Type == ClaimTypes.Authentication)?.Value;
 
             // Specify the address to be used for the client.
-            BasicHttpBinding binding = new BasicHttpBinding();
+            BasicHttpsBinding binding = new BasicHttpsBinding();
             EndpointAddress address = new EndpointAddress(GetServiceUrl(HttpContext, "wcf") + "/valueservice.svc");
             var sRef = new ValueService.ValueServiceClient(binding, address);
             sRef.Endpoint.EndpointBehaviors.Add(new JwtHeaderEndpointBehavior(new CloudFoundryOptions(ApplicationConfig.Configuration), token));
             try
             {
+                // disable certificate validation
+                ServicePointManager.ServerCertificateValidationCallback =
+                        delegate (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+
                 ViewBag.Message = await sRef.GetDataAsync();
             }
             catch(Exception e)
@@ -105,9 +112,9 @@ namespace CloudFoundrySingleSignon.Controllers
             return View("Index");
         }
 
-        const string SSO_HOSTNAME = "single-signon-4x";
-        const string JWT_HOSTNAME = "jwtauth-4x";
-        const string WCF_HOSTNAME = "wcf-jwt-4x";
+        const string SSO_HOSTNAME = "single-signon";
+        const string JWT_HOSTNAME = "jwtauth";
+        const string WCF_HOSTNAME = "wcf-jwt";
 
         private string GetServiceUrl(HttpContextBase httpContext, string service)
         {
@@ -118,7 +125,7 @@ namespace CloudFoundrySingleSignon.Controllers
             // if on cloud foundry...
             if (hostName.Contains(SSO_HOSTNAME))
             {
-                var suffix = hostName.Substring(indx + 16, hostName.Length - indx - 16);
+                var suffix = hostName.Substring(indx + 13, hostName.Length - indx - 13);
                 if (service == "jwt")
                 {
                     hostName = JWT_HOSTNAME + suffix;
@@ -140,7 +147,7 @@ namespace CloudFoundrySingleSignon.Controllers
                 }
             }
             Console.WriteLine($"Resolved remote service hostname request for {service} as {hostName}");
-            return "http://" + hostName;
+            return "https://" + hostName;
         }
     }
 }
