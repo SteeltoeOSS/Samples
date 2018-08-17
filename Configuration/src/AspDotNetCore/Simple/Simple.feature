@@ -13,7 +13,7 @@ Feature: Simple Configuration
         And you run: git -C spring-cloud-config checkout v1.3.3.RELEASE
         And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
         And you wait until process listening on port 8888
-        And you run: dotnet restore --configfile nuget.config
+        And you run: dotnet restore
         And you set env var <env_name> to "<env_value>"
         And you run in the background: dotnet run -f netcoreapp2.1
         And you wait until process listening on port 5000
@@ -35,7 +35,7 @@ Feature: Simple Configuration
         And you run: git -C spring-cloud-config checkout v1.3.3.RELEASE
         And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
         And you wait until process listening on port 8888
-        And you run: dotnet restore --configfile nuget.config
+        And you run: dotnet restore
         And you set env var <env_name> to "<env_value>"
         And you run in the background: dotnet run -f net461
         And you wait until process listening on port 5000
