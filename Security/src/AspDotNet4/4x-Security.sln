@@ -14,6 +14,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryWcf", "CloudFou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CredHubClient", "CredHubClient\CredHubClient.csproj", "{62C91A7D-35BF-4B26-8907-FA42E8D82114}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{A0F28CAF-55D2-43E1-A5F9-F0A35F61B59B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\scripts\credhub-setup.cmd = ..\..\scripts\credhub-setup.cmd
+		..\..\scripts\credhub-setup.sh = ..\..\scripts\credhub-setup.sh
+		..\..\scripts\sso-setup.cmd = ..\..\scripts\sso-setup.cmd
+		..\..\scripts\sso-setup.sh = ..\..\scripts\sso-setup.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
