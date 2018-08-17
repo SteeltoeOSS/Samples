@@ -1,5 +1,8 @@
-﻿using Steeltoe.Security.Authentication.CloudFoundry.Wcf;
+﻿using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.Services;
+using Steeltoe.Security.Authentication.CloudFoundry.Wcf;
 using System;
+using System.Linq;
 using System.ServiceModel;
 
 namespace CloudFoundryWcf
@@ -10,7 +13,11 @@ namespace CloudFoundryWcf
         protected void Application_Start(object sender, EventArgs e)
         {
             ApplicationConfig.RegisterConfig("development");
-            var serviceHost = new ServiceHost(typeof(ValueService));
+            var serviceInfos = CloudFoundryServiceInfoCreator.Instance(ApplicationConfig.Configuration);
+            var ssoInfo = serviceInfos.GetServiceInfos<SsoServiceInfo>().FirstOrDefault() 
+                ?? throw new NullReferenceException("Couldn't find SSO Service Info");
+
+            var serviceHost = new ServiceHost(typeof(ValueService), new Uri("http://" + ssoInfo.ApplicationInfo.ApplicationUris.First()));
             serviceHost.Authorization.ServiceAuthorizationManager = new JwtAuthorizationManager(new CloudFoundryOptions(ApplicationConfig.Configuration));
         }
 

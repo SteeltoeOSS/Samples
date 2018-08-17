@@ -90,10 +90,6 @@ namespace CloudFoundrySingleSignon.Controllers
             sRef.Endpoint.EndpointBehaviors.Add(new JwtHeaderEndpointBehavior(new CloudFoundryOptions(ApplicationConfig.Configuration), token));
             try
             {
-                // disable certificate validation
-                ServicePointManager.ServerCertificateValidationCallback =
-                        delegate (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-
                 ViewBag.Message = await sRef.GetDataAsync();
             }
             catch(Exception e)

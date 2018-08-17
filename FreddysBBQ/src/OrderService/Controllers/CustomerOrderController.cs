@@ -72,6 +72,7 @@ namespace OrderService.Controllers
             float total = 0;
             foreach (var reqItem in itemsAndQuantities)
             {
+                _logger.LogDebug("Order item key: {key}, Quantity: {quantity}", reqItem.Key, reqItem.Value ?? 0);
                 long itemId = reqItem.Key;
                 int quantity = reqItem.Value ?? 0;
                 if (itemId < 0 || quantity < 0)
@@ -87,7 +88,7 @@ namespace OrderService.Controllers
                 MenuItem item = await _menuService.GetMenuItemAsync(itemId);
                 if (item == null)
                 {
-                    _logger.LogInformation("Unable to find menuitem: " + itemId);
+                    _logger.LogCritical("Unable to find menuitem: " + itemId);
                     continue;
                 }
 
@@ -107,8 +108,12 @@ namespace OrderService.Controllers
             {
                 order.Total = total;
                 _dbContext.Orders.Add(order);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
                 return Ok();
+            }
+            else
+            {
+                _logger.LogCritical("Somehow ended up with no order items");
             }
 
             return Ok();

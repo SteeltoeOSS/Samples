@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MySql.Models;
 using Steeltoe.CloudFoundry.Connector.MySql;
 
 namespace MySql
@@ -45,9 +44,6 @@ namespace MySql
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Insert couple rows into table
-            SampleData.InitializeMySqlData(app.ApplicationServices).Wait();
         }
     }
 }

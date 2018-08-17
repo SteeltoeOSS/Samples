@@ -17,10 +17,10 @@ namespace Common.Services
     public abstract class AbstractService 
     {
         protected DiscoveryHttpClientHandler _handler;
-        protected ILogger _logger;
+        protected ILogger<AbstractService> _logger;
         protected IHttpContextAccessor _context;
 
-        public AbstractService(IDiscoveryClient client, ILogger logger, IHttpContextAccessor context)
+        public AbstractService(IDiscoveryClient client, ILogger<AbstractService> logger, IHttpContextAccessor context)
         {
             _handler = new DiscoveryHttpClientHandler(client)
             {
@@ -148,7 +148,18 @@ namespace Common.Services
             var token = await _context.HttpContext.GetTokenAsync("access_token");
             if (token != null)
             {
+                _logger.LogDebug("Found a token {token}", token);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+            else
+            {
+                _logger.LogDebug("Token not found in HttpContext");
+                string authHeader = await Task.FromResult(_context.HttpContext.Request.Headers["Authorization"]);
+                if (authHeader != null)
+                {
+                    _logger.LogDebug("Found authorization header");
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authHeader.Replace("bearer ", string.Empty));
+                }
             }
 
             return client;

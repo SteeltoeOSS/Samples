@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MySql.Models;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using System;
 using System.IO;
 
 namespace MySql
@@ -10,7 +13,23 @@ namespace MySql
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {   // Insert couple rows into table
+                    SampleData.InitializeMySqlData(services).Wait();
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+            }
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args)
