@@ -6,7 +6,6 @@ using MusicStore.Models;
 using Pivotal.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Management.Endpoint.Health;
 
 namespace MusicStore
 {
@@ -22,10 +21,6 @@ namespace MusicStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            // Add custom health check contributor
-            services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
-
             // Add Steeltoe Management services
             services.AddCloudFoundryActuators(Configuration);
 
@@ -40,13 +35,11 @@ namespace MusicStore
 
             // Add Framework services
             services.AddMvc();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
- 
             // Add Steeltoe Management endpoints into pipeline
             app.UseCloudFoundryActuators();
 

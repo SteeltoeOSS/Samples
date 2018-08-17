@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <Import Project="..\..\..\config\versions.props" />
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp2.1</TargetFrameworks>
   </PropertyGroup>
@@ -13,18 +14,19 @@
   </ItemGroup>
   <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
-    <PackageReference Include="GitInfo" Version="2.0.11" />  
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
-    
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0-rc1-final" />
-    
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="2.1.0-dev-00173" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="2.1.0-dev-00177" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.1.0-dev-00250" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.1.0-dev-00143" />     
+    <PackageReference Include="GitInfo" Version="2.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>  
+    <PackageReference Include="Microsoft.AspNetCore" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="$(PivotalConfigVersion)" />
+    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="$(PivotalDiscoveryVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />     
   </ItemGroup>
   
   <Target Name="_GitProperties" AfterTargets="CoreCompile">

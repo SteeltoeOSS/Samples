@@ -6,7 +6,6 @@ using OrderService.Models;
 using Pivotal.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Management.Endpoint.Health;
 
 namespace OrderService
 {
@@ -22,9 +21,6 @@ namespace OrderService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add custom health check contributor
-            services.AddSingleton<IHealthContributor, MySqlHealthContributor>();
-
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
 

@@ -15,7 +15,6 @@ using Steeltoe.Security.DataProtection;
 #endif
 
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-using Steeltoe.Management.Endpoint.Health;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.CircuitBreaker.Hystrix;
 using Command = MusicStoreUI.Services.HystrixCommands;
@@ -45,8 +44,6 @@ namespace MusicStoreUI
 #else
             services.AddDistributedMemoryCache();
 #endif
-            // Add custom health check contributor
-            services.AddScoped<IHealthContributor, MySqlHealthContributor>();
 
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
