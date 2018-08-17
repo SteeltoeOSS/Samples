@@ -10,6 +10,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDataProtectionKeyStore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredHubDemo", "CredHubDemo\CredHubDemo.csproj", "{7DC7077F-E876-4F1C-92A3-7B161C93A762}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4E1E88D9-D6CB-4864-BAFD-F840CA3BBB7F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\scripts\credhub-setup.cmd = ..\..\scripts\credhub-setup.cmd
+		..\..\scripts\credhub-setup.sh = ..\..\scripts\credhub-setup.sh
+		..\..\scripts\sso-setup.cmd = ..\..\scripts\sso-setup.cmd
+		..\..\scripts\sso-setup.sh = ..\..\scripts\sso-setup.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

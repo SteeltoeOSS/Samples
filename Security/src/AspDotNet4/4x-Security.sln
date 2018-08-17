@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundrySingleSignon", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudFoundryWcf", "CloudFoundryWcf\CloudFoundryWcf.csproj", "{98F03423-C4AB-43EF-9DDB-C2A65AE51409}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CredHubClient", "CredHubClient\CredHubClient.csproj", "{62C91A7D-35BF-4B26-8907-FA42E8D82114}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{98F03423-C4AB-43EF-9DDB-C2A65AE51409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98F03423-C4AB-43EF-9DDB-C2A65AE51409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98F03423-C4AB-43EF-9DDB-C2A65AE51409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62C91A7D-35BF-4B26-8907-FA42E8D82114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62C91A7D-35BF-4B26-8907-FA42E8D82114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62C91A7D-35BF-4B26-8907-FA42E8D82114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62C91A7D-35BF-4B26-8907-FA42E8D82114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

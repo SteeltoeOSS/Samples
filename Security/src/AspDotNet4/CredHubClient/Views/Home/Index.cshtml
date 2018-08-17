@@ -1,0 +1,19 @@
+﻿@using Steeltoe.Security.DataProtection.CredHub;
+@model CredHubCredential<PasswordCredential>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Steeltoe-CredHub Demo</h1>
+<h2>Constructor-initialized CredHub Client</h2>
+<h3>Created credential:</h3>
+<ul>
+    <li>Id: @Model.Id</li>
+    <li>Name: @Model.Name</li>
+    <li>Type: @Model.Type</li>
+    <li>Value: @Model.Value</li>
+    <li>Created: @Model.Version_Created_At</li>
+</ul>
+<h3>Delete operation results:</h3>
+<ul>
+    <li>Generated credential was @if (!ViewBag.Deleted){<span>NOT</span>} deleted successfully</li>
+</ul>
