@@ -10,10 +10,10 @@ namespace FortuneTellerUI4.Controllers
         IFortuneService _fortunes;
         ILogger<HomeController> _logger;
 
-        public HomeController(IFortuneService fortunes, ILoggerFactory logFactory = null)
+        public HomeController()
         {
-            _fortunes = fortunes;
-            _logger = logFactory?.CreateLogger<HomeController>();
+            _fortunes = new FortuneService(DiscoveryConfig.DiscoveryClient, LoggingConfig.LoggerFactory);
+            _logger = LoggingConfig.LoggerFactory.CreateLogger<HomeController>();
         }
 
         public ActionResult Index()

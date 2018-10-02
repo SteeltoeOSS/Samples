@@ -9,7 +9,7 @@ namespace FortuneTellerService4
     public static class ApplicationConfig
     {
 
-        public static IConfigurationRoot Configuration { get; set; }
+        public static IConfigurationRoot Configuration { get; internal set; }
 
         public static void RegisterConfig(string environment)
         {

@@ -11,10 +11,10 @@ namespace FortuneTellerService4.Controllers
         private IFortuneRepository _fortunes;
         private ILogger<FortunesController> _logger;
 
-        public FortunesController(IFortuneRepository fortunes, ILoggerFactory logFactory = null)
+        public FortunesController()
         {
-            _fortunes = fortunes;
-            _logger = logFactory?.CreateLogger<FortunesController>();
+            _fortunes = new FortuneRepository(SampleData.FortuneContext);
+            _logger = LoggingConfig.LoggerFactory.CreateLogger<FortunesController>();
         }
 
         // GET: api/fortunes
