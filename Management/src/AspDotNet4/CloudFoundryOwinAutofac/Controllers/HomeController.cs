@@ -29,7 +29,7 @@ namespace CloudFoundryOwinAutofac.Controllers
             return View();
         }
 
-        private LogLevel GetMinLogLevel(ILogger logger)
+        public static LogLevel GetMinLogLevel(ILogger logger)
         {
             for (var i = 0; i < 6; i++)
             {
