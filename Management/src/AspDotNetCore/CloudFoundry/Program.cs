@@ -31,6 +31,7 @@ namespace CloudFoundry
                 {
                     loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
                     loggingBuilder.AddDynamicConsole();
+                    loggingBuilder.AddDebug();
                 })
                 .Build();
 
