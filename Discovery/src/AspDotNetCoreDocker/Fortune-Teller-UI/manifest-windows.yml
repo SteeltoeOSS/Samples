@@ -1,0 +1,12 @@
+---
+applications:
+- name: fortuneui
+  buildpack: hwc_buildpack
+  memory: 256M
+  disk_quota: 100M
+  stack: windows2012R2
+  command: .\Fortune-Teller-UI
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myDiscoveryService
