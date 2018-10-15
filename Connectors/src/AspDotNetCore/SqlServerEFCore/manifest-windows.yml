@@ -2,9 +2,10 @@
 applications:
 - name: sqlserverefcore-connector
   memory: 256M
-  disk_quota: 100M
-  stack: windows2012R2
-  buildpack: hwc_buildpack
+  disk_quota: 200M
+  stack: windows2016
+  buildpacks:
+   - hwc_buildpack
   command: .\SqlServerEFCore
   env:
     ASPNETCORE_ENVIRONMENT: Development

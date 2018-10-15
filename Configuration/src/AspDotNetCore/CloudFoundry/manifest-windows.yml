@@ -2,7 +2,7 @@
 applications:
 - name: cloud
   memory: 512M
-  stack: windows2012R2
+  stack: windows2016
   command: cmd /c .\CloudFoundry
   buildpack: binary_buildpack
   env:

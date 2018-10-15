@@ -1,8 +1,9 @@
 ﻿---
 applications:
 - name: wcf-jwt
-  buildpack: hwc_buildpack
+  buildpacks:
+   - hwc_buildpack
   memory: 512M
-  stack: windows2012R2
+  stack: windows2016
   services:
    - myOAuthService

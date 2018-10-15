@@ -1,9 +1,10 @@
 ---
 applications:
 - name: rabbitmq-connector
-  buildpack: dotnet_core_buildpack
+  buildpacks:
+   - dotnet_core_buildpack
   memory: 256M
-  disk_quota: 100M
+  disk_quota: 200M
   command: cd ${HOME} && ./RabbitMQ --server.urls http://0.0.0.0:${PORT}
   env:
     ASPNETCORE_ENVIRONMENT: Development

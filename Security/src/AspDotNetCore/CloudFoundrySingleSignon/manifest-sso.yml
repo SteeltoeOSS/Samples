@@ -1,7 +1,8 @@
 ﻿---
 applications:
 - name: single-signon
-  buildpack: dotnet_core_buildpack
+  buildpacks:
+   - dotnet_core_buildpack
   memory: 256M
   command: cd ${HOME} && ./CloudFoundrySingleSignon --server.urls http://0.0.0.0:${PORT}
   env:

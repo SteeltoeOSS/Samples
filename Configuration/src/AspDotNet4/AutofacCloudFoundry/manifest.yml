@@ -1,9 +1,10 @@
 ---
 applications:
 - name: foo
-  buildpack: hwc_buildpack
+  buildpacks:
+   - hwc_buildpack
   memory: 1G
-  stack: windows2012R2
+  stack: windows2016
   env:
     Hosting__Environment: development
   services:

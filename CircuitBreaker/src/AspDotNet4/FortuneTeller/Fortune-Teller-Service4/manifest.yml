@@ -1,9 +1,10 @@
 ﻿---
 applications:
 - name: fortuneService
-  buildpack: hwc_buildpack
+  buildpacks:
+   - hwc_buildpack
   memory: 512M
-  stack: windows2012R2
+  stack: windows2016
   health-check-type: http
   health-check-http-endpoint: /api/Fortunes/health
   services:

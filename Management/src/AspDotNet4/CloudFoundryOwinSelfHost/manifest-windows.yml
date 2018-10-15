@@ -2,7 +2,7 @@
 applications:
 - name: actuators-owinselfhost
   memory: 512M
-  stack: windows2012R2
+  stack: windows2016
   buildpack: binary_buildpack
   command: cloudfoundryowinselfhost.exe
   services:
