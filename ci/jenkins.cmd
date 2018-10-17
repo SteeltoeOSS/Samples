@@ -16,8 +16,8 @@ SET CF_HOME=C:\ProgramData\chocolatey\bin
 SET TEST_OUT=C:\st\%~nx1
 
 ECHO [behave.userdata] > %USERINI%
-ECHO cf_apiurl = api.run.pcfbeta.io >> %USERINI%
-ECHO cf_org = STEELTOE >> %USERINI%
+ECHO cf_apiurl = api.run.pcfone.io >> %USERINI%
+ECHO cf_org = group-steeltoe >> %USERINI%
 ECHO cf_username = %CF_USER% >> %USERINI%
 ECHO cf_password = %CF_PASS% >> %USERINI%
 ECHO cf_max_attempts = 250 >> %USERINI%
