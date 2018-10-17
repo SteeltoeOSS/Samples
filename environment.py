@@ -86,15 +86,9 @@ def setup_cloud(context, scenario):
     command.Command(context, 'cf create-space {}'.format(context.cf_space)).run()
     cmd = command.Command(context, 'cf target -s {}'.format(context.cf_space))
     cmd.run()
-    context.cf_domain = context.options.cf.domain
-    if not context.cf_domain:
-        match = re.search('^api endpoint:\s+https?://api.run.(.*)', cmd.stdout)
-        assert match, 'Cannot determine API url'
-        context.cf_domain = match.group(1)
     def cleanup():
         cmd = command.Command(context, 'cf delete-space -f {}'.format(context.cf_space))
-        cmd.exec()
-        cmd.wait()
+        cmd.run()
     context.cleanups.append(cleanup)
 
 def after_scenario(context, scenario):
@@ -159,8 +153,6 @@ def setup_options(context):
     context.log.info("option: CloudFoundry password -> {}".format('*' if context.options.cf.password else None))
     context.options.cf.org = context.config.userdata.get('cf_org')
     context.log.info("option: CloudFoundry org -> {}".format(context.options.cf.org))
-    context.options.cf.domain = context.config.userdata.get('cf_domain')
-    context.log.info("option: CloudFoundry domain -> {}".format(context.options.cf.domain))
     context.options.cf.space = context.config.userdata.get('cf.space')
     context.log.info("option: CloudFoundry space -> {}".format(context.options.cf.space))
     context.options.cf.max_attempts = context.config.userdata.getint('cf_max_attempts')

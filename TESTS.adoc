@@ -106,8 +106,6 @@ You can configure the tests to use their own credentials by setting the followin
 * `cf_password`
 * `cf_org`
 
-Set `cf_domain` if the target CloudFoundry domain has been changed from its default.
-
 It is expected that a CloudFoundry space named `development` exists for the configured credentials.
 The `development` space will be used as the target from which to create additional spaces for running tests.
 
@@ -119,7 +117,6 @@ cf_apiurl = api.run.pez.pivotal.io
 cf_username = myuser
 cf_password = mypass
 cf_org = p-steeltoe
-cf_domain = cfapps.pez.pivotal.io
 ----
 
 == Run
@@ -228,11 +225,6 @@ C:> test-run -Dfoo=bar
 | _string_
 |
 | CloudFoundry API endpoint
-
-| `cf_domain`
-| _string_
-|
-| CloudFoundry domain; if not set, domain derived from the API endpoint
 
 | `cf_max_attempts`
 | _integer_
