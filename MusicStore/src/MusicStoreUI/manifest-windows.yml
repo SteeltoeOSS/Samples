@@ -1,7 +1,7 @@
 ---
 applications:
 - name: musicui
-  memory: 256M
+  memory: 512M
   stack: windows2016
   command: .\MusicStoreUI
   env:
