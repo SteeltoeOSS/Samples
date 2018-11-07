@@ -16,26 +16,11 @@ $ cd samples/Configuration/src/AspDotNetCore/Simple
 
 == Run {sccs}
 
-The default configuration of {sccs} uses https://github.com/spring-cloud-samples/config-repo for its source of configuration data.
-
-Start {sccs} using one of the following:
-
-=== Docker
-
 ----
-$ docker-compose up
-----
-
-=== Build From Source
-
-Building from source requires Java 8 JDK and Maven 3.x.
-
-.Build/Run {sccs} from GitHub repository
-----
-$ git clone https://github.com/spring-cloud/spring-cloud-config
-$ cd spring-cloud-config\spring-cloud-config-server
-$ git checkout v1.3.3.RELEASE
-$ mvn spring-boot:run
+$ st init
+$ st target docker
+$ st add config-server myConfigServer
+$ st deploy
 ----
 
 == Run Sample
