@@ -19,6 +19,7 @@ $ st add config-server myConfigServer
 
 ```
 $ st add app foo-samples
+$ st target cloud-foundry
 $ st deploy
 ```
 
