@@ -11,16 +11,16 @@ ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud
 
 ## Setup Config Server
 
----
+```
 $ st add config-server myConfigServer
----
+```
 
 ## Publish App & Push
 
----
+```
 $ st add app foo-samples
 $ st deploy
----
+```
 
 > Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
