@@ -7,23 +7,20 @@ ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud
 1. Installed Pivotal CloudFoundry 1.10+
 1. Installed Spring Cloud Services 1.1+
 1. .Net Core SDK 2.1.300
+1. Installed Steeltoe Developer Tools CLI
 
 ## Setup Config Server
 
-You must first create an instance of the Config Server service in a org/space.
-
-1. cf target -o myorg -s development
-1. cd src/AspDotNetCore/SimpleCloudFoundry
-1. cf create-service p-config-server standard myConfigServer -c ./config-server.json
-1. Wait for service to become ready (i.e. cf services )
+---
+$ st add config-server myConfigServer
+---
 
 ## Publish App & Push
 
-1. cf target -o myorg -s development
-1. cd src/AspDotNetCore/SimpleCloudFoundry
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+---
+$ st add app foo-samples
+$ st deploy
+---
 
 > Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
@@ -31,7 +28,7 @@ You must first create an instance of the Config Server service in a org/space.
 
 ## What to expect
 
-The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
+The cf push will create an app in the space by the name `foo-samples` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo-samples.x.y.z/`.
 
 The Config Servers Git repository has been set to: `https://github.com/spring-cloud-samples/config-repo`
 
