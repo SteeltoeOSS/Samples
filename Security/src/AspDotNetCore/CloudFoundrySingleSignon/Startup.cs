@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
+using Steeltoe.Security.DataProtection;
 
 namespace CloudFoundrySingleSignon
 {
@@ -43,6 +46,15 @@ namespace CloudFoundrySingleSignon
                 options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
            
             });
+
+            // Add Redis to allow scaling beyond a single instance
+            // services.AddRedisConnectionMultiplexer(Configuration);
+            // services.AddDataProtection()
+            //     .PersistKeysToRedis()
+            //     .SetApplicationName("fortuneui");
+
+            // services.AddDistributedRedisCache(Configuration);
+            // services.AddSession();
 
             services.AddMvc();
         }

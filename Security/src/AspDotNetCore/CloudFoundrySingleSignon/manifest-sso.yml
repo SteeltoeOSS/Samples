@@ -9,3 +9,4 @@ applications:
     ASPNETCORE_ENVIRONMENT: Development
   services:
    - mySSOService
+  #  - myRedisService
