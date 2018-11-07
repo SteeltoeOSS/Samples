@@ -11,30 +11,19 @@ This sample uses both [Microsoft RedisCache](https://github.com/aspnet/Caching/t
 1. Installed Redis Cache service
 1. Installed .NET Core SDK
 
-## Create Redis Service Instance on CloudFoundry
+## Deploy Redis and Sample to CloudFoundry
 
-You must first create an instance of the Redis service in a org/space.
-
-1. `cf target -o myorg -s development`
-1. `cf create-service p-redis shared-vm myRedisService`
-
-## Publish App & Push to CloudFoundry
-
-1. `cf target -o myorg -s development`
-1. `cd samples/Connectors/src/AspDotNetCore/Redis`
-1. `dotnet restore --configfile nuget.config`
-1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`
-   * `dotnet publish -f net461 -r win10-x64`
-1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish`
-   * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
-
-> Note: The provided manifest will create an app named `redis-connector` and attempt to bind the app to Redis service `myRedisService`.
+```
+$ st init
+$ st add app foo-sample
+$ st add redis myRedisService
+$ st target cloud-foundry
+$ st deploy
+> Note: The provided manifest will create an app named `foo-sample` and attempt to bind the app to Redis service `myRedisService`.
 
 ## What to expect - CloudFoundry
 
-To see the logs as you startup and use the app: `cf logs redis-connector`
+To see the logs as you startup and use the app: `cf logs foo-sample`
 
 On a Windows cell, you should see something like this during startup:
 
@@ -50,7 +39,7 @@ On a Windows cell, you should see something like this during startup:
 
 Upon startup the app inserts a key/values into the bound Redis Cache.
 
-This sample will be available at <http://redis-connector.[your-cf-apps-domain]/>.
+This sample will be available at <http://foo-sample.[your-cf-apps-domain]/>.
 
 To display those values click on the `Cache Data` link in the menu and you should see the key/values displayed using the Microsoft RedisCache.
 
