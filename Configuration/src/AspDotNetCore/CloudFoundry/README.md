@@ -7,17 +7,18 @@ ASP.NET Core sample app illustrating how to use the Steeltoe [CloudFoundry](http
 1. Installed Pivotal CloudFoundry
 1. .NET Core SDK 2.1.300
 
-## Publish App & Push
+## Deploy Sample to CloudFoundry
 
-1. cf target -o myorg -s development
-1. cd src/AspDotNetCore/CloudFoundry
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+```
+$ st init
+$ st add app foo-sample
+$ st target cloud-foundry
+$ st deploy
+```
 
 ## What to expect
 
-The cf push will create an app in the space by the name `cloud`. You can hit the app @ `http://cloud.x.y.z/`.
+The cf push will create an app in the space by the name `foo-sample`. You can hit the app @ `http://foo-sample.x.y.z/`.
 
 Use the menus at the top of the app to see various output:
 
@@ -25,7 +26,7 @@ Use the menus at the top of the app to see various output:
 
 ## Observe Logs
 
-To see the logs as you startup and use the app: `cf logs cloud`
+To see the logs as you startup and use the app: `cf logs foo-sample`
 
 On a Linux cell, you should see something like this during startup:
 

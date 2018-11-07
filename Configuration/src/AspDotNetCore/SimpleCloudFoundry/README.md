@@ -9,16 +9,12 @@ ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud
 1. .Net Core SDK 2.1.300
 1. Installed Steeltoe Developer Tools CLI
 
-## Setup Config Server
+## Deploy Config Server and Sample to CloudFoundry
 
 ```
+$ st init
+$ st add app foo-sample
 $ st add config-server myConfigServer
-```
-
-## Publish App & Push
-
-```
-$ st add app foo-samples
 $ st target cloud-foundry
 $ st deploy
 ```
@@ -29,7 +25,7 @@ $ st deploy
 
 ## What to expect
 
-The cf push will create an app in the space by the name `foo-samples` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo-samples.x.y.z/`.
+The cf push will create an app in the space by the name `foo-sample` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo-sample.x.y.z/`.
 
 The Config Servers Git repository has been set to: `https://github.com/spring-cloud-samples/config-repo`
 
@@ -42,7 +38,7 @@ Use the menus at the top of the app to see various output:
 
 ## Observe Logs
 
-To see the logs as you startup and use the app: `cf logs foo`
+To see the logs as you startup and use the app: `cf logs foo-sample`
 
 On a Linux cell, you should see something like this during startup:
 

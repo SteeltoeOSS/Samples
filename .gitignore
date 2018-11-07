@@ -211,3 +211,7 @@ test.out/
 user.ini
 
 git.properties
+
+# Steeltoe Tooling
+steeltoe.yml
+manifest-steeltoe.yml
