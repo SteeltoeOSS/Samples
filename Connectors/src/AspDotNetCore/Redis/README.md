@@ -19,6 +19,8 @@ $ st add app foo-sample
 $ st add redis myRedisService
 $ st target cloud-foundry
 $ st deploy
+```
+
 > Note: The provided manifest will create an app named `foo-sample` and attempt to bind the app to Redis service `myRedisService`.
 
 ## What to expect - CloudFoundry
