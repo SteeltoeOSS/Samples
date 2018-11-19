@@ -4,18 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MySqlEFCore
 {
-    public class TestContext : DbContext
+    public class SecondTestContext : DbContext
     {
-        public TestContext(DbContextOptions<TestContext> options) : base(options)
+        public SecondTestContext(DbContextOptions<SecondTestContext> options) : base(options)
         {
 
         }
 
-        public DbSet<TestData> TestData { get; set; }
+        public DbSet<MoreTestData> MoreTestData { get; set; }
     }
 
-    [Table("EFCoreTestData")]
-    public class TestData
+    [Table("EFCoreMoreTestData")]
+    public class MoreTestData
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
