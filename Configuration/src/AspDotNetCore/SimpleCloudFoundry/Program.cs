@@ -15,7 +15,7 @@ namespace SimpleCloudFoundry
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .UseCloudFoundryHosting()
-                    .ConfigureAppConfiguration(b => b.AddConfigServer(new LoggerFactory().AddConsole(LogLevel.Trace)))
+                    .AddConfigServer(new LoggerFactory().AddConsole(LogLevel.Trace))
                     .UseStartup<Startup>()
                     .Build();
     }
