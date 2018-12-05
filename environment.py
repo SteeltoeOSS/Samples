@@ -3,9 +3,9 @@ import os
 import re
 import shutil
 import stat
-import sure
 import sys
 import uuid
+from urllib.parse import urlparse
 
 sys.path.append(os.path.join(os.getcwd(), 'pylib'))
 import command
@@ -83,12 +83,22 @@ def setup_cloud(context, scenario):
     context.cf_space = context.options.cf.space
     if not context.cf_space:
         context.cf_space = uuid.uuid4()
-    command.Command(context, 'cf create-space {}'.format(context.cf_space)).run()
-    cmd = command.Command(context, 'cf target -s {}'.format(context.cf_space))
-    cmd.run()
-    def cleanup():
-        cmd = command.Command(context, 'cf delete-space -f {}'.format(context.cf_space))
+    context.log.info('CloudFoundry space -> {}'.format(context.cf_space))
+    context.cf_domain = context.options.cf.domain
+    if not context.cf_domain:
+        context.log.info('Guessing CloudFoundry domain')
+        cmd = command.Command(context, 'cf target')
         cmd.run()
+        m = re.search(r'^api endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
+        if not m:
+            raise Exception('couldn\'t guess domain; cf target did not return api endpoint')
+        endpoint = m.group(1)
+        context.cf_domain = urlparse(endpoint).hostname.replace('api.run', 'apps')
+    context.log.info('CloudFoundry domain -> {}'.format(context.cf_domain))
+    command.Command(context, 'cf create-space {}'.format(context.cf_space)).run()
+    command.Command(context, 'cf target -s {}'.format(context.cf_space)).run()
+    def cleanup():
+        command.Command(context, 'cf delete-space -f {}'.format(context.cf_space)).run()
     context.cleanups.append(cleanup)
 
 def after_scenario(context, scenario):
@@ -153,7 +163,9 @@ def setup_options(context):
     context.log.info("option: CloudFoundry password -> {}".format('*' if context.options.cf.password else None))
     context.options.cf.org = context.config.userdata.get('cf_org')
     context.log.info("option: CloudFoundry org -> {}".format(context.options.cf.org))
-    context.options.cf.space = context.config.userdata.get('cf.space')
+    context.options.cf.domain = context.config.userdata.get('cf_domain')
+    context.log.info("option: CloudFoundry domain -> {}".format(context.options.cf.domain))
+    context.options.cf.space = context.config.userdata.get('cf_space')
     context.log.info("option: CloudFoundry space -> {}".format(context.options.cf.space))
     context.options.cf.max_attempts = context.config.userdata.getint('cf_max_attempts')
     context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf.max_attempts))

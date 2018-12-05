@@ -148,8 +148,8 @@ def resolve_gradle_args(context, args, cwd):
     args.append('-Dorg.gradle.daemon=false')
     for i in range(len(args)):
         if args[i].startswith('-Dapp='):
-            app = args[i].split('=', 1)[1]
-            args[i] = '-Dapp={}'.format(resolve.hostname(context, app))
+            host = args[i].split('=', 1)[1]
+            args[i] = '-Dapp={}'.format(resolve.hostname(context, host))
         if args[i].startswith('-Dapp-domain='):
             domain = args[i].split('=', 1)[1]
             args[i] = '-Dapp-domain={}'.format(resolve.domainname(context, domain))

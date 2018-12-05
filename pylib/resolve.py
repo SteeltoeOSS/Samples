@@ -17,14 +17,17 @@ def hostname(context, name):
     host = '{}-{}'.format(host, context.cf_space)
     context.log.info('host -> {}'.format(host))
     if domain:
-        if domain == 'x.y.z':
-            cmd = command.Command(context, 'cf routes')
-            cmd.run()
-            domain = re.search('{}\s+(\S+)'.format(host), cmd.stdout).group(1)
+        domain = domainname(context, domain)
         context.log.info('domain -> {}'.format(domain))
     resolved = '{}.{}'.format(host, domain) if domain else host
     context.log.info('resolved name -> {}'.format(resolved))
     return resolved
+
+def domainname(context, name):
+    resolved = name if name != 'x.y.z' else 'apps.pcfone.io'
+    context.log.info('resolved domain -> {}'.format(resolved))
+    return resolved
+
 
 def url(context, url):
     '''
