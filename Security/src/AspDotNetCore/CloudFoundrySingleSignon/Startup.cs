@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
-using Steeltoe.Security.DataProtection;
+// using Steeltoe.Security.DataProtection;
 
 namespace CloudFoundrySingleSignon
 {
