@@ -1,5 +1,7 @@
+from behave import *
 import mechanicalsoup
 import resolve
+import sure
 import time
 
 @when(u'you get {url}')

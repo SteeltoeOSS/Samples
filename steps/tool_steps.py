@@ -1,5 +1,7 @@
+from behave import *
 import command
 import re
+import sure
 from version import Version
 
 @given(u'you have at least .NET Core SDK {version} installed')
