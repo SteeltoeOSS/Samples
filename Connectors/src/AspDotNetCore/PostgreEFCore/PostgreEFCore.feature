@@ -7,8 +7,8 @@ Feature: PostgreEFCore Connector
     @win10-x64
     Scenario: PostgreEFCore Connector for .Net Core 2.1 (win10-x64)
         Given you have at least .NET Core SDK 2.1.300 installed
-        And you have CloudFoundry service EDB-Shared-PostgreSQL installed
-        When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
+        And you have CloudFoundry service postgresql-9.5-odb installed
+        When you run: cf create-service postgresql-9.5-odb small myPostgres -c '{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}'
         And you wait until CloudFoundry service myPostgres is created
         And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp2.1 -r win10-x64
@@ -22,8 +22,8 @@ Feature: PostgreEFCore Connector
     @ubuntu.14.04-x64
     Scenario: PostgreEFCore Connector for .Net Core 2.1 (ubuntu.14.04-x64)
         Given you have at least .NET Core SDK 2.1.300 installed
-        And you have CloudFoundry service EDB-Shared-PostgreSQL installed
-        When you run: cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
+        And you have CloudFoundry service postgresql-9.5-odb installed
+        When you run: cf create-service postgresql-9.5-odb small myPostgres -c '{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}'
         And you wait until CloudFoundry service myPostgres is created
         And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
