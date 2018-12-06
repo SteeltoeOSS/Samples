@@ -9,7 +9,7 @@ import threading
 class Command(object):
 
     PROJECT_COMMANDS = ['dotnet', 'cf']
-    BATCH_COMMANDS = ['mvn']
+    BATCH_COMMANDS = ['mvn', 'uaac']
     COUNT = 0
     COUNT_LOCK = threading.Lock()
 
