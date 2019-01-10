@@ -10,7 +10,7 @@
     <SteeltoeSecurityVersion>2.1.1</SteeltoeSecurityVersion>
     <PivotalConfigVersion>2.1.1</PivotalConfigVersion>
     <PivotalDiscoveryVersion>2.1.1</PivotalDiscoveryVersion>
-    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
+    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
 	<RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>
