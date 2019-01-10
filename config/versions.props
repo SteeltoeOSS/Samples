@@ -2,15 +2,15 @@
   <PropertyGroup>
     <SteeltoeCircuitBreakerVersion>2.1.1</SteeltoeCircuitBreakerVersion>
     <SteeltoeCommonVersion>2.1.1</SteeltoeCommonVersion>
-    <SteeltoeConfigVersion>2.2.0-dev-00270</SteeltoeConfigVersion>
-    <SteeltoeConnectorVersion>2.2.0-dev-00304</SteeltoeConnectorVersion>
+    <SteeltoeConfigVersion>2.2.0-dev-00325</SteeltoeConfigVersion>
+    <SteeltoeConnectorVersion>2.2.0-dev-00354</SteeltoeConnectorVersion>
     <SteeltoeDiscoveryVersion>2.1.1</SteeltoeDiscoveryVersion>
     <SteeltoeLoggingVersion>2.1.1</SteeltoeLoggingVersion>
-    <SteeltoeManagementVersion>2.2.0-dev-00272</SteeltoeManagementVersion>
+    <SteeltoeManagementVersion>2.2.0-dev-00338</SteeltoeManagementVersion>
     <SteeltoeSecurityVersion>2.1.1</SteeltoeSecurityVersion>
     <PivotalConfigVersion>2.1.1</PivotalConfigVersion>
     <PivotalDiscoveryVersion>2.1.1</PivotalDiscoveryVersion>
-    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
+    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
 	<RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>

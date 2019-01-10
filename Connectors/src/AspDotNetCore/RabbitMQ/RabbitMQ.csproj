@@ -11,5 +11,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="RabbitMQ.Client" Version="$(RabbitMQVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
 </Project>

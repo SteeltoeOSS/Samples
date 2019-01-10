@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Logging;
 using System.IO;
 
 namespace RabbitMQ
@@ -24,6 +26,12 @@ namespace RabbitMQ
                         .AddEnvironmentVariables()
                         // Add to configuration the Cloudfoundry VCAP settings
                         .AddCloudFoundry();
+                })
+                .ConfigureLogging((builderContext, loggingBuilder) =>
+                {
+                    loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
+                    loggingBuilder.AddDynamicConsole();
+                    loggingBuilder.AddDebug();
                 })
                 .Build();
 
