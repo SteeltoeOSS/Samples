@@ -55,7 +55,8 @@ namespace CloudFoundrySingleSignon.Controllers
             try
             {
                 values = await client.GetStringAsync(jwtSamplesUrl);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 values = "Request failed: " + e.Message + " , expect JWT Sample app to be listening at: " + jwtSamplesUrl;
             }
@@ -114,12 +115,15 @@ namespace CloudFoundrySingleSignon.Controllers
                 indx = hostName.IndexOf('.');
                 if (indx < 0)
                 {
-                    return hostName;
+                    jwtappsHostname = hostName + ":63807";
                 }
-                jwtappsHostname = JWTAPPS_HOSTNAME + hostName.Substring(indx);
+                else
+                {
+                    jwtappsHostname = JWTAPPS_HOSTNAME + hostName.Substring(indx);
+                }
             }
             return "http://" + jwtappsHostname + "/api/values";
-            //return "http://localhost:5555/api/values";
+            //return "http://localhost:63807/api/values";
         }
     }
 }

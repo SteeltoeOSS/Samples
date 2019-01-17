@@ -1,13 +1,9 @@
-﻿using CloudFoundrySingleSignon.App_Start;
-using Steeltoe.Security.Authentication.CloudFoundry.Wcf;
+﻿using Steeltoe.Security.Authentication.CloudFoundry.Wcf;
 using System;
 using System.IdentityModel.Claims;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web;
@@ -17,6 +13,20 @@ namespace CloudFoundrySingleSignon.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly CloudFoundryOptions cfOptions = new CloudFoundryOptions
+                {
+                    // in order to use the 'client_credentials' grant type, the SSO info would need to be for a "Service-to-Service App" when using the Pivotal SSO tile
+                    //AuthorizationUrl = ApplicationConfig.SsoServiceInfo.AuthDomain,
+                    //ClientId = ApplicationConfig.SsoServiceInfo.ClientId,
+                    //ClientSecret = ApplicationConfig.SsoServiceInfo.ClientSecret,
+                    //ValidateCertificates = false,
+                    ForwardUserCredentials = true
+                };
+
+        public HomeController()
+        {
+        }
+
         // GET: Home
         public ActionResult Index()
         {
@@ -87,7 +97,7 @@ namespace CloudFoundrySingleSignon.Controllers
             BasicHttpsBinding binding = new BasicHttpsBinding();
             EndpointAddress address = new EndpointAddress(GetServiceUrl(HttpContext, "wcf") + "/valueservice.svc");
             var sRef = new ValueService.ValueServiceClient(binding, address);
-            sRef.Endpoint.EndpointBehaviors.Add(new JwtHeaderEndpointBehavior(new CloudFoundryOptions(ApplicationConfig.Configuration), token));
+            sRef.Endpoint.EndpointBehaviors.Add(new JwtHeaderEndpointBehavior(cfOptions, token));
             try
             {
                 ViewBag.Message = await sRef.GetDataAsync();

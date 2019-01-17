@@ -7,7 +7,7 @@ namespace CloudFoundryJwtAuthentication
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.UseCloudFoundryJwtBearerAuthentication(ApplicationConfig.Configuration);
+            app.UseCloudFoundryJwtBearerAuthentication(ApplicationConfig.Configuration, ApplicationConfig.LoggerFactory.CreateLogger("CloudFoundryExtensions"));
         }
    }
 }

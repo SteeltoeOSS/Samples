@@ -8,7 +8,6 @@ namespace CloudFoundryJwtAuthentication
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            ApplicationConfig.RegisterConfig("development");
         }
     }
 }
