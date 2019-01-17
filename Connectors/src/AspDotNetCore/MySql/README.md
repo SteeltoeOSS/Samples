@@ -24,7 +24,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https
 You must first create an instance of the MySql service in a org/space.
 
 1. `cf target -o myorg -s development`
-1. `cf create-service p-mysql 100mb myMySqlService`
+1. `cf create-service p.mysql db-small myMySqlService`
 
 ## Publish App & Push to CloudFoundry
 

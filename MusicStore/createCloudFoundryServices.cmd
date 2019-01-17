@@ -1,7 +1,7 @@
 @ECHO OFF
 
-SET db_service=p-mysql
-SET db_plan=100mb
+SET db_service=p.mysql
+SET db_plan=db-small
 IF NOT "%1"=="" set db_service=%1
 IF NOT "%2"=="" set db_plan=%2
 cf create-service p-config-server standard mStoreConfig -c config-server.json

@@ -32,7 +32,7 @@ Once you have finished deploying and verifing the Java version, you are then rea
 First you will need to create a new MySql service for our .NET version of the `Order REST API` service. Run the following commands:
 
 ```bash
-cf create-service p-mysql 100mb mysql-orders
+cf create-service p.mysql db-small mysql-orders
 ```
 
 ## Update admin-portal SSO Settings
