@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
+// using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.CloudFoundry.Connector.Redis;
+// using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
 // using Steeltoe.Security.DataProtection;
 
@@ -32,19 +33,18 @@ namespace CloudFoundrySingleSignon
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CloudFoundryDefaults.AuthenticationScheme;
-
             })
             .AddCookie((options) =>
             {
                 options.AccessDeniedPath = new PathString("/Home/AccessDenied");
             })
-            .AddCloudFoundryOAuth(Configuration);
+            //.AddCloudFoundryOAuth(Configuration);
+            .AddCloudFoundryOpenIdConnect(Configuration);
 
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("testgroup", policy => policy.RequireClaim("scope", "testgroup"));
                 options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
-           
             });
 
             // Add Redis to allow scaling beyond a single instance
@@ -62,9 +62,6 @@ namespace CloudFoundrySingleSignon
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,6 +72,11 @@ namespace CloudFoundrySingleSignon
             }
 
             app.UseStaticFiles();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
 
             app.UseAuthentication();
 

@@ -1,25 +1,17 @@
-﻿using System;
-
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Steeltoe.Security.Authentication.CloudFoundry;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 
 namespace CloudFoundrySingleSignon.Controllers
 {
     public class HomeController : Controller
     {
-        private IHttpContextAccessor HttpContextAccessor { get; set; }
-        public HomeController(IHttpContextAccessor contextAccessor)
-        {
-            HttpContextAccessor = contextAccessor;
-        }
         public IActionResult Index()
         {
             return View();
@@ -44,7 +36,6 @@ namespace CloudFoundrySingleSignon.Controllers
         public async Task<IActionResult> InvokeJwtSample()
         {
             var token = await HttpContext.GetTokenAsync("access_token");
-            //var token = await HttpContextAccessor.HttpContext.Authentication.GetTokenAsync("access_token");
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
