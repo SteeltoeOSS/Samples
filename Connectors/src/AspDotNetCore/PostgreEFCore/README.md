@@ -23,9 +23,9 @@ Create an instance of the PostgreSQL database service in a org/space:
 > cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
 
 # for CrunchyPostgres:
-> cf create-service postgresql-9.5-odb small myPostgres -c '{"db_name":"postgresample", "db_username": "steeltoe", "owner_name":"<your name>", "owner_email":"<your email>"}'
+> cf create-service postgresql-10-odb standalone myPostgres -c '{"db_name":"postgresample", "db_username": "steeltoe", "owner_name":"<your name>", "owner_email":"<your email>"}'
 # or with escaped double quotes for Powershell
-> cf create-service postgresql-9.5-odb small myPostgres -c '{\"db_name\":\"postgresample\", \"db_username\": \"steeltoe\", \"owner_name\":\"<your name>\", \"owner_email\":\"<your email>\"}'
+> cf create-service postgresql-10-odb stadalone myPostgres -c '{\"db_name\":\"postgresample\", \"db_username\": \"steeltoe\", \"owner_name\":\"<your name>\", \"owner_email\":\"<your email>\"}'
 ```
 
 ## Publish App & Push to CloudFoundry
