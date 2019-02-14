@@ -4,6 +4,7 @@ import re
 import shutil
 import stat
 import sys
+import time
 import uuid
 from urllib.parse import urlparse
 
@@ -98,6 +99,29 @@ def setup_cloud(context, scenario):
     command.Command(context, 'cf create-space {}'.format(context.cf_space)).run()
     command.Command(context, 'cf target -s {}'.format(context.cf_space)).run()
     def cleanup():
+        context.log.info('cleaning up cloud-foundry')
+        cmd = command.Command(context, 'cf apps')
+        cmd.run()
+        for app_info in cmd.stdout.splitlines()[4:]:
+            app = app_info.split()[0]
+            context.log.info('deleting app {}'.format(app))
+            command.Command(context, 'cf delete -f {}'.format(app)).run()
+        cmd = command.Command(context, 'cf services')
+        cmd.run()
+        for service_info in cmd.stdout.splitlines()[3:]:
+            svc = service_info.split()[0]
+            context.log.info('deleting service {}'.format(svc))
+            command.Command(context, 'cf delete-service -f {}'.format(svc)).run()
+            count = 0
+            while True:
+                try:
+                    command.Command(context, 'cf service {}'.format(svc)).run()
+                except command.CommandException:
+                    break
+                count += 1
+                context.log.info('delete still in progress, waiting ({})'.format(count))
+                time.sleep(1)
+        context.log.info('deleting space {}'.format(context.cf_space))
         command.Command(context, 'cf delete-space -f {}'.format(context.cf_space)).run()
     context.cleanups.append(cleanup)
 
