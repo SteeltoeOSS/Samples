@@ -22,7 +22,7 @@ Feature: CloudFoundry Single SignOn
         And you run: uaac group add testgroup
         And you run: uaac user add testuser --given_name Test --family_name User --emails testuser@domain.com --password Password1!
         And you run: uaac member add testgroup testuser
-        And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
+        And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri https://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
         And you run: dotnet restore
@@ -59,7 +59,7 @@ Feature: CloudFoundry Single SignOn
         And you run: uaac group add testgroup
         And you run: uaac user add testuser --given_name Test --family_name User --emails testuser@domain.com --password Password1!
         And you run: uaac member add testgroup testuser
-        And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
+        And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri https://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
         And you run: dotnet restore
@@ -95,7 +95,7 @@ Feature: CloudFoundry Single SignOn
         And you run: uaac group add testgroup
         And you run: uaac user add testuser --given_name Test --family_name User --emails testuser@domain.com --password Password1!
         And you run: uaac member add testgroup testuser
-        And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
+        And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri https://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
         And you run: dotnet restore
