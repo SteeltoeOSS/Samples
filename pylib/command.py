@@ -9,7 +9,7 @@ import threading
 class Command(object):
 
     PROJECT_COMMANDS = ['dotnet', 'cf']
-    BATCH_COMMANDS = ['mvn', 'uaac']
+    BATCH_COMMANDS = ['gradlew', 'mvn', 'uaac']
     COUNT = 0
     COUNT_LOCK = threading.Lock()
 
@@ -21,8 +21,6 @@ class Command(object):
         self.env = self.context.env.copy()
         self.command = command
         self.sandbox_dir = context.sandbox_dir
-        if self.context.platform == 'windows':
-            self.command = self.command.replace('/', '\\\\')
         self.args = shlex.split(command)
         self.cwd = infer_cwd(context, self.args)
         self.args = resolve_args(context, self.args, self.cwd)
@@ -32,8 +30,9 @@ class Command(object):
     def exec(self):
         popen_args = []
         if self.context.platform == 'windows':
-            if self.windowed or self.args[0] in Command.BATCH_COMMANDS:
+            if self.windowed or self.args[0].split('/')[-1] in Command.BATCH_COMMANDS:
                 popen_args += ['CMD', '/C']
+            self.args[0] = self.args[0].replace('/', '\\')
         if self.windowed and self.context.options.use_windowed:
             if self.context.platform == 'windows':
                 popen_args += ['START', '/WAIT']
