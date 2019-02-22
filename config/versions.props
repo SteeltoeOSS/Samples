@@ -1,17 +1,17 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeCircuitBreakerVersion>2.1.1</SteeltoeCircuitBreakerVersion>
-    <SteeltoeCommonVersion>2.1.1</SteeltoeCommonVersion>
-    <SteeltoeConfigVersion>2.2.0-dev-00325</SteeltoeConfigVersion>
-    <SteeltoeConnectorVersion>2.2.0-dev-00354</SteeltoeConnectorVersion>
-    <SteeltoeDiscoveryVersion>2.1.1</SteeltoeDiscoveryVersion>
-    <SteeltoeLoggingVersion>2.1.1</SteeltoeLoggingVersion>
-    <SteeltoeManagementVersion>2.2.0-dev-00338</SteeltoeManagementVersion>
-    <SteeltoeSecurityVersion>2.2.0-dev-00285</SteeltoeSecurityVersion>
-    <PivotalConfigVersion>2.1.1</PivotalConfigVersion>
-    <PivotalDiscoveryVersion>2.1.1</PivotalDiscoveryVersion>
+    <SteeltoeCircuitBreakerVersion>2.2.0-master-00272</SteeltoeCircuitBreakerVersion>
+    <SteeltoeCommonVersion>2.2.0-master-00103</SteeltoeCommonVersion>
+    <SteeltoeConfigVersion>2.2.0-master-00337</SteeltoeConfigVersion>
+    <SteeltoeConnectorVersion>2.2.0-master-00364</SteeltoeConnectorVersion>
+    <SteeltoeDiscoveryVersion>2.2.0-master-00313</SteeltoeDiscoveryVersion>
+    <SteeltoeLoggingVersion>2.2.0-master-00079</SteeltoeLoggingVersion>
+    <SteeltoeManagementVersion>2.2.0-master-00358</SteeltoeManagementVersion>
+    <SteeltoeSecurityVersion>2.2.0-master-00289</SteeltoeSecurityVersion>
+    <PivotalConfigVersion>2.2.0-master-00299</PivotalConfigVersion>
+    <PivotalDiscoveryVersion>2.2.0-master-00396</PivotalDiscoveryVersion>
     <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
-	<RabbitMQVersion>5.1.0</RabbitMQVersion>
+	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>
 </Project>
