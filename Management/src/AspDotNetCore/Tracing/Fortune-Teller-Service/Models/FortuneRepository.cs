@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
+using OpenCensus.Trace;
 using Steeltoe.Management.Census.Trace;
-using Steeltoe.Management.Census.Trace.Unsafe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FortuneTellerService.Models
 {
@@ -44,7 +43,7 @@ namespace FortuneTellerService.Models
 
             // Start a scoped span.  This will create a new span with the parent equal to whatever is the current span.
             // When Dispose() called on the returned scope the span will end and the parent span will become the current span
-            using (var scope = _tracing.Tracer.SpanBuilder(SPAN_NAME_RANDOM).StartScopedSpan())
+            using (var scope = _tracing.Tracer.SpanBuilder(SPAN_NAME_RANDOM).StartScopedSpan(out ISpan span))
             {
                 int count = _db.Fortunes.Count();
                 var index = _random.Next() % count;
@@ -53,11 +52,10 @@ namespace FortuneTellerService.Models
                 _logger.LogDebug("RandomFortune() ->" + result.Text);
 
                 // Obtain the current span and add some attributes which will be captured along with the span itself
-                var span = AsyncLocalContext.CurrentSpan;
                 span.PutAttribute(SPAN_NAME_RANDOM_INDEX_ATTRIBUTE, AttributeValue.LongAttributeValue(index));
                 span.PutAttribute(SPAN_NAME_RANDOM_FORTUNEID_ATTRIBUTE, AttributeValue.LongAttributeValue(result.Id));
                 span.PutAttribute(SPAN_NAME_RANDOM_FORTUNETEXT_ATTRIBUTE, AttributeValue.StringAttributeValue(result.Text));
-                span.Status = Status.OK;
+                span.Status = Status.Ok;
 
                 _logger.LogDebug("Finished RandomFortune()");
                 return result;
