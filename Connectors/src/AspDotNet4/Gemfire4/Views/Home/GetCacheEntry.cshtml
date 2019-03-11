@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Get the best fruit from Cache";
+}
+<h2>@ViewBag.Title.</h2>
+<hr />
+<h3>@ViewBag.Message</h3>
+<hr />
+<p>
+    The cache entry for "BestFruit" is retrieved every time this page is loaded.<br />
+    @Html.ActionLink("Update the cache with this link", "SetCacheEntry")
+</p>
