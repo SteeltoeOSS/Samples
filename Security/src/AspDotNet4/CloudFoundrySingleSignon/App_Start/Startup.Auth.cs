@@ -15,16 +15,6 @@ namespace CloudFoundrySingleSignon
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.Use((context, next) =>
-            {
-                if (context.Request.Headers["X-Forwarded-Proto"] == "https")
-                {
-                    context.Request.Scheme = "https";
-                }
-
-                return next();
-            });
-
             app.SetDefaultSignInAsAuthenticationType("ExternalCookie");
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {

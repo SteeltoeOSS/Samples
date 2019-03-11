@@ -51,6 +51,9 @@
     <Reference Include="Microsoft.DiaSymReader.PortablePdb, Version=1.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.DiaSymReader.PortablePdb.1.5.0\lib\net45\Microsoft.DiaSymReader.PortablePdb.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>
@@ -126,35 +129,44 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="OpenCensus, Version=0.1.0.0, Culture=neutral, PublicKeyToken=7bd6737fe5b67e3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCensus.0.1.0-alpha-42253\lib\net46\OpenCensus.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCensus.Abstractions, Version=0.1.0.0, Culture=neutral, PublicKeyToken=7bd6737fe5b67e3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCensus.Abstractions.0.1.0-alpha-42253\lib\net45\OpenCensus.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.2.0-dev-00354\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.2.2.0-dev-00089\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Http, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Http.2.2.0-dev-00089\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Http.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.2.0-dev-00322\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.1.0\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
+    <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.Diagnostics, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.1.0\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
+    <Reference Include="Steeltoe.Management.Diagnostics, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.EndpointBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.1.0\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
+    <Reference Include="Steeltoe.Management.EndpointBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.OpenCensus, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.1.0\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
+    <Reference Include="Steeltoe.Management.OpenCensus, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
+    </Reference>
+    <Reference Include="Steeltoe.Management.OpenCensusBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensusBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Management.OpenCensusBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Security.Authentication.CloudFoundryBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Security.Authentication.CloudFoundryBase.2.2.0-dev-00276\lib\netstandard2.0\Steeltoe.Security.Authentication.CloudFoundryBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Security.Authentication.CloudFoundryBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Security.Authentication.CloudFoundryBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Security.Authentication.CloudFoundryWcf, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Security.Authentication.CloudFoundryWcf.2.2.0-dev-00276\lib\net461\Steeltoe.Security.Authentication.CloudFoundryWcf.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Security.Authentication.CloudFoundryWcf.2.2.0-rc2\lib\net461\Steeltoe.Security.Authentication.CloudFoundryWcf.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
