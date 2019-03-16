@@ -29,7 +29,7 @@ RUN apt-get -y install dotnet-sdk-2.1.300-rc1-008673
 
 # CloudFoundry
 RUN curl https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | apt-key add -
-RUN echo "deb http://packages.cloudfoundry.org/debian stable main" > /etc/apt/sources.list.d/cloudfoundry-cli.list
+RUN echo "deb https://packages.cloudfoundry.org/debian stable main" > /etc/apt/sources.list.d/cloudfoundry-cli.list
 RUN apt-get update
 RUN apt-get -y install cf-cli
 
