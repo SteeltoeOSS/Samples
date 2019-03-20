@@ -40,7 +40,7 @@ Use the Cloud Foundry CLI to see the logs as you startup and use the app, with t
 
 Upon startup, the app inserts a key/values into the bound Redis Cache.
 
-This sample will be available at <http://redis-connector-4x.[your-cf-apps-domain]/>.
+This sample will be available at <https://redis-connector-4x.[your-cf-apps-domain]/>.
 
 To display those values using the Microsoft RedisCache, click on the `Cache Data` link in the menu.
 

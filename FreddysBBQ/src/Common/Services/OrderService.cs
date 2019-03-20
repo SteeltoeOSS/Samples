@@ -11,7 +11,7 @@ namespace Common.Services
     public class OrderService : AbstractService, IOrderService
     {
 
-        private const string ORDERS_URL = "http://order-service/orders";
+        private const string ORDERS_URL = "https://order-service/orders";
 
         public OrderService(IDiscoveryClient client, ILoggerFactory factory, IHttpContextAccessor context) :
             base(client, factory.CreateLogger<MenuService>(), context)

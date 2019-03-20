@@ -12,7 +12,7 @@ namespace Common.Services
     public class MenuService : AbstractService, IMenuService
     {
 
-        private const string MENUITEMS_URL = "http://menu-service/menuItems/{id}";
+        private const string MENUITEMS_URL = "https://menu-service/menuItems/{id}";
 
         public MenuService(IDiscoveryClient client, ILoggerFactory factory, IHttpContextAccessor context) :
             base(client, factory.CreateLogger<MenuService>(), context)

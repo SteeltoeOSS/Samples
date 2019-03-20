@@ -11,7 +11,7 @@ namespace MusicStoreUI.Services
 {
     public class OrderProcessingService : BaseDiscoveryService, IOrderProcessing
     {
-        private const string ORDER_URL = "http://orderprocessing/api/Order";
+        private const string ORDER_URL = "https://orderprocessing/api/Order";
 
         public OrderProcessingService(IDiscoveryClient client, ILoggerFactory logFactory) : base(client, logFactory.CreateLogger<OrderProcessingService>())
         {

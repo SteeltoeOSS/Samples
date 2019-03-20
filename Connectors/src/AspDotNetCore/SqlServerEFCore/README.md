@@ -50,7 +50,7 @@ On a Windows cell, you should see something like this during startup:
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
 
-This sample will be available at <http://sqlserverefcore-connector.[your-cf-apps-domain]/>.
+This sample will be available at <https://sqlserverefcore-connector.[your-cf-apps-domain]/>.
 
 Upon startup, the app inserts two rows into the bound SQL Server database. Those rows are displayed on the home page of the application.
 

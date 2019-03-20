@@ -43,11 +43,11 @@ info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
 info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
       Executing action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI) - Validation state: Valid
 dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
-      LookupService(http://fortuneservice/api/fortunes/random)
+      LookupService(https://fortuneservice/api/fortunes/random)
 dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
       GetInstances returning: Instance[InstanceId=DESKTOP-D0GL5GA:fortuneService:5000,HostName=DESKTOP-D0GL5GA,IpAddr=10.0.75.1,Status=UP,IsUnsecurePortEnabled=True,Port=5000,IsSecurePortEnabled=False,SecurePort=443,VipAddress=fortuneService,SecureVipAddress=fortuneService,ActionType=ADDED]
 dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
-      LookupService() returning http://desktop-d0gl5ga:5000/api/fortunes/random 
+      LookupService() returning https://desktop-d0gl5ga:5000/api/fortunes/random 
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
       HandleStartEvent start 9
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
@@ -61,7 +61,7 @@ info: Fortune_Teller_UI.Services.FortuneService[0]
 info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[2]
       Executed action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2051.4374ms.
 dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
-      GetRequestContent generated JSON: [{"traceId":"5c5ed95138709c24a4b5824b85f6bb35","parentId":"16c94814418c9d64","id":"255c3b47f9c7748e","kind":"CLIENT","name":"httpclient:/api/fortunes/random","timestamp":1526414222696000,"duration":1019000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:03 GMT","span.kind":"client","http.url":"http://desktop-d0gl5ga:5000/api/fortunes/random","http.response.Server":"Kestrel","http.path":"/api/fortunes/random","http.status_code":"200","http.host":"desktop-d0gl5ga","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
+      GetRequestContent generated JSON: [{"traceId":"5c5ed95138709c24a4b5824b85f6bb35","parentId":"16c94814418c9d64","id":"255c3b47f9c7748e","kind":"CLIENT","name":"httpclient:/api/fortunes/random","timestamp":1526414222696000,"duration":1019000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:03 GMT","span.kind":"client","http.url":"https://desktop-d0gl5ga:5000/api/fortunes/random","http.response.Server":"Kestrel","http.path":"/api/fortunes/random","http.status_code":"200","http.host":"desktop-d0gl5ga","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
       HandleStartEvent start 13
 dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
@@ -181,11 +181,11 @@ info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
 info: Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker[1]
       Executing action method Fortune_Teller_UI.Controllers.HomeController.Index (Fortune-Teller-UI) - Validation state: Valid
 dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
-      LookupService(http://fortuneservice/api/fortunes/random)
+      LookupService(https://fortuneservice/api/fortunes/random)
 dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
       GetInstances returning: Instance[InstanceId=DESKTOP-D0GL5GA:fortuneService:5000,HostName=DESKTOP-D0GL5GA,IpAddr=10.0.75.1,Status=UP,IsUnsecurePortEnabled=True,Port=5000,IsSecurePortEnabled=False,SecurePort=443,VipAddress=fortuneService,SecureVipAddress=fortuneService,ActionType=ADDED]
 dbug: Steeltoe.Common.Discovery.DiscoveryHttpClientHandler[0]
-      LookupService() returning http://desktop-d0gl5ga:5000/api/fortunes/random 
+      LookupService() returning https://desktop-d0gl5ga:5000/api/fortunes/random 
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
       HandleStartEvent start 9
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
@@ -195,7 +195,7 @@ trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
       HandleStopEvent finished 28
 dbug: Steeltoe.Management.Exporter.Tracing.Zipkin.TraceExporter[0]
-      GetRequestContent generated JSON: [{"traceId":"0150e5df086f64d0c1752cdb35552bdc","parentId":"40f4d477a40eb43b","id":"a0cec3119233c3d6","kind":"CLIENT","name":"httpclient:/api/fortunes/random","timestamp":1526414234404000,"duration":1005000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:15 GMT","span.kind":"client","http.url":"http://desktop-d0gl5ga:5000/api/fortunes/random","http.response.Server":"Kestrel","http.path":"/api/fortunes/random","http.status_code":"200","http.host":"desktop-d0gl5ga","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
+      GetRequestContent generated JSON: [{"traceId":"0150e5df086f64d0c1752cdb35552bdc","parentId":"40f4d477a40eb43b","id":"a0cec3119233c3d6","kind":"CLIENT","name":"httpclient:/api/fortunes/random","timestamp":1526414234404000,"duration":1005000,"localEndpoint":{"serviceName":"fortuneUI","ipv4":"10.0.75.1","ipv6":"fe80::38e6:d7e2:bbc7:20ed%5","port":0},"remoteEndpoint":null,"annotations":null,"tags":{"http.method":"GET","http.response.Date":"Tue, 15 May 2018 19:57:15 GMT","span.kind":"client","http.url":"https://desktop-d0gl5ga:5000/api/fortunes/random","http.response.Server":"Kestrel","http.path":"/api/fortunes/random","http.status_code":"200","http.host":"desktop-d0gl5ga","http.response.Transfer-Encoding":"chunked","census.status_code":"OK"},"debug":false,"shared":false}]
 trce: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]
       HandleStartEvent start 13
 dbug: Steeltoe.Management.Tracing.Observer.HttpClientCoreObserver[0]

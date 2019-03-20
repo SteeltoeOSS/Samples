@@ -41,7 +41,7 @@ You must first create an instance of the Microsoft SQL Server service in a org/s
 
 Use the Cloud Foundry CLI to see the logs as you startup and use the app, with the command `cf logs mssql4-connector`
 
-This sample will be available at <http://mssql-connector-4x.[your-cf-apps-domain]/>.
+This sample will be available at <https://mssql-connector-4x.[your-cf-apps-domain]/>.
 
 Upon startup, the app inserts two rows into the bound Microsoft SQL Server database. To display those rows, browse to the app and the row data should be on the home page.
 

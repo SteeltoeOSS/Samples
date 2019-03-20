@@ -10,8 +10,8 @@ namespace MusicStoreUI.Services
 {
     public class ShoppingCartService : BaseDiscoveryService, IShoppingCart
     {
-        private const string SHOPPINGCART_URL = "http://shoppingcart/api/ShoppingCart/{cartId}";
-        private const string SHOPPINGCART_ITEM_URL ="http://shoppingcart/api/ShoppingCart/{cartId}/Item/{itemId}";
+        private const string SHOPPINGCART_URL = "https://shoppingcart/api/ShoppingCart/{cartId}";
+        private const string SHOPPINGCART_ITEM_URL ="https://shoppingcart/api/ShoppingCart/{cartId}/Item/{itemId}";
 
         public ShoppingCartService(IDiscoveryClient client, ILoggerFactory logFactory) :
             base(client, logFactory.CreateLogger<ShoppingCartService>())

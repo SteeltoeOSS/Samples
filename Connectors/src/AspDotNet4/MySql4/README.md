@@ -36,7 +36,7 @@ You must first create an instance of the MySql service in a org/space.
 
 Use the Cloud Foundry CLI to see the logs as you startup and use the app, with the command `cf logs mysql-connector-4x`
 
-This sample will be available at <http://mysql-connector-4x.[your-cf-apps-domain]/>.
+This sample will be available at <https://mysql-connector-4x.[your-cf-apps-domain]/>.
 
 Upon startup, the app inserts two rows into the bound MySql database. To display those rows click on the `MySql Data` link in the menu.
 

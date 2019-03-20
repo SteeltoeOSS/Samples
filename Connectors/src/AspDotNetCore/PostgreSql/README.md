@@ -58,7 +58,7 @@ On a Windows cell, you should see something like this during startup:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
 
-This sample will be available at <http://postgres-connector.[your-cf-apps-domain]/>.
+This sample will be available at <https://postgres-connector.[your-cf-apps-domain]/>.
 
 Upon startup, the app inserts a couple rows into the bound PostgreSQL database. To display those rows, click on the `Postgres Data` link in the menu.
 

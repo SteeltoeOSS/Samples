@@ -48,7 +48,7 @@ On a Windows cell, you should see something like this during startup:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
 
-This sample will be available at <http://oauth-connector.[your-cf-apps-domain]/>.
+This sample will be available at <https://oauth-connector.[your-cf-apps-domain]/>.
 
 On the app's menu, click on `OAuth Options` to see meaningful configuration data for the bound OAuth service.
 

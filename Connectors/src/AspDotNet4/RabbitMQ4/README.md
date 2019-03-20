@@ -36,7 +36,7 @@ You must first create an instance of the RabbitMQ service in a org/space.
 
 Use the Cloud Foundry CLI to see the logs as you startup and use the app, with the command `cf logs rabbitmq-connector-4x`
 
-This sample will be available at <http://rabbitmq-connector-4x.[your-cf-apps-domain]/>.
+This sample will be available at <https://rabbitmq-connector-4x.[your-cf-apps-domain]/>.
 
 To send a message over RabbitMQ: click "Send" in the menu, enter text and click the Send button.
 To receive a RabbitMQ message that you have sent: click "Receive" in the menu, and messages will be retrieved from the queue one at a time (per page view).

@@ -10,13 +10,13 @@ namespace MusicStoreUI.Services
     public class MusicStoreService : BaseDiscoveryService, IMusicStore
     {
 
-        private const string TOP_SELLING_URL = "http://musicstore/api/Store/TopSelling";
-        private const string GENRES_URL = "http://musicstore/api/Store/Genres";
-        private const string GENRE_URL = "http://musicstore/api/Store/Genre";
-        private const string ALBUMS_URL = "http://musicstore/api/Store/Albums";
-        private const string ALBUM_URL = "http://musicstore/api/Store/Album";
-        private const string ARTISTS_URL = "http://musicstore/api/Store/Artists";
-        private const string ARTIST_URL = "http://musicstore/api/Store/Artist";
+        private const string TOP_SELLING_URL = "https://musicstore/api/Store/TopSelling";
+        private const string GENRES_URL = "https://musicstore/api/Store/Genres";
+        private const string GENRE_URL = "https://musicstore/api/Store/Genre";
+        private const string ALBUMS_URL = "https://musicstore/api/Store/Albums";
+        private const string ALBUM_URL = "https://musicstore/api/Store/Album";
+        private const string ARTISTS_URL = "https://musicstore/api/Store/Artists";
+        private const string ARTIST_URL = "https://musicstore/api/Store/Artist";
 
         public MusicStoreService(IDiscoveryClient client, ILoggerFactory logFactory) : base(client, logFactory.CreateLogger<MusicStoreService>())
         {

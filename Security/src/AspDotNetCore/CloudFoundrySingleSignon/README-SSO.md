@@ -51,7 +51,7 @@ bound apps: single-signon
 Tags:
 Plan: auth
 Description: Single Sign-On as a Service
-Documentation url: http://docs.pivotal.io/p-identity/index.html
+Documentation url: https://docs.pivotal.io/p-identity/index.html
 Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_GUID}/instances/{INSTANCE_GUID}/
 ...
 ```
@@ -60,7 +60,7 @@ On the dashboard, under `Apps`:
 
 1. Select the `single-signon` app.
 1. Click "Select Scopes" and add the `testgroup` scope
-1. Add the URI `http://single-signon.<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>/signin-cloudfoundry` under "Auth Redirect URIs"
+1. Add the URI `https://single-signon.<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>/signin-cloudfoundry` under "Auth Redirect URIs"
 1. Click the "Save Config" button
 
 ## What to expect - CloudFoundry
@@ -77,7 +77,7 @@ After pushing the app, you should see something like the following in the logs:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
 
-At this point the app is up and running.  You can access it at <http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
+At this point the app is up and running.  You can access it at <https://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
 > Note: To see the logs as the app runs, execute this command: `cf logs single-signon`
 

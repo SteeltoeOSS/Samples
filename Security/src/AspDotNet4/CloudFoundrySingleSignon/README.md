@@ -39,7 +39,7 @@ After authenticating, add a new `user` and `group` to the UAA Server database. D
 After adding the user and group, we are ready to add our application as a new client to the UAA server. This step will establish our application's credentials and allow it to interact with the UAA server. Use the line below once you have replaced the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with the domain used by your cloud foundry instance.
 
 ```bash
-uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-oidc --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
+uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri https://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-oidc --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
 ```
 
 ### Add User-Provided Service with OAuth Details
@@ -80,7 +80,7 @@ After pushing the app, you should see something like the following in the logs:
 2018-05-04T10:18:08.928-05:00 [CELL/0] [OUT] Container became healthy
 ```
 
-At this point the app is up and running.  You can access it at <http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
+At this point the app is up and running.  You can access it at <https://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
 > Note: To see the logs as the app runs, execute this command: `cf logs single-signon`
 

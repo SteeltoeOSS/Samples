@@ -47,7 +47,7 @@ You must first create an instance of the PostgreSQL database service in a org/sp
 
 Use the Cloud Foundry CLI to see the logs as you startup and use the app, with the command `cf logs postgresql-connector-4x`
 
-This sample will be available at <http://postgresql-connector-4x.[your-cf-apps-domain]/>.
+This sample will be available at <https://postgresql-connector-4x.[your-cf-apps-domain]/>.
 
 Upon startup, the app inserts two rows into the bound PostgreSQL database. To display those rows click on the `Postgres Data` link in the menu.
 

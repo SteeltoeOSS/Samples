@@ -37,7 +37,7 @@ If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identit
 
 Use the Cloud Foundry CLI to see the logs as you startup and use the app, with the command `cf logs oauth-connector-4x`
 
-This sample will be available at <http://oauth-connector-4x.[your-cf-apps-domain]/>.
+This sample will be available at <https://oauth-connector-4x.[your-cf-apps-domain]/>.
 
 On the apps menu, click on the `OAuth Options` menu item and you should see meaningful configuration data for the bound OAuth service.
 
