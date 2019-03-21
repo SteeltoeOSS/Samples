@@ -1,0 +1,16 @@
+Logging: 
+  IncludeScopes: false
+  Debug:
+    LogLevel: 
+      Default: Information
+      Fortune_Teller_Service: Debug
+      Fortune_Teller_UI: Debug
+      Pivotal: Debug
+      Steeltoe: Debug
+  Console:
+    LogLevel: 
+      Default: Information
+      Fortune_Teller_Service: Debug
+      Fortune_Teller_UI: Debug
+      Pivotal: Debug
+      Steeltoe: Debug

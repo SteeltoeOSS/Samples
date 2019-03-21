@@ -1,0 +1,16 @@
+﻿---
+applications:
+- name: fortuneui
+  random-route: true
+  buildpack: binary_buildpack
+  memory: 512M
+  stack: windows2012R2
+  command: cmd /c .\Fortune-Teller-UI --server.urls http://*:%PORT%
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+   - myConfigServer
+   - myDiscoveryService
+   - myRedisService
+   - myHystrixService    
+   - myOAuthService

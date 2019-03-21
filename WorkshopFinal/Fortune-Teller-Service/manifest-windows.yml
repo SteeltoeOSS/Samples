@@ -1,0 +1,15 @@
+﻿---
+applications:
+- name: fortuneService
+  random-route: true
+  buildpack: binary_buildpack
+  memory: 512M
+  stack: windows2012R2
+  command: cmd /c .\Fortune-Teller-Service --server.urls http://*:%PORT%
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+   - myConfigServer
+   - myDiscoveryService
+   - myMySqlService
+   - myOAuthService
