@@ -32,6 +32,9 @@ using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.Exporter.Metrics;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Extensions.Configuration.ConfigServer;
+using Steeltoe.Common.HealthChecks;
+using Steeltoe.Discovery.Eureka;
 // Lab11 End
 
 
@@ -120,6 +123,10 @@ namespace Fortune_Teller_UI
 
             // Lab11 Start
             services.AddCloudFoundryActuators(Configuration);
+
+            // Add Health contributors
+            services.AddConfigServerHealthContributor();
+            services.AddSingleton<IHealthContributor, EurekaApplicationsHealthContributor>();
 
             // Add Metrics collection
             services.AddMetricsActuator(Configuration);

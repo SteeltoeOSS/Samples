@@ -28,6 +28,7 @@ using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.Exporter.Metrics;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 // Lab11 End
 
 namespace Fortune_Teller_Service
@@ -62,7 +63,6 @@ namespace Fortune_Teller_Service
                 // Lab08 add
                 services.AddDbContext<FortuneContext>(
                     options => options.UseMySql(Configuration));
-                services.AddMySqlHealthContributor(Configuration);
             }
 
             // Lab05 Start
@@ -85,6 +85,10 @@ namespace Fortune_Teller_Service
 
             // Lab11 Start
             services.AddCloudFoundryActuators(Configuration);
+
+            // Add health contributors
+            services.AddMySqlHealthContributor(Configuration);
+            services.AddConfigServerHealthContributor();
 
             // Add Metrics collection
             services.AddMetricsActuator(Configuration);
