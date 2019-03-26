@@ -51,7 +51,7 @@ bound apps: single-signon
 Tags:
 Plan: auth
 Description: Single Sign-On as a Service
-Documentation url: http://docs.pivotal.io/p-identity/index.html
+Documentation url: https://docs.pivotal.io/p-identity/index.html
 Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_GUID}/instances/{INSTANCE_GUID}/
 ...
 ```

@@ -50,7 +50,7 @@ On a Linux cell, you should see something like this during startup:
 2016-08-24T12:23:01.72-0400 [APP/0]      OUT
 2016-08-24T12:23:02.81-0400 [APP/0]      OUT Hosting environment: development
 2016-08-24T12:23:02.81-0400 [APP/0]      OUT Content root path: /home/vcap/app
-2016-08-24T12:23:02.81-0400 [APP/0]      OUT Now listening on: http://0.0.0.0:8080
+2016-08-24T12:23:02.81-0400 [APP/0]      OUT Now listening on: https://0.0.0.0:8080
 2016-08-24T12:23:02.81-0400 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 2016-08-24T12:23:02.89-0400 [CELL/0]     OUT Container became healthy
 ```

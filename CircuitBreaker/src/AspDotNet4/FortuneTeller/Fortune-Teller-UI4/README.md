@@ -1,8 +1,8 @@
 # Fortune-Teller-UI - ASP.NET 4 MVC Application
 
-ASP.NET 4 MVC sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for discovering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
+ASP.NET 4 MVC sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud) for discovering micro services and [Spring Cloud Hystrix](https://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
 
-This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
+This sample also illustrates how to use the [Hystrix Dashboard](https://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
 
  The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
@@ -75,14 +75,14 @@ You should see something like this during startup:
 2016-11-22T09:48:05.04-0700 [APP/0]      OUT Server Started.... press CTRL + C to stop
 ```
 
-At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit <http://fortuneui.x.y.z/> to see it!
+At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit <https://fortuneui.x.y.z/> to see it!
 
 ## Using the Hystrix Dashboard - Cloud Foundry
 
 Once you have the two applications communicating, you can make use of the Hystrix dashboard by following the instructions below.
 
 1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. <https://apps.system.testcloud.com>)
-2. Follow [these instructions](http://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
+2. Follow [these instructions](https://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
 3. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the Hystrix dashboard.  Click the refresh button on the UI app quickly to see the dashboard update.
 
 ---
