@@ -48,7 +48,7 @@ Bound apps: customer-portal,menu-service,admin-portal,order-service
 Tags:
 Plan: auth
 Description: Single Sign-On as a Service
-Documentation url: http://docs.pivotal.io/p-identity/index.html
+Documentation url: https://docs.pivotal.io/p-identity/index.html
 Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_GUID}/instances/{INSTANCE_GUID}/
 ...
 ```
@@ -64,7 +64,7 @@ https://admin-portal.apps.testcloud.com
 then after making the changes, the Auth Redirect URIs would look as follows:
 
 ```bash
-https://admin-portal.apps.testcloud.com,http://admin-portal.apps.testcloud.com/signin-cloudfoundry
+https://admin-portal.apps.testcloud.com,https://admin-portal.apps.testcloud.com/signin-cloudfoundry
 ```
 
 Save your changes  .... (i.e. `Save Config`)

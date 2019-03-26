@@ -4,7 +4,7 @@ applications:
   buildpack: dotnet_core_buildpack
   memory: 256M
   disk_quota: 100M
-  command: cd ${HOME} && ./Fortune-Teller-UI --server.urls http://0.0.0.0:${PORT}
+  command: cd ${HOME} && ./Fortune-Teller-UI --server.urls https://0.0.0.0:${PORT}
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:
