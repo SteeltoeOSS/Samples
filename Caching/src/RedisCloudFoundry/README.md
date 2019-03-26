@@ -1,5 +1,5 @@
 # RedisCloudfoundry 
-ASP.NET Core sample app illustrating how to use [Redis on CloudFoundry](http://docs.pivotal.io/redis/index.html) as a distributed cache in ASP.NET Core.
+ASP.NET Core sample app illustrating how to use [Redis on CloudFoundry](https://docs.pivotal.io/redis/index.html) as a distributed cache in ASP.NET Core.
 
 
 # Pre-requisites - CloudFoundry
@@ -44,7 +44,7 @@ On a Windows cell, you should see something like this during startup:
 ```
 At this point the Sample app is up and running and ready.  
 
-If you hit http://redis-sample.x.y.z/ you should see the typical ASP.NET Core UI appear. Select the `Cache Data` menu item. You should see:
+If you hit https://redis-sample.x.y.z/ you should see the typical ASP.NET Core UI appear. Select the `Cache Data` menu item. You should see:
 ```
 Cache Data.
 Key1=Key1Value

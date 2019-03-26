@@ -1,5 +1,5 @@
 # SimpleCloudFoundry - ASP.NET Core Sample Application 
-ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
+ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](https://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
 
 # Pre-requisites
 
@@ -34,7 +34,7 @@ Windows Note: If you are pushing to a windows stack, and you are using self-sign
 Note: We have experienced this [problem](https://github.com/dotnet/cli/issues/3283) when using the RC2 SDK and when publishing to a relative directory... workaround is to use full path.
 
 # What to expect
-The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
+The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `https://foo.x.y.z/`.
 
 The Config Servers Git repository has been set to: `https://github.com/spring-cloud-samples/config-repo`
 

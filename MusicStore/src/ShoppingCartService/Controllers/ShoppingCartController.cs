@@ -14,7 +14,7 @@ using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 #endif
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ShoppingCartService.Controllers
 {

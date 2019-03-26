@@ -10,7 +10,7 @@ namespace RabbitDemo
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://0.0.0.0:8080")
+                .UseUrls("https://0.0.0.0:8080")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup(typeof(Program).GetTypeInfo().Assembly.GetName().Name)
                 .Build();

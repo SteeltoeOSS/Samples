@@ -1,5 +1,5 @@
 # Simple - ASP.NET Core Sample Application
-ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config) as a configuration source.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config) as a configuration source.
 
 # Pre-requisites
 

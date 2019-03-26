@@ -22,7 +22,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: transition.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#transitions
+ * https://twbs.github.com/bootstrap/javascript.html#transitions
  * ========================================================================
  * Copyright 2013 Twitter, Inc.
  *
@@ -42,7 +42,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 +function ($) { "use strict";
 
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // CSS TRANSITION SUPPORT (Shoutout: https://www.modernizr.com/)
   // ============================================================
 
   function transitionEnd() {
@@ -62,7 +62,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }
   }
 
-  // http://blog.alexmaccaw.com/css-transitions
+  // https://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
     var called = false, $el = this
     $(this).one($.support.transition.end, function () { called = true })
@@ -79,7 +79,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: alert.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#alerts
+ * https://twbs.github.com/bootstrap/javascript.html#alerts
  * ========================================================================
  * Copyright 2013 Twitter, Inc.
  *
@@ -178,7 +178,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: button.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#buttons
+ * https://twbs.github.com/bootstrap/javascript.html#buttons
  * ========================================================================
  * Copyright 2013 Twitter, Inc.
  *
@@ -288,7 +288,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: carousel.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#carousel
+ * https://twbs.github.com/bootstrap/javascript.html#carousel
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -506,7 +506,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#collapse
+ * https://twbs.github.com/bootstrap/javascript.html#collapse
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -686,7 +686,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: dropdown.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#dropdowns
+ * https://twbs.github.com/bootstrap/javascript.html#dropdowns
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -841,7 +841,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: modal.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#modals
+ * https://twbs.github.com/bootstrap/javascript.html#modals
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1088,7 +1088,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#tooltip
+ * https://twbs.github.com/bootstrap/javascript.html#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
@@ -1475,7 +1475,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: popover.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#popovers
+ * https://twbs.github.com/bootstrap/javascript.html#popovers
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1593,7 +1593,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#scrollspy
+ * https://twbs.github.com/bootstrap/javascript.html#scrollspy
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1752,7 +1752,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: tab.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#tabs
+ * https://twbs.github.com/bootstrap/javascript.html#tabs
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
@@ -1888,7 +1888,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: affix.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#affix
+ * https://twbs.github.com/bootstrap/javascript.html#affix
  * ========================================================================
  * Copyright 2012 Twitter, Inc.
  *
