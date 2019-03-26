@@ -4,7 +4,7 @@ How to setup and run the sample tests.
 :!toc-title:
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :linkattrs:
-:uri-behave-cli: http://pythonhosted.org/behave/behave.html
+:uri-behave-cli: https://pythonhosted.org/behave/behave.html
 :uri-behave-ini: link:behave.ini
 :uri-brew: https://brew.sh/
 :uri-choco: https://chocolatey.org/

@@ -39,7 +39,7 @@ On a Windows cell, you should see something like this during startup:
 2017-08-17T08:48:19.51-0600 [STG/0] OUT Successfully destroyed container
 2017-08-17T08:48:20.24-0600 [CELL/0] OUT Successfully created container
 2017-08-17T08:48:29.33-0600 [APP/PROC/WEB/0] OUT Running .\CloudFoundry
-2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Now listening on: http://0.0.0.0:56925
+2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Now listening on: https://0.0.0.0:56925
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Hosting environment: Development
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Content root path: C:\containerizer\B91BBA946E8B925107\user\app
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Application started. Press Ctrl+C to shut down.
