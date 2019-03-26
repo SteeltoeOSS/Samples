@@ -1,9 +1,9 @@
 # Fortune-Teller-UI - ASP.NET Core MVC Application
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix Command with fallback ability when communicating with the Fortune service.  
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](https://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix Command with fallback ability when communicating with the Fortune service.  
 
 In addition, the Fortune-Teller-UI also illustrates how to use a Hystrix Collapser to combine, or 'batch up', multiple requests to backend micro-services endpoints. 
 
-This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
+This sample also illustrates how to use the [Hystrix Dashboard](https://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
 
 # Pre-requisites - Local
 
@@ -108,16 +108,16 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:38:48.12-0600 [APP/0]      OUT Now listening on: http://*:58442
 2016-05-14T06:38:48.12-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
-At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit http://fortuneui.x.y.z/ to see it!
+At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit https://fortuneui.x.y.z/ to see it!
 
-In addition to hitting http://fortuneui.x.y.z/, you can also hit: http://fortuneui.x.y.z/#/multiple to cause the UI to make use of a Hystrix Collapser to obtain multiple fortunes.
+In addition to hitting https://fortuneui.x.y.z/, you can also hit: https://fortuneui.x.y.z/#/multiple to cause the UI to make use of a Hystrix Collapser to obtain multiple fortunes.
 
 # Using the Hystrix Dashboard - Cloud Foundry
 
 Once you have the two applications communicating, you can make use of the Hystrix dashboard by following the instructions below.  
 
 1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. https://apps.system.testcloud.com)
-2. Follow [these instructions](http://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
+2. Follow [these instructions](https://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
 3. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the Hystrix dashboard.  Click the refresh button on the UI app quickly to see the dashboard update.
 
 # Enabling SSL usage on Cloud Foundry

@@ -1,7 +1,7 @@
 # Steeltoe Discovery Sample Applications
 This repo tree contains sample apps illustrating how to use the Steeltoe [Discovery](https://github.com/SteeltoeOSS/Discovery) packages. 
-* src/AspDotNetCore/Fortune-Teller-Service - ASP.NET Core microservice illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for service registration.
-* src/AspDotNetCore/Fortune-Teller-UI - ASP.NET Core MVC app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for service discovery.
+* src/AspDotNetCore/Fortune-Teller-Service - ASP.NET Core microservice illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for service registration.
+* src/AspDotNetCore/Fortune-Teller-UI - ASP.NET Core MVC app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for service discovery.
 * src/AspDotNet4/Fortune-Teller-Service - same as AspDotNetCore/Fortune-Teller-Service but built for ASP.NET 4.x and using Autofac IOC container 
 * src/AspDotNet4/Fortune-Teller-UI - same as AspDotNetCore/Fortune-Teller-UI but built for ASP.NET 4.x and using Autofac IOC container 
 

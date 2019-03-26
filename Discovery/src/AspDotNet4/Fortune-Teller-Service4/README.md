@@ -1,5 +1,5 @@
 # Fortune-Teller-Service - ASP.NET 4 WebApi Microservice
-ASP.NET 4 WebApi sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
+ASP.NET 4 WebApi sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.
 
 Note: This application is built using the Autofac IOC container.
 

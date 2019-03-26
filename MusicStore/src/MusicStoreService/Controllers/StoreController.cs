@@ -149,7 +149,7 @@ namespace MusicStore.Controllers
         public List<AlbumJson> GetTopSelling([FromQuery] int count = 6)
         {
             // TODO: Current MySQL provider has a Take() bug
-            // See: http://forums.mysql.com/read.php?38,650020,650020#msg-650020
+            // See: https://forums.mysql.com/read.php?38,650020,650020#msg-650020
 
             //var albumModel = await DbContext.Albums
             //    .OrderByDescending(a => a.OrderCount)

@@ -43,4 +43,4 @@ On a Windows cell, you should see something like this during startup:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
-At this point the app is up and running.  You can access the app at http://oauth.x.y.z/.  On the apps menu, click on the `OAuth Options` menu item and you should see meaningful configurtion data for the bound OAuth service.
+At this point the app is up and running.  You can access the app at https://oauth.x.y.z/.  On the apps menu, click on the `OAuth Options` menu item and you should see meaningful configurtion data for the bound OAuth service.

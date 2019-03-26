@@ -4,7 +4,7 @@ applications:
   memory: 512M
   stack: windows2012R2
   health-check-type: none
-  command: cmd /c .\Redis --server.urls http://0.0.0.0:%PORT%
+  command: cmd /c .\Redis --server.urls https://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

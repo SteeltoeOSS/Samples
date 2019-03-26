@@ -18,7 +18,7 @@ ASP.NET Core sample app illustrating how to use the Steeltoe [CloudFoundry](http
 
 
 # What to expect
-The cf push will create an app in the space by the name `cloud`. You can hit the app @ `http://cloud.x.y.z/`.
+The cf push will create an app in the space by the name `cloud`. You can hit the app @ `https://cloud.x.y.z/`.
 
 Use the menus at the top of the app to see various output:
 
@@ -36,7 +36,7 @@ On a Linux cell, you should see something like this during startup:
    2017-08-15T09:59:17.08-0600 [APP/PROC/WEB/0] OUT Content root path: /home/vcap/app
    2017-08-15T09:59:17.08-0600 [APP/PROC/WEB/0] OUT Hosting environment: Development
    2017-08-15T09:59:17.08-0600 [APP/PROC/WEB/0] OUT Application started. Press Ctrl+C to shut down.
-   2017-08-15T09:59:17.08-0600 [APP/PROC/WEB/0] OUT Now listening on: http://0.0.0.0:8080
+   2017-08-15T09:59:17.08-0600 [APP/PROC/WEB/0] OUT Now listening on: https://0.0.0.0:8080
    2017-08-15T09:59:17.69-0600 [CELL/0] OUT Container became healthy
 
 ```

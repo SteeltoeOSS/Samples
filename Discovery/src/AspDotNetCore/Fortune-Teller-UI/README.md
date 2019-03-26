@@ -1,5 +1,5 @@
 # Fortune-Teller-UI - ASP.NET Core MVC Application
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
 # Pre-requisites - Local
 
@@ -87,7 +87,7 @@ On a Windows cell, you should see something like this during startup:
 2016-05-14T06:38:48.12-0600 [APP/0]      OUT Now listening on: http://*:58442
 2016-05-14T06:38:48.12-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
 ```
-At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit http://fortuneui.x.y.z/ to see it!
+At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit https://fortuneui.x.y.z/ to see it!
 
 # Enabling SSL usage on Cloud Foundry
 

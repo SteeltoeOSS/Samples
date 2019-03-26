@@ -1,5 +1,5 @@
 # Fortune-Teller-UI - ASP.NET 4 MVC Application
-ASP.NET 4 MVC sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
+ASP.NET 4 MVC sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
 Note: This application is built using the Autofac IOC container.
 # Pre-requisites - Running Local
@@ -80,5 +80,5 @@ You should see something like this during startup:
 2016-11-22T09:48:04.93-0700 [APP/0]      OUT 2016-11-22 16:48:04Z|INFO|Starting web server instance...
 2016-11-22T09:48:05.04-0700 [APP/0]      OUT Server Started.... press CTRL + C to stop
 ```
-At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit http://fortuneui.x.y.z/ to see it!
+At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit https://fortuneui.x.y.z/ to see it!
 

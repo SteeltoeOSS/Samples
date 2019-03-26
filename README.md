@@ -15,7 +15,7 @@ All new development is done on the dev branch. More stable versions of the sampl
 
 # Documentation
 
-If you are looking for documentation on how to use the Steeltoe components, you can find that [here](http://steeltoe.io/docs/).
+If you are looking for documentation on how to use the Steeltoe components, you can find that [here](https://steeltoe.io/docs/).
 
 # Building & Running
 

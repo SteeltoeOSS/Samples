@@ -1,5 +1,5 @@
 # Simple - ASP.NET 4.x Sample Application
-ASP.NET 4.x sample app illustrating how to use [Spring Cloud Config Server](http://projects.spring.io/spring-cloud/) as a configuration source.
+ASP.NET 4.x sample app illustrating how to use [Spring Cloud Config Server](https://projects.spring.io/spring-cloud/) as a configuration source.
 
 # Pre-requisites
 
