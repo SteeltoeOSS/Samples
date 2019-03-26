@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="https://www.bing.com/" elementFormDefault="qualified" targetNamespace="https://www.bing.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence />

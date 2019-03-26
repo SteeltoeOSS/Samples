@@ -43,7 +43,7 @@ On a Windows cell, you should see something like this during startup:
 2017-08-17T08:48:19.51-0600 [STG/0] OUT Successfully destroyed container
 2017-08-17T08:48:20.24-0600 [CELL/0] OUT Successfully created container
 2017-08-17T08:48:29.33-0600 [APP/PROC/WEB/0] OUT Running .\CloudFoundry
-2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Now listening on: http://0.0.0.0:56925
+2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Now listening on: https://0.0.0.0:56925
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Hosting environment: Development
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Content root path: C:\containerizer\B91BBA946E8B925107\user\app
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Application started. Press Ctrl+C to shut down.
@@ -57,14 +57,14 @@ Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.pivotal.i
 
 ## View Application Metrics in PCF Metrics
 
-If you wish to collect and view applications metrics in [PCF Metrics](http://docs.pivotal.io/pcf-metrics/1-4/index.html), you first must bind an instance of the [Metrics Forwarder](https://docs.pivotal.io/metrics-forwarder/index.html) service to your application and restart it.  Once thats complete custom metrics will be collected and automatically exported to the Metrics Forwarder service.  
+If you wish to collect and view applications metrics in [PCF Metrics](https://docs.pivotal.io/pcf-metrics/1-4/index.html), you first must bind an instance of the [Metrics Forwarder](https://docs.pivotal.io/metrics-forwarder/index.html) service to your application and restart it.  Once thats complete custom metrics will be collected and automatically exported to the Metrics Forwarder service.  
 
 1. cf target -o myorg -s development
 2. cf create-service metrics-forwarder unlimited my-metrics
 3. cf bind-service actuator my-metrics
 4. cf restart actuator
 
-To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/products/apm) tool from Pivotal. Follow the instructions in the [documentation](http://docs.pivotal.io/pcf-metrics/1-4/) and pay particular attention to the section on viewing [Custom Metrics](http://docs.pivotal.io/pcf-metrics/1-4/using.html).
+To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/products/apm) tool from Pivotal. Follow the instructions in the [documentation](https://docs.pivotal.io/pcf-metrics/1-4/) and pay particular attention to the section on viewing [Custom Metrics](https://docs.pivotal.io/pcf-metrics/1-4/using.html).
 
 ---
 
