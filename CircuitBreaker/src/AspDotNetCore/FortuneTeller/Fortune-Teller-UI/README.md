@@ -1,10 +1,10 @@
 # Fortune-Teller-UI - ASP.NET Core MVC Application
 
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](https://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix Command with fallback ability when communicating with the Fortune service.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_circuit_breaker_hystrix_clients) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix Command with fallback ability when communicating with the Fortune service.
 
 In addition, the Fortune-Teller-UI also illustrates how to use a Hystrix Collapser to combine, or 'batch up', multiple requests to backend micro-services endpoints.
 
-This sample also illustrates how to use the [Hystrix Dashboard](https://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
+This sample also illustrates how to use the [Hystrix Dashboard](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_circuit_breaker_hystrix_dashboard) to gather status and metrics of the Hystrix command used in communications.
 
 ## Pre-requisites - Local
 

@@ -4,7 +4,7 @@ applications:
   buildpacks:
    - dotnet_core_buildpack
   memory: 256M
-  command: cd ${HOME} && ./CloudFoundryJwtAuthentication --server.urls https://0.0.0.0:${PORT}
+  command: cd ${HOME} && ./CloudFoundryJwtAuthentication
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

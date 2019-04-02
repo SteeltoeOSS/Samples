@@ -4,7 +4,7 @@
 :!toc-title:
 :sccs: Spring Cloud Config Server
 
-ASP.NET Core sample app illustrating how to use https://cloud.spring.io/spring-cloud-config/[{sccs}] as a configuration source.
+ASP.NET Core sample app illustrating how to use https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config_server[{sccs}] as a configuration source.
 
 == Prepare
 
