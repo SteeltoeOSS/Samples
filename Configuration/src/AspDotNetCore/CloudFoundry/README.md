@@ -17,7 +17,7 @@ ASP.NET Core sample app illustrating how to use the Steeltoe [CloudFoundry](http
 
 ## What to expect
 
-The cf push will create an app in the space by the name `cloud`. You can hit the app @ `http://cloud.x.y.z/`.
+The cf push will create an app in the space by the name `cloud`. You can hit the app @ `https://cloud.x.y.z/`.
 
 Use the menus at the top of the app to see various output:
 

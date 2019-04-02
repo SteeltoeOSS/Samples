@@ -5,7 +5,7 @@ applications:
    - dotnet_core_buildpack
   memory: 256M
   disk_quota: 200M
-  command: cd ${HOME} && ./PostgreSql --server.urls http://0.0.0.0:${PORT}
+  command: cd ${HOME} && ./PostgreSql
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:
