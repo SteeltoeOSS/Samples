@@ -2,7 +2,8 @@
 applications:
 - name: fortuneService
   random-route: true
-  buildpack: binary_buildpack
+  buildpacks:
+   - dotnet_core_buildpack
   memory: 512M
   stack: windows2012R2
   command: cmd /c .\Fortune-Teller-Service --server.urls http://*:%PORT%

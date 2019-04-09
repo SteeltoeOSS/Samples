@@ -11,6 +11,7 @@
 
     <!-- Lab06 Start-->
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.RandomValueBase" Version="2.2.0" />
     <!-- Lab06 End-->
     
     <!-- Lab07 Start-->

@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 
 // Lab06 Start
 using Steeltoe.Extensions.Configuration.ConfigServer;
+using Steeltoe.Extensions.Configuration.Placeholder;
+using Steeltoe.Extensions.Configuration.RandomValue;
 // Lab06 End
 
 // Lab11 Start
@@ -42,6 +44,9 @@ namespace Fortune_Teller_UI
                     // Lab06 End
 
                     config.AddEnvironmentVariables();
+
+                    config.AddRandomValueSource();
+                    config.AddPlaceholderResolver();
 
                     if (args != null)
                     {

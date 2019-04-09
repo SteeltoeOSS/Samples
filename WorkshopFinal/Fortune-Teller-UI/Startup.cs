@@ -35,6 +35,7 @@ using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Discovery.Eureka;
+using Microsoft.AspNetCore.HttpOverrides;
 // Lab11 End
 
 
@@ -176,6 +177,10 @@ namespace Fortune_Teller_UI
             app.UseSession();
 
             // Lab10 Start
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
             app.UseAuthentication();
             // Lab10 End
 

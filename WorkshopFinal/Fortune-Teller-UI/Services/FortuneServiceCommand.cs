@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steeltoe.CircuitBreaker.Hystrix;
 
@@ -11,14 +12,17 @@ namespace Fortune_Teller_UI.Services
     {
         IFortuneService _fortuneService;
         ILogger<FortuneServiceCommand> _logger;
+        string fallbackText;
 
         public FortuneServiceCommand(IHystrixCommandOptions options,
             IFortuneService fortuneService, 
-            ILogger<FortuneServiceCommand> logger) : base(options)
+            ILogger<FortuneServiceCommand> logger,
+            IConfiguration configuration) : base(options)
         {
             _fortuneService = fortuneService;
             _logger = logger;
             IsFallbackUserDefined = true;
+            fallbackText = configuration.GetValue<string>("fallbackFortune");
         }
         public async Task<Fortune> RandomFortuneAsync()
         {
@@ -34,7 +38,7 @@ namespace Fortune_Teller_UI.Services
         protected override async Task<Fortune> RunFallbackAsync()
         {
             _logger.LogInformation("RunFallback");
-            return await Task.FromResult<Fortune>(new Fortune() { Id = 9999, Text = "You will have a happy day!" });
+            return await Task.FromResult<Fortune>(new Fortune() { Id = 9999, Text = fallbackText });
         }
     }
     // Lab09 End
