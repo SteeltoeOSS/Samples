@@ -1,0 +1,10 @@
+﻿---
+applications:
+- name: single-signon-vb
+  buildpacks:
+   - hwc_buildpack
+  command: .cloudfoundry\hwc.exe
+  memory: 512M
+  stack: windows2016
+  services:
+   - myOAuthService
