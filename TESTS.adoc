@@ -162,7 +162,7 @@ Tags can be used to specify a subset of tests to run.  Tags are specified using 
 
 * Runtime Tags
 ** `win-10-x64`
-** `ubuntu.14.04-x64`
+** `ubuntu.16.04-x64`
 
 * Runtime Environment Tags
 ** `cloud`
@@ -171,7 +171,7 @@ Tags can be used to specify a subset of tests to run.  Tags are specified using 
 .Example: Run tests for .NET Core App 2.0 framework targeting the Ubuntu runtime
 [source,bat]
 ----
-C:> test-run -t netcoreapp2.0 -t ubuntu.14.04-x64
+C:> test-run -t netcoreapp2.0 -t ubuntu.16.04-x64
 ----
 
 .Example: Run tests that run locally

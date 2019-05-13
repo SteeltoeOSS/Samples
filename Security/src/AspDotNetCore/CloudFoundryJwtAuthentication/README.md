@@ -16,10 +16,10 @@ This sample illustrates how you can secure your web api endpoints using JWT Bear
 1. cd samples/Security/src/CloudFoundryJwtAuthentication
 1. dotnet restore --configfile nuget.config
 1. Publish app to a directory selecting the framework and runtime you want to run on.
-    * `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`
+    * `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`
     * `dotnet publish -f netcoreapp2.1 -r win10-x64`
 1. Push the app using the appropriate manifest.
-    * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish`
+    * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish`
     * `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
 
 The provided manifest(s) will create an app named `jwtauth` and attempt to bind it to `myOAuthService`.
