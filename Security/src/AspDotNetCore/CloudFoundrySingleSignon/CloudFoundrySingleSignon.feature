@@ -41,8 +41,8 @@ Feature: CloudFoundry Single SignOn
 
     @#153028887
     @netcoreapp2.1
-    @ubuntu.14.04-x64
-    Scenario: CloudFoundry Single SignOn for .Net Core 2.1 (ubuntu.14.04-x64)
+    @ubuntu.16.04-x64
+    Scenario: CloudFoundry Single SignOn for .Net Core 2.1 (ubuntu.16.04-x64)
         Given you have at least .Net Core SDK 2.1.300 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
@@ -63,8 +63,8 @@ Feature: CloudFoundry Single SignOn
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
         And you run: dotnet restore
-        And you run: dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
-        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish
+        And you run: dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64
+        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish
         And you wait until CloudFoundry app single-signon is started
         # Test authentication
         When you get https://single-signon.x.y.z/Home/About
