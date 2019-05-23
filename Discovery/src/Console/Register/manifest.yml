@@ -1,0 +1,11 @@
+﻿---
+applications:
+- name: eureka-register
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 512M
+  stack: cflinuxfs3
+  health-check-type: process
+  no-route: true
+  services:
+   - myDiscoveryService
