@@ -65,8 +65,8 @@
     <Reference Include="Microsoft.Extensions.Configuration.EnvironmentVariables, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.EnvironmentVariables.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Configuration.EnvironmentVariables.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Json, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.Json.2.0.2\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll</HintPath>
@@ -74,14 +74,14 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.0.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.2.0.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=2.0.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.2.0.1\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.2.1.1\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Http, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Http.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Http.dll</HintPath>

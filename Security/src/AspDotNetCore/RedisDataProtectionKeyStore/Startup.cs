@@ -44,9 +44,6 @@ namespace RedisDataProtectionKeyStore
         {
             app.UseSession();
 
-            loggerFactory.AddConsole(LogLevel.Debug);
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
