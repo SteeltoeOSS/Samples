@@ -8,7 +8,9 @@ namespace FortuneTellerService4.Models
 {
     public static class SampleData
     {
-        internal static FortuneContext InitializeFortunes()
+        public static FortuneContext FortuneContext { get; internal set; }
+
+        internal static void InitializeFortunes()
         {
             var fortunes = GetFortunes();
 
@@ -17,7 +19,7 @@ namespace FortuneTellerService4.Models
             {
                 dict.Add(f.Id, f);
             }
-            return new FortuneContext(dict);
+            FortuneContext = new FortuneContext(dict);
    
         }
 

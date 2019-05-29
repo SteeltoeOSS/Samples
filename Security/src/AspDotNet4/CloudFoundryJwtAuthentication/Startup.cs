@@ -9,6 +9,7 @@ namespace CloudFoundryJwtAuthentication
     {
         public void Configuration(IAppBuilder app)
         {
+            ApplicationConfig.RegisterConfig("development");
             ConfigureAuth(app);
         }
     }

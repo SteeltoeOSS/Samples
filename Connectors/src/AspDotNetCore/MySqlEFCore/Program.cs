@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Logging;
 using System;
 using System.IO;
 
@@ -24,6 +25,19 @@ namespace MySqlEFCore
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+                var config = services.GetService<IConfiguration>();
+                if (config.GetValue<bool>("multipleMySqlDatabases"))
+                {
+                    try
+                    {
+                        MoreSampleData.InitializeMyContexts(services);
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error occurred seeding the second DB.");
+                    }
                 }
             }
 
@@ -51,7 +65,7 @@ namespace MySqlEFCore
                 .ConfigureLogging((context, builder) =>
                 {
                     builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddConsole();
+                    builder.AddDynamicConsole();
                 })
                 .Build();
         }

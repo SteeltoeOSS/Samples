@@ -1,8 +1,8 @@
 ---
 applications:
 - name: musicui
-  memory: 256M
-  stack: windows2012R2
+  memory: 512M
+  stack: windows2016
   command: .\MusicStoreUI
   env:
     ASPNETCORE_ENVIRONMENT: Production

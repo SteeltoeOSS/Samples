@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using CloudFoundrySingleSignon.App_Start;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(CloudFoundrySingleSignon.Startup))]
@@ -9,6 +10,7 @@ namespace CloudFoundrySingleSignon
     {
         public void Configuration(IAppBuilder app)
         {
+            ApplicationConfig.RegisterConfig("development");
             ConfigureAuth(app);
         }
     }

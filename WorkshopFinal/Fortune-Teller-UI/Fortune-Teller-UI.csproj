@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Fortune_Teller_UI</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+
+    <!-- Lab06 Start-->
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.RandomValueBase" Version="2.2.0" />
+    <!-- Lab06 End-->
+    
+    <!-- Lab07 Start-->
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="2.2.0" />
+    <!-- Lab07 End-->
+    
+    <!-- Lab08 Start-->
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" version="2.2.0" />
+    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" version="2.2.0" />
+    <!-- Lab08 End-->
+    
+    <!-- Lab10 Start-->
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.2.0" />
+    <!-- Lab10 End-->
+  </ItemGroup>
+
+  <!-- Lab09 Start-->
+  <ItemGroup Condition="'$(BUILD)' == ''">
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="2.2.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BUILD)' == 'LOCAL'">
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="2.2.0" />
+  </ItemGroup>
+  <!-- Lab09 End-->
+  
+ <!-- Lab11 Start--> 
+  <ItemGroup>
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.2.0" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="2.2.0" />
+    <PackageReference Include="OpenCensus" Version="0.1.0-alpha-42253" />
+    <PackageReference Include="OpenCensus.Exporter.Zipkin" Version="0.1.0-alpha-42253" />
+    
+    <PackageReference Include="GitInfo" Version="2.0.20" />
+    <None Include="git.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="_GitProperties" AfterTargets="CoreCompile">
+    <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRoot)" Overwrite="true" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id=$(GitSha)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.tags=$(GitTag)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.branch=$(GitBranch)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.time=$([System.DateTime]::Now.ToString('O'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.user.name=$([System.Environment]::GetEnvironmentVariable('USERNAME'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
+  </Target>
+  <!-- Lab11 End-->
+  
+  
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+  
+</Project>

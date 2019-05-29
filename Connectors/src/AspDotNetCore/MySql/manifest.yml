@@ -1,10 +1,11 @@
 ﻿---
 applications:
 - name: mysql-connector
-  buildpack: dotnet_core_buildpack
+  buildpacks:
+   - dotnet_core_buildpack
   memory: 256M
-  disk_quota: 100M
-  command: cd ${HOME} && ./MySql --server.urls http://0.0.0.0:${PORT}
+  disk_quota: 200M
+  command: cd ${HOME} && ./MySql
   env:
     ASPNETCORE_ENVIRONMENT: Development
   services:

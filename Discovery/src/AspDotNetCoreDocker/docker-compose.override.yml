@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  fortune-teller-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:5000"
+
+  fortune-teller-ui:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5555:5555"
+
+  eureka:
+    image: steeltoeoss/eurekaserver
+    ports:
+      - "8761:8761"

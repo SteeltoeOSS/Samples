@@ -1,0 +1,11 @@
+﻿@model IEnumerable<MoreTestData>
+@{
+    ViewData["Title"] = "Steeltoe EF Core MySQL Sample";
+}
+<h2>More Test data from MySql:</h2>
+<ul>
+    @foreach (var td in Model)
+    {
+        <li>@td.Id: @td.Data</li>
+    }
+</ul>

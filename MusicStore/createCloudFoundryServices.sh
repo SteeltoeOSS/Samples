@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -ex
 
-db_service=p-mysql
-db_plan=100mb
+db_service=p.mysql
+db_plan=db-small
 
 
 if  [ "$1" != "" ]; then 

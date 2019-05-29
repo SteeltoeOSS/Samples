@@ -2,7 +2,7 @@
 applications:
 - name: fortuneui
   memory: 512M
-  stack: windows2012R2
+  stack: windows2016
   command: .\Fortune-Teller-UI
   env:
     ASPNETCORE_ENVIRONMENT: Development

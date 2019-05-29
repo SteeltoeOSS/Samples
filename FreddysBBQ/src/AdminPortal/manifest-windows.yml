@@ -2,7 +2,7 @@
 applications:
 - name: admin-portal
   memory: 256M
-  stack: windows2012R2
+  stack: windows2016
   command: .\AdminPortal
   env:
     ASPNETCORE_ENVIRONMENT: Development

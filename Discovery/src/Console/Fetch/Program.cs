@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Discovery.Eureka;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace Fetch
 {
@@ -13,6 +17,7 @@ namespace Fetch
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.SetBasePath(Environment.CurrentDirectory);
             builder.AddJsonFile("appsettings.json");
+            builder.AddCloudFoundry();
             var configuration = builder.Build();
 
             // Setup logging
@@ -20,11 +25,18 @@ namespace Fetch
             factory.AddConsole(configuration.GetSection("Logging"));
 
             // Build Eureka clients config from configuration
-            var clientConfig = new EurekaClientConfig();
-            ConfigurationBinder.Bind(configuration.GetSection("eureka:client"), clientConfig);
+            var clientOpts = new EurekaClientOptions();
+            ConfigurationBinder.Bind(configuration.GetSection("eureka:client"), clientOpts);
+
+            // if a Cloud Foundry Service Binding is found, update config
+            var si = configuration.GetServiceInfos<EurekaServiceInfo>();
+            if (si.Any())
+            {
+                EurekaPostConfigurer.UpdateConfiguration(configuration, si.First(), clientOpts);
+            }
 
             // Create the Eureka client, start fetching registry in background thread
-            var client = new DiscoveryClient(clientConfig, null, factory);
+            var client = new DiscoveryClient(clientOpts, null, factory);
 
             do
             {

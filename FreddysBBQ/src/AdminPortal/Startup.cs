@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pivotal.Discovery.Client;
@@ -36,7 +37,8 @@ namespace AdminPortal
                 {
                     options.AccessDeniedPath = new PathString("/Home/AccessDenied");
                 })
-                .AddCloudFoundryOAuth(Configuration);
+                //.AddCloudFoundryOAuth(Configuration);
+                .AddCloudFoundryOpenIdConnect(Configuration);
 
             services.AddAuthorization(options =>
             {
@@ -66,6 +68,11 @@ namespace AdminPortal
             }
 
             app.UseStaticFiles();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
 
             app.UseAuthentication();
 

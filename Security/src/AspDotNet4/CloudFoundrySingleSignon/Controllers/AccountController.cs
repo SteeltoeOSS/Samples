@@ -1,4 +1,5 @@
 ﻿using CloudFoundrySingleSignon.Models;
+using Steeltoe.Security.Authentication.CloudFoundry;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,7 +9,8 @@ namespace CloudFoundrySingleSignon.Controllers
     {
         public ActionResult AuthorizeSSO(string returnUrl)
         {
-            return new ChallengeResult("PivotalSSO", returnUrl ?? Url.Action("Secure", "Home"));
+            // the value for provider must match the value used for AuthenticationType when configuring authentication (in Startup.Auth.cs)
+            return new ChallengeResult(CloudFoundryDefaults.AuthenticationScheme, returnUrl ?? Url.Action("Secure", "Home"));
         }
 
         public ActionResult AccessDenied()

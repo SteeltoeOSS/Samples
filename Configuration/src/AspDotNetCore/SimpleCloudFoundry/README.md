@@ -1,6 +1,6 @@
 # SimpleCloudFoundry - ASP.NET Core Sample Application
 
-ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](http://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
+ASP.NET Core sample app illustrating how to use [Config Server for Pivotal Cloud Foundry](https://docs.pivotal.io/spring-cloud-services/config-server/) as a configuration source.
 
 ## Pre-requisites
 
@@ -22,8 +22,8 @@ You must first create an instance of the Config Server service in a org/space.
 1. cf target -o myorg -s development
 1. cd src/AspDotNetCore/SimpleCloudFoundry
 1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
 
 > Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
@@ -31,7 +31,7 @@ You must first create an instance of the Config Server service in a org/space.
 
 ## What to expect
 
-The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `http://foo.x.y.z/`.
+The cf push will create an app in the space by the name `foo` and will bind the `myConfigServer` service instance to the app. You can hit the app @ `https://foo.x.y.z/`.
 
 The Config Servers Git repository has been set to: `https://github.com/spring-cloud-samples/config-repo`
 

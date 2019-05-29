@@ -32,7 +32,7 @@ Once you have finished deploying and verifing the Java version, you are then rea
 First you will need to create a new MySql service for our .NET version of the `Order REST API` service. Run the following commands:
 
 ```bash
-cf create-service p-mysql 100mb mysql-orders
+cf create-service p.mysql db-small mysql-orders
 ```
 
 ## Update admin-portal SSO Settings
@@ -48,7 +48,7 @@ Bound apps: customer-portal,menu-service,admin-portal,order-service
 Tags:
 Plan: auth
 Description: Single Sign-On as a Service
-Documentation url: http://docs.pivotal.io/p-identity/index.html
+Documentation url: https://docs.pivotal.io/p-identity/index.html
 Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_GUID}/instances/{INSTANCE_GUID}/
 ...
 ```
@@ -64,7 +64,7 @@ https://admin-portal.apps.testcloud.com
 then after making the changes, the Auth Redirect URIs would look as follows:
 
 ```bash
-https://admin-portal.apps.testcloud.com,http://admin-portal.apps.testcloud.com/signin-cloudfoundry
+https://admin-portal.apps.testcloud.com,https://admin-portal.apps.testcloud.com/signin-cloudfoundry
 ```
 
 Save your changes  .... (i.e. `Save Config`)
@@ -80,8 +80,8 @@ cf delete order-service -f
 dotnet publish -f netcoreapp2.1 -r win10-x64
 cf push -f manifest-windows.yml -p bin\Debug\netcoreapp2.1\win10-x64\publish
 # OR for Linux
-dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
-cf push -f manifest.yml -p bin\Debug\netcoreapp2.1\ubuntu.14.04-x64\publish
+dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64
+cf push -f manifest.yml -p bin\Debug\netcoreapp2.1\ubuntu.16.04-x64\publish
 
 cd ..\AdminPortal
 cf delete admin-portal -f
@@ -89,8 +89,8 @@ cf delete admin-portal -f
 dotnet publish -f netcoreapp2.1 -r win10-x64
 cf push -f manifest-windows.yml -p bin\Debug\netcoreapp2.1\win10-x64\publish
 # OR for Linux
-dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
-cf push -f manifest.yml -p bin\Debug\netcoreapp2.1\ubuntu.14.04-x64\publish
+dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64
+cf push -f manifest.yml -p bin\Debug\netcoreapp2.1\ubuntu.16.04-x64\publish
 ```
 
 At this point the app should continue to work as it did before.  Any orders you might have had before, will be gone as you are now starting with a new clean order database. 

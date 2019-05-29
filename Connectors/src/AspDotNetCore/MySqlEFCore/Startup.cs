@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Management.CloudFoundry;
 
 namespace MySqlEFCore
 {
@@ -19,7 +21,22 @@ namespace MySqlEFCore
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Context and use MySql as provider ... provider will be configured from VCAP_ info
-            services.AddDbContext<TestContext>(options => options.UseMySql(Configuration));
+            if (Configuration.GetValue<bool>("multipleMySqlDatabases"))
+            {
+                // For multiple databases, specify the service binding name
+                // review appsettings.development.json to see how local connection info is provided
+                services.AddDbContext<TestContext>(options => options.UseMySql(Configuration, "myMySqlService"));
+                services.AddMySqlHealthContributor(Configuration, "myMySqlService");
+                services.AddDbContext<SecondTestContext>(options => options.UseMySql(Configuration, "myOtherMySqlService"));
+                services.AddMySqlHealthContributor(Configuration, "myOtherMySqlService");
+            }
+            else
+            {
+                services.AddDbContext<TestContext>(options => options.UseMySql(Configuration));
+                services.AddMySqlHealthContributor(Configuration);
+            }
+
+            services.AddCloudFoundryActuators(Configuration);
 
             // Add framework services.
             services.AddMvc();
@@ -38,6 +55,8 @@ namespace MySqlEFCore
             }
 
             app.UseStaticFiles();
+
+            app.UseCloudFoundryActuators();
 
             app.UseMvc(routes =>
             {

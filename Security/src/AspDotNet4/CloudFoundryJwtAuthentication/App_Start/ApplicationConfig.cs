@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using System;
 using System.IO;
@@ -7,7 +8,8 @@ namespace CloudFoundryJwtAuthentication
 {
     public class ApplicationConfig
     {
-        public static IConfiguration Configuration { get; set; }
+        public static IConfiguration Configuration { get; private set; }
+        public static LoggerFactory LoggerFactory { get; private set; }
 
         public static void RegisterConfig(string environment)
         {
@@ -20,6 +22,9 @@ namespace CloudFoundryJwtAuthentication
                 .AddCloudFoundry();
 
             Configuration = builder.Build();
+
+            LoggerFactory = new LoggerFactory();
+            LoggerFactory.AddConsole(LogLevel.Trace);
         }
         public static string GetContentRoot()
         {

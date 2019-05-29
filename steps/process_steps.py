@@ -1,3 +1,4 @@
+from behave import *
 from command import Command, CommandException
 import re
 import socket

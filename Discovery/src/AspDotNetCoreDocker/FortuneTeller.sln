@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76DE0ABA-25A4-4E3E-A168-33BB02BD986F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-UI", "Fortune-Teller-UI\Fortune-Teller-UI.csproj", "{49EDF3B4-33A1-4316-92BC-718FDF175250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-Service", "Fortune-Teller-Service\Fortune-Teller-Service.csproj", "{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76DE0ABA-25A4-4E3E-A168-33BB02BD986F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76DE0ABA-25A4-4E3E-A168-33BB02BD986F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76DE0ABA-25A4-4E3E-A168-33BB02BD986F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76DE0ABA-25A4-4E3E-A168-33BB02BD986F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49EDF3B4-33A1-4316-92BC-718FDF175250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49EDF3B4-33A1-4316-92BC-718FDF175250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49EDF3B4-33A1-4316-92BC-718FDF175250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49EDF3B4-33A1-4316-92BC-718FDF175250}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {244C154C-92BE-438E-B09A-AEB93A6E06E1}
+	EndGlobalSection
+EndGlobal

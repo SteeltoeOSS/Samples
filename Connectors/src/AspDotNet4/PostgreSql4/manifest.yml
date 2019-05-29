@@ -2,7 +2,8 @@
 applications:
 - name: postgresql-connector-4x
   memory: 512M
-  stack: windows2012R2
-  buildpack: hwc_buildpack
+  stack: windows2016
+  buildpacks:
+   - hwc_buildpack
   services:
    - myPostgres

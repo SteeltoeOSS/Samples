@@ -4,7 +4,7 @@ How to setup and run the sample tests.
 :!toc-title:
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :linkattrs:
-:uri-behave-cli: http://pythonhosted.org/behave/behave.html
+:uri-behave-cli: https://pythonhosted.org/behave/behave.html
 :uri-behave-ini: link:behave.ini
 :uri-brew: https://brew.sh/
 :uri-choco: https://chocolatey.org/
@@ -106,8 +106,6 @@ You can configure the tests to use their own credentials by setting the followin
 * `cf_password`
 * `cf_org`
 
-Set `cf_domain` if the target CloudFoundry domain has been changed from its default.
-
 It is expected that a CloudFoundry space named `development` exists for the configured credentials.
 The `development` space will be used as the target from which to create additional spaces for running tests.
 
@@ -119,7 +117,6 @@ cf_apiurl = api.run.pez.pivotal.io
 cf_username = myuser
 cf_password = mypass
 cf_org = p-steeltoe
-cf_domain = cfapps.pez.pivotal.io
 ----
 
 == Run
@@ -165,7 +162,7 @@ Tags can be used to specify a subset of tests to run.  Tags are specified using 
 
 * Runtime Tags
 ** `win-10-x64`
-** `ubuntu.14.04-x64`
+** `ubuntu.16.04-x64`
 
 * Runtime Environment Tags
 ** `cloud`
@@ -174,7 +171,7 @@ Tags can be used to specify a subset of tests to run.  Tags are specified using 
 .Example: Run tests for .NET Core App 2.0 framework targeting the Ubuntu runtime
 [source,bat]
 ----
-C:> test-run -t netcoreapp2.0 -t ubuntu.14.04-x64
+C:> test-run -t netcoreapp2.0 -t ubuntu.16.04-x64
 ----
 
 .Example: Run tests that run locally
@@ -228,11 +225,6 @@ C:> test-run -Dfoo=bar
 | _string_
 |
 | CloudFoundry API endpoint
-
-| `cf_domain`
-| _string_
-|
-| CloudFoundry domain; if not set, domain derived from the API endpoint
 
 | `cf_max_attempts`
 | _integer_

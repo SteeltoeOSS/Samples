@@ -6,7 +6,7 @@ namespace MySqlEFCore
 {
     public class TestContext : DbContext
     {
-        public TestContext(DbContextOptions options) : base(options)
+        public TestContext(DbContextOptions<TestContext> options) : base(options)
         {
 
         }

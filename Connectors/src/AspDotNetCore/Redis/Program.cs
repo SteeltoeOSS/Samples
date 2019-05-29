@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Logging;
 using System.IO;
 
 namespace Redis
@@ -29,7 +30,7 @@ namespace Redis
                 .ConfigureLogging((context, builder) =>
                 {
                     builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddConsole();
+                    builder.AddDynamicConsole();
                 })
                 .Build();
 

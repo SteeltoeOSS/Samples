@@ -32,6 +32,10 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Home" asp-action="MySqlData">MySql Data</a></li>
+                    @if (ViewBag.MultipleDatabases == true)
+                    {
+                        <li><a asp-controller="Home" asp-action="MoreMySqlData">More MySql Data</a></li>
+                    }
                 </ul>
             </div>
         </div>

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Steeltoe.CloudFoundry.ConnectorAutofac;
 using Steeltoe.Common.Configuration.Autofac;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
@@ -18,7 +19,6 @@ namespace CloudFoundryOwinAutofac
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
-            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
@@ -29,6 +29,7 @@ namespace CloudFoundryOwinAutofac
 
             // Register all the controllers with Autofac
             builder.RegisterControllers(typeof(Global).Assembly);
+            builder.RegisterApiControllers(typeof(Global).Assembly);
             builder.RegisterCloudFoundryOptions(ApplicationConfig.Configuration);
             builder.RegisterConfiguration(ApplicationConfig.Configuration);
             builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
@@ -47,6 +48,7 @@ namespace CloudFoundryOwinAutofac
             // Uncomment if you want to enable exporting of metrics to the Cloud Foundry metrics exporter, it's not enabled by default
             // container.StartMetricsExporter();
 
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(ApplicationConfig.Container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }

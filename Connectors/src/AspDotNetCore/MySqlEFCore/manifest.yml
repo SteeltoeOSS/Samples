@@ -1,11 +1,13 @@
 ﻿---
 applications:
 - name: mysqlefcore-connector
-  buildpack: dotnet_core_buildpack
+  buildpacks:
+   - dotnet_core_buildpack
   memory: 256M
-  disk_quota: 100M
-  command: cd ${HOME} && ./MySqlEFCore --server.urls http://0.0.0.0:${PORT}
+  disk_quota: 200M
+  command: cd ${HOME} && ./MySqlEFCore
   env:
-    ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: Production
   services:
    - myMySqlService
+  # - myOtherMySqlService

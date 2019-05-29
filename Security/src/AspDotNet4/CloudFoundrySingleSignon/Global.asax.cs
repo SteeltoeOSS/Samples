@@ -18,7 +18,6 @@ namespace CloudFoundrySingleSignon
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            ApplicationConfig.RegisterConfig("development");
         }
     }
 }

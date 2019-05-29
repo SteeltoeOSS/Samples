@@ -7,19 +7,27 @@ def hostname(context, name):
     if FQDN, then return name unless the domain is x.y.x
     if domain is x.y.z, return the hostname per the CloudFoundry route
     '''
+    context.log.info('resolving hostname for {}'.format(name))
     if re.search('^localhost(:\d+)$', name):
         return name
     if '.' in name:
         host, domain = name.split('.', 1)
-        domain = domainname(context, domain)
     else:
         host, domain = name, None
-    return '{}-{}{}{}'.format(host, context.cf_space, '.' if domain else '', domain if domain else '')
+    host = '{}-{}'.format(host, context.cf_space)
+    context.log.info('host -> {}'.format(host))
+    if domain:
+        domain = domainname(context, domain)
+        context.log.info('domain -> {}'.format(domain))
+    resolved = '{}.{}'.format(host, domain) if domain else host
+    context.log.info('resolved name -> {}'.format(resolved))
+    return resolved
 
 def domainname(context, name):
-    if name != 'x.y.z':
-        return name
-    return context.cf_domain
+    resolved = name if name != 'x.y.z' else 'apps.pcfone.io'
+    context.log.info('resolved domain -> {}'.format(resolved))
+    return resolved
+
 
 def url(context, url):
     '''

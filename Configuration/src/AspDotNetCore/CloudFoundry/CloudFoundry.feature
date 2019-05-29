@@ -15,12 +15,12 @@ Feature: CloudFoundry Configuration
         Then you should see "vcap:application:application_name = cloud"
 
     @netcoreapp2.1
-    @ubuntu.14.04-x64
-    Scenario: CloudFoundry Configuration for .Net Core 2.1 (ubuntu.14.04-x64)
+    @ubuntu.16.04-x64
+    Scenario: CloudFoundry Configuration for .Net Core 2.1 (ubuntu.16.04-x64)
         Given you have at least .Net Core SDK 2.1.300 installed
         When you run: dotnet restore
-        And you run: dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64
-        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish
+        And you run: dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64
+        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish
         And you wait until CloudFoundry app cloud is started
         When you get https://cloud.x.y.z/Home/CloudFoundry
         Then you should see "vcap:application:application_name = cloud"

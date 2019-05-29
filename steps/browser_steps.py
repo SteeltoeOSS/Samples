@@ -1,5 +1,9 @@
+from behave import *
+import command
 import mechanicalsoup
+import requests
 import resolve
+import sure
 import time
 
 @when(u'you get {url}')
@@ -45,3 +49,18 @@ def step_impl(context, url):
 @then(u'you should see "{text}"')
 def step_impl(context, text):
     context.browser.get_current_page().get_text().should.match(r'.*{}.*'.format(text))
+
+@then(u'you should be able to access CloudFoundry app {app} management endpoints')
+def step_impl(context, app):
+    url = resolve.url(context, 'https://{}.x.y.z/cloudfoundryapplication'.format(app))
+    token = get_oauth_token(context)
+    resp = requests.get(url, headers={'Authorization': token})
+    resp.status_code.should.equal(200)
+    context.log.info(resp.content)
+    for endpoint in ['info', 'health', 'loggers', 'trace', 'mappings']:
+        resp.text.should.contain('/cloudfoundryapplication/{}'.format(endpoint))
+
+def get_oauth_token(context):
+    cmd = command.Command(context, 'cf oauth-token')
+    cmd.run()
+    return cmd.stdout.strip()

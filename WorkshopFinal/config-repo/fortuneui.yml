@@ -1,0 +1,12 @@
+eureka:
+  client:
+    shouldRegisterWithEureka: false
+hystrix:
+  stream:
+    validate_certificates: false
+fortuneService:
+  scheme: http
+  address: fortuneservice
+  randomFortunePath: api/fortunes/random
+  allFortunesPath: api/fortunes/all
+

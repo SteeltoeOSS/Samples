@@ -27,10 +27,10 @@ You must first create an instance of the SQL Server service in a org/space using
 1. `cd samples/Connectors/src/AspDotNetCore/SqlServerEFCore`
 1. `dotnet restore --configfile nuget.config`
 1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`
+   * `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`
    * `dotnet publish -f net461 -r win10-x64`
 1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish`
+   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish`
    * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
 
 > Note: The provided manifest will create an app named `sqlserverefcore-connector` and attempt to bind the app to SQL Server service `mySqlServerService`.

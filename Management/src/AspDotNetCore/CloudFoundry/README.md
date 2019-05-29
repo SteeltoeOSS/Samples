@@ -18,15 +18,15 @@ This application also illustrates how to have application metrics captured and e
 You must first create an instance of the MySql service in a org/space.
 
 1. cf target -o myorg -s development
-2. cf create-service p-mysql 100mb myMySqlService
+2. cf create-service p.mysql db-small myMySqlService
 
 ## Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
 2. cd samples/Management/src/AspDotNetCore/CloudFoundry
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
-5. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+4. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`)
+5. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
 
 > Note: The provided manifest will create an app named `actuator` and attempt to bind to the the app to MySql service `myMySqlService`.
 
@@ -57,14 +57,14 @@ Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.pivotal.i
 
 ## View Application Metrics in PCF Metrics
 
-If you wish to collect and view applications metrics in [PCF Metrics](http://docs.pivotal.io/pcf-metrics/1-4/index.html), you first must bind an instance of the [Metrics Forwarder](https://docs.pivotal.io/metrics-forwarder/index.html) service to your application and restart it.  Once thats complete custom metrics will be collected and automatically exported to the Metrics Forwarder service.  
+If you wish to collect and view applications metrics in [PCF Metrics](https://docs.pivotal.io/pcf-metrics/1-4/index.html), you first must bind an instance of the [Metrics Forwarder](https://docs.pivotal.io/metrics-forwarder/index.html) service to your application and restart it.  Once thats complete custom metrics will be collected and automatically exported to the Metrics Forwarder service.  
 
 1. cf target -o myorg -s development
 2. cf create-service metrics-forwarder unlimited my-metrics
 3. cf bind-service actuator my-metrics
 4. cf restart actuator
 
-To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/products/apm) tool from Pivotal. Follow the instructions in the [documentation](http://docs.pivotal.io/pcf-metrics/1-4/) and pay particular attention to the section on viewing [Custom Metrics](http://docs.pivotal.io/pcf-metrics/1-4/using.html).
+To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/products/apm) tool from Pivotal. Follow the instructions in the [documentation](https://docs.pivotal.io/pcf-metrics/1-4/) and pay particular attention to the section on viewing [Custom Metrics](https://docs.pivotal.io/pcf-metrics/1-4/using.html).
 
 ---
 
