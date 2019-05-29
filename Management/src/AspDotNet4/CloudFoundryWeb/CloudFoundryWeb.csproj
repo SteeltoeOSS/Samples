@@ -160,17 +160,22 @@
     <Reference Include="Steeltoe.Management.Diagnostics, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.1.0\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.EndpointBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.1.0\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
+    <Reference Include="Steeltoe.Management.EndpointBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.2.0\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.EndpointWeb, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointWeb.2.1.0\lib\net461\Steeltoe.Management.EndpointWeb.dll</HintPath>
+    <Reference Include="Steeltoe.Management.EndpointWeb, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Steeltoe.Management.EndpointWeb.2.2.0\lib\net461\Steeltoe.Management.EndpointWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.ExporterBase, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.1.0\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
+    <Reference Include="Steeltoe.Management.ExporterBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.2.0\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.OpenCensus, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.1.0\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
+    <Reference Include="Steeltoe.Management.OpenCensus, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.2.0\lib\netstandard2.0\Steeltoe.Management.OpenCensus.dll</HintPath>
+    </Reference>
+    <Reference Include="Steeltoe.Management.OpenCensusBase">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensusBase.2.2.0\lib\netstandard2.0\Steeltoe.Management.OpenCensusBase.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">

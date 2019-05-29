@@ -15,6 +15,7 @@ using Steeltoe.Management.Endpoint.Health.Contributor;
 using Steeltoe.Management.Exporter.Metrics;
 using Steeltoe.Management.Exporter.Metrics.CloudFoundryForwarder;
 using Steeltoe.Management.Endpoint.Metrics;
+using Steeltoe.Management.Census.Stats;
 
 namespace CloudFoundryWeb
 {
@@ -25,7 +26,7 @@ namespace CloudFoundryWeb
         public static void ConfigureManagementActuators(IConfiguration configuration, ILoggerProvider dynamicLogger, IApiExplorer apiExplorer, ILoggerFactory loggerFactory = null)
         {
             ActuatorConfigurator.UseCloudFoundryActuators(configuration, dynamicLogger, GetHealthContributors(configuration), apiExplorer, loggerFactory);
-
+        
             // You can individually configure actuators as shown below if you don't want all of them
             //ActuatorConfigurator.UseCloudFoundrySecurity(configuration, null, loggerFactory);
             //ActuatorConfigurator.UseCloudFoundryActuator(configuration, loggerFactory);
