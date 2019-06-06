@@ -2,7 +2,7 @@ variables:
   steeltoe.max.attempts: 250
   steeltoe.cf.apiurl: api.run.pcfone.io
   steeltoe.cf.org: group-steeltoe
-  steeltoe.cf.max.attempts: 500
+  steeltoe.cf.max.attempts: -1
 trigger:
  - 2.x
 jobs:
