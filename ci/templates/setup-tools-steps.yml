@@ -1,0 +1,28 @@
+parameters:
+  dotnetMinorVersion: 2
+steps:
+- task: UseDotNet@2
+  displayName: 'Setup DotNet'
+  inputs:
+    packageType: sdk
+    version: 2.${{parameters.dotnetMinorVersion}}.x
+- script: dotnet --version
+  displayName: 'DotNet Version'
+- task: UsePythonVersion@0
+  displayName: 'Setup Python'
+  inputs:
+    versionSpec: 3.6.x
+- script: python --version
+  displayName: 'Python Version'
+- task: UseRubyVersion@0
+  displayName: 'Setup Ruby'
+  inputs:
+    versionSpec: 2.4.x
+- script: ruby --version
+  displayName: 'Ruby Version'
+- script: java -version
+  displayName: 'Java Version'
+- script: python -m pip install -r pyenv.pkgs
+  displayName: 'Setup Behave'
+- script: behave --version
+  displayName: 'Behave Version'

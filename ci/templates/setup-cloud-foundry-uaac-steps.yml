@@ -1,0 +1,5 @@
+steps:
+- script: gem install cf-uaac --platform ruby
+  displayName: 'Setup UAAC'
+- script: uaac --version
+  displayName: 'UAAC Version'
