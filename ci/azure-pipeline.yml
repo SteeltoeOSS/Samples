@@ -4,7 +4,7 @@ variables:
   steeltoe.cf.org: group-steeltoe
   steeltoe.cf.max.attempts: -1
 trigger:
- - 2.x
+ - master
 jobs:
 - template: templates/cloud-foundry-job.yml
   parameters:
