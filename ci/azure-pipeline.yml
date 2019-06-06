@@ -4,7 +4,7 @@ variables:
   steeltoe.cf.org: group-steeltoe
   steeltoe.cf.max.attempts: 500
 trigger:
- - devops-spike
+ - 2.x
 jobs:
 - template: templates/cloud-foundry-job.yml
   parameters:
