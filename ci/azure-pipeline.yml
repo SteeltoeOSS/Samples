@@ -1,0 +1,60 @@
+variables:
+  steeltoe.max.attempts: 250
+  steeltoe.cf.apiurl: api.run.pcfone.io
+  steeltoe.cf.org: group-steeltoe
+  steeltoe.cf.max.attempts: 500
+trigger:
+ - devops-spike
+jobs:
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Configuration
+    sample: CloudFoundry
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Configuration
+    sample: Simple
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Configuration
+    sample: SimpleCloudFoundry
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: MySql
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: MySqlEF6
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: MySqlEFCore
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: PostgreSql
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: PostgreEFCore
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: RabbitMQ
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: Redis
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Connectors
+    sample: SqlServerEFCore
+- template: templates/cloud-foundry-job.yml
+  parameters:
+    feature: Management
+    sample: CloudFoundry
+- template: templates/cloud-foundry-uaac-job.yml
+  parameters:
+    feature: Security
+    sample: CloudFoundrySingleSignon
