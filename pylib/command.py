@@ -73,7 +73,7 @@ class Command(object):
         self.exec()
         self.wait()
         if self.rc:
-            raise CommandException('command returned non-zero return code: {}'.format(self.rc))
+            raise CommandException('command returned non-zero return code: {}, stderr:\n{}'.format(self.rc, self.stderr))
 
     def kill(self):
         try:
