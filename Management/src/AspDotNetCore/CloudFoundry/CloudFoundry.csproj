@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="MySqlConnector" Version="0.43.0" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.SerilogDynamicLogger" Version="2.3.0-rc1" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
     <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
