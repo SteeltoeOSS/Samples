@@ -114,25 +114,25 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.2.2.0\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Autofac, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Autofac.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Common.Autofac.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Autofac.2.2.0\lib\netstandard2.0\Steeltoe.Common.Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Http, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Http.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Http.2.2.0\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryAutofac, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryAutofac.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryAutofac.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryAutofac.2.2.0\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryAutofac.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.2.0\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.2.0\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Security.DataProtection.CredHubBase, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Security.DataProtection.CredHubBase.2.2.0-rc2\lib\netstandard2.0\Steeltoe.Security.DataProtection.CredHubBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Security.DataProtection.CredHubBase.2.2.0\lib\netstandard2.0\Steeltoe.Security.DataProtection.CredHubBase.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -282,7 +282,7 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see https://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>

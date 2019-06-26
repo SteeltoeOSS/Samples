@@ -1,8 +1,8 @@
 # Fortune-Teller-Service - ASP.NET Core Microservice
 
-ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](http://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](http://cloud.spring.io/spring-cloud) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
+ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud) for registering micro services and [Spring Cloud Hystrix](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_circuit_breaker_hystrix_clients) for building resilient micro services applications. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup and the Fortune-Teller-UI uses a Hystrix command with fallback ability when communicating with the Fortune service.
 
-This sample also illustrates how to use the [Hystrix Dashboard](http://cloud.spring.io/spring-cloud) to gather status and metrics of the Hystrix command used in communications.
+This sample also illustrates how to use the [Hystrix Dashboard](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_circuit_breaker_hystrix_dashboard) to gather status and metrics of the Hystrix command used in communications.
 
 Note: You can run this either locally or on CloudFoundry.
 
@@ -62,8 +62,8 @@ You must first create an instance of the Service Registry service in a org/space
 1. cf target -o myorg -s development
 1. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service
 1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
 
 Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 

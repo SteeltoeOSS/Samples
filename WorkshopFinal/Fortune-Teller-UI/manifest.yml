@@ -1,0 +1,14 @@
+﻿---
+applications:
+- name: fortuneui
+  random-route: true
+  buildpacks:
+   - dotnet_core_buildpack
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+   - myConfigServer
+   - myDiscoveryService
+   - myRedisService
+   - myHystrixService
+   - myOAuthService

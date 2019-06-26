@@ -30,10 +30,10 @@ Next, locate the sso-setup script you'd like to execute (.cmd/.sh) from the scri
 1. cd samples/Security/src/CloudFoundrySingleSignon
 1. dotnet restore --configfile nuget.config
 1. Publish app to a directory, specifying the desired framework and runtime:
-    * `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`
+    * `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`
     * `dotnet publish -f netcoreapp2.1 -r win10-x64`
 1. Push the app using the appropriate manifest:
-    * `cf push -f manifest-sso.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish`
+    * `cf push -f manifest-sso.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish`
     * `cf push -f manifest-windows-sso.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`
 
 > Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the SSO service `mySSOService`.
@@ -51,7 +51,7 @@ bound apps: single-signon
 Tags:
 Plan: auth
 Description: Single Sign-On as a Service
-Documentation url: http://docs.pivotal.io/p-identity/index.html
+Documentation url: https://docs.pivotal.io/p-identity/index.html
 Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_GUID}/instances/{INSTANCE_GUID}/
 ...
 ```

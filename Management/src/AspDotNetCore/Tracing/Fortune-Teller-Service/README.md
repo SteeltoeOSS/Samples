@@ -2,7 +2,7 @@
 
 ASP.NET Core sample app illustrating how to use the Tracing features found in the Steeltoe Management framework. This sample requires running two additional services in order for it to run properly.
 
-First, a [Spring Cloud Eureka Server](http://cloud.spring.io/spring-cloud-static/Edgware.SR3/multi/multi_spring-cloud-eureka-server.html) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.  The Fortune-Teller-UI will discover the service using the Steeltoe Eureka client.
+First, a [Spring Cloud Eureka Server](https://cloud.spring.io/spring-cloud-static/Edgware.SR3/multi/multi_spring-cloud-eureka-server.html) for registering micro services. The Fortune-Teller-Service registers the fortuneService with the Eureka server upon startup.  The Fortune-Teller-UI will discover the service using the Steeltoe Eureka client.
 
 Second, a [Zipkin Server](https://zipkin.io/pages/quickstart) for capturing and viewing trace information captured by both Fortune-Teller components.
 
@@ -77,18 +77,18 @@ You must first create an instance of the Service Registry service in a org/space
 
 1. Download latest zipkin server jar file from [here](https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server) (e.g. zipkin-server-2.8.4-exec.jar).
 1. Start the zipkin server on Cloud Foundry. (e.g. cf push zipkin-server -p ./zipkin-server-2.8.4-exec.jar)
-1. Verify server is up and running.   (e.g. http://zipkin-server.cfapps.io/)
+1. Verify server is up and running.   (e.g. https://zipkin-server.cfapps.io/)
 
 ## Configure Zipkin Server Endpoint in Fortune-Teller-Service
 
-1. Open `appsettings.json` and modify the `management:tracing:exporter:zipkin:endpoint` configuration setting to match the endpoint of the Zipkin server deployed to Cloud Foundry above.  (e.g. `http://zipkin-server.cfapps.io/api/v2/spans`)
+1. Open `appsettings.json` and modify the `management:tracing:exporter:zipkin:endpoint` configuration setting to match the endpoint of the Zipkin server deployed to Cloud Foundry above.  (e.g. `https://zipkin-server.cfapps.io/api/v2/spans`)
 
 ## Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
 1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-Service
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
 
 ## What to expect - CloudFoundry
 
