@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.CloudFoundry.Connector.EFCore;
 using Steeltoe.CloudFoundry.Connector.MySql;
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Info;
-using Steeltoe.Management.Endpoint.Metrics;
-using Steeltoe.Management.Exporter.Metrics;
+using Steeltoe.Management.TaskCore;
 
 namespace CloudFoundry
 {
@@ -25,11 +26,15 @@ namespace CloudFoundry
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add in a MySql connection (this method also adds an IHealthContributor for it)
-            services.AddMySqlConnection(Configuration);
-
+            // Add entity framework db context bound to connection string in configuration
+            services.AddDbContext<MyContext>(options => options.UseMySql(Configuration));
+            // Add MySql health contributor to be exposed by the endpoint
+            services.AddMySqlHealthContributor(Configuration);
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+            
+            // register a migrate context task with PCF
+            services.AddTask<MigrateDbContextTask<MyContext>>();
 
             // Add your own IInfoContributor, making sure to register with the interface
             services.AddSingleton<IInfoContributor, ArbitraryInfoContributor>();
@@ -48,8 +53,9 @@ namespace CloudFoundry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, MyContext ctx)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
