@@ -3,10 +3,10 @@
     <SteeltoeCircuitBreakerVersion>2.2.0</SteeltoeCircuitBreakerVersion>
     <SteeltoeCommonVersion>2.2.0</SteeltoeCommonVersion>
     <SteeltoeConfigVersion>2.2.0</SteeltoeConfigVersion>
-    <SteeltoeConnectorVersion>3.0.0-412</SteeltoeConnectorVersion>
+    <SteeltoeConnectorVersion>2.2.0</SteeltoeConnectorVersion>
     <SteeltoeDiscoveryVersion>2.2.0</SteeltoeDiscoveryVersion>
     <SteeltoeLoggingVersion>2.2.0</SteeltoeLoggingVersion>
-    <SteeltoeManagementVersion>3.0.0-412</SteeltoeManagementVersion>
+    <SteeltoeManagementVersion>2.2.0</SteeltoeManagementVersion>
     <SteeltoeSecurityVersion>2.2.0</SteeltoeSecurityVersion>
     <PivotalConfigVersion>2.2.0</PivotalConfigVersion>
     <PivotalDiscoveryVersion>2.2.0</PivotalDiscoveryVersion>
