@@ -15,11 +15,11 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.3.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.3.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.3.0-rc1" />
     <PackageReference Include="Steeltoe.Management.TaskCore" Version="2.3.0-rc1" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.3.0-rc1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="git.properties" CopyToOutputDirectory="PreserveNewest"/>
