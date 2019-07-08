@@ -3,6 +3,7 @@ variables:
   steeltoe.cf.apiurl: api.run.pcfone.io
   steeltoe.cf.org: group-steeltoe
   steeltoe.cf.max.attempts: -1
+  behave.args: -t ~@mysql
 trigger:
  - master
 jobs:
