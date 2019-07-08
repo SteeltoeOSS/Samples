@@ -1,4 +1,5 @@
 @cloud
+@postgresql
 Feature: PostgreEFCore Connector
     In order to show you how to use Steeltoe for connecting to PostgreSql using EntityFramework Core
     You can run some PostgreSql using EntityFramework Core connection samples

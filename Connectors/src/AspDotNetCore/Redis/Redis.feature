@@ -1,4 +1,5 @@
 @cloud
+@redis
 Feature: Redis Connector
     In order to show you how to use Steeltoe for connecting to Redis
     You can run some Redis connection samples
