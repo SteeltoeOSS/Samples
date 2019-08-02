@@ -1,4 +1,5 @@
 @cloud
+@postgresql
 Feature: PostgreSql Connector
     In order to show you how to use Steeltoe for connecting to PostgreSql
     You can run some PostgreSql connection samples

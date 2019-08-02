@@ -7,6 +7,12 @@ using Steeltoe.Extensions.Logging.SerilogDynamicLogger;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.Common.Tasks;
+using Steeltoe.Management.TaskCore;
 
 namespace CloudFoundry
 {
@@ -23,6 +29,7 @@ namespace CloudFoundry
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
+                        .AddCommandLine(args)
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                         .AddJsonFile($"appsettings.{builderContext.HostingEnvironment.EnvironmentName}.json", optional: true)
                         .AddCloudFoundry()
@@ -37,7 +44,7 @@ namespace CloudFoundry
                 })
                 .Build();
 
-            host.Run();
+            host.RunWithTasks();
         }
     }
 }
