@@ -1,10 +1,7 @@
-﻿using Apache.Geode.Client;
-using Gemfire.Models;
-using Pivotal.GemFire.Session;
+using Autofac;
+using Autofac.Integration.Mvc;
+using Steeltoe.CloudFoundry.ConnectorAutofac;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -17,14 +14,22 @@ namespace Gemfire
         {
             ServerConfig.RegisterConfig("development");
 
-            //SessionStateStore.AuthInitialize = new BasicAuthInitialize("developer_KfqcIiDwxAudQ6VvI7Snw", "QkALvzpFcFr5VNcF7Ax7A"); //pcfone
-            //SessionStateStore.AuthInitialize = new BasicAuthInitialize("developer_zcs4XnFoWIDg14VVA7GKxA", "MGMtLoPDToFXlfnFhYZpA"); //beet.springapps.io
-            //SessionStateStore.AuthInitialize = new BasicAuthInitialize("john", "secret");
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var builder = new ContainerBuilder();
+
+            // Register all the controllers with Autofac
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            builder.RegisterGemFireConnection(ServerConfig.Configuration, typeof(BasicAuthInitialize));
+
+            // Create the Autofac container
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
         }
 
         protected void Session_Start(object sender, EventArgs e)

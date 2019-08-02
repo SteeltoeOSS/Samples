@@ -15,15 +15,15 @@ namespace GemFire.Controllers
         private static IRegion<string, string> cacheRegion;
         private static Cache gemfireCache;
         private readonly List<string> sampleData = new List<string> { "Apples", "Apricots", "Avacados", "Bananas", "Blueberries", "Lemons", "Limes", "Mangos", "Oranges", "Pears", "Pineapples" };
-        private string _regionName = "SteeltoeDemo";
+        private static readonly string _regionName = "SteeltoeDemo";
 
-        public HomeController(/*PoolFactory poolFactory, Cache cache*/)
+        public HomeController(PoolFactory poolFactory, Cache cache)
         {
             Console.WriteLine("HomeController constructor");
             if (cacheRegion == null)
             {
                 Console.WriteLine("Initializing stuff");
-                InitializeGemFireObjects(/*poolFactory, cache*/);
+                InitializeGemFireObjects(poolFactory, cache);
             }
             Console.WriteLine("Leaving HomeController constructor");
         }
@@ -42,9 +42,8 @@ namespace GemFire.Controllers
                 //var cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
                 Console.WriteLine("Get from CacheRegion");
                 message = cacheRegion["BestFruit"];
-                Console.WriteLine("Got from CacheRegion {message}", message);
+                Console.WriteLine("Got from CacheRegion {0}", message);
             }
-            // catch (RegionDestroyedException) not sure why this isn't being thrown anymore ... ?
             catch (CacheServerException)
             {
                 message = "The region SteeltoeDemo has not been initialized in Gemfire.\r\nConnect to Gemfire with gfsh and run 'create region --name=SteeltoeDemo --type=PARTITION'";
@@ -92,16 +91,11 @@ namespace GemFire.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private void InitializeGemFireObjects(/*PoolFactory poolFactory, Cache cache*/)
+        private static void InitializeGemFireObjects(PoolFactory poolFactory, Cache cache)
         {
-            Console.WriteLine("Create CacheFactory");
-            var cacheFactory = new CacheFactory().SetPdxIgnoreUnreadFields(true)
-                .SetAuthInitialize(new BasicAuthInitialize("developer_pXaEHbxknTypU6IjFFGA", "83svfPdb67k4vL1Gt09SQ"));
-            Console.WriteLine("Create Cache");
-            gemfireCache = cacheFactory.Create();
             Console.WriteLine("Create PoolFactory");
-            var poolFactory = gemfireCache.GetPoolFactory().AddLocator("192.168.12.220", 55221);
-            //gemfireCache = cache;
+            gemfireCache = cache;
+            gemfireCache.TypeRegistry.PdxSerializer = new ReflectionBasedAutoSerializer();
 
             try
             {

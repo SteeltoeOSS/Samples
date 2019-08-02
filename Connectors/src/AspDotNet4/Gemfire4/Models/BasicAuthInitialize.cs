@@ -1,6 +1,6 @@
-﻿using Apache.Geode.Client;
+using Apache.Geode.Client;
 
-namespace Gemfire.Models
+namespace Gemfire
 {
     public class BasicAuthInitialize : IAuthInitialize
     {

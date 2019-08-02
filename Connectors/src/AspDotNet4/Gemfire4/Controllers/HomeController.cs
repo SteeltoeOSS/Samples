@@ -1,5 +1,4 @@
-﻿using Apache.Geode.Client;
-using Gemfire.Models;
+using Apache.Geode.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,52 +10,25 @@ namespace Gemfire.Controllers
     public class HomeController : Controller
     {
         private readonly Random rando = new Random();
+        private static IRegion<string, string> cacheRegion;
         private static Cache gemfireCache;
         private readonly List<string> sampleData = new List<string> { "Apples", "Apricots", "Avacados", "Bananas", "Blueberries", "Lemons", "Limes", "Mangos", "Oranges", "Pears", "Pineapples" };
-        private string _regionName = "steeltoeDemo";
+        private static readonly string _regionName = "SteeltoeDemo";
 
-        public HomeController()
+        public HomeController(PoolFactory poolFactory, Cache cache)
         {
-            if (gemfireCache == null)
+            Console.WriteLine("HomeController constructor");
+            if (cacheRegion == null)
             {
-                var cacheFactory = new CacheFactory()
-                    //.Set("log-level", "fine")
-                    //.Set("log-file", "C:\\steeltoe\\samples\\Connectors\\src\\AspDotNet4\\Gemfire\\pcc.log")
-                    .Set("connect-timeout", "1000ms")
-                    .Set("durable-timeout", "1000ms")
-                    //.SetAuthInitialize(new BasicAuthInitialize("developer_zcs4XnFoWIDg14VVA7GKxA", "MGMtLoPDToFXlfnFhYZpA")); // beet
-                    .SetAuthInitialize(new BasicAuthInitialize("developer_pXaEHbxknTypU6IjFFGA", "83svfPdb67k4vL1Gt09SQ")); // pcfone
-                    //.SetAuthInitialize(new BasicAuthInitialize("john", "secret"));
-
-                gemfireCache = cacheFactory.Create();
-
-                var poolFactory = gemfireCache.GetPoolFactory()
-                    //.AddLocator("10.194.45.168", 55221);
-                    .AddLocator("192.168.12.220", 55221);
-                    //.AddLocator("localhost", 10334);
-                var pool = poolFactory.Create("pool");
-                var regionFactory = gemfireCache.CreateRegionFactory(RegionShortcut.PROXY)
-                    .SetPoolName("pool");
-                regionFactory.Create<string, string>(_regionName);
+                Console.WriteLine("Initializing stuff");
+                InitializeGemFireObjects(poolFactory, cache);
             }
+            Console.WriteLine("Leaving HomeController constructor");
         }
 
         public ActionResult Index()
         {
-            var items = new List<string>() { "disabled" };
-
-            //if (Session["items"] != null)
-            //{
-            //    if (Session["items"] is List<string>)
-            //    {
-            //        items = Session["items"] as List<string>;
-            //        items.Add($"Random{rando.Next()}");
-            //    }
-            //}
-
-            //Session["items"] = items;
-
-            return View(items);
+            return View();
         }
 
         public ActionResult Reset()
@@ -67,18 +39,22 @@ namespace Gemfire.Controllers
 
             var cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
             cacheRegion.Remove("BestFruit");
+            cacheRegion = null;
             return RedirectToAction("Index");
         }
 
         public ActionResult GetCacheEntry()
         {
+            Console.WriteLine("GetCacheEntry");
             string message;
             try
             {
-                var cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
-                message = cacheRegion.Get("BestFruit");
+                //var cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
+                Console.WriteLine("Get from CacheRegion");
+                message = cacheRegion["BestFruit"];
+                Console.WriteLine("Got from CacheRegion {0}", message);
             }
-            catch (RegionDestroyedException)
+            catch (CacheServerException)
             {
                 message = "The region SteeltoeDemo has not been initialized in Gemfire.\r\nConnect to Gemfire with gfsh and run 'create region --name=SteeltoeDemo --type=PARTITION'";
             }
@@ -96,10 +72,46 @@ namespace Gemfire.Controllers
         {
             var bestfruit = sampleData.OrderBy(g => Guid.NewGuid()).First();
 
-            var cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
-            cacheRegion.Put("BestFruit", $"{bestfruit} are the best fruit.");
+            //var cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
+            cacheRegion["BestFruit"] = $"{bestfruit} are the best fruit. Here's random id:{rando.Next()}";
 
             return RedirectToAction("GetCacheEntry");
+        }
+
+        private static void InitializeGemFireObjects(PoolFactory poolFactory, Cache cache)
+        {
+            Console.WriteLine("Create PoolFactory");
+            gemfireCache = cache;
+            gemfireCache.TypeRegistry.PdxSerializer = new ReflectionBasedAutoSerializer();
+
+            try
+            {
+                Console.WriteLine("Create Pool");
+                // make sure the pool has been created
+                poolFactory.Create("pool");
+            }
+            catch (IllegalStateException e)
+            {
+                // we end up here with this message if you've hit the reset link after the pool was created
+                if (e.Message != "Pool with the same name already exists")
+                {
+                    throw;
+                }
+            }
+
+            Console.WriteLine("Create Cache RegionFactory");
+            var regionFactory = gemfireCache.CreateRegionFactory(RegionShortcut.PROXY).SetPoolName("pool");
+            try
+            {
+                Console.WriteLine("Create CacheRegion");
+                cacheRegion = regionFactory.Create<string, string>(_regionName);
+                Console.WriteLine("CacheRegion created");
+            }
+            catch
+            {
+                Console.WriteLine("Create CacheRegion failed... now trying to get the region");
+                cacheRegion = gemfireCache.GetRegion<string, string>(_regionName);
+            }
         }
     }
 }

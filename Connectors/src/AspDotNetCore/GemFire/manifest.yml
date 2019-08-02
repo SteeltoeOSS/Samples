@@ -2,9 +2,9 @@
 applications:
 - name: gemfire-connector
   memory: 512M
-  stack: windows2016
+  stack: windows
   buildpacks:
    - hwc_buildpack
   command: .\GemFire
   services:
-   - pcc-dev
+   - myPCCService
