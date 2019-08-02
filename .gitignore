@@ -211,3 +211,7 @@ test.out/
 user.ini
 
 git.properties
+
+# GemFire Stats
+*.gfs
+\.ionide/
