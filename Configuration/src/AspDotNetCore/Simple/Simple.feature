@@ -1,5 +1,6 @@
 @#152883475
 @local
+@configserver
 Feature: Simple Configuration
     In order to show you how to use Steeltoe for simple configurations
     You can run a some simple configuration samples

@@ -1,11 +1,18 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
+using Steeltoe.Extensions.Logging.SerilogDynamicLogger;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.Common.Tasks;
+using Steeltoe.Management.TaskCore;
 
 namespace CloudFoundry
 {
@@ -22,6 +29,7 @@ namespace CloudFoundry
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
                     config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
+                        .AddCommandLine(args)
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                         .AddJsonFile($"appsettings.{builderContext.HostingEnvironment.EnvironmentName}.json", optional: true)
                         .AddCloudFoundry()
@@ -30,12 +38,13 @@ namespace CloudFoundry
                 .ConfigureLogging((builderContext, loggingBuilder) =>
                 {
                     loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
-                    loggingBuilder.AddDynamicConsole();
+                    // loggingBuilder.AddDynamicConsole();
+                    loggingBuilder.AddSerilogDynamicConsole();
                     loggingBuilder.AddDebug();
                 })
                 .Build();
 
-            host.Run();
+            host.RunWithTasks();
         }
     }
 }

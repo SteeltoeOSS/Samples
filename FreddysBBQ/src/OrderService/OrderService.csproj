@@ -15,9 +15,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(AspNetCoreVersion)" /> 
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="$(PivotalDiscoveryVersion)" />
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="$(PivotalConfigVersion)" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeDiscoveryVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="$(SteeltoeConfigVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeLoggingVersion)" />

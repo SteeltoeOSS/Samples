@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.Discovery.Client;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reactive;
@@ -15,9 +15,9 @@ namespace Fortune_Teller_UI.Services
         ICollection<ICollapsedRequest<Fortune, int>> _requests;
         IFortuneService _fortuneService;
 
-        public MultiFortuneServiceCommand(IHystrixCommandGroupKey groupKey, 
-            ICollection<ICollapsedRequest<Fortune, int>> requests, 
-            IFortuneService fortuneService, 
+        public MultiFortuneServiceCommand(IHystrixCommandGroupKey groupKey,
+            ICollection<ICollapsedRequest<Fortune, int>> requests,
+            IFortuneService fortuneService,
             ILogger<MultiFortuneServiceCommand> logger) : base(groupKey)
         {
             _fortuneService = fortuneService;
@@ -41,6 +41,6 @@ namespace Fortune_Teller_UI.Services
             return await Task.FromResult(results);
         }
 
-  
+
     }
 }

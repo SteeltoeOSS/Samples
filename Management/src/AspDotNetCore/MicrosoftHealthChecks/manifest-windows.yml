@@ -1,0 +1,12 @@
+﻿---
+applications:
+- name: actuator
+  buildpacks:
+   - hwc_buildpack
+  memory: 512M
+  stack: windows2016
+  command: .\CloudFoundry
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myMySqlService

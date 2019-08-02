@@ -1,4 +1,5 @@
 @cloud
+@rabbitmq
 Feature: RabbitMQ Connector
     In order to show you how to use Steeltoe for connecting to RabbitMQ
     You can run some RabbitMQ connection samples

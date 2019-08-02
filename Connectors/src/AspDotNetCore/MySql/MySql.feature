@@ -1,4 +1,5 @@
 @cloud
+@mysql
 Feature: MySql Connector
     In order to show you how to use Steeltoe for connecting to MySql
     You can run some MySql connection samples

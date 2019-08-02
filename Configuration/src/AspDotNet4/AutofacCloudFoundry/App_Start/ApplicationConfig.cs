@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Pivotal.Extensions.Configuration.ConfigServer;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;

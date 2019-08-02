@@ -1,0 +1,11 @@
+﻿---
+applications:
+- name: actuator
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 512M
+  command: cd ${HOME} && ./CloudFoundry
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myMySqlService

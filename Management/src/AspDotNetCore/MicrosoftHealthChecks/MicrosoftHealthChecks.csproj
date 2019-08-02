@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <Import Project="..\..\..\..\config\versions.props" />
+  <PropertyGroup>
+    <TargetFrameworks>net461;netcoreapp2.1</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- GitInfo provides $(Git*) properties used below -->
+    <PackageReference Include="AspNetCore.HealthChecks.MySql" Version="2.2.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="2.2.29" />
+    <PackageReference Include="GitInfo" Version="2.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="MySqlConnector" Version="0.43.0" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.3.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.3.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="git.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+
+  <Target Name="_GitProperties" AfterTargets="CoreCompile">
+    <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRoot)" Overwrite="true" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id=$(GitSha)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.tags=$(GitTag)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.branch=$(GitBranch)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.time=$([System.DateTime]::Now.ToString('O'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.user.name=$([System.Environment]::GetEnvironmentVariable('USERNAME'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
+  </Target>
+</Project>

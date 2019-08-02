@@ -1,16 +1,25 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeCircuitBreakerVersion>2.2.0</SteeltoeCircuitBreakerVersion>
-    <SteeltoeCommonVersion>2.2.0</SteeltoeCommonVersion>
-    <SteeltoeConfigVersion>2.2.0</SteeltoeConfigVersion>
-    <SteeltoeConnectorVersion>2.2.0</SteeltoeConnectorVersion>
-    <SteeltoeDiscoveryVersion>2.2.0</SteeltoeDiscoveryVersion>
-    <SteeltoeLoggingVersion>2.2.0</SteeltoeLoggingVersion>
-    <SteeltoeManagementVersion>2.2.0</SteeltoeManagementVersion>
-    <SteeltoeSecurityVersion>2.2.0</SteeltoeSecurityVersion>
-    <PivotalConfigVersion>2.2.0</PivotalConfigVersion>
-    <PivotalDiscoveryVersion>2.2.0</PivotalDiscoveryVersion>
+    <SteeltoeCircuitBreakerVersion>2.3.0-rc2</SteeltoeCircuitBreakerVersion>
+    <SteeltoeCommonVersion>2.3.0-rc2</SteeltoeCommonVersion>
+    <SteeltoeConfigVersion>2.3.0-rc2</SteeltoeConfigVersion>
+    <SteeltoeConnectorVersion>2.3.0-rc2</SteeltoeConnectorVersion>
+    <SteeltoeDiscoveryVersion>2.3.0-rc2</SteeltoeDiscoveryVersion>
+    <SteeltoeLoggingVersion>2.3.0-rc2</SteeltoeLoggingVersion>
+    <SteeltoeManagementVersion>2.3.0-rc2</SteeltoeManagementVersion>
+    <SteeltoeSecurityVersion>2.3.0-rc2</SteeltoeSecurityVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'== 'netcoreapp2.2'">
+    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
+    <EFCoreVersion>2.2.4</EFCoreVersion>
+    <GitInfoVersion>2.0.20</GitInfoVersion>
+    <JsonNetVersion>11.0.3</JsonNetVersion>
+	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' != 'netcoreapp2.2'">
     <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
+    <EFCoreVersion>2.1.1</EFCoreVersion>
+    <GitInfoVersion>2.0.20</GitInfoVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
 	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>

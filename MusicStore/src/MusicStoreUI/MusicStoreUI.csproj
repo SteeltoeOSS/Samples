@@ -21,7 +21,7 @@
     <PackageReference Include="GitInfo" Version="2.0.15">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference> 
+    </PackageReference>
 
     <PackageReference Include="Microsoft.AspNetCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
@@ -32,10 +32,10 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspNetCoreVersion)" /> 
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Pivotal.Extensions.Configuration.ConfigServerCore" Version="$(PivotalConfigVersion)" />
-    <PackageReference Include="Pivotal.Discovery.ClientCore" Version="$(PivotalDiscoveryVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="$(SteeltoeConfigVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeDiscoveryVersion)" />
     <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="$(SteeltoeCircuitBreakerVersion)" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />

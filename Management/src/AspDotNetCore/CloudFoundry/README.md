@@ -25,10 +25,20 @@ You must first create an instance of the MySql service in a org/space.
 1. cf target -o myorg -s development
 2. cd samples/Management/src/AspDotNetCore/CloudFoundry
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`)
-5. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+4. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.2 -r ubuntu.16.04-x64`)
+5. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.2/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.2/win10-x64/publish`)
 
 > Note: The provided manifest will create an app named `actuator` and attempt to bind to the the app to MySql service `myMySqlService`.
+
+### Running Tasks
+
+Apply entity framework database migration scripts as a Cloud Foundry task
+
+``` shell
+cf run-task actuator "./CloudFoundry runtask=migrate" --name migrate 
+```
+
+
 
 ## What to expect - CloudFoundry
 
@@ -48,6 +58,17 @@ On a Windows cell, you should see something like this during startup:
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Content root path: C:\containerizer\B91BBA946E8B925107\user\app
 2017-08-17T08:48:29.79-0600 [APP/PROC/WEB/0] OUT Application started. Press Ctrl+C to shut down.
 ```
+
+You should also see a list of logs from the database migration task similar to following:
+
+```bash
+   2019-07-04T13:03:45.75-0400 [APP/TASK/af067dc8/0] OUT       The following migrations have been successfully applied:
+   2019-07-04T13:03:45.75-0400 [APP/TASK/af067dc8/0] OUT info: Steeltoe.CloudFoundry.Connector.EFCore.MigrateDbContextTask[0]
+   2019-07-04T13:03:45.75-0400 [APP/TASK/af067dc8/0] OUT       20190704145149_InitialCreate
+   2019-07-04T13:03:45.78-0400 [APP/TASK/af067dc8/0] OUT Exit status 0
+```
+
+
 
 Once the app is up and running then you can access the management endpoints exposed by Steeltoe using the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/2-1/console/).
 

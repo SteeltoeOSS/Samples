@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Fortune_Teller_UI.Services;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Management.Exporter.Tracing;
 
