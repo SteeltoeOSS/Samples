@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MusicStore.Models;
-using Pivotal.Extensions.Configuration.ConfigServer;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
 using System.IO;

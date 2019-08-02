@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.ConfigServer;
@@ -36,9 +36,6 @@ namespace Simple
 
             // Optional: Adds ConfigServerClientOptions to service container
             services.ConfigureConfigServerClientOptions(Configuration);
-
-            // Optional:  Adds IConfiguration and IConfigurationRoot to service container
-            services.AddConfiguration(Configuration);
 
             // Add framework services.
             services.AddMvc();

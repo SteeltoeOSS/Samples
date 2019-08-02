@@ -4,7 +4,7 @@ using SimpleCloudFoundry.Model;
 using Microsoft.Extensions.Options;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using SimpleCloudFoundry.ViewModels.Home;
-using Pivotal.Extensions.Configuration.ConfigServer;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using Microsoft.Extensions.Configuration;
 
 namespace SimpleCloudFoundry.Controllers
@@ -19,8 +19,8 @@ namespace SimpleCloudFoundry.Controllers
         private IConfigurationRoot Config { get; set; }
 
         public HomeController(IConfigurationRoot config,
-            IOptionsSnapshot<ConfigServerData> configServerData, 
-            IOptions<CloudFoundryApplicationOptions> appOptions, 
+            IOptionsSnapshot<ConfigServerData> configServerData,
+            IOptions<CloudFoundryApplicationOptions> appOptions,
             IOptions<CloudFoundryServicesOptions> servOptions,
             IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
         {

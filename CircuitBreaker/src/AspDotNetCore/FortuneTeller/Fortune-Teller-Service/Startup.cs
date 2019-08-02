@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 
 namespace FortuneTellerService
 {
@@ -32,7 +32,7 @@ namespace FortuneTellerService
 
             // Add framework services.
             services.AddMvc();
-        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

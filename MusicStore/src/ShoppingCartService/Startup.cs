@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pivotal.Discovery.Client;
 using ShoppingCartService.Models;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 
 namespace ShoppingCartService

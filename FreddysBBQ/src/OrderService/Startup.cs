@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OrderService.Models;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Security.Authentication.CloudFoundry;
 
@@ -39,7 +39,7 @@ namespace OrderService
             services.AddDiscoveryClient(Configuration);
 
             services.AddDbContext<OrderContext>(options => options.UseMySql(Configuration));
-       
+
             services.AddSingleton<IMenuService, MenuService>();
 
             // Add framework services.

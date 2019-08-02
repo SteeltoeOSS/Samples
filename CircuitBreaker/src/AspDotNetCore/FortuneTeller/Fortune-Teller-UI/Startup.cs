@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
 
 namespace Fortune_Teller_UI
@@ -32,7 +32,7 @@ namespace Fortune_Teller_UI
             // Add some pretend services that make use of the FortuneServiceCollaper to return multiple fortunes
             // Each pretend service receives an injected FortuneServiceCollaper to retrieve a fortune and also
             // calls on another FakeService to get Fortunes from it.  All of this is done async and in parallel.
-            // Due to the use of the FortuneServiceCollapser, all of the Fortune requests are batched up by 
+            // Due to the use of the FortuneServiceCollapser, all of the Fortune requests are batched up by
             // the collapser and issued in a single request to the backend service
             services.AddTransient<IFakeService1, FakeService1>();
             services.AddTransient<IFakeService2, FakeService2>();
@@ -44,7 +44,7 @@ namespace Fortune_Teller_UI
             // Add framework services.
             services.AddMvc();
 
-            // Add Hystrix metrics stream to enable monitoring 
+            // Add Hystrix metrics stream to enable monitoring
             services.AddHystrixMetricsStream(Configuration);
         }
 

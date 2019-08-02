@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 using Steeltoe.Common.Http.Discovery;
 using System;
 

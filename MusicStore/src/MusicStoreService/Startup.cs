@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStore.Models;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
 

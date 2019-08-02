@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Pivotal.Extensions.Configuration.ConfigServer;
 using SimpleCloudFoundry.Model;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace SimpleCloudFoundry
 {
@@ -25,9 +24,6 @@ namespace SimpleCloudFoundry
 
             // Optional: Adds ConfigServerClientOptions to service container
             services.ConfigureConfigServerClientOptions(Configuration);
-
-            // Optional:  Adds IConfiguration and IConfigurationRoot to service container
-            services.AddConfiguration(Configuration);
 
             // Optional:  Adds CloudFoundryApplicationOptions and CloudFoundryServicesOptions to service container
             services.ConfigureCloudFoundryOptions(Configuration);
