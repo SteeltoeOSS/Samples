@@ -28,6 +28,9 @@ namespace SimpleCloudFoundry
             // Optional:  Adds CloudFoundryApplicationOptions and CloudFoundryServicesOptions to service container
             services.ConfigureCloudFoundryOptions(Configuration);
 
+            // Optional:  Adds IConfiguration and IConfigurationRoot to service container
+            services.AddConfiguration(Configuration);
+
             // Add framework services.
             services.AddMvc();
 
