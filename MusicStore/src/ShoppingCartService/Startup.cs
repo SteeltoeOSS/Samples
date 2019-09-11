@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingCartService.Models;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 
@@ -25,20 +25,27 @@ namespace ShoppingCartService
             services.AddCloudFoundryActuators(Configuration);
 
             // Add framework services.
-            services.AddMvc();
+            services.AddControllers();
 
             services.AddDiscoveryClient(Configuration);
 
-            services.AddDbContext<ShoppingCartContext>(options => options.UseMySql(Configuration));
+            services.AddDbContext<ShoppingCartContext>(options => options.UseSqlServer(Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+
              // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
 
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseDiscoveryClient();
         }

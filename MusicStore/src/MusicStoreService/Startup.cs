@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStore.Models;
 using Steeltoe.Discovery.Client;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Management.CloudFoundry;
 
 namespace MusicStore
@@ -31,28 +31,25 @@ namespace MusicStore
             services.AddDiscoveryClient(Configuration);
 
             // Steeltoe MySQL Connector
-            services.AddDbContext<MusicStoreContext>(options => options.UseMySql(Configuration));
+            services.AddDbContext<MusicStoreContext>(options => options.UseSqlServer(Configuration));
 
             // Add Framework services
-            services.AddMvc();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+
             // Add Steeltoe Management endpoints into pipeline
             app.UseCloudFoundryActuators();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
-
-                routes.MapRoute(
-                    name: "api",
-                    template: "{controller}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
             // Start Steeltoe Discovery services

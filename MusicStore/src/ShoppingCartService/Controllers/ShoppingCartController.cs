@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShoppingCartService.Models;
-
-using Microsoft.EntityFrameworkCore;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShoppingCartService.Controllers
 {
@@ -25,16 +21,14 @@ namespace ShoppingCartService.Controllers
 
         public ShoppingCartContext DbContext { get; }
 
-        //
-        // GET: api/ShoppingCart/cartId
-        [HttpGet("{cartId}")]
-        public async Task<IActionResult> GetCartItems(string cartId)
+        // GET: api/ShoppingCart/id
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCartItems(string id)
         {
-    
+
             var cart = await DbContext.Carts
-                .Where(c => c.CartId == cartId)
                 .Include(g => g.CartItems)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(c => c.CartId == id);
 
             if (cart == null)
             {
@@ -45,12 +39,12 @@ namespace ShoppingCartService.Controllers
             return new ObjectResult(result);
         }
 
-        // PUT: api/ShoppingCart/cartid
-        [HttpPut("{cartId}")]
-        public async Task<IActionResult> CreateCart(string cartId)
+        // PUT: api/ShoppingCart/id
+        [HttpPut("{id}")]
+        public async Task<IActionResult> CreateCart(string id)
         {
             var cart = await DbContext.Carts
-                        .Where(c => c.CartId == cartId)
+                        .Where(c => c.CartId == id)
                         .FirstOrDefaultAsync();
 
             if (cart != null)
@@ -59,7 +53,7 @@ namespace ShoppingCartService.Controllers
             }
             cart = new ShoppingCart()
             {
-                CartId = cartId
+                CartId = id
 
             };
             DbContext.Carts.Add(cart);
@@ -67,13 +61,13 @@ namespace ShoppingCartService.Controllers
             return Ok();
         }
 
-        // DELETE: api/ShoppingCart/cartid
-        [HttpDelete("{cartId}")]
-        public async Task<IActionResult> DeleteCart(string cartId)
+        // DELETE: api/ShoppingCart/id
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCart(string id)
         {
             var cart = await DbContext.Carts
                         .Include(c => c.CartItems)
-                        .Where(c => c.CartId == cartId)
+                        .Where(c => c.CartId == id)
                         .FirstOrDefaultAsync();
 
             if (cart == null)
@@ -89,11 +83,11 @@ namespace ShoppingCartService.Controllers
 
         //
         // PUT: api/ShoppingCart/cartid/Item/itemId
-        [HttpPut("{cartId}/Item/{itemId}")]
-        public async Task<IActionResult> AddCartItem(string cartId, int itemId)
+        [HttpPut("{id}/Item/{itemId}")]
+        public async Task<IActionResult> AddCartItem(string id, int itemId)
         {
             var cart = await DbContext.Carts
-                       .Where(c => c.CartId == cartId)
+                       .Where(c => c.CartId == id)
                        .Include(g => g.CartItems)
                        .FirstOrDefaultAsync();
 
@@ -112,28 +106,30 @@ namespace ShoppingCartService.Controllers
                 cartItem = new CartItem
                 {
                     ItemKey = itemId,
-                    CartId = cartId,
                     Count = 1,
                     DateCreated = DateTime.Now
                 };
+                cart.CartItems.Add(cartItem);
 
-                DbContext.CartItems.Add(cartItem);
-            } else
+                // DbContext.CartItems.Add(cartItem);
+            }
+            else
             {
                 cartItem.Count++;
             }
+
             await DbContext.SaveChangesAsync();
             return Ok();
         }
 
         //
         // DELETE: /api/ShoppingCart/{cartId}/Item/itemId
-        [HttpDelete("{cartId}/Item/{itemId}")]
+        [HttpDelete("{id}/Item/{itemId}")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCartItem(string cartId, int itemId)
+        public async Task<IActionResult> DeleteCartItem(string id, int itemId)
         {
             var cart = await DbContext.Carts
-                            .Where(c => c.CartId == cartId)
+                            .Where(c => c.CartId == id)
                             .Include(g => g.CartItems)
                             .FirstOrDefaultAsync();
 

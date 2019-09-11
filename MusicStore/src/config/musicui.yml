@@ -6,10 +6,8 @@ mysql:
     database: steeltoe2
     username: root
     password: steeltoe
-postgres:
-  client:
-    database: steeltoe2
-    username: steeltoe
-    password: steeltoe
+sqlserver:
+  credentials:
+    database: MusicStore
 DefaultAdminUsername: Administrator@test.com
 DefaultAdminPassword: YouShouldChangeThisPassword1!

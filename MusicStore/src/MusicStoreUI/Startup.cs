@@ -1,11 +1,11 @@
-﻿using MusicStoreUI.Services;
+using MusicStoreUI.Services;
 using MusicStoreUI.Models;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 
 #if USE_REDIS_CACHE
@@ -14,7 +14,6 @@ using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.DataProtection;
 #endif
 
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.CircuitBreaker.Hystrix;
 using Command = MusicStoreUI.Services.HystrixCommands;
@@ -28,7 +27,7 @@ namespace MusicStoreUI
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -50,14 +49,21 @@ namespace MusicStoreUI
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            services.AddDbContext<AccountsContext>(options => options.UseMySql(Configuration));
+            services.AddDbContext<AccountsContext>(options => options.UseSqlServer(Configuration));
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Home/AccessDenied");
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AccountsContext>()
                     .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            services.AddDiscoveryClient(Configuration);
+            if (Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                services.AddConfigurationDiscoveryClient(Configuration);
+            }
+            else
+            {
+                services.AddDiscoveryClient(Configuration);
+            }
 
             services.AddSingleton<IMusicStore, MusicStoreService>();
             services.AddSingleton<IShoppingCart, ShoppingCartService>();
@@ -68,7 +74,7 @@ namespace MusicStoreUI
             services.AddHystrixCommand<Command.GetGenre>("MusicStore", Configuration);
             services.AddHystrixCommand<Command.GetAlbum>("MusicStore", Configuration);
 
-            services.AddMvc();
+            services.AddControllersWithViews();
 
             // Add memory cache services
             services.AddMemoryCache();
@@ -97,7 +103,7 @@ namespace MusicStoreUI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Add Hystrix Metrics context to pipeline
             app.UseHystrixRequestContext();
@@ -107,7 +113,7 @@ namespace MusicStoreUI
 
             app.UseSession();
 
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -118,22 +124,28 @@ namespace MusicStoreUI
 
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             // Add cookie-based authentication to the request pipeline
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "areaRoute",
-                    template: "{area:exists}/{controller}/{action}",
+                    pattern: "{area:exists}/{controller}/{action}",
                     defaults: new { action = "Index" });
 
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseDiscoveryClient();
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                app.UseDiscoveryClient();
+            }
 
             // Startup Hystrix metrics stream
             app.UseHystrixMetricsStream();

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Steeltoe.Common.Discovery;
 using System;
@@ -98,7 +98,8 @@ namespace MusicStoreUI.Services
                     JsonSerializer serializer = new JsonSerializer();
                     return (T)serializer.Deserialize(reader, typeof(T));
                 }
-            } catch(Exception e)
+            }
+            catch(Exception e)
             {
                 _logger?.LogError("Deserialize exception: {0}", e);
                 throw;

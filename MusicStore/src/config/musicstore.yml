@@ -8,8 +8,6 @@ mysql:
     database: steeltoe
     username: root
     password: steeltoe
-postgres:
-  client:
-    database: steeltoe
-    username: steeltoe
-    password: steeltoe
+sqlserver:
+  credentials:
+    database: MusicService

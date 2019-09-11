@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace OrderService.Models
@@ -62,6 +63,7 @@ namespace OrderService.Models
         public string Email { get; set; }
 
         [BindNever]
+        [Column(TypeName = "decimal(18,2)")]
         [ScaffoldColumn(false)]
         public decimal Total { get; set; }
 

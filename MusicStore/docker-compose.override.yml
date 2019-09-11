@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+
+  musicstoreservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - spring__cloud__config__uri=http://configserver:8888
+
+  shoppingcartservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - spring__cloud__config__uri=http://configserver:8888
+
+  orderservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - spring__cloud__config__uri=http://configserver:8888
+
+  musicstoreui:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - spring__cloud__config__uri=http://configserver:8888
+    ports:
+      - "5555:5555"

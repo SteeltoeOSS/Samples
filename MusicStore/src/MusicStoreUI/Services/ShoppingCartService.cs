@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MusicStoreUI.Models;
@@ -12,10 +12,12 @@ namespace MusicStoreUI.Services
     {
         private const string SHOPPINGCART_URL = "http://shoppingcart/api/ShoppingCart/{cartId}";
         private const string SHOPPINGCART_ITEM_URL ="http://shoppingcart/api/ShoppingCart/{cartId}/Item/{itemId}";
+        private new ILogger _logger;
 
         public ShoppingCartService(IDiscoveryClient client, ILoggerFactory logFactory) :
             base(client, logFactory.CreateLogger<ShoppingCartService>())
         {
+            _logger = logFactory.CreateLogger<ShoppingCartService>();
         }
 
         public async Task<bool> EmptyCartAsync(string cartId)
@@ -32,7 +34,15 @@ namespace MusicStoreUI.Services
             var cartUrl = SHOPPINGCART_URL.Replace("{cartId}", cartId);
 
             var request = new HttpRequestMessage(HttpMethod.Get, cartUrl);
-            var cartResult = await Invoke<List<CartItemJson>>(request);
+            var cartResult = new List<CartItemJson>();
+            try
+            {
+                cartResult = await Invoke<List<CartItemJson>>(request);
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical(e, "Failed to get cart!");
+            }
 
             var result = CartItem.From(cartResult);
             return result;
@@ -61,8 +71,16 @@ namespace MusicStoreUI.Services
             var cartUrl = SHOPPINGCART_URL.Replace("{cartId}", cartId);
 
             var request = new HttpRequestMessage(HttpMethod.Put, cartUrl);
-            var result = await Invoke(request);
-            return result;
+            try
+            {
+                var result = await Invoke(request);
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.LogCritical(e, "Failed to create cart!");
+                return false;
+            }
         }
     }
 }

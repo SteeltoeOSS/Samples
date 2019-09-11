@@ -8,8 +8,6 @@ mysql:
     database: steeltoe3
     username: root
     password: steeltoe
-postgres:
-  client:
-    database: steeltoe3
-    username: steeltoe
-    password: steeltoe
+sqlserver:
+  credentials:
+    database: OrderProcessing

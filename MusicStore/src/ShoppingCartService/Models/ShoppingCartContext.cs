@@ -1,4 +1,4 @@
-﻿
+
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,8 +13,7 @@ namespace ShoppingCartService.Models
         }
 
         public DbSet<ShoppingCart> Carts { get; set; }
+
         public DbSet<CartItem> CartItems { get; set; }
-
     }
-
 }
