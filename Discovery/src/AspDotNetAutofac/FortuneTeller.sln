@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-Service4", "Fortune-Teller-Service4\Fortune-Teller-Service4.csproj", "{AF79873A-08ED-490A-B689-FC9375D30911}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-UI4", "Fortune-Teller-UI4\Fortune-Teller-UI4.csproj", "{D964D401-8037-43C1-9127-5C2DB1DEE80A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-OwinService4", "Fortune-Teller-OwinService4\Fortune-Teller-OwinService4.csproj", "{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{D964D401-8037-43C1-9127-5C2DB1DEE80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D964D401-8037-43C1-9127-5C2DB1DEE80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D964D401-8037-43C1-9127-5C2DB1DEE80A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8BB03E1-FACF-445F-BB0B-3A2CAD1F6950}
 	EndGlobalSection
 EndGlobal

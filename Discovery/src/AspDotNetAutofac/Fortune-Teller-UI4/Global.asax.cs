@@ -2,9 +2,9 @@
 using Autofac.Integration.Mvc;
 using FortuneTellerUI4.Services;
 using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
 using Steeltoe.Common.Logging.Autofac;
 using Steeltoe.Common.Options.Autofac;
+using Steeltoe.Discovery.Client;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
