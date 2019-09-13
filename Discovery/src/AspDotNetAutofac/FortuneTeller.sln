@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-UI4", "Fortu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-OwinService4", "Fortune-Teller-OwinService4\Fortune-Teller-OwinService4.csproj", "{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortuneTellerWinService", "FortuneTellerWinService\FortuneTellerWinService.csproj", "{C9599AAA-6FFF-4B5C-BA77-03DFF46FCDBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C55A8D6A-5F42-4788-948C-D5FFEBFB9B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9599AAA-6FFF-4B5C-BA77-03DFF46FCDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9599AAA-6FFF-4B5C-BA77-03DFF46FCDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9599AAA-6FFF-4B5C-BA77-03DFF46FCDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9599AAA-6FFF-4B5C-BA77-03DFF46FCDBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
