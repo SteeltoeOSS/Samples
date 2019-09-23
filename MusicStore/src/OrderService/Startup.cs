@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
+using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
+using System;
 
 namespace OrderService
 {
@@ -30,8 +33,14 @@ namespace OrderService
             // Add framework services.
             services.AddMvc();
 
-            services.AddDiscoveryClient(Configuration);
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                services.AddDiscoveryClient(Configuration);
+            }
 
+            // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
+            // Console.WriteLine("Using SQL Connection: {0}", cstring);
+            // services.AddDbContext<OrdersContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<OrdersContext>(options => options.UseSqlServer(Configuration));
         }
 
@@ -50,7 +59,10 @@ namespace OrderService
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseDiscoveryClient();
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                app.UseDiscoveryClient();
+            }
         }
     }
 }

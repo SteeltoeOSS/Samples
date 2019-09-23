@@ -1,8 +1,11 @@
 version: '3.4'
 
 services:
+  configserver:
+    environment:
+      - spring.cloud.config.git.uri=https://github.com/SteeltoeOSS/Samples/
 
-  musicstoreservice:
+  musicservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888
@@ -17,7 +20,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888
 
-  musicstoreui:
+  musicstore:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888

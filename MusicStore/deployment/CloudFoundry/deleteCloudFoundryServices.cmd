@@ -1,10 +1,11 @@
 @ECHO OFF
-
-cf delete-service mStoreConfig
-cf delete-service mStoreRegistry 
-cf delete-service mStoreAccountsDB
-cf delete-service mStoreOrdersDB
-cf delete-service mStoreCartDB
-cf delete-service mStoreStoreDB
-cf delete-service mStoreRedis
-cf delete-service mStoreHystrix
+cf delete musicstore -r -f
+cf delete musicui -r -f
+cf delete-service mStoreConfig -f
+cf delete-service mStoreRegistry -f
+cf delete-service mStoreAccountsDB -f
+cf delete-service mStoreOrdersDB -f
+cf delete-service mStoreCartDB -f
+cf delete-service mStoreStoreDB -f
+cf delete-service mStoreRedis -f
+cf delete-service mStoreHystrix -f

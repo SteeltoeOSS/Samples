@@ -1,20 +1,19 @@
+using Microsoft.Extensions.Logging;
+using MusicStoreUI.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using MusicStoreUI.Models;
-using Microsoft.Extensions.Logging;
 using System.Net.Http;
-using Steeltoe.Common.Discovery;
+using System.Threading.Tasks;
 
 namespace MusicStoreUI.Services
 {
     public class ShoppingCartService : BaseDiscoveryService, IShoppingCart
     {
-        private const string SHOPPINGCART_URL = "http://shoppingcart/api/ShoppingCart/{cartId}";
-        private const string SHOPPINGCART_ITEM_URL ="http://shoppingcart/api/ShoppingCart/{cartId}/Item/{itemId}";
+        private const string SHOPPINGCART_URL = "http://shoppingcartservice/api/ShoppingCart/{cartId}";
+        private const string SHOPPINGCART_ITEM_URL ="http://shoppingcartservice/api/ShoppingCart/{cartId}/Item/{itemId}";
         private new ILogger _logger;
 
-        public ShoppingCartService(IDiscoveryClient client, ILoggerFactory logFactory) :
+        public ShoppingCartService(HttpClient client, ILoggerFactory logFactory) :
             base(client, logFactory.CreateLogger<ShoppingCartService>())
         {
             _logger = logFactory.CreateLogger<ShoppingCartService>();

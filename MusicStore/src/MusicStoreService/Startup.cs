@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStore.Models;
-using Steeltoe.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
+using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 
 namespace MusicStore
@@ -28,7 +28,10 @@ namespace MusicStore
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             // Steeltoe Service Discovery
-            services.AddDiscoveryClient(Configuration);
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                services.AddDiscoveryClient(Configuration);
+            }
 
             // Steeltoe MySQL Connector
             services.AddDbContext<MusicStoreContext>(options => options.UseSqlServer(Configuration));
@@ -53,7 +56,10 @@ namespace MusicStore
             });
 
             // Start Steeltoe Discovery services
-            app.UseDiscoveryClient();
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                app.UseDiscoveryClient();
+            }
         }
     }
 }

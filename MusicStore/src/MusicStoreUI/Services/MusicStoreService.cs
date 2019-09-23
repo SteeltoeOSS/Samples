@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using MusicStoreUI.Models;
-using Steeltoe.Common.Discovery;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,15 +9,16 @@ namespace MusicStoreUI.Services
     public class MusicStoreService : BaseDiscoveryService, IMusicStore
     {
 
-        private const string TOP_SELLING_URL = "http://musicstore/api/Store/TopSelling";
-        private const string GENRES_URL = "http://musicstore/api/Store/Genres";
-        private const string GENRE_URL = "http://musicstore/api/Store/Genre";
-        private const string ALBUMS_URL = "http://musicstore/api/Store/Albums";
-        private const string ALBUM_URL = "http://musicstore/api/Store/Album";
-        private const string ARTISTS_URL = "http://musicstore/api/Store/Artists";
-        private const string ARTIST_URL = "http://musicstore/api/Store/Artist";
+        private const string TOP_SELLING_URL = "http://musicservice/api/Store/TopSelling";
+        private const string GENRES_URL = "http://musicservice/api/Store/Genres";
+        private const string GENRE_URL = "http://musicservice/api/Store/Genre";
+        private const string ALBUMS_URL = "http://musicservice/api/Store/Albums";
+        private const string ALBUM_URL = "http://musicservice/api/Store/Album";
+        private const string ARTISTS_URL = "http://musicservice/api/Store/Artists";
+        private const string ARTIST_URL = "http://musicservice/api/Store/Artist";
 
-        public MusicStoreService(IDiscoveryClient client, ILoggerFactory logFactory) : base(client, logFactory.CreateLogger<MusicStoreService>())
+        public MusicStoreService(HttpClient client, ILoggerFactory logFactory)
+            : base(client, logFactory.CreateLogger<MusicStoreService>())
         {
         }
 

@@ -1,13 +1,13 @@
 eureka:
   client:
-    shouldFetchRegistry: false
-  instance:
-    port: 5000
+    shouldRegisterWithEureka: false
 mysql:
   client:
-    database: steeltoe
+    database: steeltoe2
     username: root
     password: steeltoe
 sqlserver:
   credentials:
-    database: MusicService
+    database: MusicStore
+DefaultAdminUsername: Administrator@test.com
+DefaultAdminPassword: YouShouldChangeThisPassword1!

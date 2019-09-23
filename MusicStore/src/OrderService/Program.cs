@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -27,11 +28,19 @@ namespace OrderService
                 {
                     webbuilder
                         .UseStartup<Startup>()
-                        .UseCloudFoundryHosting(7000);
+                        /*.UseCloudFoundryHosting(7000)*/;
                 })
                 .ConfigureAppConfiguration((builderContext, configBuilder) =>
                 {
-                    configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
+                    {
+                        var settings = configBuilder.Build();
+                        configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    }
+                    else
+                    {
+                        configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    }
                 })
                 .ConfigureLogging((context, builder) =>
                 {

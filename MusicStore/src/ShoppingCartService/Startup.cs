@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingCartService.Models;
+using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
+using System;
 
 namespace ShoppingCartService
 {
@@ -27,8 +31,18 @@ namespace ShoppingCartService
             // Add framework services.
             services.AddControllers();
 
-            services.AddDiscoveryClient(Configuration);
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                services.AddDiscoveryClient(Configuration);
+            }
+            else
+            {
+                services.AddConfigurationDiscoveryClient(Configuration);
+            }
 
+            // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
+            // Console.WriteLine("Using SQL Connection: {0}", cstring);
+            // services.AddDbContext<ShoppingCartContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<ShoppingCartContext>(options => options.UseSqlServer(Configuration));
         }
 
@@ -47,7 +61,10 @@ namespace ShoppingCartService
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseDiscoveryClient();
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                app.UseDiscoveryClient();
+            }
         }
     }
 }

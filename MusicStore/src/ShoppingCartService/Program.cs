@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,11 +23,19 @@ namespace ShoppingCartService
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
                 WebHost.CreateDefaultBuilder(args)
-                    .UseCloudFoundryHosting(6000)
+                    //.UseCloudFoundryHosting(6000)
                     .UseStartup<Startup>()
                     .ConfigureAppConfiguration((builderContext, configBuilder) =>
                     {
+                        if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
+                        {
+                            var settings = configBuilder.Build();
+                            configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                        }
+                        else
+                        {
                             configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                        }
                     })
                     .ConfigureLogging((context, builder) =>
                     {

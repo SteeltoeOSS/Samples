@@ -22,8 +22,8 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-  musicstoreservice:
-    image: ${DOCKER_REGISTRY-}musicstoreservice
+  musicservice:
+    image: ${DOCKER_REGISTRY-}musicservice
     build:
       context: ./src/MusicStoreService
       dockerfile: Dockerfile
@@ -49,15 +49,15 @@ services:
       - configserver
       - eurekaserver
       - sqlserver
-  musicstoreui:
-    image: ${DOCKER_REGISTRY-}musicstoreui
+  musicstore:
+    image: ${DOCKER_REGISTRY-}musicstore
     build:
       context: ./src/MusicStoreUI
       dockerfile: Dockerfile
     depends_on:
       - configserver
       - eurekaserver
-      - musicstoreservice
+      - musicservice
       - shoppingcartservice
       - orderservice
       - sqlserver

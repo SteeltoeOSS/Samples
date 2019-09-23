@@ -14,7 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6D07EFD-13C8-48A5-834F-E1F72D0F7DCA}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
-		docker-compose.yml = docker-compose.yml
 		..\nuget.config = ..\nuget.config
 		README.md = README.md
 		..\config\versions.props = ..\config\versions.props
@@ -23,8 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{18423ABE-6774-47D0-803B-E5CF88EDB8C3}"
 	ProjectSection(SolutionItems) = preProject
 		src\config\application.yml = src\config\application.yml
+		src\config\musicservice.yml = src\config\musicservice.yml
 		src\config\musicstore.yml = src\config\musicstore.yml
-		src\config\musicui.yml = src\config\musicui.yml
 		src\config\orderprocessing.yml = src\config\orderprocessing.yml
 		src\config\shoppingcart.yml = src\config\shoppingcart.yml
 	EndProjectSection

@@ -17,6 +17,12 @@ using Steeltoe.Security.DataProtection;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.CircuitBreaker.Hystrix;
 using Command = MusicStoreUI.Services.HystrixCommands;
+using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.SqlServer;
+using Microsoft.EntityFrameworkCore;
+using System;
+using Steeltoe.Common.Http.Discovery;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace MusicStoreUI
 {
@@ -49,6 +55,9 @@ namespace MusicStoreUI
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
+            // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
+            // Console.WriteLine("Using SQL Connection: {0}", cstring);
+            // services.AddDbContext<AccountsContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<AccountsContext>(options => options.UseSqlServer(Configuration));
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Home/AccessDenied");
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -56,18 +65,23 @@ namespace MusicStoreUI
                     .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            if (Configuration.GetValue<bool>("DisableServiceDiscovery"))
-            {
-                services.AddConfigurationDiscoveryClient(Configuration);
-            }
-            else
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
             {
                 services.AddDiscoveryClient(Configuration);
             }
+            else
+            {
+                services.AddConfigurationDiscoveryClient(Configuration);
+                services.TryAddTransient<DiscoveryHttpMessageHandler>();
+            }
 
-            services.AddSingleton<IMusicStore, MusicStoreService>();
-            services.AddSingleton<IShoppingCart, ShoppingCartService>();
-            services.AddSingleton<IOrderProcessing, OrderProcessingService>();
+            services.AddHttpClient<IMusicStore, MusicStoreService>()
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
+            services.AddHttpClient<IShoppingCart, ShoppingCartService>()
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
+            services.AddHttpClient<IOrderProcessing, OrderProcessingService>()
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
+
 
             services.AddHystrixCommand<Command.GetTopAlbums>("MusicStore", Configuration);
             services.AddHystrixCommand<Command.GetGenres>("MusicStore", Configuration);
