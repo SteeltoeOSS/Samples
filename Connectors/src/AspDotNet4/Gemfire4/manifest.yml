@@ -1,10 +1,9 @@
 ---
 applications:
-- name: gemfire-connector
+- name: gemfire-connector-4x
   memory: 512M
   stack: windows
   buildpacks:
    - hwc_buildpack
-  command: .\GemFire
   services:
    - pcc-steeltoe
