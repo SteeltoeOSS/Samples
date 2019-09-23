@@ -212,3 +212,9 @@ user.ini
 
 git.properties
 .ionide/
+
+#ignore bianaries
+/Connectors/src/AspDotNet4/Gemfire4/bin
+#ignore gemfire package
+/Connectors/pivotal-gemfire-native-10.0.2-build.9-Windows-64bit
+Samples\Connectors\pivotal-gemfire-native-10.0.2-build.9-Windows-64bit.zip
