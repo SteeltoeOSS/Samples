@@ -6,4 +6,4 @@ applications:
   buildpacks:
    - hwc_buildpack
   services:
-   - myPCCService
+   - pcc-steeltoe

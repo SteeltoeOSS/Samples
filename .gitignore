@@ -212,3 +212,8 @@ user.ini
 
 git.properties
 .ionide/
+
+# ignore GemFire-related assets
+Pivotal.GemFire.dll
+pivnet.exe
+pivotal*.zip
