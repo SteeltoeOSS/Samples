@@ -1,0 +1,113 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: musicservice
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicservices
+        component: musicservice
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: musicservice
+        image: <acr>/musicservice:<version>
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: musicstore
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: orderservice
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicservices
+        component: orderservice
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: orderservice
+        image: <acr>/orderservice:<version>
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: musicstore
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: shoppingcartservice
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicservices
+        component: shoppingcartservice
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: shoppingcartservice
+        image: <acr>/shoppingcartservice:<version>
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: musicstore
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: musicstore
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicstore
+        component: musicstore
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: musicstore
+        image: <acr>/musicstore:<version>
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: musicstore
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicservices
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: musicservices
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicstore
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: musicstore
+  type: LoadBalancer

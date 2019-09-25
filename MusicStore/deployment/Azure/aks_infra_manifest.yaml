@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sqlserver
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: sqlserver
+        image: mcr.microsoft.com/mssql/server
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          value: "SteeltoeR0cks!"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver
+spec:
+  ports:
+  - port: 1433
+  selector:
+    app: sqlserver
