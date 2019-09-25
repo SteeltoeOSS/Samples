@@ -30,10 +30,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <!--
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(PomeloMySqlEFCoreVersion)" />-->
-    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-manual" />
-    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-manual" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-manual" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-manual" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-manual-001" />
   </ItemGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Configuration\src\ConfigServerCore\Steeltoe.Extensions.Configuration.ConfigServerCore.csproj" />

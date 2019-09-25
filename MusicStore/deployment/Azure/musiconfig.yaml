@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: musicconfig
+  namespace: default
+data:
+  ASPNETCORE_ENVIRONMENT: AKS
+  sqlserver__credentials__server: sqlserver
+  sqlserver__credentials__username: sa
+  sqlserver__credentials__password: "SteeltoeR0cks!"
+  DisableServiceDiscovery: "true"
+  logging__logLevel__Steeltoe.Management: "Critical"

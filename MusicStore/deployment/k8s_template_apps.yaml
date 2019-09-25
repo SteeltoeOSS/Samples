@@ -19,7 +19,17 @@ spec:
         - containerPort: 80
         envFrom:
           - configMapRef:
-              name: musicstore
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicservice
+spec:
+  ports:
+  - port: 80
+  selector:
+    component: musicservice
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -42,7 +52,17 @@ spec:
         - containerPort: 80
         envFrom:
           - configMapRef:
-              name: musicstore
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderservice
+spec:
+  ports:
+  - port: 80
+  selector:
+    component: orderservice
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -65,7 +85,17 @@ spec:
         - containerPort: 80
         envFrom:
           - configMapRef:
-              name: musicstore
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoppingcartservice
+spec:
+  ports:
+  - port: 80
+  selector:
+    component: shoppingcartservice
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -88,17 +118,7 @@ spec:
         - containerPort: 80
         envFrom:
           - configMapRef:
-              name: musicstore
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: musicservices
-spec:
-  ports:
-  - port: 80
-  selector:
-    app: musicservices
+              name: musicconfig
 ---
 apiVersion: v1
 kind: Service

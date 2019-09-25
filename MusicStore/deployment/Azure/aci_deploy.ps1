@@ -71,4 +71,5 @@ foreach ($image in $images)
         --environment-variables ASPNETCORE_ENVIRONMENT=AzureContainerInstances sqlserver__credentials__server="musicsql$uid.$location.azurecontainer.io" AppConfig__Endpoint="https://$rg.azconfig.io"
 
     # TODO: Give container instance the Contributor permission on the AppConfig resource
+    # az role assignment create --role Contributor --scope /subscriptions/<subscriptionId>/resourceGroups/$rg --assignee <objectId for aci?>
 }

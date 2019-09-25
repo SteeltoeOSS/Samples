@@ -7,6 +7,7 @@ $rg = "musicstore$uid"
 $cluster = "musiccluster$uid"
 $registryId = "musicregistry$uid"
 $buildImages = $false
+$deploymentFolder = (Get-Item $PSScriptRoot).Parent
 
 Write-Host "Building environment with unique suffix $uid"
 $TotalTime = New-Object -TypeName System.Diagnostics.Stopwatch
@@ -48,18 +49,11 @@ Write-Host "Time to provision AKS cluster:" $TotalTime.Elapsed.ToString()
 Write-Host "Pointing kubectl at the new AKS cluster"
 az aks get-credentials --resource-group $rg --name $cluster --overwrite-existing
 
-kubectl create configmap musicstore `
-    --from-literal ASPNETCORE_ENVIRONMENT=AKS `
-    --from-literal sqlserver__credentials__server=sqlserver `
-    --from-literal sqlserver__credentials__username=sa `
-    --from-literal sqlserver__credentials__password=SteeltoeR0cks! `
-    --from-literal DisableServiceDiscovery=true
+kubectl create configmap musicconfig --from-file=$PSScriptRoot/musicconfig.yaml
 
 # TODO: Use Azure SQL with Managed Identity access instead
 Write-Host "Deploying SQL Server"
-kubectl apply -f $PSScriptRoot\aks_infra_manifest.yaml
-
-# TODO: Create AppConfig, import settings into it, set permissions (container instances need to be Contributor)
+kubectl apply -f $deploymentFolder\k8s_infra_manifest.yaml
 
 if ($buildImages)
 {
@@ -77,7 +71,7 @@ if ($buildImages)
 }
 
 Write-Host "Replacing tokens in app manifest with env-specific values"
-((Get-Content -Path $PSScriptRoot\aks_template_apps.yaml -Raw) `
+((Get-Content -Path $deploymentFolder\k8s_template_apps.yaml -Raw) `
     -replace '<uid>', $uid `
     -replace '<acr>', $acrLoginServer `
     -replace '<version>', $version) | `
