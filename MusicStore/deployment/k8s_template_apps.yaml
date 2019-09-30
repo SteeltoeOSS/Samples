@@ -1,8 +1,11 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: musicservice
 spec:
+  selector:
+    matchLabels:
+      component: musicservice
   replicas: 1
   template:
     metadata:
@@ -17,6 +20,9 @@ spec:
         image: <acr>/musicservice:<version>
         ports:
         - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
         envFrom:
           - configMapRef:
               name: musicconfig
@@ -31,11 +37,14 @@ spec:
   selector:
     component: musicservice
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: orderservice
 spec:
+  selector:
+    matchLabels:
+      component: orderservice
   replicas: 1
   template:
     metadata:
@@ -50,6 +59,9 @@ spec:
         image: <acr>/orderservice:<version>
         ports:
         - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
         envFrom:
           - configMapRef:
               name: musicconfig
@@ -64,11 +76,14 @@ spec:
   selector:
     component: orderservice
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shoppingcartservice
 spec:
+  selector:
+    matchLabels:
+      component: shoppingcartservice
   replicas: 1
   template:
     metadata:
@@ -83,6 +98,9 @@ spec:
         image: <acr>/shoppingcartservice:<version>
         ports:
         - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
         envFrom:
           - configMapRef:
               name: musicconfig
@@ -97,11 +115,14 @@ spec:
   selector:
     component: shoppingcartservice
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: musicstore
 spec:
+  selector:
+    matchLabels:
+      component: musicstore
   replicas: 1
   template:
     metadata:
@@ -116,6 +137,9 @@ spec:
         image: <acr>/musicstore:<version>
         ports:
         - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
         envFrom:
           - configMapRef:
               name: musicconfig

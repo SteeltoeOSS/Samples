@@ -30,6 +30,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{18423A
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", "{D10DD7B6-0FBF-413A-AD4F-12399F7587C1}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\k8s_infra_manifest.yaml = deployment\k8s_infra_manifest.yaml
+		deployment\k8s_template_apps.yaml = deployment\k8s_template_apps.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{A14292E1-F82F-4F49-929E-3A7A74D0C914}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\Azure\aci_deploy.ps1 = deployment\Azure\aci_deploy.ps1
+		deployment\Azure\aci_undeploy.ps1 = deployment\Azure\aci_undeploy.ps1
+		deployment\Azure\aks_deploy.ps1 = deployment\Azure\aks_deploy.ps1
+		deployment\Azure\aks_undeploy.ps1 = deployment\Azure\aks_undeploy.ps1
+		deployment\Azure\musiconfig.yaml = deployment\Azure\musiconfig.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CloudFoundry", "CloudFoundry", "{BFC8B26A-362B-40CC-92FE-452C09980A3D}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\CloudFoundry\config-server.json = deployment\CloudFoundry\config-server.json
+		deployment\CloudFoundry\createCloudFoundryServices.cmd = deployment\CloudFoundry\createCloudFoundryServices.cmd
+		deployment\CloudFoundry\createCloudFoundryServices.sh = deployment\CloudFoundry\createCloudFoundryServices.sh
+		deployment\CloudFoundry\deleteCloudFoundryServices.cmd = deployment\CloudFoundry\deleteCloudFoundryServices.cmd
+		deployment\CloudFoundry\deleteCloudFoundryServices.sh = deployment\CloudFoundry\deleteCloudFoundryServices.sh
+		deployment\CloudFoundry\deployApps.ps1 = deployment\CloudFoundry\deployApps.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{8D6EAF21-8786-4519-8205-BD1B82A0A470}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\Kubernetes\local_deploy.ps1 = deployment\Kubernetes\local_deploy.ps1
+		deployment\Kubernetes\local_undeploy.ps1 = deployment\Kubernetes\local_undeploy.ps1
+		deployment\Kubernetes\musicconfig.yaml = deployment\Kubernetes\musicconfig.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +94,10 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{18423ABE-6774-47D0-803B-E5CF88EDB8C3} = {C6D07EFD-13C8-48A5-834F-E1F72D0F7DCA}
+		{D10DD7B6-0FBF-413A-AD4F-12399F7587C1} = {C6D07EFD-13C8-48A5-834F-E1F72D0F7DCA}
+		{A14292E1-F82F-4F49-929E-3A7A74D0C914} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{BFC8B26A-362B-40CC-92FE-452C09980A3D} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{8D6EAF21-8786-4519-8205-BD1B82A0A470} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A330BCA5-F22D-4572-A612-D233B106E89F}

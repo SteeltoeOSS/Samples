@@ -14,6 +14,14 @@ services:
     image: "steeltoeoss/eurekaserver"
     ports:
       - "8761:8761"
+  spring-boot-admin:
+     environment:
+       - EUREKA_SERVICE_URL=http://eurekaserver:8761
+     image: "hananiel/spring-boot-admin-eureka-sample"
+     ports:
+       - "8889:8080"
+     depends_on:
+       - eurekaserver
   sqlserver:
     image: "mcr.microsoft.com/mssql/server"
     environment:

@@ -5,6 +5,8 @@ $version = "v1"
 $TotalTime = New-Object -TypeName System.Diagnostics.Stopwatch
 $TotalTime.Start()
 
+kubectl apply -f $deploymentFolder\k8s_infra_manifest.yaml
+
 if ($buildImages)
 {
     ## tag and push containers 
@@ -12,13 +14,13 @@ if ($buildImages)
     foreach ($image in $images)
     {
         $tag = $image + ":" + $version
-        # docker-compose build $image
+        docker-compose build $image
         Write-Host "Tagging $image with $tag"
         docker tag $image $tag
     }
 }
 
-kubectl create configmap musicconfig --from-file=$PSScriptRoot/musicconfig.yaml
+kubectl apply -f $PSScriptRoot\musicconfig.yaml
 
 Write-Host "Replacing tokens in app manifest with env-specific values"
 ((Get-Content -Path $deploymentFolder\k8s_template_apps.yaml -Raw) `

@@ -6,7 +6,8 @@ $configId = "musicconfig$uid"
 $cleanImages = $false
 
 # remove container instances
-$containers = "musicstore", "musicservice", "orderservice", "shoppingcartservice", "sqlserver"
+$containers = "musicstore", "musicservice", "orderservice", "shoppingcartservice", "sqlserver", "eurekaserver", "adminserver"
+$hubImages = "sqlserver", "eurekaserver", "adminserver"
 foreach ($c in $containers)
 {
     az container delete --name $c -g $rg -y
@@ -21,7 +22,7 @@ if ($cleanImages)
         while ($vloop -gt 0)
         {
             $tag = $c + ":v" + $vloop
-            if ($c -ne "sqlserver"){
+            if ($c -notin $hubImages){
                 az acr repository delete --name $registryId --image $tag -y
             }
             $vloop--
@@ -29,4 +30,4 @@ if ($cleanImages)
     }
 }
 
-az appconfig delete -g $rg -n $configId
+az appconfig delete -g $rg -n $configId -y

@@ -51,8 +51,8 @@ az aks get-credentials --resource-group $rg --name $cluster --overwrite-existing
 
 kubectl create configmap musicconfig --from-file=$PSScriptRoot/musicconfig.yaml
 
-# TODO: Use Azure SQL with Managed Identity access instead
-Write-Host "Deploying SQL Server"
+# TODO: Use Azure SQL with Managed Identity access instead of deploying a SQL instance to the k8s cluster
+Write-Host "Deploying infrastructure services"
 kubectl apply -f $deploymentFolder\k8s_infra_manifest.yaml
 
 if ($buildImages)

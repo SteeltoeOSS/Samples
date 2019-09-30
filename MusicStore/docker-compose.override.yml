@@ -1,28 +1,31 @@
 version: '3.4'
 
 services:
-  configserver:
-    environment:
-      - spring.cloud.config.git.uri=https://github.com/SteeltoeOSS/Samples/
-
   musicservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888
+      - PORT=80
+      - eureka__instance__port=80
 
   shoppingcartservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888
+      - PORT=80
+      - eureka__instance__port=80
 
   orderservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888
+      - PORT=80
+      - eureka__instance__port=80
 
   musicstore:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - spring__cloud__config__uri=http://configserver:8888
+      - PORT=80
     ports:
-      - "5555:5555"
+      - "5555:80"

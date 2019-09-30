@@ -6,6 +6,8 @@ using MusicStore.Models;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Env;
+using Steeltoe.Management.Endpoint.Refresh;
 
 namespace MusicStore
 {
@@ -23,6 +25,8 @@ namespace MusicStore
         {
             // Add Steeltoe Management services
             services.AddCloudFoundryActuators(Configuration);
+            services.AddEnvActuator(Configuration);
+            services.AddRefreshActuator(Configuration);
 
             // Add framework services.
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
@@ -37,7 +41,7 @@ namespace MusicStore
             services.AddDbContext<MusicStoreContext>(options => options.UseSqlServer(Configuration));
 
             // Add Framework services
-            services.AddControllersWithViews();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +51,8 @@ namespace MusicStore
 
             // Add Steeltoe Management endpoints into pipeline
             app.UseCloudFoundryActuators();
+            app.UseEnvActuator();
+            app.UseRefreshActuator();
 
             app.UseEndpoints(endpoints =>
             {

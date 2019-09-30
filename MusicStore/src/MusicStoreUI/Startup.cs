@@ -23,6 +23,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Steeltoe.Common.Http.Discovery;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Steeltoe.Management.Endpoint.Env;
+using Steeltoe.Management.Endpoint.Refresh;
 
 namespace MusicStoreUI
 {
@@ -52,6 +54,8 @@ namespace MusicStoreUI
 
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+            services.AddEnvActuator(Configuration);
+            services.AddRefreshActuator(Configuration);
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
@@ -124,6 +128,8 @@ namespace MusicStoreUI
 
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
+            app.UseEnvActuator();
+            app.UseRefreshActuator();
 
             app.UseSession();
 

@@ -5,8 +5,12 @@ metadata:
   namespace: default
 data:
   ASPNETCORE_ENVIRONMENT: AKS
+  # DisableServiceDiscovery: "true"
+  eureka__client__serviceUrl: eurekaserver
+  eureka__instance__healthCheckUrlPath: /actuator/health
+  eureka__instance_statusPageUrlPath: /actuator/info
+  management__endpoints__path: /actuator
   sqlserver__credentials__server: sqlserver
   sqlserver__credentials__username: sa
   sqlserver__credentials__password: "SteeltoeR0cks!"
-  DisableServiceDiscovery: "true"
   logging__logLevel__Steeltoe.Management: "Critical"

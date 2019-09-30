@@ -8,6 +8,8 @@ using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Env;
+using Steeltoe.Management.Endpoint.Refresh;
 using System;
 
 namespace OrderService
@@ -26,12 +28,13 @@ namespace OrderService
         {
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+            services.AddEnvActuator(Configuration);
+            services.AddRefreshActuator(Configuration);
 
-            // Add framework services.
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             // Add framework services.
-            services.AddMvc();
+            services.AddControllers();
 
             if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
             {
@@ -51,6 +54,8 @@ namespace OrderService
 
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
+            app.UseEnvActuator();
+            app.UseRefreshActuator();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,34 +17,39 @@ namespace ShoppingCartService
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            var host = CreateHostBuilder(args).Build();
             SeedDatabase(host);
             host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-                WebHost.CreateDefaultBuilder(args)
-                    //.UseCloudFoundryHosting(6000)
-                    .UseStartup<Startup>()
-                    .ConfigureAppConfiguration((builderContext, configBuilder) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webbuilder =>
+                {
+                    webbuilder
+                        .UseStartup<Startup>()
+                        .UseCloudFoundryHosting(6000);
+                })
+                .ConfigureAppConfiguration((builderContext, configBuilder) =>
+                {
+                    if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
                     {
-                        if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
-                        {
-                            var settings = configBuilder.Build();
-                            configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
-                        }
-                        else
-                        {
-                            configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
-                        }
-                    })
-                    .ConfigureLogging((context, builder) =>
+                        var settings = configBuilder.Build();
+                        configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    }
+                    else
                     {
-                        builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                        builder.AddDynamicConsole();
-                    });
+                        configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    }
+                    configBuilder.AddEnvironmentVariables();
+                })
+                .ConfigureLogging((context, builder) =>
+                {
+                    builder.ClearProviders();
+                    builder.AddDynamicConsole();
+                });
 
-        private static void SeedDatabase(IWebHost host)
+        private static void SeedDatabase(IHost host)
         {
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;

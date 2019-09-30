@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MusicStoreUI.Models;
 using Steeltoe.Extensions.Configuration.ConfigServer;
@@ -17,10 +18,10 @@ namespace MusicStoreUI
 
         public static void Main(string[] args)
         {
-            IWebHost host = null;
+            IHost host = null;
             try
             {
-                host = CreateWebHostBuilder(args).Build();
+                host = CreateHostBuilder(args).Build();
             }
             catch (ArgumentException e)
             {
@@ -28,7 +29,7 @@ namespace MusicStoreUI
                 {
                     Array.Resize(ref args, args.Length + 1);
                     args[^1] = "DisableServiceDiscovery=true";
-                    host = CreateWebHostBuilder(args).Build();
+                    host = CreateHostBuilder(args).Build();
                 }
             }
 
@@ -36,30 +37,36 @@ namespace MusicStoreUI
             host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-                WebHost.CreateDefaultBuilder(args)
-                    .ConfigureAppConfiguration((builderContext, configBuilder) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webbuilder =>
+                {
+                    webbuilder
+                        .UseStartup<Startup>()
+                        .UseCloudFoundryHosting(5555);
+                })
+                .ConfigureAppConfiguration((builderContext, configBuilder) =>
+                {
+                    if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
                     {
-                        if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
-                        {
-                            var settings = configBuilder.Build();
-                            configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
-                        }
-                        else
-                        {
-                            configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
-                        }
-                        configuration = configBuilder.Build();
-                    })
-                    .ConfigureLogging((context, builder) =>
+                        var settings = configBuilder.Build();
+                        configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    }
+                    else
                     {
-                        builder.AddDynamicConsole();
-                    })
-                   // .UseCloudFoundryHosting(5555)
-                    .UseStartup<Startup>();
+                        configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    }
+                    configBuilder.AddEnvironmentVariables();
+                    configuration = configBuilder.Build();
+                })
+                .ConfigureLogging((context, builder) =>
+                {
+                    builder.ClearProviders();
+                    builder.AddDynamicConsole();
+                });
 
 
-        private static void SeedDatabase(IWebHost host)
+        private static void SeedDatabase(IHost host)
         {
             using (var scope = host.Services.CreateScope())
             {

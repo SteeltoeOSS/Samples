@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +29,7 @@ namespace MusicStore
                 {
                     webbuilder
                         .UseStartup<Startup>()
-                        /*.UseCloudFoundryHosting(5000)*/;
+                        .UseCloudFoundryHosting(5000);
                 })
                 .ConfigureAppConfiguration((builderContext, configBuilder) =>
                 {
@@ -41,9 +42,11 @@ namespace MusicStore
                     {
                         configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
                     }
+                    configBuilder.AddEnvironmentVariables();
                 })
                 .ConfigureLogging((context, builder) =>
                 {
+                    builder.ClearProviders();
                     builder.AddDynamicConsole();
                 });
 

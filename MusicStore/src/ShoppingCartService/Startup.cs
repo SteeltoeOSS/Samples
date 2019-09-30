@@ -9,6 +9,8 @@ using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Env;
+using Steeltoe.Management.Endpoint.Refresh;
 using System;
 
 namespace ShoppingCartService
@@ -27,6 +29,8 @@ namespace ShoppingCartService
         {
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+            services.AddEnvActuator(Configuration);
+            services.AddRefreshActuator(Configuration);
 
             // Add framework services.
             services.AddControllers();
@@ -51,8 +55,10 @@ namespace ShoppingCartService
         {
             app.UseRouting();
 
-             // Add management endpoints into pipeline
+            // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
+            app.UseEnvActuator();
+            app.UseRefreshActuator();
 
             app.UseEndpoints(endpoints =>
             {
