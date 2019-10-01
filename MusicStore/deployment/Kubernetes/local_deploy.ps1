@@ -5,7 +5,8 @@ $version = "v1"
 $TotalTime = New-Object -TypeName System.Diagnostics.Stopwatch
 $TotalTime.Start()
 
-kubectl apply -f $deploymentFolder\k8s_infra_manifest.yaml
+Write-Host "Deploying infrastructure services"
+kubectl apply -f (Join-Path $deploymentFolder k8s_infra_manifest.yaml)
 
 if ($buildImages)
 {
@@ -14,22 +15,23 @@ if ($buildImages)
     foreach ($image in $images)
     {
         $tag = $image + ":" + $version
-        docker-compose build $image
+        docker-compose build --parallel $image
         Write-Host "Tagging $image with $tag"
         docker tag $image $tag
     }
 }
 
-kubectl apply -f $PSScriptRoot\musicconfig.yaml
+kubectl apply -f (Join-Path $PSScriptRoot musicconfig.yaml)
 
 Write-Host "Replacing tokens in app manifest with env-specific values"
-((Get-Content -Path $deploymentFolder\k8s_template_apps.yaml -Raw) `
+((Get-Content -Path (Join-Path $deploymentFolder k8s_template_apps.yaml) -Raw) `
+    -replace "LoadBalancer", "NodePort" `
     -replace '<acr>/', "" `
     -replace '<version>', $version) | `
-    Set-Content -Path $PSScriptRoot\local_apps_manifest.yaml
+    Set-Content -Path (Join-Path $PSScriptRoot local_apps_manifest.yaml)
 
 Write-Host "Deploying Apps"
-kubectl apply -f $PSScriptRoot\local_apps_manifest.yaml
+kubectl apply -f (Join-Path $PSScriptRoot local_apps_manifest.yaml)
 
 $TotalTime.Stop()
 Write-Host "Total processing time:" $TotalTime.Elapsed.ToString()

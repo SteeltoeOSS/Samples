@@ -13,8 +13,6 @@ spec:
         app: musicservices
         component: musicservice
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: musicservice
         image: <acr>/musicservice:<version>
@@ -52,8 +50,6 @@ spec:
         app: musicservices
         component: orderservice
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: orderservice
         image: <acr>/orderservice:<version>
@@ -91,8 +87,6 @@ spec:
         app: musicservices
         component: shoppingcartservice
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: shoppingcartservice
         image: <acr>/shoppingcartservice:<version>
@@ -130,8 +124,6 @@ spec:
         app: musicstore
         component: musicstore
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: musicstore
         image: <acr>/musicstore:<version>

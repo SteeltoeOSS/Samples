@@ -77,8 +77,6 @@ spec:
       labels:
         app: spring-boot-admin
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: spring-boot-admin
         image: hananiel/spring-boot-admin-eureka-sample

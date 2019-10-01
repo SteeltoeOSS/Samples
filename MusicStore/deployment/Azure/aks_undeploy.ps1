@@ -1,9 +1,20 @@
-$uid = "123"
-$version = 1
-$rg = "musicstore$uid"
-$cluster = "musiccluster$uid"
-$registryId = "musicregistry$uid"
-$cleanImages = $false
+param
+(
+    [String]    
+    $uid = "112",
+    [String]
+    $version = 1,
+    [String]
+    $rg = "mstore$uid",
+    [String]
+    $cluster = "mcluster$uid",
+    [String]
+    $registryId = "mregistry$uid",
+    [switch]
+    $cleanImages = $false,
+    [String]
+    $originalKubeContext = "docker-desktop"
+)
 
 Write-Host "Deleting cluster (with --no-wait)"
 az aks delete --name $cluster --resource-group $rg -y --no-wait
@@ -26,3 +37,8 @@ if ($cleanImages)
 
 Write-Host "Deleting service principal created for AKS cluster"
 az ad sp delete --id "http://$cluster"
+
+kubectl config set-context $originalKubeContext
+Write-Host "Removing demo Kubernetes context $cluster"
+kubectl config delete-context $cluster
+Write-Host "kubectl config current-context =" (kubectl config current-context)
