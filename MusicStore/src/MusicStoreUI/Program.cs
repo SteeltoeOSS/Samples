@@ -18,21 +18,7 @@ namespace MusicStoreUI
 
         public static void Main(string[] args)
         {
-            IHost host = null;
-            try
-            {
-                host = CreateHostBuilder(args).Build();
-            }
-            catch (ArgumentException e)
-            {
-                if (e.Message.Equals("Discovery client type UNKNOWN, check configuration"))
-                {
-                    Array.Resize(ref args, args.Length + 1);
-                    args[^1] = "DisableServiceDiscovery=true";
-                    host = CreateHostBuilder(args).Build();
-                }
-            }
-
+            IHost host = CreateHostBuilder(args).Build();
             SeedDatabase(host);
             host.Run();
         }

@@ -62,6 +62,7 @@ spec:
   - port: 8761
   selector:
     app: eurekaserver
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -81,7 +82,7 @@ spec:
       - name: spring-boot-admin
         image: hananiel/spring-boot-admin-eureka-sample
         ports:
-        - containerPort: 8889
+        - containerPort: 8080
         env:
           - name: EUREKA_SERVICE_URL
             value: http://eurekaserver:8761
@@ -93,6 +94,9 @@ metadata:
 spec:
   ports:
   - port: 8080
-    targetPort: 8889
   selector:
     app: spring-boot-admin
+  type: LoadBalancer
+    
+    
+    
