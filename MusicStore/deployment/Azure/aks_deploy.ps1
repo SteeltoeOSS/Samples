@@ -12,7 +12,7 @@ param (
     [String]
     $registryId = "mregistry$uid",
     [switch]
-    $buildImages = $true,
+    $skipBuildImages = $false,
     [String]
     $deploymentFolder = (Get-Item $PSScriptRoot).Parent
 )
@@ -50,27 +50,18 @@ Start-Sleep -s 10
 
 $AKSTime = New-Object -TypeName System.Diagnostics.Stopwatch
 $AKSTime.Start()
-Write-Host "Deploying AKS cluster - this will take some time, you might want to get a sandwich or a coffee..."
+Write-Host "Kicking off AKS deployment"
 
 az aks create `
     -g $rg --name $cluster --service-principal $spAppId --client-secret $spPassword --attach-acr $acrId `
     --node-count 2 --node-vm-size Standard_D2s_v3 --dns-name-prefix mstore$uid `
-    --generate-ssh-keys --enable-addons http_application_routing --debug
+    --generate-ssh-keys --enable-addons http_application_routing --debug --no-wait
 
-$AKSTime.Stop()
-Write-Host "Time to provision AKS cluster:" $TotalTime.Elapsed.ToString()
+Write-Host "Time to issue provisioning command for AKS cluster:" $AKSTime.Elapsed.ToString()
 
-Write-Host "Pointing kubectl at the new AKS cluster"
-az aks get-credentials --resource-group $rg --name $cluster --overwrite-existing
-
-kubectl create configmap musicconfig --from-file=(Join-Path $PSScriptRoot musicconfig.yaml)
-
-# TODO: Use Azure SQL with Managed Identity access instead of deploying a SQL instance to the k8s cluster
-Write-Host "Deploying infrastructure services"
-kubectl apply -f (Join-Path $deploymentFolder k8s_infra_manifest.yaml)
-
-if ($buildImages)
+if (!$skipBuildImages)
 {
+    Write-Host "Building and pushing app images"
     ## tag and push containers 
     $images = "musicservice", "orderservice", "shoppingcartservice", "musicstore"
     foreach ($image in $images)
@@ -84,12 +75,36 @@ if ($buildImages)
     }
 }
 
+Write-Host "Waiting for AKS provisioning to complete..."
+az aks wait -g $rg --name $cluster --created
+$AKSTime.Stop()
+Write-Host "Time to provision AKS cluster:" $AKSTime.Elapsed.ToString()
+
+Write-Host "Pointing kubectl at the new AKS cluster"
+az aks get-credentials -g $rg --name $cluster --overwrite-existing
+
+Write-Host "Creating configmap with contents of file located at" (Join-Path $deploymentFolder Kubernetes musicconfig.yaml)
+kubectl apply -f (Join-Path $deploymentFolder Kubernetes musicconfig.yaml)
+
+Write-Host "Deploying infrastructure services"
+kubectl apply -f (Join-Path $deploymentFolder k8s_infra_manifest.yaml)
+
 Write-Host "Replacing tokens in app manifest with env-specific values"
 ((Get-Content -Path (Join-Path $deploymentFolder k8s_template_apps.yaml) -Raw) `
     -replace '<uid>', $uid `
     -replace '<acr>', $acrLoginServer `
     -replace '<version>', $version) | `
     Set-Content -Path (Join-Path $PSScriptRoot aks_apps_manifest.yaml)
+
+Write-Host "Deploying Apps"
+kubectl apply -f (Join-Path $PSScriptRoot aks_apps_manifest.yaml)
+
+$dnsZone = az aks show -g $rg -n $cluster --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv
+Write-Host "Replacing tokens in ingress manifest with env-specific values"
+((Get-Content -Path (Join-Path $PSScriptRoot aks_ingress_template.yaml) -Raw) `
+    -replace '<CLUSTER_SPECIFIC_DNS_ZONE>', $dnsZone) | `
+    Set-Content -Path (Join-Path $PSScriptRoot aks_ingress_manifest.yaml)
+kubectl apply -f (Join-Path $PSScriptRoot aks_ingress_manifest.yaml)
 
 Write-Host "Deploying Apps"
 kubectl apply -f (Join-Path $PSScriptRoot aks_apps_manifest.yaml)

@@ -38,7 +38,7 @@ if ($cleanImages)
 Write-Host "Deleting service principal created for AKS cluster"
 az ad sp delete --id "http://$cluster"
 
-kubectl config set-context $originalKubeContext
+kubectl config set current-context $originalKubeContext
 Write-Host "Removing demo Kubernetes context $cluster"
 kubectl config delete-context $cluster
 Write-Host "kubectl config current-context =" (kubectl config current-context)
