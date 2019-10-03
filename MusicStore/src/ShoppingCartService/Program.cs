@@ -27,6 +27,10 @@ namespace ShoppingCartService
                 .ConfigureWebHostDefaults(webbuilder =>
                 {
                     webbuilder
+                        .ConfigureKestrel(options =>
+                        {
+                            options.AllowSynchronousIO = true;
+                        })
                         .UseStartup<Startup>()
                         .UseCloudFoundryHosting(6000);
                 })
