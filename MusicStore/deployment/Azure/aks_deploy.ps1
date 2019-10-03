@@ -106,8 +106,5 @@ Write-Host "Replacing tokens in ingress manifest with env-specific values"
     Set-Content -Path (Join-Path $PSScriptRoot aks_ingress_manifest.yaml)
 kubectl apply -f (Join-Path $PSScriptRoot aks_ingress_manifest.yaml)
 
-Write-Host "Deploying Apps"
-kubectl apply -f (Join-Path $PSScriptRoot aks_apps_manifest.yaml)
-
 $TotalTime.Stop()
 Write-Host "Total processing time:" $TotalTime.Elapsed.ToString()

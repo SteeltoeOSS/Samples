@@ -28,6 +28,10 @@ namespace MusicStore
                 .ConfigureWebHostDefaults(webbuilder =>
                 {
                     webbuilder
+                        .ConfigureKestrel(options =>
+                        {
+                            options.AllowSynchronousIO = true;
+                        })
                         .UseStartup<Startup>()
                         .UseCloudFoundryHosting(5000);
                 })
