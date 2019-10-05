@@ -25,6 +25,9 @@ using Steeltoe.Common.Http.Discovery;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
+using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Management.Tracing;
+using Steeltoe.Management.Exporter.Tracing.Zipkin;
 
 namespace MusicStoreUI
 {
@@ -78,6 +81,9 @@ namespace MusicStoreUI
                 services.AddConfigurationDiscoveryClient(Configuration);
                 services.TryAddTransient<DiscoveryHttpMessageHandler>();
             }
+
+            services.AddDistributedTracing(Configuration);
+            services.AddZipkinExporter(Configuration);
 
             services.AddHttpClient<IMusicStore, MusicStoreService>()
                 .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
@@ -150,6 +156,7 @@ namespace MusicStoreUI
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseTracingExporter(); // zipkin
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -166,7 +173,7 @@ namespace MusicStoreUI
             {
                 app.UseDiscoveryClient();
             }
-
+            
             // Startup Hystrix metrics stream
             app.UseHystrixMetricsStream();
         }

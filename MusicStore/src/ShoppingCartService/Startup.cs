@@ -12,6 +12,8 @@ using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
 using System;
+using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Management.Tracing;
 
 namespace ShoppingCartService
 {
@@ -44,6 +46,9 @@ namespace ShoppingCartService
                 services.AddConfigurationDiscoveryClient(Configuration);
             }
 
+            services.AddDistributedTracing(Configuration);
+            services.AddZipkinExporter(Configuration);
+            
             // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
             // Console.WriteLine("Using SQL Connection: {0}", cstring);
             // services.AddDbContext<ShoppingCartContext>(options => options.UseSqlServer(cstring));
@@ -55,11 +60,15 @@ namespace ShoppingCartService
         {
             app.UseRouting();
 
+            
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
             app.UseEnvActuator();
             app.UseRefreshActuator();
 
+            
+            app.UseTracingExporter();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -34,6 +34,8 @@
     <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-manual-001" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-manual-001" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-manual-001" />
   </ItemGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Configuration\src\ConfigServerCore\Steeltoe.Extensions.Configuration.ConfigServerCore.csproj" />

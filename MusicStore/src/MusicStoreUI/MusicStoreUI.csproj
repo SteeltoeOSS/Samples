@@ -42,6 +42,8 @@
     <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-manual-001" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-manual-001" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-manual-001" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="3.0.0-manual-001" />
 
   </ItemGroup>

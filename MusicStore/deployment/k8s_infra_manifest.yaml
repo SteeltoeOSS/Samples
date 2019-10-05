@@ -130,5 +130,37 @@ spec:
   selector:
     app: hystrix-dashboard
   type: LoadBalancer
-    
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkinserver
+spec:
+  selector:
+    matchLabels:
+      app: zipkinserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zipkinserver
+    spec:
+      containers:
+        - name: zipkinserver
+          image: "openzipkin/zipkin:2.12.2"
+          ports:
+            - containerPort: 9411
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zipkinserver
+spec:
+  ports:
+    - port: 9411
+  selector:
+    app: zipkinserver
+  type: LoadBalancer
     

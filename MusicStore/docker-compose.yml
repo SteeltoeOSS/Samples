@@ -30,6 +30,10 @@ services:
     depends_on:
       - configserver
       - eurekaserver
+  zipkinserver:
+    image: "steeltoeoss/zipkin"
+    ports:
+      - "9411:9411"
   musicservice:
     image: ${DOCKER_REGISTRY-}musicservice
     build:
