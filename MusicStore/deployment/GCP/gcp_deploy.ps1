@@ -38,6 +38,12 @@ gcloud auth configure-docker
 
 $registry = 'gcr.io/'+$projectId
 Write-Host 'Targeting registry: '$registry
+
+
+Write-Host "Deploying infrastructure services"
+kubectl apply -f (Join-Path $deploymentFolder k8s_infra_manifest.yaml)
+
+Write-Host "buildImages- $buildImages"
 if ($buildImages)
 {
     ## tag and push containers 
@@ -54,8 +60,8 @@ if ($buildImages)
     }
 }
 
-Write-Host "Deploying infrastructure services"
-kubectl apply -f (Join-Path $deploymentFolder k8s_infra_manifest.yaml)
+Write-Host "Deploying config "
+kubectl apply -f (Join-Path $deploymentFolder Kubernetes musicconfig.yaml)
 
 Write-Host "Replacing tokens in app manifest with env-specific values"
 ((Get-Content -Path (Join-Path $deploymentFolder k8s_template_apps.yaml) -Raw) `
