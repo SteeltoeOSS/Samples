@@ -214,6 +214,7 @@ git.properties
 .ionide/
 
 # ignore GemFire-related assets
+*.gfs
 Pivotal.GemFire.dll
-pivnet.exe
+pivnet*
 pivotal*.zip
