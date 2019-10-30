@@ -65,4 +65,4 @@ If you navigate to the http://localhost:5000/Home/ConfigServerSettings, you will
 Change the Hosting environment setting to `development` (i.e., set `ASPNETCORE_ENVIRONMENT=development`), then restart the application. You will see different configuration data returned for that profile/hosting environment.
 
 [NOTE]
-_See the Official https://steeltoe.io/docs/steeltoe-configuration[Steeltoe Configuration Documentation] for a more in-depth walkthrough of the samples and more detailed information._
+_See the https://steeltoe.io/app-configuration[App Configuration] area of the Steeltoe site for a more in-depth walkthrough of the samples and more detailed information._
