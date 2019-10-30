@@ -11,6 +11,6 @@ steps:
     EOF
     cat user.ini
   env:
-    STEELTOE_CF_USERNAME: $(steeltoe.cf.username)
-    STEELTOE_CF_PASSWORD: $(steeltoe.cf.password)
+    STEELTOE_CF_USERNAME: $(STEELTOE_CF_USERNAME)
+    STEELTOE_CF_PASSWORD: $(STEELTOE_CF_PASSWORD)
   displayName: 'Configure Behave'
