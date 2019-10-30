@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - ci/*
+      - environment.py
+      - pylib/*
+      - Management/src/AspDotNetCore/CloudFoundry/*
+
+variables:
+  - group: 'Samples Configuration and Credentials'
+
+jobs:
+  -
+    template: ../../../../ci/templates/cloud-foundry-job.yml
+    parameters:
+      feature: Management
+      sample: CloudFoundry
