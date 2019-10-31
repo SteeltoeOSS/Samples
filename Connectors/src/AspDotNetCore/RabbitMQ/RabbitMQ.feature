@@ -13,7 +13,7 @@ Feature: RabbitMQ Connector
         And you wait until CloudFoundry service myRabbitMQService is created
         And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.0 -r win10-x64
-        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
+        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.0/win10-x64/publish
         And you wait until CloudFoundry app rabbitmq-connector is started
         When you post "Message=HEY THERE" to https://rabbitmq-connector.x.y.z/RabbitMQ/Send
         And you get https://rabbitmq-connector.x.y.z/RabbitMQ/Receive
@@ -28,7 +28,7 @@ Feature: RabbitMQ Connector
         And you wait until CloudFoundry service myRabbitMQService is created
         And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.0 -r ubuntu.16.04-x64
-        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish
+        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.0/ubuntu.16.04-x64/publish
         And you wait until CloudFoundry app rabbitmq-connector is started
         When you post "Message=HEY THERE" to https://rabbitmq-connector.x.y.z/RabbitMQ/Send
         And you get https://rabbitmq-connector.x.y.z/RabbitMQ/Receive
