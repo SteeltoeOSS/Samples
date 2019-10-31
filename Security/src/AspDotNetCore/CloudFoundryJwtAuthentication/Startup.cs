@@ -46,8 +46,8 @@ namespace CloudFoundryJwtAuthentication
             app.UseAuthentication();
 
 #if NETCOREAPP3_0
-            app.UseRouting();
             app.UseAuthorization();
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
