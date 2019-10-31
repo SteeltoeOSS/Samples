@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundryJwtAuthentication", "CloudFoundryJwtAuthentication\CloudFoundryJwtAuthentication.csproj", "{7C45D011-F900-42B9-A975-DF5239A32450}"
 EndProject
@@ -16,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4E1E
 		..\..\scripts\credhub-setup.sh = ..\..\scripts\credhub-setup.sh
 		..\..\scripts\sso-setup.cmd = ..\..\scripts\sso-setup.cmd
 		..\..\scripts\sso-setup.sh = ..\..\scripts\sso-setup.sh
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E89A1BB6-1F81-4C2A-9F4A-936EE33ACD8B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\config\versions.props = ..\..\..\config\versions.props
 	EndProjectSection
 EndProject
 Global

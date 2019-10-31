@@ -42,7 +42,11 @@ namespace Fortune_Teller_UI
             services.AddHystrixCollapser<IFortuneServiceCollapser, FortuneServiceCollapser>("FortuneServiceCollapser", Configuration);
 
             // Add framework services.
+#if NETCOREAPP3_0
+            services.AddControllersWithViews();
+#else
             services.AddMvc();
+#endif
 
             // Add Hystrix metrics stream to enable monitoring
             services.AddHystrixMetricsStream(Configuration);
@@ -66,7 +70,22 @@ namespace Fortune_Teller_UI
             // Add Hystrix Metrics context to pipeline
             app.UseHystrixRequestContext();
 
-            app.UseMvc();
+#if NETCOREAPP3_0
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+#else
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+#endif
 
             // Startup discovery client
             app.UseDiscoveryClient();
