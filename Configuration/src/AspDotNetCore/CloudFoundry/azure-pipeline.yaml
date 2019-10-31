@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - master
+      - 2.x
   paths:
     include:
       - ci/*
