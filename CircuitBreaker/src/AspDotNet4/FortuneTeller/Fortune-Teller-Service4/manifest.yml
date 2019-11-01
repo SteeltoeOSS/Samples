@@ -4,7 +4,7 @@ applications:
   buildpacks:
    - hwc_buildpack
   memory: 512M
-  stack: windows2016
+  stack: windows
   health-check-type: http
   health-check-http-endpoint: /api/Fortunes/health
   services:

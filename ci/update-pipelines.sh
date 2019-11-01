@@ -100,6 +100,7 @@ EOF
   paths:
     include:
       - ci/*
+      - config/*
       - environment.py
       - pylib/*
       - $sample_path/*

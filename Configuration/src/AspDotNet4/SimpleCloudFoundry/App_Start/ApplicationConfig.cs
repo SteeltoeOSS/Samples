@@ -1,9 +1,8 @@
-﻿
-using Microsoft.Extensions.Configuration;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Pivotal.Extensions.Configuration.ConfigServer;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using System;
 using System.IO;
 
@@ -13,7 +12,6 @@ namespace SimpleCloudFoundry4
     {
         public static CloudFoundryApplicationOptions CloudFoundryApplication
         {
-
             get
             {
                 var opts = new CloudFoundryApplicationOptions();
@@ -22,6 +20,7 @@ namespace SimpleCloudFoundry4
                 return opts;
             }
         }
+
         public static CloudFoundryServicesOptions CloudFoundryServices
         {
             get
@@ -49,7 +48,6 @@ namespace SimpleCloudFoundry4
                 .AddConfigServer(environment, factory);
 
             Configuration = builder.Build();
-
         }
 
         public static string GetContentRoot()
@@ -59,5 +57,4 @@ namespace SimpleCloudFoundry4
             return Path.GetFullPath(basePath);
         }
     }
-
 }

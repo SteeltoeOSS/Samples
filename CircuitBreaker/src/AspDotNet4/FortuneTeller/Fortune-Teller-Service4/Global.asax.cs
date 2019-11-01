@@ -1,12 +1,12 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using FortuneTellerService4.Models;
-using Pivotal.Discovery.Client;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Logging.Autofac;
+using Steeltoe.Common.Options.Autofac;
+using Steeltoe.Discovery.Client;
 using System.Reflection;
 using System.Web.Http;
-using Steeltoe.Common.Options.Autofac;
-using Steeltoe.Common.Logging.Autofac;
 
 namespace FortuneTellerService4
 {
