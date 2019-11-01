@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - ci/*
+      - config/versions.props
       - environment.py
       - pylib/*
       - Connectors/src/AspDotNetCore/MySqlEF6/*
