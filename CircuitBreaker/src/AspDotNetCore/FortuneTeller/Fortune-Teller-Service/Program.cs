@@ -10,6 +10,7 @@ namespace FortuneTellerService
         {
             BuildWebHost(args).Run();
         }
+        
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .UseCloudFoundryHosting(5000)

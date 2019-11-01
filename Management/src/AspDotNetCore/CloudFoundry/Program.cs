@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
+using Steeltoe.Extensions.Logging.SerilogDynamicLogger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +38,8 @@ namespace CloudFoundry
                 .ConfigureLogging((builderContext, loggingBuilder) =>
                 {
                     loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
-                    loggingBuilder.AddDynamicConsole();
+                    // loggingBuilder.AddDynamicConsole();
+                    loggingBuilder.AddSerilogDynamicConsole();
                     loggingBuilder.AddDebug();
                 })
                 .Build();

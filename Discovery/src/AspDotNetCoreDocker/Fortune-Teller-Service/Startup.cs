@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 using FortuneTellerService.Models;
 using Microsoft.EntityFrameworkCore;
 

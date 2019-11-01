@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Rabbit": {
+    "RabbitMQ": {
       "commandName": "Project"
     }
   }

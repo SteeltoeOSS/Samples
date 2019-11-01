@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration.ConfigServer;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Simple.Model;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace Simple
 {
@@ -41,7 +39,11 @@ namespace Simple
             services.AddConfiguration(Configuration);
 
             // Add framework services.
+#if NETCOREAPP3_0
+            services.AddControllersWithViews();
+#else
             services.AddMvc();
+#endif
 
             // Adds the configuration data POCO configured with data returned from the Spring Cloud Config Server
             services.Configure<ConfigServerData>(Configuration);
@@ -54,7 +56,6 @@ namespace Simple
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
@@ -63,12 +64,22 @@ namespace Simple
 
             app.UseStaticFiles();
 
+#if NETCOREAPP3_0
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+#else
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+#endif
         }
 
     }

@@ -1,28 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <Import Project="..\..\..\..\config\versions.props" />
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;netcoreapp2.1;net461;</TargetFrameworks>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.0'">
+    <PackageReference Include="Microsoft.AspNetCore" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="$(AspNetCoreVersion)" />
+  </ItemGroup>
+  
   <ItemGroup>
     <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="GitInfo" Version="2.0.15">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.3.0-rc1" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.3.0-rc1" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.3.0-rc1" />
-    <PackageReference Include="Steeltoe.Management.TaskCore" Version="2.3.0-rc1" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.3.0-rc1" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.SerilogDynamicLogger" Version="$(SteeltoeLoggingVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
+    <PackageReference Include="Steeltoe.Management.TaskCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="git.properties" CopyToOutputDirectory="PreserveNewest"/>
+    <None Include="git.properties" CopyToOutputDirectory="PreserveNewest" />
     <None Include="appsettings.json" CopyToOutputDirectory="Always" />
     <None Include="appsettings.Development.json" CopyToOutputDirectory="Always" />
   </ItemGroup>

@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundry", "CloudFoundry\CloudFoundry.csproj", "{B4B8FE2B-CB42-4C1E-851C-FCDF81ECA00F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7AE4863D-B020-45B3-B8F7-DCFD8B964479}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\config\versions.props = ..\..\..\config\versions.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

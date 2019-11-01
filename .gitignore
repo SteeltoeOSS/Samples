@@ -211,3 +211,10 @@ test.out/
 user.ini
 
 git.properties
+.ionide/
+
+# ignore GemFire-related assets
+*.gfs
+Pivotal.GemFire.dll
+pivnet*
+pivotal*.zip

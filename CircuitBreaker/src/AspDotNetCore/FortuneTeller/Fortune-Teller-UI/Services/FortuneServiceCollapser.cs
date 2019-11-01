@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.Discovery.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Steeltoe.CircuitBreaker.Hystrix;
 using System.Reactive;
-using Microsoft.Extensions.Logging;
-using Pivotal.Discovery.Client;
+using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Services
 {
@@ -30,7 +30,7 @@ namespace Fortune_Teller_UI.Services
         {
             _logger.LogInformation("Creating MultiFortuneServiceCommand to handle {0} number of requests", requests.Count);
             return new MultiFortuneServiceCommand(
-                HystrixCommandGroupKeyDefault.AsKey("MultiFortuneService"), 
+                HystrixCommandGroupKeyDefault.AsKey("MultiFortuneService"),
                 requests,
                 _fortuneService,
                 _loggerFactory.CreateLogger<MultiFortuneServiceCommand>());

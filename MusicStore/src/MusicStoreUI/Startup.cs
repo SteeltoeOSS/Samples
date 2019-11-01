@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pivotal.Discovery.Client;
+using Steeltoe.Discovery.Client;
 
 #if USE_REDIS_CACHE
 using Microsoft.AspNetCore.DataProtection;
@@ -92,7 +92,7 @@ namespace MusicStoreUI
                     });
             });
 
-            // Add Hystrix metrics stream to enable monitoring 
+            // Add Hystrix metrics stream to enable monitoring
             services.AddHystrixMetricsStream(Configuration);
         }
 

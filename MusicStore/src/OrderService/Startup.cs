@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
-using Pivotal.Discovery.Client;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 
 namespace OrderService
@@ -40,7 +40,7 @@ namespace OrderService
         {
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
-            
+
             app.UseMvc();
 
             app.UseDiscoveryClient();

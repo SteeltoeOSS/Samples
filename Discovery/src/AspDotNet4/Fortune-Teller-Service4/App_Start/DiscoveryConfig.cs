@@ -1,14 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Pivotal.Discovery.Eureka;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Common.Discovery;
 using Steeltoe.Discovery.Eureka;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace FortuneTellerService4
 {
@@ -53,7 +50,7 @@ namespace FortuneTellerService4
                 ConfigurationBinder.Bind(clientSection, clientOptions);
                 if (einfo != null)
                 {
-                    PivotalEurekaConfigurer.UpdateConfiguration(config, einfo, clientOptions);
+                    EurekaPostConfigurer.UpdateConfiguration(config, einfo, clientOptions);
                 }
         
 
@@ -62,11 +59,11 @@ namespace FortuneTellerService4
                 ConfigurationBinder.Bind(instSection, instOptions);
                 if (einfo != null)
                 {
-                    PivotalEurekaConfigurer.UpdateConfiguration(config, einfo, instOptions);
+                    EurekaPostConfigurer.UpdateConfiguration(config, einfo, instOptions);
                 }
                 var manager = new EurekaApplicationInfoManager(new OptionsMonitorWrapper<EurekaInstanceOptions>(instOptions), LoggingConfig.LoggerFactory);
 
-                return new PivotalEurekaDiscoveryClient(
+                return new EurekaDiscoveryClient(
                     new OptionsMonitorWrapper<EurekaClientOptions>(clientOptions),
                     new OptionsMonitorWrapper<EurekaInstanceOptions>(instOptions),
                     manager,

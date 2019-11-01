@@ -14,7 +14,7 @@ variables:
 
 jobs:
   -
-    template: ../../../../ci/templates/cloud-foundry-job.yml
+    template: ../../../../ci/templates/cloud-foundry-uaac-job.yml
     parameters:
       feature: Security
       sample: CloudFoundrySingleSignon
