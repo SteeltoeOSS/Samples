@@ -1,11 +1,12 @@
 trigger:
   branches:
     include:
+      - master
       - 2.x
   paths:
     include:
       - ci/*
-      - config/versions.props
+      - config/*
       - environment.py
       - pylib/*
       - Configuration/src/AspDotNetCore/Simple/*
