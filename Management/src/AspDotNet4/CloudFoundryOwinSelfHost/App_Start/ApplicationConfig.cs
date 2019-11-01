@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
 using System;
@@ -30,9 +30,10 @@ namespace CloudFoundryOwinSelfHost
 
         public static void ConfigureLogging()
         {
-            LoggerProvider = new DynamicLoggerProvider(new ConsoleLoggerSettings().FromConfiguration(Configuration));
-            LoggerFactory = new LoggerFactory();
-            LoggerFactory.AddProvider(LoggerProvider);
+            IServiceCollection serviceCollection = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
+            serviceCollection.AddLogging(builder => builder.AddDynamicConsole());
+            LoggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
         }
 
         public static string GetContentRoot()

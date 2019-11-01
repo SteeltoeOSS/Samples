@@ -3,7 +3,6 @@ using Owin;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.CloudFoundry.Connector.Relational;
-using Steeltoe.CloudFoundry.Connector.Relational.MySql;
 using Steeltoe.CloudFoundry.Connector.Services;
 using Steeltoe.Common.Diagnostics;
 using Steeltoe.Common.HealthChecks;

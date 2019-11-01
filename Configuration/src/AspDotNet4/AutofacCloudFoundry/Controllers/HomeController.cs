@@ -2,8 +2,8 @@
 using AutofacCloudFoundry.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Pivotal.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using System.Web.Mvc;
 
 namespace AutofacCloudFoundry.Controllers
@@ -11,9 +11,13 @@ namespace AutofacCloudFoundry.Controllers
     public class HomeController : Controller
     {
         private IOptionsSnapshot<ConfigServerData> IConfigServerData { get; set; }
+
         private CloudFoundryServicesOptions CloudFoundryServices { get; set; }
+
         private CloudFoundryApplicationOptions CloudFoundryApplication { get; set; }
+
         private ConfigServerClientSettingsOptions ConfigServerClientSettingsOptions { get; set; }
+
         private IConfigurationRoot Config { get; set; }
 
         public HomeController(IConfigurationRoot config,

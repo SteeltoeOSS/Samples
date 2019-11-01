@@ -5,6 +5,7 @@ using Owin;
 using Steeltoe.CloudFoundry.Connector.Relational;
 using Steeltoe.Common.Diagnostics;
 using Steeltoe.Common.HealthChecks;
+using Steeltoe.Management.Census.Stats;
 using Steeltoe.Management.Endpoint.Health.Contributor;
 using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.EndpointOwin;
