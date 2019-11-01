@@ -43,11 +43,11 @@ namespace CloudFoundryJwtAuthentication
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            app.UseAuthentication();
 
 #if NETCOREAPP3_0
-            app.UseAuthorization();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -55,6 +55,7 @@ namespace CloudFoundryJwtAuthentication
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 #else
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

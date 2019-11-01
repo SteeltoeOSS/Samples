@@ -82,11 +82,10 @@ namespace CloudFoundrySingleSignon
                 ForwardedHeaders = ForwardedHeaders.XForwardedProto
             });
 
-            app.UseAuthentication();
-
 #if NETCOREAPP3_0
-            app.UseAuthorization();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -94,6 +93,7 @@ namespace CloudFoundrySingleSignon
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 #else
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
