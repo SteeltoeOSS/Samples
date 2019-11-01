@@ -19,6 +19,7 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 ## Environment (please complete the following information):
+ - Sample name: [e.g. RabbitMQ Connector, Discovery, etc.]
  - Platform: [e.g. Cloud Foundry, Azure, etc.) 
  - OS: [e.g. Windows, Linux, Mac OSX]
  - .NET Version [e.g. .NET Core 2.1.0, .NET Framework 4.7.1, etc.] 
