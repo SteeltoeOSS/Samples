@@ -2,7 +2,7 @@
 applications:
 - name: musicstore
   memory: 256M
-  stack: windows2016
+  stack: windows
   command: .\MusicStoreService
   env:
     ASPNETCORE_ENVIRONMENT: Production

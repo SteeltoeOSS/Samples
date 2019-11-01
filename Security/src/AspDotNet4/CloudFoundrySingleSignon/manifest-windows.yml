@@ -5,6 +5,6 @@ applications:
    - hwc_buildpack
   command: .cloudfoundry\hwc.exe
   memory: 512M
-  stack: windows2016
+  stack: windows
   services:
    - myOAuthService

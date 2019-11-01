@@ -2,7 +2,7 @@
 applications:
 - name: rabbitmq-connector-4x
   memory: 512M
-  stack: windows2016
+  stack: windows
   buildpacks:
    - hwc_buildpack
   services:

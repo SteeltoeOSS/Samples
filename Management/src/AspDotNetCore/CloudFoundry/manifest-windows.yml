@@ -4,7 +4,7 @@ applications:
   buildpacks:
    - hwc_buildpack
   memory: 512M
-  stack: windows2016
+  stack: windows
   command: .\CloudFoundry
   env:
     ASPNETCORE_ENVIRONMENT: Development

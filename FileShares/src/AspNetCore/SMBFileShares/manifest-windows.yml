@@ -1,7 +1,7 @@
 ﻿---
 applications:
 - name: smbfileshares
-  stack: windows2016
+  stack: windows
   memory: 512M
   disk_quota: 256M
   buildpacks:
