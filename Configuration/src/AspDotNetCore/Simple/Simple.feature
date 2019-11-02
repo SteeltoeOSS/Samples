@@ -33,7 +33,7 @@ Feature: Simple Configuration
         And you have Java 8 installed
         And you have Apache Maven 3 installed
         When you run: git clone https://github.com/spring-cloud/spring-cloud-config
-        And you run: git -C spring-cloud-config checkout v1.3.3.RELEASE
+        And you run: git -C spring-cloud-config checkout v2.1.4.RELEASE
         And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
         And you wait until process listening on port 8888
         And you run: dotnet restore
@@ -55,7 +55,7 @@ Feature: Simple Configuration
         And you have Java 8 installed
         And you have Apache Maven 3 installed
         When you run: git clone https://github.com/spring-cloud/spring-cloud-config
-        And you run: git -C spring-cloud-config checkout v1.3.3.RELEASE
+        And you run: git -C spring-cloud-config checkout v2.1.4.RELEASE
         And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
         And you wait until process listening on port 8888
         And you run: dotnet restore
