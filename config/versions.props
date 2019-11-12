@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeCommonVersion>2.4.0-rc1</SteeltoeCommonVersion>
+    <SteeltoeCommonVersion>2.4.0-ci1341</SteeltoeCommonVersion>
     <SteeltoeCircuitBreakerVersion>$(SteeltoeCommonVersion)</SteeltoeCircuitBreakerVersion>
     <SteeltoeConfigVersion>$(SteeltoeCommonVersion)</SteeltoeConfigVersion>
     <SteeltoeConnectorVersion>$(SteeltoeCommonVersion)</SteeltoeConnectorVersion>
