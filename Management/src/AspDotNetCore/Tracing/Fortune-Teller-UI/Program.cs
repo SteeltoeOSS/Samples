@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Logging;
-using Microsoft.Extensions.Logging;
+using Steeltoe.Discovery.Client;
+using Steeltoe.Management.CloudFoundry;
 
 namespace Fortune_Teller_UI
 {
@@ -12,18 +12,14 @@ namespace Fortune_Teller_UI
         {
             BuildWebHost(args).Run();
         }
+
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                    .UseCloudFoundryHosting(5555)
                     .AddCloudFoundry()
-                    .ConfigureLogging((builderContext, loggingBuilder) =>
-                    {
-                        loggingBuilder.ClearProviders();
-                        loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
-                        loggingBuilder.AddDynamicConsole();
-                     })
+                    .AddCloudFoundryActuators()
+                    .AddServiceDiscovery()
                     .UseStartup<Startup>()
+                    .UseCloudFoundryHosting(5555)
                     .Build();
-
     }
 }

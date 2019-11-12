@@ -20,7 +20,6 @@ namespace RabbitMQ
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRabbitMQConnection(Configuration);
-            services.AddCloudFoundryActuators(Configuration);
 
 #if NETCOREAPP3_0
             services.AddControllersWithViews();
@@ -40,7 +39,7 @@ namespace RabbitMQ
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseCloudFoundryActuators();
+
             app.UseStaticFiles();
 
 #if NETCOREAPP3_0

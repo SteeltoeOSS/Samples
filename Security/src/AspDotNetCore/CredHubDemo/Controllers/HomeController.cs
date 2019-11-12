@@ -54,7 +54,7 @@ namespace CredHubDemo.Controllers
 
         public async Task<IActionResult> Injected([FromServices]ICredHubClient credHub)
         {
-            var newPassword = await credHub.GenerateAsync<PasswordCredential>(new PasswordGenerationRequest("generated-password", new PasswordGenerationParameters { Length = 20 }, null, OverwiteMode.overwrite));
+            var newPassword = await credHub.GenerateAsync<PasswordCredential>(new PasswordGenerationRequest("generated-password", new PasswordGenerationParameters { Length = 20 }));
             ViewBag.Deleted = await credHub.DeleteByNameAsync("generated-password");
 
             return View(newPassword);
@@ -67,7 +67,7 @@ namespace CredHubDemo.Controllers
 
             var creds = "{\"key\": 123,\"key_list\": [\"val1\",\"val2\"],\"is_true\": true}";
             _logger.LogTrace("Setting credentials...");
-            await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest($"/credhubdemo-config-server/credentials", creds, null, OverwiteMode.overwrite));
+            await _credHub.WriteAsync<JsonCredential>(new JsonSetRequest($"/credhubdemo-config-server/credentials", creds));
 
             _logger.LogTrace("Setting up ViewModel and calling Interpolate...");
             var interpolated = await _credHub.InterpolateServiceDataAsync(Program.OriginalServices);
@@ -124,7 +124,7 @@ namespace CredHubDemo.Controllers
 
             // certificates
             // generate a CA
-            var generatedCA = await _credHub.GenerateAsync<CertificateCredential>(new CertificateGenerationRequest("testGeneratedCA", new CertificateGenerationParameters { IsCertificateAuthority = true, CommonName = "generator.ca" }));
+            var generatedCA = await _credHub.GenerateAsync<CertificateCredential>(new CertificateGenerationRequest("testGeneratedCA", new CertificateGenerationParameters { IsCertificateAuthority = true, CommonName = "generated-ca" }));
             // generate a cert signed by the generated CA
             var generatedCert = await _credHub.GenerateAsync<CertificateCredential>(new CertificateGenerationRequest("testGeneratedCert", new CertificateGenerationParameters { CommonName = "generated.cert", CertificateAuthority = "/testGeneratedCA" }));
             // write the generated cert under another name
@@ -165,11 +165,6 @@ namespace CredHubDemo.Controllers
             var deletedUser = await _credHub.DeleteByNameAsync(generatedUser.Name);
 
             // comment out one or more Delete operations above to see more results in Find requests:
-            var paths = await _credHub.FindAllPathsAsync();
-            foreach (var p in paths)
-            {
-                Console.WriteLine($"Found path {p.Path}");
-            }
             var foundByPath = await _credHub.FindByPathAsync("/");
             foreach(var f in foundByPath)
             {

@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using System.IO;
+using Steeltoe.Management.CloudFoundry;
 
 namespace OAuth
 {
@@ -15,29 +14,12 @@ namespace OAuth
 
         public static IWebHost BuildWebHost(string[] args)
         {
-            return new WebHostBuilder()
-                .UseKestrel()
-                .UseCloudFoundryHosting()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+            return WebHost.CreateDefaultBuilder(args)
+                .AddCloudFoundry()
+                .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((builderContext, configBuilder) =>
-                {
-                    var env = builderContext.HostingEnvironment;
-                    configBuilder.SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                        .AddEnvironmentVariables()
-                        // Add to configuration the Cloudfoundry VCAP settings
-                        .AddCloudFoundry();
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddConsole();
-                })
+                .UseCloudFoundryHosting()
                 .Build();
         }
-
     }
 }

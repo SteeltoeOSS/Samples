@@ -36,8 +36,6 @@ namespace MySqlEFCore
                 services.AddMySqlHealthContributor(Configuration);
             }
 
-            services.AddCloudFoundryActuators(Configuration);
-
             // Add framework services.
 #if NETCOREAPP3_0
             services.AddControllersWithViews();
@@ -60,16 +58,9 @@ namespace MySqlEFCore
 
             app.UseStaticFiles();
 
-            app.UseCloudFoundryActuators();
-
 #if NETCOREAPP3_0
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else
             app.UseMvc(routes =>
             {

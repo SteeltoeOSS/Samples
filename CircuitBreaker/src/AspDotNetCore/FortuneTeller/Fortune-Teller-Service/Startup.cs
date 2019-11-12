@@ -1,12 +1,10 @@
 ﻿
 using FortuneTellerService.Models;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Discovery.Client;
 
 namespace FortuneTellerService
 {
@@ -28,8 +26,6 @@ namespace FortuneTellerService
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
-            services.AddDiscoveryClient(Configuration);
-
             // Add framework services.
 #if NETCOREAPP3_0
             services.AddControllers();
@@ -39,18 +35,13 @@ namespace FortuneTellerService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime lifetime)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             app.UseStaticFiles();
 
 #if NETCOREAPP3_0
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else
             app.UseMvc(routes =>
             {
@@ -59,8 +50,6 @@ namespace FortuneTellerService
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 #endif
-
-            app.UseDiscoveryClient();
 
             SampleData.InitializeFortunesAsync(app.ApplicationServices).Wait();
         }

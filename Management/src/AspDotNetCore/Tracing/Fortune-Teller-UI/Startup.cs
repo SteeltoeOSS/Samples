@@ -1,14 +1,13 @@
-﻿
+﻿using Fortune_Teller_UI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Fortune_Teller_UI.Services;
-using Steeltoe.Discovery.Client;
-using Steeltoe.Management.Tracing;
+using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Management.Exporter.Tracing;
-
+using Steeltoe.Management.Tracing;
+using System;
 
 namespace Fortune_Teller_UI
 {
@@ -24,9 +23,12 @@ namespace Fortune_Teller_UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDiscoveryClient(Configuration);
-
-            services.AddSingleton<IFortuneService, FortuneService>();
+            services.AddHttpClient("fortunes", c =>
+                {
+                    c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
+                })
+                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
+                .AddTypedClient<IFortuneService, FortuneService>();
 
             // Add Distributed tracing
             services.AddDistributedTracing(Configuration);
@@ -35,7 +37,11 @@ namespace Fortune_Teller_UI
             services.AddZipkinExporter(Configuration);
 
             // Add framework services.
+#if NETCOREAPP3_0
+            services.AddControllersWithViews();
+#else
             services.AddMvc();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,13 +58,15 @@ namespace Fortune_Teller_UI
 
             app.UseStaticFiles();
 
+#if NETCOREAPP3_0
+            app.UseRouting();
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+#else
             app.UseMvc();
-
-            app.UseDiscoveryClient();
+#endif
 
             // Start up trace exporter
             app.UseTracingExporter();
         }
-
     }
 }

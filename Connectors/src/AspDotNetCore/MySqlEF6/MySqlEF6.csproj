@@ -16,5 +16,6 @@
     <PackageReference Include="MySql.Data.Entity" Version="6.10.7" />
     <PackageReference Include="Steeltoe.CloudFoundry.Connector.EF6Core" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeConfigVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
 </Project>
