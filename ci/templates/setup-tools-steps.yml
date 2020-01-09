@@ -1,6 +1,6 @@
 parameters:
-  dotnet3Version: 3.0.100
-  dotnet2Version: 2.2.300
+  dotnet3Version: 3.1.x
+  dotnet2Version: 2.2.x
 steps:
 - task: UseDotNet@2
   displayName: 'Setup DotNet3'
