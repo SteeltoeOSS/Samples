@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using Steeltoe.Extensions.Logging;
 
 namespace CloudFoundryWeb
@@ -13,9 +12,13 @@ namespace CloudFoundryWeb
 
         public static void Configure(IConfiguration configuration)
         {
-            IServiceCollection serviceCollection = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
-            serviceCollection.AddLogging(builder => builder.AddDynamicConsole());
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder => {
+                builder
+                    .SetMinimumLevel(LogLevel.Trace)
+                    .AddConfiguration(configuration)
+                    .AddDynamicConsole();
+            });
             LoggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
         }
     }
