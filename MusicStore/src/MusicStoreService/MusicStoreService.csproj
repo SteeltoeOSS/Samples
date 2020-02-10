@@ -28,15 +28,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="2.0.0-preview-009470001-1371" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-1656" />
 
     <!--<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(ExtensionsVersion)" />-->
     <!--<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(PomeloMySqlEFCoreVersion)" />-->
-    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-manual-001" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-manual-001" />
-    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-manual-001" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-manual-001" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-manual-001" />
-    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-manual-001" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-1656" />
+    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-1656" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-1656" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-1656" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-1656" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-1656" />
   </ItemGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Configuration\src\ConfigServerCore\Steeltoe.Extensions.Configuration.ConfigServerCore.csproj" />
