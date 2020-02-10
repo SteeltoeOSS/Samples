@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MusicStoreUI.Models;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
@@ -33,7 +34,7 @@ namespace MusicStoreUI
                             options.AllowSynchronousIO = true;
                         })
                         .UseStartup<Startup>()
-                        .UseCloudFoundryHosting(5555);
+                        .UseCloudHosting(5555);
                 })
                 .ConfigureAppConfiguration((builderContext, configBuilder) =>
                 {

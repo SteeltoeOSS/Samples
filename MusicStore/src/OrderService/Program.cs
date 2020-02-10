@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OrderService.Models;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
@@ -33,7 +34,7 @@ namespace OrderService
                             options.AllowSynchronousIO = true;
                         })
                         .UseStartup<Startup>()
-                        .UseCloudFoundryHosting(7000);
+                        .UseCloudHosting(7000);
                 })
                 .ConfigureAppConfiguration((builderContext, configBuilder) =>
                 {

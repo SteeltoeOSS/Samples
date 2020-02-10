@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ShoppingCartService.Models;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
@@ -32,7 +33,7 @@ namespace ShoppingCartService
                             options.AllowSynchronousIO = true;
                         })
                         .UseStartup<Startup>()
-                        .UseCloudFoundryHosting(6000);
+                        .UseCloudHosting(6000);
                 })
                 .ConfigureAppConfiguration((builderContext, configBuilder) =>
                 {
