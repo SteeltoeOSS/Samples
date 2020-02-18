@@ -32,7 +32,7 @@ namespace CloudFoundry
             services.AddMySqlHealthContributor(Configuration);
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
-            
+
             // register a migrate context task with PCF
             services.AddTask<MigrateDbContextTask<MyContext>>();
 
@@ -42,24 +42,20 @@ namespace CloudFoundry
             // Add your own IHealthContributor, registered with the interface
             services.AddSingleton<IHealthContributor, CustomHealthContributor>();
 
-            // Add management components which collect and forwards metrics to 
+            // Add management components which collect and forwards metrics to
             // the Cloud Foundry Metrics Forwarder service
             // Remove comments below to enable
             // services.AddMetricsActuator(Configuration);
             // services.AddMetricsForwarderExporter(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_0
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, MyContext ctx)
         {
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -77,7 +73,6 @@ namespace CloudFoundry
             // Add metrics collection to the app
             // Remove comment below to enable
             // app.UseMetricsActuator();
-#if NETCOREAPP3_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -85,14 +80,6 @@ namespace CloudFoundry
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
             // Start up the metrics forwarder service added above
             // Remove comment below to enable
             // app.UseMetricsExporter();

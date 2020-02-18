@@ -18,15 +18,11 @@ namespace OAuth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
- 
+
             // Configure and Add IOptions<OAuthServiceOptions> to the container
             services.AddOAuthServiceOptions(Configuration);
 
-#if NETCOREAPP3_0
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +39,6 @@ namespace OAuth
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -51,14 +46,6 @@ namespace OAuth
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }

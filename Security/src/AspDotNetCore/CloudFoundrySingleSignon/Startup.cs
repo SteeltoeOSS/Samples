@@ -56,11 +56,7 @@ namespace CloudFoundrySingleSignon
             // services.AddDistributedRedisCache(Configuration);
             // services.AddSession();
 
-#if NETCOREAPP3_0
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +78,6 @@ namespace CloudFoundrySingleSignon
                 ForwardedHeaders = ForwardedHeaders.XForwardedProto
             });
 
-#if NETCOREAPP3_0
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -92,15 +87,6 @@ namespace CloudFoundrySingleSignon
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }

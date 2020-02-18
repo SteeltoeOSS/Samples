@@ -27,11 +27,7 @@ namespace CredHubDemo
             services.AddCloudFoundryActuators(Configuration);
             services.Configure<CredHubOptions>(Configuration.GetSection("CredHubClient"));
             services.AddCredHubClient(Configuration, logFactory);
-#if NETCOREAPP3_0
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +45,6 @@ namespace CredHubDemo
             app.UseStaticFiles();
             app.UseCloudFoundryActuators();
 
-#if NETCOREAPP3_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -57,14 +52,6 @@ namespace CredHubDemo
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }

@@ -3,10 +3,10 @@ Feature: CloudFoundry Single SignOn
     In order to show you how to use Steeltoe with CloudFoundry Single SignOn
     You can run some CloudFoundry Single SignOn samples
 
-    @netcoreapp3.0
+    @netcoreapp3.1
     @win10-x64
-    Scenario: CloudFoundry Single SignOn for .Net Core 3.0 (win10-x64)
-        Given you have at least .Net Core SDK 3.0.100 installed
+    Scenario: CloudFoundry Single SignOn for .Net Core 3.1 (win10-x64)
+        Given you have at least .Net Core SDK 3.1.100 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
         # build/deploy UAA server
@@ -26,8 +26,8 @@ Feature: CloudFoundry Single SignOn
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
         And you run: dotnet restore
-        And you run: dotnet publish -f netcoreapp3.0 -r win10-x64
-        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.0/win10-x64/publish
+        And you run: dotnet publish -f netcoreapp3.1 -r win10-x64
+        And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish
         And you wait until CloudFoundry app single-signon is started
         # Test authentication
         When you get https://single-signon.x.y.z/Home/About
@@ -39,10 +39,10 @@ Feature: CloudFoundry Single SignOn
         Then you should be at https://single-signon.x.y.z/Home/About
         And you should see "Your About page."
 
-    @netcoreapp3.0
+    @netcoreapp3.1
     @ubuntu.16.04-x64
-    Scenario: CloudFoundry Single SignOn for .Net Core 3.0 (ubuntu.16.04-x64)
-        Given you have at least .Net Core SDK 3.0.100 installed
+    Scenario: CloudFoundry Single SignOn for .Net Core 3.1 (ubuntu.16.04-x64)
+        Given you have at least .Net Core SDK 3.1.100 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
         # build/deploy UAA server
@@ -62,8 +62,8 @@ Feature: CloudFoundry Single SignOn
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
         And you run: dotnet restore
-        And you run: dotnet publish -f netcoreapp3.0 -r ubuntu.16.04-x64
-        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.0/ubuntu.16.04-x64/publish
+        And you run: dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
+        And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish
         And you wait until CloudFoundry app single-signon is started
         # Test authentication
         When you get https://single-signon.x.y.z/Home/About

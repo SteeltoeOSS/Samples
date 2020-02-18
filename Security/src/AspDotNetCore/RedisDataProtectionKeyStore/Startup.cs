@@ -36,11 +36,7 @@ namespace RedisDataProtectionKeyStore
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Add framework services.
-#if NETCOREAPP3_0
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +55,6 @@ namespace RedisDataProtectionKeyStore
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -67,14 +62,6 @@ namespace RedisDataProtectionKeyStore
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }

@@ -12,16 +12,8 @@
     <JsonNetVersion>11.0.3</JsonNetVersion>
 	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'netcoreapp2.1'">
-    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
-    <EFCoreVersion>2.1.1</EFCoreVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
-    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
-    <EFCoreVersion>2.2.4</EFCoreVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-      <AspNetCoreVersion>3.0.0</AspNetCoreVersion>
-      <EFCoreVersion>3.0.0</EFCoreVersion>
+  <PropertyGroup>
+      <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
+      <EFCoreVersion>3.1.0</EFCoreVersion>
     </PropertyGroup>
   </Project>
