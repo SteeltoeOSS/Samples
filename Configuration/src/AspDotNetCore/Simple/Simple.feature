@@ -7,7 +7,7 @@ Feature: Simple Configuration
 
     @netcoreapp3.1
     Scenario Outline: Simple Configuration for .Net Core 3.1
-        Given you have at least .NET Core SDK 3.1.100 installed
+        Given you have at least .NET Core SDK 3.1 installed
         And you have Java 8 installed
         And you have Apache Maven 3 installed
         When you run: git clone https://github.com/spring-cloud/spring-cloud-config

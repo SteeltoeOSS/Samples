@@ -7,7 +7,7 @@ Feature: MySql Connector
     @netcoreapp3.1
     @win10-x64
     Scenario: MySql Connector for .Net Core 3.1 (win10-x64)
-        Given you have at least .NET Core SDK 3.1.100 installed
+        Given you have at least .NET Core SDK 3.1 installed
         And you have CloudFoundry service p.mysql installed
         When you run: cf create-service p.mysql db-small myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
@@ -22,7 +22,7 @@ Feature: MySql Connector
     @netcoreapp3.1
     @ubuntu.16.04-x64
     Scenario: MySql Connector for .Net Core 3.1 (ubuntu.16.04-x64)
-        Given you have at least .NET Core SDK 3.1.100 installed
+        Given you have at least .NET Core SDK 3.1 installed
         And you have CloudFoundry service p.mysql installed
         When you run: cf create-service p.mysql db-small myMySqlService
         And you wait until CloudFoundry service myMySqlService is created

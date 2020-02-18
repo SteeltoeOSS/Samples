@@ -6,7 +6,7 @@ Feature: CloudFoundry Single SignOn
     @netcoreapp3.1
     @win10-x64
     Scenario: CloudFoundry Single SignOn for .Net Core 3.1 (win10-x64)
-        Given you have at least .Net Core SDK 3.1.100 installed
+        Given you have at least .Net Core SDK 3.1 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
         # build/deploy UAA server
@@ -42,7 +42,7 @@ Feature: CloudFoundry Single SignOn
     @netcoreapp3.1
     @ubuntu.16.04-x64
     Scenario: CloudFoundry Single SignOn for .Net Core 3.1 (ubuntu.16.04-x64)
-        Given you have at least .Net Core SDK 3.1.100 installed
+        Given you have at least .Net Core SDK 3.1 installed
         And you have Java 8 installed
         And you have UAA Client 4 installed
         # build/deploy UAA server
