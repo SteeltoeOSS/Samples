@@ -1,9 +1,0 @@
-﻿---
-applications:
-- name: fortuneService
-  buildpacks:
-   - hwc_buildpack
-  memory: 512M
-  stack: windows
-  services:
-   - myDiscoveryService

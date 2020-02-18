@@ -1,9 +1,0 @@
-﻿---
-applications:
-- name: actuators-owinselfhost
-  memory: 512M
-  stack: windows
-  buildpack: binary_buildpack
-  command: cloudfoundryowinselfhost.exe
-  services:
-   - myMySqlService

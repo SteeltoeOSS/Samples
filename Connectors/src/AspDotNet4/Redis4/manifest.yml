@@ -1,9 +1,0 @@
-﻿---
-applications:
-- name: redis-connector-4x
-  memory: 512M
-  stack: windows
-  buildpacks:
-   - hwc_buildpack
-  services:
-   - myRedisService
