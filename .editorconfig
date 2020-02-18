@@ -28,6 +28,10 @@ indent_size = 2
 [*.{yaml,yml}]
 indent_size = 2
 
+# Gherkin files
+[*.feature]
+indent_size = 4
+
 # Dotnet code style settings:
 [*.cs]
 # Sort using and Import directives with System.* appearing first
