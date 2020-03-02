@@ -92,6 +92,9 @@
     <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
     </Reference>
@@ -135,40 +138,40 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.4.0\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.2.4.0\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Common.Http, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Http.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Common.Http.2.4.0\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.4.0\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.4.0\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.Diagnostics, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.4.0\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.EndpointBase, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.4.0\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.EndpointOwin, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointOwin.2.4.0-ci1177\lib\net461\Steeltoe.Management.EndpointOwin.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.EndpointOwin.2.4.0\lib\net461\Steeltoe.Management.EndpointOwin.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.ExporterBase, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.4.0\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.OpenCensus, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.4.0-ci1177\lib\net46\Steeltoe.Management.OpenCensus.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.4.0\lib\net46\Steeltoe.Management.OpenCensus.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.OpenCensus.Abstractions, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.Abstractions.2.4.0-ci1177\lib\net45\Steeltoe.Management.OpenCensus.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.Abstractions.2.4.0\lib\net45\Steeltoe.Management.OpenCensus.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Steeltoe.Management.OpenCensusBase, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensusBase.2.4.0-ci1177\lib\netstandard2.0\Steeltoe.Management.OpenCensusBase.dll</HintPath>
+      <HintPath>..\packages\Steeltoe.Management.OpenCensusBase.2.4.0\lib\netstandard2.0\Steeltoe.Management.OpenCensusBase.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
