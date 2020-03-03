@@ -6,9 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Steeltoe.Common.Security;
 // using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
+using System;
+using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 // using Steeltoe.Security.DataProtection;
 
 namespace CloudFoundrySingleSignon
@@ -27,7 +33,14 @@ namespace CloudFoundrySingleSignon
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddOptions();
+            services.AddCloudFoundryContainerIdentity(Configuration);
+            services.AddHttpClient("default", (services, client) =>
+            {
+                var options = services.GetService<IOptions<CertificateOptions>>();
+                var b64 = Convert.ToBase64String(options.Value.Certificate.Export(X509ContentType.Cert));
+                client.DefaultRequestHeaders.Add("X-Forwarded-Client-Cert", b64);
+            }).ConfigurePrimaryHttpMessageHandler((isp) => new HttpClientHandler { ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true });
+
 
             services.AddAuthentication((options) =>
             {
@@ -38,8 +51,7 @@ namespace CloudFoundrySingleSignon
             {
                 options.AccessDeniedPath = new PathString("/Home/AccessDenied");
             })
-            .AddCloudFoundryOAuth(Configuration);
-            //.AddCloudFoundryOpenIdConnect(Configuration);
+            .AddCloudFoundryOpenIdConnect(Configuration);
 
             services.AddAuthorization(options =>
             {
@@ -60,7 +72,7 @@ namespace CloudFoundrySingleSignon
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

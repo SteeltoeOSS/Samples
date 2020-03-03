@@ -1,0 +1,8 @@
+﻿---
+applications:
+- name: mtls-server
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 384M
+  stack: cflinuxfs3
+  command: cd ${HOME} && ./CloudFoundryCertificateAuthentication

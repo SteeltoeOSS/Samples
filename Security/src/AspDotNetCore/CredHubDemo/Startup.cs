@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Security.DataProtection.CredHub;
-using Steeltoe.Security.DataProtection.CredHubCore;
 
 namespace CredHubDemo
 {

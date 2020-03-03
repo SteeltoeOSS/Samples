@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace CloudFoundryJwtAuthentication
@@ -13,7 +14,7 @@ namespace CloudFoundryJwtAuthentication
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                    .UseCloudFoundryHosting(63807)
+                    .UseCloudHosting(8082, 8083)
                     .AddCloudFoundry()
                     .UseStartup<Startup>()
                     .Build();
