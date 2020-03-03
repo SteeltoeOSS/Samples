@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Steeltoe.Extensions.Configuration.PlaceholderCore;
+using Steeltoe.Extensions.Configuration.Placeholder;
 
 namespace Placeholder
 {

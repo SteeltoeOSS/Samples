@@ -2,6 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace SimpleCloudFoundry
@@ -15,7 +16,8 @@ namespace SimpleCloudFoundry
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                    .UseCloudFoundryHosting()
+                    .ConfigureAppConfiguration(builder => builder.AddConfigServer())
+                    .UseCloudHosting()
                     .AddConfigServer(GetLoggerFactory())
                     .UseStartup<Startup>()
                     .Build();

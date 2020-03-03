@@ -35,9 +35,6 @@ namespace Simple
             // Optional: Adds ConfigServerClientOptions to service container
             services.ConfigureConfigServerClientOptions(Configuration);
 
-            // Optional:  Adds IConfiguration and IConfigurationRoot to service container
-            services.AddConfiguration(Configuration);
-
             // Add framework services.
             services.AddControllersWithViews();
 

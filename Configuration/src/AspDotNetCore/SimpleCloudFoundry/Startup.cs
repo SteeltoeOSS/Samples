@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SimpleCloudFoundry.Model;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Configuration.ConfigServer;
@@ -28,9 +29,6 @@ namespace SimpleCloudFoundry
             // Optional:  Adds CloudFoundryApplicationOptions and CloudFoundryServicesOptions to service container
             services.ConfigureCloudFoundryOptions(Configuration);
 
-            // Optional:  Adds IConfiguration and IConfigurationRoot to service container
-            services.AddConfiguration(Configuration);
-
             // Adds the configuration data POCO configured with data returned from the Spring Cloud Config Server
             services.Configure<ConfigServerData>(Configuration);
 
@@ -38,7 +36,7 @@ namespace SimpleCloudFoundry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

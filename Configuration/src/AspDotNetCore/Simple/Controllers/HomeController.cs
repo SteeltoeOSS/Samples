@@ -15,7 +15,7 @@ namespace Simple.Controllers
 
         private IConfigurationRoot Config { get; set; }
 
-        public HomeController(IConfigurationRoot config, IOptionsSnapshot<ConfigServerData> configServerData, IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
+        public HomeController(IConfiguration config, IOptionsSnapshot<ConfigServerData> configServerData, IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
         {
             // The ASP.NET DI mechanism injects the data retrieved from the Spring Cloud Config Server 
             // as an IOptionsSnapshot<ConfigServerData>. This happens because we added the call to:
@@ -27,7 +27,7 @@ namespace Simple.Controllers
             if (confgServerSettings != null)
                 ConfigServerClientSettingsOptions = confgServerSettings.Value;
 
-            Config = config;
+            Config = config as IConfigurationRoot;
         }
 
         public IActionResult Index()

@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+using Steeltoe.Extensions.Configuration;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SimpleCloudFoundry.TagHelpers
 {
-   
+
     /// <summary>
     /// Tag helper for generating the HTML for the service credentials in a VCAP_SERVICES entry
     /// </summary>
