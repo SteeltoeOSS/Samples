@@ -34,11 +34,9 @@ Create an instance of the PostgreSQL database service in a org/space:
 1. `cd samples/Connectors/src/AspDotNetCore/PostgreEFCore`
 1. `dotnet restore --configfile nuget.config`
 1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`
-   * `dotnet publish -f net461 -r win10-x64`
+   * `dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64`
 1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish`
-   * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
+   * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish`
 
 > Note: The provided manifest(s) will create an app named `postgresefcore-connector` and attempt to bind the app to PostgreSql service `myPostgres`.
 

@@ -3,7 +3,7 @@ function printUsage()
 {
     echo "USAGE:" 
     echo "RunFortuneTeller [framework]"
-    echo "framework - target framework to publish (e.g. netcoreapp2.1)"
+    echo "framework - target framework to publish (e.g. netcoreapp3.1)"
     exit
 }
 #

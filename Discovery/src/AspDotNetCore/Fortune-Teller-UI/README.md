@@ -13,7 +13,7 @@ Refer to [common tasks](/CommonTasks.md#Spring-Cloud-Eureka-Server) for detailed
 1. Clone this repository: `git clone https://github.com/SteeltoeOSS/Samples`
 1. `cd samples/Discovery/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI`
 1. `dotnet restore`
-1. `dotnet run -f netcoreapp3.1` - netcoreapp2.1 are also valid choices net461
+1. `dotnet run -f netcoreapp3.1`
 
 ## What to expect - Local
 
@@ -21,7 +21,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
-$ dotnet run -f netcoreapp2.1
+$ dotnet run -f netcoreapp3.1
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.
