@@ -18,7 +18,7 @@ namespace Placeholder
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<SampleOptions>(Configuration);
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -39,7 +39,7 @@ namespace Placeholder
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

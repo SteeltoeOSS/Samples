@@ -22,7 +22,7 @@ namespace OAuth
             // Configure and Add IOptions<OAuthServiceOptions> to the container
             services.AddOAuthServiceOptions(Configuration);
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -43,7 +43,7 @@ namespace OAuth
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

@@ -56,7 +56,7 @@ namespace CloudFoundrySingleSignon
             // services.AddDistributedRedisCache(Configuration);
             // services.AddSession();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -82,7 +82,7 @@ namespace CloudFoundrySingleSignon
                 ForwardedHeaders = ForwardedHeaders.XForwardedProto
             });
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

@@ -30,7 +30,7 @@ namespace CloudFoundry
             services.ConfigureCloudFoundryOptions(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -51,7 +51,7 @@ namespace CloudFoundry
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

@@ -21,7 +21,7 @@ namespace SqlServerEFCore
             // Add Context and use SqlServer as provider ... provider will be configured from VCAP_ info
             services.AddDbContext<TestContext>(options => options.UseSqlServer(Configuration));
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -42,7 +42,7 @@ namespace SqlServerEFCore
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else

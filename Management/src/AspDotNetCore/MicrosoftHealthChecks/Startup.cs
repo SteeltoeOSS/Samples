@@ -34,7 +34,7 @@ namespace CloudFoundry
             services.AddHealthChecksUI();
 
             // Add framework services.
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -43,7 +43,7 @@ namespace CloudFoundry
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
                                 IWebHostEnvironment env,
 #else
                                 Microsoft.AspNetCore.Hosting.IHostingEnvironment env,
@@ -71,7 +71,7 @@ namespace CloudFoundry
             //Optionally use health checks ui at /healthchecks-ui
             app.UseHealthChecksUI();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else

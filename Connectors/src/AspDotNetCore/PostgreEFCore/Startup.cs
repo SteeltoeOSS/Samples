@@ -22,7 +22,7 @@ namespace PostgreEFCore
             services.AddDbContext<TestContext>(options => options.UseNpgsql(Configuration));
 
             // Add framework services.
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -43,7 +43,7 @@ namespace PostgreEFCore
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

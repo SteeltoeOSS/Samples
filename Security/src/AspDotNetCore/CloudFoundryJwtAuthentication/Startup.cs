@@ -32,7 +32,7 @@ namespace CloudFoundryJwtAuthentication
                 options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
             });
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -44,7 +44,7 @@ namespace CloudFoundryJwtAuthentication
         {
 
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

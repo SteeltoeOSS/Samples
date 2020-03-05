@@ -6,9 +6,7 @@ Feature: MySqlEF6 Connector
 
     @net461
     @win10-x64
-    Scenario: MySqlEF6 Connector for .Net Core 2.1 (win10-x64)
-        Given you have at least .Net Core SDK 2.1.300 installed
-        And you have CloudFoundry service p.mysql installed
+    Scenario: MySqlEF6 Connector for net461/win10-x64
         When you run: cf create-service p.mysql db-small myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
         And you run: dotnet restore

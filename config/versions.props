@@ -1,26 +1,29 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeCommonVersion>2.4.0</SteeltoeCommonVersion>
-    <SteeltoeCircuitBreakerVersion>$(SteeltoeCommonVersion)</SteeltoeCircuitBreakerVersion>
-    <SteeltoeConfigVersion>$(SteeltoeCommonVersion)</SteeltoeConfigVersion>
-    <SteeltoeConnectorVersion>$(SteeltoeCommonVersion)</SteeltoeConnectorVersion>
-    <SteeltoeDiscoveryVersion>$(SteeltoeCommonVersion)</SteeltoeDiscoveryVersion>
-    <SteeltoeLoggingVersion>$(SteeltoeCommonVersion)</SteeltoeLoggingVersion>
-    <SteeltoeManagementVersion>$(SteeltoeCommonVersion)</SteeltoeManagementVersion>
-    <SteeltoeSecurityVersion>$(SteeltoeCommonVersion)</SteeltoeSecurityVersion>
+    <SteeltoeVersion>2.4.0</SteeltoeVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SteeltoeCommonVersion>$(SteeltoeVersion)</SteeltoeCommonVersion>
+    <SteeltoeCircuitBreakerVersion>$(SteeltoeVersion)</SteeltoeCircuitBreakerVersion>
+    <SteeltoeConfigVersion>$(SteeltoeVersion)</SteeltoeConfigVersion>
+    <SteeltoeConnectorVersion>$(SteeltoeVersion)</SteeltoeConnectorVersion>
+    <SteeltoeDiscoveryVersion>$(SteeltoeVersion)</SteeltoeDiscoveryVersion>
+    <SteeltoeLoggingVersion>$(SteeltoeVersion)</SteeltoeLoggingVersion>
+    <SteeltoeManagementVersion>$(SteeltoeVersion)</SteeltoeManagementVersion>
+    <SteeltoeSecurityVersion>$(SteeltoeVersion)</SteeltoeSecurityVersion>
     <GitInfoVersion>2.0.20</GitInfoVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
 	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'netcoreapp2.1'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
     <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
     <EFCoreVersion>2.1.1</EFCoreVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
-    <AspNetCoreVersion>2.2.0</AspNetCoreVersion>
-    <EFCoreVersion>2.2.4</EFCoreVersion>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
+    <EFCoreVersion>2.1.1</EFCoreVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
       <AspNetCoreVersion>3.0.0</AspNetCoreVersion>
       <EFCoreVersion>3.0.0</EFCoreVersion>
     </PropertyGroup>
