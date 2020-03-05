@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector.EFCore;
 using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Common.HealthChecks;
-using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Info;
 using Steeltoe.Management.TaskCore;
 
@@ -53,9 +51,8 @@ namespace CloudFoundry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, MyContext ctx)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -80,6 +77,7 @@ namespace CloudFoundry
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
             // Start up the metrics forwarder service added above
             // Remove comment below to enable
             // app.UseMetricsExporter();

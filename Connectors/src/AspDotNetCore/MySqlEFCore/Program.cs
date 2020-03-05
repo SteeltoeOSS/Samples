@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Logging;
+using Steeltoe.Management.CloudFoundry;
 using System;
-using System.IO;
 
 namespace MySqlEFCore
 {
@@ -46,29 +46,12 @@ namespace MySqlEFCore
 
         public static IWebHost BuildWebHost(string[] args)
         {
-            return new WebHostBuilder()
-                .UseKestrel()
-                .UseCloudFoundryHosting()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+            return WebHost.CreateDefaultBuilder(args)
+                .AddCloudFoundry()
+                .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((builderContext, configBuilder) =>
-                {
-                    var env = builderContext.HostingEnvironment;
-                    configBuilder.SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                        .AddEnvironmentVariables()
-                        // Add to configuration the Cloudfoundry VCAP settings
-                        .AddCloudFoundry();
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddDynamicConsole();
-                })
+                .UseCloudFoundryHosting()
                 .Build();
         }
-
     }
 }

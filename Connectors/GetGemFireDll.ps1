@@ -6,36 +6,37 @@ Param(
 
  Set-Location $PSScriptRoot
  
-if (-Not (Get-Command "pivnet" -ErrorAction SilentlyContinue))
-{
-    Write-Host "Downloading PivNet client..."
-    if ($IsWindows -Or $PSVersionTable.PSVersion.Major -lt 6)
-    {
-        Write-Host "Running on Windows, use WebClient"
-        # Download pivnet cli ... TODO: get latest instead of hardcoded version
-        (New-Object System.Net.WebClient).DownloadFile("https://github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.60/pivnet-windows-amd64-0.0.60", "$PSScriptRoot\pivnet.exe")  
-        Write-Host "Adding alias 'pivnet' for .\pivnet.exe"
-        Set-Alias -Name pivnet -Value ".\pivnet.exe"
-    }
-    elseif ($IsMacOS)
-    {
-        Write-Host "Running on MacOS, use brew"
-        brew install pivotal/tap/pivnet-cli
-    }
-    elseif ($IsLinux)
-    {
-        Write-Host "Running on Linux"
-        wget -O pivnet https://github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.60/pivnet-linux-amd64-0.0.60
-        chmod +x ./pivnet
-        Write-Host "Adding alias 'pivnet' for ./pivnet"
-        Set-Alias -Name pivnet -Value "./pivnet"
-    }
-    else
-    {
-        Write-Host "Unknown Host! Can't continue without pivnet cli and don't know how to get it"
-        return 1
-    }
-}
+ if (-Not (Get-Command "pivnet" -ErrorAction SilentlyContinue))
+ {
+     Write-Host "Downloading PivNet client..."
+     if ($IsWindows -Or $PSVersionTable.PSVersion.Major -lt 6)
+     {
+         Write-Host "Running on Windows, use WebClient"
+         $pivnetClientUri = (Invoke-WebRequest -Uri https://api.github.com/repos/pivotal-cf/pivnet-cli/releases/latest -UseBasicParsing).Content | jq  '.assets[].browser_download_url | select(contains(\"windows\"))' -r
+         (New-Object System.Net.WebClient).DownloadFile($pivnetClientUri, "$PSScriptRoot\pivnet.exe")  
+         Write-Host "Adding alias 'pivnet' for .\pivnet.exe"
+         Set-Alias -Name pivnet -Value ".\pivnet.exe"
+     }
+     elseif ($IsMacOS)
+     {
+         Write-Host "Running on MacOS, use brew"
+         brew install pivotal/tap/pivnet-cli
+     }
+     elseif ($IsLinux)
+     {
+         Write-Host "Running on Linux"
+         $pivnetClientUri = (Invoke-WebRequest -Uri https://api.github.com/repos/pivotal-cf/pivnet-cli/releases/latest -UseBasicParsing).Content | jq  '.assets[].browser_download_url | select(contains(\"linux\"))' -r
+         wget -O pivnet $pivnetClientUri
+         chmod +x ./pivnet
+         Write-Host "Adding alias 'pivnet' for ./pivnet"
+         Set-Alias -Name pivnet -Value "./pivnet"
+     }
+     else
+     {
+         Write-Host "Unknown Host! Can't continue without pivnet cli and don't know how to get it"
+         return 1
+     }
+ }
 
 # login with API token (deprecated!)
 # New way is to use Refresh token (1 hr life) to get access token -- doesn't appear possible in CI Process ???

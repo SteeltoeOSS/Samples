@@ -5,8 +5,7 @@ Feature: CloudFoundry Configuration
 
     @netcoreapp3.1
     @win10-x64
-    Scenario Outline: CloudFoundry Configuration for .Net Core 3.1 (win10-x64)
-        Given you have at least .Net Core SDK 3.1 installed
+    Scenario: CloudFoundry Configuration for netcoreapp3.1/win10-x64
         When you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.1 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish
@@ -16,8 +15,7 @@ Feature: CloudFoundry Configuration
 
     @netcoreapp3.1
     @ubuntu.16.04-x64
-    Scenario: CloudFoundry Configuration for .Net Core 3.1 (ubuntu.16.04-x64)
-        Given you have at least .Net Core SDK 3.1 installed
+    Scenario: CloudFoundry Configuration for netcoreapp3.1/ubuntu.16.04-x64
         When you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
         And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish

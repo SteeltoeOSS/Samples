@@ -6,12 +6,9 @@ Feature: Simple Configuration
     You can run a some simple configuration samples
 
     @netcoreapp3.1
-    Scenario Outline: Simple Configuration for .Net Core 3.1
-        Given you have at least .NET Core SDK 3.1 installed
-        And you have Java 8 installed
-        And you have Apache Maven 3 installed
+    Scenario Outline: Simple Configuration for netcoreapp3.1
         When you run: git clone https://github.com/spring-cloud/spring-cloud-config
-        And you run: git -C spring-cloud-config checkout v1.3.3.RELEASE
+        And you run: git -C spring-cloud-config checkout v2.1.4.RELEASE
         And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
         And you wait until process listening on port 8888
         And you run: dotnet restore

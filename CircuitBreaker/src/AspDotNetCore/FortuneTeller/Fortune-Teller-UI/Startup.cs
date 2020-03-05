@@ -21,8 +21,6 @@ namespace Fortune_Teller_UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDiscoveryClient(Configuration);
-
             // The Fortune service itself, calls the REST APIs to get random fortunes
             services.AddSingleton<IFortuneService, FortuneService>();
 
@@ -42,7 +40,7 @@ namespace Fortune_Teller_UI
             services.AddHystrixCollapser<IFortuneServiceCollapser, FortuneServiceCollapser>("FortuneServiceCollapser", Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -70,14 +68,9 @@ namespace Fortune_Teller_UI
             // Add Hystrix Metrics context to pipeline
             app.UseHystrixRequestContext();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else
             app.UseMvc(routes =>
             {
@@ -86,9 +79,6 @@ namespace Fortune_Teller_UI
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 #endif
-
-            // Startup discovery client
-            app.UseDiscoveryClient();
 
             // Startup Hystrix metrics stream
             app.UseHystrixMetricsStream();

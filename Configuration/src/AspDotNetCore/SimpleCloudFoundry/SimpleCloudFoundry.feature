@@ -6,9 +6,7 @@ Feature: Simple CloudFoundry Configuration
 
     @netcoreapp3.1
     @win10-x64
-    Scenario: Simple CloudFoundry Configuration for .Net Core 3.1 (win10-x64)
-        Given you have at least .NET Core SDK 3.1 installed
-        And you have CloudFoundry service p-config-server installed
+    Scenario: Simple CloudFoundry Configuration for netcoreapp3.1/win10-x64
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created
         And you run: dotnet restore
@@ -20,9 +18,7 @@ Feature: Simple CloudFoundry Configuration
 
     @netcoreapp3.1
     @ubuntu.16.04-x64
-    Scenario: Simple CloudFoundry Configuration for .Net Core 3.1 (ubuntu.16.04-x64)
-        Given you have at least .NET Core SDK 3.1 installed
-        And you have CloudFoundry service p-config-server installed
+    Scenario: Simple CloudFoundry Configuration for netcoreapp3.1/ubuntu.16.04-x64
         When you run: cf create-service p-config-server standard myConfigServer -c ./config-server.json
         And you wait until CloudFoundry service myConfigServer is created
         And you run: dotnet restore

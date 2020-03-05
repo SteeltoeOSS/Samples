@@ -6,9 +6,7 @@ Feature: PostgreEFCore Connector
 
     @netcoreapp3.1
     @win10-x64
-    Scenario: PostgreEFCore Connector for .Net Core 3.1 (win10-x64)
-        Given you have at least .NET Core SDK 3.1 installed
-        And you have CloudFoundry service postgresql-10-odb installed
+    Scenario: PostgreEFCore Connector for netcoreapp3.1/win10-x64
         When you run: cf create-service postgresql-10-odb standalone myPostgres -c '{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}'
         And you wait until CloudFoundry service myPostgres is created
         And you run: dotnet restore
@@ -21,9 +19,7 @@ Feature: PostgreEFCore Connector
 
     @netcoreapp3.1
     @ubuntu.16.04-x64
-    Scenario: PostgreEFCore Connector for .Net Core 3.1 (ubuntu.16.04-x64)
-        Given you have at least .NET Core SDK 3.1 installed
-        And you have CloudFoundry service postgresql-10-odb installed
+    Scenario: PostgreEFCore Connector for netcoreapp3.1/ubuntu.16.04-x64
         When you run: cf create-service postgresql-10-odb standalone myPostgres -c '{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}'
         And you wait until CloudFoundry service myPostgres is created
         And you run: dotnet restore

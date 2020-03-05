@@ -1,19 +1,22 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeCommonVersion>3.0.0-m1</SteeltoeCommonVersion>
-    <SteeltoeCircuitBreakerVersion>$(SteeltoeCommonVersion)</SteeltoeCircuitBreakerVersion>
-    <SteeltoeConfigVersion>$(SteeltoeCommonVersion)</SteeltoeConfigVersion>
-    <SteeltoeConnectorVersion>$(SteeltoeCommonVersion)</SteeltoeConnectorVersion>
-    <SteeltoeDiscoveryVersion>$(SteeltoeCommonVersion)</SteeltoeDiscoveryVersion>
-    <SteeltoeLoggingVersion>$(SteeltoeCommonVersion)</SteeltoeLoggingVersion>
-    <SteeltoeManagementVersion>$(SteeltoeCommonVersion)</SteeltoeManagementVersion>
-    <SteeltoeSecurityVersion>$(SteeltoeCommonVersion)</SteeltoeSecurityVersion>
-    <GitInfoVersion>2.0.20</GitInfoVersion>
-    <JsonNetVersion>11.0.3</JsonNetVersion>
-	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
+    <SteeltoeVersion>3.0.0-m1</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
-      <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
-      <EFCoreVersion>3.1.0</EFCoreVersion>
-    </PropertyGroup>
-  </Project>
+    <SteeltoeCommonVersion>$(SteeltoeVersion)</SteeltoeCommonVersion>
+    <SteeltoeCircuitBreakerVersion>$(SteeltoeVersion)</SteeltoeCircuitBreakerVersion>
+    <SteeltoeConfigVersion>$(SteeltoeVersion)</SteeltoeConfigVersion>
+    <SteeltoeConnectorVersion>$(SteeltoeVersion)</SteeltoeConnectorVersion>
+    <SteeltoeDiscoveryVersion>$(SteeltoeVersion)</SteeltoeDiscoveryVersion>
+    <SteeltoeLoggingVersion>$(SteeltoeVersion)</SteeltoeLoggingVersion>
+    <SteeltoeManagementVersion>$(SteeltoeVersion)</SteeltoeManagementVersion>
+    <SteeltoeSecurityVersion>$(SteeltoeVersion)</SteeltoeSecurityVersion>
+    <GitInfoVersion>2.0.20</GitInfoVersion>
+    <JsonNetVersion>11.0.3</JsonNetVersion>
+    <RabbitMQVersion>5.1.0</RabbitMQVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
+    <EFCoreVersion>3.1.0</EFCoreVersion>
+  </PropertyGroup>
+</Project>

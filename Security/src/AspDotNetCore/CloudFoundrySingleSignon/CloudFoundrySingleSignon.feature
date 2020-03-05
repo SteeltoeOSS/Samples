@@ -5,10 +5,7 @@ Feature: CloudFoundry Single SignOn
 
     @netcoreapp3.1
     @win10-x64
-    Scenario: CloudFoundry Single SignOn for .Net Core 3.1 (win10-x64)
-        Given you have at least .Net Core SDK 3.1 installed
-        And you have Java 8 installed
-        And you have UAA Client 4 installed
+    Scenario: CloudFoundry Single SignOn for netcoreapp3.1/win10-x64
         # build/deploy UAA server
         When you run: git clone https://github.com/cloudfoundry/uaa.git
         And you run: git -C uaa checkout 4.7.1
@@ -41,10 +38,7 @@ Feature: CloudFoundry Single SignOn
 
     @netcoreapp3.1
     @ubuntu.16.04-x64
-    Scenario: CloudFoundry Single SignOn for .Net Core 3.1 (ubuntu.16.04-x64)
-        Given you have at least .Net Core SDK 3.1 installed
-        And you have Java 8 installed
-        And you have UAA Client 4 installed
+    Scenario: CloudFoundry Single SignOn for netcoreapp3.1/ubuntu.16.04-x64
         # build/deploy UAA server
         When you run: git clone https://github.com/cloudfoundry/uaa.git
         And you run: git -C uaa checkout 4.7.1

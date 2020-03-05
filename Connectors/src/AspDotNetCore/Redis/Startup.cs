@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Redis.Models;
 using Steeltoe.CloudFoundry.Connector.Redis;
-using Steeltoe.Management.CloudFoundry;
 
 namespace Redis
 {
@@ -31,8 +30,6 @@ namespace Redis
             // This works like the above, but adds a IConnectionMultiplexer to the container
             services.AddRedisConnectionMultiplexer(Configuration);
 
-            services.AddCloudFoundryActuators(Configuration);
-
             // Add framework services.
             services.AddControllersWithViews();
         }
@@ -48,8 +45,6 @@ namespace Redis
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            app.UseCloudFoundryActuators();
 
             app.UseStaticFiles();
 

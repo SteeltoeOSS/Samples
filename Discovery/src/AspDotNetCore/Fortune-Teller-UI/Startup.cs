@@ -22,10 +22,6 @@ namespace Fortune_Teller_UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDiscoveryClient(Configuration);
-
-            services.AddTransient<DiscoveryHttpMessageHandler>();
-
             services.AddHttpClient("fortunes", c =>
                 {
                     c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
@@ -34,7 +30,7 @@ namespace Fortune_Teller_UI
                 .AddTypedClient<IFortuneService, FortuneService>();
 
             // Add framework services.
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -55,14 +51,9 @@ namespace Fortune_Teller_UI
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else
             app.UseMvc(routes =>
             {
@@ -71,9 +62,6 @@ namespace Fortune_Teller_UI
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 #endif
-
-            // Startup the background thread
-            app.UseDiscoveryClient();
         }
     }
 }

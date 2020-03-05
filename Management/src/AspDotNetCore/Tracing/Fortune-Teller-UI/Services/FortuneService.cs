@@ -1,32 +1,28 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Steeltoe.Common.Discovery;
 
 namespace Fortune_Teller_UI.Services
 {
     public class FortuneService : IFortuneService
     {
-        DiscoveryHttpClientHandler _handler;
         ILogger<FortuneService> _logger;
-        private const string RANDOM_FORTUNE_URL = "http://fortuneService/api/fortunes/random";
+        private const string RANDOM_FORTUNE_URL = "random";
+        private readonly HttpClient _httpClient;
 
-        public FortuneService(IDiscoveryClient client, ILoggerFactory logFactory) 
+        public FortuneService(HttpClient httpClient, ILoggerFactory logFactory)
         {
-            _handler =  new DiscoveryHttpClientHandler(client, logFactory.CreateLogger<DiscoveryHttpClientHandler>());
-            // Remove comment to use SSL communications with Self-Signed Certs
-           // _handler.ServerCertificateCustomValidationCallback = (a,b,c,d) => {return true;};
-            _logger =  logFactory.CreateLogger<FortuneService>();
+            _logger = logFactory.CreateLogger<FortuneService>();
+            _httpClient = httpClient;
         }
 
         public async Task<Fortune> RandomFortuneAsync()
         {
-            var client = GetClient();
-            var str = await client.GetStreamAsync(RANDOM_FORTUNE_URL);
-            Fortune result = Decode(str);
+            var response = await _httpClient.GetAsync(RANDOM_FORTUNE_URL);
+            var result = Decode(await response.Content.ReadAsStreamAsync());
             _logger.LogInformation("RandomFortuneAsync: {0}", result.Text);
             return result;
         }
@@ -55,12 +51,6 @@ namespace Fortune_Teller_UI.Services
                 Id = 0,
                 Text = "Have a good day!"
             };
-        }
-
-        private HttpClient GetClient()
-        {
-            var client = new HttpClient(_handler, false);
-            return client;
         }
     }
 }

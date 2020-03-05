@@ -8,5 +8,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Npgsql" Version="4.0.2" />
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
 </Project>

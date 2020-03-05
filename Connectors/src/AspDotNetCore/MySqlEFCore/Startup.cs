@@ -36,8 +36,6 @@ namespace MySqlEFCore
                 services.AddMySqlHealthContributor(Configuration);
             }
 
-            services.AddCloudFoundryActuators(Configuration);
-
             // Add framework services.
             services.AddControllersWithViews();
         }

@@ -1,17 +1,8 @@
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Logging;
 using Steeltoe.Extensions.Logging.SerilogDynamicLogger;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Common.Tasks;
+using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.TaskCore;
 
 namespace CloudFoundry
@@ -20,28 +11,12 @@ namespace CloudFoundry
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseCloudFoundryHosting()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+            var host = WebHost.CreateDefaultBuilder()
+                .AddCloudFoundry()              // config
+                .UseCloudFoundryHosting()       // listen on port defined in env var 'PORT'
+                .ConfigureLogging((context, builder) => builder.AddSerilogDynamicConsole())
+                .AddCloudFoundryActuators()     // add actuators - should come AFTER Serilog config or else DynamicConsoleLogger will be injected
                 .UseStartup<Startup>()
-                .ConfigureAppConfiguration((builderContext, config) =>
-                {
-                    config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
-                        .AddCommandLine(args)
-                        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{builderContext.HostingEnvironment.EnvironmentName}.json", optional: true)
-                        .AddCloudFoundry()
-                        .AddEnvironmentVariables();
-                })
-                .ConfigureLogging((builderContext, loggingBuilder) =>
-                {
-                    loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
-                    // loggingBuilder.AddDynamicConsole();
-                    loggingBuilder.AddSerilogDynamicConsole();
-                    loggingBuilder.AddDebug();
-                })
                 .Build();
 
             host.RunWithTasks();

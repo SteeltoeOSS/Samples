@@ -9,9 +9,5 @@
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeCommonVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeConfigVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="3.0.0-1778" />
-    <!-- <PackageReference Include="Microsoft.AspNetCore.Session" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.1.1" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="$(SteeltoeSecurityVersion)" /> -->
   </ItemGroup>
 </Project>

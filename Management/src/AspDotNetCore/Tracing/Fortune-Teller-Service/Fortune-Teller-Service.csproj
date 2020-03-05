@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <Import Project="..\..\..\..\..\config\versions.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;netcoreapp2.1;net461</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,19 +13,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.1'">
     <PackageReference Include="Microsoft.AspNetCore" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="$(AspNetCoreVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="OpenCensus" Version="0.1.0-alpha-42253" />
-    <PackageReference Include="OpenCensus.Exporter.Zipkin" Version="0.1.0-alpha-42253" />
     <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeDiscoveryVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeConfigVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
     <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
     <PackageReference Include="Steeltoe.Management.TracingCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
