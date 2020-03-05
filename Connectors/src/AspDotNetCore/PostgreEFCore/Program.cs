@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
-using System;
 
 namespace PostgreEFCore
 {
@@ -36,9 +37,8 @@ namespace PostgreEFCore
                 .AddCloudFoundry()
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
-                .UseCloudFoundryHosting()
+                .UseCloudHosting()
                 .Build();
         }
     }
 }
-

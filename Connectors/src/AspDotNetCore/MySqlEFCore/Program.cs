@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
 using System;
+using Steeltoe.Common.Hosting;
 
 namespace MySqlEFCore
 {
@@ -50,7 +51,7 @@ namespace MySqlEFCore
                 .AddCloudFoundry()
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
-                .UseCloudFoundryHosting()
+                .UseCloudHosting()
                 .Build();
         }
     }
