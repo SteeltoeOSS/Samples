@@ -13,7 +13,7 @@ import command
 
 PLATFORM_SUPPORT = {
         'netcoreapp2.0': ['windows', 'linux', 'osx'],
-        'net461': ['windows'],
+        'net461': ['windows', 'linux', 'osx'],
         }
 
 def before_all(context):
