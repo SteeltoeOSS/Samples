@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql", "MySql\MySql.csproj", "{DB37AA9C-28EB-480F-AF53-F6C3F1C9829C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySqlEF6", "MySqlEF6\MySqlEF6.csproj", "{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySqlEFCore", "MySqlEFCore\MySqlEFCore.csproj", "{BA61CD15-2EA2-4698-84A7-C06FB004BE8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuth", "OAuth\OAuth.csproj", "{472F6016-4894-4DE6-84EB-2B41C734CE72}"
@@ -26,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\config\versions.props = ..\..\..\config\versions.props
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CosmosDb", "CosmosDb\CosmosDb.csproj", "{29BF56DA-1534-43F3-97FF-563F03C6A72E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,18 +49,6 @@ Global
 		{DB37AA9C-28EB-480F-AF53-F6C3F1C9829C}.Release|x64.Build.0 = Release|Any CPU
 		{DB37AA9C-28EB-480F-AF53-F6C3F1C9829C}.Release|x86.ActiveCfg = Release|Any CPU
 		{DB37AA9C-28EB-480F-AF53-F6C3F1C9829C}.Release|x86.Build.0 = Release|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Debug|x64.Build.0 = Debug|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Debug|x86.Build.0 = Debug|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Release|x64.ActiveCfg = Release|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Release|x64.Build.0 = Release|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Release|x86.ActiveCfg = Release|Any CPU
-		{3C461A0E-D22A-4DC4-B2DA-6F77A43AA9FF}.Release|x86.Build.0 = Release|Any CPU
 		{BA61CD15-2EA2-4698-84A7-C06FB004BE8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA61CD15-2EA2-4698-84A7-C06FB004BE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA61CD15-2EA2-4698-84A7-C06FB004BE8F}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -153,6 +141,18 @@ Global
 		{8ADE1279-FFF3-4E09-BEE6-8B0C5E9745F5}.Release|x64.ActiveCfg = Release|x64
 		{8ADE1279-FFF3-4E09-BEE6-8B0C5E9745F5}.Release|x64.Build.0 = Release|x64
 		{8ADE1279-FFF3-4E09-BEE6-8B0C5E9745F5}.Release|x86.ActiveCfg = Release|x64
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Debug|x64.Build.0 = Debug|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Debug|x86.Build.0 = Debug|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Release|x64.ActiveCfg = Release|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Release|x64.Build.0 = Release|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Release|x86.ActiveCfg = Release|Any CPU
+		{29BF56DA-1534-43F3-97FF-563F03C6A72E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

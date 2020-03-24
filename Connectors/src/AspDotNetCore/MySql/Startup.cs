@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.MySql;
 
 namespace MySql
 {
@@ -18,7 +17,9 @@ namespace MySql
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMySqlConnection(Configuration);
+            var crapstring = Configuration.GetConnectionString("myConNecTion");
+            Configuration.GetValue(typeof(string), "ConnectionStrings:myConNecTion");
+            //services.AddMySqlConnection();
 
             // Add framework services.
             services.AddControllersWithViews();

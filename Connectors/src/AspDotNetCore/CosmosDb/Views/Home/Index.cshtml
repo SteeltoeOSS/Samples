@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CosmosDb.TestData>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cosmos Db Sample</h1>
+
+<p>
+    <a href="/home/AddData">Add new data</a>
+</p>
+<table style="width:80%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SomeThing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SomeOtherThing)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SomeThing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SomeOtherThing)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
