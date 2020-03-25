@@ -3,15 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
-using System;
-using Steeltoe.Management.Exporter.Tracing;
+//using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Management.Tracing;
 
 namespace OrderService
@@ -44,7 +41,7 @@ namespace OrderService
             }
             
             services.AddDistributedTracing(Configuration);
-            services.AddZipkinExporter(Configuration);
+//            services.AddZipkinExporter(Configuration);
 
             // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
             // Console.WriteLine("Using SQL Connection: {0}", cstring);
@@ -62,7 +59,7 @@ namespace OrderService
             app.UseEnvActuator();
             app.UseRefreshActuator();
 
-            app.UseTracingExporter();
+//            app.UseTracingExporter();
             
             app.UseEndpoints(endpoints =>
             {

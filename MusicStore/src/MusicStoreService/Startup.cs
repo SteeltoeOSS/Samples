@@ -8,7 +8,7 @@ using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
-using Steeltoe.Management.Exporter.Tracing;
+//using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Management.Tracing;
 
 namespace MusicStore
@@ -43,7 +43,7 @@ namespace MusicStore
             services.AddDbContext<MusicStoreContext>(options => options.UseSqlServer(Configuration));
 
             services.AddDistributedTracing(Configuration);
-            services.AddZipkinExporter(Configuration);
+//            services.AddZipkinExporter(Configuration);
             // Add Framework services
             services.AddControllers();
         }
@@ -58,7 +58,7 @@ namespace MusicStore
             app.UseEnvActuator();
             app.UseRefreshActuator();
 
-            app.UseTracingExporter();
+//            app.UseTracingExporter();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
