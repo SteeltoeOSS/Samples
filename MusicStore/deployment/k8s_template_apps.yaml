@@ -1,0 +1,157 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musicservice
+spec:
+  selector:
+    matchLabels:
+      component: musicservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicservices
+        component: musicservice
+    spec:
+      containers:
+      - name: musicservice
+        image: <acr>/musicservice:<version>
+        ports:
+        - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
+          - name: eureka__instance__hostName
+            value: "musicservice"
+        envFrom:
+          - configMapRef:
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicservice
+spec:
+  ports:
+  - port: 80
+  selector:
+    component: musicservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservice
+spec:
+  selector:
+    matchLabels:
+      component: orderservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicservices
+        component: orderservice
+    spec:
+      containers:
+      - name: orderservice
+        image: <acr>/orderservice:<version>
+        ports:
+        - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
+          - name: eureka__instance__hostName
+            value: "orderservice"
+        envFrom:
+          - configMapRef:
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderservice
+spec:
+  ports:
+  - port: 80
+  selector:
+    component: orderservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoppingcartservice
+spec:
+  selector:
+    matchLabels:
+      component: shoppingcartservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicservices
+        component: shoppingcartservice
+    spec:
+      containers:
+      - name: shoppingcartservice
+        image: <acr>/shoppingcartservice:<version>
+        ports:
+        - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
+          - name: eureka__instance__hostName
+            value: "shoppingcartservice"
+        envFrom:
+          - configMapRef:
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoppingcartservice
+spec:
+  ports:
+  - port: 80
+  selector:
+    component: shoppingcartservice
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musicstore
+spec:
+  selector:
+    matchLabels:
+      component: musicstore
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: musicstore
+        component: musicstore
+    spec:
+      containers:
+      - name: musicstore
+        image: <acr>/musicstore:<version>
+        ports:
+        - containerPort: 80
+        env:
+          - name: PORT
+            value: "80"
+          - name: eureka__instance__hostName
+            value: "musicstore"
+        envFrom:
+          - configMapRef:
+              name: musicconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: musicstore
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: musicstore
+  type: LoadBalancer

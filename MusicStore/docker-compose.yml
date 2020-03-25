@@ -1,7 +1,8 @@
-version: '3.2'
+version: '3.4'
+
 services:
-  config:
-    image: "steeltoeoss/configserver:1.3.2"
+  configserver:
+    image: "steeltoeoss/configserver"
     command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
     volumes:
       - type: bind
@@ -9,16 +10,66 @@ services:
         target: /config
     ports:
       - "8888:8888"
-  eureka:
-    image: "steeltoeoss/eurekaserver:1.4.4"
+  eurekaserver:
+    image: "steeltoeoss/eurekaserver"
     ports:
       - "8761:8761"
-  mysql:
-    image: "mysql:5.7"
-    ports:
-      - "3306:3306"
+  spring-boot-admin:
+     environment:
+       - EUREKA_SERVICE_URL=http://eurekaserver:8761
+     image: "hananiel/spring-boot-admin-eureka-sample"
+     ports:
+       - "8889:8080"
+     depends_on:
+       - eurekaserver
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server"
     environment:
-      MYSQL_ROOT_PASSWORD: steeltoe
-      MYSQL_DATABASE: steeltoe
-      MYSQL_USER: steeltoe
-      MYSQL_PASSWORD: steeltoe
+      MSSQL_SA_PASSWORD: "SteeltoeR0cks"
+      ACCEPT_EULA: "Y"
+    depends_on:
+      - configserver
+      - eurekaserver
+  zipkinserver:
+    image: "steeltoeoss/zipkin"
+    ports:
+      - "9411:9411"
+  musicservice:
+    image: ${DOCKER_REGISTRY-}musicservice
+    build:
+      context: ./src/MusicStoreService
+      dockerfile: Dockerfile
+    depends_on:
+      - configserver
+      - eurekaserver
+      - sqlserver
+  shoppingcartservice:
+    image: ${DOCKER_REGISTRY-}shoppingcartservice
+    build:
+      context: ./src/ShoppingCartService
+      dockerfile: Dockerfile
+    depends_on:
+      - configserver
+      - eurekaserver
+      - sqlserver
+  orderservice:
+    image: ${DOCKER_REGISTRY-}orderservice
+    build:
+      context: ./src/OrderService
+      dockerfile: Dockerfile
+    depends_on:
+      - configserver
+      - eurekaserver
+      - sqlserver
+  musicstore:
+    image: ${DOCKER_REGISTRY-}musicstore
+    build:
+      context: ./src/MusicStoreUI
+      dockerfile: Dockerfile
+    depends_on:
+      - configserver
+      - eurekaserver
+      - musicservice
+      - shoppingcartservice
+      - orderservice
+      - sqlserver

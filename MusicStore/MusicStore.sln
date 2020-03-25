@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStoreService", "src\MusicStoreService\MusicStoreService.csproj", "{9507C4C7-2EDE-4948-9D0A-DEFDCE8A569E}"
 EndProject
@@ -13,8 +13,80 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingCartService", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6D07EFD-13C8-48A5-834F-E1F72D0F7DCA}"
 	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\nuget.config = ..\nuget.config
 		README.md = README.md
+		..\config\versions.props = ..\config\versions.props
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{18423ABE-6774-47D0-803B-E5CF88EDB8C3}"
+	ProjectSection(SolutionItems) = preProject
+		src\config\application.yml = src\config\application.yml
+		src\config\musicservice.yml = src\config\musicservice.yml
+		src\config\musicstore.yml = src\config\musicstore.yml
+		src\config\orderprocessing.yml = src\config\orderprocessing.yml
+		src\config\shoppingcart.yml = src\config\shoppingcart.yml
+	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", "{D10DD7B6-0FBF-413A-AD4F-12399F7587C1}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\k8s_infra_manifest.yaml = deployment\k8s_infra_manifest.yaml
+		deployment\k8s_template_apps.yaml = deployment\k8s_template_apps.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{A14292E1-F82F-4F49-929E-3A7A74D0C914}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\Azure\aci_deploy.ps1 = deployment\Azure\aci_deploy.ps1
+		deployment\Azure\aci_undeploy.ps1 = deployment\Azure\aci_undeploy.ps1
+		deployment\Azure\aks_deploy.ps1 = deployment\Azure\aks_deploy.ps1
+		deployment\Azure\aks_undeploy.ps1 = deployment\Azure\aks_undeploy.ps1
+		deployment\Azure\musiconfig.yaml = deployment\Azure\musiconfig.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CloudFoundry", "CloudFoundry", "{BFC8B26A-362B-40CC-92FE-452C09980A3D}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\CloudFoundry\config-server.json = deployment\CloudFoundry\config-server.json
+		deployment\CloudFoundry\createCloudFoundryServices.cmd = deployment\CloudFoundry\createCloudFoundryServices.cmd
+		deployment\CloudFoundry\createCloudFoundryServices.sh = deployment\CloudFoundry\createCloudFoundryServices.sh
+		deployment\CloudFoundry\deleteCloudFoundryServices.cmd = deployment\CloudFoundry\deleteCloudFoundryServices.cmd
+		deployment\CloudFoundry\deleteCloudFoundryServices.sh = deployment\CloudFoundry\deleteCloudFoundryServices.sh
+		deployment\CloudFoundry\deployApps.ps1 = deployment\CloudFoundry\deployApps.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{8D6EAF21-8786-4519-8205-BD1B82A0A470}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\Kubernetes\local_deploy.ps1 = deployment\Kubernetes\local_deploy.ps1
+		deployment\Kubernetes\local_undeploy.ps1 = deployment\Kubernetes\local_undeploy.ps1
+		deployment\Kubernetes\musicconfig.yaml = deployment\Kubernetes\musicconfig.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCP", "GCP", "{57E0407E-8053-4272-A772-EF9A37B0DD71}"
+ProjectSection(SolutionItems) = preProject
+	deployment\GCP\gcp_deploy.ps1 = deployment\GCP\gcp_deploy.ps1
+	deployment\GCP\gcp_undeploy.ps1 = deployment\GCP\gcp_undeploy.ps1
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AWS", "AWS", "{88DC4F07-1090-445C-AEEC-534FE1FAAF8D}"
+ProjectSection(SolutionItems) = preProject
+	deployment\AWS\eks_deploy.ps1 = deployment\AWS\eks_deploy.ps1
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{FDFDF2F0-B965-455B-9F29-380921F6FB19}"
+ProjectSection(SolutionItems) = preProject
+	deployment\Docker\dockerrun-configserver.cmd = deployment\Docker\dockerrun-configserver.cmd
+	deployment\Docker\dockerrun-configserver.sh = deployment\Docker\dockerrun-configserver.sh
+	deployment\Docker\dockerrun-eurekaserver.cmd = deployment\Docker\dockerrun-eurekaserver.cmd
+	deployment\Docker\dockerrun-eurekaserver.sh = deployment\Docker\dockerrun-eurekaserver.sh
+	deployment\Docker\dockerrun-mysqlserver.cmd = deployment\Docker\dockerrun-mysqlserver.cmd
+	deployment\Docker\dockerrun-mysqlserver.sh = deployment\Docker\dockerrun-mysqlserver.sh
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PKS", "PKS", "{AFFFEC3B-3938-4397-85B5-772507B5AAED}"
+ProjectSection(SolutionItems) = preProject
+	deployment\PKS\pks_deploy.ps1 = deployment\PKS\pks_deploy.ps1
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +110,24 @@ Global
 		{A216599F-51BE-48A0-949E-E00F391DEDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A216599F-51BE-48A0-949E-E00F391DEDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A216599F-51BE-48A0-949E-E00F391DEDB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18423ABE-6774-47D0-803B-E5CF88EDB8C3} = {C6D07EFD-13C8-48A5-834F-E1F72D0F7DCA}
+		{D10DD7B6-0FBF-413A-AD4F-12399F7587C1} = {C6D07EFD-13C8-48A5-834F-E1F72D0F7DCA}
+		{A14292E1-F82F-4F49-929E-3A7A74D0C914} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{BFC8B26A-362B-40CC-92FE-452C09980A3D} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{8D6EAF21-8786-4519-8205-BD1B82A0A470} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{57E0407E-8053-4272-A772-EF9A37B0DD71} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{88DC4F07-1090-445C-AEEC-534FE1FAAF8D} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{FDFDF2F0-B965-455B-9F29-380921F6FB19} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
+		{AFFFEC3B-3938-4397-85B5-772507B5AAED} = {D10DD7B6-0FBF-413A-AD4F-12399F7587C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A330BCA5-F22D-4572-A612-D233B106E89F}

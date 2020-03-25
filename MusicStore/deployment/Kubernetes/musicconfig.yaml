@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: musicconfig
+  namespace: default
+data:
+  ASPNETCORE_ENVIRONMENT: Kubernetes
+  eureka__client__serviceUrl: http://eurekaserver:8761/eureka
+  eureka__instance__healthCheckUrlPath: /actuator/health
+  eureka__instance_statusPageUrlPath: /actuator/info
+  management__endpoints__path: /actuator
+  sqlserver__credentials__server: sqlserver
+  sqlserver__credentials__username: sa
+  sqlserver__credentials__password: "SteeltoeR0cks!"
+  logging__logLevel__Steeltoe.Management: "Critical"

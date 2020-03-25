@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration.ConfigServer;
 using ShoppingCartService.Models;
+using Steeltoe.Common.Hosting;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
-using System.IO;
 
 namespace ShoppingCartService
 {
@@ -15,48 +18,55 @@ namespace ShoppingCartService
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseCloudFoundryHosting(6000)
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .ConfigureAppConfiguration((builderContext, configBuilder) =>
-                {
-                    var env = builderContext.HostingEnvironment;
-                    configBuilder.SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                        .AddEnvironmentVariables()
-                        .AddConfigServer(env.EnvironmentName);
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddDynamicConsole();
-                })
-                .Build();
-
+            var host = CreateHostBuilder(args).Build();
             SeedDatabase(host);
-
             host.Run();
         }
 
-        private static void SeedDatabase(IWebHost host)
-        {
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webbuilder =>
+                {
+                    webbuilder
+                        .ConfigureKestrel(options =>
+                        {
+                            options.AllowSynchronousIO = true;
+                        })
+                        .UseStartup<Startup>()
+                        .UseCloudHosting(6000);
+                })
+                .ConfigureAppConfiguration((builderContext, configBuilder) =>
+                {
+                    if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
+                    {
+                        var settings = configBuilder.Build();
+                        configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    }
+                    else
+                    {
+                        configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    }
+                    configBuilder.AddEnvironmentVariables();
+                })
+                .ConfigureLogging((context, builder) =>
+                {
+                    builder.ClearProviders();
+                    builder.AddDynamicConsole();
+                });
 
-                try
-                {
-                    SampleData.InitializeShoppingCartDatabase(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
-                }
+        private static void SeedDatabase(IHost host)
+        {
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+
+            try
+            {
+                SampleData.InitializeShoppingCartDatabase(services);
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred seeding the DB.");
             }
         }
     }

@@ -1,11 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.CloudFoundry.Connector;
+using Steeltoe.CloudFoundry.Connector.SqlServer;
+using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Env;
+using Steeltoe.Management.Endpoint.Refresh;
+using System;
+using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Management.Tracing;
 
 namespace OrderService
 {
@@ -23,27 +30,51 @@ namespace OrderService
         {
             // Add managment endpoint services
             services.AddCloudFoundryActuators(Configuration);
+            services.AddEnvActuator(Configuration);
+            services.AddRefreshActuator(Configuration);
 
-            // Add framework services.
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             // Add framework services.
-            services.AddMvc();
+            services.AddControllers();
 
-            services.AddDiscoveryClient(Configuration);
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                services.AddDiscoveryClient(Configuration);
+            }
+            
+            services.AddDistributedTracing(Configuration);
+            services.AddZipkinExporter(Configuration);
 
-            services.AddDbContext<OrdersContext>(options => options.UseMySql(Configuration));
+            // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
+            // Console.WriteLine("Using SQL Connection: {0}", cstring);
+            // services.AddDbContext<OrdersContext>(options => options.UseSqlServer(cstring));
+            services.AddDbContext<OrdersContext>(options => options.UseSqlServer(Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+            
             // Add management endpoints into pipeline
             app.UseCloudFoundryActuators();
+            app.UseEnvActuator();
+            app.UseRefreshActuator();
 
-            app.UseMvc();
+            app.UseTracingExporter();
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
-            app.UseDiscoveryClient();
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                app.UseDiscoveryClient();
+            }
         }
     }
 }

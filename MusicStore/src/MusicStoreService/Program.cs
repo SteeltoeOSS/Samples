@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MusicStore.Models;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
+using Steeltoe.Common.Hosting;
 using System;
-using System.IO;
 
 namespace MusicStore
 {
@@ -15,49 +17,57 @@ namespace MusicStore
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseCloudFoundryHosting(5000)
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .ConfigureAppConfiguration((builderContext, configBuilder) =>
-                {
-                    var env = builderContext.HostingEnvironment;
-                    configBuilder.SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                        .AddEnvironmentVariables()
-                        .AddConfigServer(env.EnvironmentName);
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddDynamicConsole();
-                })
-                .Build();
+            var host = CreateHostBuilder(args).Build();
 
             SeedDatabase(host);
 
             host.Run();
         }
 
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webbuilder =>
+                {
+                    webbuilder
+                        .ConfigureKestrel(options =>
+                        {
+                            options.AllowSynchronousIO = true;
+                        })
+                        .UseStartup<Startup>()
+                        .UseCloudHosting(5000);
+                })
+                .ConfigureAppConfiguration((builderContext, configBuilder) =>
+                {
+                    if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
+                    {
+                        var settings = configBuilder.Build();
+                        configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    }
+                    else
+                    {
+                        configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    }
+                    configBuilder.AddEnvironmentVariables();
+                })
+                .ConfigureLogging((context, builder) =>
+                {
+                    builder.ClearProviders();
+                    builder.AddDynamicConsole();
+                });
 
-        private static void SeedDatabase(IWebHost host)
+        private static void SeedDatabase(IHost host)
         {
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
 
-                try
-                {
-                    SampleData.InitializeMusicStoreDatabase(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
-                }
+            try
+            {
+                SampleData.InitializeMusicStoreDatabase(services);
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred seeding the DB.");
             }
         }
     }

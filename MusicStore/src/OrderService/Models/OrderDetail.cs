@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrderService.Models
 {
@@ -12,6 +13,7 @@ namespace OrderService.Models
 
         public int Quantity { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
         public virtual Order Order { get; set; }

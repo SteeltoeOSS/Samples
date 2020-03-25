@@ -1,4 +1,4 @@
-﻿
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +28,6 @@ namespace MusicStoreUI.Models
                     CreateAdminUser(serviceProvider, configuration).Wait();
                 }
             }
-
-            BuildFallbackData();
         }
 
         private static async Task CreateAdminUser(IServiceProvider serviceProvider, IConfiguration configuration)
@@ -37,10 +35,10 @@ namespace MusicStoreUI.Models
             const string adminRole = "Administrator";
 
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
-            var roleManager = serviceProvider.GetService<RoleManager<ApplicationRole>>();
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
             if (!await roleManager.RoleExistsAsync(adminRole))
             {
-                await roleManager.CreateAsync(new ApplicationRole(adminRole));
+                await roleManager.CreateAsync(new IdentityRole(adminRole));
             }
 
             var user = await userManager.FindByNameAsync(configuration[defaultAdminUserName]);
@@ -68,6 +66,7 @@ namespace MusicStoreUI.Models
             }
 #endif
         }
+
         private static bool ShouldDropCreateDatabase()
         {
             string index = Environment.GetEnvironmentVariable("CF_INSTANCE_INDEX");
@@ -75,8 +74,7 @@ namespace MusicStoreUI.Models
             {
                 return true;
             }
-            int indx = -1;
-            if (int.TryParse(index, out indx))
+            if (int.TryParse(index, out int indx))
             {
                 if (indx > 0) return false;
             }
@@ -85,7 +83,8 @@ namespace MusicStoreUI.Models
 
         const string imgUrl = "~/Images/placeholder.png";
         public static string ImageUrl { get { return imgUrl;  } }
-        private  static Album[] GetAlbums()
+
+        private static Album[] GetAlbums()
         {
             var genres = Genres;
             var artists = Artists;
@@ -565,7 +564,48 @@ namespace MusicStoreUI.Models
 
             return albums;
         }
+
+        internal static void BuildFallbackData()
+        {
+            var albums = GetAlbums();
+            Array.Resize(ref albums, 100);
+            FallbackAlbums = albums.ToList();
+
+            
+            Dictionary<int, Genre> genres = new Dictionary<int, Genre>();
+            Dictionary<int, Artist> artists = new Dictionary<int, Artist>();
+
+            foreach (var a in FallbackAlbums)
+            {
+                var genre = a.Genre;
+                a.GenreId = genre.GenreId;
+
+                var artist = a.Artist;
+                a.ArtistId = artist.ArtistId;
+
+                if (!genres.ContainsKey(genre.GenreId))
+                {
+                    genres.Add(genre.GenreId, genre);
+                }
+            
+                if (genre.Albums == null)
+                {
+                    genre.Albums = new List<Album>();
+                }
+                genre.Albums.Add(a);
+ 
+                if (!artists.ContainsKey(artist.ArtistId))
+                {
+                    artists.Add(artist.ArtistId, artist);
+                }
+            }
+
+            FallbackGenres = genres.Values.ToList();
+            FallbackArtists = artists.Values.ToList();
+        }
+
         private static Dictionary<string, Artist> artists;
+
         private static Dictionary<string, Artist> Artists
         {
             get
@@ -891,7 +931,9 @@ namespace MusicStoreUI.Models
                 return artists;
             }
         }
+
         private static Dictionary<string, Genre> genres;
+
         private static Dictionary<string, Genre> Genres
         {
             get
@@ -929,70 +971,12 @@ namespace MusicStoreUI.Models
                 return genres;
             }
         }
-        private static void BuildFallbackData()
-        {
-            var albums = GetAlbums();
-            Array.Resize(ref albums, 100);
-            _fallbackAlbums = albums.ToList();
 
-            
-            Dictionary<int, Genre> genres = new Dictionary<int, Genre>();
-            Dictionary<int, Artist> artists = new Dictionary<int, Artist>();
+        public static List<Album> FallbackAlbums { get; private set; }
 
-            foreach (var a in FallbackAlbums)
-            {
-                var genre = a.Genre;
-                a.GenreId = genre.GenreId;
+        public static List<Genre> FallbackGenres { get; private set; }
 
-                var artist = a.Artist;
-                a.ArtistId = artist.ArtistId;
-
-                if (!genres.ContainsKey(genre.GenreId))
-                {
-                    genres.Add(genre.GenreId, genre);
-                }
-            
-                if (genre.Albums == null)
-                {
-                    genre.Albums = new List<Album>();
-                }
-                genre.Albums.Add(a);
- 
-                if (!artists.ContainsKey(artist.ArtistId))
-                {
-                    artists.Add(artist.ArtistId, artist);
-                }
-            }
-
-            _fallbackGenre = genres.Values.ToList();
-            _fallbackArtists = artists.Values.ToList();
-        }
-
-        private static List<Album> _fallbackAlbums;
-        public static List<Album> FallbackAlbums
-        {
-            get
-            {
-                return _fallbackAlbums;
-            }
-        }
-        private static List<Genre> _fallbackGenre;
-        public static List<Genre> FallbackGenres
-        {
-            get
-            {
-                return _fallbackGenre;
-            }
-        }
-
-        private static List<Artist> _fallbackArtists;
-        public static List<Artist> FallbackArtists
-        {
-            get
-            {
-                return _fallbackArtists;
-            }
-        }
+        public static List<Artist> FallbackArtists { get; private set; }
     }
 }
 

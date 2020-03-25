@@ -1,20 +1,22 @@
 AppSettings:
   SiteTitle: Music Store
   CacheDbResults: true
-Logging: 
+Logging:
   IncludeScopes: false
-  LogLevel: 
+  LogLevel:
     Default: Debug
-    System: Information
-    Microsoft: Information
-
+    System: Warning
+    Microsoft: Warning
 eureka:
   client:
-    serviceUrl: http://localhost:8761/eureka/
-mysql:
-  client:
-    server: localhost
-    sslmode: none
-redis:
-  client:
-    host: localhost
+    serviceUrl: http://eurekaserver:8761/eureka/
+    validateCertificates: false
+sqlserver:
+  credentials:
+    server: sqlserver
+    username: sa
+    password: SteeltoeR0cks
+management:
+  endpoints:
+    cloudfoundry:
+      validateCertificates: false

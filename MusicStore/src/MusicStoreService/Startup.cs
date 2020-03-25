@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStore.Models;
+using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint.Env;
+using Steeltoe.Management.Endpoint.Refresh;
+using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Management.Tracing;
 
 namespace MusicStore
 {
@@ -23,40 +27,50 @@ namespace MusicStore
         {
             // Add Steeltoe Management services
             services.AddCloudFoundryActuators(Configuration);
+            services.AddEnvActuator(Configuration);
+            services.AddRefreshActuator(Configuration);
 
             // Add framework services.
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             // Steeltoe Service Discovery
-            services.AddDiscoveryClient(Configuration);
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                services.AddDiscoveryClient(Configuration);
+            }
 
             // Steeltoe MySQL Connector
-            services.AddDbContext<MusicStoreContext>(options => options.UseMySql(Configuration));
+            services.AddDbContext<MusicStoreContext>(options => options.UseSqlServer(Configuration));
 
+            services.AddDistributedTracing(Configuration);
+            services.AddZipkinExporter(Configuration);
             // Add Framework services
-            services.AddMvc();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            app.UseRouting();
+
             // Add Steeltoe Management endpoints into pipeline
             app.UseCloudFoundryActuators();
+            app.UseEnvActuator();
+            app.UseRefreshActuator();
 
-            app.UseMvc(routes =>
+            app.UseTracingExporter();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
-
-                routes.MapRoute(
-                    name: "api",
-                    template: "{controller}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
             // Start Steeltoe Discovery services
-            app.UseDiscoveryClient();
+            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
+            {
+                app.UseDiscoveryClient();
+            }
         }
     }
 }

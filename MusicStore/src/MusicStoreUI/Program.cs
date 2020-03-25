@@ -1,50 +1,63 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MusicStoreUI.Models;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Logging;
 using System;
-using System.IO;
 
 namespace MusicStoreUI
 {
     public class Program
     {
+        private static IConfiguration configuration;
+
         public static void Main(string[] args)
         {
-            IConfiguration config = null;
-
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseCloudFoundryHosting(5555)
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .ConfigureAppConfiguration((builderContext, configBuilder) =>
-                {
-                    var env = builderContext.HostingEnvironment;
-                    configBuilder.SetBasePath(env.ContentRootPath)
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                        .AddEnvironmentVariables()
-                        .AddConfigServer(env.EnvironmentName);
-                    config = configBuilder.Build();
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    builder.AddDynamicConsole();
-                })
-                .Build();
-
-            SeedDatabase(host, config);
-
+            IHost host = CreateHostBuilder(args).Build();
+            SeedDatabase(host);
             host.Run();
         }
 
-        private static void SeedDatabase(IWebHost host, IConfiguration config)
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webbuilder =>
+                {
+                    webbuilder
+                        .ConfigureKestrel(options =>
+                        {
+                            options.AllowSynchronousIO = true;
+                        })
+                        .UseStartup<Startup>()
+                        .UseCloudHosting(5555);
+                })
+                .ConfigureAppConfiguration((builderContext, configBuilder) =>
+                {
+                    if (builderContext.HostingEnvironment.EnvironmentName.Contains("Azure"))
+                    {
+                        var settings = configBuilder.Build();
+                        configBuilder.AddAzureAppConfiguration(options => options.ConnectWithManagedIdentity(settings["AppConfig:Endpoint"]));
+                    }
+                    else
+                    {
+                        configBuilder.AddConfigServer(builderContext.HostingEnvironment.EnvironmentName);
+                    }
+                    configBuilder.AddEnvironmentVariables();
+                    configuration = configBuilder.Build();
+                })
+                .ConfigureLogging((context, builder) =>
+                {
+                    builder.ClearProviders();
+                    builder.AddDynamicConsole();
+                });
+
+
+        private static void SeedDatabase(IHost host)
         {
             using (var scope = host.Services.CreateScope())
             {
@@ -52,7 +65,7 @@ namespace MusicStoreUI
 
                 try
                 {
-                    SampleData.InitializeAccountsDatabase(services, config);
+                    SampleData.InitializeAccountsDatabase(services, configuration);
                 }
                 catch (Exception ex)
                 {
@@ -60,6 +73,8 @@ namespace MusicStoreUI
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
+
+            SampleData.BuildFallbackData();
         }
     }
 }
