@@ -82,8 +82,7 @@ namespace MusicStoreUI
                 services.TryAddTransient<DiscoveryHttpMessageHandler>();
             }
 
-            services.AddDistributedTracing(Configuration);
-         //   services.AddZipkinExporter(Configuration);
+            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
 
             services.AddHttpClient<IMusicStore, MusicStoreService>()
                 .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
@@ -156,7 +155,6 @@ namespace MusicStoreUI
             app.UseAuthentication();
             app.UseAuthorization();
 
-    //        app.UseTracingExporter(); // zipkin
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

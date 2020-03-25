@@ -8,7 +8,6 @@ using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
-//using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Management.Tracing;
 
 namespace OrderService
@@ -39,9 +38,8 @@ namespace OrderService
             {
                 services.AddDiscoveryClient(Configuration);
             }
-            
-            services.AddDistributedTracing(Configuration);
-//            services.AddZipkinExporter(Configuration);
+
+            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
 
             // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
             // Console.WriteLine("Using SQL Connection: {0}", cstring);
@@ -59,8 +57,6 @@ namespace OrderService
             app.UseEnvActuator();
             app.UseRefreshActuator();
 
-//            app.UseTracingExporter();
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
