@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>2.4.0</SteeltoeVersion>
+    <SteeltoeVersion>2.4.3</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SteeltoeCommonVersion>$(SteeltoeVersion)</SteeltoeCommonVersion>
@@ -24,7 +24,7 @@
     <EFCoreVersion>2.1.1</EFCoreVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-      <AspNetCoreVersion>3.0.0</AspNetCoreVersion>
-      <EFCoreVersion>3.0.0</EFCoreVersion>
+      <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
+      <EFCoreVersion>3.1.0</EFCoreVersion>
     </PropertyGroup>
   </Project>
