@@ -2,7 +2,7 @@
 applications:
 - name: order-service
   memory: 256M
-  stack: windows2016
+  stack: windows
   command: .\OrderService
   env:
     ASPNETCORE_ENVIRONMENT: Development

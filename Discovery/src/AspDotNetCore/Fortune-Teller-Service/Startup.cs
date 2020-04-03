@@ -28,22 +28,31 @@ namespace FortuneTellerService
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
-            services.AddDiscoveryClient(Configuration);
-
             // Add framework services.
+#if NETCOREAPP3_1
+            services.AddControllers();
+#else
             services.AddMvc();
-        
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime lifetime)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
 
             app.UseStaticFiles();
 
-            app.UseMvc();
-
-            app.UseDiscoveryClient();
+#if NETCOREAPP3_1
+            app.UseRouting();
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+#else
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+#endif
 
             SampleData.InitializeFortunesAsync(app.ApplicationServices).Wait();
         }

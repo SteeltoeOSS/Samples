@@ -2,23 +2,18 @@
 
 ASP.NET Core sample app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for discovering micro services. The Fortune-Teller-UI attempts to locate the fortuneService in the Eureka server and uses it to get your fortune.
 
-## Pre-requisites - Local
+## Running Local
 
-This sample assumes that there is a running Spring Cloud Eureka Server on your machine. To make this happen:
+### Running a Eureka Server
 
-1. Install Java 8 JDK.
-1. Install Maven 3.x.
-1. Clone the Spring Cloud Samples Eureka repository. (<https://github.com/spring-cloud-samples/eureka.git>)
-1. Go to the eureka server directory (`eureka`) and fire it up with `mvn spring-boot:run`
-1. This sample will default to looking for its eurka server on <http://localhost:8761/eureka>, so it should all connect.
-1. Install .NET Core SDK
+Refer to [common tasks](/CommonTasks.md#Spring-Cloud-Eureka-Server) for detailed instructions on running a local Eureka server.
 
 ## Building & Running - Local
 
-1. Clone this repo. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
-1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
-1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp2.1
+1. Clone this repository: `git clone https://github.com/SteeltoeOSS/Samples`
+1. `cd samples/Discovery/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI`
+1. `dotnet restore`
+1. `dotnet run -f netcoreapp3.1` - netcoreapp2.1 are also valid choices net461
 
 ## What to expect - Local
 
@@ -34,32 +29,21 @@ Application started. Press Ctrl+C to shut down.
 
 At this point the Fortune Teller UI is up and running and ready for displaying your fortune. Hit <http://localhost:5555/> to see it!
 
-## Pre-requisites - CloudFoundry
+## Running on Cloud Foundry
 
-1. Installed Pivotal CloudFoundry
-1. Optionally install Windows support
-1. Installed Spring Cloud Services
-1. Install .NET Core SDK
+### Setup Service Registry on Cloud Foundry
 
-## Setup Service Registry on CloudFoundry
-
-You must first create an instance of the Service Registry service in a org/space.
-
-1. cf target -o myorg -s development
-1. cf create-service p-service-registry standard myDiscoveryService
-1. Wait for the service to become ready! (i.e. cf services)
+Using the service instance name of `myDiscoveryService`, complete the [common task](/CommonTasks.md#Spring-Cloud-Eureka-Server) of provisioning a Eureka server.
 
 ## Publish App & Push to CloudFoundry
 
-1. cf target -o myorg -s development
-1. cd samples/Discovery/src/AspDotNetCore/Fortune-Teller-UI
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
-
-> Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
-
-1. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `eureka:client:validateCertificates=false`.
+1. Login and target your desired space/org: `cf target -o myorg -s myspace`
+1. `cd samples/Discovery/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service`
+1. Publish the app, selecting the framework and runtime you want to run on:
+   - `dotnet publish -f netcoreapp3.1 -r ubuntu.18.04-x64`
+1. Push the app using the appropriate manifest:
+   - `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.18.04-x64/publish`
+   - `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
 
 ## What to expect - CloudFoundry
 
@@ -101,4 +85,4 @@ If you wish to use SSL communications between the Fortune Teller UI and the Fort
 
 ---
 
-### See the Official [Steeltoe Service Discovery Documentation](https://steeltoe.io/docs/steeltoe-service-discovery) for a more in-depth walkthrough of the samples and more detailed information
+### See the [Service Discovery](https://steeltoe.io/service-discovery) area of the Steeltoe site for a more in-depth walkthrough of the samples and more detailed information

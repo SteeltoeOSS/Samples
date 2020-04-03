@@ -3,7 +3,7 @@ applications:
 - name: rabbitmq-connector
   memory: 256M
   disk_quota: 200M
-  stack: windows2016
+  stack: windows
   buildpacks:
    - hwc_buildpack
   command: .\RabbitMQ

@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Redis.Models;
 using Steeltoe.CloudFoundry.Connector.Redis;
-using Steeltoe.Management.CloudFoundry;
 
 namespace Redis
 {
@@ -31,10 +30,12 @@ namespace Redis
             // This works like the above, but adds a IConnectionMultiplexer to the container
             services.AddRedisConnectionMultiplexer(Configuration);
 
-            services.AddCloudFoundryActuators(Configuration);
-
             // Add framework services.
+#if NETCOREAPP3_1
+            services.AddControllersWithViews();
+#else
             services.AddMvc();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,16 +50,19 @@ namespace Redis
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseCloudFoundryActuators();
-
             app.UseStaticFiles();
 
+#if NETCOREAPP3_1
+            app.UseRouting();
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+#else
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+#endif
 
             // Add some data to the Redis cache
             SampleData.InitializeCache(app.ApplicationServices).Wait();

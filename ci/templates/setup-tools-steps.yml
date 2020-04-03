@@ -1,11 +1,17 @@
 parameters:
-  dotnetMinorVersion: 2
+  dotnet3Version: 3.1.x
+  dotnet2Version: 2.1.x
 steps:
 - task: UseDotNet@2
-  displayName: 'Setup DotNet'
+  displayName: 'Setup DotNet3'
   inputs:
     packageType: sdk
-    version: 2.${{parameters.dotnetMinorVersion}}.x
+    version: ${{parameters.dotnet3Version}}
+- task: UseDotNet@2
+  displayName: 'Setup DotNet2'
+  inputs:
+    packageType: sdk
+    version: ${{parameters.dotnet2Version}}
 - script: dotnet --version
   displayName: 'DotNet Version'
 - task: UsePythonVersion@0

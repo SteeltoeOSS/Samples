@@ -1,16 +1,21 @@
 # Steeltoe Circuit Breaker Sample Applications
 
-This repo tree contains sample apps illustrating how to use the Steeltoe [CircuitBreaker](https://github.com/SteeltoeOSS/CircuitBreaker) packages.
+This repo tree contains two samples illustrating how to use Steeltoe [Circuit Breakers](https://steeltoe.io/circuit-breakers).
 
-* src/AspDotNetCore/Fortune-Teller/Fortune-Teller-Service - ASP.NET Core microservice illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for service registration.
-* src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI - ASP.NET Core MVC app illustrating how to use [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) for service discovery and [Spring Cloud Hystrix](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_circuit_breaker_hystrix_clients) commands for accessing the Fortune Service.  The application also illustrates how to use the Hystrix dashboard, both on Cloud Foundry and locally, for monitoring the status of Hystrix commands.
-* src/AspDotNet4/Fortune-Teller/Fortune-Teller-Service4 -same as AspDotNetCore/Fortune-Teller-Service but built for ASP.NET 4.x and using Autofac IOC container
-* src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI - same as AspDotNetCore/Fortune-Teller-UI but built for ASP.NET 4.x and using Autofac IOC container
+One sample uses ASP.NET Core, the other uses ASP.NET MVC/WebAPI, but both share the following characteristics:
+
+- Fortune Teller Service - a microservice for providing fortunes
+- Fortune Teller UI - an MVC application that wraps calls for retrieving fortunes from the back-end service with circuit breakers
+- Service discovery via [Spring Cloud Eureka Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#spring-cloud-eureka-server) (the service registers itself, the UI discovers the service)
+
+The application also illustrates how to use the Hystrix dashboard, both on Cloud Foundry and locally, for monitoring the status of Hystrix commands.
+
+The legacy AspDotNet sample uses Autofac for dependency injection.
 
 ## Building & Running
 
-See the Readme for instructions on building and running each app.  Instructions for running the apps both locally and on CloudFoundry are provided.
+Each project in each sample contains a Readme for instructions on building and running each app.
 
 ---
 
-### See the Official [Steeltoe Circuit Breaker Documentation](https://steeltoe.io/docs/steeltoe-circuitbreaker) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Circuit Breaker Documentation](https://steeltoe.io/circuit-breakers/docs) for a more information

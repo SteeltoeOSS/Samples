@@ -6,8 +6,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Steeltoe.Common.Options.Autofac;
 using Steeltoe.Common.Configuration.Autofac;
-using Pivotal.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace AutofacCloudFoundry
 {

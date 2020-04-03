@@ -2,7 +2,7 @@
 applications:
 - name: actuators-owin-autofac
   memory: 512M
-  stack: windows2016
+  stack: windows
   buildpacks:
    - hwc_buildpack
   services:

@@ -2,13 +2,10 @@
 using Autofac.Integration.WebApi;
 using FortuneTellerService4.Models;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
-using Pivotal.Discovery.Client;
 using Steeltoe.Common.Discovery;
 using Steeltoe.Common.Logging.Autofac;
 using Steeltoe.Common.Options.Autofac;
-using System;
-using System.Diagnostics;
+using Steeltoe.Discovery.Client;
 using System.Reflection;
 using System.Web.Http;
 

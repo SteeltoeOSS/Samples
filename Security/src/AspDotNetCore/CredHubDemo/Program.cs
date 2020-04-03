@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
@@ -61,10 +62,22 @@ namespace CredHubDemo
                     loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
                     loggingBuilder.AddDynamicConsole();
                 })
-                .UseCredHubInterpolation(new LoggerFactory().AddConsole())
+                .UseCredHubInterpolation(GetLoggerFactory())
                 .Build();
 
             host.Run();
+        }
+
+        public static ILoggerFactory GetLoggerFactory()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
+            serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
+            {
+                opts.DisableColors = true;
+            }));
+            serviceCollection.AddLogging(builder => builder.AddDebug());
+            return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
         }
     }
 }

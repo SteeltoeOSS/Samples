@@ -20,8 +20,12 @@ namespace RabbitMQ
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRabbitMQConnection(Configuration);
-            services.AddCloudFoundryActuators(Configuration);
+
+#if NETCOREAPP3_1
+            services.AddControllersWithViews();
+#else
             services.AddMvc();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,15 +39,25 @@ namespace RabbitMQ
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseCloudFoundryActuators();
+
             app.UseStaticFiles();
 
+#if NETCOREAPP3_1
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=RabbitMQ}/{action=Send}/{id?}");
+            });
+#else
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=RabbitMQ}/{action=Send}/{id?}");
             });
+#endif
         }
     }
 }

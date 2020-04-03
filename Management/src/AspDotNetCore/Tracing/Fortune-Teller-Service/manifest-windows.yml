@@ -2,7 +2,7 @@
 applications:
 - name: fortuneService
   memory: 512M
-  stack: windows2016
+  stack: windows
   command: .\Fortune-Teller-Service
   env:
     ASPNETCORE_ENVIRONMENT: Development

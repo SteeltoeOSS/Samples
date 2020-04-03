@@ -5,7 +5,7 @@ applications:
    - hwc_buildpack
   memory: 256M
   disk_quota: 200M
-  stack: windows2016
+  stack: windows
   command: .\Fortune-Teller-Service
   env:
     ASPNETCORE_ENVIRONMENT: Development

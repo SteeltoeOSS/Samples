@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using System;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using System.IO;
 
 namespace AutofacCloudFoundry
@@ -14,7 +13,7 @@ namespace AutofacCloudFoundry
         public static void RegisterConfig(string environment)
         {
             ILoggerFactory factory = new LoggerFactory();
-            factory.AddProvider(new ConsoleLoggerProvider((category, logLevel) => logLevel >= LogLevel.Debug, false));
+            factory.AddConsole(LogLevel.Debug);
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()

@@ -13,7 +13,7 @@ import command
 
 PLATFORM_SUPPORT = {
         'netcoreapp2.0': ['windows', 'linux', 'osx'],
-        'net461': ['windows'],
+        'net461': ['windows', 'linux', 'osx'],
         }
 
 def before_all(context):
@@ -170,13 +170,29 @@ def setup_options(context):
     context.options = type("", (), {})()
     context.options.output_dir = context.config.userdata.get('output')
     context.log.info("option: output directory -> {}".format(context.options.output_dir))
-    context.options.use_windowed = context.config.userdata.getbool('windowed')
-    context.options.do_cleanup = context.config.userdata.getbool('cleanup')
+    try:
+        context.options.use_windowed = context.config.userdata.getbool('windowed')
+    except ValueError as e:
+        context.log.error("invalid config option: windowed -> {}".format(context.config.userdata.get('windowed')))
+        raise e
+    context.log.info("option: windowed? -> {}".format(context.options.use_windowed))
+    try:
+        context.options.do_cleanup = context.config.userdata.getbool('cleanup')
+    except ValueError as e:
+        context.log.error("invalid config option: cleanup -> {}".format(context.config.userdata.get('cleanup')))
+        raise e
     context.log.info("option: cleanup? -> {}".format(context.options.do_cleanup))
-    context.log.info("option: use windowed? -> {}".format(context.options.use_windowed))
-    context.options.max_attempts = context.config.userdata.getint('max_attempts')
+    try:
+        context.options.max_attempts = context.config.userdata.getint('max_attempts')
+    except ValueError as e:
+        context.log.error("invalid config option: max_attempts -> {}".format(context.config.userdata.get('max_attempts')))
+        raise e
     context.log.info("option: max attempts -> {}".format(context.options.max_attempts))
-    context.options.debug_on_error = context.config.userdata.getbool('debug_on_error')
+    try:
+        context.options.debug_on_error = context.config.userdata.getbool('debug_on_error')
+    except ValueError as e:
+        context.log.error("invalid config option: debug_on_error -> {}".format(context.config.userdata.get('debug_on_error')))
+        raise e
     context.log.info("option: debug on error? -> {}".format(context.options.debug_on_error))
     context.options.cf = type("", (), {})()
     context.options.cf.apiurl = context.config.userdata.get('cf_apiurl')
@@ -191,7 +207,11 @@ def setup_options(context):
     context.log.info("option: CloudFoundry domain -> {}".format(context.options.cf.domain))
     context.options.cf.space = context.config.userdata.get('cf_space')
     context.log.info("option: CloudFoundry space -> {}".format(context.options.cf.space))
-    context.options.cf.max_attempts = context.config.userdata.getint('cf_max_attempts')
+    try:
+        context.options.cf.max_attempts = context.config.userdata.getint('cf_max_attempts')
+    except ValueError as e:
+        context.log.error("invalid config option: cf_max_attempts -> {}".format(context.config.userdata.get('cf_max_attempts')))
+        raise e
     context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf.max_attempts))
 
 def setup_logging(context):
