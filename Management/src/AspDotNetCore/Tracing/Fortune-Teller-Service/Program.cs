@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Common.Hosting;
+using Steeltoe.Discovery.Client;
 using Steeltoe.Management.CloudFoundry;
 
 namespace FortuneTellerService
@@ -16,9 +17,9 @@ namespace FortuneTellerService
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .AddCloudFoundry()
+                    .UseCloudHosting(5000)
                     .AddCloudFoundryActuators()
                     .AddServiceDiscovery()
-                    .UseCloudFoundryHosting(5000)
                     .UseStartup<Startup>()
                     .Build();
     }

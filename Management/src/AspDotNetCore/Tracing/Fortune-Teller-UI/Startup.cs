@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Http.Discovery;
-using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Management.Tracing;
 using System;
 
@@ -31,10 +30,7 @@ namespace Fortune_Teller_UI
                 .AddTypedClient<IFortuneService, FortuneService>();
 
             // Add Distributed tracing
-            services.AddDistributedTracing(Configuration);
-
-            // Export traces to Zipkin
-            services.AddZipkinExporter(Configuration);
+            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
 
             // Add framework services.
 #if NETCOREAPP3_1
@@ -65,8 +61,6 @@ namespace Fortune_Teller_UI
             app.UseMvc();
 #endif
 
-            // Start up trace exporter
-            app.UseTracingExporter();
         }
     }
 }
