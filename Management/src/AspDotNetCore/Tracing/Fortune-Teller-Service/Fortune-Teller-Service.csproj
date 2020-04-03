@@ -18,8 +18,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-m1" />
     <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeDiscoveryVersion)" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeConfigVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
     <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
     <PackageReference Include="Steeltoe.Management.TracingCore" Version="$(SteeltoeManagementVersion)" />

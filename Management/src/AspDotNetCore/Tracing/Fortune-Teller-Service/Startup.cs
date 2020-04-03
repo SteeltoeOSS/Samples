@@ -26,10 +26,8 @@ namespace FortuneTellerService
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
             // Add Distributed tracing
-            services.AddDistributedTracing(Configuration);
-
-            // Export traces to Zipkin
-            services.AddZipkinExporter(Configuration);
+            services.AddDistributedTracing(Configuration,
+                builder => builder.UseZipkinWithTraceOptions(services));
 
             // Add framework services.
 #if NETCOREAPP3_1
@@ -50,9 +48,6 @@ namespace FortuneTellerService
 #else
             app.UseMvc();
 #endif
-
-            // Start up trace exporter
-            app.UseTracingExporter();
 
             SampleData.InitializeFortunesAsync(app.ApplicationServices).Wait();
         }
