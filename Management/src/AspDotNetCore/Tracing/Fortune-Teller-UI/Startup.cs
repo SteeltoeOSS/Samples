@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Http.Discovery;
-using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Management.Tracing;
 using System;
 
