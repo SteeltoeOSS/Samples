@@ -6,9 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Cosmos" Version="4.0.0-preview3" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="2.4.3" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.4.3" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.4.3" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeCommonVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
 
   <ItemGroup>
