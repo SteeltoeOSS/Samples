@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Steeltoe.CloudFoundry.Connector.OAuth;
+using Steeltoe.Connector.OAuth;
 using System.Collections.Generic;
 
 namespace OAuth.Controllers

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
+using Steeltoe.Connector.SqlServer.EFCore;
 
 namespace SqlServerEFCore
 {

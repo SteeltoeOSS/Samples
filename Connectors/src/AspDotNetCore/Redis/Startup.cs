@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Redis.Models;
-using Steeltoe.CloudFoundry.Connector.Redis;
+using Steeltoe.Connector.Redis;
 
 namespace Redis
 {

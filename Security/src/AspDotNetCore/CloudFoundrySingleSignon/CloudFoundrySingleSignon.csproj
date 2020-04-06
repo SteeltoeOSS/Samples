@@ -8,6 +8,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeCommonVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeConfigVersion)" />
-    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="3.0.0-1778" />
+    <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="$(SteeltoeSecurityVersion)" />
   </ItemGroup>
 </Project>

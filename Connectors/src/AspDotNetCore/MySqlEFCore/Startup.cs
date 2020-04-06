@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.MySql;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Connector.MySql;
+using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
 
 namespace MySqlEFCore

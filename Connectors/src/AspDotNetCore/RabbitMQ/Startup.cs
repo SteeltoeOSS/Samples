@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.RabbitMQ;
+using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.CloudFoundry;
 
 namespace RabbitMQ

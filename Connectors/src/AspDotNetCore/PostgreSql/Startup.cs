@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PostgreSql.Models;
-using Steeltoe.CloudFoundry.Connector.PostgreSql;
+using Steeltoe.Connector.PostgreSql;
 
 namespace PostgreSql
 {

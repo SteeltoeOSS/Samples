@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeCommonVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>

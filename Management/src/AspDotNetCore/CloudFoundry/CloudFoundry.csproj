@@ -12,9 +12,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeHostingVersion)" />
+    <PackageReference Include="Steeltoe.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Connector.EFCore" Version="$(SteeltoeConnectorVersion)" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeCommonVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Logging.SerilogDynamicLoggerCore" Version="$(SteeltoeLoggingVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeManagementVersion)" />

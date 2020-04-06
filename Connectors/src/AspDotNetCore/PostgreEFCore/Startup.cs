@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.PostgreSql.EFCore;
+using Steeltoe.Connector.PostgreSql.EFCore;
 
 namespace PostgreEFCore
 {
