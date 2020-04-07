@@ -11,7 +11,7 @@ namespace Redis
         public static void Main(string[] args)
         {
             var host = WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundry()
+                .ConfigureAppConfiguration(config => config.AddCloudFoundry())
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()

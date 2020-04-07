@@ -16,7 +16,7 @@ namespace OAuth
         public static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundry()
+                .ConfigureAppConfiguration(config => config.AddCloudFoundry())
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()
