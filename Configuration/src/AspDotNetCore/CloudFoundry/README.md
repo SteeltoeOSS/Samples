@@ -15,7 +15,7 @@ This ASP.NET Core sample app illustrates how to use the [Steeltoe Cloud Foundry 
 1. Publish app to a directory selecting the framework and runtime you want to run on:
    - `dotnet publish -f netcoreapp3.1 -r ubuntu.18.04-x64`
 1. Push the app using the appropriate manifest:
-   - `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish`
+   - `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.18.04-x64/publish`
    - `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
 
 ## What to expect

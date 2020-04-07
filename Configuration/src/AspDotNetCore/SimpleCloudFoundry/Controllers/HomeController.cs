@@ -18,7 +18,7 @@ namespace SimpleCloudFoundry.Controllers
         private ConfigServerClientSettingsOptions ConfigServerClientSettingsOptions { get; set; }
         private IConfigurationRoot Config { get; set; }
 
-        public HomeController(IConfigurationRoot config,
+        public HomeController(IConfiguration config,
             IOptionsSnapshot<ConfigServerData> configServerData,
             IOptions<CloudFoundryApplicationOptions> appOptions,
             IOptions<CloudFoundryServicesOptions> servOptions,
@@ -42,7 +42,7 @@ namespace SimpleCloudFoundry.Controllers
             if (confgServerSettings != null)
                 ConfigServerClientSettingsOptions = confgServerSettings.Value;
 
-            Config = config;
+            Config = config as IConfigurationRoot;
         }
 
         public IActionResult Index()
