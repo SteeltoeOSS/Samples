@@ -3,6 +3,7 @@ parameters:
   sample: ''
 jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
+  timeoutInMinutes: 90
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
   pool:
     vmImage: Ubuntu-16.04
@@ -16,6 +17,7 @@ jobs:
       sample: ${{parameters.sample}}
       os: Linux
 - job: ${{parameters.feature}}_${{parameters.sample}}_OSX
+  timeoutInMinutes: 90
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (OSX)'
   pool:
     vmImage: MacOS-10.14
@@ -29,6 +31,7 @@ jobs:
       sample: ${{parameters.sample}}
       os: OSX
 - job: ${{parameters.feature}}_${{parameters.sample}}_Windows
+  timeoutInMinutes: 90
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
   pool:
     vmImage: Windows-2019

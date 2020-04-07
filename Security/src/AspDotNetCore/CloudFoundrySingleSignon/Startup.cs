@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Steeltoe.Common.Options;
 using Steeltoe.Common.Security;
 // using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
