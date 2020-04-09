@@ -12,6 +12,10 @@ indent_style = space
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
 
+# Shell scripts
+[*.sh]
+indent_size = 2
+
 # Xml project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
 indent_size = 2
