@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySql.Models;
 using Steeltoe.Common.Hosting;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
 using System;
 
@@ -35,6 +36,7 @@ namespace MySql
         public static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
+                .AddCloudFoundry()
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()

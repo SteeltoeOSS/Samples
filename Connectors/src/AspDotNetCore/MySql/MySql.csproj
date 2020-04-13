@@ -9,6 +9,7 @@
     <PackageReference Include="MySql.Data" Version="8.0.11" />
     <PackageReference Include="Steeltoe.ConnectorCore" Version="$(SteeltoeConnectorVersion)" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeCommonVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeConfigVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
   </ItemGroup>
 </Project>
