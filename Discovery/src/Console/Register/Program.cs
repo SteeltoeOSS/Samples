@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.CloudFoundry.Connector.Services;
+using Steeltoe.Connector;
+using Steeltoe.Connector.Services;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 
@@ -22,8 +23,7 @@ namespace Register
 
 
             // Setup logging
-            var factory = new LoggerFactory();
-            factory.AddConsole(configuration.GetSection("Logging"));
+            var factory = GetLoggerFactory();
 
 
             // Build Eureka clients config from configuration
@@ -39,7 +39,7 @@ namespace Register
             if (si.Any())
             {
                 EurekaPostConfigurer.UpdateConfiguration(configuration, si.First(), clientOpts);
-                EurekaPostConfigurer.UpdateConfiguration(configuration, instOpts);
+                EurekaPostConfigurer.UpdateConfiguration(configuration, si.First(), instOpts);
             }
 
             // Initialize ApplicationManager with instance configuration
@@ -51,5 +51,19 @@ namespace Register
             // Hang and keep renewing the registration
             Console.ReadLine();
         }
+
+
+        public static ILoggerFactory GetLoggerFactory()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
+            serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
+            {
+                opts.DisableColors = true;
+            }));
+            serviceCollection.AddLogging(builder => builder.AddConsole());
+            return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+        }
+
     }
 }
