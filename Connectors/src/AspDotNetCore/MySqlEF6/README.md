@@ -1,5 +1,7 @@
 ﻿# MySql Connector Sample App - EntityFramework 6
 
+[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_MySqlEF6%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=19&branchName=2.x)
+
 ASP.NET Core sample app illustrating how to use the EntityFramework 6 together with [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/master/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry. There is also an additional sample which illustrates how to use a `MySqlConnection` to issue commands to the bound database.
 
 ## Pre-requisites - CloudFoundry

@@ -3,6 +3,11 @@
 :toclevels: 2
 :!toc-title:
 :sccs: Spring Cloud Config Server
+:branch: 2.x
+:uri-build: https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=16&branchName={branch}
+:uri-build-status: https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_Simple%5D?branchName={branch}
+
+image:{uri-build-status}["Build Status", link={uri-build}]
 
 ASP.NET Core sample app illustrating how to use https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config_server[{sccs}] as a configuration source.
 
