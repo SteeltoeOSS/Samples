@@ -3,7 +3,7 @@
 :toclevels: 2
 :!toc-title:
 :sccs: Spring Cloud Config Server
-:branch: 2.x
+:branch: master
 :uri-build: https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=16&branchName={branch}
 :uri-build-status: https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_Simple%5D?branchName={branch}
 
