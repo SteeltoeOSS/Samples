@@ -22,7 +22,6 @@ Feature: CloudFoundry Single SignOn
         And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri https://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
-        And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.1 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish
         And you wait until CloudFoundry app single-signon is started
@@ -55,7 +54,6 @@ Feature: CloudFoundry Single SignOn
         And you run: uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri https://single-signon.x.y.z/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
         And you run: cf cups myOAuthService -p "{\"client_id\": \"myTestApp\", \"client_secret\": \"myTestApp\", \"uri\": \"uaa://uaa.x.y.z\"}"
         # deploy single-signon app
-        And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
         And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish
         And you wait until CloudFoundry app single-signon is started

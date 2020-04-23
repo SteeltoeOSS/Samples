@@ -131,6 +131,7 @@ delete_space() {
     delete_service $service
   done
   cf delete-space $space -f >/dev/null
+  msg "deleted space $space"
 }
 
 get_services() {
@@ -141,16 +142,23 @@ get_services() {
 delete_service() {
   local service=$1
   msg "  deleting service $service"
+  local count=0
   while true; do
+    count=$(($count + 1))
     status=$(cf service $service 2>/dev/null | grep '^status:' | sed 's/.*:[[:space:]]*\(.*\)/\1/')
     case $status in
       "")
         break
         ;;
-      "create succeeded")
+      "create in progress")
+        msg "    ... waiting for create to complete ($count)"
+        ;;
+      "create succeeded"|"create failed")
+        count=0
         cf delete-service $service -f >/dev/null
         ;;
       "delete in progress")
+        msg "    ... ($count)"
         ;;
       "delete failed")
         err "failed to delete service"
@@ -158,10 +166,12 @@ delete_service() {
         ;;
       *)
         err "unknown service status: $status"
+        exit 1
         break
         ;;
     esac
   done
+  msg "  deleted service $service"
 }
 
 get_apps() {
@@ -171,7 +181,8 @@ get_apps() {
 delete_app() {
   local app=$1
   msg "  deleting app $app"
-  cf delete $app -f -r >/dev/null 2>&1
+  cf delete $app -f -r
+  msg "  deleted app $app"
 }
 
 # ----------------------------------------------------------------------------

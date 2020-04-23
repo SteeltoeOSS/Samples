@@ -9,7 +9,6 @@ Feature: Cloud Foundry Samples
     Scenario: CloudFoundry Management for netcoreapp3.1/win10-x64
         When you run: cf create-service p.mysql db-small myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
-        And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.1 -r win10-x64
         And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish
         And you wait until CloudFoundry app actuator is started
@@ -20,7 +19,6 @@ Feature: Cloud Foundry Samples
     Scenario: CloudFoundry Management for netcoreapp3.1/ubuntu.16.04-x64
         When you run: cf create-service p.mysql db-small myMySqlService
         And you wait until CloudFoundry service myMySqlService is created
-        And you run: dotnet restore
         And you run: dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
         And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish
         And you wait until CloudFoundry app actuator is started

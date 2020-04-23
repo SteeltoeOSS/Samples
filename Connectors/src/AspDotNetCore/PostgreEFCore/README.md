@@ -1,5 +1,7 @@
 ﻿# PostgreSQL Connector Sample App - EntityFramework Core
 
+[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_PostgreEFCore%5D?branchName=master)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=22&branchName=2.x)
+
 An ASP.NET Core sample application for the [Steeltoe PostgreSQL Connector](https://steeltoe.io/docs/steeltoe-connectors/#2-0-postgresql).
 
 This sample uses EntityFramework Core to issue commands to the bound database.

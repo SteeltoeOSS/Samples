@@ -1,5 +1,7 @@
 ﻿# PostgreSQL Connector Sample App - NpgsqlConnection
 
+[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_PostgreSql%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=21&branchName=2.x)
+
 An ASP.NET Core sample application for the [Steeltoe PostgreSQL Connector](https://steeltoe.io/docs/steeltoe-connectors/#2-0-postgresql).
 
 This sample uses `NpgsqlConnection` to issue commands to the bound database.
