@@ -1,14 +1,10 @@
 trigger:
   branches:
     include:
-      - master
       - 2.x
   paths:
     include:
-      - ci/*
       - config/*
-      - environment.py
-      - pylib/*
       - Connectors/src/AspDotNetCore/PostgreEFCore/*
 
 variables:

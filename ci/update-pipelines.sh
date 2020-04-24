@@ -99,10 +99,7 @@ EOF
   cat >> $sample_pipeline << EOF
   paths:
     include:
-      - ci/*
       - config/*
-      - environment.py
-      - pylib/*
       - $sample_path/*
 
 variables:
