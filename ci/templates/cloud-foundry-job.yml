@@ -9,7 +9,7 @@ jobs:
     vmImage: Ubuntu-16.04
   steps:
   - template: setup-cloud-foundry-linux-steps.yml
-  - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} --tags ~@netcoreapp2.1 ${{parameters.behave_args}}
+  - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} --tags ~@net461 ${{parameters.behave_args}}
     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
@@ -22,7 +22,7 @@ jobs:
     vmImage: MacOS-10.14
   steps:
   - template: setup-cloud-foundry-osx-steps.yml
-  - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}  --tags ~@netcoreapp2.1 ${{parameters.behave_args}}
+  - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}  --tags ~@net461 ${{parameters.behave_args}}
     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
