@@ -11,11 +11,6 @@ from urllib.parse import urlparse
 sys.path.append(os.path.join(os.getcwd(), 'pylib'))
 import command
 
-PLATFORM_SUPPORT = {
-        'netcoreapp2.0': ['windows', 'linux', 'osx'],
-        'net461': ['windows', 'linux', 'osx'],
-        }
-
 def before_all(context):
     '''
     behave hook called before running test suite
@@ -47,19 +42,13 @@ def before_scenario(context, scenario):
     behave hook called before running test scenario
     '''
     context.log.info('[---] {}'.format(scenario.name))
-    tags = scenario.tags + scenario.feature.tags
-    for tag in tags:
-        if tag in PLATFORM_SUPPORT:
-            if context.platform not in PLATFORM_SUPPORT[tag]:
-                context.log.info("{} not supported on {}".format(tag, context.platform))
-                scenario.mark_skipped()
-                return
     sandbox_name = scenario.name.translate({ord(ch): None for ch in ' -'})
     context.sandbox_dir = os.path.join(context.sandboxes_dir, sandbox_name)
     context.log.info('sandbox directory: {}'.format(context.sandbox_dir))
     os.makedirs(context.sandbox_dir)
     context.cleanups = []
     setup_env(context, scenario)
+    tags = scenario.tags + scenario.feature.tags
     if 'cloud' in tags:
         setup_cloud(context, scenario)
 
