@@ -49,7 +49,7 @@ def before_scenario(context, scenario):
     context.cleanups = []
     setup_env(context, scenario)
     tags = scenario.tags + scenario.feature.tags
-    if 'cloud' in tags:
+    if 'cloudfoundry' in tags:
         setup_cloud(context, scenario)
 
 def setup_env(context, scenario):

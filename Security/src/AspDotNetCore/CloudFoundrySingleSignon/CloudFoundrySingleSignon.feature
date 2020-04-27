@@ -1,4 +1,4 @@
-@cloud
+@cloudfoundry
 Feature: CloudFoundry Single SignOn
     In order to show you how to use Steeltoe with CloudFoundry Single SignOn
     You can run some CloudFoundry Single SignOn samples

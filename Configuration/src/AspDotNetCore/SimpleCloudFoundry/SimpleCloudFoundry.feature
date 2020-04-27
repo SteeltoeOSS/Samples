@@ -1,4 +1,4 @@
-@cloud
+@cloudfoundry
 @configserver
 Feature: Simple CloudFoundry Configuration
     In order to show you how to use Steeltoe for simple CloudFoundry configurations

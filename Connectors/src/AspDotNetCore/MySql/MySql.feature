@@ -1,4 +1,4 @@
-@cloud
+@cloudfoundry
 @mysql
 Feature: MySql Connector
     In order to show you how to use Steeltoe for connecting to MySql

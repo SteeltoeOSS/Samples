@@ -1,4 +1,4 @@
-@cloud
+@cloudfoundry
 @mysql
 Feature: Cloud Foundry Samples
     In order to show you how to use Steeltoe Management Endpoint
