@@ -152,7 +152,6 @@ def setup_options(context):
         section = context.config.userdata.get("config_section", "behave.userdata")
         if parser.has_section(section):
             options = parser.items(section)
-            context.log.info("user options {}".format(options))
             context.config.userdata.update(options)
         else:
             context.log.info("user options file found but does not contain section [{}]".format(section))
