@@ -1,0 +1,12 @@
+﻿@model List<Person>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+@foreach (var p in Model)
+{
+    <h4>@p.FirstName @p.LastName thinks @p.FavoriteThing is the best</h4>
+}
+</div>
