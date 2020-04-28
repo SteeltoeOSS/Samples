@@ -81,12 +81,12 @@ def step_impl(context, service):
     """
 
     def service_available():
-        cmd = Command(context, 'cf services', logf=context.log.debug)
+        cmd = Command(context, 'cf services', log_func=context.log.debug)
         cmd.run()
         if not re.search(r'^{}\s'.format(service), cmd.stdout, re.MULTILINE):
             context.log.info('waiting for service {} deployment to start'.format(service))
             return False
-        cmd = Command(context, 'cf service {}'.format(service), logf=context.log.debug)
+        cmd = Command(context, 'cf service {}'.format(service), log_func=context.log.debug)
         cmd.run()
         match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
         if not match:
