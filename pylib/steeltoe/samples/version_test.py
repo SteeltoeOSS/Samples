@@ -1,6 +1,6 @@
-import sure
 import unittest
-import version
+from steeltoe.samples import version
+
 
 class VersionTest(unittest.TestCase):
 

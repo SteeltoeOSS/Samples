@@ -206,9 +206,10 @@ project.lock.json
 *.swp
 
 # test framework and output
-pyenv/
-test.out/
-user.ini
+/pyenv/
+/test.out/
+/user.ini
+__pycache__/
 
 git.properties
 .ionide/
