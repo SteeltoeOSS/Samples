@@ -1,6 +1,6 @@
 @cloudfoundry
 Feature: Simple CloudFoundry Configuration
-  In order to show you how to use Steeltoe for simple CloudFoundry configurations
+  In order to show you how to use Steeltoe for simple Cloud Foundry configurations
   You can run some simple CloudFoundry configuration samples
 
   @netcoreapp3.1
