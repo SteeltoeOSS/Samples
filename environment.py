@@ -37,8 +37,6 @@ def after_all(context):
     """
     behave hook called after running test features
     """
-    count = context.counters['failed_scenarios']
-    context.log.info(count)
     context.log.info("failed features : {}".format(context.counters['failed_features']))
     context.log.info("failed scenarios: {}".format(context.counters['failed_scenarios']))
 
@@ -244,7 +242,11 @@ def setup_cloudfoundry(context, scenario):
     if not context.cf_space:
         tld = re.split('/|\\\\', scenario.filename)[0]
         feature_file = os.path.basename(scenario.filename)
-        context.cf_space = "{}_{}".format(tld, os.path.splitext(feature_file)[0]).lower()
+        context.cf_space = "{}-{}-{}".format(
+            tld,
+            os.path.splitext(feature_file)[0],
+            context.platform
+        ).lower()
     context.log.info('CloudFoundry space -> {}'.format(context.cf_space))
     context.cf_domain = context.options.cf.domain
     if not context.cf_domain:
