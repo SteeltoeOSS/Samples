@@ -11,7 +11,7 @@ def step_impl(context):
     Delegates deployment to the function 'deploy' defined in the module '{Feature}Deps.py'.
     :type context: behave.runner.Context
     """
-    module_name = '{}_CloudFoundryDeps'.format(os.path.splitext(os.path.basename(context.feature.filename))[0])
+    module_name = 'cloudfoundry_deps'
     module_dir = os.path.join(context.samples_dir, os.path.dirname(context.feature.filename))
     sys.path.append(os.path.join(module_dir))
     try:
