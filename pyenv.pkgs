@@ -31,3 +31,4 @@ sure==1.4.9
 traitlets==4.3.2
 urllib3==1.22
 wcwidth==0.1.7
+PyYAML==5.3.1

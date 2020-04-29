@@ -137,7 +137,7 @@ def setup_options(context):
         raise e
     context.log.info("option: windowed? -> {}".format(context.options.use_windowed))
     try:
-        context.options.do_cleanup = context.config.userdata.getbool('cleanup', False)
+        context.options.do_cleanup = context.config.userdata.getbool('cleanup')
     except ValueError as e:
         context.log.error("invalid config option: cleanup -> {}".format(context.config.userdata.get('cleanup')))
         raise e
