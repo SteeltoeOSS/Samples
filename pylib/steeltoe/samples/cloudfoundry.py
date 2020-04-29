@@ -67,10 +67,10 @@ class CloudFoundry(object):
         attempts = 0
         while True:
             attempts += 1
-            if self._context.options.max_attempts >= 0:
-                if attempts > self._context.options.max_attempts:
-                    assert False, "maximum attempts exceeded ({})".format(self._context.options.max_attempts)
-                self._context.log.info("attempt {}/{}".format(attempts, self._context.options.max_attempts))
+            if self._context.options.cf.max_attempts >= 0:
+                if attempts > self._context.options.cf.max_attempts:
+                    assert False, "maximum attempts exceeded ({})".format(self._context.options.cf.max_attempts)
+                self._context.log.info("attempt {}/{}".format(attempts, self._context.options.cf.max_attempts))
             else:
                 self._context.log.info("attempt {}".format(attempts))
             cmd_s = 'cf services'
