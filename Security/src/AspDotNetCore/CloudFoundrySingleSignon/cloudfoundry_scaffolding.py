@@ -3,11 +3,15 @@ from steeltoe.samples import dns
 from steeltoe.samples.command import Command
 
 
-def deploy(context):
+def setup(context):
     """
     :type context: behave.runner.Context
     """
     cf = cloudfoundry.CloudFoundry(context)
+    # remove previous app
+    app = 'single-signon'
+    cf.delete_app(app)
+    # create service
     uaa_app_status = cf.get_app_status('uaa')
     if uaa_app_status is None:
         hostname = dns.resolve_hostname(context, 'uaa')

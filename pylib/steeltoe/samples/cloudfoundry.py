@@ -51,22 +51,24 @@ class CloudFoundry(object):
         cmd_s = 'cf target -s {}'.format(name)
         command.Command(self._context, cmd_s).run()
 
-    def create_service(self, service, plan, name, args=[]):
+    def create_service(self, service, plan, service_instance, args=None):
         """
         :type service: str
         :type plan: str
-        :type name: str
+        :type service_instance: str
         :type args: list
         """
-        self._context.log.info('creating Cloud Foundry service "{}"'.format(name))
-        cmd_s = 'cf create-service {} {} {}'.format(service, plan, name)
+        if args is None:
+            args = []
+        self._context.log.info('creating Cloud Foundry service "{}:{}" instance "{}"'.format(service, plan, service_instance))
+        cmd_s = 'cf create-service {} {} {}'.format(service, plan, service_instance)
         if args:
             cmd_s += ' ' + ' '.join(args)
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
         if cmd.rc != 0:
-            raise Exception('create service failed: {}'.format(name))
-        self._context.log.info('waiting for service "{}" to become available'.format(name))
+            raise Exception('create service instance failed: {}'.format(service_instance))
+        self._context.log.info('waiting for service instance "{}" to become available'.format(service_instance))
         attempts = 0
         while True:
             attempts += 1
@@ -76,25 +78,25 @@ class CloudFoundry(object):
                 self._context.log.info("attempt {}/{}".format(attempts, self._context.options.cf.max_attempts))
             else:
                 self._context.log.info("attempt {}".format(attempts))
-            status = self.get_service_status(name)
+            status = self.get_service_status(service_instance)
             if status == 'create succeeded':
                 break
             if status is None:
-                self._context.log.info('service "{}" status not yet available'.format(name))
+                self._context.log.info('service instance "{}" status not yet available'.format(service_instance))
             else:
-                self._context.log.info('service "{}" status: "{}"'.format(name, status))
+                self._context.log.info('service instance "{}" status: "{}"'.format(service_instance, status))
             time.sleep(1)
 
-    def get_service_status(self, name):
+    def get_service_status(self, service_instance):
         """
-        :type name: str
+        :type service_instance: str
         """
-        cmd_s = 'cf service {}'.format(name)
+        cmd_s = 'cf service {}'.format(service_instance)
         cmd = command.Command(self._context, cmd_s, log_func=self._context.log.debug)
         try:
             cmd.run()
         except command.CommandException as e:
-            if 'Service instance {} not found'.format(instance) in str(e):
+            if 'Service instance {} not found'.format(service_instance) in str(e):
                 return None
             raise e
         match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
@@ -106,13 +108,14 @@ class CloudFoundry(object):
         """
         :type manifest: str
         """
+        manifest_yaml = yaml.load(open(os.path.join(self._context.sandbox_dir, manifest), 'r'))
+        app_name = manifest_yaml['applications'][0]['name']
+        self._context.log.info('pushing Cloud Foundry app "{}" ({})'.format(app_name, manifest))
         cmd_s = 'cf push -f {}'.format(manifest)
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
         if cmd.rc != 0:
-            raise Exception('push app failed: {}'.format(manifest))
-        manifest_yaml = yaml.load(open(os.path.join(self._context.sandbox_dir, manifest), 'r'))
-        name = manifest_yaml['applications'][0]['name']
+            raise Exception('push app failed: "{}" ({})'.format(app_name, manifest))
         attempts = 0
         while True:
             attempts += 1
@@ -122,25 +125,33 @@ class CloudFoundry(object):
                 self._context.log.info("attempt {}/{}".format(attempts, self._context.options.cf.max_attempts))
             else:
                 self._context.log.info("attempt {}".format(attempts))
-            status = self.get_app_status(name)
+            status = self.get_app_status(app_name)
             if status == 'running':
                 break
             if status is None:
-                self._context.log.info('app "{}" status not yet available'.format(name))
+                self._context.log.info('app "{}" status not yet available'.format(app_name))
             else:
-                self._context.log.info('app "{}" status: "{}"'.format(name, status))
+                self._context.log.info('app "{}" status: "{}"'.format(app_name, status))
             time.sleep(1)
 
-    def get_app_status(self, name):
+    def delete_app(self, app_name):
         """
-        :type name: str
+        :type app_name: str
         """
-        cmd_s = 'cf app {}'.format(name)
+        self._context.log.info('deleting Cloud Foundry app "{}"'.format(app_name))
+        cmd_s = 'cf delete -f {}'.format(app_name)
+        command.Command(self._context, cmd_s, log_func=self._context.log.debug).run()
+
+    def get_app_status(self, app_name):
+        """
+        :type app_name: str
+        """
+        cmd_s = 'cf app {}'.format(app_name)
         cmd = command.Command(self._context, cmd_s, log_func=self._context.log.debug)
         try:
             cmd.run()
         except command.CommandException as e:
-            if "App '{}' not found".format(name) in str(e):
+            if "App '{}' not found".format(app_name) in str(e):
                 return None
             raise e
         match = re.search(r'^#0\s+(\S+)', cmd.stdout, re.MULTILINE)
