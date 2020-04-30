@@ -3,7 +3,6 @@ Feature: Redis Connector
   In order to show you how to use Steeltoe for connecting to Redis
   You can run some Redis connection samples
 
-  @wip
   @netcoreapp3.1
   @win10-x64
   Scenario: Redis Connector for netcoreapp3.1/win10-x64
