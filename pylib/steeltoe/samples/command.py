@@ -107,7 +107,7 @@ class Command(object):
         output = open(getattr(self, '{}_path'.format(output_name))).read()
         setattr(self, output_name, output)
         if output:
-            self.log_func("command[{}] {}: ↓↓↓\n{}".format(self.command_id, output_name, output.strip()))
+            self.log_func("command[{}] {}:\n{}".format(self.command_id, output_name, output.strip()))
         else:
             self.log_func("command[{}] {}: <none>".format(self.command_id, output_name))
 
