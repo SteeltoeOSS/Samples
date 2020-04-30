@@ -3,7 +3,7 @@ applications:
 - name: actuator
   buildpacks:
    - hwc_buildpack
-  memory: 512M
+  memory: 384M
   stack: windows
   command: .\CloudFoundry
   env:
