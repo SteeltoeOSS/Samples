@@ -178,13 +178,6 @@ def setup_options(context):
     context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf.max_attempts))
 
 
-def setup_env(context):
-    """
-    set up command execution environment
-    """
-    context.env = {'CF_COLOR': 'false'}
-
-
 def setup_platform(context):
     """
     determine the underlying platform and whether it's supported
@@ -268,5 +261,13 @@ def setup_cloudfoundry(context, scenario):
             command.Command(context, 'cf delete -f {}'.format(app)).run()
         cmd = command.Command(context, 'cf services')
         cmd.run()
-
     context.cleanups.append(cleanup)
+
+
+def setup_env(context):
+    """
+    set up command execution environment
+    """
+    context.env = {}
+    if context.platform == 'windows':
+        context.env['CF_COLOR'] = 'false'
