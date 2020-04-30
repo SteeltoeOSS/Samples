@@ -78,14 +78,8 @@ class Command(object):
         self.rc = self.proc.wait()
         self.log_func("command[{}] rc: {}".format(self.command_id, self.rc))
         if not self.windowed:
-            self.stdout_f.close()
-            self.stdout = open(self.stdout_path).read()
-            self.log_func(
-                "command[{}] stdout:\n | {}".format(self.command_id, self.stdout.strip().replace('\n', '\n | ')))
-            self.stderr_f.close()
-            self.stderr = open(self.stderr_path).read()
-            self.log_func(
-                "command[{}] stderr:\n | {}".format(self.command_id, self.stderr.strip().replace('\n', '\n | ')))
+            self._format_output('stdout')
+            self._format_output('stderr')
 
     def run(self):
         self.exec()
@@ -104,6 +98,18 @@ class Command(object):
             self.log_func('killed process with pid {}'.format(self.proc.pid))
         except psutil.NoSuchProcess:
             self.log_func('process with pid {} no longer exists'.format(self.proc.pid))
+
+    def _format_output(self, output_name):
+        """
+        :type output_name: str
+        """
+        getattr(self, '{}_f'.format(output_name)).close()
+        output = open(getattr(self, '{}_path'.format(output_name))).read()
+        setattr(self, output_name, output)
+        if output:
+            self.log_func("command[{}] {}: ↓↓↓\n{}".format(self.command_id, output_name, output.strip()))
+        else:
+            self.log_func("command[{}] {}: <none>".format(self.command_id, output_name))
 
 
 class CommandException(Exception):
