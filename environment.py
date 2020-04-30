@@ -1,3 +1,4 @@
+import importlib
 import logging
 import os
 import re
@@ -215,6 +216,8 @@ def setup_cloudfoundry(context, scenario):
     setup Cloud Foundry options and settings
     """
     cf = cloudfoundry.CloudFoundry(context)
+
+    # options
     creds = [context.options.cf.apiurl, context.options.cf.username, context.options.cf.password,
              context.options.cf.org]
     if [cred for cred in creds if cred]:
@@ -248,8 +251,27 @@ def setup_cloudfoundry(context, scenario):
         endpoint = cf.get_api_endpoint()
         context.cf_domain = urlparse(endpoint).hostname.replace('api.run', 'apps')
     context.log.info('CloudFoundry domain -> {}'.format(context.cf_domain))
+
+    # sandbox
     cf.create_space(context.cf_space)
     cf.target_space(context.cf_space)
+
+    # scaffolding
+    module_name = 'cloudfoundry_scaffolding'
+    module_dir = os.path.join(context.samples_dir, os.path.dirname(context.feature.filename))
+    sys.path.append(os.path.join(module_dir))
+    try:
+        module = importlib.import_module(module_name)
+    except ModuleNotFoundError:
+        raise Exception('scaffolding module does not exist: {}'.format(module_name))
+    sys.path.pop()
+    func_name = 'setup'
+    try:
+        setup = getattr(module, func_name)
+    except AttributeError:
+        raise Exception('"{}" "{}" function does not exist'.format(module_name, func_name))
+    context.log.info('delegating scaffolding setup deployment to "{}.{}"'.format(module_name, func_name))
+    setup(context)
 
     def cleanup():
         context.log.info('cleaning up cloud-foundry')
@@ -257,10 +279,13 @@ def setup_cloudfoundry(context, scenario):
         cmd.run()
         for app_info in cmd.stdout.splitlines()[4:]:
             app = app_info.split()[0]
-            context.log.info('deleting app {}'.format(app))
+            cf.delete_app(app)
             command.Command(context, 'cf delete -f {}'.format(app)).run()
         cmd = command.Command(context, 'cf services')
         cmd.run()
+        for svc_info in cmd.stdout.splitlines()[3:]:
+            svc_instance = svc_info.split()[0]
+            cf.delete_service(svc_instance)
     context.cleanups.append(cleanup)
 
 

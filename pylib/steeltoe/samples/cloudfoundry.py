@@ -87,6 +87,14 @@ class CloudFoundry(object):
                 self._context.log.info('service instance "{}" status: "{}"'.format(service_instance, status))
             time.sleep(1)
 
+    def delete_service(self, service_instance):
+        """
+        :type service_instance: str
+        """
+        self._context.log.info('deleting Cloud Foundry service instance "{}"'.format(service_instance))
+        cmd_s = 'cf delete-service -f {}'.format(service_instance)
+        command.Command(self._context, cmd_s, log_func=self._context.log.debug).run()
+
     def get_service_status(self, service_instance):
         """
         :type service_instance: str
