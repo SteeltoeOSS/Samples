@@ -3,7 +3,7 @@ applications:
 - name: redis-connector
   buildpacks:
    - dotnet_core_buildpack
-  memory: 256M
+  memory: 128M
   disk_quota: 200M
   command: cd ${HOME} && ./Redis
   env:

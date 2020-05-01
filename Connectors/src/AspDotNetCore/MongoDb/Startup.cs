@@ -3,7 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+<<<<<<< HEAD
 using Steeltoe.Connector.MongoDb;
+=======
+using Steeltoe.CloudFoundry.Connector.MongoDb;
+>>>>>>> 2.x
 
 namespace MongoDb
 {

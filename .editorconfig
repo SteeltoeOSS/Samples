@@ -32,9 +32,9 @@ indent_size = 2
 [*.{yaml,yml}]
 indent_size = 2
 
-# Gherkin files
+# Gherkin (feature) files
 [*.feature]
-indent_size = 4
+indent_size = 2
 
 # Dotnet code style settings:
 [*.cs]

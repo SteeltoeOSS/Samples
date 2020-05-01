@@ -7,7 +7,11 @@
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
+<<<<<<< HEAD
     <PackageReference Include="Steeltoe.ConnectorCore" Version="$(SteeltoeVersion)" />
+=======
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeVersion)" />
+>>>>>>> 2.x
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 

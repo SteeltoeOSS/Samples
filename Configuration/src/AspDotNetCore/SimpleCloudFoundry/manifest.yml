@@ -3,6 +3,7 @@ applications:
 - name: foo
   buildpacks:
    - dotnet_core_buildpack
+  memory: 128M
   env:
     ASPNETCORE_ENVIRONMENT: development
   services:
