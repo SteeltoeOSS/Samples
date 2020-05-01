@@ -116,7 +116,7 @@ class CloudFoundry(object):
         """
         :type manifest: str
         """
-        manifest_yaml = yaml.load(open(os.path.join(self._context.sandbox_dir, manifest), 'r'))
+        manifest_yaml = yaml.safe_load(open(os.path.join(self._context.sandbox_dir, manifest), 'r'))
         app_name = manifest_yaml['applications'][0]['name']
         self._context.log.info('pushing Cloud Foundry app "{}" ({})'.format(app_name, manifest))
         cmd_s = 'cf push -f {}'.format(manifest)
