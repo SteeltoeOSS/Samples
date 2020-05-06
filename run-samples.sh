@@ -15,7 +15,7 @@ if ! command_available pipenv >/dev/null; then
   echo "installing 'pipenv'"
   pip=pip
   command_available pip3 >/dev/null && pip=pip3
-  $pip install pipenv
+  $pip install pipenv --user
 fi
 
 # set working dir
