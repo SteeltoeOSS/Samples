@@ -6,9 +6,9 @@ $OldPath = $Env:Path
 $Env:Path += ";$Env:AppData\Python\Python38\Scripts"
 
 function Command-Available {
+    param($Command)
     $OldPref = $ErrorActionPreference
     $ErrorActionPreference = 'stop'
-    param($Command)
     try {
         (Get-Command $Command)
         return $True
