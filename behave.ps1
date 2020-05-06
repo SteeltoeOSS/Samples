@@ -24,7 +24,7 @@ function Command-Available {
 # ensure pipenv available
 if (!(Command-Available pipenv)) {
     "installing 'pipenv'"
-    & pip3 install pipenv --user
+    pip3 install pipenv --user
 }
 
 try {
@@ -34,12 +34,12 @@ try {
     # initialize framework if needed
     if (!(Test-Path $FrameworkInitFlag)) {
         "installing framework"
-        & pipenv install --three --ignore-pipfile
+        pipenv install --three --ignore-pipfile
         New-Item -Name $FrameworkInitFlag -ItemType file | Out-Null
     }
 
     # run samples
-    & pipenv run behave $Args
+    pipenv run behave $Args 2>&1 | %{ "$_" }
 
 }
 finally {
