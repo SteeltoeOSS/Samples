@@ -71,7 +71,11 @@ class Command(object):
         self.log_func("command[{}] cmd: {}".format(self.command_id, ' '.join(popen_args)))
         self.log_func("command[{}] cwd: {}".format(self.command_id, self.cwd))
         self.log_func("command[{}] env: {}".format(self.command_id, self.env))
-        self.proc = subprocess.Popen(popen_args, cwd=self.cwd, env=env, stdin=None, stdout=stdout, stderr=stderr)
+        try:
+            self.proc = subprocess.Popen(popen_args, cwd=self.cwd, env=env, stdin=None, stdout=stdout, stderr=stderr)
+        except FileNotFoundError:
+            raise CommandException('command not found: {}'.format(self.command.split()[0]))
+
         self.log_func("command[{}] pid: {}".format(self.command_id, self.proc.pid))
 
     def wait(self):
