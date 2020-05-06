@@ -210,6 +210,7 @@ project.lock.json
 /test.out/
 /user.ini
 __pycache__/
+/.framework-initialized
 
 git.properties
 .ionide/
