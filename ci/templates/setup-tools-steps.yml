@@ -17,7 +17,7 @@ steps:
 - task: UsePythonVersion@0
   displayName: 'Setup Python'
   inputs:
-    versionSpec: 3.6.x
+    versionSpec: 3.8.x
 - script: python --version
   displayName: 'Python Version'
 - task: UseRubyVersion@0
@@ -28,7 +28,3 @@ steps:
   displayName: 'Ruby Version'
 - script: java -version
   displayName: 'Java Version'
-- script: python -m pip install -r pyenv.pkgs
-  displayName: 'Setup Behave'
-- script: behave --version
-  displayName: 'Behave Version'
