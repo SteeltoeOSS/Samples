@@ -10,7 +10,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-linux-steps.yml
   - script: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
-    displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
+    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
       feature: ${{parameters.feature}}
@@ -23,7 +23,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-osx-steps.yml
   - script: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
-    displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
+    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
       feature: ${{parameters.feature}}
@@ -36,7 +36,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-windows-steps.yml
   - powershell: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}}
-    displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
+    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
       feature: ${{parameters.feature}}
