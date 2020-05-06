@@ -9,7 +9,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-linux-steps.yml
   - template: setup-cloud-foundry-uaac-steps.yml
-  - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
+  - script: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
@@ -23,7 +23,7 @@ jobs:
 #   steps:
 #   - template: setup-cloud-foundry-osx-steps.yml
 #   - template: setup-cloud-foundry-uaac-steps.yml
-#   - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
+#   - script: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
 #     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
 #   - template: publish-results-steps.yml
 #     parameters:
@@ -37,7 +37,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-windows-steps.yml
   - template: setup-cloud-foundry-uaac-steps.yml
-  - script: behave ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
+  - script: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
