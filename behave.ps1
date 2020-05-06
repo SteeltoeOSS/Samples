@@ -1,4 +1,3 @@
-$ErrorActionPreference = 'stop'
 
 
 $BaseDir = $PSScriptRoot
@@ -7,6 +6,8 @@ $OldPath = $Env:Path
 $Env:Path += ";$Env:AppData\Python\Python38\Scripts"
 
 function Command-Available {
+    $OldPref = $ErrorActionPreference
+    $ErrorActionPreference = 'stop'
     param($Command)
     try {
         (Get-Command $Command)
@@ -14,6 +15,9 @@ function Command-Available {
     }
     catch {
         return $False
+    }
+    finally {
+        $ErrorActionPreference = $OldPref
     }
 }
 
@@ -36,6 +40,7 @@ try {
 
     # run samples
     & pipenv run behave $Args
+
 }
 finally {
     Pop-Location
