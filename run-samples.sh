@@ -5,11 +5,16 @@ set -e
 basedir=$(dirname $0)
 framework_init_flag=$basedir/.framework-initialized
 
+command_available() {
+  local cmd=$1
+  command -v $cmd >/dev/null
+}
+
 # ensure pipenv available
-if ! command -v pipenv >/dev/null; then
+if ! command_available pipenv >/dev/null; then
   echo "installing 'pipenv'"
   pip=pip
-  command -v pip3 >/dev/null && pip=pip3
+  command_available pip3 >/dev/null && pip=pip3
   $pip install pipenv
 fi
 
