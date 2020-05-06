@@ -206,7 +206,6 @@ project.lock.json
 *.swp
 
 # test framework and output
-/pyenv/
 /test.out/
 /user.ini
 __pycache__/
