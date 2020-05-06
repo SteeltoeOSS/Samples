@@ -35,7 +35,7 @@ jobs:
     vmImage: Windows-2019
   steps:
   - template: setup-cloud-foundry-windows-steps.yml
-  - script: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}}
+  - powershell: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}}
     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:

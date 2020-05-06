@@ -37,7 +37,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-windows-steps.yml
   - template: setup-cloud-foundry-uaac-steps.yml
-  - script: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
+  - powershell: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
     displayName: 'Test -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yml
     parameters:
