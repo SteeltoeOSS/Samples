@@ -20,5 +20,3 @@ steps:
   displayName: 'Setup Ruby'
   inputs:
     versionSpec: 2.4.x
-- script: java -version
-  displayName: 'Java Version'
