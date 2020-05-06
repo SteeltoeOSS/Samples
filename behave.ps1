@@ -1,5 +1,6 @@
 $ErrorActionPreference = 'stop'
 
+
 $BaseDir = $PSScriptRoot
 $FrameworkInitFlag = ".framework-initialized"
 $OldPath = $Env:Path
@@ -29,12 +30,12 @@ try {
     # initialize framework if needed
     if (!(Test-Path $FrameworkInitFlag)) {
         "installing framework"
-        pipenv install --three --ignore-pipfile
+        & pipenv install --three --ignore-pipfile
         New-Item -Name $FrameworkInitFlag -ItemType file | Out-Null
     }
 
     # run samples
-    pipenv run behave $Args
+    & pipenv run behave $Args
 }
 finally {
     Pop-Location
