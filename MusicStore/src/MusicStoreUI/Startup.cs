@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
+using Steeltoe.Connector.SqlServer.EFCore;
 using Steeltoe.Discovery.Client;
 
 #if USE_REDIS_CACHE
@@ -17,16 +17,15 @@ using Steeltoe.Security.DataProtection;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.CircuitBreaker.Hystrix;
 using Command = MusicStoreUI.Services.HystrixCommands;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Steeltoe.Common.Http.Discovery;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
 // using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Management.Tracing;
+using Steeltoe.Common;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 // using Steeltoe.Management.Exporter.Tracing.Zipkin;
 
 namespace MusicStoreUI
@@ -43,6 +42,15 @@ namespace MusicStoreUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // this should be done automatically by Steeltoe somewhere else! Zipkin throws without it
+            if (Platform.IsCloudFoundry)
+            {
+                services.RegisterCloudFoundryApplicationInstanceInfo();
+            }
+            else
+            {
+                services.GetApplicationInstanceInfo();
+            }
 
             // Add framework services.
 #if USE_REDIS_CACHE
