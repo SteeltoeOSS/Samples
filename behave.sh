@@ -35,4 +35,4 @@ if ! env_exists; then
 fi
 
 # run samples
-echo exec pipenv run behave $*
+exec pipenv run behave $*
