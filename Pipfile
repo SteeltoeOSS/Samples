@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+behave = "*"
+sure = "*"
+pyyaml = "*"
+psutil = "*"
+mechanicalsoup = "*"
+requests = "*"
+ipdb = "*"
+
+[requires]
+python_version = "3.8"
