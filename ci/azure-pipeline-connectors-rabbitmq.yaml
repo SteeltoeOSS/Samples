@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - config/*
+      - Connectors/src/AspDotNetCore/RabbitMQ/*
+
+variables:
+  - group: 'Samples Configuration and Credentials'
+
+jobs:
+  -
+    template: templates/cloud-foundry-job.yaml
+    parameters:
+      feature: Connectors
+      sample: RabbitMQ
