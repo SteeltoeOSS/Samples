@@ -10,7 +10,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-linux-steps.yaml
   - template: setup-cloud-foundry-uaac-steps.yaml
-  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yaml
     parameters:
@@ -24,7 +24,7 @@ jobs:
 #   steps:
 #   - template: setup-cloud-foundry-osx-steps.yaml
 #   - template: setup-cloud-foundry-uaac-steps.yaml
-#   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+#   - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
 #     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
 #   - template: publish-results-steps.yaml
 #     parameters:
@@ -38,7 +38,7 @@ jobs:
   steps:
   - template: setup-cloud-foundry-windows-steps.yaml
   - template: setup-cloud-foundry-uaac-steps.yaml
-  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
   - template: publish-results-steps.yaml
     parameters:

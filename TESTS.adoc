@@ -149,7 +149,7 @@ C:> test-run
 .Example: Run tests for simple CloudFoundry configuration
 [source,bat]
 ----
-C:> test-run Configuration/src/AspDotNetCore/CloudFoundry
+C:> test-run Configuration/src/CloudFoundry
 ----
 
 === Tags

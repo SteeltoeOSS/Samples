@@ -5,7 +5,7 @@ trigger:
   paths:
     include:
       - config/*
-      - Connectors/src/AspDotNetCore/MySqlEFCore/*
+      - Connectors/src/MySqlEFCore/*
 
 variables:
   - group: 'Samples Configuration and Credentials'

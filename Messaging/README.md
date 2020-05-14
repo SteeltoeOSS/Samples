@@ -4,7 +4,7 @@ NOTE:  The Steeltoe Messaging packages are experimental and the API is subject t
 
 This repo tree contains sample apps illustrating how to use the Steeltoe Messaging APIs in your .NET applications. 
 
-* src/AspDotNetCore/RabbitMQWeb - ASP.NET Core sample app illustrating how to use the Steeltoe Messaging APIs when interacting with a RabbitMQ broker.
+* src/RabbitMQWeb - ASP.NET Core sample app illustrating how to use the Steeltoe Messaging APIs when interacting with a RabbitMQ broker.
 
 ## Building & Running
 
