@@ -1,9 +1,10 @@
+@local_scaffold
 Feature: Simple Configuration
   In order to show you how to use Steeltoe for simple configurations
   You can run a some simple configuration samples
 
   @netcoreapp3.1
-  Scenario: Simple Configuration for netcoreapp3.1
+  Scenario: Simple Configuration (netcoreapp3.1)
     When you run: git clone https://github.com/spring-cloud/spring-cloud-config
     And you run: git -C spring-cloud-config checkout v2.1.4.RELEASE
     And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
@@ -16,7 +17,7 @@ Feature: Simple Configuration
     And you should see "spring:cloud:config:env = MyNetCoreEnv"
 
   @netcoreapp2.1
-  Scenario: Simple Configuration for netcoreapp2.1
+  Scenario: Simple Configuration (netcoreapp2.1)
     When you run: git clone https://github.com/spring-cloud/spring-cloud-config
     And you run: git -C spring-cloud-config checkout v2.1.4.RELEASE
     And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
@@ -29,7 +30,7 @@ Feature: Simple Configuration
     And you should see "spring:cloud:config:env = MyNetCoreEnv"
 
   @net461
-  Scenario: Simple Configuration for net461
+  Scenario: Simple Configuration (net461)
     When you run: git clone https://github.com/spring-cloud/spring-cloud-config
     And you run: git -C spring-cloud-config checkout v2.1.4.RELEASE
     And you run in the background: mvn -f spring-cloud-config/spring-cloud-config-server/pom.xml spring-boot:run
