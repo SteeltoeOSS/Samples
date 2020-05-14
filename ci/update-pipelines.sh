@@ -97,7 +97,7 @@ fi
 for sample in $(get_samples); do
   name=$(get_sample_name $sample)
   feature=$(get_sample_feature $sample)
-  pipeline=azure-pipeline-$(tolower $feature)-$name.yaml
+  pipeline=azure-pipeline-$(tolower $feature)-$(tolower $name).yaml
   msg "updating $sample -> $pipeline"
   pipeline_path="$ci_dir"/$pipeline
   if [[ $feature:$name == Security:CloudFoundrySingleSignon ]]; then

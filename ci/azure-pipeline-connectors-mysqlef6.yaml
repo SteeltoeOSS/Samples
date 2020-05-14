@@ -1,11 +1,11 @@
 trigger:
   branches:
     include:
-      - master
+      - 2.x
   paths:
     include:
       - config/*
-      - Configuration/src/AspDotNetCore/SimpleCloudFoundry/*
+      - Connectors/src/AspDotNetCore/MySqlEF6/*
 
 variables:
   - group: 'Samples Configuration and Credentials'
@@ -14,5 +14,5 @@ jobs:
   -
     template: templates/cloud-foundry-job.yaml
     parameters:
-      feature: Configuration
-      sample: SimpleCloudFoundry
+      feature: Connectors
+      sample: MySqlEF6
