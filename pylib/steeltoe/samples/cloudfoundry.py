@@ -7,6 +7,10 @@ import yaml
 from . import command
 
 
+class CloudFoundryObjectDoesNotExistError(Exception):
+    pass
+
+
 class CloudFoundry(object):
 
     def __init__(self, context):
@@ -87,36 +91,64 @@ class CloudFoundry(object):
                 self._context.log.info('service instance "{}" status: "{}"'.format(service_instance, status))
             time.sleep(1)
 
+    def create_user_provided_service(self, service_instance, credentials=None):
+        """
+        :type service_instance: str
+        :type credentials: str
+        """
+        cmd_s = 'cf create-user-provided-service {}'.format(service_instance)
+        if credentials:
+            cmd_s += ' -p {}'.format(credentials)
+        cmd = command.Command(self._context, cmd_s)
+        cmd.run()
+        if cmd.rc != 0:
+            raise Exception('create user provided service instance failed: {}'.format(service_instance))
+
     def delete_service(self, service_instance):
         """
         :type service_instance: str
         """
         self._context.log.info('deleting Cloud Foundry service instance "{}"'.format(service_instance))
         cmd_s = 'cf delete-service -f {}'.format(service_instance)
-        command.Command(self._context, cmd_s, log_func=self._context.log.debug).run()
+        command.Command(self._context, cmd_s).run()
+
+    def service_exists(self, service_instance):
+        """
+        :type service_instance: str
+        """
+        cmd_s = 'cf service {}'.format(service_instance)
+        cmd = command.Command(self._context, cmd_s)
+        try:
+            cmd.run()
+            return True
+        except command.CommandException as e:
+            if 'Service instance {} not found'.format(service_instance) in str(e):
+                return False
+            raise e
 
     def get_service_status(self, service_instance):
         """
         :type service_instance: str
         """
         cmd_s = 'cf service {}'.format(service_instance)
-        cmd = command.Command(self._context, cmd_s, log_func=self._context.log.debug)
+        cmd = command.Command(self._context, cmd_s)
         try:
             cmd.run()
         except command.CommandException as e:
             if 'Service instance {} not found'.format(service_instance) in str(e):
-                return None
+                raise CloudFoundryObjectDoesNotExistError()
             raise e
         match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
-        if not match:
-            return None
+        if match:
+            return match.group(1)
+        match = re.search(r'^service:\s+(.*)', cmd.stdout, re.MULTILINE)
         return match.group(1)
 
     def push_app(self, manifest):
         """
         :type manifest: str
         """
-        manifest_yaml = yaml.safe_load(open(os.path.join(self._context.sandbox_dir, manifest), 'r'))
+        manifest_yaml = yaml.safe_load(open(os.path.join(self._context.project_dir, manifest), 'r'))
         app_name = manifest_yaml['applications'][0]['name']
         self._context.log.info('pushing Cloud Foundry app "{}" ({})'.format(app_name, manifest))
         cmd_s = 'cf push -f {}'.format(manifest)
@@ -148,19 +180,33 @@ class CloudFoundry(object):
         """
         self._context.log.info('deleting Cloud Foundry app "{}"'.format(app_name))
         cmd_s = 'cf delete -f {}'.format(app_name)
-        command.Command(self._context, cmd_s, log_func=self._context.log.debug).run()
+        command.Command(self._context, cmd_s).run()
+
+    def app_exists(self, app_name):
+        """
+        :type app_name: str
+        """
+        cmd_s = 'cf app {}'.format(app_name)
+        cmd = command.Command(self._context, cmd_s)
+        try:
+            cmd.run()
+            return True
+        except command.CommandException as e:
+            if "App '{}' not found".format(app_name) in str(e):
+                return False
+            raise e
 
     def get_app_status(self, app_name):
         """
         :type app_name: str
         """
         cmd_s = 'cf app {}'.format(app_name)
-        cmd = command.Command(self._context, cmd_s, log_func=self._context.log.debug)
+        cmd = command.Command(self._context, cmd_s)
         try:
             cmd.run()
         except command.CommandException as e:
             if "App '{}' not found".format(app_name) in str(e):
-                return None
+                raise CloudFoundryObjectDoesNotExistError()
             raise e
         match = re.search(r'^#0\s+(\S+)', cmd.stdout, re.MULTILINE)
         if not match:

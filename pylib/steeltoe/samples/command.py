@@ -30,7 +30,7 @@ class Command(object):
         self.command = command
         self.sandbox_dir = context.sandbox_dir
         self.args = shlex.split(command)
-        self.cwd = infer_cwd(context, self.args)
+        self.cwd = self.context.project_dir
         self.args = resolve_args(context, self.args, self.cwd)
         self.windowed = windowed
         self.log_func = log_func if log_func else context.log.info
@@ -120,26 +120,6 @@ class CommandException(Exception):
 
     def __init(self, message):
         super(CommandException, self).__init__(message)
-
-
-def infer_cwd(context, args):
-    """
-    all dotnet commands are run in project dir
-    cf commands are run in project dir if they refer to a project file, else run in sandbox
-    all other commands are run in sandbox
-    :type context: behave.runner.Context
-    :type args: list
-    """
-    if args[0] == 'dotnet':
-        return context.project_dir
-    if args[0] == 'cf':
-        for flag in ['-c', '-f']:
-            if flag in args:
-                path = args[args.index(flag) + 1]
-                if os.path.exists(os.path.join(context.project_dir, path)):
-                    return context.project_dir
-        return context.sandbox_dir
-    return context.sandbox_dir
 
 
 def resolve_args(context, args, cwd):
