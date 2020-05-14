@@ -8,10 +8,10 @@ jobs:
   pool:
     vmImage: Ubuntu-16.04
   steps:
-  - template: setup-cloud-foundry-linux-steps.yml
+  - template: setup-cloud-foundry-linux-steps.yaml
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-  - template: publish-results-steps.yml
+  - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
       sample: ${{parameters.sample}}
@@ -21,10 +21,10 @@ jobs:
   pool:
     vmImage: MacOS-10.14
   steps:
-  - template: setup-cloud-foundry-osx-steps.yml
+  - template: setup-cloud-foundry-osx-steps.yaml
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-  - template: publish-results-steps.yml
+  - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
       sample: ${{parameters.sample}}
@@ -34,10 +34,10 @@ jobs:
   pool:
     vmImage: Windows-2019
   steps:
-  - template: setup-cloud-foundry-windows-steps.yml
+  - template: setup-cloud-foundry-windows-steps.yaml
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-  - template: publish-results-steps.yml
+  - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
       sample: ${{parameters.sample}}

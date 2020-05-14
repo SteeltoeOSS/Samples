@@ -107,7 +107,7 @@ variables:
 
 jobs:
   -
-    template: ../../../../ci/templates/cloud-foundry-job.yml
+    template: ../../../../ci/templates/cloud-foundry-job.yaml
     parameters:
       feature: $feature
       sample: $sample
