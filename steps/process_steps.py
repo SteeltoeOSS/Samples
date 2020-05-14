@@ -5,6 +5,7 @@ import time
 from behave import *
 
 from steeltoe.samples.command import Command, CommandException
+from steeltoe.samples.cloudfoundry import CloudFoundry, CloudFoundryObjectDoesNotExistError
 
 
 @when(u'you set env var {name} to ""')
@@ -73,32 +74,6 @@ def step_impl(context, port):
     try_until(context, port_listening, context.options.max_attempts)
 
 
-@when(u'you wait until CloudFoundry service {service} is created')
-def step_impl(context, service):
-    """
-    :type context: behave.runner.Context
-    :type service: str
-    """
-
-    def service_available():
-        cmd = Command(context, 'cf services', log_func=context.log.debug)
-        cmd.run()
-        if not re.search(r'^{}\s'.format(service), cmd.stdout, re.MULTILINE):
-            context.log.info('waiting for service {} deployment to start'.format(service))
-            return False
-        cmd = Command(context, 'cf service {}'.format(service), log_func=context.log.debug)
-        cmd.run()
-        match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
-        if not match:
-            context.log.info('service "{}" status not yet available'.format(service))
-            return False
-        status = match.group(1)
-        context.log.info('service "{}" status: "{}"'.format(service, status))
-        return status == 'create succeeded'
-
-    try_until(context, service_available, context.options.cf.max_attempts)
-
-
 @when(u'you wait until CloudFoundry app {app} is started')
 def step_impl(context, app):
     """
@@ -107,26 +82,10 @@ def step_impl(context, app):
     """
 
     def app_started():
-        cmd = Command(context, 'cf apps', log_func=context.log.debug)
-        cmd.run()
-        if not re.search(r'^{}\s'.format(app), cmd.stdout, re.MULTILINE):
-            context.log.info('waiting for app {} deployment to start'.format(app))
-            return False
-        cmd = Command(context, 'cf app {}'.format(app), log_func=context.log.debug)
         try:
-            cmd.run()
-        except CommandException as e:
-            context.log.info('unexpected exception: {}'.format(e))
+           return CloudFoundry(context).get_app_status(app) == 'running'
+        except CloudFoundryObjectDoesNotExistError:
             return False
-        match = re.search(r'^#0\s+(\S+)', cmd.stdout, re.MULTILINE)
-        if not match:
-            context.log.info('app "{}" status not yet available'.format(app))
-            return False
-        status = match.group(1)
-        if status == 'crashed':
-            raise Exception('CloudFoundry app {} has crashed'.format(app))
-        context.log.info('app "{}" status: "{}"'.format(app, status))
-        return status == 'running'
 
     try_until(context, app_started, context.options.cf.max_attempts)
 

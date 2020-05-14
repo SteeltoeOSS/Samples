@@ -2,8 +2,6 @@ import importlib
 import logging
 import os
 import re
-import shutil
-import stat
 import sure
 import sys
 from urllib.parse import urlparse
@@ -11,8 +9,8 @@ from urllib.parse import urlparse
 import behave
 
 sys.path.append(os.path.join(os.getcwd(), 'pylib'))
-from steeltoe.samples import command
 from steeltoe.samples import cloudfoundry
+from steeltoe.samples import fs
 
 
 #
@@ -38,8 +36,9 @@ def after_all(context):
     """
     behave hook called after running test features
     """
-    context.log.info("failed features : {}".format(context.counters['failed_features']))
-    context.log.info("failed scenarios: {}".format(context.counters['failed_scenarios']))
+    context.log.info("failures:")
+    context.log.info("    features : {}".format(context.counters['failed_features']))
+    context.log.info("    scenarios: {}".format(context.counters['failed_scenarios']))
 
 
 def before_feature(context, feature):
@@ -65,15 +64,15 @@ def before_scenario(context, scenario):
     behave hook called before running test scenario
     """
     context.log.info('[---] scenario starting: "{}"'.format(scenario.name))
-    sandbox_name = scenario.name.translate({ord(ch): None for ch in ' -'})
+    sandbox_name = scenario.name.translate({ord(ch): ' ' for ch in '/'})
     context.sandbox_dir = os.path.join(context.sandboxes_dir, sandbox_name)
     context.log.info('sandbox directory: {}'.format(context.sandbox_dir))
     os.makedirs(context.sandbox_dir)
     context.cleanups = []
     setup_env(context)
     tags = scenario.tags + scenario.feature.tags
-    if 'cloudfoundry' in tags:
-        setup_cloudfoundry(context, scenario)
+    for scaffold in list(filter(lambda t: t.endswith('_scaffold'), tags)):
+        setup_scaffold(context, scenario, scaffold)
 
 
 def after_scenario(context, scenario):
@@ -200,24 +199,49 @@ def setup_output(context):
     """
     context.log.info("output directory: {}".format(context.options.output_dir))
     context.options.output_dir = os.path.abspath(context.options.output_dir)
-    if os.path.exists(context.options.output_dir):
-        def remove_readonly(func, path, info):
-            context.log.info("trying to toggle write bit ({})".format(info))
-            os.chmod(path, stat.S_IWRITE)
-            func(path)
-
-        shutil.rmtree(context.options.output_dir, onerror=remove_readonly)
+    fs.deltree(context.options.output_dir)
     context.sandboxes_dir = os.path.join(context.options.output_dir, 'sandboxes')
     context.config.junit_directory = os.path.join(context.options.output_dir, 'reports')
 
 
-def setup_cloudfoundry(context, scenario):
+def setup_env(context):
     """
-    setup Cloud Foundry options and settings
+    set up command execution environment
     """
+    context.env = {}
+    if context.platform == 'windows':
+        context.env['CF_COLOR'] = 'false'
+
+
+def setup_scaffold(context, scenario, scaffold):
+    # general scaffolding
+    eval('setup_{}(context, scenario)'.format(scaffold))
+    # sample scaffolding
+    sample_module_dir = os.path.join(context.samples_dir, os.path.dirname(context.feature.filename))
+    sys.path.append(os.path.join(sample_module_dir))
+    try:
+        sample_module = importlib.import_module(scaffold)
+    except ModuleNotFoundError:
+        raise Exception('sample scaffolding module does not exist: {}'.format(scaffold))
+    finally:
+        sys.path.pop()
+    sample_setup_func_name = 'setup'
+    try:
+        sample_setup_func = getattr(sample_module, sample_setup_func_name)
+    except AttributeError:
+        raise Exception('sample scaffolding "{}" function does not exist'.format(scaffold, sample_setup_func_name))
+    context.log.info('delegating sample scaffolding setup deployment to "{}.{}"'.format(scaffold, sample_setup_func_name))
+    sample_setup_func(context)
+
+
+def setup_local_scaffold(context, scenario):
+    pass
+
+
+def setup_cloudfoundry_scaffold(context, scenario):
     cf = cloudfoundry.CloudFoundry(context)
 
-    # options
+    # CloudFoundry options
     creds = [context.options.cf.apiurl, context.options.cf.username, context.options.cf.password,
              context.options.cf.org]
     if [cred for cred in creds if cred]:
@@ -252,47 +276,6 @@ def setup_cloudfoundry(context, scenario):
         context.cf_domain = urlparse(endpoint).hostname.replace('api.run', 'apps')
     context.log.info('CloudFoundry domain -> {}'.format(context.cf_domain))
 
-    # sandbox
+    # CloudFoundry sandbox
     cf.create_space(context.cf_space)
     cf.target_space(context.cf_space)
-
-    # scaffolding
-    module_name = 'cloudfoundry_scaffolding'
-    module_dir = os.path.join(context.samples_dir, os.path.dirname(context.feature.filename))
-    sys.path.append(os.path.join(module_dir))
-    try:
-        module = importlib.import_module(module_name)
-    except ModuleNotFoundError:
-        raise Exception('scaffolding module does not exist: {}'.format(module_name))
-    sys.path.pop()
-    func_name = 'setup'
-    try:
-        setup = getattr(module, func_name)
-    except AttributeError:
-        raise Exception('"{}" "{}" function does not exist'.format(module_name, func_name))
-    context.log.info('delegating scaffolding setup deployment to "{}.{}"'.format(module_name, func_name))
-    setup(context)
-
-    def cleanup():
-        context.log.info('cleaning up cloud-foundry')
-        cmd = command.Command(context, 'cf apps')
-        cmd.run()
-        for app_info in cmd.stdout.splitlines()[4:]:
-            app = app_info.split()[0]
-            cf.delete_app(app)
-            command.Command(context, 'cf delete -f {}'.format(app)).run()
-        cmd = command.Command(context, 'cf services')
-        cmd.run()
-        for svc_info in cmd.stdout.splitlines()[3:]:
-            svc_instance = svc_info.split()[0]
-            cf.delete_service(svc_instance)
-    context.cleanups.append(cleanup)
-
-
-def setup_env(context):
-    """
-    set up command execution environment
-    """
-    context.env = {}
-    if context.platform == 'windows':
-        context.env['CF_COLOR'] = 'false'
