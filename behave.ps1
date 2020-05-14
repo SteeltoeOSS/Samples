@@ -1,7 +1,7 @@
 
 
 $BaseDir = $PSScriptRoot
-$FrameworkInitFlag = ".framework-initialized"
+$ReInitFlag = "reinit"
 $OldPath = $Env:Path
 $Env:Path += ";$Env:AppData\Python\Python38\Scripts"
 
@@ -21,6 +21,11 @@ function Command-Available {
     }
 }
 
+function Env-Exists {
+    pipenv --venv 2>&1 | Out-Null
+    $?
+}
+
 # ensure pipenv available
 if (!(Command-Available pipenv)) {
     "installing 'pipenv'"
@@ -31,16 +36,19 @@ try {
     # set working dir
     Push-Location $BaseDir
 
-    # initialize framework if needed
-    if (!(Test-Path $FrameworkInitFlag)) {
-        "installing framework"
-        pipenv install --three --ignore-pipfile
-        New-Item -Name $FrameworkInitFlag -ItemType file | Out-Null
+    # initialize framework if requested
+    if (Test-Path $ReInitFlag) {
+        "reinitializing"
+        pipenv --rm
+        Remove-Item $ReInitFlag
+    }
+    if (!(Env-Exists)) {
+        "installing env"
+         pipenv --three sync
     }
 
     # run samples
-    pipenv run behave $Args 2>&1 | %{ "$_" }
-
+    pipenv run behave $Args
 }
 finally {
     Pop-Location
