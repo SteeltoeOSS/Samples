@@ -27,10 +27,12 @@ cd $basedir
 
 # initialize framework if requested/needed
 if [ -f $reinit_flag ] ; then
+  echo "reinitializing"
   pipenv --rm || true
   rm $reinit_flag
 fi
 if ! env_exists; then
+  echo "installing env"
   pipenv --three sync
 fi
 

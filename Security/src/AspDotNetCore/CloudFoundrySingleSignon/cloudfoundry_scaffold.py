@@ -1,3 +1,6 @@
+import os
+import shutil
+
 from steeltoe.samples import cloudfoundry
 from steeltoe.samples import dns
 from steeltoe.samples.command import Command
@@ -8,14 +11,20 @@ def setup(context):
     :type context: behave.runner.Context
     """
     cf = cloudfoundry.CloudFoundry(context)
-    # remove previous app
-    app = 'single-signon'
-    cf.delete_app(app)
-    # create service
-    uaa_app_status = cf.get_app_status('uaa')
-    if uaa_app_status is None:
+    # remove previous apps
+    cf.delete_app('single-signon')
+    cf.delete_app('uaa')
+    # create UAA service and app
+    if not cf.service_exists('myOAuthService'):
+        credentials = '\'{{"client_id":"myTestApp", "client_secret":"myTestApp", "uri":"{}"}}\''.format(
+            dns.resolve_url(context, 'uaa://uaa.x.y.z'))
+        cf.create_user_provided_service('myOAuthService', credentials)
+    if not cf.app_exists('uaa'):
         hostname = dns.resolve_hostname(context, 'uaa')
         domainname = dns.resolve_domainname(context, 'x.y.z')
+        uaa_repo = os.path.join(context.project_dir, 'uaa')
+        if os.path.exists(uaa_repo):
+            shutil.rmtree(uaa_repo)
         for cmd_s in [
             'git clone https://github.com/cloudfoundry/uaa.git',
             'git -C uaa checkout 4.7.1',
@@ -33,7 +42,5 @@ def setup(context):
             'uaac member add testgroup testuser',
             'uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri {} --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp'.format(
                 'https://single-signon.x.y.z/signin-cloudfoundry'),
-            'cf create-user-provided-service myOAuthService -p \'{{"client_id":"myTestApp", "client_secret":"myTestApp", "uri":"{}"}}\''.format(
-                dns.resolve_url(context, 'uaa://uaa.x.y.z')),
         ]:
             Command(context, cmd_s).run()
