@@ -5,14 +5,14 @@ trigger:
   paths:
     include:
       - config/*
-      - Connectors/src/AspDotNetCore/MySql/*
+      - Configuration/src/AspDotNetCore/SimpleCloudFoundry/*
 
 variables:
   - group: 'Samples Configuration and Credentials'
 
 jobs:
   -
-    template: ../../../../ci/templates/cloud-foundry-job.yml
+    template: templates/cloud-foundry-job.yaml
     parameters:
-      feature: Connectors
-      sample: MySql
+      feature: Configuration
+      sample: SimpleCloudFoundry
