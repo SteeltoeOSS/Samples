@@ -7,11 +7,11 @@ jobs:
   pool:
     vmImage: Ubuntu-16.04
   steps:
-  - template: setup-cloud-foundry-linux-steps.yml
-  - template: setup-cloud-foundry-uaac-steps.yml
+  - template: setup-cloud-foundry-linux-steps.yaml
+  - template: setup-cloud-foundry-uaac-steps.yaml
   - script: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-  - template: publish-results-steps.yml
+  - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
       sample: ${{parameters.sample}}
@@ -21,11 +21,11 @@ jobs:
 #   pool:
 #     vmImage: MacOS-10.14
 #   steps:
-#   - template: setup-cloud-foundry-osx-steps.yml
-#   - template: setup-cloud-foundry-uaac-steps.yml
+#   - template: setup-cloud-foundry-osx-steps.yaml
+#   - template: setup-cloud-foundry-uaac-steps.yaml
 #   - script: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
 #     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-#   - template: publish-results-steps.yml
+#   - template: publish-results-steps.yaml
 #     parameters:
 #       feature: ${{parameters.feature}}
 #       sample: ${{parameters.sample}}
@@ -35,11 +35,11 @@ jobs:
   pool:
     vmImage: Windows-2019
   steps:
-  - template: setup-cloud-foundry-windows-steps.yml
-  - template: setup-cloud-foundry-uaac-steps.yml
+  - template: setup-cloud-foundry-windows-steps.yaml
+  - template: setup-cloud-foundry-uaac-steps.yaml
   - powershell: .\behave.ps1 ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}}
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-  - template: publish-results-steps.yml
+  - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
       sample: ${{parameters.sample}}

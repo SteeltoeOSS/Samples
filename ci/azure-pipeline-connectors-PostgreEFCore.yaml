@@ -5,14 +5,14 @@ trigger:
   paths:
     include:
       - config/*
-      - Management/src/AspDotNetCore/CloudFoundry/*
+      - Connectors/src/AspDotNetCore/PostgreEFCore/*
 
 variables:
   - group: 'Samples Configuration and Credentials'
 
 jobs:
   -
-    template: ../../../../ci/templates/cloud-foundry-job.yml
+    template: templates/cloud-foundry-job.yaml
     parameters:
-      feature: Management
-      sample: CloudFoundry
+      feature: Connectors
+      sample: PostgreEFCore

@@ -1,5 +1,5 @@
 steps:
-- template: setup-tools-steps.yml
+- template: setup-tools-steps.yaml
 - script: choco install cloudfoundry-cli
   displayName: 'Setup Cloud Foundry CLI'
-- template: configure-cloud-foundry-steps.yml
+- template: configure-cloud-foundry-steps.yaml

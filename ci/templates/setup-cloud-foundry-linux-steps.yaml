@@ -1,9 +1,9 @@
 steps:
-- template: setup-tools-steps.yml
+- template: setup-tools-steps.yaml
 - script: |
     wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
     echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
     sudo apt-get update
     sudo apt-get install cf-cli
   displayName: 'Setup Cloud Foundry CLI'
-- template: configure-cloud-foundry-steps.yml
+- template: configure-cloud-foundry-steps.yaml
