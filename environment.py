@@ -18,6 +18,7 @@ from pysteel import fs
 def before_all(context):
     """
     behave hook called before running test features
+    :type context: behave.runner.Context
     """
     context.samples_dir = os.getcwd()
     context.config.setup_logging(configfile=os.path.join(context.samples_dir, 'logging.ini'))
@@ -33,6 +34,7 @@ def before_all(context):
 def after_all(context):
     """
     behave hook called after running test features
+    :type context: behave.runner.Context
     """
     context.log.info("failures:")
     context.log.info("    features : {}".format(context.counters['failed_features']))
@@ -42,6 +44,8 @@ def after_all(context):
 def before_feature(context, feature):
     """
     behave hook called before running test feature
+    :type context: behave.runner.Context
+    :type feature: behave.model.Feature
     """
     context.log.info('[===] feature starting: "{}"'.format(feature.name))
     context.project_dir = os.path.dirname(os.path.join(context.samples_dir, feature.filename))
@@ -51,6 +55,8 @@ def before_feature(context, feature):
 def after_feature(context, feature):
     """
     behave hook called before running test feature
+    :type context: behave.runner.Context
+    :type feature: behave.model.Feature
     """
     if feature.status == behave.model.Status.failed:
         context.counters['failed_features'] += 1
@@ -60,6 +66,8 @@ def after_feature(context, feature):
 def before_scenario(context, scenario):
     """
     behave hook called before running test scenario
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
     """
     context.log.info('[---] scenario starting: "{}"'.format(scenario.name))
     sandbox_name = scenario.name.translate({ord(ch): ' ' for ch in '/'})
@@ -76,6 +84,8 @@ def before_scenario(context, scenario):
 def after_scenario(context, scenario):
     """
     behave hook called after running test scenario
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
     """
     if scenario.status == behave.model.Status.failed:
         context.counters['failed_scenarios'] += 1
@@ -92,6 +102,8 @@ def after_scenario(context, scenario):
 def before_step(context, step):
     """
     behave hook called before running test step
+    :type context: behave.runner.Context
+    :type step: behave.model.Step
     """
     context.log.info('[...] step starting: "{}"'.format(step.name))
 
@@ -99,6 +111,8 @@ def before_step(context, step):
 def after_step(context, step):
     """
     behave hook called after running test step
+    :type context: behave.runner.Context
+    :type step: behave.model.Step
     """
     if context.options.debug_on_error:
         import ipdb
@@ -113,6 +127,7 @@ def after_step(context, step):
 def setup_options(context):
     """
     setup/configure user-supplied options, or those dictated by the environment
+    :type context: behave.runner.Context
     """
     user_opts = os.path.join(context.samples_dir, "user.ini")
     if os.path.exists(user_opts):
@@ -179,6 +194,7 @@ def setup_options(context):
 def setup_platform(context):
     """
     determine the underlying platform and whether it's supported
+    :type context: behave.runner.Context
     """
     try:
         context.platform = {
@@ -194,6 +210,7 @@ def setup_platform(context):
 def setup_output(context):
     """
     setup test output directories
+    :type context: behave.runner.Context
     """
     context.log.info("output directory: {}".format(context.options.output_dir))
     context.options.output_dir = os.path.abspath(context.options.output_dir)
@@ -205,6 +222,7 @@ def setup_output(context):
 def setup_env(context):
     """
     set up command execution environment
+    :type context: behave.runner.Context
     """
     context.env = {}
     if context.platform == 'windows':
@@ -212,6 +230,12 @@ def setup_env(context):
 
 
 def setup_scaffold(context, scenario, scaffold):
+    """
+    set up scenario scaffolding
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
+    :type scaffold: str
+    """
     # general scaffolding
     eval('setup_{}(context, scenario)'.format(scaffold))
     # sample scaffolding
@@ -234,10 +258,20 @@ def setup_scaffold(context, scenario, scaffold):
 
 
 def setup_local_scaffold(context, scenario):
+    """
+    set up scenario scaffolding
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
+    """
     pass
 
 
 def setup_cloudfoundry_scaffold(context, scenario):
+    """
+    set up scenario scaffolding
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
+    """
     cf = cloudfoundry.CloudFoundry(context)
 
     # CloudFoundry options
