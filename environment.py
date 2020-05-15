@@ -3,9 +3,9 @@ import logging
 import os
 import sys
 
-import behave
-import sure
-from pysteel import fs
+from behave.model import Status
+
+from pysteel import fs, tooling
 
 
 #
@@ -17,6 +17,7 @@ def before_all(context):
     behave hook called before running test features
     :type context: behave.runner.Context
     """
+    tooling.init()
     context.samples_dir = os.getcwd()
     context.config.setup_logging(configfile=os.path.join(context.samples_dir, 'logging.ini'))
     context.log = logging.getLogger('pivotal')
@@ -55,7 +56,7 @@ def after_feature(context, feature):
     :type context: behave.runner.Context
     :type feature: behave.model.Feature
     """
-    if feature.status == behave.model.Status.failed:
+    if feature.status == Status.failed:
         context.counters['failed_features'] += 1
     context.log.info('[===] feature completed: "{}" [{}]'.format(feature.name, feature.status))
 
@@ -84,13 +85,14 @@ def after_scenario(context, scenario):
     :type context: behave.runner.Context
     :type scenario: behave.model.Scenario
     """
-    if scenario.status == behave.model.Status.failed:
+    if scenario.status == Status.failed:
         context.counters['failed_scenarios'] += 1
     if context.options.do_cleanup:
         context.log.info('cleaning up test scenario')
         if hasattr(context, 'cleanups'):
-            while context.cleanups:
-                context.cleanups.pop()()
+            cleanups = list(context.cleanups)
+            while cleanups:
+                cleanups.pop()()
     else:
         context.log.info('skipping scenario cleanup')
     context.log.info('[---] scenario completed: "{}" [{}]'.format(scenario.name, scenario.status))
