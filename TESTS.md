@@ -31,13 +31,13 @@ C:> .\behave.ps1
 To run a specific sample, pass the path to the sample:
 
 ```dos
-C:> .\behave.ps1 Connectors\src\AspDotNetCore\RabbitMQ
+C:> .\behave.ps1 Connectors\src\RabbitMQ
 ```
 
 To run only a specific framework/runtime combination, use the `--tags` or `-t` parameter:
 
 ```dos
-C:> .\behave.ps1 Connectors\src\AspDotNetCore\RabbitMQ -t netcoreapp2.1 -t ubuntu.16.04-x64
+C:> .\behave.ps1 Connectors\src\RabbitMQ -t netcoreapp2.1 -t ubuntu.16.04-x64
 ```
 
 ## Configuring
@@ -84,7 +84,7 @@ The space is named `{feature}-{sample}-{os}` where:
 * `{sample}` is the sample name (the bottom directory node of the sample path)
 * `{os}` is one of: `windows`, `osx`, `linux` depending on the platform on which the tests are run
 
-As an example, if running the sample `Connectors\src\AspDotNetCore\RabbitMQ` on Windows, it will use the space `connectors-rabbitmq-windows`.
+As an example, if running the sample `Connectors\src\RabbitMQ` on Windows, it will use the space `connectors-rabbitmq-windows`.
 
 You can override this behavior by setting the `cf_space` option.
 ```
