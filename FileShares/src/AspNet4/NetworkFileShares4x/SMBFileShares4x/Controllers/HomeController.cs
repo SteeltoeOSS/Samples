@@ -1,4 +1,6 @@
-﻿using Steeltoe.Common.Net;
+﻿using Microsoft.Extensions.Configuration;
+using Steeltoe.Common.Net;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,9 +20,10 @@ namespace SMBFileShares4x.Controllers
             var credHubEntry = ApplicationConfig.CloudFoundryServices.Services["credhub"].First(q => q.Name.Equals("steeltoe-network-share"));
 
             sharePath = credHubEntry.Credentials["location"].Value;
-            string userName = credHubEntry.Credentials["username"].Value;
-            string password = credHubEntry.Credentials["password"].Value;
+            var userName = credHubEntry.Credentials["username"].Value;
+            var password = credHubEntry.Credentials["password"].Value;
             ShareCredentials = new NetworkCredential(userName, password);
+            Console.WriteLine("Prepared to interact with the file share found at {0}", sharePath);
         }
 
         public ActionResult Index()
@@ -30,7 +33,7 @@ namespace SMBFileShares4x.Controllers
 
         public ActionResult Copy()
         {
-            using (WindowsNetworkFileShare networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+            using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
             {
                 System.IO.File.Copy(Path.Combine(Server.MapPath("~"), demoFileName), Path.Combine(sharePath, demoFileName), true);
             }
@@ -40,15 +43,24 @@ namespace SMBFileShares4x.Controllers
 
         public ActionResult List()
         {
-            using (WindowsNetworkFileShare networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+            try
             {
-                return Json(Directory.EnumerateFiles(sharePath), JsonRequestBehavior.AllowGet);
+                using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+                {
+                    return Json(Directory.EnumerateFiles(sharePath), JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                throw;
             }
         }
 
         public ActionResult Delete()
         {
-            using (WindowsNetworkFileShare networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+            using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
             {
                 System.IO.File.Delete(Path.Combine(sharePath, demoFileName));
             }

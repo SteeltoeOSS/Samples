@@ -5,11 +5,10 @@ using System.IO;
 
 namespace SMBFileShares4x
 {
-    public class ApplicationConfig
+    public static class ApplicationConfig
     {
         public static CloudFoundryApplicationOptions CloudFoundryApplication
         {
-
             get
             {
                 var opts = new CloudFoundryApplicationOptions();
@@ -18,6 +17,7 @@ namespace SMBFileShares4x
                 return opts;
             }
         }
+
         public static CloudFoundryServicesOptions CloudFoundryServices
         {
             get
@@ -28,6 +28,7 @@ namespace SMBFileShares4x
                 return opts;
             }
         }
+
         public static IConfigurationRoot Configuration { get; set; }
 
         public static void Configure(string environment)
