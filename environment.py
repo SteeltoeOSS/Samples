@@ -1,13 +1,10 @@
 import importlib
 import logging
 import os
-import re
 import sys
-from urllib.parse import urlparse
 
 import behave
 import sure
-from pysteel import cloudfoundry
 from pysteel import fs
 
 
@@ -236,79 +233,17 @@ def setup_scaffold(context, scenario, scaffold):
     :type scenario: behave.model.Scenario
     :type scaffold: str
     """
+    target, _ = scaffold.rsplit('_', -1)
+
     # general scaffolding
-    eval('setup_{}(context, scenario)'.format(scaffold))
+    scaffold_model = importlib.import_module('pysteel.scaffold.{}'.format(target))
+    scaffold_model.setup(context, scenario)
+
     # sample scaffolding
-    sample_module_dir = os.path.join(context.samples_dir, os.path.dirname(context.feature.filename))
-    sys.path.append(os.path.join(sample_module_dir))
+    sys.path.append(os.path.join(context.samples_dir, os.path.dirname(context.feature.filename)))
     try:
-        sample_module = importlib.import_module(scaffold)
-    except ModuleNotFoundError:
-        raise Exception('sample scaffolding module does not exist: {}'.format(scaffold))
+        sample_scaffold_module = importlib.import_module('scaffold.{}'.format(target))
+        importlib.reload(sample_scaffold_module)
+        sample_scaffold_module.setup(context)
     finally:
         sys.path.pop()
-    sample_setup_func_name = 'setup'
-    try:
-        sample_setup_func = getattr(sample_module, sample_setup_func_name)
-    except AttributeError:
-        raise Exception('sample scaffolding "{}" function does not exist'.format(scaffold, sample_setup_func_name))
-    context.log.info(
-        'delegating sample scaffolding setup deployment to "{}.{}"'.format(scaffold, sample_setup_func_name))
-    sample_setup_func(context)
-
-
-def setup_local_scaffold(context, scenario):
-    """
-    set up scenario scaffolding
-    :type context: behave.runner.Context
-    :type scenario: behave.model.Scenario
-    """
-    pass
-
-
-def setup_cloudfoundry_scaffold(context, scenario):
-    """
-    set up scenario scaffolding
-    :type context: behave.runner.Context
-    :type scenario: behave.model.Scenario
-    """
-    cf = cloudfoundry.CloudFoundry(context)
-
-    # CloudFoundry options
-    creds = [context.options.cf.apiurl, context.options.cf.username, context.options.cf.password,
-             context.options.cf.org]
-    if [cred for cred in creds if cred]:
-        if None in creds:
-            raise Exception(
-                'if setting CloudFoundry credentials, all of cf_apiurl, cf_username, cf_password, cf_org must be set')
-        context.env['CF_HOME'] = context.sandbox_dir
-        cf.login(
-            context.options.cf.apiurl,
-            context.options.cf.username,
-            context.options.cf.password,
-            context.options.cf.org,
-            'development'
-        )
-    else:
-        context.log.info('CloudFoundry credentials not provided, assuming already logged in')
-    context.cf_space = context.options.cf.space
-    if not context.cf_space:
-        tld = re.split('/|\\\\', scenario.filename)[0]
-        feature_file = os.path.basename(scenario.filename)
-        context.cf_space = "{}-{}-{}".format(
-            tld,
-            os.path.splitext(feature_file)[0],
-            context.platform
-        ).lower()
-    context.log.info('CloudFoundry space -> {}'.format(context.cf_space))
-    context.cf_domain = context.options.cf.domain
-    if not context.cf_domain:
-        context.cf_domain = cf.get_api_endpoint()
-        context.log.info('guessing CloudFoundry domain')
-        endpoint = cf.get_api_endpoint()
-        context.cf_domain = urlparse(endpoint).hostname.replace('api.run', 'apps')
-    context.log.info('CloudFoundry domain -> {}'.format(context.cf_domain))
-
-    # CloudFoundry sandbox
-    cf.create_space(context.cf_space)
-    cf.target_space(context.cf_space)
