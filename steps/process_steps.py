@@ -1,11 +1,10 @@
-import re
 import socket
 import time
 
 from behave import *
 
-from steeltoe.samples.command import Command, CommandException
-from steeltoe.samples.cloudfoundry import CloudFoundry, CloudFoundryObjectDoesNotExistError
+from pysteel.cloudfoundry import CloudFoundry, CloudFoundryObjectDoesNotExistError
+from pysteel.command import Command
 
 
 @when(u'you set env var {name} to ""')
@@ -83,7 +82,7 @@ def step_impl(context, app):
 
     def app_started():
         try:
-           return CloudFoundry(context).get_app_status(app) == 'running'
+            return CloudFoundry(context).get_app_status(app) == 'running'
         except CloudFoundryObjectDoesNotExistError:
             return False
 

@@ -1,4 +1,4 @@
-from steeltoe.samples import cloudfoundry
+from pysteel import cloudfoundry
 
 
 def setup(context):
@@ -13,5 +13,6 @@ def setup(context):
     service = 'postgresql-10-odb'
     plan = 'standalone'
     instance = 'myPostgres'
-    args = ['-c', '\'{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}\'']
+    args = ['-c',
+            '\'{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}\'']
     cf.create_service(service, plan, instance, args)

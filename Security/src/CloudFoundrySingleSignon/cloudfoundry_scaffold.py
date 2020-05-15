@@ -1,9 +1,8 @@
 import os
 import shutil
 
-from steeltoe.samples import cloudfoundry
-from steeltoe.samples import dns
-from steeltoe.samples.command import Command
+from pysteel import cloudfoundry, dns
+from pysteel.command import Command
 
 
 def setup(context):

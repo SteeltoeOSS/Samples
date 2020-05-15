@@ -2,7 +2,7 @@ import re
 
 from behave import *
 
-from steeltoe.samples import command
+from pysteel import command
 
 
 @given(u'you have UAA Client {version} installed')
