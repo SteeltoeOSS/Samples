@@ -1,4 +1,4 @@
-from steeltoe.samples import cloudfoundry
+from pysteel import cloudfoundry
 
 
 def setup(context):
@@ -14,4 +14,3 @@ def setup(context):
     plan = 'shared-vm'
     instance = 'myRedisService'
     cf.create_service(service, plan, instance)
-

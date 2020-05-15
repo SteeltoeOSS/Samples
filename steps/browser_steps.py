@@ -4,7 +4,7 @@ import mechanicalsoup
 import requests
 from behave import *
 
-from steeltoe.samples import command, dns
+from pysteel import command, dns
 
 
 @when(u'you get {url}')

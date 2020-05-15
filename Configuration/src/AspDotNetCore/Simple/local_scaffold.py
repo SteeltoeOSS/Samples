@@ -1,6 +1,6 @@
 import os
 
-from steeltoe.samples import fs
+from pysteel import fs
 
 
 def setup(context):

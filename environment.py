@@ -2,15 +2,13 @@ import importlib
 import logging
 import os
 import re
-import sure
 import sys
 from urllib.parse import urlparse
 
 import behave
-
-sys.path.append(os.path.join(os.getcwd(), 'pylib'))
-from steeltoe.samples import cloudfoundry
-from steeltoe.samples import fs
+import sure
+from pysteel import cloudfoundry
+from pysteel import fs
 
 
 #
@@ -230,7 +228,8 @@ def setup_scaffold(context, scenario, scaffold):
         sample_setup_func = getattr(sample_module, sample_setup_func_name)
     except AttributeError:
         raise Exception('sample scaffolding "{}" function does not exist'.format(scaffold, sample_setup_func_name))
-    context.log.info('delegating sample scaffolding setup deployment to "{}.{}"'.format(scaffold, sample_setup_func_name))
+    context.log.info(
+        'delegating sample scaffolding setup deployment to "{}.{}"'.format(scaffold, sample_setup_func_name))
     sample_setup_func(context)
 
 
