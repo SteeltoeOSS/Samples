@@ -1,14 +1,11 @@
 import importlib
 import logging
 import os
-import re
 import sys
-from urllib.parse import urlparse
 
-import behave
-import sure
-from pysteel import cloudfoundry
-from pysteel import fs
+from behave.model import Status
+
+from pysteel import fs, tooling
 
 
 #
@@ -18,7 +15,9 @@ from pysteel import fs
 def before_all(context):
     """
     behave hook called before running test features
+    :type context: behave.runner.Context
     """
+    tooling.init()
     context.samples_dir = os.getcwd()
     context.config.setup_logging(configfile=os.path.join(context.samples_dir, 'logging.ini'))
     context.log = logging.getLogger('pivotal')
@@ -33,6 +32,7 @@ def before_all(context):
 def after_all(context):
     """
     behave hook called after running test features
+    :type context: behave.runner.Context
     """
     context.log.info("failures:")
     context.log.info("    features : {}".format(context.counters['failed_features']))
@@ -42,6 +42,8 @@ def after_all(context):
 def before_feature(context, feature):
     """
     behave hook called before running test feature
+    :type context: behave.runner.Context
+    :type feature: behave.model.Feature
     """
     context.log.info('[===] feature starting: "{}"'.format(feature.name))
     context.project_dir = os.path.dirname(os.path.join(context.samples_dir, feature.filename))
@@ -51,8 +53,10 @@ def before_feature(context, feature):
 def after_feature(context, feature):
     """
     behave hook called before running test feature
+    :type context: behave.runner.Context
+    :type feature: behave.model.Feature
     """
-    if feature.status == behave.model.Status.failed:
+    if feature.status == Status.failed:
         context.counters['failed_features'] += 1
     context.log.info('[===] feature completed: "{}" [{}]'.format(feature.name, feature.status))
 
@@ -60,6 +64,8 @@ def after_feature(context, feature):
 def before_scenario(context, scenario):
     """
     behave hook called before running test scenario
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
     """
     context.log.info('[---] scenario starting: "{}"'.format(scenario.name))
     sandbox_name = scenario.name.translate({ord(ch): ' ' for ch in '/'})
@@ -76,14 +82,17 @@ def before_scenario(context, scenario):
 def after_scenario(context, scenario):
     """
     behave hook called after running test scenario
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
     """
-    if scenario.status == behave.model.Status.failed:
+    if scenario.status == Status.failed:
         context.counters['failed_scenarios'] += 1
     if context.options.do_cleanup:
         context.log.info('cleaning up test scenario')
         if hasattr(context, 'cleanups'):
-            while context.cleanups:
-                context.cleanups.pop()()
+            cleanups = list(context.cleanups)
+            while cleanups:
+                cleanups.pop()()
     else:
         context.log.info('skipping scenario cleanup')
     context.log.info('[---] scenario completed: "{}" [{}]'.format(scenario.name, scenario.status))
@@ -92,6 +101,8 @@ def after_scenario(context, scenario):
 def before_step(context, step):
     """
     behave hook called before running test step
+    :type context: behave.runner.Context
+    :type step: behave.model.Step
     """
     context.log.info('[...] step starting: "{}"'.format(step.name))
 
@@ -99,6 +110,8 @@ def before_step(context, step):
 def after_step(context, step):
     """
     behave hook called after running test step
+    :type context: behave.runner.Context
+    :type step: behave.model.Step
     """
     if context.options.debug_on_error:
         import ipdb
@@ -113,6 +126,7 @@ def after_step(context, step):
 def setup_options(context):
     """
     setup/configure user-supplied options, or those dictated by the environment
+    :type context: behave.runner.Context
     """
     user_opts = os.path.join(context.samples_dir, "user.ini")
     if os.path.exists(user_opts):
@@ -179,6 +193,7 @@ def setup_options(context):
 def setup_platform(context):
     """
     determine the underlying platform and whether it's supported
+    :type context: behave.runner.Context
     """
     try:
         context.platform = {
@@ -194,6 +209,7 @@ def setup_platform(context):
 def setup_output(context):
     """
     setup test output directories
+    :type context: behave.runner.Context
     """
     context.log.info("output directory: {}".format(context.options.output_dir))
     context.options.output_dir = os.path.abspath(context.options.output_dir)
@@ -205,6 +221,7 @@ def setup_output(context):
 def setup_env(context):
     """
     set up command execution environment
+    :type context: behave.runner.Context
     """
     context.env = {}
     if context.platform == 'windows':
@@ -212,69 +229,23 @@ def setup_env(context):
 
 
 def setup_scaffold(context, scenario, scaffold):
+    """
+    set up scenario scaffolding
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
+    :type scaffold: str
+    """
+    target, _ = scaffold.rsplit('_', -1)
+
     # general scaffolding
-    eval('setup_{}(context, scenario)'.format(scaffold))
+    scaffold_model = importlib.import_module('pysteel.scaffold.{}'.format(target))
+    scaffold_model.setup(context, scenario)
+
     # sample scaffolding
-    sample_module_dir = os.path.join(context.samples_dir, os.path.dirname(context.feature.filename))
-    sys.path.append(os.path.join(sample_module_dir))
+    sys.path.append(os.path.join(context.samples_dir, os.path.dirname(context.feature.filename)))
     try:
-        sample_module = importlib.import_module(scaffold)
-    except ModuleNotFoundError:
-        raise Exception('sample scaffolding module does not exist: {}'.format(scaffold))
+        sample_scaffold_module = importlib.import_module('scaffold.{}'.format(target))
+        importlib.reload(sample_scaffold_module)
+        sample_scaffold_module.setup(context)
     finally:
         sys.path.pop()
-    sample_setup_func_name = 'setup'
-    try:
-        sample_setup_func = getattr(sample_module, sample_setup_func_name)
-    except AttributeError:
-        raise Exception('sample scaffolding "{}" function does not exist'.format(scaffold, sample_setup_func_name))
-    context.log.info(
-        'delegating sample scaffolding setup deployment to "{}.{}"'.format(scaffold, sample_setup_func_name))
-    sample_setup_func(context)
-
-
-def setup_local_scaffold(context, scenario):
-    pass
-
-
-def setup_cloudfoundry_scaffold(context, scenario):
-    cf = cloudfoundry.CloudFoundry(context)
-
-    # CloudFoundry options
-    creds = [context.options.cf.apiurl, context.options.cf.username, context.options.cf.password,
-             context.options.cf.org]
-    if [cred for cred in creds if cred]:
-        if None in creds:
-            raise Exception(
-                'if setting CloudFoundry credentials, all of cf_apiurl, cf_username, cf_password, cf_org must be set')
-        context.env['CF_HOME'] = context.sandbox_dir
-        cf.login(
-            context.options.cf.apiurl,
-            context.options.cf.username,
-            context.options.cf.password,
-            context.options.cf.org,
-            'development'
-        )
-    else:
-        context.log.info('CloudFoundry credentials not provided, assuming already logged in')
-    context.cf_space = context.options.cf.space
-    if not context.cf_space:
-        tld = re.split('/|\\\\', scenario.filename)[0]
-        feature_file = os.path.basename(scenario.filename)
-        context.cf_space = "{}-{}-{}".format(
-            tld,
-            os.path.splitext(feature_file)[0],
-            context.platform
-        ).lower()
-    context.log.info('CloudFoundry space -> {}'.format(context.cf_space))
-    context.cf_domain = context.options.cf.domain
-    if not context.cf_domain:
-        context.cf_domain = cf.get_api_endpoint()
-        context.log.info('guessing CloudFoundry domain')
-        endpoint = cf.get_api_endpoint()
-        context.cf_domain = urlparse(endpoint).hostname.replace('api.run', 'apps')
-    context.log.info('CloudFoundry domain -> {}'.format(context.cf_domain))
-
-    # CloudFoundry sandbox
-    cf.create_space(context.cf_space)
-    cf.target_space(context.cf_space)
