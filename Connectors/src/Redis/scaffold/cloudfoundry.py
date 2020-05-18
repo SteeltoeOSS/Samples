@@ -7,11 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'rabbitmq-connector'
+    app = 'redis-connector'
     cf.delete_app(app)
     # create service
-    service = 'p-rabbitmq'
-    plan = 'standard'
-    instance = 'myRabbitMQService'
-    cf.delete_service(instance)
+    service = 'p-redis'
+    plan = 'shared-vm'
+    instance = 'myRedisService'
     cf.create_service(service, plan, instance)

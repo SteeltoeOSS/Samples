@@ -7,12 +7,11 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'postgres-connector'
+    app = 'rabbitmq-connector'
     cf.delete_app(app)
     # create service
-    service = 'postgresql-10-odb'
-    plan = 'standalone'
-    instance = 'myPostgres'
-    args = ['-c',
-            '\'{"db_name":"postgresample", "db_username":"steeltoe", "owner_name":"Steeltoe Demo", "owner_email":"demo@steeltoe.io"}\'']
-    cf.create_service(service, plan, instance, args)
+    service = 'p-rabbitmq'
+    plan = 'standard'
+    instance = 'myRabbitMQService'
+    cf.delete_service(instance)
+    cf.create_service(service, plan, instance)

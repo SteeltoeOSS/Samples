@@ -7,10 +7,11 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'redis-connector'
+    app = 'foo'
     cf.delete_app(app)
     # create service
-    service = 'p-redis'
-    plan = 'shared-vm'
-    instance = 'myRedisService'
-    cf.create_service(service, plan, instance)
+    service = 'p-config-server'
+    plan = 'standard'
+    instance = 'myConfigServer'
+    args = ['-c', './config-server.json']
+    cf.create_service(service, plan, instance, args)

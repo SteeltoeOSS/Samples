@@ -7,7 +7,7 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'postgresefcore-connector'
+    app = 'postgres-connector'
     cf.delete_app(app)
     # create service
     service = 'postgresql-10-odb'
