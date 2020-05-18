@@ -6,7 +6,7 @@ Feature: Redis Connector
   @netcoreapp3.1
   @win10-x64
   Scenario: Redis Connector (netcoreapp3.1/win10-x64)
-    When you run: dotnet restore --configfile ../../../../nuget.config
+    When you run: dotnet restore --configfile ../../../nuget.config
     And you run: dotnet publish -f netcoreapp3.1 -r win10-x64
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish
     And you wait until CloudFoundry app redis-connector is started
@@ -17,7 +17,7 @@ Feature: Redis Connector
   @netcoreapp3.1
   @ubuntu.16.04-x64
   Scenario: Redis Connector (netcoreapp3.1/ubuntu.16.04-x64)
-    When you run: dotnet restore --configfile ../../../../nuget.config
+    When you run: dotnet restore --configfile ../../../nuget.config
     And you run: dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
     And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish
     And you wait until CloudFoundry app redis-connector is started
