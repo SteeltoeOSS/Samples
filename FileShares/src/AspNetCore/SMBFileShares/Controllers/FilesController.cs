@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Steeltoe.Common.Net;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
@@ -17,21 +18,22 @@ namespace SMBFileShares.Controllers
         private readonly string sharePath;
         private NetworkCredential ShareCredentials { get; set; }
 
-        public FilesController(IOptions<CloudFoundryServicesOptions> serviceOptions)
+        public FilesController(IOptions<CloudFoundryServicesOptions> serviceOptions, ILogger<FilesController> logger)
         {
             var credHubEntry = serviceOptions.Value.Services["credhub"].First(q => q.Name.Equals("steeltoe-network-share"));
 
             sharePath = credHubEntry.Credentials["location"].Value;
-            string userName = credHubEntry.Credentials["username"].Value;
-            string password = credHubEntry.Credentials["password"].Value;
+            var userName = credHubEntry.Credentials["username"].Value;
+            var password = credHubEntry.Credentials["password"].Value;
             ShareCredentials = new NetworkCredential(userName, password);
+            logger.LogCritical("Share path: {path}", sharePath);
         }
 
         // GET api/files
         [HttpGet("copy")]
         public ActionResult<string> Copy()
         {
-            using (WindowsNetworkFileShare networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+            using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
             {
                 System.IO.File.Copy(demoFileName, Path.Combine(sharePath, demoFileName), true);
             }
@@ -42,7 +44,7 @@ namespace SMBFileShares.Controllers
         [HttpGet("list")]
         public ActionResult<IEnumerable<string>> List()
         {
-            using (WindowsNetworkFileShare networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+            using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
             {
                 return new ActionResult<IEnumerable<string>>(Directory.EnumerateFiles(sharePath));
             }
@@ -51,7 +53,7 @@ namespace SMBFileShares.Controllers
         [HttpGet("delete")]
         public ActionResult<string> Delete()
         {
-            using (WindowsNetworkFileShare networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
+            using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
             {
                 System.IO.File.Delete(Path.Combine(sharePath, demoFileName));
             }
