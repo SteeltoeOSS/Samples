@@ -6,7 +6,5 @@ applications:
   disk_quota: 256M
   buildpacks:
    - hwc_buildpack
-  env:
-    ASPNETCORE_ENVIRONMENT: Production
   services:
     - steeltoe-network-share

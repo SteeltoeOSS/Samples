@@ -19,10 +19,17 @@ namespace SMBFileShares4x.Controllers
         {
             var credHubEntry = ApplicationConfig.CloudFoundryServices.Services["credhub"].First(q => q.Name.Equals("steeltoe-network-share"));
 
-            sharePath = credHubEntry.Credentials["location"].Value;
             var userName = credHubEntry.Credentials["username"].Value;
+            var domain = string.Empty;
+            if (userName.Contains("\\"))
+            {
+                domain = userName.Split('\\')[0];
+                userName = userName.Split('\\')[1];
+            }
+
             var password = credHubEntry.Credentials["password"].Value;
-            ShareCredentials = new NetworkCredential(userName, password);
+            sharePath = credHubEntry.Credentials["location"].Value;
+            ShareCredentials = new NetworkCredential(userName, password, domain);
             Console.WriteLine("Prepared to interact with the file share found at {0}", sharePath);
         }
 
@@ -35,7 +42,10 @@ namespace SMBFileShares4x.Controllers
         {
             using (var networkPath = new WindowsNetworkFileShare(sharePath, ShareCredentials))
             {
-                System.IO.File.Copy(Path.Combine(Server.MapPath("~"), demoFileName), Path.Combine(sharePath, demoFileName), true);
+                var testFilePath = Path.Combine(sharePath, demoFileName);
+                var outputFile = new StreamWriter(testFilePath);
+                outputFile.WriteLine("hello");
+                outputFile.Close();
             }
 
             return Json("File copied successfully", JsonRequestBehavior.AllowGet);
