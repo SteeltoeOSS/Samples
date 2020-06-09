@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using System;
 
 namespace SMBFileShares
 {
@@ -14,8 +14,8 @@ namespace SMBFileShares
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundry()
-                .UseCloudFoundryHosting()
+                .ConfigureAppConfiguration(cfg => cfg.AddCloudFoundry())
+                .UseCloudHosting()
                 .UseStartup<Startup>();
     }
 }

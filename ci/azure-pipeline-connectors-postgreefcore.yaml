@@ -7,12 +7,14 @@ trigger:
       - config/*
       - Connectors/src/PostgreEFCore/*
 
+# skip pipeline for PRs
+pr: none
+
 variables:
   - group: 'Samples Configuration and Credentials'
 
 jobs:
-  -
-    template: templates/cloud-foundry-job.yaml
+  - template: templates/cloud-foundry-job.yaml
     parameters:
       feature: Connectors
       sample: PostgreEFCore
