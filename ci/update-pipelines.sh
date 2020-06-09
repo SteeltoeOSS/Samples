@@ -128,8 +128,7 @@ variables:
   - group: 'Samples Configuration and Credentials'
 
 jobs:
-  -
-    template: templates/$template
+  - template: templates/$template
     parameters:
       feature: $feature
       sample: $name

@@ -14,8 +14,7 @@ variables:
   - group: 'Samples Configuration and Credentials'
 
 jobs:
-  -
-    template: templates/cloud-foundry-uaac-job.yaml
+  - template: templates/cloud-foundry-uaac-job.yaml
     parameters:
       feature: Security
       sample: CloudFoundrySingleSignon
