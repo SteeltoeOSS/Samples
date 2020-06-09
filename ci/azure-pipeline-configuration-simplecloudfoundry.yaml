@@ -7,6 +7,9 @@ trigger:
       - config/*
       - Configuration/src/AspDotNetCore/SimpleCloudFoundry/*
 
+# skip pipeline for PRs
+pr: none
+
 variables:
   - group: 'Samples Configuration and Credentials'
 

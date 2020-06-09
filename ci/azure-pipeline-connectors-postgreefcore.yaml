@@ -7,6 +7,9 @@ trigger:
       - config/*
       - Connectors/src/AspDotNetCore/PostgreEFCore/*
 
+# skip pipeline for PRs
+pr: none
+
 variables:
   - group: 'Samples Configuration and Credentials'
 
