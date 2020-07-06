@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMBFileShares4x", "SMBFileShares4x\SMBFileShares4x.csproj", "{A550B10F-40EF-478E-8C56-2334E4DDCF23}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{D89C9FC9-F5AD-403B-B4D1-91CFB783B57B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\scripts\cf-create-service.ps1 = ..\..\..\scripts\cf-create-service.ps1
+		..\..\..\scripts\create-user-and-share.ps1 = ..\..\..\scripts\create-user-and-share.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMBFileShares4x", "SMBFileShares4x\SMBFileShares4x.csproj", "{5AB5BF52-BA5F-4548-BA55-EFA587E37267}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A550B10F-40EF-478E-8C56-2334E4DDCF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A550B10F-40EF-478E-8C56-2334E4DDCF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A550B10F-40EF-478E-8C56-2334E4DDCF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A550B10F-40EF-478E-8C56-2334E4DDCF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB5BF52-BA5F-4548-BA55-EFA587E37267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB5BF52-BA5F-4548-BA55-EFA587E37267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB5BF52-BA5F-4548-BA55-EFA587E37267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB5BF52-BA5F-4548-BA55-EFA587E37267}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

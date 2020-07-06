@@ -1,0 +1,30 @@
+<Project>
+  <PropertyGroup>
+    <SteeltoeVersion>2.4.3</SteeltoeVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SteeltoeCommonVersion>$(SteeltoeVersion)</SteeltoeCommonVersion>
+    <SteeltoeCircuitBreakerVersion>$(SteeltoeVersion)</SteeltoeCircuitBreakerVersion>
+    <SteeltoeConfigVersion>$(SteeltoeVersion)</SteeltoeConfigVersion>
+    <SteeltoeConnectorVersion>$(SteeltoeVersion)</SteeltoeConnectorVersion>
+    <SteeltoeDiscoveryVersion>$(SteeltoeVersion)</SteeltoeDiscoveryVersion>
+    <SteeltoeLoggingVersion>$(SteeltoeVersion)</SteeltoeLoggingVersion>
+    <SteeltoeManagementVersion>$(SteeltoeVersion)</SteeltoeManagementVersion>
+    <SteeltoeSecurityVersion>$(SteeltoeVersion)</SteeltoeSecurityVersion>
+    <GitInfoVersion>2.0.20</GitInfoVersion>
+    <JsonNetVersion>11.0.3</JsonNetVersion>
+	  <RabbitMQVersion>5.1.0</RabbitMQVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
+    <EFCoreVersion>2.1.1</EFCoreVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <AspNetCoreVersion>2.1.1</AspNetCoreVersion>
+    <EFCoreVersion>2.1.1</EFCoreVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+      <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
+      <EFCoreVersion>3.1.0</EFCoreVersion>
+    </PropertyGroup>
+  </Project>
