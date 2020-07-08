@@ -12,13 +12,20 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="idunno.Authentication.Basic" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-3014" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-3056" />
+    <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.0-3056" />
+    <PackageReference Include="Steeltoe.ConnectorCore" Version="3.0.0-3056" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.0.0-3056" />
+    <PackageReference Include="Steeltoe.Management.TaskCore" Version="3.0.0-3056" />
+    <!--<PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-3014" />
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.0-3014" />
     <PackageReference Include="Steeltoe.ConnectorCore" Version="3.0.0-3014" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.0.0-3014" />
-    <PackageReference Include="Steeltoe.Management.TaskCore" Version="3.0.0-3014" />
+    <PackageReference Include="Steeltoe.Management.TaskCore" Version="3.0.0-3014" />-->
 
   </ItemGroup>
   <ItemGroup>
@@ -26,7 +33,6 @@
     <None Include="appsettings.json" CopyToOutputDirectory="Always" />
     <None Include="appsettings.Development.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
-
 
   <Target Name="_GitProperties" AfterTargets="CoreCompile">
     <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRoot)" Overwrite="true" />

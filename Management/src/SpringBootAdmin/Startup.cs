@@ -1,16 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CloudFoundry;
+using idunno.Authentication.Basic;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.HealthChecks;
-using Steeltoe.Connector.EFCore;
-using Steeltoe.Connector.MySql;
-using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.Endpoint.Info;
 using Steeltoe.Management.Endpoint.SpringBootAdminClient;
-using Steeltoe.Management.TaskCore;
-namespace CloudFoundry
+using Steeltoe.Management.Info;
+using System.Security.Claims;
+
+namespace SpringBootAdmin
 {
     public class Startup
     {
@@ -24,25 +26,27 @@ namespace CloudFoundry
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add entity framework db context bound to connection string in configuration
-            services.AddDbContext<MyContext>(options => options.UseMySql(Configuration));
-            // Add MySql health contributor to be exposed by the endpoint
-            services.AddMySqlHealthContributor(Configuration);
-            // register a migrate context task with PCF
-         //   services.AddTask<MigrateDbContextTask<MyContext>>();
-
+         
             // Add your own IInfoContributor, making sure to register with the interface
             services.AddSingleton<IInfoContributor, ArbitraryInfoContributor>();
 
             // Add your own IHealthContributor, registered with the interface
             services.AddSingleton<IHealthContributor, CustomHealthContributor>();
 
+            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
+               .AddBasicAuth("/actuator", new Claim("scope", "actuators.read"));
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
+            });
+
             // Add framework services.
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,8 +58,14 @@ namespace CloudFoundry
             }
 
             app.UseStaticFiles();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
