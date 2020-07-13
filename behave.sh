@@ -5,6 +5,7 @@ set -e
 basedir=$(dirname $0)
 reinit_flag=$basedir/reinit
 PATH+=:~/.local/bin
+PIP=${PIP:-pip3}
 
 command_available() {
   local cmd=$1
@@ -18,7 +19,7 @@ env_exists() {
 # ensure pipenv available
 if ! command_available pipenv >/dev/null; then
   echo "installing 'pipenv'"
-  pip3 install --user pipenv
+  $PIP install --user pipenv
 fi
 
 # set working dir

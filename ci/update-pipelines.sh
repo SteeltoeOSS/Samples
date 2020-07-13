@@ -125,7 +125,7 @@ EOF
 pr: none
 
 variables:
-  - group: 'Samples Configuration and Credentials'
+  - group: 'PCFone Credentials'
 
 jobs:
   - template: templates/$template
