@@ -4,6 +4,7 @@ using System.Text;
 
 namespace RabbitMQWeb
 {
+    [Serializable]
     public class Bar : Foo
     {
         public Bar()

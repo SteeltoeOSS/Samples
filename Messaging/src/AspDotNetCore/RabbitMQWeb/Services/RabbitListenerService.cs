@@ -6,6 +6,9 @@ using System.Text;
 
 namespace RabbitMQWeb.Services
 {
+    /// <summary>
+    /// A service class that will handle incoming messages 
+    /// </summary>
     public class RabbitListenerService
     {
         public const string INFERRED_FOO_QUEUE = "sample1.inferred.foo";
@@ -17,12 +20,20 @@ namespace RabbitMQWeb.Services
             _logger = logger;
         }
 
+        /// <summary>
+        /// Process any messages put on the INFERRED_FOO_QUEUE
+        /// </summary>
+        /// <param name="foo"></param>
         [RabbitListener(INFERRED_FOO_QUEUE)]
         public void ListenForAFoo(Foo foo)
         {
             _logger.LogInformation("Expected a Foo, got a " + foo);
         }
 
+        /// <summary>
+        /// Process any messages put on the INFERRED_BAR_QUEUE 
+        /// </summary>
+        /// <param name="bar"></param>
         [RabbitListener(INFERRED_BAR_QUEUE)]
         public void ListenForAFoo(Bar bar)
         {

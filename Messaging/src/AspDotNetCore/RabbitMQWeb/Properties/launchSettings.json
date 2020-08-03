@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "rabbittest/sendfoo",
+      "launchUrl": "rabbittest/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "RabbitMQWeb": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "rabbittest/sendfoo",
+      "launchUrl": "rabbittest/",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
