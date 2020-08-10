@@ -2,9 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
-using Steeltoe.Security.DataProtection.CredHubCore;
+using Steeltoe.Security.DataProtection.CredHub;
 using System;
 using System.IO;
 
@@ -45,7 +46,7 @@ namespace CredHubDemo
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseCloudFoundryHosting()
+                .UseCloudHosting()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

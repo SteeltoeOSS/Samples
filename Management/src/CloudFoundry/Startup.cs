@@ -3,13 +3,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Connector.EFCore;
 using Steeltoe.Connector.MySql;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Endpoint.Info;
 using Steeltoe.Management.Endpoint.Metrics;
+using Steeltoe.Management.Info;
 using Steeltoe.Management.TaskCore;
 namespace CloudFoundry
 {
@@ -52,7 +55,7 @@ namespace CloudFoundry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -68,7 +71,7 @@ namespace CloudFoundry
             // Add management endpoints into pipeline
         
             // Add metrics collection to the app
-            app.UseMetricsActuator();
+            //app.UseMetricsActuator();
             //app.UsePrometheusActuator(); available in m2
             app.UseRouting();
             app.UseEndpoints(endpoints =>
@@ -76,6 +79,7 @@ namespace CloudFoundry
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.Map<MetricsEndpoint>();
             });
 
             // Start up the metrics forwarder service added above

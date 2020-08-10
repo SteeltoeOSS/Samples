@@ -15,8 +15,8 @@ namespace GemFire
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundry()
-                .UseCloudFoundryHosting()
+                .AddCloudFoundryConfiguration()
+                .UseCloudHosting()
                 .UseStartup<Startup>()
                 .ConfigureLogging((context, builder) =>
                 {

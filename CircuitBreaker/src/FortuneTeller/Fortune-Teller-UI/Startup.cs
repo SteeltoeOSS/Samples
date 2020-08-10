@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Discovery.Client;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Microsoft.Extensions.Hosting;
 
 namespace Fortune_Teller_UI
 {
@@ -40,18 +39,14 @@ namespace Fortune_Teller_UI
             services.AddHystrixCollapser<IFortuneServiceCollapser, FortuneServiceCollapser>("FortuneServiceCollapser", Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
 
             // Add Hystrix metrics stream to enable monitoring
             services.AddHystrixMetricsStream(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             if (env.IsDevelopment())
@@ -68,17 +63,8 @@ namespace Fortune_Teller_UI
             // Add Hystrix Metrics context to pipeline
             app.UseHystrixRequestContext();
 
-#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
 
             // Startup Hystrix metrics stream
             app.UseHystrixMetricsStream();

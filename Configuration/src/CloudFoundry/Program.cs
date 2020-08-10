@@ -16,7 +16,7 @@ namespace CloudFoundry
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .UseCloudHosting()
-                    .AddCloudFoundry()
+                    .AddCloudFoundryConfiguration()
                     .UseStartup<Startup>()
                     .Build();
 

@@ -15,7 +15,7 @@ namespace CloudFoundryJwtAuthentication
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .UseCloudHosting(8082, 8083)
-                    .AddCloudFoundry()
+                    .AddCloudFoundryConfiguration()
                     .UseStartup<Startup>()
                     .Build();
     } 

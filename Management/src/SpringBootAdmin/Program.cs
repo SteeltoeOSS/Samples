@@ -17,8 +17,9 @@ namespace SpringBootAdmin
         public static IHost BuildWebHost(string[] args) =>
             Host.CreateDefaultBuilder(args)
 
-                .ConfigureWebHost(configure => {
-                    configure.AddCloudFoundry();
+                .ConfigureWebHost(configure =>
+                {
+                    configure.AddCloudFoundryConfiguration();
                     configure.UseStartup<Startup>().UseKestrel();
                     configure.UseUrls("http://host.docker.internal:5000");
                 })

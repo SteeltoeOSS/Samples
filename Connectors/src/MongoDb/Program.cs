@@ -25,7 +25,7 @@ namespace MongoDb
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .AddCloudFoundryActuators()
-                .ConfigureAppConfiguration(builder => builder.AddCloudFoundry())
+                .AddCloudFoundryConfiguration()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

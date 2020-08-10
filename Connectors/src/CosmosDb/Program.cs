@@ -15,7 +15,7 @@ namespace CosmosDb
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(builder => builder.AddCloudFoundry())
+                .AddCloudFoundryConfiguration()
                 .AddCloudFoundryActuators()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

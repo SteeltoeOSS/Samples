@@ -17,7 +17,7 @@ namespace CloudFoundrySingleSignon
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(cfg => cfg.AddCloudFoundryContainerIdentity("a8fef16f-94c0-49e3-aa0b-ced7c3da6229", "122b942a-d7b9-4839-b26e-836654b9785f"))
                 .UseCloudHosting(8080, 8081)
-                .AddCloudFoundry()
+                .AddCloudFoundryConfiguration()
                 .UseStartup<Startup>()
                 .Build();
     }

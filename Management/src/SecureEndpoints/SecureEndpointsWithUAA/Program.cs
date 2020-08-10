@@ -23,9 +23,10 @@ namespace SecureWithUAA
         public static IHost BuildWebHost(string[] args) =>
             Host.CreateDefaultBuilder(args)
 
-                .ConfigureWebHost(configure => {
+                .ConfigureWebHost(configure =>
+                {
                     configure.ConfigureAppConfiguration(cfg => cfg.AddCloudFoundryContainerIdentity("a8fef16f-94c0-49e3-aa0b-ced7c3da6229", "122b942a-d7b9-4839-b26e-836654b9785f"));
-                    configure.AddCloudFoundry();
+                    configure.AddCloudFoundryConfiguration();
                     configure.UseStartup<Startup>().UseKestrel();
                 })
                .UseCloudHosting(5000, 5002)

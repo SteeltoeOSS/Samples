@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <Import Project="..\..\..\config\versions.props" />
-  <Import Project="..\..\..\config\targetframework.props"/>
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
@@ -14,9 +13,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySqlConnector" Version="0.43.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeManagementVersion)" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeManagementVersion)" />
-    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeManagementVersion)" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <ItemGroup>

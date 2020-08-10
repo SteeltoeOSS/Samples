@@ -1,4 +1,4 @@
-﻿using Steeltoe.Management.Endpoint.Info;
+﻿using Steeltoe.Management.Info;
 
 namespace SecureWithBasic
 {

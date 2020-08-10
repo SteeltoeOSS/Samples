@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="3.0.0-m2" />
+    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="3.0.0-rc1" />
   </ItemGroup>
 
 </Project>

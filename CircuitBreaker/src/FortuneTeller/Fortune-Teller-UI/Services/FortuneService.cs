@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using Steeltoe.Common.Discovery;
+using Steeltoe.Discovery;
 
 namespace Fortune_Teller_UI.Services
 {

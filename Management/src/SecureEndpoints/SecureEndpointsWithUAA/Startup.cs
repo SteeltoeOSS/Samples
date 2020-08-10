@@ -1,29 +1,20 @@
-﻿using idunno.Authentication.Basic;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Common.Options;
-using Steeltoe.Connector.EFCore;
-using Steeltoe.Connector.MySql;
-using Steeltoe.Connector.MySql.EFCore;
-using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Management.Endpoint.Info;
-using Steeltoe.Management.Endpoint.Metrics;
-using Steeltoe.Management.TaskCore;
+using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Info;
 using Steeltoe.Security.Authentication.CloudFoundry;
 using System;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace SecureWithUAA
 {

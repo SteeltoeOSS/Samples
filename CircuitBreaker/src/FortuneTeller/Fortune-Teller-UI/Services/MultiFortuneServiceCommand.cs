@@ -1,10 +1,8 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using Steeltoe.CircuitBreaker;
 using Steeltoe.CircuitBreaker.Hystrix;
-using Steeltoe.Discovery.Client;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Reactive;
 using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Services

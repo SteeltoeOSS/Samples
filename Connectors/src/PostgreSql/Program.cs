@@ -16,7 +16,7 @@ namespace PostgreSql
         public static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(config => config.AddCloudFoundry())
+                .AddCloudFoundryConfiguration()
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()

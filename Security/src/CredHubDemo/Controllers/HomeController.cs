@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Security.DataProtection.CredHub;
 using System;
@@ -75,7 +74,7 @@ namespace CredHubDemo.Controllers
             {
                 { "PUT to CredHub at /config-server/credentials", creds },
                 { "original", Program.OriginalServices },
-                { "interpolated", JsonConvert.SerializeObject(JsonConvert.DeserializeObject(interpolated), Formatting.Indented) }
+                { "interpolated", interpolated }
             };
 
             return View(viewModel);
@@ -87,7 +86,7 @@ namespace CredHubDemo.Controllers
             var viewModel = new Dictionary<string, string>
             {
                 { "original", Program.OriginalServices },
-                { "interpolated", JsonConvert.SerializeObject(JsonConvert.DeserializeObject(_cfSettings.ServicesJson), Formatting.Indented) }
+                { "interpolated", _cfSettings.ServicesJson }
             };
 
             return View("Interpolate", viewModel);
