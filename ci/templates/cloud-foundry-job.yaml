@@ -3,10 +3,10 @@ parameters:
   sample: ''
   behave_args: '--stop --tags ~@wip'
 jobs:
-- job: ${{parameters.feature}}_${{parameters.sample}}
-  displayName: '${{parameters.feature}}: ${{parameters.sample}}'
+- job: ${{parameters.feature}}_${{parameters.sample}}_Linux
+  displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
   pool:
-    vmImage: ubuntu-latest
+    vmImage: Ubuntu-16.04
   steps:
   - template: setup-cloud-foundry-linux-steps.yaml
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
@@ -16,3 +16,29 @@ jobs:
       feature: ${{parameters.feature}}
       sample: ${{parameters.sample}}
       os: Linux
+- job: ${{parameters.feature}}_${{parameters.sample}}_OSX
+  displayName: '${{parameters.feature}}: ${{parameters.sample}} (OSX)'
+  pool:
+    vmImage: MacOS-10.14
+  steps:
+  - template: setup-cloud-foundry-osx-steps.yaml
+  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+  - template: publish-results-steps.yaml
+    parameters:
+      feature: ${{parameters.feature}}
+      sample: ${{parameters.sample}}
+      os: OSX
+- job: ${{parameters.feature}}_${{parameters.sample}}_Windows
+  displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
+  pool:
+    vmImage: Windows-2019
+  steps:
+  - template: setup-cloud-foundry-windows-steps.yaml
+  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+  - template: publish-results-steps.yaml
+    parameters:
+      feature: ${{parameters.feature}}
+      sample: ${{parameters.sample}}
+      os: Windows
