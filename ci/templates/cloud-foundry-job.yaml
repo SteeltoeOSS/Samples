@@ -6,7 +6,7 @@ jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
   pool:
-    vmImage: Ubuntu-16.04
+    vmImage: ubuntu-latest
   steps:
   - template: setup-cloud-foundry-linux-steps.yaml
   - bash: touch reinit
