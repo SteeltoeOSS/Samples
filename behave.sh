@@ -5,7 +5,7 @@ set -e
 basedir=$(dirname $0)
 reinit_flag=$basedir/reinit
 PATH+=:~/.local/bin
-PIP=${PIP:-pip3}
+PYTHON=${PYTHON:-python3.7}
 
 command_available() {
   local cmd=$1
@@ -19,7 +19,7 @@ env_exists() {
 # ensure pipenv available
 if ! command_available pipenv >/dev/null; then
   echo "installing 'pipenv'"
-  $PIP install --user pipenv
+  $PYTHON -m pip install --user pipenv
 fi
 
 # set working dir
@@ -34,8 +34,9 @@ if [ -f $reinit_flag ] ; then
 fi
 if ! env_exists; then
   echo "installing env"
-  pipenv --three sync
+  pipenv --python $PYTHON sync
 fi
 
+exit
 # run samples
 exec pipenv run behave $*
