@@ -34,7 +34,7 @@ if [ -f $reinit_flag ] ; then
 fi
 if ! env_exists; then
   echo "installing env"
-  pipenv --python $PYTHON sync
+  $PYTHON -m pipenv sync
 fi
 
 # run samples
