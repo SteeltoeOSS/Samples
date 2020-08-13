@@ -37,6 +37,5 @@ if ! env_exists; then
   pipenv --python $PYTHON sync
 fi
 
-exit
 # run samples
 exec pipenv run behave $*
