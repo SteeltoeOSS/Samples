@@ -13,6 +13,8 @@ jobs:
     displayName: 'Reinit Virtual Python Environment'
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+    env:
+      PYTHON: python3.7
   - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
@@ -28,6 +30,8 @@ jobs:
 #    displayName: 'Reinit Virtual Python Environment'
 #  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
 #    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+#    env:
+#      PYTHON: python3.7
 #  - template: publish-results-steps.yaml
 #    parameters:
 #      feature: ${{parameters.feature}}
@@ -43,6 +47,8 @@ jobs:
     displayName: 'Reinit Virtual Python Environment'
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+    env:
+      PYTHON: python
   - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
