@@ -36,7 +36,7 @@ jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Windows
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
   pool:
-    vmImage: Windows-2019
+    vmImage: windows-latest
   steps:
   - template: setup-cloud-foundry-windows-steps.yaml
   - bash: touch reinit
