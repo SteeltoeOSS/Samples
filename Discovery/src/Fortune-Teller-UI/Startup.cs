@@ -25,7 +25,7 @@ namespace Fortune_Teller_UI
                 {
                     c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
                 })
-                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
+                .AddServiceDiscovery()
                 .AddTypedClient<IFortuneService, FortuneService>();
 
             // Add framework services.

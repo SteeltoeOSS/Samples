@@ -24,7 +24,7 @@
     "Fortune-Teller-Service-Consul": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Consul"
+        "ASPNETCORE_ENVIRONMENT": "consul"
       }
     }
   }
