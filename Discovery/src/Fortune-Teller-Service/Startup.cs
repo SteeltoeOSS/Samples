@@ -21,12 +21,11 @@ namespace FortuneTellerService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthActuator(Configuration);
             services.AddEntityFrameworkInMemoryDatabase().AddDbContext<FortuneContext>(
                 options => options.UseInMemoryDatabase("Fortunes"), ServiceLifetime.Singleton);
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
-            
-            services.AddHealthActuator(Configuration);
 
             // Add framework services.
             services.AddControllers();
