@@ -1,10 +1,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fortune-Teller-Service", "Fortune-Teller-Service\Fortune-Teller-Service.csproj", "{47CC1025-CDA0-4DBF-A19D-D71F61CA45A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fortune-Teller-UI", "Fortune-Teller-UI\Fortune-Teller-UI.csproj", "{F215C9E4-EE4B-4ADC-9099-ABABE475F9B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ADB1693B-1D87-4019-978D-9E57811D3782}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\config\versions.props = ..\..\config\versions.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
