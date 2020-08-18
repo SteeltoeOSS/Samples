@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Discovery.Client;
+using Steeltoe.Management.Endpoint.Health;
 
 namespace FortuneTellerService
 {
@@ -24,6 +25,8 @@ namespace FortuneTellerService
                 options => options.UseInMemoryDatabase("Fortunes"), ServiceLifetime.Singleton);
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
+            
+            services.AddHealthActuator(Configuration);
 
             // Add framework services.
             services.AddControllers();

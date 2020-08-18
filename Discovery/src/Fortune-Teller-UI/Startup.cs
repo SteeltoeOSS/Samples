@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.Http.Discovery;
 using System;
+using Steeltoe.Management.Endpoint.Health;
 
 namespace Fortune_Teller_UI
 {
@@ -27,6 +28,8 @@ namespace Fortune_Teller_UI
                 })
                 .AddServiceDiscovery()
                 .AddTypedClient<IFortuneService, FortuneService>();
+            
+            services.AddHealthActuator(Configuration);
 
             // Add framework services.
             services.AddControllersWithViews();
@@ -45,7 +48,7 @@ namespace Fortune_Teller_UI
             }
 
             app.UseStaticFiles();
-
+            
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
         }
