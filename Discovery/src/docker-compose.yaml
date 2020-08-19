@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  fortune-teller-service:
+    image: ${DOCKER_REGISTRY}fortunetellerservicek8s
+    build:
+      context: Fortune-Teller-Service
+      dockerfile: Dockerfile
+
+  fortune-teller-ui:
+    image: ${DOCKER_REGISTRY}fortunetelleruik8s
+    build:
+      context: Fortune-Teller-UI
+      dockerfile: Dockerfile

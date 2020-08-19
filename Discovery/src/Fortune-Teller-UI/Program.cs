@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Management.Endpoint;
 
 namespace Fortune_Teller_UI
 {
@@ -10,15 +11,19 @@ namespace Fortune_Teller_UI
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            BuildHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                    .AddCloudFoundryConfiguration()
-                    .AddDiscoveryClient()
-                    .UseStartup<Startup>()
-                    .UseCloudHosting(5555)
-                    .Build();
+        public static IHost BuildHost(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(host =>
+                {
+                    host.UseStartup<Startup>();
+                })
+                .AddCloudFoundryConfiguration()
+                .AddHealthActuator()
+                .AddDiscoveryClient()
+                .UseCloudHosting(5555)
+                .Build();
     }
 }
