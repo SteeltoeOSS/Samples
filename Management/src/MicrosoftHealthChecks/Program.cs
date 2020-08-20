@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
-
 namespace CloudFoundry
 {
     public class Program

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Services
@@ -22,35 +22,26 @@ namespace Fortune_Teller_UI.Services
         public async Task<Fortune> RandomFortuneAsync()
         {
             var response = await _httpClient.GetAsync(RANDOM_FORTUNE_URL);
-            var result = Decode(await response.Content.ReadAsStreamAsync());
+            var result =  Decode(await response.Content.ReadAsStringAsync());
             _logger.LogInformation("RandomFortuneAsync: {0}", result.Text);
             return result;
         }
 
-        private Fortune Decode(Stream stream)
+        private Fortune Decode(string json)
         {
             try
-            {
-                var serializer = new JsonSerializer();
-
-                using (var sr = new StreamReader(stream))
-                {
-                    using (var jsonTextReader = new JsonTextReader(sr))
-                    {
-                        return serializer.Deserialize<Fortune>(jsonTextReader);
-                    }
-                }
+            { 
+                return JsonSerializer.Deserialize<Fortune>(json, new JsonSerializerOptions(){PropertyNameCaseInsensitive = true});
             }
             catch (Exception e)
             {
                 _logger?.LogError("Error {0} deserializing", e);
+                return new Fortune()
+                {
+                    Id = 0,
+                    Text = "Have a good day!"
+                };
             }
-
-            return new Fortune()
-            {
-                Id = 0,
-                Text = "Have a good day!"
-            };
         }
     }
 }

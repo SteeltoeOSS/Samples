@@ -19,7 +19,6 @@
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicSerilogCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
-<!--    <PackageReference Include="Steeltoe.Management.ExporterCore" Version="$(SteeltoeVersion)" />-->
     <PackageReference Include="Steeltoe.Management.TaskCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
   <ItemGroup>
