@@ -1,0 +1,26 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes
+  namespace: default
+data:
+  someKey: someValue
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes.development
+  namespace: default
+data:
+  ConfigMapName: kubernetes.development
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes.production
+  namespace: default
+data:
+  ConfigMapName: kubernetes.production
