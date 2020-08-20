@@ -15,7 +15,7 @@ steps:
 - task: UsePythonVersion@0
   displayName: 'Setup Python'
   inputs:
-    versionSpec: 3.7.x
+    versionSpec: 3.7.8
 - task: UseRubyVersion@0
   displayName: 'Setup Ruby'
   inputs:
