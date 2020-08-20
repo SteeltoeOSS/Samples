@@ -160,7 +160,6 @@ def resolve_uaac_args(context, args, cwd):
     :type args: list
     :type cwd: str
     """
-    context.log.info("ARGS {}".format(args))
     if '--redirect_uri' in args:
         idx = args.index('--redirect_uri') + 1
         args[idx] = dns.resolve_url(context, args[idx])
