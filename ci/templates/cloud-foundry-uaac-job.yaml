@@ -7,6 +7,8 @@ jobs:
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
   pool:
     vmImage: Ubuntu-16.04
+  workspace:
+    clean: all
   steps:
   - template: setup-cloud-foundry-linux-steps.yaml
   - template: setup-cloud-foundry-uaac-steps.yaml
@@ -23,6 +25,8 @@ jobs:
 #   displayName: '${{parameters.feature}}: ${{parameters.sample}} (OSX)'
 #   pool:
 #     vmImage: MacOS-10.14
+#   workspace:
+#     clean: all
 #   steps:
 #   - template: setup-cloud-foundry-osx-steps.yaml
 #   - template: setup-cloud-foundry-uaac-steps.yaml
@@ -39,6 +43,8 @@ jobs:
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
   pool:
     vmImage: Windows-2019
+  workspace:
+    clean: all
   steps:
   - template: setup-cloud-foundry-windows-steps.yaml
   - template: setup-cloud-foundry-uaac-steps.yaml
