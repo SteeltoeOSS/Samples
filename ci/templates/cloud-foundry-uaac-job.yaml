@@ -12,6 +12,8 @@ jobs:
   - template: setup-cloud-foundry-uaac-steps.yaml
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+    env:
+      PYTHON: python3.7
   - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
@@ -26,6 +28,8 @@ jobs:
 #   - template: setup-cloud-foundry-uaac-steps.yaml
 #   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
 #     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+#     env:
+#       PYTHON: python3.7
 #   - template: publish-results-steps.yaml
 #     parameters:
 #       feature: ${{parameters.feature}}
@@ -40,6 +44,8 @@ jobs:
   - template: setup-cloud-foundry-uaac-steps.yaml
   - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+    env:
+      PYTHON: C:\hostedtoolcache\windows\Python\3.7.8\x64\python.exe
   - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
