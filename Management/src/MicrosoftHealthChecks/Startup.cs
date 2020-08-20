@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.CloudFoundry.Connector.MySql;
+using Steeltoe.Connector;
+using Steeltoe.Connector.MySql;
 
 namespace CloudFoundry
 {
@@ -29,7 +28,7 @@ namespace CloudFoundry
             services.AddHealthChecks().AddMySql(connectionString); 
 
             // Add in a MySql connection (this method also adds an IHealthContributor for it)
-            services.AddMySqlConnection(Configuration); //will use microsoft health check instead of steelto health check
+            services.AddMySqlConnection(Configuration); //will use microsoft health check instead of steeltoe health check
 
             services.AddHealthChecksUI();
 

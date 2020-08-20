@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Management.Tracing;
 using System;
+using Microsoft.Extensions.Hosting;
 
 namespace Fortune_Teller_UI
 {
@@ -41,7 +42,7 @@ namespace Fortune_Teller_UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {

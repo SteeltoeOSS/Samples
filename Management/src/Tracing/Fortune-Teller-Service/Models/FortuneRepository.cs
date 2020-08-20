@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using OpenCensus.Trace;
-using Steeltoe.Management.Census.Trace;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Steeltoe.Management.OpenTelemetry.Trace;
 
 namespace FortuneTellerService.Models
 {
@@ -43,23 +42,25 @@ namespace FortuneTellerService.Models
 
             // Start a scoped span.  This will create a new span with the parent equal to whatever is the current span.
             // When Dispose() called on the returned scope the span will end and the parent span will become the current span
-            using (var scope = _tracing.Tracer.SpanBuilder(SPAN_NAME_RANDOM).StartScopedSpan(out ISpan span))
-            {
-                int count = _db.Fortunes.Count();
-                var index = _random.Next() % count;
-                var result = GetAll().ElementAt(index);
+            // using (var scope = _tracing.Tracer.SpanBuilder(SPAN_NAME_RANDOM).StartScopedSpan(out ISpan span))
+            // TODO: Update to use new Trace API
+            // {
+            var count = _db.Fortunes.Count();
+            var index = _random.Next() % count;
+            var result = GetAll().ElementAt(index);
 
-                _logger.LogDebug("RandomFortune() ->" + result.Text);
+            _logger.LogDebug("RandomFortune() ->" + result.Text);
 
-                // Obtain the current span and add some attributes which will be captured along with the span itself
-                span.PutAttribute(SPAN_NAME_RANDOM_INDEX_ATTRIBUTE, AttributeValue.LongAttributeValue(index));
-                span.PutAttribute(SPAN_NAME_RANDOM_FORTUNEID_ATTRIBUTE, AttributeValue.LongAttributeValue(result.Id));
-                span.PutAttribute(SPAN_NAME_RANDOM_FORTUNETEXT_ATTRIBUTE, AttributeValue.StringAttributeValue(result.Text));
-                span.Status = Status.Ok;
+            // Obtain the current span and add some attributes which will be captured along with the span itself
+            // span.PutAttribute(SPAN_NAME_RANDOM_INDEX_ATTRIBUTE, AttributeValue.LongAttributeValue(index));
+            // span.PutAttribute(SPAN_NAME_RANDOM_FORTUNEID_ATTRIBUTE, AttributeValue.LongAttributeValue(result.Id));
+            // span.PutAttribute(SPAN_NAME_RANDOM_FORTUNETEXT_ATTRIBUTE, AttributeValue.StringAttributeValue(result.Text));
+            // span.Status = Status.Ok;
 
-                _logger.LogDebug("Finished RandomFortune()");
-                return result;
-            }
+            _logger.LogDebug("Finished RandomFortune()");
+            return result;
+            //}
+
         }
 
     }

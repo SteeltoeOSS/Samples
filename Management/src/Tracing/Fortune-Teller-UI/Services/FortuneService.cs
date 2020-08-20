@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Fortune_Teller_UI.Services
@@ -31,15 +31,8 @@ namespace Fortune_Teller_UI.Services
         {
             try
             {
-                var serializer = new JsonSerializer();
+                var result = JsonSerializer.DeserializeAsync<Fortune>(stream);
 
-                using (var sr = new StreamReader(stream))
-                {
-                    using (var jsonTextReader = new JsonTextReader(sr))
-                    {
-                        return serializer.Deserialize<Fortune>(jsonTextReader);
-                    }
-                }
             }
             catch (Exception e)
             {
