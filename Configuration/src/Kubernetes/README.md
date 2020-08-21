@@ -53,7 +53,7 @@ Several config maps have been provided in the file `configmaps.yaml`, use `kubec
 kubectl apply -f .\Kubernetes\configmaps.yaml
 ```
 
->This sample uses the default settings of refresh by polling. ConfigMap additions and updates will be visible within 15 seconds.
+>This sample uses the default settings of refresh by polling. ConfigMap additions and updates will be available within 15 seconds. Refresh to see the change.
 
 ## Add Secrets
 
@@ -63,7 +63,7 @@ Several secrets have been provided in the file `secrets.yaml`, use `kubectl` to 
 kubectl apply -f .\Kubernetes\secrets.yaml
 ```
 
->This sample uses the default settings of refresh by polling. Secret additions and updates will be visible within 15 seconds.
+>This sample uses the default settings of refresh by polling. Secret additions and updates will be available within 15 seconds. Refresh to see the change.
 
 ## Remarks
 
