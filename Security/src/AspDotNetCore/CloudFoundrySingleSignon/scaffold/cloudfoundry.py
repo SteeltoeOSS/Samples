@@ -1,5 +1,6 @@
 import os
 import shutil
+import stat
 
 from pysteel import cloudfoundry, dns
 from pysteel.command import Command
@@ -23,7 +24,10 @@ def setup(context):
         domainname = dns.resolve_domainname(context, 'x.y.z')
         uaa_repo = os.path.join(context.project_dir, 'uaa')
         if os.path.exists(uaa_repo):
-            shutil.rmtree(uaa_repo)
+            def remove_readonly(func, path, excinfo):
+                os.chmod(path, stat.S_IWRITE)
+                func(path)
+            shutil.rmtree(uaa_repo, onerror=remove_readonly)
         for cmd_s in [
             'git clone https://github.com/cloudfoundry/uaa.git',
             'git -C uaa checkout 4.7.1',
