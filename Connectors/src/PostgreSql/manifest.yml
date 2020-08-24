@@ -1,0 +1,12 @@
+﻿---
+applications:
+- name: postgres-connector
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  disk_quota: 200M
+  command: cd ${HOME} && ./PostgreSql
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - myPostgres

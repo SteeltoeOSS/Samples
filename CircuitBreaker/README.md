@@ -10,8 +10,6 @@ One sample uses ASP.NET Core, the other uses ASP.NET MVC/WebAPI, but both share 
 
 The application also illustrates how to use the Hystrix dashboard, both on Cloud Foundry and locally, for monitoring the status of Hystrix commands.
 
-The legacy AspDotNet sample uses Autofac for dependency injection.
-
 ## Building & Running
 
 Each project in each sample contains a Readme for instructions on building and running each app.

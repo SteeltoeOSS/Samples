@@ -27,17 +27,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="3.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <!--
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(PomeloMySqlEFCoreVersion)" />-->
-    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-m1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-2430" />
     <!--<PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-1656" />-->
-    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-m1" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-2430" />
   </ItemGroup>
   <!--<ItemGroup>
     <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Configuration\src\ConfigServerCore\Steeltoe.Extensions.Configuration.ConfigServerCore.csproj" />

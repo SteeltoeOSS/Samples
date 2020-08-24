@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStore.Models;
-using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
+using Steeltoe.Connector.SqlServer.EFCore;
+using Steeltoe.Common;
 using Steeltoe.Discovery.Client;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Refresh;
@@ -24,6 +26,16 @@ namespace MusicStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // this should be done automatically by Steeltoe somewhere else! Zipkin throws without it
+            if (Platform.IsCloudFoundry)
+            {
+                services.RegisterCloudFoundryApplicationInstanceInfo();
+            }
+            else
+            {
+                services.GetApplicationInstanceInfo();
+            }
+
             // Add Steeltoe Management services
             services.AddCloudFoundryActuators(Configuration);
             services.AddEnvActuator(Configuration);

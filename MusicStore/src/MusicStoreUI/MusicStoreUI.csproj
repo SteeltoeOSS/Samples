@@ -33,20 +33,20 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
     <!--<PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="$(AspNetCoreVersion)" />-->
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-m1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-2430" />
 
-    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-m1" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-2430" />
     <!--<PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-m1" />-->
-    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-m1" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="3.0.0-m1" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="3.0.0-2430" />
 
   </ItemGroup>
 
@@ -57,7 +57,7 @@
   </ItemGroup>-->
 
   <ItemGroup> <!--Condition="'$(CONFIGURATION)' == 'Debug'"-->
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="3.0.0-m1" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="3.0.0-2430" />
     <!--<ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\CircuitBreaker\src\Hystrix.MetricsEventsCore\Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore.csproj" />-->
   </ItemGroup>
 

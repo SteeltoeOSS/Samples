@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 set -e
+
 prog=$(basename $0)
-base_dir="$(dirname $0)"/..
+base_dir=$(cd "$(dirname $0)"/.. && pwd)
+ci_dir="$base_dir"/ci
+
 source "$base_dir"/.libexec/functions.sh
-pipeline=azure-pipeline.yaml
 
 # ----------------------------------------------------------------------------
 # help
@@ -63,8 +65,20 @@ done
 # funcs
 # ----------------------------------------------------------------------------
 
-get_sample_paths() {
-  find "$base_dir" -name '*.feature' -exec dirname {} \;| sed 's|^'"$base_dir"'/||'
+get_samples() {
+  find "$base_dir" -name '*.feature' -exec dirname {} \; | sed 's|^'"$base_dir"'/||'
+}
+
+get_sample_name() {
+  basename $1
+}
+
+get_sample_feature() {
+  expr $1 : '\([^/]*\)'
+}
+
+tolower() {
+  echo "$*" | tr [:upper:] [:lower:]
 }
 
 # ----------------------------------------------------------------------------
@@ -72,47 +86,51 @@ get_sample_paths() {
 # ----------------------------------------------------------------------------
 
 if $do_list; then
-  for sample_path in $(get_sample_paths); do
-    echo $sample_path
+  for sample in $(get_samples); do
+    echo $sample
   done
   exit
 fi
 
 [ ${#branches[@]} -gt 0 ] || die "no branches specified; run with -h for help"
 
-for sample_path in $(get_sample_paths); do
-  msg "updating $sample_path"
-  sample_pipeline=$sample_path/$pipeline
-  feature=$(expr "$sample_path" : '\([^/]*\)')
-  sample=$(basename $sample_path)
-  rm -f $sample_pipeline
-  cat > $sample_pipeline << EOF
+for sample in $(get_samples); do
+  name=$(get_sample_name $sample)
+  feature=$(get_sample_feature $sample)
+  pipeline=azure-pipeline-$(tolower $feature)-$(tolower $name).yaml
+  msg "updating $sample -> $pipeline"
+  pipeline_path="$ci_dir"/$pipeline
+  if [[ $feature:$name == Security:CloudFoundrySingleSignon ]]; then
+    template=cloud-foundry-uaac-job.yaml
+  else
+    template=cloud-foundry-job.yaml
+  fi
+  cat > "$pipeline_path" << EOF
 trigger:
   branches:
     include:
 EOF
   for branch in ${branches[@]}; do
-    cat >> $sample_pipeline << EOF
+    cat >> "$pipeline_path" << EOF
       - $branch
 EOF
   done
-  cat >> $sample_pipeline << EOF
+  cat >> "$pipeline_path" << EOF
   paths:
     include:
-      - ci/*
       - config/*
-      - environment.py
-      - pylib/*
-      - $sample_path/*
+      - $sample/*
+
+# skip pipeline for PRs
+pr: none
 
 variables:
-  - group: 'Samples Configuration and Credentials'
+  - group: 'PCFone Credentials'
 
 jobs:
-  -
-    template: ../../../../ci/templates/cloud-foundry-job.yml
+  - template: templates/$template
     parameters:
       feature: $feature
-      sample: $sample
+      sample: $name
 EOF
 done

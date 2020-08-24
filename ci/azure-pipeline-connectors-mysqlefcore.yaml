@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - config/*
+      - Connectors/src/MySqlEFCore/*
+
+# skip pipeline for PRs
+pr: none
+
+variables:
+  - group: 'PCFone Credentials'
+
+jobs:
+  - template: templates/cloud-foundry-job.yaml
+    parameters:
+      feature: Connectors
+      sample: MySqlEFCore

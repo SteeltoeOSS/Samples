@@ -1,14 +1,19 @@
-from behave import *
-import command
+import time
+
 import mechanicalsoup
 import requests
-import resolve
-import sure
-import time
+from behave import *
+
+from pysteel import command, dns
+
 
 @when(u'you get {url}')
 def step_impl(context, url):
-    url = resolve.url(context, url)
+    """
+    :type context: behave.runner.Context
+    :type url: str
+    """
+    url = dns.resolve_url(context, url)
     context.log.info('getting url {}'.format(url))
     context.browser = mechanicalsoup.StatefulBrowser()
     attempt = 0
@@ -24,43 +29,74 @@ def step_impl(context, url):
             raise Exception('Unable to get page {} [{}]'.format(url, resp.status_code))
         time.sleep(1)
 
+
 @when(u'you post "{data}" to {url}')
 def step_impl(context, data, url):
-    url = resolve.url(context, url)
+    """
+    :type context: behave.runner.Context
+    :type data: str
+    :type url: str
+    """
+    url = dns.resolve_url(context, url)
     fields = data.split('=')
     assert len(fields) == 2, 'Invalid data format: {}'.format(data)
-    payload = { fields[0]: fields[1] }
+    payload = {fields[0]: fields[1]}
     context.log.info('posting url {} {}'.format(url, payload))
     context.browser = mechanicalsoup.StatefulBrowser()
     resp = context.browser.post(url, data=payload)
     context.log.info('POST {} [{}]'.format(url, resp.status_code))
 
+
 @when(u'you login with "{username}"/"{password}"')
 def step_impl(context, username, password):
+    """
+    :type context: behave.runner.Context
+    :type username: str
+    :type password: str
+    """
     context.browser.select_form('form[action="/login.do"]')
     context.browser['username'] = username
     context.browser['password'] = password
     context.browser.submit_selected()
 
+
 @then(u'you should be at {url}')
 def step_impl(context, url):
-    context.browser.get_url().should.match(r'{}(\?.*)?'.format(resolve.url(context, url)))
+    """
+    :type context: behave.runner.Context
+    :type url: str
+    """
+    context.browser.get_url().should.match(r'{}(\?.*)?'.format(dns.resolve_url(context, url)))
+
 
 @then(u'you should see "{text}"')
 def step_impl(context, text):
+    """
+    :type context: behave.runner.Context
+    :type text: str
+    """
     context.browser.get_current_page().get_text().should.match(r'.*{}.*'.format(text))
+
 
 @then(u'you should be able to access CloudFoundry app {app} management endpoints')
 def step_impl(context, app):
-    url = resolve.url(context, 'https://{}.x.y.z/cloudfoundryapplication'.format(app))
+    """
+    :type context: behave.runner.Context
+    :type app: str
+    """
+    url = dns.resolve_url(context, 'https://{}.x.y.z/cloudfoundryapplication'.format(app))
     token = get_oauth_token(context)
     resp = requests.get(url, headers={'Authorization': token})
     resp.status_code.should.equal(200)
     context.log.info(resp.content)
-    for endpoint in ['info', 'health', 'loggers', 'trace', 'mappings']:
+    for endpoint in ['info', 'health', 'loggers', 'httptrace', 'mappings']:
         resp.text.should.contain('/cloudfoundryapplication/{}'.format(endpoint))
 
+
 def get_oauth_token(context):
+    """
+    :type context: behave.runner.Context
+    """
     cmd = command.Command(context, 'cf oauth-token')
     cmd.run()
     return cmd.stdout.strip()

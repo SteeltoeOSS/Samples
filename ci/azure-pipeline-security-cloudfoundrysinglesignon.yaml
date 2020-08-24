@@ -1,0 +1,20 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - config/*
+      - Security/src/CloudFoundrySingleSignon/*
+
+# skip pipeline for PRs
+pr: none
+
+variables:
+  - group: 'PCFone Credentials'
+
+jobs:
+  - template: templates/cloud-foundry-uaac-job.yaml
+    parameters:
+      feature: Security
+      sample: CloudFoundrySingleSignon

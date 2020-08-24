@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <div>
+        <h1 class="display-4">Welcome</h1>
+        <h5>Running in Kubernetes? @Steeltoe.Common.Platform.IsKubernetes</h5>
+        <h3>Values from configuration:</h3>
+        <div>
+            <h4>Configmap name (from a ConfigMap): @Model.ConfigMapName</h4>
+            <h4>Username (from a Secret): @Model.UserName</h4>
+            <h4>Kubernetes Namespace: @Model.K8sNamespace</h4>
+        </div>
+    </div>

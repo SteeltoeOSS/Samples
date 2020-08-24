@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>
@@ -12,9 +12,11 @@
   </ItemGroup>  
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0" />
-    <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.3" />
+    <PackageReference Include="Steeltoe.ConnectorBase" Version="3.0.0-m2" />
+    <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="3.0.0-m2" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase" Version="3.0.0-m2" />
   </ItemGroup>
   
 </Project>

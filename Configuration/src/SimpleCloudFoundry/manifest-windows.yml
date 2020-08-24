@@ -1,0 +1,11 @@
+---
+applications:
+- name: foo
+  memory: 256M
+  stack: windows
+  buildpack: binary_buildpack
+  command: cmd /c .\SimpleCloudFoundry
+  env:
+     ASPNETCORE_ENVIRONMENT: development
+  services:
+   - myConfigServer
