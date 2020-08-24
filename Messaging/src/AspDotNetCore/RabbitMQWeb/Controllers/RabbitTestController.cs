@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RabbitMQWeb.Services;
-using Steeltoe.Messaging.Rabbit.Core;
+using Steeltoe.Messaging.RabbitMQ.Core;
 
 namespace RabbitMQWeb.Controllers
 {

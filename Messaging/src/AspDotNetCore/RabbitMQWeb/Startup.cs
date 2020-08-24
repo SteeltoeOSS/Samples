@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQWeb.Services;
-using Steeltoe.Messaging.Rabbit.Config;
-using Steeltoe.Messaging.Rabbit.Extensions;
+using Steeltoe.Messaging.RabbitMQ.Config;
+using Steeltoe.Messaging.RabbitMQ.Extensions;
 
 namespace RabbitMQWeb
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Steeltoe.Messaging.Rabbit.Attributes;
+using Steeltoe.Messaging.RabbitMQ.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
