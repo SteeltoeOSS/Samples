@@ -49,7 +49,7 @@ namespace PostgreSql
             });
 
             // Insert couple rows into table
-            SampleData.InitializePostgresData(app.ApplicationServices).Wait();
+            SampleData.InitializePostgresData(app.ApplicationServices).GetAwaiter().GetResult();
         }
     }
 }

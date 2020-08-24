@@ -14,18 +14,17 @@ namespace PostgreSql.Models
                 throw new ArgumentNullException("serviceProvider");
             }
 
-            using (var service = serviceProvider.GetRequiredService<NpgsqlConnection>())
-            {
-                await service.OpenAsync();
-                DropCreateTable(service);
-                InsertSampleData(service);
-                service.Close();
-            }
+            using var serviceScope = serviceProvider.CreateScope();
+            using var service = serviceScope.ServiceProvider.GetRequiredService<NpgsqlConnection>();
+            await service.OpenAsync();
+            DropCreateTable(service);
+            InsertSampleData(service);
+            service.Close();
         }
 
         private static void InsertSampleData(NpgsqlConnection service)
         {
-            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO TestData(Id, MyText) VALUES(1, 'Row1 Text');", service);
+            var cmd = new NpgsqlCommand("INSERT INTO TestData(Id, MyText) VALUES(1, 'Row1 Text');", service);
             cmd.ExecuteNonQuery();
             cmd = new NpgsqlCommand("INSERT INTO TestData(Id, MyText) VALUES(2, 'Row2 Text');", service);
             cmd.ExecuteNonQuery();
@@ -33,11 +32,10 @@ namespace PostgreSql.Models
 
         private static void DropCreateTable(NpgsqlConnection service)
         {
-            NpgsqlCommand cmd = new NpgsqlCommand("DROP TABLE IF EXISTS TestData;", service);
+            var cmd = new NpgsqlCommand("DROP TABLE IF EXISTS TestData;", service);
             cmd.ExecuteNonQuery();
             cmd = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS TestData(Id INT PRIMARY KEY, MyText VARCHAR(255));", service);
             cmd.ExecuteNonQuery();
-
         }
     }
 }
