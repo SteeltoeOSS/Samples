@@ -53,22 +53,22 @@ namespace RabbitMQWeb.Controllers
         [HttpGet("sendreceivefoo")]
         public ActionResult<string> SendReceiveFoo()
         {
-            var foo = new Foo("sendreceivefoo foo string");
+            var foo = new Foo("SendReceiveFoo foo string");
             _rabbitTemplate.ConvertAndSend(RECEIVE_AND_CONVERT_QUEUE, foo);
             _logger.LogInformation("SendReceiveFoo: Sent message to " + RECEIVE_AND_CONVERT_QUEUE);
             foo = _rabbitTemplate.ReceiveAndConvert<Foo>(RECEIVE_AND_CONVERT_QUEUE, 10_000);
-            _logger.LogInformation("SendReceiveFoo:Receeived a Foo message back " + foo);
+            _logger.LogInformation("SendReceiveFoo:Received a Foo message back " + foo);
             return foo.ToString();
         }
 
         [HttpGet("sendreceivebar")]
         public ActionResult<string> SendReceiveBar()
         {
-            var bar = new Bar("sendreceivebar bar string");
+            var bar = new Bar("SendReceiveBar bar string");
             _rabbitTemplate.ConvertAndSend(RECEIVE_AND_CONVERT_QUEUE, bar);
             _logger.LogInformation("SendReceiveBar: Sent message to " + RECEIVE_AND_CONVERT_QUEUE);
             bar = _rabbitTemplate.ReceiveAndConvert<Bar>(RECEIVE_AND_CONVERT_QUEUE, 10_000);
-            _logger.LogInformation("SendReceiveBar:Receeived a Bar message back " + bar);
+            _logger.LogInformation("SendReceiveBar:Received a Bar message back " + bar);
             return bar.ToString();
         }
 
