@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Data;
 
 namespace PostgreSql.Models
 {
@@ -14,12 +15,16 @@ namespace PostgreSql.Models
                 throw new ArgumentNullException("serviceProvider");
             }
 
-            using (var service = serviceProvider.GetRequiredService<NpgsqlConnection>())
+            using (var scope = serviceProvider.CreateScope())
             {
-                await service.OpenAsync();
-                DropCreateTable(service);
-                InsertSampleData(service);
-                service.Close();
+                
+                using (var service = (NpgsqlConnection)scope.ServiceProvider.GetRequiredService<IDbConnection>())
+                {
+                    await service.OpenAsync();
+                    DropCreateTable(service);
+                    InsertSampleData(service);
+                    service.Close();
+                }
             }
         }
 
