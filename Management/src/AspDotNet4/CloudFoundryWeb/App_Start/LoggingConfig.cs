@@ -8,6 +8,7 @@ namespace CloudFoundryWeb
     public static class LoggingConfig
     {
         public static ILoggerFactory LoggerFactory { get; set; }
+
         public static ILoggerProvider LoggerProvider { get; set; }
 
         public static void Configure(IConfiguration configuration)
@@ -19,7 +20,9 @@ namespace CloudFoundryWeb
                     .AddConfiguration(configuration)
                     .AddDynamicConsole();
             });
-            LoggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            LoggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            LoggerProvider = serviceProvider.GetService<ILoggerProvider>();
         }
     }
 }

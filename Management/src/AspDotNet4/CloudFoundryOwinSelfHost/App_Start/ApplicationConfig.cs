@@ -11,7 +11,9 @@ namespace CloudFoundryOwinSelfHost
     public class ApplicationConfig
     {
         public static IConfigurationRoot Configuration { get; set; }
+
         public static ILoggerFactory LoggerFactory { get; set; }
+
         public static ILoggerProvider LoggerProvider { get; set; }
 
         public static void Register(string environment)
@@ -30,10 +32,12 @@ namespace CloudFoundryOwinSelfHost
 
         public static void ConfigureLogging()
         {
-            IServiceCollection serviceCollection = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
-            serviceCollection.AddLogging(builder => builder.AddDynamicConsole());
-            LoggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+            serviceCollection.AddLogging(builder => builder.AddDynamicConsole(true));
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            LoggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            LoggerProvider = serviceProvider.GetService<ILoggerProvider>();
         }
 
         public static string GetContentRoot()
