@@ -52,7 +52,8 @@ namespace CloudFoundrySingleSignon
             {
                 options.AccessDeniedPath = new PathString("/Home/AccessDenied");
             })
-            .AddCloudFoundryOpenIdConnect(Configuration);
+            .AddCloudFoundryOAuth(Configuration);
+            //.AddCloudFoundryOpenIdConnect(Configuration);
 
             services.AddAuthorization(options =>
             {
