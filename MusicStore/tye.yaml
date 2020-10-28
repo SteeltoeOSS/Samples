@@ -1,0 +1,74 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+name: musicstore
+services:
+# setting single-port bindings to force HTTP because Spring Boot Admin doesn't trust the ASP.NET Core Certificates
+- name: musicstoreservice
+  project: src/MusicStoreService/MusicStoreService.csproj
+  bindings:
+  - port: 5010
+- name: orderservice
+  project: src/OrderService/OrderService.csproj
+  bindings:
+  - port: 5020
+- name: shoppingcartservice
+  project: src/ShoppingCartService/ShoppingCartService.csproj
+  bindings:
+  - port: 5030
+- name: musicstoreui
+  project: src/MusicStoreUI/MusicStoreUI.csproj
+  bindings:
+  - port: 5000
+  env:
+    - name: USE_REDIS_CACHE
+      value: true
+
+- name: configserver
+  image: steeltoeoss/configserver:1.3.2
+  env:
+    - name: spring.profiles.active
+      value: native
+  volumes:
+    - source: ./src/config/
+      target: /config
+  bindings:
+    - containerPort: 8888
+      port: 8888
+      protocol: http
+  
+- name: eurekaserver
+  image: steeltoeoss/eurekaserver:1.4.4
+  bindings:
+    - containerPort: 8761
+      port: 8761
+      protocol: http
+
+- name: mysql
+  image: mysql:5.7
+  bindings:
+    - port: 3306
+      protocol: mysql
+  env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: steeltoe
+    - name: MYSQL_DATABASE
+      value: steeltoe2
+    - name: MYSQL_USER
+      value: steeltoe
+    - name: MYSQL_PASSWORD
+      value: steeltoe
+
+- name: springbootadmin
+  image: hananiel/spring-boot-admin-eureka-sample
+  bindings:
+    - containerPort: 8080
+      port: 8889
+      protocol: http
+  env:
+    - name: EUREKA_SERVICE_URL
+      value: http://eurekaserver:8761
+
+- name: redis
+  image: redis
+  bindings:
+    - port: 6379

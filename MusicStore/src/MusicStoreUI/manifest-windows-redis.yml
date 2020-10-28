@@ -1,6 +1,6 @@
 ---
 applications:
-- name: musicui
+- name: musicstoreui
   memory: 512M
   stack: windows
   command: .\MusicStoreUI

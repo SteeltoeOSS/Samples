@@ -1,13 +1,13 @@
 # Running the Music Store on Cloud Foundry
+
 ## Pre-requisites - CloudFoundry
 
 1. Install Spring Cloud Services
-1. (Optional) Install Redis service - for sharing Session and KeyRing storage between app instances.
-1. Install Pivotal Apps Manager to access Management endpoints from Apps Manager.
+1. Install Redis service - for sharing Session and KeyRing storage between app instances.
 
 ## Setup Services on CloudFoundry
 
-As mentioned above, the application is dependent on the following services:
+The application is dependent on the following services:
 
 * Spring Cloud Config Server
 * Spring Cloud Eureka Server

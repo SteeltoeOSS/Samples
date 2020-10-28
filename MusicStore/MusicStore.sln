@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.editorconfig = ..\.editorconfig
 		..\nuget.config = ..\nuget.config
 		README.md = README.md
+		tye.yaml = tye.yaml
 		..\config\versions.props = ..\config\versions.props
 	EndProjectSection
 EndProject
@@ -63,30 +64,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCP", "GCP", "{57E0407E-8053-4272-A772-EF9A37B0DD71}"
-ProjectSection(SolutionItems) = preProject
-	deployment\GCP\gcp_deploy.ps1 = deployment\GCP\gcp_deploy.ps1
-	deployment\GCP\gcp_undeploy.ps1 = deployment\GCP\gcp_undeploy.ps1
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		deployment\GCP\gcp_deploy.ps1 = deployment\GCP\gcp_deploy.ps1
+		deployment\GCP\gcp_undeploy.ps1 = deployment\GCP\gcp_undeploy.ps1
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AWS", "AWS", "{88DC4F07-1090-445C-AEEC-534FE1FAAF8D}"
-ProjectSection(SolutionItems) = preProject
-	deployment\AWS\eks_deploy.ps1 = deployment\AWS\eks_deploy.ps1
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		deployment\AWS\eks_deploy.ps1 = deployment\AWS\eks_deploy.ps1
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{FDFDF2F0-B965-455B-9F29-380921F6FB19}"
-ProjectSection(SolutionItems) = preProject
-	deployment\Docker\dockerrun-configserver.cmd = deployment\Docker\dockerrun-configserver.cmd
-	deployment\Docker\dockerrun-configserver.sh = deployment\Docker\dockerrun-configserver.sh
-	deployment\Docker\dockerrun-eurekaserver.cmd = deployment\Docker\dockerrun-eurekaserver.cmd
-	deployment\Docker\dockerrun-eurekaserver.sh = deployment\Docker\dockerrun-eurekaserver.sh
-	deployment\Docker\dockerrun-mysqlserver.cmd = deployment\Docker\dockerrun-mysqlserver.cmd
-	deployment\Docker\dockerrun-mysqlserver.sh = deployment\Docker\dockerrun-mysqlserver.sh
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		deployment\Docker\dockerrun-configserver.cmd = deployment\Docker\dockerrun-configserver.cmd
+		deployment\Docker\dockerrun-configserver.sh = deployment\Docker\dockerrun-configserver.sh
+		deployment\Docker\dockerrun-eurekaserver.cmd = deployment\Docker\dockerrun-eurekaserver.cmd
+		deployment\Docker\dockerrun-eurekaserver.sh = deployment\Docker\dockerrun-eurekaserver.sh
+		deployment\Docker\dockerrun-mysqlserver.cmd = deployment\Docker\dockerrun-mysqlserver.cmd
+		deployment\Docker\dockerrun-mysqlserver.sh = deployment\Docker\dockerrun-mysqlserver.sh
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PKS", "PKS", "{AFFFEC3B-3938-4397-85B5-772507B5AAED}"
-ProjectSection(SolutionItems) = preProject
-	deployment\PKS\pks_deploy.ps1 = deployment\PKS\pks_deploy.ps1
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		deployment\PKS\pks_deploy.ps1 = deployment\PKS\pks_deploy.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

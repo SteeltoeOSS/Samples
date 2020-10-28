@@ -1,32 +1,20 @@
-using MusicStoreUI.Services;
-using MusicStoreUI.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Connector.SqlServer.EFCore;
-using Steeltoe.Discovery.Client;
-
-#if USE_REDIS_CACHE
-using Microsoft.AspNetCore.DataProtection;
-using Steeltoe.CloudFoundry.Connector.Redis;
-using Steeltoe.Security.DataProtection;
-#endif
-
-using Steeltoe.Management.CloudFoundry;
+using MusicStoreUI.Models;
+using MusicStoreUI.Services;
 using Steeltoe.CircuitBreaker.Hystrix;
-using Command = MusicStoreUI.Services.HystrixCommands;
-using Microsoft.EntityFrameworkCore;
 using Steeltoe.Common.Http.Discovery;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Steeltoe.Management.Endpoint.Env;
-using Steeltoe.Management.Endpoint.Refresh;
-// using Steeltoe.Management.Exporter.Tracing;
+using Steeltoe.Connector.MySql.EFCore;
+using Steeltoe.Connector.Redis;
 using Steeltoe.Management.Tracing;
-using Steeltoe.Common;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-// using Steeltoe.Management.Exporter.Tracing.Zipkin;
+using Steeltoe.Security.DataProtection;
+using System;
+using Command = MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI
 {
@@ -42,62 +30,42 @@ namespace MusicStoreUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // this should be done automatically by Steeltoe somewhere else! Zipkin throws without it
-            if (Platform.IsCloudFoundry)
+            // Add framework services.
+            if (bool.Parse(Environment.GetEnvironmentVariable("USE_REDIS_CACHE")))
             {
-                services.RegisterCloudFoundryApplicationInstanceInfo();
+                services.AddRedisConnectionMultiplexer(Configuration);
+                services.AddDataProtection()
+                    .PersistKeysToRedis()
+                    .SetApplicationName("MusicStoreUI");
+                services.AddDistributedRedisCache(Configuration);
             }
             else
             {
-                services.GetApplicationInstanceInfo();
+                Console.WriteLine("NOT Using Redis");
+                services.AddDistributedMemoryCache();
             }
-
-            // Add framework services.
-#if USE_REDIS_CACHE
-            services.AddRedisConnectionMultiplexer(Configuration);
-            services.AddDataProtection()
-                .PersistKeysToRedis()
-                .SetApplicationName("MusicStoreUI");
-            services.AddDistributedRedisCache(Configuration);
-#else
-            services.AddDistributedMemoryCache();
-#endif
-
-            // Add managment endpoint services
-            services.AddCloudFoundryActuators(Configuration);
-            services.AddEnvActuator(Configuration);
-            services.AddRefreshActuator(Configuration);
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            // var cstring = new ConnectionStringManager(Configuration).Get<SqlServerConnectionInfo>().ConnectionString;
-            // Console.WriteLine("Using SQL Connection: {0}", cstring);
             // services.AddDbContext<AccountsContext>(options => options.UseSqlServer(cstring));
-            services.AddDbContext<AccountsContext>(options => options.UseSqlServer(Configuration));
+            services.AddDbContext<AccountsContext>(options => options.UseMySql(Configuration));
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Home/AccessDenied");
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AccountsContext>()
                     .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
-            {
-                services.AddDiscoveryClient(Configuration);
-            }
-            else
-            {
-                services.AddConfigurationDiscoveryClient(Configuration);
-                services.TryAddTransient<DiscoveryHttpMessageHandler>();
-            }
-
             services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
 
-            services.AddHttpClient<IMusicStore, MusicStoreService>()
-                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
-            services.AddHttpClient<IShoppingCart, ShoppingCartService>()
-                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
-            services.AddHttpClient<IOrderProcessing, OrderProcessingService>()
-                .AddHttpMessageHandler<DiscoveryHttpMessageHandler>();
+            services
+                .AddHttpClient<IMusicStore, MusicStoreService>()
+                .AddServiceDiscovery();
+            services
+                .AddHttpClient<IShoppingCart, ShoppingCartService>()
+                .AddServiceDiscovery();
+            services
+                .AddHttpClient<IOrderProcessing, OrderProcessingService>()
+                .AddServiceDiscovery();
 
 
             services.AddHystrixCommand<Command.GetTopAlbums>("MusicStore", Configuration);
@@ -114,7 +82,6 @@ namespace MusicStoreUI
 
             // Use call below if you want sticky Sessions on Cloud Foundry
             // services.AddSession((options) => options.CookieName = "JSESSIONID");
-
             services.AddSession();
 
             // Configure Auth
@@ -138,11 +105,6 @@ namespace MusicStoreUI
         {
             // Add Hystrix Metrics context to pipeline
             app.UseHystrixRequestContext();
-
-            // Add management endpoints into pipeline
-            app.UseCloudFoundryActuators();
-            app.UseEnvActuator();
-            app.UseRefreshActuator();
 
             app.UseSession();
 
@@ -175,11 +137,6 @@ namespace MusicStoreUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            if (!Configuration.GetValue<bool>("DisableServiceDiscovery"))
-            {
-                app.UseDiscoveryClient();
-            }
-            
             // Startup Hystrix metrics stream
             app.UseHystrixMetricsStream();
         }

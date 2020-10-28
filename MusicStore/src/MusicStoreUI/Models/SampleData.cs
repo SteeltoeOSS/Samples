@@ -21,12 +21,10 @@ namespace MusicStoreUI.Models
             if (ShouldDropCreateDatabase())
             {
 
-                using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
-                    db.Database.EnsureCreated();
-                    CreateAdminUser(serviceProvider, configuration).Wait();
-                }
+                using var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+                var db = serviceScope.ServiceProvider.GetService<AccountsContext>();
+                db.Database.EnsureCreated();
+                CreateAdminUser(serviceProvider, configuration).GetAwaiter().GetResult();
             }
         }
 
@@ -41,10 +39,12 @@ namespace MusicStoreUI.Models
                 await roleManager.CreateAsync(new IdentityRole(adminRole));
             }
 
-            var user = await userManager.FindByNameAsync(configuration[defaultAdminUserName]);
+            var defaultadminUser = configuration[defaultAdminUserName];
+            Console.WriteLine("User to find: {0}", defaultadminUser);
+            var user = await userManager.FindByNameAsync(defaultadminUser ?? defaultAdminUserName);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = configuration[defaultAdminUserName] };
+                user = new ApplicationUser { UserName = defaultadminUser };
                 await userManager.CreateAsync(user, configuration[defaultAdminPassword]);
                 await userManager.AddToRoleAsync(user, adminRole);
                 await userManager.AddClaimAsync(user, new Claim("ManageStore", "Allowed"));

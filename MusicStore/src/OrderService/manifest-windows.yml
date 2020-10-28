@@ -1,6 +1,6 @@
 ---
 applications:
-- name: orderprocessing
+- name: orderservice
   memory: 256M
   stack: windows
   command: .\OrderService

@@ -1,13 +1,9 @@
 eureka:
   client:
     shouldFetchRegistry: false
-  instance:
-    port: 6000
 mysql:
   client:
-    database: steeltoe1
-    username: root
-    password: steeltoe
+    database: ShoppingCart
 sqlserver:
   credentials:
     database: ShoppingCart

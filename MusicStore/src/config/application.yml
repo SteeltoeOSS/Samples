@@ -2,15 +2,22 @@ AppSettings:
   SiteTitle: Music Store
   CacheDbResults: true
 Logging:
-  IncludeScopes: false
   LogLevel:
-    Default: Debug
+    Default: Information
     System: Warning
     Microsoft: Warning
+    Steeltoe: Information
 eureka:
   client:
     serviceUrl: http://eurekaserver:8761/eureka/
-    validateCertificates: false
+  instance:
+    StatusPageUrlPath: /actuator/info
+    HealthCheckUrlPath: /actuator/health
+mysql:
+  client:
+    server: mysql
+    username: root
+    password: steeltoe
 sqlserver:
   credentials:
     server: sqlserver
@@ -18,5 +25,6 @@ sqlserver:
     password: SteeltoeR0cks
 management:
   endpoints:
-    cloudfoundry:
-      validateCertificates: false
+    actuator:
+      exposure:
+        include: [ "*" ]

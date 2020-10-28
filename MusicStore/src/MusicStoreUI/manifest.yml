@@ -1,6 +1,6 @@
 ---
 applications:
-- name: musicui
+- name: musicstoreui
   buildpacks:
    - dotnet_core_buildpack
   memory: 512M

@@ -1,6 +1,6 @@
 ---
 applications:
-- name: shoppingcart
+- name: shoppingcartservice
   buildpacks:
    - dotnet_core_buildpack
   memory: 256M

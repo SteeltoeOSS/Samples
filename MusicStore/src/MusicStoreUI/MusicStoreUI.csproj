@@ -19,56 +19,45 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="Azure.Identity" Version="1.1.1" />
-    <PackageReference Include="GitInfo" Version="2.0.26">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
-    <!--<PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="$(AspNetCoreVersion)" />-->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" /> -->
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-2430" />
 
-    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="3.0.0-2430" />
-    <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.0-2430" />
-    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0-2430" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.0-2430" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0-2430" />
-    <!--<PackageReference Include="Steeltoe.Management.ExporterCore" Version="3.0.0-m1" />-->
-    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0-2430" />
-    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="3.0.0-2430" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="3.0.1" />
+    <!-- GitInfo provides $(Git*) properties used below -->
+    <PackageReference Include="GitInfo" Version="2.0.26">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
 
   </ItemGroup>
 
   <!--<ItemGroup Condition="'$(CONFIGURATION)' == 'Release'">
     <PackageReference Include="RabbitMQ.Client" Version="$(RabbitMQVersion)" />
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="3.0.0-manual" />
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\CircuitBreaker\src\Hystrix.MetricsStreamCore\Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore.csproj" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="3.0.1" />
   </ItemGroup>-->
 
   <ItemGroup> <!--Condition="'$(CONFIGURATION)' == 'Debug'"-->
-    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="3.0.0-2430" />
-    <!--<ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\CircuitBreaker\src\Hystrix.MetricsEventsCore\Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore.csproj" />-->
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore" Version="3.0.1" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\CircuitBreaker\src\HystrixCore\Steeltoe.CircuitBreaker.HystrixCore.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Configuration\src\ConfigServerCore\Steeltoe.Extensions.Configuration.ConfigServerCore.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Connectors\src\Connector.EFCore\Steeltoe.CloudFoundry.Connector.EFCore.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Discovery\src\ClientCore\Steeltoe.Discovery.ClientCore.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Management\src\CloudFoundryCore\Steeltoe.Management.CloudFoundryCore.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SteeltoeOSS\steeltoe\src\Security\src\DataProtection.RedisCore\Steeltoe.Security.DataProtection.RedisCore.csproj" />
-  </ItemGroup>-->
   <Target Name="_GitProperties" AfterTargets="CoreCompile">
     <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRoot)" Overwrite="true" />
     <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />

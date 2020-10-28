@@ -1,13 +1,14 @@
 eureka:
   client:
-    shouldRegisterWithEureka: false
+    shouldRegisterWithEureka: true
 mysql:
   client:
-    database: steeltoe2
-    username: root
-    password: steeltoe
+    database: MusicStore
 sqlserver:
   credentials:
     database: MusicStore
+redis:
+  client:
+    host: redis
 DefaultAdminUsername: Administrator@test.com
 DefaultAdminPassword: YouShouldChangeThisPassword1!
