@@ -1,5 +1,6 @@
 import os
 import shutil
+import stat
 
 from pysteel import cloudfoundry, dns
 from pysteel.command import Command
