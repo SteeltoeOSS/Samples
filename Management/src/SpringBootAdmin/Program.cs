@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Common.Hosting;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace SpringBootAdmin
 {
@@ -16,10 +15,9 @@ namespace SpringBootAdmin
 
         public static IHost BuildWebHost(string[] args) =>
             Host.CreateDefaultBuilder(args)
-
+                .AddCloudFoundryConfiguration()
                 .ConfigureWebHost(configure =>
                 {
-                    configure.AddCloudFoundryConfiguration();
                     configure.UseStartup<Startup>().UseKestrel();
                     configure.UseUrls("http://host.docker.internal:5000");
                 })

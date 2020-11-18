@@ -18,6 +18,7 @@
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.0.1" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.TaskCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
