@@ -4,6 +4,3 @@ eureka:
 mysql:
   client:
     database: OrderProcessing
-sqlserver:
-  credentials:
-    database: OrderProcessing

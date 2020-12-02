@@ -58,6 +58,7 @@ namespace MusicStoreUI.Services
                 {
                     request.Content = Serialize(content);
                 }
+                
                 using var response = await _client.SendAsync(request);
                 var stream = await response.Content.ReadAsStreamAsync();
                 return Deserialize<T>(stream);

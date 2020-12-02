@@ -8,23 +8,38 @@ Logging:
     Microsoft: Warning
     Steeltoe: Information
 eureka:
-  client:
-    serviceUrl: http://eurekaserver:8761/eureka/
   instance:
     StatusPageUrlPath: /actuator/info
     HealthCheckUrlPath: /actuator/health
 mysql:
   client:
-    server: mysql
     username: root
     password: steeltoe
-sqlserver:
-  credentials:
-    server: sqlserver
-    username: sa
-    password: SteeltoeR0cks
 management:
   endpoints:
     actuator:
       exposure:
         include: [ "*" ]
+  tracing:
+    alwaysSample: true
+    useShortTraceIds: true
+    exporter:
+      zipkin:
+        useShortTraceIds: true
+---
+spring:
+  profiles: Docker
+eureka:
+  client:
+    serviceUrl: http://eurekaserver:8761/eureka/
+mysql:
+  client:
+    server: mysql
+management:
+  tracing:
+    exporter:
+      zipkin:
+        endpoint: http://zipkinserver:9411/api/v2/spans
+redis:
+  client:
+    host: redis

@@ -23,10 +23,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{18423ABE-6774-47D0-803B-E5CF88EDB8C3}"
 	ProjectSection(SolutionItems) = preProject
 		src\config\application.yml = src\config\application.yml
-		src\config\musicservice.yml = src\config\musicservice.yml
-		src\config\musicstore.yml = src\config\musicstore.yml
-		src\config\orderprocessing.yml = src\config\orderprocessing.yml
-		src\config\shoppingcart.yml = src\config\shoppingcart.yml
+		src\config\musicstoreservice.yml = src\config\musicstoreservice.yml
+		src\config\musicstoreui.yml = src\config\musicstoreui.yml
+		src\config\orderservice.yml = src\config\orderservice.yml
+		src\config\shoppingcartservice.yml = src\config\shoppingcartservice.yml
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{54B3E7C4-7F15-4963-BD65-95B1E87A1C5E}"

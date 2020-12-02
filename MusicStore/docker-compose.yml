@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   configserver:
-    image: "steeltoeoss/configserver"
+    image: "steeltoeoss/config-server"
     command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
     volumes:
       - type: bind
@@ -22,11 +22,13 @@ services:
        - "8889:8080"
      depends_on:
        - eurekaserver
-  sqlserver:
-    image: "mcr.microsoft.com/mssql/server"
+  mysql:
+    image: mysql:5.7
     environment:
-      MSSQL_SA_PASSWORD: "SteeltoeR0cks"
-      ACCEPT_EULA: "Y"
+      MYSQL_ROOT_PASSWORD: steeltoe
+      MYSQL_DATABASE: steeltoe2
+      MYSQL_USER: steeltoe
+      MYSQL_PASSWORD: steeltoe
     depends_on:
       - configserver
       - eurekaserver
@@ -42,7 +44,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-      - sqlserver
+      - mysql
   shoppingcartservice:
     image: ${DOCKER_REGISTRY-}shoppingcartservice
     build:
@@ -51,7 +53,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-      - sqlserver
+      - mysql
   orderservice:
     image: ${DOCKER_REGISTRY-}orderservice
     build:
@@ -60,7 +62,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-      - sqlserver
+      - mysql
   musicstore:
     image: ${DOCKER_REGISTRY-}musicstore
     build:
@@ -72,4 +74,4 @@ services:
       - musicservice
       - shoppingcartservice
       - orderservice
-      - sqlserver
+      - mysql

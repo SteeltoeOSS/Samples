@@ -54,12 +54,7 @@ namespace ShoppingCartService
         private static ILoggerFactory GetLoggerFactory()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
-            serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
-            {
-                opts.DisableColors = true;
-            }));
-            serviceCollection.AddLogging(builder => builder.AddDebug());
+            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace).AddConsole());
             return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
         }
     }

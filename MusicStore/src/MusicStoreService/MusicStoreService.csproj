@@ -9,11 +9,11 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup> 
     <None Include="git.properties">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
+  </ItemGroup> -->
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
@@ -27,17 +27,17 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="3.0.1" />
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.1" />
-    <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.0.2-4314" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.1" />
     <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.1" />
-    <!-- GitInfo provides $(Git*) properties used below -->
+    <!-- GitInfo provides $(Git*) properties used below
     <PackageReference Include="GitInfo" Version="2.0.26">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    </PackageReference> -->
   </ItemGroup>
 
-  <Target Name="_GitProperties" AfterTargets="CoreCompile">
+  <!-- <Target Name="_GitProperties" AfterTargets="CoreCompile">
     <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRoot)" Overwrite="true" />
     <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
     <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false" />
@@ -47,5 +47,5 @@
     <WriteLinesToFile File="git.properties" Lines="git.build.time=$([System.DateTime]::Now.ToString('O'))" Overwrite="false" />
     <WriteLinesToFile File="git.properties" Lines="git.build.user.name=$([System.Environment]::GetEnvironmentVariable('USERNAME'))" Overwrite="false" />
     <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
-  </Target>
+  </Target> -->
 </Project>

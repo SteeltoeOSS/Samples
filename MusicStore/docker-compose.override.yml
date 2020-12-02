@@ -3,29 +3,25 @@ version: '3.4'
 services:
   musicservice:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - spring__cloud__config__uri=http://configserver:8888
+      - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
 
   shoppingcartservice:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - spring__cloud__config__uri=http://configserver:8888
+      - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
 
   orderservice:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - spring__cloud__config__uri=http://configserver:8888
+      - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
 
   musicstore:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - spring__cloud__config__uri=http://configserver:8888
+      - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
     ports:
