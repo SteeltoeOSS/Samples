@@ -32,8 +32,6 @@ namespace CloudFoundry
             services.AddDbContext<MyContext>(options => options.UseMySql(Configuration));
             // Add MySql health contributor to be exposed by the endpoint
             services.AddMySqlHealthContributor(Configuration);
-            // Add managment endpoint services
-            services.AddCloudFoundryActuators(Configuration);
 
             // register a migrate context task with PCF
             services.AddTask<MigrateDbContextTask<MyContext>>();
@@ -44,9 +42,6 @@ namespace CloudFoundry
             // Add your own IHealthContributor, registered with the interface
             services.AddSingleton<IHealthContributor, CustomHealthContributor>();
 
-            services.AddMetricsActuator(Configuration);
-            //services.AddPrometheusActuator(Configuration); available in m2
-            // Add management components which collect and forwards metrics to 
             // the Cloud Foundry Metrics Forwarder service
             // services.AddMetricsForwarderExporter(Configuration);
 
@@ -68,18 +63,12 @@ namespace CloudFoundry
 
             app.UseStaticFiles();
 
-            // Add management endpoints into pipeline
-        
-            // Add metrics collection to the app
-            //app.UseMetricsActuator();
-            //app.UsePrometheusActuator(); available in m2
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.Map<MetricsEndpoint>();
             });
 
             // Start up the metrics forwarder service added above

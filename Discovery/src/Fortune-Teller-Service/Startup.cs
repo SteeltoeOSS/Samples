@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Discovery.Client;
+using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Endpoint.Health;
 
 namespace FortuneTellerService
@@ -22,8 +22,7 @@ namespace FortuneTellerService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthActuator(Configuration);
-            services.AddEntityFrameworkInMemoryDatabase().AddDbContext<FortuneContext>(
-                options => options.UseInMemoryDatabase("Fortunes"), ServiceLifetime.Singleton);
+            services.AddDbContext<FortuneContext>(options => options.UseInMemoryDatabase("Fortunes"), ServiceLifetime.Singleton);
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
@@ -37,9 +36,13 @@ namespace FortuneTellerService
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+            app.UseEndpoints(endpoints => {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.Map<HealthEndpoint>();
+            });
 
             SampleData.InitializeFortunesAsync(app.ApplicationServices).Wait();
+            HealthStartupFilter.InitializeAvailability(app.ApplicationServices);
         }
 
     }

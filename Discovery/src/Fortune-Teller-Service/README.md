@@ -58,8 +58,8 @@ You must first create an instance of the Service Registry service in a org/space
 1. cf target -o myorg -s development
 1. cd samples/Discovery/src/Fortune-Teller-Service
 1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp3.1 -r linux-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`)
 
 > Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 

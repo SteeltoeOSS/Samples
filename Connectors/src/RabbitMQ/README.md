@@ -24,9 +24,9 @@ You must first create an instance of the RabbitMQ service in a org/space.
 1. `cd samples/Connectors/src/RabbitMQ`
 1. `dotnet restore --configfile nuget.config`
 1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64`
+   * `dotnet publish -f netcoreapp3.1 -r linux-x64`
 1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish`
+   * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
 
 > Note: The provided manifest will create an app named `rabbitmq-connector` and attempt to bind the app to RabbitMQ service `myRabbitMQService`.
 

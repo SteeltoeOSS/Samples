@@ -1,14 +1,18 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>3.0.1</SteeltoeVersion>
+    <SteeltoeVersion>3.0.2-4314</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
     <GitInfoVersion>2.0.20</GitInfoVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
     <RabbitMQVersion>5.1.0</RabbitMQVersion>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
     <EFCoreVersion>3.1.0</EFCoreVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <AspNetCoreVersion>5.0.0</AspNetCoreVersion>
+    <EFCoreVersion>5.0.0</EFCoreVersion>
   </PropertyGroup>
 </Project>

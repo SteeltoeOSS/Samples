@@ -23,10 +23,10 @@ We will need to use the UAA command line tool to establish some security credent
 1. cd samples/Security/src/CredHubDemo
 1. dotnet restore
 1. Publish app to a directory selecting the framework and runtime you want to run on.
-    * `dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64`
+    * `dotnet publish -f netcoreapp3.1 -r linux-x64`
     * `dotnet publish -f netcoreapp3.1 -r win10-x64`
 1. Push the app using the appropriate manifest.
-    * `cf push -f manifest-nix.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish`
+    * `cf push -f manifest-nix.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
     * `cf push -f manifest-win-core.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
 
 > Note: The provided manifest will create an app named `CredHubDemo-nix`, `CredHubDemo-win` or `CredHubDemo-wincore`.

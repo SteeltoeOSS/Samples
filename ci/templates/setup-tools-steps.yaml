@@ -1,5 +1,6 @@
 parameters:
   dotnet3Version: 3.1.x
+  dotnet5Version: 5.0.x
 steps:
 - task: UseDotNet@2
   displayName: 'Setup DotNet3'
@@ -7,10 +8,10 @@ steps:
     packageType: sdk
     version: ${{parameters.dotnet3Version}}
 - task: UseDotNet@2
-  displayName: 'Setup DotNet2'
+  displayName: 'Setup DotNet5'
   inputs:
     packageType: sdk
-    version: ${{parameters.dotnet2Version}}
+    version: ${{parameters.dotnet5Version}}
 - task: UsePythonVersion@0
   displayName: 'Setup Python'
   inputs:

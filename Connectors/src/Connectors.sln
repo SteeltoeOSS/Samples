@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GemFire", "GemFire\GemFire.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6297031D-2427-4A59-8D6E-73355360E72A}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\config\versions.props = ..\..\..\config\versions.props
+		..\..\config\versions.props = ..\..\config\versions.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CosmosDb", "CosmosDb\CosmosDb.csproj", "{29BF56DA-1534-43F3-97FF-563F03C6A72E}"
