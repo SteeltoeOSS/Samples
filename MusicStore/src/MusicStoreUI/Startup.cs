@@ -8,12 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 using MusicStoreUI.Models;
 using MusicStoreUI.Services;
 using Steeltoe.CircuitBreaker.Hystrix;
+using Steeltoe.Common;
 using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Connector.Redis;
+using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Security.DataProtection;
 using System;
+using System.Linq;
 using Command = MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI
@@ -31,7 +34,8 @@ namespace MusicStoreUI
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            if (bool.Parse(Environment.GetEnvironmentVariable("USE_REDIS_CACHE")))
+            bool.TryParse(Environment.GetEnvironmentVariable("USE_REDIS_CACHE"), out var useRedis);
+            if (useRedis)
             {
                 services.AddRedisConnectionMultiplexer(Configuration);
                 services.AddDataProtection()

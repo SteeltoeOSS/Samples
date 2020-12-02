@@ -4,6 +4,3 @@ eureka:
 mysql:
   client:
     database: MusicService
-sqlserver:
-  credentials:
-    database: MusicService

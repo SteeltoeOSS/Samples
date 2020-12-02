@@ -23,7 +23,7 @@ This application makes use of the following Steeltoe components:
 * Steeltoe Redis DataProtection provider to the cause the DataProtection KeyRing to be stored in a Redis cache. Note: This is also required if you want to scale the MusicStoreUI component to multiple instances.
 * Optionally uses Hystrix Dashboard for monitoring Circuit Breakers
 
-The default is to NOT use a Redis cache for Session storage or DataProtection KeyRing storage. Details on how to enable it are provided below.
+Usage of Redis for Session storage DataProtection KeyRing storage is controlled by the environment variable `USE_REDIS_CACHE` for MusicStoreUI. This variable is not set if you run the project directly or with Docker Compose, but is enabled when [using Project Tye](#using-project-tye)
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ The default is to NOT use a Redis cache for Session storage or DataProtection Ke
 
 1. [Install Tye](https://github.com/dotnet/tye/blob/master/docs/getting_started.md)
 1. `cd Samples/MusicStore`
-1. `tye run --docker`
+1. `tye run`
 1. Browse to the [local Tye dashboard](http://localhost:8000) to see the status of all the services and find the URL of the Music Store UI
 
 ## Cloud Foundry
