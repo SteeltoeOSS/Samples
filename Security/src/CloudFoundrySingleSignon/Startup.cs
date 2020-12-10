@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
-// using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Steeltoe.Common.Options;
-using Steeltoe.Common.Security;
-// using Steeltoe.CloudFoundry.Connector.Redis;
+using Steeltoe.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
+using Steeltoe.Security.DataProtection;
 using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
-// using Steeltoe.Security.DataProtection;
 
 namespace CloudFoundrySingleSignon
 {

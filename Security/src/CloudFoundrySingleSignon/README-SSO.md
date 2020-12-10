@@ -30,10 +30,10 @@ Next, locate the sso-setup script you'd like to execute (.cmd/.sh) from the scri
 1. cd samples/Security/src/CloudFoundrySingleSignon
 1. dotnet restore --configfile nuget.config
 1. Publish app to a directory, specifying the desired framework and runtime:
-    * `dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64`
+    * `dotnet publish -f netcoreapp3.1 -r linux-x64`
     * `dotnet publish -f netcoreapp3.1 -r win10-x64`
 1. Push the app using the appropriate manifest:
-    * `cf push -f manifest-sso.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish`
+    * `cf push -f manifest-sso.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
     * `cf push -f manifest-windows-sso.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
 
 > Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the SSO service `mySSOService`.

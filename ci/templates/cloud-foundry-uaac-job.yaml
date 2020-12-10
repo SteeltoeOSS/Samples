@@ -6,7 +6,7 @@ jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
   pool:
-    vmImage: Ubuntu-16.04
+    vmImage: Ubuntu-latest
   workspace:
     clean: all
   steps:
@@ -42,7 +42,7 @@ jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Windows
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
   pool:
-    vmImage: Windows-2019
+    vmImage: Windows-latest
   workspace:
     clean: all
   steps:

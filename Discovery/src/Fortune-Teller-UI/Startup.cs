@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.Http.Discovery;
 using System;
 using Steeltoe.Management.Endpoint.Health;
+using Steeltoe.Management.Endpoint;
 
 namespace Fortune_Teller_UI
 {
@@ -48,7 +49,12 @@ namespace Fortune_Teller_UI
 
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+            app.UseEndpoints(endpoints => {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.Map<HealthEndpoint>();
+            });
+
+            HealthStartupFilter.InitializeAvailability(app.ApplicationServices);
         }
     }
 }

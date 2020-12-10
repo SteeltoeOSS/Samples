@@ -31,8 +31,8 @@ You must first create an instance of the MySql service in a org/space.
 1. cf target -o myorg -s development
 2. cd samples/Management/src/CloudFoundry
 3. dotnet restore --configfile nuget.config
-4. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.2 -r ubuntu.16.04-x64`)
-5. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.2/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.2/win10-x64/publish`)
+4. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.2 -r linux-x64`)
+5. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.2/linux-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.2/win10-x64/publish`)
 
 > Note: The provided manifest will create an app named `actuator` and attempt to bind to the the app to MySql service `myMySqlService`.
 

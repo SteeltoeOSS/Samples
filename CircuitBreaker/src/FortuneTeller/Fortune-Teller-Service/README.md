@@ -34,7 +34,7 @@ At this point the Fortune Teller Service is up and waiting for the Fortune Telle
 
 1. Installed Pivotal CloudFoundry
 1. Installed Spring Cloud Services
-1. Install .Net Core SDK 2.1.300+
+1. Install .Net Core SDK
 
 ### Setup Service Registry on CloudFoundry
 
@@ -45,9 +45,9 @@ Using the service instance name of `myDiscoveryService`, complete the [common ta
 1. Login and target your desired space/org: `cf target -o myorg -s myspace`
 1. `cd samples/CircuitBreaker/src/Fortune-Teller/Fortune-Teller-Service`
 1. Publish the app, selecting the framework and runtime you want to run on:
-   - `dotnet publish -f netcoreapp3.1 -r ubuntu.18.04-x64`
+   - `dotnet publish -f netcoreapp3.1 -r linux-x64`
 1. Push the app using the appropriate manifest:
-   - `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.18.04-x64/publish`
+   - `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
    - `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
 
 ## What to expect - CloudFoundry

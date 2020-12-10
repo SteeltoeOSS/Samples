@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4E1E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E89A1BB6-1F81-4C2A-9F4A-936EE33ACD8B}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\config\versions.props = ..\..\..\config\versions.props
+		..\..\config\versions.props = ..\..\config\versions.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundryCertificateAuthentication", "CloudFoundryCertificateAuthentication\CloudFoundryCertificateAuthentication.csproj", "{D5F0FF6D-56B1-48AE-BDC6-15DE3AB00F79}"

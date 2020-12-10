@@ -12,7 +12,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder", "Placeholder\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomValue", "RandomValue\RandomValue.csproj", "{6BC02BAE-39B1-4C1F-A6A7-1EB39B6A7003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes", "Kubernetes\Kubernetes.csproj", "{C763D75D-19FA-494E-895B-65527592A25D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kubernetes", "Kubernetes\Kubernetes.csproj", "{C763D75D-19FA-494E-895B-65527592A25D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D291523F-9962-4000-9C11-9FC9BD202AC5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\config\versions.props = ..\..\config\versions.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
