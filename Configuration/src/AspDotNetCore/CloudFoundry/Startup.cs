@@ -34,9 +34,9 @@ namespace CloudFoundry
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 #if NETCOREAPP3_1 || NET5_0
-        public void Configure(IApplicationBuilder app, IHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
 #else
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 #endif
         {
             if (env.IsDevelopment())

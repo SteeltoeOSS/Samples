@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
 
@@ -10,10 +11,10 @@ namespace RabbitMQ
         public static void Main(string[] args)
         {
             var host = WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundry()
+                .AddCloudFoundryConfiguration()
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
-                .UseCloudFoundryHosting()
+                .UseCloudHosting()
                 .Build();
 
             host.Run();

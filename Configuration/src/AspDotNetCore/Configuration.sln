@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30803.129
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple", "Simple\Simple.csproj", "{C45A50EA-B7A6-48DC-9744-AD4D74EC545C}"
 EndProject
@@ -8,9 +8,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCloudFoundry", "Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundry", "CloudFoundry\CloudFoundry.csproj", "{3D8E61DB-F610-4546-95D9-A75202621555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Placeholder", "Placeholder\Placeholder.csproj", "{ECC6314B-1DB2-4D2C-9C17-99406F84FDE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Placeholder", "Placeholder\Placeholder.csproj", "{ECC6314B-1DB2-4D2C-9C17-99406F84FDE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomValue", "RandomValue\RandomValue.csproj", "{6BC02BAE-39B1-4C1F-A6A7-1EB39B6A7003}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomValue", "RandomValue\RandomValue.csproj", "{6BC02BAE-39B1-4C1F-A6A7-1EB39B6A7003}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E0407428-4126-485F-9523-FC5AAB682BDB}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\config\targetframework.props = ..\..\..\config\targetframework.props
+		..\..\..\config\versions.props = ..\..\..\config\versions.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

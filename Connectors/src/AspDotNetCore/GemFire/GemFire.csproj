@@ -22,9 +22,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.3.0-rc2" />
-    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.3.0-rc2" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.3.0-rc2" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <ItemGroup>

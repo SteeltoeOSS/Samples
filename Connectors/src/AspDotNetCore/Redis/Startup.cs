@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Redis.Models;
 using Steeltoe.CloudFoundry.Connector.Redis;
@@ -31,7 +31,7 @@ namespace Redis
             services.AddRedisConnectionMultiplexer(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -39,7 +39,11 @@ namespace Redis
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#endif
         {
             if (env.IsDevelopment())
             {
@@ -52,7 +56,7 @@ namespace Redis
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else

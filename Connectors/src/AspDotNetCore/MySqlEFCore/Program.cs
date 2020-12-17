@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.CloudFoundry;
 using System;
@@ -47,10 +48,10 @@ namespace MySqlEFCore
         public static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundry()
+                .AddCloudFoundryConfiguration()
                 .AddCloudFoundryActuators()
                 .UseStartup<Startup>()
-                .UseCloudFoundryHosting()
+                .UseCloudHosting()
                 .Build();
         }
     }

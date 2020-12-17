@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.CloudFoundry.Connector.MySql;
 
 namespace MySql
@@ -21,7 +22,7 @@ namespace MySql
             services.AddMySqlConnection(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -29,7 +30,11 @@ namespace MySql
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+#endif
         {
             if (env.IsDevelopment())
             {
@@ -42,7 +47,7 @@ namespace MySql
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
