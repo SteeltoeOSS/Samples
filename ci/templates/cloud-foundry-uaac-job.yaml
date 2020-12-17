@@ -6,7 +6,7 @@ jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
   pool:
-    vmImage: Ubuntu-16.04
+    vmImage: Ubuntu-latest
   steps:
   - template: setup-cloud-foundry-linux-steps.yaml
   - template: setup-cloud-foundry-uaac-steps.yaml
@@ -38,7 +38,7 @@ jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Windows
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
   pool:
-    vmImage: Windows-2019
+    vmImage: Windows-latest
   steps:
   - template: setup-cloud-foundry-windows-steps.yaml
   - template: setup-cloud-foundry-uaac-steps.yaml

@@ -14,10 +14,10 @@ Feature: RabbitMQ Connector
     Then you should see "Message=HEY THERE"
 
   @netcoreapp3.1
-  @ubuntu.16.04-x64
-  Scenario: Rabbit Connector (netcoreapp3.1/ubuntu.16.04-x64)
-    When you run: dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish
+  @linux-x64
+  Scenario: Rabbit Connector (netcoreapp3.1/linux-x64)
+    When you run: dotnet publish -f netcoreapp3.1 -r linux-x64
+    And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish
     And you wait until CloudFoundry app rabbitmq-connector is started
     When you post "Message=HEY THERE" to https://rabbitmq-connector.x.y.z/RabbitMQ/Send
     And you get https://rabbitmq-connector.x.y.z/RabbitMQ/Receive
@@ -34,10 +34,10 @@ Feature: RabbitMQ Connector
     Then you should see "Message=HEY THERE"
 
   @netcoreapp2.1
-  @ubuntu.16.04-x64
-  Scenario: Rabbit Connector (netcoreapp2.1/ubuntu.16.04-x64)
-    When you run: dotnet publish -f netcoreapp2.1 -r ubuntu.16.04-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.16.04-x64/publish
+  @linux-x64
+  Scenario: Rabbit Connector (netcoreapp2.1/linux-x64)
+    When you run: dotnet publish -f netcoreapp2.1 -r linux-x64
+    And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/linux-x64/publish
     And you wait until CloudFoundry app rabbitmq-connector is started
     When you post "Message=HEY THERE" to https://rabbitmq-connector.x.y.z/RabbitMQ/Send
     And you get https://rabbitmq-connector.x.y.z/RabbitMQ/Receive

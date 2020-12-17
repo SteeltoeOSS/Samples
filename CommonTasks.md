@@ -64,6 +64,74 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Regist
 1. cf create-service p-service-registry standard myDiscoveryServiceInstanceName
 1. Wait for service to be ready. (use `cf services` to check the status)
 
+## RabbitMQ
+
+### Run RabbitMQ Server with Docker
+
+This command starts a RabbitMQ server with the management plugin enabled with no credentials and default ports:
+
+```script
+docker run --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+
+## Consul
+
+### Run Consul Server with Docker
+
+```script
+docker run --name=steeltoe-consul -p 8500:8500 consul
+```
+
+## Spring Boot Admin
+
+### Run Spring Boot Admin Server with Docker
+
+There are multiple Spring Boot Admin images to choose from, this is only one option:
+
+```script
+docker run --name --rm -it --name steeltoe-springbootadmin -p 8080:8080 steeltoeoss/spring-boot-admin
+```
+
+## Redis
+
+### Run Redis server with Docker
+
+```script
+docker run --name redis -p 6379:6379 redis
+```
+
+## MySQL
+
+### Run MySQL Server with Docker
+
+```script
+docker run --name steeltoe-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
+```
+
+## SQL Server
+
+### Run SQL Server with Docker
+
+```script
+docker run --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' -p 1433:1433 mcr.microsoft.com/mssql/server
+```
+
+## PostgreSQL
+
+### Run PostgreSQL Server with Docker
+
+```script
+docker run --name steeltoe-postgres -d -p 5432:5432 -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+```
+
+## Zipkin
+
+### Run Zipkin Server with Docker
+
+```script
+docker run --name zipkin -p 9411:9411 openzipkin/zipkin
+```
+
 ## Hystrix Dashboard
 
 ### Run Hystrix Dashboard with Docker
