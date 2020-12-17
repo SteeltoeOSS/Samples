@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Security.Authentication.CloudFoundry;
 
@@ -51,12 +52,11 @@ namespace AdminPortal
             services.AddSingleton<IMenuService, MenuService>();
             services.AddSingleton<IOrderService, OrderService>();
 
-            // Add framework services.
-            services.AddMvc();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,13 +74,15 @@ namespace AdminPortal
                 ForwardedHeaders = ForwardedHeaders.XForwardedProto
             });
 
+            app.UseRouting();
+
             app.UseAuthentication();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseDiscoveryClient();

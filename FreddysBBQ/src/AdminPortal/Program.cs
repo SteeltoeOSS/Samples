@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace AdminPortal
 {
@@ -10,19 +7,14 @@ namespace AdminPortal
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-                WebHost.CreateDefaultBuilder(args)
-                        .UseCloudFoundryHosting()
-                        .AddCloudFoundry()
-                        .ConfigureLogging((builderContext, loggingBuilder) =>
-                        {
-                            loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
-                            loggingBuilder.AddDynamicConsole();
-                        })
-                        .UseStartup<Startup>()
-                        .Build();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
