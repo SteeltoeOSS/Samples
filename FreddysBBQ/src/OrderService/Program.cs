@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Logging;
 
 namespace OrderService
@@ -18,8 +16,7 @@ namespace OrderService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                /// .UseCloudHosting(5000)
-                // .AddCloudFoundryConfiguration()
+                .AddCloudFoundryConfiguration()
                 .ConfigureLogging((builderContext, logging) =>
                 {
                     logging.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
@@ -30,6 +27,7 @@ namespace OrderService
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseCloudHosting();
     }
 }

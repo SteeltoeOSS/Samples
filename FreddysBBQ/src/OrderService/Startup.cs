@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
 using Steeltoe.Discovery.Client;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Security.Authentication.CloudFoundry;
 using Steeltoe.Connector.MySql.EFCore;
 
@@ -42,23 +41,17 @@ namespace OrderService
 
             services.AddSingleton<IMenuService, MenuService>();
 
-            // Add framework services.
-            services.AddMvc();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            // loggerFactory.AddDebug();
-
             app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseDiscoveryClient();
