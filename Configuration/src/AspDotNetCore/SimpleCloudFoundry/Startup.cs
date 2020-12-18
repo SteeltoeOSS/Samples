@@ -28,6 +28,9 @@ namespace SimpleCloudFoundry
             // Optional:  Adds CloudFoundryApplicationOptions and CloudFoundryServicesOptions to service container
             services.ConfigureCloudFoundryOptions(Configuration);
 
+            // Optional:  Adds IConfiguration and IConfigurationRoot to service container
+            services.AddConfiguration(Configuration);
+
             // Adds the configuration data POCO configured with data returned from the Spring Cloud Config Server
             services.Configure<ConfigServerData>(Configuration);
 
