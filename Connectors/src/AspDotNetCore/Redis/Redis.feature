@@ -56,7 +56,7 @@ Feature: Redis Connector
   @net5.0
   @linux-x64
   Scenario: Redis Connector (net5.0/linux-x64)
-    When you run: dotnet publish -f net5.0 -r win10-x64
+    When you run: dotnet publish -f net5.0 -r linux-x64
     And you run in the background: cf push -f manifest.yml -p bin/Debug/net5.0/linux-x64/publish
     And you wait until CloudFoundry app redis-connector is started
     When you get https://redis-connector.x.y.z/Home/CacheData
