@@ -17,13 +17,7 @@ namespace OrderService
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .AddCloudFoundryConfiguration()
-                .ConfigureLogging((builderContext, logging) =>
-                {
-                    logging.AddConfiguration(builderContext.Configuration.GetSection("Logging"));
-                    logging.AddDynamicConsole();
-                    logging.AddConsole();
-                    logging.AddDebug();
-                })
+                .AddDynamicLogging()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
