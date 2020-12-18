@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Security.DataProtection.CredHubCore;
@@ -45,7 +46,7 @@ namespace CredHubDemo
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseCloudFoundryHosting()
+                .UseCloudHosting()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
@@ -71,12 +72,7 @@ namespace CredHubDemo
         public static ILoggerFactory GetLoggerFactory()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
-            serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
-            {
-                opts.DisableColors = true;
-            }));
-            serviceCollection.AddLogging(builder => builder.AddDebug());
+            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace).AddConsole().AddDebug());
             return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
         }
     }

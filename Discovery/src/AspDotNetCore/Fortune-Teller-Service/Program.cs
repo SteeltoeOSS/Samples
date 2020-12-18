@@ -16,7 +16,7 @@ namespace FortuneTellerService
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //    .AddCloudFoundry()
+                //    .AddCloudFoundryConfiguration()
                     .AddPlaceholderResolver()
                     .AddServiceDiscovery()
                     .UseStartup<Startup>()

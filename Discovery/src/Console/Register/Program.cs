@@ -17,7 +17,7 @@ namespace Register
             ConfigurationBuilder builder = new ConfigurationBuilder();
             builder.SetBasePath(Environment.CurrentDirectory);
             builder.AddJsonFile("appsettings.json");
-            builder.AddCloudFoundry();
+            builder.AddCloudFoundryConfiguration();
             var configuration = builder.Build();
 
 

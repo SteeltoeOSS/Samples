@@ -1,11 +1,9 @@
-﻿
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.Security.Authentication.CloudFoundry;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CloudFoundryJwtAuthentication
 {
@@ -32,7 +30,7 @@ namespace CloudFoundryJwtAuthentication
                 options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
             });
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -40,11 +38,15 @@ namespace CloudFoundryJwtAuthentication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#endif
         {
 
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

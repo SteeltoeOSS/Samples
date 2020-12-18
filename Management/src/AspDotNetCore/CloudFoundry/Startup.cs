@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.CloudFoundry.Connector.EFCore;
 using Steeltoe.CloudFoundry.Connector.MySql;
 using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
@@ -45,7 +45,7 @@ namespace CloudFoundry
             // services.AddMetricsForwarderExporter(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -53,7 +53,11 @@ namespace CloudFoundry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#endif
         {
             if (env.IsDevelopment())
             {
@@ -69,7 +73,7 @@ namespace CloudFoundry
             // Add metrics collection to the app
             // Remove comment below to enable
             // app.UseMetricsActuator();
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else

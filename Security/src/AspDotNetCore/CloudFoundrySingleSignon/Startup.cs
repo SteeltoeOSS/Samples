@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 // using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 // using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.Security.Authentication.CloudFoundry;
 // using Steeltoe.Security.DataProtection;
@@ -56,7 +55,7 @@ namespace CloudFoundrySingleSignon
             // services.AddDistributedRedisCache(Configuration);
             // services.AddSession();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -64,7 +63,11 @@ namespace CloudFoundrySingleSignon
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#endif
         {
             if (env.IsDevelopment())
             {
@@ -82,7 +85,7 @@ namespace CloudFoundrySingleSignon
                 ForwardedHeaders = ForwardedHeaders.XForwardedProto
             });
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

@@ -1,13 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Security.DataProtection;
+using Microsoft.Extensions.Hosting;
 using Steeltoe.CloudFoundry.Connector.Redis;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.DataProtection;
+using Steeltoe.Security.DataProtection;
 
 namespace RedisDataProtectionKeyStore
 {
@@ -36,7 +34,7 @@ namespace RedisDataProtectionKeyStore
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Add framework services.
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -44,7 +42,11 @@ namespace RedisDataProtectionKeyStore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#endif
         {
             app.UseSession();
 
@@ -59,7 +61,7 @@ namespace RedisDataProtectionKeyStore
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

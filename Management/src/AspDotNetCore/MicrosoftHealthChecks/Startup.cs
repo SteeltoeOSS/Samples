@@ -1,11 +1,9 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Steeltoe.CloudFoundry.Connector;
 using Steeltoe.CloudFoundry.Connector.MySql;
 
@@ -29,12 +27,12 @@ namespace CloudFoundry
             services.AddHealthChecks().AddMySql(connectionString); 
 
             // Add in a MySql connection (this method also adds an IHealthContributor for it)
-            services.AddMySqlConnection(Configuration); //will use microsoft health check instead of steelto health check
+            services.AddMySqlConnection(Configuration); //will use microsoft health check instead of steeltoe health check
 
             services.AddHealthChecksUI();
 
             // Add framework services.
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -42,13 +40,11 @@ namespace CloudFoundry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,
-#if NETCOREAPP3_1
-                                IWebHostEnvironment env,
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
 #else
-                                Microsoft.AspNetCore.Hosting.IHostingEnvironment env,
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 #endif
-                                ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -71,7 +67,7 @@ namespace CloudFoundry
             //Optionally use health checks ui at /healthchecks-ui
             app.UseHealthChecksUI();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else

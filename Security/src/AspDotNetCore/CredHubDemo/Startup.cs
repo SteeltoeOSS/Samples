@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Security.DataProtection.CredHub;
@@ -27,7 +27,7 @@ namespace CredHubDemo
             services.AddCloudFoundryActuators(Configuration);
             services.Configure<CredHubOptions>(Configuration.GetSection("CredHubClient"));
             services.AddCredHubClient(Configuration, logFactory);
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
 #else
             services.AddMvc();
@@ -35,7 +35,11 @@ namespace CredHubDemo
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#if NETCOREAPP3_1 || NET5_0
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+#else
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#endif
         {
             if (env.IsDevelopment())
             {
@@ -49,7 +53,7 @@ namespace CredHubDemo
             app.UseStaticFiles();
             app.UseCloudFoundryActuators();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

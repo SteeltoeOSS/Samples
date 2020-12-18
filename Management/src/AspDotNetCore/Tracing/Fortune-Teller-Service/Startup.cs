@@ -32,7 +32,7 @@ namespace FortuneTellerService
             services.AddZipkinExporter(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             services.AddControllers();
 #else
             services.AddMvc();
@@ -44,7 +44,7 @@ namespace FortuneTellerService
         {
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 #else
