@@ -89,8 +89,8 @@ cf delete admin-portal -f
 dotnet publish -f netcoreapp3.1 -r win10-x64
 cf push -f manifest-windows.yml -p bin\Debug\netcoreapp3.1\win10-x64\publish
 # OR for Linux
-dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64
-cf push -f manifest.yml -p bin\Debug\netcoreapp3.1\ubuntu.16.04-x64\publish
+dotnet publish -f netcoreapp3.1 -r linux-x64
+cf push -f manifest.yml -p bin\Debug\netcoreapp3.1\linux-x64\publish
 ```
 
 At this point the app should continue to work as it did before.  Any orders you might have had before, will be gone as you are now starting with a new clean order database. 
