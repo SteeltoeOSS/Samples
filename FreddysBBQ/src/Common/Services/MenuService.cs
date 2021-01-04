@@ -1,5 +1,4 @@
-﻿
-using Common.Models;
+﻿using Common.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Discovery;
