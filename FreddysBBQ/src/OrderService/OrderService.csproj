@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-    <Compile Include="..\Common\Services\*.cs" />
-    <Compile Include="..\Common\Models\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
@@ -30,5 +28,9 @@
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="$(SteeltoeVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 </Project>
