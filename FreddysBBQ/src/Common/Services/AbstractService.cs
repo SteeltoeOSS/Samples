@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Steeltoe.Common.Discovery;
+using Steeltoe.Discovery;
 using System;
 using System.IO;
 using System.Net;
@@ -68,7 +69,7 @@ namespace Common.Services
 
                     _logger?.LogInformation(message);
 
-                    return default(T);
+                    return default;
                 }
 
                 Stream stream = await response.Content.ReadAsStreamAsync();
@@ -85,7 +86,7 @@ namespace Common.Services
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
                     if (response.StatusCode == HttpStatusCode.NotFound)
-                        return default(T);
+                        return default;
 
                     // Log status
                     var message = string.Format("Service request returned status: {0} invoking path: {1}",
@@ -93,23 +94,23 @@ namespace Common.Services
 
                     _logger?.LogInformation(message);
 
-                    return default(T);
+                    return default;
                 }
 
                 string json = await response.Content.ReadAsStringAsync();
                 if (string.IsNullOrEmpty(json))
                 {
-                    return default(T);
+                    return default;
                 }
                 var parsed = JObject.Parse(json);
                 if (parsed == null)
                 {
-                    return default(T);
+                    return default;
                 }
                 var items = parsed["_embedded"]?[key];
                 if (items == null)
                 {
-                    return default(T);
+                    return default;
                 }
                 return items.ToObject<T>();
 

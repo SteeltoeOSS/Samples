@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.ComponentModel.DataAnnotations;
+
 namespace Common.Models
 {
     public class MenuItem

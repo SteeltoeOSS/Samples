@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using OrderService.Models;
 using Steeltoe.Discovery.Client;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 using Steeltoe.Security.Authentication.CloudFoundry;
+using Steeltoe.Connector.MySql.EFCore;
 
 namespace OrderService
 {
@@ -42,19 +41,18 @@ namespace OrderService
 
             services.AddSingleton<IMenuService, MenuService>();
 
-            // Add framework services.
-            services.AddMvc();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseDiscoveryClient();
 

@@ -1,7 +1,7 @@
 ﻿using Common.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Common.Discovery;
+using Steeltoe.Discovery;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
