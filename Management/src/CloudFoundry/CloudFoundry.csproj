@@ -22,13 +22,12 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
-  </ItemGroup>  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="git.properties" CopyToOutputDirectory="PreserveNewest" />
-    <None Include="appsettings.json" CopyToOutputDirectory="Always" />
-    <None Include="appsettings.Development.json" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <Target Name="_GitProperties" AfterTargets="CoreCompile">
