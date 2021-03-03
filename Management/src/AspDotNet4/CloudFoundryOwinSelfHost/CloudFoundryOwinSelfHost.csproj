@@ -122,13 +122,13 @@
       <Version>4.1.1</Version>
     </PackageReference>
     <PackageReference Include="MySql.Data">
-      <Version>8.0.21</Version>
+      <Version>8.0.23</Version>
     </PackageReference>
     <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase">
-      <Version>2.5.0</Version>
+      <Version>2.5.2</Version>
     </PackageReference>
     <PackageReference Include="Steeltoe.Management.EndpointOwin">
-      <Version>2.5.0</Version>
+      <Version>2.5.2</Version>
     </PackageReference>
     <PackageReference Include="System.Net.Http">
       <Version>4.3.4</Version>

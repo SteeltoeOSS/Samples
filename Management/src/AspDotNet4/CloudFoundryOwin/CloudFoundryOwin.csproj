@@ -45,6 +45,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.11.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.11.4\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.1.11\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -127,8 +142,8 @@
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.10.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.6.10.8\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.23.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.23\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -136,41 +151,44 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.5.0\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
+    <Reference Include="Renci.SshNet, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2020.0.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Common, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.2.5.0\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
+    <Reference Include="Steeltoe.CloudFoundry.ConnectorBase, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.CloudFoundry.ConnectorBase.2.5.2\lib\netstandard2.0\Steeltoe.CloudFoundry.ConnectorBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Common.Http, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Common.Http.2.5.0\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
+    <Reference Include="Steeltoe.Common, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Common.2.5.2\lib\netstandard2.0\Steeltoe.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.5.0\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
+    <Reference Include="Steeltoe.Common.Http, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Common.Http.2.5.2\lib\netstandard2.0\Steeltoe.Common.Http.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.5.0\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
+    <Reference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Extensions.Configuration.CloudFoundryBase.2.5.2\lib\netstandard2.0\Steeltoe.Extensions.Configuration.CloudFoundryBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.Diagnostics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.5.0\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
+    <Reference Include="Steeltoe.Extensions.Logging.DynamicLogger, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Extensions.Logging.DynamicLogger.2.5.2\lib\netstandard2.0\Steeltoe.Extensions.Logging.DynamicLogger.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.EndpointBase, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.5.0\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
+    <Reference Include="Steeltoe.Management.Diagnostics, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.Diagnostics.2.5.2\lib\netstandard2.0\Steeltoe.Management.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.EndpointOwin, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.EndpointOwin.2.5.0\lib\net461\Steeltoe.Management.EndpointOwin.dll</HintPath>
+    <Reference Include="Steeltoe.Management.EndpointBase, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.EndpointBase.2.5.2\lib\netstandard2.0\Steeltoe.Management.EndpointBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.ExporterBase, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.5.0\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
+    <Reference Include="Steeltoe.Management.EndpointOwin, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.EndpointOwin.2.5.2\lib\net461\Steeltoe.Management.EndpointOwin.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.OpenCensus, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.5.0\lib\net46\Steeltoe.Management.OpenCensus.dll</HintPath>
+    <Reference Include="Steeltoe.Management.ExporterBase, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.ExporterBase.2.5.2\lib\netstandard2.0\Steeltoe.Management.ExporterBase.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.OpenCensus.Abstractions, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensus.Abstractions.2.5.0\lib\net45\Steeltoe.Management.OpenCensus.Abstractions.dll</HintPath>
+    <Reference Include="Steeltoe.Management.OpenCensus, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.2.5.2\lib\net46\Steeltoe.Management.OpenCensus.dll</HintPath>
     </Reference>
-    <Reference Include="Steeltoe.Management.OpenCensusBase, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Steeltoe.Management.OpenCensusBase.2.5.0\lib\netstandard2.0\Steeltoe.Management.OpenCensusBase.dll</HintPath>
+    <Reference Include="Steeltoe.Management.OpenCensus.Abstractions, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensus.Abstractions.2.5.2\lib\net45\Steeltoe.Management.OpenCensus.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Steeltoe.Management.OpenCensusBase, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Steeltoe.Management.OpenCensusBase.2.5.2\lib\netstandard2.0\Steeltoe.Management.OpenCensusBase.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -184,7 +202,7 @@
     </Reference>
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -222,7 +240,7 @@
       <HintPath>..\packages\System.Reflection.Metadata.1.8.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -288,6 +306,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.23\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.23\lib\net452\Zstandard.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure">

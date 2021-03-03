@@ -3,6 +3,7 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Steeltoe.CloudFoundry.ConnectorAutofac;
 using Steeltoe.Common.Configuration.Autofac;
+using Steeltoe.Common.Options.Autofac;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.EndpointOwinAutofac;
 using Steeltoe.Management.EndpointOwinAutofac.Actuators;
@@ -34,6 +35,9 @@ namespace CloudFoundryOwinAutofac
             builder.RegisterConfiguration(ApplicationConfig.Configuration);
             builder.RegisterMySqlConnection(ApplicationConfig.Configuration);
             builder.RegisterCloudFoundryActuators(ApplicationConfig.Configuration);
+
+            // workaround for https://github.com/SteeltoeOSS/Steeltoe/issues/460 -- can be removed after upgrade to 2.5.3
+            builder.RegisterOptions();
 
             // Uncomment if you want to enable metrics actuator endpoint, it's not enabled by default
             // builder.RegisterMetricsActuator(ApplicationConfig.Configuration);
