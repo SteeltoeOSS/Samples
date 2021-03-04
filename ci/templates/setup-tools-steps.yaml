@@ -26,3 +26,8 @@ steps:
   displayName: 'Setup Ruby'
   inputs:
     versionSpec: 2.6.x
+- task: JavaToolInstaller@0
+  displayName: 'Setup Java 8'
+  inputs:
+    versionSpec: '8'
+    jdkSourceOption: 'PreInstalled'
