@@ -25,4 +25,4 @@ steps:
 - task: UseRubyVersion@0
   displayName: 'Setup Ruby'
   inputs:
-    versionSpec: 2.4.x
+    versionSpec: 2.6.x
