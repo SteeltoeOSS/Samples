@@ -15,7 +15,7 @@ Feature: MySqlEF6 Connector
 
   @netcoreapp3.1
   @win10-x64
-  Scenario: MySqlEF6 Connector (netcoreapp3.1/linux-x64)
+  Scenario: MySqlEF6 Connector (netcoreapp3.1/win10-x64)
     When you run: dotnet publish -f netcoreapp3.1 -r win10-x64
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish
     And you wait until CloudFoundry app mysqlef6-connector is started
