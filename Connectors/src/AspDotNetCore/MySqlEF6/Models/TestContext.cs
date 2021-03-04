@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MySql.Data.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using MySql.Data.Entity;
 
 namespace MySqlEF6.Models
 {

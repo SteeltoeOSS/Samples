@@ -2,7 +2,7 @@
   <Import Project="..\..\..\..\config\versions.props" />
   <Import Project="..\..\..\..\config\targetframework.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netcoreapp2.1;net461;net5.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;netcoreapp3.1;netcoreapp2.1;net461;</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp3.1' And '$(TargetFramework)' != 'net5.0'">

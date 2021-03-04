@@ -1,0 +1,11 @@
+﻿---
+applications:
+- name: mysqlef6-connector
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  disk_quota: 200M
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+  services:
+   - myMySqlService
