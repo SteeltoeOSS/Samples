@@ -30,4 +30,5 @@ steps:
   displayName: 'Setup Java 8'
   inputs:
     versionSpec: '8'
+    jdkArchitectureOption: 'x86'
     jdkSourceOption: 'PreInstalled'
