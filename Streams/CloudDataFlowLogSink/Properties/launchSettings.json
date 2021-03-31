@@ -1,0 +1,40 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:50753",
+      "sslPort": 44381
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "SPRING_APPLICATION_JSON": "{\"management.metrics.tags.application.type\":\"${spring.cloud.dataflow.stream.app.type:unknown}\",\"spring.cloud.dataflow.stream.app.label\":\"steeltoebasicsink\",\"management.metrics.tags.application.version\":\"${vcap.application.application_version:unknown}\",\"management.metrics.tags.stream.name\":\"${spring.cloud.dataflow.stream.name:unknown}\",\"management.metrics.tags.application\":\"${spring.cloud.dataflow.stream.name:unknown}-${spring.cloud.dataflow.stream.app.label:unknown}-${spring.cloud.dataflow.stream.app.type:unknown}\",\"spring.cloud.dataflow.stream.name\":\"steeltoestream\",\"management.metrics.tags.organization.name\":\"${vcap.application.org_name:default}\",\"management.metrics.tags.instance.index\":\"${vcap.application.instance_index:${spring.cloud.stream.instanceIndex:0}}\",\"management.metrics.tags.space.name\":\"${vcap.application.space_name:unknown}\",\"management.metrics.tags.application.id\":\"${vcap.application.application_id:unknown}\",\"management.metrics.tags.service\":\"stream-application\",\"spring.cloud.stream.bindings.input.group\":\"steeltoestream\",\"management.metrics.tags.application.guid\":\"${spring.cloud.application.guid:unknown}\",\"management.metrics.tags.application.name\":\"${vcap.application.application_name:${spring.cloud.dataflow.stream.app.label:unknown}}\",\"management.metrics.tags.space.id\":\"${vcap.application.space_id:unknown}\",\"spring.cloud.dataflow.stream.app.type\":\"sink\",\"spring.cloud.stream.bindings.input.destination\":\"steeltoestream.steeltoebasicprocessor\"}",
+        "VCAP_APPLICATION": "{\"a\":\"b\"}",
+        "VCAP_SERVICES": "{\"p-dataflow-messaging\":[{ \"label\": \"p-dataflow-messaging\", \"provider\": null, \"plan\": \"proxy\", \"name\": \"messaging-902dbf85-7378-48e9-93c1-b9b6cab67db4\", \"tags\": [ \"data-flow\", \"spring-cloud\" ], \"instance_name\": \"messaging-902dbf85-7378-48e9-93c1-b9b6cab67db4\", \"binding_name\": null, \"credentials\": { \"http_api_uris\": [ \"https://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@pivotal-rabbitmq.run.pcfone.io/api/\" ], \"hostnames\": [ \"192.168.8.36\" ], \"ssl\": false, \"uri\": \"amqp://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36/9cd41ebb-ff50-42b7-83f7-646291498fd8\", \"uris\": [ \"amqp://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36/9cd41ebb-ff50-42b7-83f7-646291498fd8\" ], \"vhost\": \"9cd41ebb-ff50-42b7-83f7-646291498fd8\", \"hostname\": \"192.168.8.36\", \"password\": \"HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w\", \"http_api_uri\": \"https://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@pivotal-rabbitmq.run.pcfone.io/api/\", \"dashboard_url\": \"https://pivotal-rabbitmq.run.pcfone.io\", \"protocols\": { \"amqp\": { \"host\": \"192.168.8.36\", \"hosts\": [ \"192.168.8.36\" ], \"password\": \"HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w\", \"port\": 5672, \"ssl\": false, \"uri\": \"amqp://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36:5672/9cd41ebb-ff50-42b7-83f7-646291498fd8\", \"uris\": [ \"amqp://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36:5672/9cd41ebb-ff50-42b7-83f7-646291498fd8\" ], \"username\": \"1c6e4609-7685-415a-8d6a-4b11645330f7\", \"vhost\": \"9cd41ebb-ff50-42b7-83f7-646291498fd8\" }, \"management\": { \"host\": \"192.168.8.36\", \"hosts\": [ \"192.168.8.36\" ], \"password\": \"HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w\", \"path\": \"/api/\", \"port\": 15672, \"ssl\": false, \"uri\": \"http://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36:15672/api/\", \"uris\": [ \"http://1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36:15672/api/\" ], \"username\": \"1c6e4609-7685-415a-8d6a-4b11645330f7\" }, \"mqtt\": { \"host\": \"192.168.8.36\", \"hosts\": [ \"192.168.8.36\" ], \"password\": \"HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w\", \"port\": 1883, \"ssl\": false, \"uri\": \"mqtt://9cd41ebb-ff50-42b7-83f7-646291498fd8%3A1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36:1883\", \"uris\": [ \"mqtt://9cd41ebb-ff50-42b7-83f7-646291498fd8%3A1c6e4609-7685-415a-8d6a-4b11645330f7:HDv2c37a88vn_gS0Oyw7clwnXtfKxp9w@192.168.8.36:1883\" ], \"username\": \"9cd41ebb-ff50-42b7-83f7-646291498fd8:1c6e4609-7685-415a-8d6a-4b11645330f7\" } }, \"username\": \"1c6e4609-7685-415a-8d6a-4b11645330f7\" }, \"syslog_drain_url\": null, \"volume_mounts\": [ ]}]}",
+        "Key": "Value",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "steeltoe_stream_samples": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  }
+}

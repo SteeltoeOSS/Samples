@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
 using Steeltoe.Common.Util;
+using Steeltoe.Connector;
+using Steeltoe.Connector.Services;
 using Steeltoe.Messaging;
+using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.Support;
+using Steeltoe.Stream.Binder.Rabbit.Config;
+using Steeltoe.Stream.Config;
 using Steeltoe.Stream.Messaging;
 
-namespace steeltoe_stream_samples.Controllers
+namespace CloudDataflowToUpperProcessor.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase//, IMessageHandler
+    public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
@@ -21,19 +29,21 @@ namespace steeltoe_stream_samples.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly SomeClass someClass;
+        private readonly Program p;
+        private readonly IOptionsMonitor<BindingServiceOptions> bindingsOptions;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, SomeClass someClass)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, Program p, IOptionsMonitor<BindingServiceOptions> bindingsOptions)
         {
             _logger = logger;
-            this.someClass = someClass;
+            this.p = p;
+            this.bindingsOptions = bindingsOptions;
         }
 
-        public string ServiceName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+  
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            p.Handle("test 123");
             var rng = new Random();
             var forecast =  Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -43,25 +53,14 @@ namespace steeltoe_stream_samples.Controllers
             })
             .ToArray();
             
-          
+            
             return forecast;
         }
-        [HttpGet("sendoutput")]
-        public void Output()
+        [HttpGet("Config")]
+        public BindingServiceOptions GetConfig()
         {
-            // _source.Output.Send(MessageBuilder.WithPayload("{\"name\":\"output\"}").Build());
-            someClass.Echo(EncodingUtils.Utf8.GetBytes("FooBar"));//.Name
-        }
-        [HttpGet("sendinput")]
-        public void SendInput()
-        {
-           // _sink.Input.Send(MessageBuilder.WithPayload("{\"name\":\"input\"}").Build());
+            return this.bindingsOptions.CurrentValue;
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public void HandleMessage(IMessage message)
-        {
-            Console.WriteLine(message.Payload);
-        }
     }
 }

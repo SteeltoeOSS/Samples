@@ -1,6 +1,6 @@
 using System;
 
-namespace steeltoe_stream_samples
+namespace CloudDataflowSink
 {
     public class WeatherForecast
     {
