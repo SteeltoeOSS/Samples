@@ -30,5 +30,18 @@ namespace ServerApp.Controllers
             _logger.LogDebug("Received a request with a client certificate from the same space");
             return "Certificate is valid and both client and server are in the same space";
         }
+
+        [HttpGet("[action]")]
+        public string Anonymous()
+        {
+            return "This action does not require a client certificate at all";
+        }
+
+        [Authorize]
+        [HttpGet("[action]")]
+        public string Authenticated()
+        {
+            return "This action requires a client certificate to be provided";
+        }
     }
 }
