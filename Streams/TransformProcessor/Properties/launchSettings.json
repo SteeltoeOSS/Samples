@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TransformProcessor": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

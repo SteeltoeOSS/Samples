@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AnnotatedArguments": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

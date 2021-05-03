@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Messaging.RabbitMQ.Extensions;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Extensions;
 using Steeltoe.Stream.Messaging;
@@ -18,6 +17,7 @@ namespace CloudDataflowSink
         private static ILogger<Program> _logger;
         public static void Main(string[] args)
         {
+
             var host = CreateStreamHostBuilder(args).Build(); // Alternatively use the default host builder
             _logger = host.Services.GetService<ILogger<Program>>();
        
@@ -31,12 +31,11 @@ namespace CloudDataflowSink
                 webhostBuilder
                     .UseStartup<Startup>()
                     .UseCloudHosting()
-                    .AddAllActuators()
-                    .AddCloudFoundryConfiguration();
+                    .AddCloudFoundryConfiguration()
+                    .AddAllActuators();
             })
            .AddStreamsServices<Program>();
 
-      
         [StreamListener(ISink.INPUT)]
         public void HandleMessage(string input)
         {

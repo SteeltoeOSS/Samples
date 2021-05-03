@@ -12,6 +12,7 @@ using Steeltoe.Connector;
 using Steeltoe.Connector.Services;
 using Steeltoe.Messaging;
 using Steeltoe.Messaging.RabbitMQ.Config;
+using Steeltoe.Messaging.RabbitMQ.Connection;
 using Steeltoe.Messaging.Support;
 using Steeltoe.Stream.Binder.Rabbit.Config;
 using Steeltoe.Stream.Config;
@@ -31,12 +32,16 @@ namespace CloudDataflowToUpperProcessor.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly Program p;
         private readonly IOptionsMonitor<BindingServiceOptions> bindingsOptions;
+        private readonly Steeltoe.Messaging.RabbitMQ.Connection.IConnectionFactory connectionFactory;
+        private readonly IOptionsMonitor<RabbitOptions> rabbitOptions;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, Program p, IOptionsMonitor<BindingServiceOptions> bindingsOptions)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, Program p, IOptionsMonitor<BindingServiceOptions> bindingsOptions, Steeltoe.Messaging.RabbitMQ.Connection.IConnectionFactory connectionFactory, IOptionsMonitor<RabbitOptions> rabbitOptions)
         {
             _logger = logger;
             this.p = p;
             this.bindingsOptions = bindingsOptions;
+            this.connectionFactory = connectionFactory;
+            this.rabbitOptions = rabbitOptions;
         }
 
   
@@ -59,8 +64,16 @@ namespace CloudDataflowToUpperProcessor.Controllers
         [HttpGet("Config")]
         public BindingServiceOptions GetConfig()
         {
-            return this.bindingsOptions.CurrentValue;
+            return this.bindingsOptions.CurrentValue ;
         }
 
+        [HttpGet("RabbitOptions")]
+        public string GetconnectionFactory()
+        {
+            var o = rabbitOptions.CurrentValue;
+            var cc = connectionFactory as CachingConnectionFactory;
+            return $"cc: {cc?.Host}:{cc?.VirtualHost} {cc?.Username}:{cc?.Password}\n"
+            + $"{o.Host}:{o.VirtualHost}:{o.Username}:{o.Password}";
+        }
     }
 }

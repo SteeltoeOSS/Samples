@@ -1,23 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>steeltoe_stream_samples</RootNamespace>
-    <UserSecretsId>1e63ea3a-bb17-4f88-b5c7-26c2bdea7ff7</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
+    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+    <UserSecretsId>c5463339-59df-4259-9d72-455c72aba99f</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <!--<PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.0.2" />-->
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-
-    <!--<PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-5271" />
-    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-5271" />-->
-  </ItemGroup>
 
   <ItemGroup>
 

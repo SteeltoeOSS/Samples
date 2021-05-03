@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamsHost;
-using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Basic
@@ -18,7 +15,7 @@ namespace Basic
         static async Task Main(string[] args)
         {
 
-            var host = StreamsHost.CreateDefaultBuilder<Program>(args)
+            await StreamsHost.CreateDefaultBuilder<Program>(args)
               .ConfigureServices((context, services) =>
               {
                   services.AddLogging(builder =>
@@ -26,13 +23,9 @@ namespace Basic
                       builder.AddDebug();
                       builder.AddConsole();
                   });
-              }).Build();
+              }).RunConsoleAsync();
             
-            var config = host.Services.GetService<IConfiguration>();
-
-            Console.WriteLine(JsonSerializer.Serialize(config.AsEnumerable().ToList()));
-
-            await host.StartAsync();
+            
         }
 
         [StreamListener(IProcessor.INPUT)]

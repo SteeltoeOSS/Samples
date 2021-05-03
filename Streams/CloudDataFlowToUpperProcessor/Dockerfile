@@ -9,4 +9,4 @@ FROM base AS final
 WORKDIR /app
 RUN pwd
 COPY bin/Debug/net5.0/publish .
-ENTRYPOINT ["dotnet", "CloudDataflow.dll"]
+ENTRYPOINT ["dotnet", "CloudDataflowToUpperProcessor.dll"]

@@ -36,6 +36,7 @@ namespace EFCore
 
         private void Sender(object state)
         {
+           
             template.ConvertAndSend("sample-sink-data","", new Foo() { name = "test", tag = "tag1" });
         }
     }

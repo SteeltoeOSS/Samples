@@ -19,18 +19,20 @@ namespace CloudDataflowToUpperProcessor
     {
         public static void Main(string[] args)
         {
-           
+
             var host = CreateStreamHostBuilder(args).Build(); // Alternatively use the default host builder      
             host.Run();
         }
 
         public static IHostBuilder CreateStreamHostBuilder(string[] args) =>
           Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webhostBuilder =>
-              webhostBuilder.UseStartup<Startup>()
-                    .UseCloudHosting()
-                    .AddAllActuators()
-                    .AddCloudFoundryConfiguration())
+                .ConfigureWebHostDefaults(
+                    webhostBuilder =>
+                        webhostBuilder.UseStartup<Startup>()
+                        .UseCloudHosting()
+                        .AddCloudFoundryConfiguration()
+                        .AddAllActuators())
+
             .AddStreamsServices<Program>();
 
         [StreamListener(IProcessor.INPUT)]
@@ -41,5 +43,4 @@ namespace CloudDataflowToUpperProcessor
             return inputVal.ToUpper();
         }
     }
-   
 }

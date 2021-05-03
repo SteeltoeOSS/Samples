@@ -8,5 +8,5 @@ EXPOSE 443
 FROM base AS final
 WORKDIR /app
 RUN pwd
-COPY bin/Debug/net5.0/publish .
-ENTRYPOINT ["dotnet", "CloudDataflowSink.dll"]
+COPY bin/Debug/netcoreapp3.1/publish .
+ENTRYPOINT ["dotnet", "CloudDataflowLogSink.dll"]

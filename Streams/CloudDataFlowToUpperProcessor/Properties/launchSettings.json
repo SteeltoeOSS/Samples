@@ -9,7 +9,7 @@
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "IIS Express": {
+    "IIS-VCAP": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -20,7 +20,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "steeltoe_stream_samples": {
+    "CloudFoundryToUpperProcessor": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

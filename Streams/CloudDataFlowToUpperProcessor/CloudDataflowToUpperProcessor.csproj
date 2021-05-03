@@ -27,8 +27,8 @@
     <ProjectReference Include="..\..\..\Steeltoe\src\Configuration\src\CloudFoundryCore\Steeltoe.Extensions.Configuration.CloudFoundryCore.csproj" />
     <ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\CloudFoundry\Steeltoe.Connector.CloudFoundry.csproj" />
     <ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\ConnectorBase\Steeltoe.Connector.ConnectorBase.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Management\src\CloudFoundryCore\Steeltoe.Management.CloudFoundryCore.csproj" />
-    <!--<ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\ConnectorCore\Steeltoe.Connector.ConnectorCore.csproj" />-->
+    <ProjectReference Include="..\..\..\Steeltoe\src\Management\src\EndpointCore\Steeltoe.Management.EndpointCore.csproj" />  
+
     <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\BinderRabbitMQ\Steeltoe.Stream.Binder.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\StreamBase\Steeltoe.Stream.StreamBase.csproj" />
   </ItemGroup>
