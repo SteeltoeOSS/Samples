@@ -5,5 +5,6 @@ steps:
     echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
     sudo apt-get update
     sudo apt-get install cf-cli
+    echo "##vso[task.setvariable variable=JAVA_HOME]$(JAVA_HOME_8_X64)"
   displayName: 'Setup Cloud Foundry CLI'
 - template: configure-cloud-foundry-steps.yaml
