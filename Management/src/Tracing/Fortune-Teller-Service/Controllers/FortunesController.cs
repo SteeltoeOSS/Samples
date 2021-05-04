@@ -13,6 +13,7 @@ namespace FortuneTellerService.Controllers
         private Random SleepInterval { get; } = new Random();
         private IFortuneRepository _fortunes;
         private ILogger<FortunesController> _logger;
+
         public FortunesController(IFortuneRepository fortunes, ILogger<FortunesController> logger)
         {
             _fortunes = fortunes;
@@ -32,7 +33,7 @@ namespace FortuneTellerService.Controllers
         public Fortune Random()
         {
             _logger?.LogInformation("GET api/fortunes/random");
-            Thread.Sleep(SleepInterval.Next(0, 10000));
+            Thread.Sleep(SleepInterval.Next(0, 2000));
             return _fortunes.RandomFortune();
         }
     }
