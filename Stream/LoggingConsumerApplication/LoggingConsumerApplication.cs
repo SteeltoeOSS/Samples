@@ -14,8 +14,7 @@ namespace LoggingConsumerApplication
     {
         static async Task Main(string[] args)
         {
-
-            await StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
+          await StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
               .ConfigureServices((context, services) =>
               {
                   services.AddLogging(builder =>
@@ -31,9 +30,8 @@ namespace LoggingConsumerApplication
         {
             Console.WriteLine("Received: " + person);
         }
-
-
     }
+
     public class Person
     {
         public string Name { get; set; }
@@ -43,5 +41,4 @@ namespace LoggingConsumerApplication
             return Name;
         }
     }
-
 }

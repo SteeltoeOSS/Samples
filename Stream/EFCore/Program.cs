@@ -16,10 +16,8 @@ namespace EFCore
 {
     class Program
     {
-
         static async Task Main(string[] args)
         {
-
             await CreateHostBuilder(args)
               .ConfigureServices((context, services) =>
               {
@@ -40,15 +38,19 @@ namespace EFCore
                   services.AddHostedService<MyRabbitSender>();
               }).Build().StartAsync();
         }
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             StreamHost.CreateDefaultBuilder<BindableChannels>(args);
+
         public class FooContext : DbContext
         {
             public FooContext(DbContextOptions<FooContext> options) : base(options)
-            { }
+            {
+            }
 
             public DbSet<Foo> Foos { get; set; }
         }
+
         public class Foo
         {
             [Key]
@@ -66,7 +68,6 @@ namespace EFCore
             public BindableChannels(FooContext db)
             {
                 _db = db;
-
             }
 
             [StreamListener("input")]
@@ -77,9 +78,6 @@ namespace EFCore
                 _db.Add(foo);
                 _db.SaveChanges();
             }
-
-
         }
     }
-
 }

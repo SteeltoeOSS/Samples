@@ -25,14 +25,10 @@ namespace CloudDataflowSink
 
         public static IHostBuilder CreateStreamHostBuilder(string[] args) =>
           Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webhostBuilder =>
-            {
-                webhostBuilder
-                    .UseStartup<Startup>()
-                    .UseCloudHosting()
-                    .AddCloudFoundryConfiguration()
-                    .AddAllActuators();
-            })
+            .ConfigureWebHostDefaults(webhostBuilder => webhostBuilder.UseStartup<Startup>())
+            .UseCloudHosting()
+            .AddCloudFoundryConfiguration()
+            .AddAllActuators()
            .AddStreamServices<Program>();
 
         [StreamListener(ISink.INPUT)]

@@ -28,7 +28,7 @@ namespace CloudDataflowToUpperProcessor
                 .ConfigureWebHostDefaults(webhostBuilder => webhostBuilder.UseStartup<Startup>())
                 .UseCloudHosting()
                 .AddCloudFoundryConfiguration()
-                .AddAllActuators())
+                .AddAllActuators()
                 .AddStreamServices<Program>();
 
         [StreamListener(IProcessor.INPUT)]
