@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -21,8 +22,7 @@ namespace EFCore
             await CreateHostBuilder(args)
               .ConfigureServices((context, services) =>
               {
-                  // Get from   context.Configuration
-                  var connectionString = "server=localhost;user=root;password=my-secret-pw;database=steeltoe";
+                  var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
                   services.AddDbContextPool<FooContext>(
                       dbContextOptions => dbContextOptions
                          .UseMySql(connectionString, mySqlOptions => mySqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend))
