@@ -7,6 +7,5 @@ EXPOSE 443
 
 FROM base AS final
 WORKDIR /app
-RUN pwd
 COPY bin/Debug/net5.0/publish .
 ENTRYPOINT ["dotnet", "CloudDataflowToUpperProcessor.dll"]

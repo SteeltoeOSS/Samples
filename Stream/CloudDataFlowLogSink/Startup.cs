@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-//using Microsoft.OpenApi.Models;
 using Steeltoe.Messaging;
 using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Stream.Attributes;
@@ -43,8 +42,6 @@ namespace CloudDataflowSink
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

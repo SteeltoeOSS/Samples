@@ -19,21 +19,17 @@ namespace CloudDataflowToUpperProcessor
     {
         public static void Main(string[] args)
         {
-
             var host = CreateStreamHostBuilder(args).Build();
             host.Run();
         }
 
         public static IHostBuilder CreateStreamHostBuilder(string[] args) =>
           Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(
-                    webhostBuilder =>
-                        webhostBuilder.UseStartup<Startup>()
-                        .UseCloudHosting()
-                        .AddCloudFoundryConfiguration()
-                        .AddAllActuators())
-
-            .AddStreamServices<Program>();
+                .ConfigureWebHostDefaults(webhostBuilder => webhostBuilder.UseStartup<Startup>())
+                .UseCloudHosting()
+                .AddCloudFoundryConfiguration()
+                .AddAllActuators())
+                .AddStreamServices<Program>();
 
         [StreamListener(IProcessor.INPUT)]
         [SendTo(IProcessor.OUTPUT)]

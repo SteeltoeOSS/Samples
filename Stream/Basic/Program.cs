@@ -14,7 +14,6 @@ namespace Basic
     {
         static async Task Main(string[] args)
         {
-
             await StreamHost.CreateDefaultBuilder<Program>(args)
               .ConfigureServices((context, services) =>
               {
@@ -24,8 +23,6 @@ namespace Basic
                       builder.AddConsole();
                   });
               }).RunConsoleAsync();
-            
-            
         }
 
         [StreamListener(IProcessor.INPUT)]
@@ -34,7 +31,5 @@ namespace Basic
         {
             return inputVal.ToUpper();
         }
-
     }
-  
 }

@@ -17,7 +17,6 @@ namespace CloudDataflowSink
         private static ILogger<Program> _logger;
         public static void Main(string[] args)
         {
-
             var host = CreateStreamHostBuilder(args).Build();
             _logger = host.Services.GetService<ILogger<Program>>();
        
@@ -42,5 +41,4 @@ namespace CloudDataflowSink
             _logger.LogInformation("sink: "+input);
         }
     }
-   
 }

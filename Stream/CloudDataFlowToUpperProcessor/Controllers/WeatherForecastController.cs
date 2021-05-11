@@ -36,11 +36,9 @@ namespace CloudDataflowToUpperProcessor.Controllers
             _logger = logger;
         }
 
-  
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-          
             var rng = new Random();
             var forecast =  Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -49,10 +47,8 @@ namespace CloudDataflowToUpperProcessor.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            
-            
+
             return forecast;
         }
-    
     }
 }
