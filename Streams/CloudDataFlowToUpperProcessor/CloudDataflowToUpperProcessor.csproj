@@ -9,8 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Steeltoe.Common" Version="3.1.0-rc1" />
@@ -18,7 +16,7 @@
     <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.1.0-rc1" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-rc1" />
   </ItemGroup>

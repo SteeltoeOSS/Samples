@@ -20,7 +20,7 @@ namespace CloudDataflowToUpperProcessor
         public static void Main(string[] args)
         {
 
-            var host = CreateStreamHostBuilder(args).Build(); // Alternatively use the default host builder      
+            var host = CreateStreamHostBuilder(args).Build();
             host.Run();
         }
 
