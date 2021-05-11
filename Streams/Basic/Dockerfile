@@ -6,7 +6,6 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Basic.csproj", "Basic/"]
-RUN dotnet nuget add source https://pkgs.dev.azure.com/dotnet/Steeltoe/_packaging/dev/nuget/v3/index.json -n SteeltoeDe
 RUN dotnet restore "Basic/Basic.csproj"
 COPY . Basic
 WORKDIR "/src/Basic"
