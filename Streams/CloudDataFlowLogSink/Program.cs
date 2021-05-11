@@ -18,7 +18,7 @@ namespace CloudDataflowSink
         public static void Main(string[] args)
         {
 
-            var host = CreateStreamHostBuilder(args).Build(); // Alternatively use the default host builder
+            var host = CreateStreamHostBuilder(args).Build();
             _logger = host.Services.GetService<ILogger<Program>>();
        
             host.Run();

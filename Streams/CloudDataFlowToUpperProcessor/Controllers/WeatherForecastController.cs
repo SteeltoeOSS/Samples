@@ -30,25 +30,17 @@ namespace CloudDataflowToUpperProcessor.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly Program p;
-        private readonly IOptionsMonitor<BindingServiceOptions> bindingsOptions;
-        private readonly Steeltoe.Messaging.RabbitMQ.Connection.IConnectionFactory connectionFactory;
-        private readonly IOptionsMonitor<RabbitOptions> rabbitOptions;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, Program p, IOptionsMonitor<BindingServiceOptions> bindingsOptions, Steeltoe.Messaging.RabbitMQ.Connection.IConnectionFactory connectionFactory, IOptionsMonitor<RabbitOptions> rabbitOptions)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            this.p = p;
-            this.bindingsOptions = bindingsOptions;
-            this.connectionFactory = connectionFactory;
-            this.rabbitOptions = rabbitOptions;
         }
 
   
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            p.Handle("test 123");
+          
             var rng = new Random();
             var forecast =  Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -61,19 +53,6 @@ namespace CloudDataflowToUpperProcessor.Controllers
             
             return forecast;
         }
-        [HttpGet("Config")]
-        public BindingServiceOptions GetConfig()
-        {
-            return this.bindingsOptions.CurrentValue ;
-        }
-
-        [HttpGet("RabbitOptions")]
-        public string GetconnectionFactory()
-        {
-            var o = rabbitOptions.CurrentValue;
-            var cc = connectionFactory as CachingConnectionFactory;
-            return $"cc: {cc?.Host}:{cc?.VirtualHost} {cc?.Username}:{cc?.Password}\n"
-            + $"{o.Host}:{o.VirtualHost}:{o.Username}:{o.Password}";
-        }
+    
     }
 }
