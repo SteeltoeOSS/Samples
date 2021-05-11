@@ -10,7 +10,7 @@ using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Binder;
 using Steeltoe.Stream.Messaging;
-using Steeltoe.Stream.StreamsHost;
+using Steeltoe.Stream.StreamHost;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -23,7 +23,7 @@ namespace PolledConsumer
     {
         static async Task Main(string[] args)
         {
-            var host = StreamsHost
+            var host = StreamHost
               .CreateDefaultBuilder<Program>(args)
               .ConfigureServices(svc => svc.AddHostedService<Worker>())
               .Build();

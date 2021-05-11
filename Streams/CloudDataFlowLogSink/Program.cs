@@ -34,7 +34,7 @@ namespace CloudDataflowSink
                     .AddCloudFoundryConfiguration()
                     .AddAllActuators();
             })
-           .AddStreamsServices<Program>();
+           .AddStreamServices<Program>();
 
         [StreamListener(ISink.INPUT)]
         public void HandleMessage(string input)

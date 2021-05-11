@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using Steeltoe.Stream.StreamsHost;
+using Steeltoe.Stream.StreamHost;
 using System.Threading.Tasks;
 
 namespace Basic
@@ -15,7 +15,7 @@ namespace Basic
         static async Task Main(string[] args)
         {
 
-            await StreamsHost.CreateDefaultBuilder<Program>(args)
+            await StreamHost.CreateDefaultBuilder<Program>(args)
               .ConfigureServices((context, services) =>
               {
                   services.AddLogging(builder =>

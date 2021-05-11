@@ -6,9 +6,11 @@ using Steeltoe.Messaging.RabbitMQ.Exceptions;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Extensions;
 using Steeltoe.Stream.Messaging;
-using Steeltoe.Stream.StreamsHost;
+using Steeltoe.Stream.StreamHost;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq; 
 
 namespace XDeathApplication
 {
@@ -21,7 +23,7 @@ namespace XDeathApplication
         static async Task Main(string[] args)
         {
 
-            await StreamsHost.CreateDefaultBuilder<Program>(args)
+            await StreamHost.CreateDefaultBuilder<Program>(args)
               .ConfigureServices((context, services) =>
               {
                   services.AddLogging(builder =>
@@ -35,9 +37,10 @@ namespace XDeathApplication
         [StreamListener(ISink.INPUT)]
         public void Listen(string input, 
             [Header(Name ="x-death", Required = false)]
-            IDictionary<string, object> death)
+            ArrayList death)
         {
-            if (death != null && (long) death["count"] == 3L)
+            var deathMaps = death?.Cast<IDictionary<string, object>>();
+            if (deathMaps != null && deathMaps.Any(dm=> (long)dm["count"] == 3L))
             {
                 // giving up - don't send to DLX
                 throw new ImmediateAcknowledgeException("Failed after 4 attempts");

@@ -7,7 +7,7 @@ using Steeltoe.Common.Util;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using Steeltoe.Stream.StreamsHost;
+using Steeltoe.Stream.StreamHost;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -41,7 +41,7 @@ namespace EFCore
               }).Build().StartAsync();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            StreamsHost.CreateDefaultBuilder<BindableChannels>(args);
+            StreamHost.CreateDefaultBuilder<BindableChannels>(args);
         public class FooContext : DbContext
         {
             public FooContext(DbContextOptions<FooContext> options) : base(options)

@@ -33,7 +33,7 @@ namespace CloudDataflowToUpperProcessor
                         .AddCloudFoundryConfiguration()
                         .AddAllActuators())
 
-            .AddStreamsServices<Program>();
+            .AddStreamServices<Program>();
 
         [StreamListener(IProcessor.INPUT)]
         [SendTo(IProcessor.OUTPUT)]

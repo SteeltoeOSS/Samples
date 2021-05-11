@@ -8,7 +8,7 @@ using Steeltoe.Common.Expression.Internal.Spring.Support;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using Steeltoe.Stream.StreamsHost;
+using Steeltoe.Stream.StreamHost;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -20,7 +20,7 @@ namespace VoteHandler
     {
         static async Task Main(string[] args)
         {
-            var host = StreamsHost
+            var host = StreamHost
               .CreateDefaultBuilder<CatsAndDogs>(args)
               .Build();
             await host.StartAsync();
