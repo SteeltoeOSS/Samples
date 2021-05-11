@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using Steeltoe.Messaging;
 using Steeltoe.Messaging.RabbitMQ.Core;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
-using Steeltoe.Messaging.Support;
 using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static EFCore.Program;

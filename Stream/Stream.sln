@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransformProcessor", "Trans
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteHandler", "VoteHandler\VoteHandler.csproj", "{61BF94C5-BA69-4716-A79B-0AE796B11C37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XDeathApplication", "XDeathApplication\XDeathApplication.csproj", "{3471089F-3950-4685-9A71-B10875745ED3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingConsumerApplication", "LoggingConsumerApplication\LoggingConsumerApplication.csproj", "{B5C0656C-1262-48FF-92FB-2CD52B8855D7}"
 EndProject
 Global
@@ -61,10 +59,6 @@ Global
 		{61BF94C5-BA69-4716-A79B-0AE796B11C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BF94C5-BA69-4716-A79B-0AE796B11C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61BF94C5-BA69-4716-A79B-0AE796B11C37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3471089F-3950-4685-9A71-B10875745ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3471089F-3950-4685-9A71-B10875745ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3471089F-3950-4685-9A71-B10875745ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3471089F-3950-4685-9A71-B10875745ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5C0656C-1262-48FF-92FB-2CD52B8855D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5C0656C-1262-48FF-92FB-2CD52B8855D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5C0656C-1262-48FF-92FB-2CD52B8855D7}.Release|Any CPU.ActiveCfg = Release|Any CPU

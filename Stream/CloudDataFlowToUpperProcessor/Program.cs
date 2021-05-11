@@ -1,10 +1,7 @@
 using Steeltoe.Common.Hosting;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Messaging.RabbitMQ.Extensions;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Extensions;
 using Steeltoe.Stream.Messaging;

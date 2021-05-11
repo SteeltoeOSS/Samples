@@ -1,22 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using RabbitMQ.Client;
-using Steeltoe.Common.Util;
-using Steeltoe.Connector;
-using Steeltoe.Connector.Services;
-using Steeltoe.Messaging;
-using Steeltoe.Messaging.RabbitMQ.Config;
-using Steeltoe.Messaging.RabbitMQ.Connection;
-using Steeltoe.Messaging.Support;
-using Steeltoe.Stream.Binder.Rabbit.Config;
-using Steeltoe.Stream.Config;
-using Steeltoe.Stream.Messaging;
 
 namespace CloudDataflowToUpperProcessor.Controllers
 {

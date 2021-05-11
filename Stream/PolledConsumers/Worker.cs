@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging;
 using System;
-using System.Text;
-using System.Text.Unicode;
 using System.Threading;
 using System.Threading.Tasks;
 

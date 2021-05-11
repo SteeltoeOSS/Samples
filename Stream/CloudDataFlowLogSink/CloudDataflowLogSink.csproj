@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steeltoe.Common" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.1.0-rc1" />
     <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.1.0-rc1" />
