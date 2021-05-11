@@ -12,25 +12,16 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <!--<PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.0.2" />-->
-    <!--<PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="3.0.2" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.0.2" />-->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-
-    <!--<PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-5271" />
-    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-5271" />-->
+    <PackageReference Include="Steeltoe.Common" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-rc1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Steeltoe\src\Common\src\Common.Hosting\Steeltoe.Common.Hosting.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Common\src\Common\Steeltoe.Common.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Configuration\src\CloudFoundryCore\Steeltoe.Extensions.Configuration.CloudFoundryCore.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\CloudFoundry\Steeltoe.Connector.CloudFoundry.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\ConnectorBase\Steeltoe.Connector.ConnectorBase.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Management\src\EndpointCore\Steeltoe.Management.EndpointCore.csproj" />  
-
-    <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\BinderRabbitMQ\Steeltoe.Stream.Binder.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\StreamBase\Steeltoe.Stream.StreamBase.csproj" />
-  </ItemGroup>
 
 </Project>

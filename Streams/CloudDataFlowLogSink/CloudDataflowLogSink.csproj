@@ -5,20 +5,16 @@
     <UserSecretsId>c5463339-59df-4259-9d72-455c72aba99f</UserSecretsId>
   </PropertyGroup>
 
-
   <ItemGroup>
-
-    <ProjectReference Include="..\..\..\Steeltoe\src\Common\src\Common.Hosting\Steeltoe.Common.Hosting.csproj" />
-
-    <ProjectReference Include="..\..\..\Steeltoe\src\Common\src\Common\Steeltoe.Common.csproj" />
-
-    <ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\ConnectorBase\Steeltoe.Connector.ConnectorBase.csproj" />
-    
-    <ProjectReference Include="..\..\..\Steeltoe\src\Connectors\src\CloudFoundry\Steeltoe.Connector.CloudFoundry.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Configuration\src\CloudFoundryCore\Steeltoe.Extensions.Configuration.CloudFoundryCore.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Management\src\CloudFoundryCore\Steeltoe.Management.CloudFoundryCore.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\BinderRabbitMQ\Steeltoe.Stream.Binder.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\StreamBase\Steeltoe.Stream.StreamBase.csproj" />
+    <PackageReference Include="Steeltoe.Common" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-rc1" />
   </ItemGroup>
+
 
 </Project>

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using Steeltoe.Stream.StreamsHost;
+using Steeltoe.Stream.StreamHost;
 using System;
 using System.Threading.Tasks;
 
@@ -15,7 +15,7 @@ namespace LoggingConsumerApplication
         static async Task Main(string[] args)
         {
 
-            await StreamsHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
+            await StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
               .ConfigureServices((context, services) =>
               {
                   services.AddLogging(builder =>
