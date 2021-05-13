@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-rc1" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\BinderRabbitMQ\Steeltoe.Stream.Binder.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\Steeltoe\src\Stream\src\StreamBase\Steeltoe.Stream.StreamBase.csproj" />
+  </ItemGroup>-->
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/servicehub.config.schema.json" /></VisualStudio></ProjectExtensions>
+</Project>
