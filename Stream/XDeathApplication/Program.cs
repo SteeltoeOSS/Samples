@@ -16,6 +16,7 @@ using Steeltoe.Stream.Binder.Rabbit;
 using Microsoft.Extensions.Options;
 using Steeltoe.Stream.Binder.Rabbit.Config;
 using System;
+using Microsoft.Extensions.Configuration;
 
 namespace XDeathApplication
 {
@@ -28,22 +29,16 @@ namespace XDeathApplication
         static async Task Main(string[] args)
         {
 
+            IConfiguration config = null;
             var host = await StreamHost.CreateDefaultBuilder<Program>(args)
               .ConfigureServices((context, services) =>
               {
-                  services.Configure<RabbitBindingsOptions>(context.Configuration.GetSection(RabbitBindingsOptions.PREFIX));
-
                   services.AddLogging(builder =>
                   {
                       builder.AddDebug();
                       builder.AddConsole();
                   });
               }).StartAsync();
-
-            var bindingsOptions  = host.Services.GetService<IOptionsMonitor<RabbitBindingsOptions>>();
-            var foo = bindingsOptions.CurrentValue;
-            Console.WriteLine("AutoBindDlq" + foo.Default.Consumer.AutoBindDlq);
-            Console.WriteLine("PREFIX " + RabbitBindingsOptions.PREFIX);
 
         }
 
