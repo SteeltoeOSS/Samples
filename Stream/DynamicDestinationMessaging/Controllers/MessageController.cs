@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DynamicDestinationMessaging.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging;
 using Steeltoe.Stream.Binding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DynamicDestinationMessaging.Controllers
 {
@@ -28,18 +24,16 @@ namespace DynamicDestinationMessaging.Controllers
         }
 
         [HttpPost]
-        public async Task<string> PostMessage()
+        [Consumes("application/json")]
+        public async Task<string> PostMessage([FromBody] SampleMessage message)
         {
-            var message = "This is a test";
-            var destination = "steeltoestream.steeltoebasicprocessor";
+            logger.LogDebug($"preparing message for {message.Destination}");
 
-            logger.LogDebug($"preparing message for {destination}");
-
-            var messageChannel = binderAwareChannelResolver.ResolveDestination("steeltoestream.steeltoebasicprocessor");
+            var messageChannel = binderAwareChannelResolver.ResolveDestination(message.Destination);
 
             logger.LogDebug($"retrieved message channel {messageChannel.ServiceName}");
 
-            var streamMessage = Message.Create<byte[]>(Encoding.UTF8.GetBytes(message));
+            var streamMessage = Message.Create(Encoding.UTF8.GetBytes(message.Body));
 
             logger.LogDebug($"stream message created from input");
 
@@ -49,7 +43,7 @@ namespace DynamicDestinationMessaging.Controllers
 
             logger.LogDebug($"Status: {messageStatus}; Service: {messageChannel.ServiceName}");
 
-            return $"The following message was sent to {messageChannel.ServiceName}: {message}";
+            return $"Message {messageStatus} for {messageChannel.ServiceName}: {message}";
         }
     }
 }
