@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingConsumerApplication"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestPocoWithAnnotatedArguments", "TestPocoWithAnnotatedArguments\TestPocoWithAnnotatedArguments.csproj", "{1326E76B-04EA-42B1-ABAE-0A5A488B7597}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicDestinationMessaging", "DynamicDestinationMessaging\DynamicDestinationMessaging.csproj", "{D7B77F33-04BD-4DBE-8DEB-179E41CA9742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicDestinationMessaging", "DynamicDestinationMessaging\DynamicDestinationMessaging.csproj", "{484E2F11-6025-4E7D-9C4B-663C90264377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,10 +65,10 @@ Global
 		{1326E76B-04EA-42B1-ABAE-0A5A488B7597}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1326E76B-04EA-42B1-ABAE-0A5A488B7597}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1326E76B-04EA-42B1-ABAE-0A5A488B7597}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7B77F33-04BD-4DBE-8DEB-179E41CA9742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7B77F33-04BD-4DBE-8DEB-179E41CA9742}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7B77F33-04BD-4DBE-8DEB-179E41CA9742}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7B77F33-04BD-4DBE-8DEB-179E41CA9742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{484E2F11-6025-4E7D-9C4B-663C90264377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{484E2F11-6025-4E7D-9C4B-663C90264377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{484E2F11-6025-4E7D-9C4B-663C90264377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{484E2F11-6025-4E7D-9C4B-663C90264377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
