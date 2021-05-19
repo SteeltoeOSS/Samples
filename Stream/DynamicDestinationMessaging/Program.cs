@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace DynamicDestinationMessaging
 {
-    [EnableBinding(typeof(IProcessor))]
+    [EnableBinding(typeof(ISink))]
     class Program
     {
         private static BinderAwareChannelResolver binderAwareChannelResolver;
@@ -21,11 +21,7 @@ namespace DynamicDestinationMessaging
 
         static async Task Main(string[] args)
         {
-            var host = StreamHost.CreateDefaultBuilder<Program>(args)
-                .ConfigureAppConfiguration(config => {
-                    config.AddJsonFile("appsettings.json");
-                })
-                .Build();
+            var host = StreamHost.CreateDefaultBuilder<Program>(args).Build();
 
             binderAwareChannelResolver =
                 host.Services.GetService<IDestinationResolver<IMessageChannel>>() as BinderAwareChannelResolver;
@@ -35,7 +31,7 @@ namespace DynamicDestinationMessaging
             await host.StartAsync();
         }
 
-        [StreamListener(IProcessor.INPUT)]
+        [StreamListener(ISink.INPUT)]
         public async void Handle(string message)
         {
             logger.LogDebug($"received message '{message}' and determining destination");
