@@ -2,17 +2,18 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Messaging;
+using Steeltoe.Messaging.Core;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Binding;
 using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamHost;
-using System.Threading.Tasks;
-using Steeltoe.Messaging;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DynamicDestinationMessaging
 {
-    [EnableBinding(typeof(IProcessor))]
+    [EnableBinding(typeof(ISink))]
     class Program
     {
         private static BinderAwareChannelResolver binderAwareChannelResolver;
@@ -20,28 +21,17 @@ namespace DynamicDestinationMessaging
 
         static async Task Main(string[] args)
         {
-            var host = StreamHost.CreateDefaultBuilder<Program>(args)
-                .ConfigureAppConfiguration(config => {
-                    config.AddJsonFile("appsettings.json");
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddTransient<BinderAwareChannelResolver>();
-                    services.AddLogging(builder =>
-                    {
-                        builder.AddDebug();
-                        builder.AddConsole();
-                    });
-                })
-                .Build();
+            var host = StreamHost.CreateDefaultBuilder<Program>(args).Build();
 
-            binderAwareChannelResolver = host.Services.GetService<BinderAwareChannelResolver>();
+            binderAwareChannelResolver =
+                host.Services.GetService<IDestinationResolver<IMessageChannel>>() as BinderAwareChannelResolver;
+
             logger = host.Services.GetService<ILogger<Program>>();
 
             await host.StartAsync();
         }
 
-        [StreamListener(IProcessor.INPUT)]
+        [StreamListener(ISink.INPUT)]
         public async void Handle(string message)
         {
             logger.LogDebug($"received message '{message}' and determining destination");
