@@ -4,51 +4,29 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Exceptions;
 using Steeltoe.Stream.Attributes;
-using Steeltoe.Stream.Extensions;
 using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamHost;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
-using Steeltoe.Common.Lifecycle;
-using Steeltoe.Stream.Binder.Rabbit;
-using Microsoft.Extensions.Options;
-using Steeltoe.Stream.Binder.Rabbit.Config;
-using System;
-using Microsoft.Extensions.Configuration;
 
 namespace XDeathApplication
 {
-    /// <summary>
-    /// TODO: Doesn't work yet, Make it work 
-    /// </summary>
     [EnableBinding(typeof(ISink))]
     public class Program
     {
         static async Task Main(string[] args)
         {
-
-            IConfiguration config = null;
-            var host = await StreamHost.CreateDefaultBuilder<Program>(args)
-              .ConfigureServices((context, services) =>
-              {
-                  services.AddLogging(builder =>
-                  {
-                      builder.AddDebug();
-                      builder.AddConsole();
-                  });
-              }).StartAsync();
+              var host = await StreamHost.CreateDefaultBuilder<Program>(args)
+             .StartAsync();
 
         }
 
         [StreamListener(ISink.INPUT)]
         public void Listen(string input, 
             [Header(Name ="x-death", Required = false)]
-            ArrayList death)
+            IDictionary<string, object> death)
         {
-            var deathMaps = death?.Cast<IDictionary<string, object>>();
-            if (deathMaps != null && deathMaps.Any(dm=> (long)dm["count"] == 3L))
+            if (death != null && (long)death["count"] == 3L)
             {
                 // giving up - don't send to DLX
                 throw new ImmediateAcknowledgeException("Failed after 4 attempts");
