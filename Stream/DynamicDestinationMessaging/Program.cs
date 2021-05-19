@@ -2,13 +2,14 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Messaging;
+using Steeltoe.Messaging.Core;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Binding;
 using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamHost;
-using System.Threading.Tasks;
-using Steeltoe.Messaging;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DynamicDestinationMessaging
 {
@@ -24,18 +25,11 @@ namespace DynamicDestinationMessaging
                 .ConfigureAppConfiguration(config => {
                     config.AddJsonFile("appsettings.json");
                 })
-                .ConfigureServices(services =>
-                {
-                    services.AddTransient<BinderAwareChannelResolver>();
-                    services.AddLogging(builder =>
-                    {
-                        builder.AddDebug();
-                        builder.AddConsole();
-                    });
-                })
                 .Build();
 
-            binderAwareChannelResolver = host.Services.GetService<BinderAwareChannelResolver>();
+            binderAwareChannelResolver =
+                host.Services.GetService<IDestinationResolver<IMessageChannel>>() as BinderAwareChannelResolver;
+
             logger = host.Services.GetService<ILogger<Program>>();
 
             await host.StartAsync();
