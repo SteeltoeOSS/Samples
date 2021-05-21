@@ -30,11 +30,9 @@ namespace ReRouteDlqRepublishToDlqTrue
               .CreateDefaultBuilder<ReRouteDlq>(args)
               .ConfigureServices((ctx, services) =>
               {
-                  //// Add steeltoe rabbit services
                   services.AddRabbitServices();
                   services.AddRabbitTemplate();
 
-                  // Tell steeltoe about singleton so it can wire up queues with methods to process queues (i.e. RabbitListenerAttribute)
                   services.AddRabbitListeners<ReRouteDlq>();
               })
               .Build();

@@ -25,21 +25,20 @@ namespace ReRouteDlq
 
         static async Task Main(string[] args)
         {
-            var host = StreamHost//.CreateDefaultBuilder(args)
+            var host = StreamHost
               .CreateDefaultBuilder<ReRouteDlq>(args)
               .ConfigureServices((ctx, services) =>
               {
-                 //// Add steeltoe rabbit services
                   services.AddRabbitServices();
                   services.AddRabbitTemplate();
 
-                  // Tell steeltoe about singleton so it can wire up queues with methods to process queues (i.e. RabbitListenerAttribute)
                   services.AddRabbitListeners<ReRouteDlq>();
               })
               .Build();
 
             await host.StartAsync();
         }
+
         [EnableBinding(typeof(ISink))]
         public class ReRouteDlq
         {
