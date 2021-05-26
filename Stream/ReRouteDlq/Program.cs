@@ -56,7 +56,10 @@ namespace ReRouteDlq
                 [Header(Name = X_RETRIES_HEADER, Required = false)]
                 int? retriesHeader)
             {
-                var failedMessage = MessageBuilder.WithPayload(Encoding.UTF8.GetBytes(text)).SetHeader(X_RETRIES_HEADER, (retriesHeader ?? 0) + 1).Build();
+                var failedMessage = MessageBuilder
+                            .WithPayload(Encoding.UTF8.GetBytes(text))
+                            .SetHeader(X_RETRIES_HEADER, (retriesHeader ?? 0) + 1)
+                            .Build();
              
                 if (!retriesHeader.HasValue || retriesHeader < 3)
                 {
