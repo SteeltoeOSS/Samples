@@ -10,7 +10,7 @@ def setup(context):
     app = 'foo'
     cf.delete_app(app)
     # create service
-    service = 'p-config-server'
+    service = 'p.config-server'
     plan = 'standard'
     instance = 'myConfigServer'
     args = ['-c', './config-server.json']

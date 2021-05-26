@@ -100,7 +100,7 @@ def try_until(context, function, max_attempts):
         attempts += 1
         if max_attempts >= 0:
             if attempts > max_attempts:
-                assert False, "maximum attemps exceeded ({})".format(max_attempts)
+                assert False, "maximum attempts exceeded ({})".format(max_attempts)
             context.log.info("attempt {}/{}".format(attempts, max_attempts))
         else:
             context.log.info("attempt {}".format(attempts))
