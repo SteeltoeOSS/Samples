@@ -33,7 +33,5 @@ namespace XDeathApplication
             }
             throw new RabbitRejectAndDontRequeueException("failed");
         }
-
     }
-  
 }

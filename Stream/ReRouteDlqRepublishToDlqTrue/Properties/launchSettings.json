@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ReRouteDlqRepublishToDlqTrue": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
