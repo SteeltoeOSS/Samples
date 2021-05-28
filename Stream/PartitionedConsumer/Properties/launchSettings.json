@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PartitionedConsumer": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

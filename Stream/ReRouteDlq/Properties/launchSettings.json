@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ReRouteDlq": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
