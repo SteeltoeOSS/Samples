@@ -1,0 +1,9 @@
+﻿---
+applications:
+- name: processor
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  command: cd ${HOME} && ./CloudDataflowToUpperProcessor
+  env:
+    ASPNETCORE_ENVIRONMENT: Development

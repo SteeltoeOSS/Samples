@@ -1,0 +1,9 @@
+﻿---
+applications:
+- name: sink
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  command: cd ${HOME} && ./CloudDataflowLogSink
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
