@@ -36,10 +36,10 @@ namespace CloudDataflowToUpperProcessor
 
         public static IHostBuilder CreateStreamHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .AddCloudFoundryConfiguration()
                 .AddPlaceholderResolver()
                 .ConfigureWebHostDefaults(webhostBuilder => webhostBuilder.UseStartup<Startup>())
                 .UseCloudHosting()
-                .AddCloudFoundryConfiguration()
                 .AddAllActuators()
                 .AddStreamServices<Program>();
                 
