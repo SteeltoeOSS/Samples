@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "UsageProcessor": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
