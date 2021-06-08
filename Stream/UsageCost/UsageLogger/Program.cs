@@ -1,13 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Hosting;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.Placeholder;
 using Steeltoe.Management.Endpoint;
-using Steeltoe.Management.Endpoint.Health;
-using Steeltoe.Stream.Attributes;
-using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamHost;
 using System.Threading.Tasks;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace UsageLogger
 {
@@ -17,10 +16,12 @@ namespace UsageLogger
         static async Task Main(string[] args)
         {
             await StreamHost.CreateDefaultBuilder<UsageLogger>(args)
-                    .ConfigureLogging(builder => builder.AddConsole())
-                    .AddPlaceholderResolver()
-                    .AddHealthActuator()
-                    .RunConsoleAsync();
+                  .ConfigureWebHostDefaults(webhostBuilder => webhostBuilder.UseStartup<Startup>())
+                  .AddCloudFoundryConfiguration()
+                  .UseCloudHosting()
+                  .AddPlaceholderResolver()
+                  .AddAllActuators()
+                  .RunConsoleAsync();
         }
     }
 }

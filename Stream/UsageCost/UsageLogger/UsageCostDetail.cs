@@ -10,7 +10,7 @@
 
         public override string ToString()
         {
-            return $"{{ \"userId\" \"{UserId}\", \"callCost\": \"{CallCost}\", \"dataCost\": \"{DataCost}\" }}";
+            return $"{{ \"UserId\" \"{UserId}\", \"CallCost\": \"{CallCost:C}\", \"DataCost\": \"{DataCost:C}\" }}";
         }
     }
 }

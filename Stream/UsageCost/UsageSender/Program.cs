@@ -6,6 +6,7 @@ using Steeltoe.Management.Endpoint;
 using System.Threading.Tasks;
 using Steeltoe.Stream.StreamHost;
 using Steeltoe.Extensions.Configuration.Placeholder;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace UsageSender
 {
@@ -16,6 +17,7 @@ namespace UsageSender
             await StreamHost
             .CreateDefaultBuilder<UsageGenerator>(args)
             .ConfigureWebHostDefaults(webhostBuilder => webhostBuilder.UseStartup<Startup>())
+            .AddCloudFoundryConfiguration()
             .UseCloudHosting()
             .AddPlaceholderResolver()
             .AddAllActuators()

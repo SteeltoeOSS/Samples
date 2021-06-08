@@ -1,0 +1,12 @@
+---
+applications:
+- name: usage-sender
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  disk_quota: 512M
+  command: cd ${HOME} && ./UsageSender
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - stream-rabbitmq

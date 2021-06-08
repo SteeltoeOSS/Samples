@@ -1,7 +1,10 @@
 {
   "profiles": {
     "UsageProcessor": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "Port": "8082"
+      }
     },
     "Docker": {
       "commandName": "Docker"

@@ -1,20 +1,7 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:50753",
-      "sslPort": 44381
-    }
-  },
   "profiles": {
     "UsageSender": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "actuator/health",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     },
     "Docker": {
       "commandName": "Docker"
