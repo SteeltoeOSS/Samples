@@ -1,0 +1,61 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: usage-sender
+  labels:
+    app: usage-cost-stream
+spec:
+  containers:
+    - name: usage-sender
+      image: projects.registry.vmware.com/steeltoe/usagesender:latest
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      env:
+        - name: SPRING_RABBITMQ_ADDRESSES
+          value: rabbitmq
+        - name: SERVER_PORT
+          value: '8080'
+  restartPolicy: Always
+
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: usage-processor
+  labels:
+    app: usage-cost-stream
+spec:
+  containers:
+    - name: usage-processor
+      image: projects.registry.vmware.com/steeltoe/usageprocessor:latest
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      env:
+        - name: SPRING_RABBITMQ_ADDRESSES
+          value: rabbitmq
+        - name: SERVER_PORT
+          value: '8080'
+  restartPolicy: Always
+
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: usage-logger
+  labels:
+    app: usage-cost-stream
+spec:
+  containers:
+    - name: usage-logger
+      image: projects.registry.vmware.com/steeltoe/usageprocessor:latest
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      env:
+        - name: SPRING_RABBITMQ_ADDRESSES
+          value: rabbitmq
+        - name: SERVER_PORT
+          value: '8080'
+  restartPolicy: Always

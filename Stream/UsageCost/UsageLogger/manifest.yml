@@ -1,0 +1,12 @@
+---
+applications:
+- name: usage-logger
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  disk_quota: 512M
+  command: cd ${HOME} && ./UsageLogger
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+  services:
+   - stream-rabbitmq

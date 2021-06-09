@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "UsageLogger": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Port": "8084"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

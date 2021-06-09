@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceHolderCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-rc1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
