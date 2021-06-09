@@ -14,7 +14,7 @@ namespace UsageProcessor
 
         public override string ToString()
         {
-            return $"{{ \"userId\" \"{UserId}\", \"callCost\": \"{CallCost}\", \"dataCost\": \"{DataCost}\" }}";
+            return $"{{ \"userId\" \"{UserId}\", \"callCost\": \"{CallCost:C}\", \"dataCost\": \"{DataCost:C}\" }}";
         }
     }
 }

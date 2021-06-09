@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
 using System;
@@ -12,7 +13,7 @@ namespace UsageLogger
 
         public UsageLogger(ILogger<UsageLogger> logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger ?? NullLogger<UsageLogger>.Instance;
         }
 
         [StreamListener(IProcessor.INPUT)]

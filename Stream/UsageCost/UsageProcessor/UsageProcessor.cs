@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using System;
 
 namespace UsageProcessor
 {
@@ -17,7 +17,7 @@ namespace UsageProcessor
 
         public UsageProcessor(ILogger<UsageProcessor> logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger ?? NullLogger<UsageProcessor>.Instance;
         }
 
         [StreamListener(IProcessor.INPUT)]

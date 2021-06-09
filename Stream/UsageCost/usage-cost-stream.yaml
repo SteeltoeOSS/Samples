@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: usage-sender
-      image: hananiel/usagesender:latest
+      image: projects.registry.vmware.com/steeltoe/usagesender:latest
       ports:
         - containerPort: 8080
           protocol: TCP
@@ -28,7 +28,7 @@ metadata:
 spec:
   containers:
     - name: usage-processor
-      image: hananiel/usageprocessor:latest
+      image: projects.registry.vmware.com/steeltoe/usageprocessor:latest
       ports:
         - containerPort: 8080
           protocol: TCP
@@ -49,7 +49,7 @@ metadata:
 spec:
   containers:
     - name: usage-logger
-      image: hananiel/usagelogger:latest
+      image: projects.registry.vmware.com/steeltoe/usageprocessor:latest
       ports:
         - containerPort: 8080
           protocol: TCP
