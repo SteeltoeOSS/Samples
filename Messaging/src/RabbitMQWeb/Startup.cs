@@ -23,23 +23,10 @@ namespace RabbitMQWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configure any rabbit client values;
-            var rabbitSection = Configuration.GetSection(RabbitOptions.PREFIX);
-            services.Configure<RabbitOptions>(rabbitSection);
-
-            // Add steeltoe rabbit services
-            services.AddRabbitServices();
-            
-            // Add the steeltoe rabbit admin client... will be used to declare queues below
-            services.AddRabbitAdmin();
-
             // Add some queues to the container that the rabbit admin will discover and declare at startup
             services.AddRabbitQueue(new Queue(RabbitListenerService.INFERRED_FOO_QUEUE));
             services.AddRabbitQueue(new Queue(RabbitListenerService.INFERRED_BAR_QUEUE));
             services.AddRabbitQueue(new Queue(RECEIVE_AND_CONVERT_QUEUE));
-
-            // Add the rabbit client template used for send and receiving messages... used in RabbitTestController
-            services.AddRabbitTemplate();
 
             // Add singleton that will process incoming messages
             services.AddSingleton<RabbitListenerService>();

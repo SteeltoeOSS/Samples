@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
+using Steeltoe.Messaging.RabbitMQ.Host;
 
 namespace ConsoleSendReceive
 {
@@ -15,27 +16,17 @@ namespace ConsoleSendReceive
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-            .ConfigureServices((hostContext, services) =>
-            {
-                // Add core services
-                services.AddRabbitServices();
+            RabbitHost.CreateDefaultBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    // Add queue to be declared
+                    services.AddRabbitQueue(new Queue("myqueue"));
 
-                // Add Rabbit admin
-                services.AddRabbitAdmin();
+                    // Add the rabbit listener
+                    services.AddSingleton<MyRabbitListener>();
+                    services.AddRabbitListeners<MyRabbitListener>();
 
-                // Add Rabbit template
-                services.AddRabbitTemplate();
-
-                // Add queue to be declared
-                services.AddRabbitQueue(new Queue("myqueue"));
-
-                // Add the rabbit listener
-                services.AddSingleton<MyRabbitListener>();
-                services.AddRabbitListeners<MyRabbitListener>();
-
-                services.AddSingleton<IHostedService, MyRabbitSender>();
-
-            });
+                    services.AddSingleton<IHostedService, MyRabbitSender>();
+                });
     }
 }
