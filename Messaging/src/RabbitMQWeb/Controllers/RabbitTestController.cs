@@ -22,7 +22,14 @@ namespace RabbitMQWeb.Controllers
         [HttpGet()]
         public ActionResult<string> Index()
         {
-            return "You can use these endpoints to interact with RabbitMQ\n/RabbitTest/SendFoo \n/RabbitTest/SendBar \n/RabbitTest/SendReceiveBar \n/RabbitTest/SendReceiveFoo \n/RabbitTest/DeleteQueues";
+            return @"
+You can use these endpoints to interact with RabbitMQ
+    /RabbitTest/SendFoo
+    /RabbitTest/SendBar
+    /RabbitTest/SendReceiveBar
+    /RabbitTest/SendReceiveFoo
+    /RabbitTest/DeleteQueues
+";
         }
 
         [HttpGet("sendfoo")]
