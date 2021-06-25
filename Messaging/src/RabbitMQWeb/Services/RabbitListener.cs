@@ -14,7 +14,7 @@ namespace RabbitMQWeb.Services
         }
 
         [RabbitListener(Queues.InferredRabbitQueue)]
-        public void ListenForAFoo(RabbitMessage message)
+        public void ListenForMessage(RabbitMessage message)
         {
             _logger.LogInformation("Got a RabbitMessage: {Message}", message);
         }
