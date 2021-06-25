@@ -7,7 +7,6 @@ namespace RabbitMQWeb
     public class Foo
     {
         public Foo()
-            : base()
         {
         }
 
