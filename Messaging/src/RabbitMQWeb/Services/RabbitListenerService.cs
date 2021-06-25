@@ -24,7 +24,7 @@ namespace RabbitMQWeb.Services
         [RabbitListener(INFERRED_FOO_QUEUE)]
         public void ListenForAFoo(Foo foo)
         {
-            _logger.LogInformation("Expected a Foo, got a " + foo);
+            _logger.LogInformation("Expected a Foo, got a {Message}", foo);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace RabbitMQWeb.Services
         [RabbitListener(INFERRED_BAR_QUEUE)]
         public void ListenForAFoo(Bar bar)
         {
-            _logger.LogInformation("Expected a Bar, got a " + bar);
+            _logger.LogInformation("Expected a Bar, got a {Message}", bar);
         }
     }
 }
