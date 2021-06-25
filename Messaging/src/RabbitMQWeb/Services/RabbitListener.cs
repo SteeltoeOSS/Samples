@@ -14,15 +14,15 @@ namespace RabbitMQWeb.Services
         }
 
         [RabbitListener(Queues.InferredRabbitQueue)]
-        public void ListenForAFoo(RabbitMessage rabbitMessage)
+        public void ListenForAFoo(RabbitMessage message)
         {
-            _logger.LogInformation("Expected a Foo, got a {Message}", rabbitMessage);
+            _logger.LogInformation("Got a RabbitMessage: {Message}", message);
         }
 
         [RabbitListener(Queues.InferredLongEaredRabbitQueue)]
-        public void ListenForAFoo(LongEaredRabbitMessage longEaredRabbitMessage)
+        public void ListenForAFoo(LongEaredRabbitMessage message)
         {
-            _logger.LogInformation("Expected a Bar, got a {Message}", longEaredRabbitMessage);
+            _logger.LogInformation("Got a LongEaredRabbitMessage: {Message}", message);
         }
     }
 }
