@@ -20,7 +20,7 @@ namespace RabbitMQWeb.Services
         }
 
         [RabbitListener(Queues.InferredLongEaredRabbitQueue)]
-        public void ListenForAFoo(LongEaredRabbitMessage message)
+        public void ListenForMessage(LongEaredRabbitMessage message)
         {
             _logger.LogInformation("Got a LongEaredRabbitMessage: {Message}", message);
         }
