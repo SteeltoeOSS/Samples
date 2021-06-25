@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RabbitMQWeb.Services
 {
