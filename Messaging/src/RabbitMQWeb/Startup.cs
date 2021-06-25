@@ -11,8 +11,6 @@ namespace RabbitMQWeb
 {
     public class Startup
     {
-        public const string RECEIVE_AND_CONVERT_QUEUE = "sample1.receive.and.convert";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,9 +22,9 @@ namespace RabbitMQWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add some queues to the container that the rabbit admin will discover and declare at startup
-            services.AddRabbitQueue(new Queue(RabbitListenerService.INFERRED_FOO_QUEUE));
-            services.AddRabbitQueue(new Queue(RabbitListenerService.INFERRED_BAR_QUEUE));
-            services.AddRabbitQueue(new Queue(RECEIVE_AND_CONVERT_QUEUE));
+            services.AddRabbitQueue(new Queue(Queues.InferredFooQueue));
+            services.AddRabbitQueue(new Queue(Queues.InferredBarQueue));
+            services.AddRabbitQueue(new Queue(Queues.ReceiveAndConvertQueue));
 
             // Add singleton that will process incoming messages
             services.AddSingleton<RabbitListenerService>();

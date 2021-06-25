@@ -8,8 +8,6 @@ namespace RabbitMQWeb.Services
     /// </summary>
     public class RabbitListenerService
     {
-        public const string INFERRED_FOO_QUEUE = "sample1.inferred.foo";
-        public const string INFERRED_BAR_QUEUE = "sample1.inferred.bar";
 
         private ILogger _logger;
         public RabbitListenerService(ILogger<RabbitListenerService> logger)
@@ -21,7 +19,7 @@ namespace RabbitMQWeb.Services
         /// Process any messages put on the INFERRED_FOO_QUEUE
         /// </summary>
         /// <param name="foo"></param>
-        [RabbitListener(INFERRED_FOO_QUEUE)]
+        [RabbitListener(Queues.InferredFooQueue)]
         public void ListenForAFoo(Foo foo)
         {
             _logger.LogInformation("Expected a Foo, got a {Message}", foo);
@@ -31,7 +29,7 @@ namespace RabbitMQWeb.Services
         /// Process any messages put on the INFERRED_BAR_QUEUE 
         /// </summary>
         /// <param name="bar"></param>
-        [RabbitListener(INFERRED_BAR_QUEUE)]
+        [RabbitListener(Queues.InferredBarQueue)]
         public void ListenForAFoo(Bar bar)
         {
             _logger.LogInformation("Expected a Bar, got a {Message}", bar);
