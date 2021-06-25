@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RabbitMQWeb.Models;
 using Steeltoe.Messaging.RabbitMQ.Core;
 
 namespace RabbitMQWeb.Controllers
@@ -12,7 +13,8 @@ namespace RabbitMQWeb.Controllers
         private readonly RabbitTemplate _rabbitTemplate;
         private readonly RabbitAdmin _rabbitAdmin;
 
-        public RabbitController(ILogger<RabbitController> logger, RabbitTemplate rabbitTemplate, RabbitAdmin rabbitAdmin)
+        public RabbitController(ILogger<RabbitController> logger, RabbitTemplate rabbitTemplate,
+            RabbitAdmin rabbitAdmin)
         {
             _logger = logger;
             _rabbitTemplate = rabbitTemplate;
@@ -24,59 +26,64 @@ namespace RabbitMQWeb.Controllers
         {
             return @"
 You can use these endpoints to interact with RabbitMQ
-    /Rabbit/SendFoo
-    /Rabbit/SendBar
-    /Rabbit/SendReceiveBar
-    /Rabbit/SendReceiveFoo
+    /Rabbit/SendRabbitMessage
+    /Rabbit/SendLongEaredRabbitMessage
+    /Rabbit/SendReceiveRabbitMessage
+    /Rabbit/SendReceiveLongEaredRabbitMessage
     /Rabbit/DeleteQueues
 ";
         }
 
-        [HttpGet("sendfoo")]
-        public ActionResult<string> SendFoo()
+        [HttpGet("SendRabbitMessage")]
+        public ActionResult<string> SendRabbitMessage()
         {
-            var foo = new Foo("send foo string");
-            _rabbitTemplate.ConvertAndSend(Queues.InferredFooQueue, foo);
-            _logger.LogInformation("SendFoo: Sent message to " + Queues.InferredFooQueue);
-            return "Message sent ... look at logs to see if message processed by RabbitListenerService";
+            var msg = new RabbitMessage("I'm a rabbit");
+            _rabbitTemplate.ConvertAndSend(Queues.InferredRabbitQueue, msg);
+            _logger.LogInformation("SendRabbitMessage: sent message to {Queue}", Queues.InferredRabbitQueue);
+            return "RabbitMessage sent ... look at logs to see if message processed by a RabbitListener";
         }
 
-        [HttpGet("sendbar")]
-        public ActionResult<string> SendBar()
+        [HttpGet("SendLongEaredRabbitMessage")]
+        public ActionResult<string> SendLongEaredRabbitMessage()
         {
-            var bar = new Bar("send bar string");
-            _rabbitTemplate.ConvertAndSend(Queues.InferredBarQueue, bar);
-            _logger.LogInformation("SendBar: Sent message to " + Queues.InferredBarQueue);
-            return "Message sent ... look at logs to see if message processed by RabbitListenerService";
+            var msg = new LongEaredRabbitMessage("I have long ears");
+            _rabbitTemplate.ConvertAndSend(Queues.InferredLongEaredRabbitQueue, msg);
+            _logger.LogInformation("SendLongEaredRabbitMessage: sent message to {Queue}",
+                Queues.InferredLongEaredRabbitQueue);
+            return "LongEaredRabbitMessage sent ... look at logs to see if message processed by a RabbitListener";
         }
 
-        [HttpGet("sendreceivefoo")]
-        public ActionResult<string> SendReceiveFoo()
+        [HttpGet("SendReceiveRabbitMessage")]
+        public ActionResult<string> SendReceiveRabbitMessage()
         {
-            var foo = new Foo("SendReceiveFoo foo string");
-            _rabbitTemplate.ConvertAndSend(Queues.ReceiveAndConvertQueue, foo);
-            _logger.LogInformation("SendReceiveFoo: Sent message to " + Queues.ReceiveAndConvertQueue);
-            foo = _rabbitTemplate.ReceiveAndConvert<Foo>(Queues.ReceiveAndConvertQueue, 10_000);
-            _logger.LogInformation("SendReceiveFoo: Received a Foo message back {Message}", foo);
-            return foo.ToString();
+            var msg = new RabbitMessage("hopping to and fro");
+            _rabbitTemplate.ConvertAndSend(Queues.SendReceiveRabbitQueue, msg);
+            _logger.LogInformation("SendReceiveRabbitMessage: sent \"{Message}\" -> {Queue}", msg,
+                Queues.SendReceiveRabbitQueue);
+            msg = _rabbitTemplate.ReceiveAndConvert<RabbitMessage>(Queues.SendReceiveRabbitQueue, 10_000);
+            _logger.LogInformation("SendReceiveRabbitMessage: received \"{Message}\" <- {Queue}", msg,
+                Queues.SendReceiveRabbitQueue);
+            return msg.ToString();
         }
 
-        [HttpGet("sendreceivebar")]
-        public ActionResult<string> SendReceiveBar()
+        [HttpGet("SendReceiveLongEaredRabbitMessage")]
+        public ActionResult<string> SendReceiveLongEaredRabbitMessage()
         {
-            var bar = new Bar("SendReceiveBar bar string");
-            _rabbitTemplate.ConvertAndSend(Queues.ReceiveAndConvertQueue, bar);
-            _logger.LogInformation("SendReceiveBar: Sent message to " + Queues.ReceiveAndConvertQueue);
-            bar = _rabbitTemplate.ReceiveAndConvert<Bar>(Queues.ReceiveAndConvertQueue, 10_000);
-            _logger.LogInformation("SendReceiveBar:Received a Bar message back {Message}", bar);
-            return bar.ToString();
+            var msg = new LongEaredRabbitMessage("flopping my ears to and fro");
+            _rabbitTemplate.ConvertAndSend(Queues.SendReceiveRabbitQueue, msg);
+            _logger.LogInformation("SendReceiveLongEaredRabbitMessage: sent \"{Message}\" -> {Queue}", msg,
+                Queues.SendReceiveRabbitQueue);
+            msg = _rabbitTemplate.ReceiveAndConvert<LongEaredRabbitMessage>(Queues.SendReceiveRabbitQueue, 10_000);
+            _logger.LogInformation("SendReceiveLongEaredRabbitMessage: received \"{Message}\" <- {Queue}", msg,
+                Queues.SendReceiveRabbitQueue);
+            return msg.ToString();
         }
 
-        [HttpGet("deletequeues")]
+        [HttpGet("DeleteQueues")]
         public ActionResult<string> DeleteQueues()
         {
-            _rabbitAdmin.DeleteQueue(Queues.ReceiveAndConvertQueue);
-            _logger.LogInformation("DeleteQueue: Deleted queue: " + Queues.ReceiveAndConvertQueue);
+            _rabbitAdmin.DeleteQueue(Queues.SendReceiveRabbitQueue);
+            _logger.LogInformation("DeleteQueue: Deleted queue {Queue}", Queues.SendReceiveRabbitQueue);
             return ("Delete queue complete\n ... All done!");
         }
     }

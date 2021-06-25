@@ -22,9 +22,9 @@ namespace RabbitMQWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add some queues to the container that the rabbit admin will discover and declare at startup
-            services.AddRabbitQueue(new Queue(Queues.InferredFooQueue));
-            services.AddRabbitQueue(new Queue(Queues.InferredBarQueue));
-            services.AddRabbitQueue(new Queue(Queues.ReceiveAndConvertQueue));
+            services.AddRabbitQueue(new Queue(Queues.InferredRabbitQueue));
+            services.AddRabbitQueue(new Queue(Queues.InferredLongEaredRabbitQueue));
+            services.AddRabbitQueue(new Queue(Queues.SendReceiveRabbitQueue));
 
             // Add singleton that will process incoming messages
             services.AddSingleton<RabbitListener>();

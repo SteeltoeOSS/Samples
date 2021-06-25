@@ -2,8 +2,8 @@ namespace RabbitMQWeb
 {
     public static class Queues
     {
-        public const string ReceiveAndConvertQueue = "sample1.receive.and.convert";
-        public const string InferredFooQueue = "sample1.inferred.foo";
-        public const string InferredBarQueue = "sample1.inferred.bar";
+        public const string SendReceiveRabbitQueue = "queue.send.receive.rabbit";
+        public const string InferredRabbitQueue = "queue.inferred.rabbit";
+        public const string InferredLongEaredRabbitQueue = "queue.inferred.long_eared_rabbit";
     }
 }

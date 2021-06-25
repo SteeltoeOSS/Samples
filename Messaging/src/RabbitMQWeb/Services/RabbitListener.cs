@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using RabbitMQWeb.Models;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
 
 namespace RabbitMQWeb.Services
@@ -18,21 +19,21 @@ namespace RabbitMQWeb.Services
         /// <summary>
         /// Process any messages put on the INFERRED_FOO_QUEUE
         /// </summary>
-        /// <param name="foo"></param>
-        [RabbitListener(Queues.InferredFooQueue)]
-        public void ListenForAFoo(Foo foo)
+        /// <param name="rabbitMessage"></param>
+        [RabbitListener(Queues.InferredRabbitQueue)]
+        public void ListenForAFoo(RabbitMessage rabbitMessage)
         {
-            _logger.LogInformation("Expected a Foo, got a {Message}", foo);
+            _logger.LogInformation("Expected a Foo, got a {Message}", rabbitMessage);
         }
 
         /// <summary>
         /// Process any messages put on the INFERRED_BAR_QUEUE 
         /// </summary>
-        /// <param name="bar"></param>
-        [RabbitListener(Queues.InferredBarQueue)]
-        public void ListenForAFoo(Bar bar)
+        /// <param name="longEaredRabbitMessage"></param>
+        [RabbitListener(Queues.InferredLongEaredRabbitQueue)]
+        public void ListenForAFoo(LongEaredRabbitMessage longEaredRabbitMessage)
         {
-            _logger.LogInformation("Expected a Bar, got a {Message}", bar);
+            _logger.LogInformation("Expected a Bar, got a {Message}", longEaredRabbitMessage);
         }
     }
 }
