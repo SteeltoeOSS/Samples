@@ -28,4 +28,4 @@ info: Microsoft.Hosting.Lifetime[0]
       Content root path: C:\workspace\Samples\Messaging\src\AspDotNetCore\RabbitMQWeb
 ```
 
-At this point the applicaiton is up and running and ready for usage.  Have a look at the `RabbitTestController.cs` and `RabbitListenerService.cs` for details on how to use the sample.
+At this point the application is up and running and ready for usage.  Have a look at the `RabbitController.cs` and `RabbitListener.cs` for details on how to use the sample.
