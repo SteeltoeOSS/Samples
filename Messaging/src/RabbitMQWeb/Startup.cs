@@ -27,10 +27,10 @@ namespace RabbitMQWeb
             services.AddRabbitQueue(new Queue(Queues.ReceiveAndConvertQueue));
 
             // Add singleton that will process incoming messages
-            services.AddSingleton<RabbitListenerService>();
+            services.AddSingleton<RabbitListener>();
 
             // Tell steeltoe about singleton so it can wire up queues with methods to process queues (i.e. RabbitListenerAttribute)
-            services.AddRabbitListeners<RabbitListenerService>();
+            services.AddRabbitListeners<RabbitListener>();
 
             services.AddControllers();
         }

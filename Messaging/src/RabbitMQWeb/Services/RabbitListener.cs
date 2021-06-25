@@ -6,11 +6,11 @@ namespace RabbitMQWeb.Services
     /// <summary>
     /// A service class that will handle incoming messages 
     /// </summary>
-    public class RabbitListenerService
+    public class RabbitListener
     {
 
         private ILogger _logger;
-        public RabbitListenerService(ILogger<RabbitListenerService> logger)
+        public RabbitListener(ILogger<RabbitListener> logger)
         {
             _logger = logger;
         }

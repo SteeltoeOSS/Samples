@@ -6,13 +6,13 @@ namespace RabbitMQWeb.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RabbitTestController : ControllerBase
+    public class RabbitController : ControllerBase
     {
-        private readonly ILogger<RabbitTestController> _logger;
+        private readonly ILogger<RabbitController> _logger;
         private readonly RabbitTemplate _rabbitTemplate;
         private readonly RabbitAdmin _rabbitAdmin;
 
-        public RabbitTestController(ILogger<RabbitTestController> logger, RabbitTemplate rabbitTemplate, RabbitAdmin rabbitAdmin)
+        public RabbitController(ILogger<RabbitController> logger, RabbitTemplate rabbitTemplate, RabbitAdmin rabbitAdmin)
         {
             _logger = logger;
             _rabbitTemplate = rabbitTemplate;
@@ -24,11 +24,11 @@ namespace RabbitMQWeb.Controllers
         {
             return @"
 You can use these endpoints to interact with RabbitMQ
-    /RabbitTest/SendFoo
-    /RabbitTest/SendBar
-    /RabbitTest/SendReceiveBar
-    /RabbitTest/SendReceiveFoo
-    /RabbitTest/DeleteQueues
+    /Rabbit/SendFoo
+    /Rabbit/SendBar
+    /Rabbit/SendReceiveBar
+    /Rabbit/SendReceiveFoo
+    /Rabbit/DeleteQueues
 ";
         }
 
