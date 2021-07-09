@@ -54,8 +54,6 @@ namespace OrderService
                 endpoints.MapControllers();
             });
 
-            app.UseDiscoveryClient();
-
             SampleData.InitializeOrderDatabase(app.ApplicationServices);
         }
     }
