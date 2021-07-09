@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Steeltoe.Management.OpenTelemetry.Trace;
+using OpenTelemetry.Trace;
 
 namespace FortuneTellerService.Models
 {
@@ -16,13 +17,11 @@ namespace FortuneTellerService.Models
 
         private FortuneContext _db;
         private ILogger<FortuneRepository> _logger;
-        private ITracing _tracing;
         Random _random = new Random();
 
-        public FortuneRepository(FortuneContext db, ITracing tracing, ILogger<FortuneRepository> logger)
+        public FortuneRepository(FortuneContext db, ILogger<FortuneRepository> logger)
         {
             _db = db;
-            _tracing = tracing;
             _logger = logger;
         }
 

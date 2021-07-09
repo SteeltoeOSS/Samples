@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Management.Endpoint;
-using Steeltoe.Management.Endpoint.Health;
 
 namespace FortuneTellerService
 {
@@ -21,7 +19,6 @@ namespace FortuneTellerService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHealthActuator(Configuration);
             services.AddDbContext<FortuneContext>(options => options.UseInMemoryDatabase("Fortunes"), ServiceLifetime.Singleton);
 
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
@@ -38,12 +35,9 @@ namespace FortuneTellerService
             app.UseRouting();
             app.UseEndpoints(endpoints => {
                 endpoints.MapDefaultControllerRoute();
-                endpoints.Map<HealthEndpoint>();
             });
 
             SampleData.InitializeFortunesAsync(app.ApplicationServices).Wait();
-            HealthStartupFilter.InitializeAvailability(app.ApplicationServices);
         }
-
     }
 }

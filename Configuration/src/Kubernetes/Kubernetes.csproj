@@ -7,9 +7,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.1" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.KubernetesCore" Version="3.0.1" />
-    <PackageReference Include="Steeltoe.Management.KubernetesCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.KubernetesCore" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Management.KubernetesCore" Version="3.1.0" />
   </ItemGroup>
 
 </Project>

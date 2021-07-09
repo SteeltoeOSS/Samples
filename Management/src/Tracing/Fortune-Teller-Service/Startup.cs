@@ -25,8 +25,7 @@ namespace FortuneTellerService
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
             // Add Distributed tracing
-            services.AddDistributedTracing(Configuration,
-                builder => builder.UseZipkinWithTraceOptions(services));
+            services.AddDistributedTracingAspNetCore();
 
             // Add framework services.
             services.AddControllers();
