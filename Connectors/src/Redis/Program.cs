@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint;
 
 namespace Redis
 {
@@ -12,7 +12,7 @@ namespace Redis
         {
             var host = WebHost.CreateDefaultBuilder(args)
                 .AddCloudFoundryConfiguration()
-                .AddCloudFoundryActuators()
+                .AddAllActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()
                 .Build();

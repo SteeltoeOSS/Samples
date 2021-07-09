@@ -23,7 +23,6 @@ namespace Fortune_Teller_UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHealthActuator(Configuration);
             services.AddHttpClient("fortunes", c =>
                 {
                     c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
@@ -51,10 +50,7 @@ namespace Fortune_Teller_UI
             app.UseRouting();
             app.UseEndpoints(endpoints => {
                 endpoints.MapDefaultControllerRoute();
-                endpoints.Map<HealthEndpoint>();
             });
-
-            HealthStartupFilter.InitializeAvailability(app.ApplicationServices);
         }
     }
 }

@@ -2,7 +2,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint;
+
 namespace CloudFoundry
 {
     public class Program
@@ -11,7 +12,7 @@ namespace CloudFoundry
         {
             var host = WebHost.CreateDefaultBuilder(args)
                                 .AddCloudFoundryConfiguration()
-                                .AddCloudFoundryActuators()
+                                .AddAllActuators()
                                 .UseCloudHosting()
                                 .UseStartup<Startup>()
                                 .Build();

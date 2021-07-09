@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Management.Tracing;
 using System;
-using Microsoft.Extensions.Hosting;
 
 namespace Fortune_Teller_UI
 {
@@ -31,14 +31,10 @@ namespace Fortune_Teller_UI
                 .AddTypedClient<IFortuneService, FortuneService>();
 
             // Add Distributed tracing
-            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
+            services.AddDistributedTracingAspNetCore();
 
             // Add framework services.
-#if NETCOREAPP3_1
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,13 +51,8 @@ namespace Fortune_Teller_UI
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
-#else
-            app.UseMvc();
-#endif
-
         }
     }
 }

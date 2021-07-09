@@ -4,7 +4,7 @@ using Serilog;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging.DynamicSerilog;
-using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.TaskCore;
 
 namespace CloudFoundry
@@ -17,7 +17,7 @@ namespace CloudFoundry
                 .AddCloudFoundryConfiguration()              // config
                 .UseCloudHosting()    // listen on port defined in env var 'PORT'
                 .AddDynamicSerilog((cfg, log) => log.ReadFrom.Configuration(cfg.Configuration))
-                .AddCloudFoundryActuators()     // add actuators - should come AFTER Serilog config or else DynamicConsoleLogger will be injected
+                .AddAllActuators()     // add actuators - should come AFTER Serilog config or else DynamicConsoleLogger will be injected
                 .UseStartup<Startup>()
                 .Build();
 

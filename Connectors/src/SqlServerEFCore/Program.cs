@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.CloudFoundry;
+using Steeltoe.Management.Endpoint;
 using System;
 
 namespace SqlServerEFCore
@@ -35,7 +35,7 @@ namespace SqlServerEFCore
         {
             return WebHost.CreateDefaultBuilder(args)
                 .AddCloudFoundryConfiguration()
-                .AddCloudFoundryActuators()
+                .AddAllActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()
                 .Build();
