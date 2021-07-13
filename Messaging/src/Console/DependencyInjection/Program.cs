@@ -12,7 +12,7 @@ namespace ConsoleSendReceive
     {
         static void Main(string[] args)
         {
-            var hostBuilder = RabbitHost.CreateDefaultBuilder();
+            var hostBuilder = RabbitMQHost.CreateDefaultBuilder();
 
             hostBuilder.ConfigureServices((hostbuilderContext, services) => {
                 services.AddLogging(b =>

@@ -12,7 +12,7 @@ namespace RabbitMQWeb
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            RabbitHost.CreateDefaultBuilder()
+            RabbitMQHost.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

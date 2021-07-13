@@ -9,9 +9,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
-    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="3.1.0-rc1" />
-    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0-rc1" />
-    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0-rc1" />
+    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
