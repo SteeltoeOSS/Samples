@@ -65,9 +65,6 @@ namespace Fortune_Teller_UI
 
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
-
-            // Startup Hystrix metrics stream
-            app.UseHystrixMetricsStream();
         }
 
     }

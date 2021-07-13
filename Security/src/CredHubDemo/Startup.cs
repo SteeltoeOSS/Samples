@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 using Steeltoe.Security.DataProtection.CredHub;
 
@@ -25,7 +24,7 @@ namespace CredHubDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCloudFoundryActuators(Configuration);
+            services.AddAllActuators(Configuration);
             services.Configure<CredHubOptions>(Configuration.GetSection("CredHubClient"));
             services.AddCredHubClient(Configuration, logFactory);
             services.AddControllersWithViews();

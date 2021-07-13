@@ -11,8 +11,6 @@ namespace RabbitMQWeb
 {
     public class Startup
     {
-        public const string RECEIVE_AND_CONVERT_QUEUE = "sample1.receive.and.convert";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,15 +22,15 @@ namespace RabbitMQWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add some queues to the container that the rabbit admin will discover and declare at startup
-            services.AddRabbitQueue(new Queue(RabbitListenerService.INFERRED_FOO_QUEUE));
-            services.AddRabbitQueue(new Queue(RabbitListenerService.INFERRED_BAR_QUEUE));
-            services.AddRabbitQueue(new Queue(RECEIVE_AND_CONVERT_QUEUE));
+            services.AddRabbitQueue(new Queue(Queues.InferredRabbitQueue));
+            services.AddRabbitQueue(new Queue(Queues.InferredLongEaredRabbitQueue));
+            services.AddRabbitQueue(new Queue(Queues.SendReceiveRabbitQueue));
 
             // Add singleton that will process incoming messages
-            services.AddSingleton<RabbitListenerService>();
+            services.AddSingleton<RabbitListener>();
 
             // Tell steeltoe about singleton so it can wire up queues with methods to process queues (i.e. RabbitListenerAttribute)
-            services.AddRabbitListeners<RabbitListenerService>();
+            services.AddRabbitListeners<RabbitListener>();
 
             services.AddControllers();
         }
@@ -49,10 +47,7 @@ namespace RabbitMQWeb
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

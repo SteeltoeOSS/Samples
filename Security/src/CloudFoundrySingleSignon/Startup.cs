@@ -32,7 +32,7 @@ namespace CloudFoundrySingleSignon
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddCloudFoundryContainerIdentity(Configuration);
+            services.AddCloudFoundryContainerIdentity();
             services.AddHttpClient("default", (services, client) =>
             {
                 var options = services.GetService<IOptions<CertificateOptions>>();

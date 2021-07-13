@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Connector.RabbitMQ;
-using Steeltoe.Management.CloudFoundry;
 
 namespace RabbitMQ
 {

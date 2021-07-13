@@ -8,12 +8,9 @@ using Steeltoe.Common.HealthChecks;
 using Steeltoe.Connector.EFCore;
 using Steeltoe.Connector.MySql;
 using Steeltoe.Connector.MySql.EFCore;
-using Steeltoe.Management.CloudFoundry;
-using Steeltoe.Management.Endpoint;
-using Steeltoe.Management.Endpoint.Info;
-using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.Info;
 using Steeltoe.Management.TaskCore;
+
 namespace CloudFoundry
 {
     public class Startup
@@ -30,6 +27,7 @@ namespace CloudFoundry
         {
             // Add entity framework db context bound to connection string in configuration
             services.AddDbContext<MyContext>(options => options.UseMySql(Configuration));
+
             // Add MySql health contributor to be exposed by the endpoint
             services.AddMySqlHealthContributor(Configuration);
 

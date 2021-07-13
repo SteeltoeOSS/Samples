@@ -4,6 +4,7 @@ using Steeltoe.Common.Hosting;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Configuration.Placeholder;
+using Steeltoe.Management.Endpoint;
 
 namespace FortuneTellerService
 {
@@ -21,6 +22,7 @@ namespace FortuneTellerService
                     host.UseStartup<Startup>();
                 })
                 .AddCloudFoundryConfiguration()
+                .AddAllActuators()
                 .AddDiscoveryClient()
                 .AddPlaceholderResolver()
                 .UseCloudHosting(5000)

@@ -83,7 +83,7 @@ class CloudFoundry(object):
             else:
                 self._context.log.info("attempt {}".format(attempts))
             status = self.get_service_status(service_instance)
-            if status == 'create succeeded':
+            if (status == 'create succeeded') or (status == 'update succeeded'):
                 break
             if status is None:
                 self._context.log.info('service instance "{}" status not yet available'.format(service_instance))

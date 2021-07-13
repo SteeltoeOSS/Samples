@@ -21,6 +21,7 @@ namespace Fortune_Teller_UI
                     host.UseStartup<Startup>();
                 })
                 .AddCloudFoundryConfiguration()
+                .AddAllActuators()
                 .AddDiscoveryClient()
                 .UseCloudHosting(5555)
                 .Build();

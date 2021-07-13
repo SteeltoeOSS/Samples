@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Connector.MySql;
 using Steeltoe.Connector.MySql.EFCore;
-using Steeltoe.Management.CloudFoundry;
 
 namespace MySqlEFCore
 {

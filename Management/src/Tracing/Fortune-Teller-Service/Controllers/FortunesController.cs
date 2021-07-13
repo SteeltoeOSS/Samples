@@ -1,11 +1,11 @@
-﻿using FortuneTellerService.Models;
+﻿using FortuneTeller.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace FortuneTellerService.Controllers
+namespace FortuneTeller.Service.Controllers
 {
     [Route("api/[controller]")]
     public class FortunesController : Controller
