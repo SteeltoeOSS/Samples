@@ -5,7 +5,7 @@ using Steeltoe.Discovery.Client;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
-namespace FortuneTellerService
+namespace FortuneTeller.Service
 {
     public class Program
     {

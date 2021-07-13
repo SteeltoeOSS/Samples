@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace FortuneTellerService.Models
+namespace FortuneTeller.Service.Models
 {
     public class FortuneContext : DbContext
     {

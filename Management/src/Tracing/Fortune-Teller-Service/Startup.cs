@@ -1,11 +1,11 @@
-﻿using FortuneTellerService.Models;
+﻿using FortuneTeller.Service.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Steeltoe.Management.Tracing;
 
-namespace FortuneTellerService
+namespace FortuneTeller.Service
 {
     public class Startup
     {
@@ -25,7 +25,7 @@ namespace FortuneTellerService
             services.AddSingleton<IFortuneRepository, FortuneRepository>();
 
             // Add Distributed tracing
-            services.AddDistributedTracingAspNetCore();
+            services.AddDistributedTracingAspNetCore(builder => builder.AddSource(FortuneRepository.ActivitySourceName));
 
             // Add framework services.
             services.AddControllers();
