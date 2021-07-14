@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.DbMigrations;
 using SteeltoeAllActuators.Providers;
 
 namespace SteeltoeAllActuators
@@ -25,9 +27,11 @@ namespace SteeltoeAllActuators
             services.AddControllers();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
+            services.AddHttpClient();
             services.AddDbContext<EmployeeData>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+
+            services.AddScoped<EmployeeData>();
 
             services.AddSwaggerGen(c =>
             {
@@ -63,6 +67,7 @@ namespace SteeltoeAllActuators
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapControllers();
+                endpoints.Map<DbMigrationsEndpoint>();
             });
         }
     }

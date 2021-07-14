@@ -85,6 +85,11 @@ ul li a
     font-style: italic;
 }
 
+.center 
+{
+    text-align: center;
+}
+
 .header-logo {
     width: 40%;
 }

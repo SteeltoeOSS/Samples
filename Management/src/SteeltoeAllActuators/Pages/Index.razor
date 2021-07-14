@@ -1,14 +1,56 @@
 ﻿@page "/"
 
-<div class="row bg-midnight-blue text-white justify-content-center">
-    <div class="col-6">
-        <h3>Actuator Endpoints</h3>
+@using Steeltoe.Management.Endpoint.Hypermedia
 
-        <ul>
-            <li><a href="/actuator" target="_blank">Actuator List (/actuator)</a></li>
-            <li><a href="/actuator/health" target="_blank">Health Actuator (/actuator/health)</a></li>
-            <li><a href="/actuator/info" target="_blank">Info Actuator (/actuator/info)</a></li>
-        </ul>
+@inject ActuatorEndpoint actuatorEndpoint;
+@inject NavigationManager navigationManager;
+
+<div class="row bg-midnight-blue text-white justify-content-center">
+    <div class="col">
+        @if (actuatorUILinks.Count() > 0)
+        {
+            <table class="table text-white text-center">
+                <thead>
+                    <tr>
+                        <th>Actuator</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ActuatorUILInk link in actuatorUILinks)
+                    {
+                        <tr>
+                            <td><b>@link.Display</b></td>
+                            <td><a class="text-white" href="@link.Href" target="_blank">@link.Href</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 </div>
 
+@code {
+
+    IEnumerable<ActuatorUILInk> actuatorUILinks = Enumerable.Empty<ActuatorUILInk>();
+
+    protected override void OnInitialized()
+    {
+        var actuatorLinks = actuatorEndpoint.Invoke($"{navigationManager.BaseUri}actuator");
+
+        actuatorUILinks = actuatorLinks._links.Select(link =>
+            new ActuatorUILInk
+            {
+                Display = link.Key,
+                Href = link.Value.Href
+            });
+
+        StateHasChanged();
+    }
+
+    private class ActuatorUILInk
+    {
+        public string Display { get; set; }
+        public string Href { get; set; }
+    }
+}
