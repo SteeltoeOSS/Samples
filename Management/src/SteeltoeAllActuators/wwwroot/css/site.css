@@ -1,7 +1,8 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /* font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+    font-family: 'Raleway', sans-serif;
 }
 
 a, .btn-link {
@@ -48,3 +49,46 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
+/** Custom **/
+.bg-midnight-blue {
+    background-color: #00376e;
+}
+.text-midnight-blue {
+    color: #00376e;
+}
+
+.text-white {
+    color: #fff !important;
+}
+
+.left {
+    text-align: left;
+}
+
+.body-content {
+    min-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    padding-top: 20px;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ul li a 
+{
+    color: white;
+    font-style: italic;
+}
+
+.header-logo {
+    width: 40%;
+}
+
+.header-title {
+    width: 60%
+}

@@ -1,17 +1,15 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<header class="sticky-top bg-white" style="box-shadow: 0 0 20px -4px #eeeeee;">
+    <nav class="bg-white navbar navbar-expand-xl container py-xl-2 navbar-light">
+        <div style="width: 40%"><img id="logo" class="svg" src="/img/logo.svg" alt="Steeltoe" /></div>
+        <div style="width: 60%"><h1 class="text-midnight-blue">Actuator Sample</h1></div>
+</nav>
+</header>
 
-    <div class="main">
-        <div class="top-row px-4">
-            <img src="~/images/transparent.png" />
-            <a href="https://steeltoe.io/" target="_blank">About</a>
-        </div>
-
-        <div class="content px-4">
+<div class="container-fluid">
+    <div class="row bg-midnight-blue text-white">
+        <div class="col-12 body-content">
             @Body
         </div>
     </div>
