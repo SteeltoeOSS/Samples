@@ -55,6 +55,7 @@ a, .btn-link {
 .bg-midnight-blue {
     background-color: #00376e;
 }
+
 .text-midnight-blue {
     color: #00376e;
 }
@@ -96,4 +97,9 @@ ul li a
 
 .header-title {
     width: 60%
+}
+
+.subnav {
+    padding: 10px 0;
+    font-weight: bolder;
 }

@@ -5,8 +5,9 @@
 @inject ActuatorEndpoint actuatorEndpoint;
 @inject NavigationManager navigationManager;
 
-<div class="row bg-midnight-blue text-white justify-content-center">
-    <div class="col">
+<div class="row justify-content-center">
+    <div class="col-4">
+        <h2>Actuator List</h2>
         @if (actuatorUILinks.Count() > 0)
         {
             <table class="table text-white text-center">
@@ -20,7 +21,7 @@
                     @foreach (ActuatorUILInk link in actuatorUILinks)
                     {
                         <tr>
-                            <td><b>@link.Display</b></td>
+                            <td>@link.Display</td>
                             <td><a class="text-white" href="@link.Href" target="_blank">@link.Href</a></td>
                         </tr>
                     }
@@ -41,7 +42,7 @@
         actuatorUILinks = actuatorLinks._links.Select(link =>
             new ActuatorUILInk
             {
-                Display = link.Key,
+                Display = link.Key != "self" ? link.Key : "all actuators",
                 Href = link.Value.Href
             });
 
