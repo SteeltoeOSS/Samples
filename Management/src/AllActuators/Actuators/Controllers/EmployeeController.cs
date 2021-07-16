@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Steeltoe.Actuators.Models;
+using Steeltoe.Actuators.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Steeltoe.Actuators.Providers;
-using Steeltoe.Actuators.Models;
-using Microsoft.Extensions.Logging;
 
 namespace Steeltoe.Actuators.Controllers
 {

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Actuators.Models;
 using Steeltoe.Actuators.Providers;
 using Steeltoe.Management.Endpoint.Hypermedia;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -17,7 +16,7 @@ namespace Steeltoe.Actuators.Controllers
 
         public PageController(
             ActuatorEndpoint actuatorEndpoint,
-            EmployeeDataContext employeeDataContext, 
+            EmployeeDataContext employeeDataContext,
             ILogger<PageController> logger)
         {
             this.actuatorEndpoint = actuatorEndpoint;
