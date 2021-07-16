@@ -27,30 +27,40 @@ namespace Steeltoe.Actuators.Controllers
 
         public IActionResult Index()
         {
+            logger.LogInformation("Retrieving actuators");
+
             var actuatorLinks = Enumerable.Empty<HrefProperties>();
 
             var actuatorEndpoints = actuatorEndpoint.Invoke("/actuator");
 
-            actuatorLinks = actuatorEndpoints._links.Select(link =>
-                new HrefProperties
-                {
-                    Display = link.Key != "self" ? link.Key : "all actuators",
-                    Address = link.Value.Href
-                });
+            if (actuatorEndpoints is not null)
+            {
+                logger.LogInformation($"Found {actuatorEndpoints._links.Count} actuators");
+
+                actuatorLinks = actuatorEndpoints._links.Select(link =>
+                    new HrefProperties
+                    {
+                        Display = link.Key != "self" ? link.Key : "all actuators",
+                        Address = link.Value.Href
+                    });
+            }
+            else
+            {
+                logger.LogError("No actuators were found");
+            }
 
             return View(actuatorLinks);
         }
 
         public IActionResult Migration()
         {
-            var employees = employeeDataContext.Employees.ToArray();
+            logger.LogInformation("Retrieving employee data");
+
+            var employees = employeeDataContext?.Employees.ToArray();
+
+            logger.LogInformation($"Found {employees?.Length} employees");
 
             return View(employees);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
