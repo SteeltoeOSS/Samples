@@ -1,10 +1,10 @@
-*.db
-.dockerignore
 .vs/
 .vscode/
 bin/
 obj/
+Properties/
+*.db
 *.sln
 *.csproj.user
 README.md
-Properties/
+.dockerignore

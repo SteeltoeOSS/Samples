@@ -1,2 +1,11 @@
+.vs/
+.vscode/
+bin/
+obj/
+Properties/
 *.db
+*.sln
+*.csproj.user
+README.md
 manifest.yml
+buildpack.yml

@@ -1,7 +1,7 @@
 ---
 applications:
-- name: steeltoe-actuators
+- name: sbo-integration
   memory: 1024M
-  command: ./SteeltoeAllActuators
+  command: cd ${DEPS_DIR}/0/dotnet_publish && exec ./Steeltoe.Actuators --server.urls https://sbo-integration.apps.pcfone.io
   env:
     ASPNETCORE_ENVIRONMENT: Development
