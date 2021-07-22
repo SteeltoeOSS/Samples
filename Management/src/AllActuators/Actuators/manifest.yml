@@ -1,7 +1,8 @@
 ---
 applications:
-- name: sbo-integration
-  memory: 1024M
-  command: cd ${DEPS_DIR}/0/dotnet_publish && exec ./Steeltoe.Actuators --server.urls https://sbo-integration.apps.pcfone.io
+- name: steeltoe-actuators
+  buildpacks:
+    - dotnet_core_buildpack
+  memory: 512M
   env:
     ASPNETCORE_ENVIRONMENT: Development
