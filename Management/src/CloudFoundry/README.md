@@ -36,15 +36,17 @@ You must first create an instance of the MySql service in a org/space.
 
 > Note: The provided manifest will create an app named `actuator` and attempt to bind to the the app to MySql service `myMySqlService`.
 
-### Running Tasks
+## Push to CloudFoundry without Local Publish
+
+This sample is currently used by the Steeltoe team for integration testing across multiple .NET runtimes, by way of the `<TargetFrameworks>` attribute in the .csproj file. This approach is not supported by buildpacks (how should they determine which runtime you actually want to use?), so that line needs to be changed. There are commented out options in the .csproj available for use.
+
+## Running Tasks
 
 Apply entity framework database migration scripts as a Cloud Foundry task
 
 ``` shell
 cf run-task actuator "./CloudFoundry runtask=migrate" --name migrate 
 ```
-
-
 
 ## What to expect - CloudFoundry
 
@@ -73,8 +75,6 @@ You should also see a list of logs from the database migration task similar to f
    2019-07-04T13:03:45.75-0400 [APP/TASK/af067dc8/0] OUT       20190704145149_InitialCreate
    2019-07-04T13:03:45.78-0400 [APP/TASK/af067dc8/0] OUT Exit status 0
 ```
-
-
 
 Once the app is up and running then you can access the management endpoints exposed by Steeltoe using the [Pivotal Apps Manager](https://docs.pivotal.io/pivotalcf/2-1/console/).
 
