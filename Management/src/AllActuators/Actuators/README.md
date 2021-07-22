@@ -1,6 +1,6 @@
 # Steeltoe All Actuators
 
-This sample is available in Docker Hub - [steeltoemain/steeltoe-actuators](https://hub.docker.com/repository/docker/steeltoemain/steeltoe-actuators)
+This sample is available in Docker Hub - [steeltoemain/steeltoe-actuators](https://hub.docker.com/r/steeltoemain/steeltoe-actuators)
 
 ## CloudFoundry
 
