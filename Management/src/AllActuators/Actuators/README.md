@@ -1,6 +1,6 @@
 # Steeltoe All Actuators
 
-This sample is available in Docker Hub - [steeltoemain/steeltoe-actuators](https://hub.docker.com/r/steeltoemain/steeltoe-actuators)
+This sample provides a list of all actuator endpoints available through Steeltoe
 
 ## Local Docker Build
 
