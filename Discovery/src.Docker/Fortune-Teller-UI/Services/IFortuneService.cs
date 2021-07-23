@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Fortune_Teller_UI.Services
+namespace FortuneTeller.UI.Services
 {
     public interface IFortuneService
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FortuneTellerService.Models
+namespace FortuneTeller.Service.Models
 {
     public class FortuneRepository : IFortuneRepository
     {
-        private FortuneContext _db;
-        Random _random = new Random();
+        private readonly FortuneContext _db;
+        private readonly Random _random = new Random();
 
         public FortuneRepository(FortuneContext db)
         {
@@ -21,7 +21,7 @@ namespace FortuneTellerService.Models
 
         public Fortune RandomFortune()
         {
-            int count = _db.Fortunes.Count();
+            var count = _db.Fortunes.Count();
             var index = _random.Next() % count;
             return GetAll().ElementAt(index);
         }

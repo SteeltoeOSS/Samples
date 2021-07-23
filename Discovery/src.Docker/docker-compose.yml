@@ -6,10 +6,22 @@ services:
     build:
       context: .
       dockerfile: Fortune-Teller-Service/Dockerfile
+    depends_on:
+    - eurekaserver
+    ports:
+      - "5000:80"
 
   fortune-teller-ui:
     image: ${DOCKER_REGISTRY}fortunetellerui
     build:
       context: .
       dockerfile: Fortune-Teller-UI/Dockerfile
+    depends_on:
+    - eurekaserver
+    ports:
+      - "5555:80"
 
+  eurekaserver:
+    image: steeltoeoss/eureka-server:latest
+    ports:
+    - "8761:8761"

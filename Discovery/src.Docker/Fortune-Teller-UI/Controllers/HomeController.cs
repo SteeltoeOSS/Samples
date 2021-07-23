@@ -1,14 +1,13 @@
-﻿using Fortune_Teller_UI.Services;
+﻿using FortuneTeller.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System.Threading;
 
-namespace Fortune_Teller_UI.Controllers
+namespace FortuneTeller.UI.Controllers
 {
     [Route("/")]
     public class HomeController : Controller
     {
-        IFortuneService _fortunes;
+        private readonly IFortuneService _fortunes;
 
         public HomeController(IFortuneService fortunes)
         {
@@ -18,7 +17,6 @@ namespace Fortune_Teller_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            Thread.Sleep(1000);
             var result = await _fortunes.RandomFortuneAsync();
             ViewData["fortune"] = result.Text;
             return View();

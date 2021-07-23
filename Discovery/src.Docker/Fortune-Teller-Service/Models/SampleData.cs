@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace FortuneTellerService.Models
+namespace FortuneTeller.Service.Models
 {
     public static class SampleData
     {
@@ -12,14 +12,12 @@ namespace FortuneTellerService.Models
             {
                 throw new ArgumentNullException("serviceProvider");
             }
-            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var db = serviceScope.ServiceProvider.GetService<FortuneContext>();
+            using var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var db = serviceScope.ServiceProvider.GetService<FortuneContext>();
 
-                if (await db.Database.EnsureCreatedAsync())
-                {
-                    await InsertFortunes(db);
-                }
+            if (await db.Database.EnsureCreatedAsync())
+            {
+                await InsertFortunes(db);
             }
         }
 

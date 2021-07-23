@@ -1,19 +1,11 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
-WORKDIR /app
-EXPOSE 5000
-
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster as builder
 WORKDIR /src
-COPY ["Fortune-Teller-Service/Fortune-Teller-Service.csproj", "Fortune-Teller-Service/"]
-RUN dotnet restore "Fortune-Teller-Service/Fortune-Teller-Service.csproj"
+COPY ["Fortune-Teller-Service/FortuneTeller.Service.csproj", "Fortune-Teller-Service/"]
+RUN dotnet restore "Fortune-Teller-Service/"
 COPY . .
-WORKDIR "/src/Fortune-Teller-Service"
-RUN dotnet build "Fortune-Teller-Service.csproj" -c Release -o /app
+RUN dotnet publish "Fortune-Teller-Service/" -c Release -o /app
 
-FROM build AS publish
-RUN dotnet publish "Fortune-Teller-Service.csproj" -c Release -o /app
-
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:3.1
 WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Fortune-Teller-Service.dll"]
+COPY --from=builder /app .
+ENTRYPOINT ["dotnet", "FortuneTeller.Service.dll"]

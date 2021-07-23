@@ -1,17 +1,15 @@
-﻿
+﻿using FortuneTeller.Service.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
-using Microsoft.AspNetCore.Mvc;
-using FortuneTellerService.Models;
-using Microsoft.Extensions.Logging;
-
-namespace FortuneTellerService.Controllers
+namespace FortuneTeller.Service.Controllers
 {
     [Route("api/[controller]")]
     public class FortunesController : Controller
     {
-        private IFortuneRepository _fortunes;
-        private ILogger<FortunesController> _logger;
+        private readonly IFortuneRepository _fortunes;
+        private readonly ILogger<FortunesController> _logger;
         public FortunesController(IFortuneRepository fortunes, ILogger<FortunesController> logger)
         {
             _fortunes = fortunes;
