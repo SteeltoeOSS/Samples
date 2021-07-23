@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{76DE0ABA-25A4-4E3E-A168-33BB02BD986F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-UI", "Fortune-Teller-UI\Fortune-Teller-UI.csproj", "{49EDF3B4-33A1-4316-92BC-718FDF175250}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortuneTeller.UI", "Fortune-Teller-UI\FortuneTeller.UI.csproj", "{49EDF3B4-33A1-4316-92BC-718FDF175250}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fortune-Teller-Service", "Fortune-Teller-Service\Fortune-Teller-Service.csproj", "{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortuneTeller.Service", "Fortune-Teller-Service\FortuneTeller.Service.csproj", "{3FD62422-C2A3-41B0-8C1B-612AA7EC6417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
