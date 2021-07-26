@@ -1,0 +1,10 @@
+.vs/
+.vscode/
+bin/
+obj/
+Properties/
+*.db
+*.sln
+*.csproj.user
+README.md
+.dockerignore
