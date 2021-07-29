@@ -2,64 +2,49 @@
 using Microsoft.Extensions.Logging;
 using Steeltoe.Actuators.Models;
 using Steeltoe.Actuators.Providers;
+using Steeltoe.Actuators.Services;
 using Steeltoe.Management.Endpoint.Hypermedia;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Steeltoe.Actuators.Controllers
 {
     public class PageController : Controller
     {
-        private readonly ActuatorEndpoint actuatorEndpoint;
         private readonly EmployeeDataContext employeeDataContext;
-        private readonly ILogger<PageController> logger;
+        private readonly IActuatorLinkService actuatorLinkService;
+        private readonly ILogLevelService logLevelService;
 
         public PageController(
-            ActuatorEndpoint actuatorEndpoint,
             EmployeeDataContext employeeDataContext,
-            ILogger<PageController> logger)
+            IActuatorLinkService actuatorLinkService,
+            ILogLevelService logLevelService)
         {
-            this.actuatorEndpoint = actuatorEndpoint;
             this.employeeDataContext = employeeDataContext;
-            this.logger = logger;
+            this.actuatorLinkService = actuatorLinkService;
+            this.logLevelService = logLevelService;
         }
 
         public IActionResult Index()
         {
-            logger.LogInformation("Retrieving actuators");
-
-            var actuatorLinks = Enumerable.Empty<HrefProperties>();
-
-            var actuatorEndpoints = actuatorEndpoint.Invoke("/actuator");
-
-            if (actuatorEndpoints is not null)
-            {
-                logger.LogInformation($"Found {actuatorEndpoints._links.Count} actuators");
-
-                actuatorLinks = actuatorEndpoints._links.Select(link =>
-                    new HrefProperties
-                    {
-                        Display = link.Key != "self" ? link.Key : "all actuators",
-                        Address = link.Value.Href
-                    });
-            }
-            else
-            {
-                logger.LogError("No actuators were found");
-            }
-
-            return View(actuatorLinks);
+            return View(actuatorLinkService.GetActuatorLinks());
         }
 
         public IActionResult Migration()
         {
-            logger.LogInformation("Retrieving employee data");
+            return View(employeeDataContext?.Employees.ToArray());
+        }
 
-            var employees = employeeDataContext?.Employees.ToArray();
+        public async Task<IActionResult> Logging()
+        {
+            return View(await logLevelService.GetLogLevelsAndNamespaces());
+        }
 
-            logger.LogInformation($"Found {employees?.Length} employees");
-
-            return View(employees);
+        public async Task<IActionResult> SetLogLevel()
+        {
+            return View(await logLevelService.GetLogLevelsAndNamespaces());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

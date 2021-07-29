@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Steeltoe.Actuators.Providers;
+using Steeltoe.Actuators.Services;
 
 namespace Steeltoe.Actuators
 {
@@ -29,6 +31,17 @@ namespace Steeltoe.Actuators
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Steeltoe Actuators", Version = "v1" });
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IActuatorLinkService, ActuatorLinkService>();
+
+            services.AddHttpClient<ILogLevelService, LogLevelService>((provider, client) => 
+            {
+                var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var scheme = httpContextAccessor.HttpContext.Request.Scheme;
+                var host = httpContextAccessor.HttpContext.Request.Host.ToUriComponent();
+                client.BaseAddress = new System.Uri($"{scheme}://{host}");
             });
         }
 

@@ -1,0 +1,43 @@
+﻿@model LogLevelsAndNamespaces
+
+@{
+    ViewData["Title"] = "Steeltoe Actuators - Logging";
+}
+
+<div class="text-center">
+    <h1>Dynamic Logging</h1>
+</div>
+
+<div>
+    Available Levels:
+    <ul>
+        @foreach (var level in Model.Levels)
+        {
+            <li>@level</li>
+        }
+    </ul>
+</div>
+
+<div>
+
+</div>
+
+<table class="table text-white">
+    <thead>
+        <tr>
+            <th>Namespace</th>
+            <th>EffectiveLevel</th>
+            <th>ConfiguredLevel</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loggerNamespace in Model?.Loggers.Keys)
+        {
+            <tr>
+                <td>@loggerNamespace</td>
+                <td>@Model.Loggers[loggerNamespace].EffectiveLevel</td>
+                <td>@Model.Loggers[loggerNamespace].ConfiguredLevel</td>
+            </tr>
+        }
+    </tbody>
+</table>
