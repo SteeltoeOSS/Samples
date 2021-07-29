@@ -1,4 +1,4 @@
-﻿@model LogLevelsAndNamespaces
+﻿@model LoggingViewModel
 
 @{
     ViewData["Title"] = "Steeltoe Actuators - Logging";
@@ -9,34 +9,39 @@
 </div>
 
 <div>
-    Available Levels:
-    <ul>
-        @foreach (var level in Model.Levels)
+    @using (Html.BeginForm("SetLogLevel", "Page", FormMethod.Post))
+    {
+        @Html.DropDownListFor(x => x.SelectedNamespace, Model.Namespaces, "Please Select Namespace", new
         {
-            <li>@level</li>
-        }
-    </ul>
-</div>
-
-<div>
-
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        });
+        <br /><br />
+        @Html.DropDownListFor(x => x.SelectedLevel, Model.Levels, "Please Select Level", new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        });
+        <br /><br />
+        <input type="submit" value="Change Log Level" />
+    }
 </div>
 
 <table class="table text-white">
     <thead>
         <tr>
-            <th>Namespace</th>
-            <th>EffectiveLevel</th>
-            <th>ConfiguredLevel</th>
+            <th>Current Namespace Levels</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var loggerNamespace in Model?.Loggers.Keys)
+        @foreach (var loggerNamespace in Model.Namespaces)
         {
             <tr>
-                <td>@loggerNamespace</td>
-                <td>@Model.Loggers[loggerNamespace].EffectiveLevel</td>
-                <td>@Model.Loggers[loggerNamespace].ConfiguredLevel</td>
+                <td>@loggerNamespace.Text</td>
             </tr>
         }
     </tbody>

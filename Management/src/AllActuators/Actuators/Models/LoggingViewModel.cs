@@ -12,6 +12,5 @@ namespace Steeltoe.Actuators.Models
         public List<SelectListItem> Levels { get; set; }
         
         public List<SelectListItem> Namespaces { get; set; }
-
     }
 }

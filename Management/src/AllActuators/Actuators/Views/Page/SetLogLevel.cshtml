@@ -1,0 +1,13 @@
+﻿@model LoggingViewModel
+
+@{
+    ViewData["Title"] = "Steeltoe Actuators - Confirmation";
+}
+
+<h1>Success!</h1>
+
+<h5>@Model.SelectedNamespace level has now been changed to @Model.SelectedLevel</h5>
+
+<br />
+<br />
+<a asp-area="" asp-controller="Page" asp-action="Logging">Back</a>

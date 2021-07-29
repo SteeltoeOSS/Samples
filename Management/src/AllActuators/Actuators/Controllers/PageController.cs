@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Actuators.Models;
 using Steeltoe.Actuators.Providers;
 using Steeltoe.Actuators.Services;
 using Steeltoe.Management.Endpoint.Hypermedia;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -39,12 +41,44 @@ namespace Steeltoe.Actuators.Controllers
 
         public async Task<IActionResult> Logging()
         {
-            return View(await logLevelService.GetLogLevelsAndNamespaces());
+            var logLevelsAndNamespaces = await logLevelService.GetLogLevelsAndNamespaces();
+
+            return View(GetLoggingViewModel(logLevelsAndNamespaces));
         }
 
-        public async Task<IActionResult> SetLogLevel()
+        public async Task<IActionResult> SetLogLevel(LoggingViewModel loggingViewModel)
         {
-            return View(await logLevelService.GetLogLevelsAndNamespaces());
+            var logNamespace = await logLevelService.SetLogLevels(
+                name: loggingViewModel.SelectedNamespace, 
+                level: loggingViewModel.SelectedLevel);
+
+            return View(new LoggingViewModel { 
+                SelectedNamespace = loggingViewModel.SelectedNamespace,
+                SelectedLevel = logNamespace.ConfiguredLevel 
+            });
+        }
+
+        private static LoggingViewModel GetLoggingViewModel(LogLevelsAndNamespaces logLevelsAndNamespaces)
+        {
+            var levels = logLevelsAndNamespaces.Levels.Select(level =>
+                new SelectListItem
+                {
+                    Text = new CultureInfo("en-US", false).TextInfo.ToTitleCase(level),
+                    Value = level
+                }).ToList();
+
+            var namespaces = logLevelsAndNamespaces.Loggers.Select(kvp =>
+                new SelectListItem
+                {
+                    Text = $"{kvp.Key} (Current: {kvp.Value.EffectiveLevel})",
+                    Value = kvp.Key
+                }).ToList();
+
+            return new LoggingViewModel
+            {
+                Levels = levels,
+                Namespaces = namespaces
+            };
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
