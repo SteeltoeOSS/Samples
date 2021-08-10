@@ -13,11 +13,5 @@ namespace Steeltoe.Actuators.Models
     {
         public string ConfiguredLevel { get; set;}
         public string EffectiveLevel { get; set; }
-
-        /* public string ActiveLevel { 
-            get { 
-                return !string.IsNullOrWhiteSpace(ConfiguredLevel) ? ConfiguredLevel : EffectiveLevel; 
-            } 
-        } */
     }
 }

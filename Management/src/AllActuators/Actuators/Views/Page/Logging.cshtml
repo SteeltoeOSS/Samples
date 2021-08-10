@@ -13,6 +13,15 @@
     the given log level of the desired namespace.</p>
 </div>
 
+<form asp-action="Logging" method="get">
+    <div class="form-actions">
+        <p>
+            Filter: <input type="text" name="filter" value="@ViewData["Filter"]" />
+            <input type="submit" value="Filter" class="btn btn-default" /> |
+        </p>
+    </div>
+</form>
+
 <table class="table log-table text-white">
     <thead>
         <tr>

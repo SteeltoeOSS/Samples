@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Steeltoe.Actuators.Extensions;
 using Steeltoe.Actuators.Models;
 using Steeltoe.Actuators.Providers;
 using Steeltoe.Actuators.Services;
@@ -36,9 +37,13 @@ namespace Steeltoe.Actuators.Controllers
             return View(employeeDataContext?.Employees.ToArray());
         }
 
-        public async Task<IActionResult> Logging()
+        public async Task<IActionResult> Logging(int page = 0, string filter = "")
         {
+            ViewData["Filter"] = filter;
+
             var logLevelsAndNamespaces = await logLevelService.GetLogLevelsAndNamespaces();
+
+            logLevelsAndNamespaces.Filter(filter, page, 10);
 
             return View(logLevelsAndNamespaces);
         }
