@@ -1,4 +1,4 @@
-﻿@model LoggingViewModel
+﻿@model LogLevelsAndNamespaces
 
 @{
     ViewData["Title"] = "Steeltoe Actuators - Logging";
@@ -8,40 +8,43 @@
     <h1>Dynamic Logging</h1>
 </div>
 
-<div>
-    @using (Html.BeginForm("SetLogLevel", "Page", FormMethod.Post))
-    {
-        @Html.DropDownListFor(x => x.SelectedNamespace, Model.Namespaces, "Please Select Namespace", new
-        {
-            htmlAttributes = new
-            {
-                @class = "form-control"
-            }
-        });
-        <br /><br />
-        @Html.DropDownListFor(x => x.SelectedLevel, Model.Levels, "Please Select Level", new
-        {
-            htmlAttributes = new
-            {
-                @class = "form-control"
-            }
-        });
-        <br /><br />
-        <input type="submit" value="Change Log Level" />
-    }
+<div class="text-center log-description">
+    <p>Steeltoe's Dynamic Logging framework can alter log levels through http requests.<br />Select the various levels below to alter
+    the given log level of the desired namespace.</p>
 </div>
 
-<table class="table text-white">
+<table class="table log-table text-white">
     <thead>
         <tr>
-            <th>Current Namespace Levels</th>
+            <th>Namespace</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var loggerNamespace in Model.Namespaces)
+        @foreach (var logger in Model.Loggers)
         {
             <tr>
-                <td>@loggerNamespace.Text</td>
+                <td>
+                    <span class="logger">@logger.Key</span>
+                    <ul class="log-level-list">
+                        @foreach (var level in Model.Levels)
+                        {
+                            if (level.ToLower() != logger.Value.EffectiveLevel?.ToLower())
+                            {
+                                <li class="log-level">
+                                    <a asp-action="SetLogLevel"
+                                       asp-route-logger="@logger.Key"
+                                       asp-route-newLevel="@level">
+                                        @level
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="log-level active">@level</li>
+                            }
+                        }
+                    </ul>
+                </td>
             </tr>
         }
     </tbody>

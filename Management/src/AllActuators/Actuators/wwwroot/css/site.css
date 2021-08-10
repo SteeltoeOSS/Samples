@@ -99,3 +99,35 @@ body {
     text-align: center;
 }
 
+ul.log-level-list {
+    padding-left: 0px;
+}
+
+ul.log-level-list li {
+    display: inline;
+    text-indent: 0px;
+}
+
+li.log-level::after {
+    content: ' | ';
+}
+
+ul.log-level-list li:last-child::after {
+    content: '';
+}
+
+.log-level, .logger {
+    font-size: .8em;
+}
+
+.logLevel.active {
+    font-weight: bolder;
+}
+
+.log-table {
+    width: 50%;
+}
+
+.log-description {
+    padding: 10px 0px;
+}
