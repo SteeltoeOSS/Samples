@@ -1,4 +1,4 @@
-﻿@model LogLevelsAndNamespaces
+﻿@model LoggingViewModel
 
 @{
     ViewData["Title"] = "Steeltoe Actuators - Logging";
@@ -13,48 +13,80 @@
     the given log level of the desired namespace.</p>
 </div>
 
-<form asp-action="Logging" method="get">
-    <div class="form-actions">
-        <p>
-            Filter: <input type="text" name="filter" value="@ViewData["Filter"]" />
-            <input type="submit" value="Filter" class="btn btn-default" /> |
-        </p>
-    </div>
-</form>
-
-<table class="table log-table text-white">
-    <thead>
-        <tr>
-            <th>Namespace</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var logger in Model.Loggers)
-        {
+<div>
+    <table class="table log-table text-white">
+        <thead>
             <tr>
-                <td>
-                    <span class="logger">@logger.Key</span>
-                    <ul class="log-level-list">
-                        @foreach (var level in Model.Levels)
-                        {
-                            if (level.ToLower() != logger.Value.EffectiveLevel?.ToLower())
-                            {
-                                <li class="log-level">
-                                    <a asp-action="SetLogLevel"
-                                       asp-route-logger="@logger.Key"
-                                       asp-route-newLevel="@level">
-                                        @level
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="log-level active">@level</li>
-                            }
-                        }
-                    </ul>
-                </td>
+                <th>
+                    <form asp-action="Logging" method="get">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" placeholder="Search Namespace" name="searchFilter" value="@ViewData["SearchFilter"]" />
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    @if (Model.TotalPages > 1)
+                    {
+                        <div>
+                            <br />
+                            <ul class="inline-list">
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    if (Model.PageIndex == i)
+                                    {
+                                        <li class="inline-list-item active">@i</li>
+                                    }
+                                    else
+                                    {
+                                        <li class="inline-list-item">
+                                            <a asp-action="Logging"
+                                               asp-route-pageIndex="@i"
+                                               asp-route-searchFilter="@ViewData["SearchFilter"]">
+                                                @i
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var log in Model.LogLevels)
+            {
+                <tr>
+                    <td>
+                        <span class="logger">@log.Namespace</span>
+                        <ul class="inline-list">
+                            @foreach (var level in Model.AvailableLevels)
+                            {
+                                if (level.ToLower() != log.Level?.ToLower())
+                                {
+                                    <li class="inline-list-item">
+                                        <a asp-action="SetLogLevel"
+                                           asp-route-logger="@log.Namespace"
+                                           asp-route-newLevel="@level"
+                                           asp-route-pageIndex="@Model.PageIndex"
+                                           asp-route-searchFilter="@ViewData["SearchFilter"]">
+                                            @level
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="inline-list-item active">@level</li>
+                                }
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

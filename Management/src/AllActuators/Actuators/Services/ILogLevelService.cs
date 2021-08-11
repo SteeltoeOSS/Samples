@@ -5,8 +5,8 @@ namespace Steeltoe.Actuators.Services
 {
     public interface ILogLevelService
     {
-        Task<LogLevelsAndNamespaces> GetLogLevelsAndNamespaces();
+        Task<DynamicLogLevels> GetLogLevelsAndNamespaces();
 
-        Task<LogNamespace> SetLogLevels(string name, string level);
+        Task<DynamicLogLevel> SetLogLevels(string name, string level);
     }
 }

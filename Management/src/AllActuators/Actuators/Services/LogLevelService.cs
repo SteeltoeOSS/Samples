@@ -16,12 +16,12 @@ namespace Steeltoe.Actuators.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<LogLevelsAndNamespaces> GetLogLevelsAndNamespaces() =>
-            await httpClient.GetFromJsonAsync<LogLevelsAndNamespaces>("actuator/loggers");
+        public async Task<DynamicLogLevels> GetLogLevelsAndNamespaces() =>
+            await httpClient.GetFromJsonAsync<DynamicLogLevels>("actuator/loggers");
 
-        public async Task<LogNamespace> SetLogLevels(string name, string level)
+        public async Task<DynamicLogLevel> SetLogLevels(string name, string level)
         {
-            var newLevel = new LogNamespace { ConfiguredLevel = level };
+            var newLevel = new DynamicLogLevel { ConfiguredLevel = level };
 
             var response = await httpClient.PostAsJsonAsync($"actuator/loggers/{name}", newLevel);
 

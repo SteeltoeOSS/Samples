@@ -2,14 +2,14 @@
 
 namespace Steeltoe.Actuators.Models
 {
-    public class LogLevelsAndNamespaces
+    public class DynamicLogLevels
     {
         public List<string> Levels { get; set; } = new();
 
-        public Dictionary<string, LogNamespace> Loggers { get; set; }  = new();
+        public Dictionary<string, DynamicLogLevel> Loggers { get; set; }  = new();
     }
 
-    public class LogNamespace
+    public class DynamicLogLevel
     {
         public string ConfiguredLevel { get; set;}
         public string EffectiveLevel { get; set; }
