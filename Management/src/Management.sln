@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicrosoftHealthChecks", "Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpringBootAdmin", "SpringBootAdmin\SpringBootAdmin.csproj", "{991C2D66-23E8-4CA5-B645-F7346F15C5CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kubernetes", "Kubernetes\Kubernetes.csproj", "{B7C43137-A5B9-40F3-B64D-8CF0B20C7A4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{991C2D66-23E8-4CA5-B645-F7346F15C5CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991C2D66-23E8-4CA5-B645-F7346F15C5CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991C2D66-23E8-4CA5-B645-F7346F15C5CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7C43137-A5B9-40F3-B64D-8CF0B20C7A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7C43137-A5B9-40F3-B64D-8CF0B20C7A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7C43137-A5B9-40F3-B64D-8CF0B20C7A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7C43137-A5B9-40F3-B64D-8CF0B20C7A4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
