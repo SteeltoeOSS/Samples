@@ -1,6 +1,10 @@
 ﻿# Kubernetes ASP.NET Core Sample Application
 
-This ASP.NET Core sample uses the Steeltoe Kubernetes management library. All snippets below are executed from the directory `Samples\Management\src`.
+This ASP.NET Core sample uses the Steeltoe Kubernetes Management library, along with a companion Spring Boot Admin Server to access the actuator endpoints.
+The application can run in or out of a Kubernetes cluster, and Steeltoe features will respond according to the environment in which they run.
+In addition to the interface provided by Spring Boot Admin, you can interact with the endpoints directly with a base path of `<host:port>/actuator` (an HTTP GET request to this path will list all configured endpoints)
+
+All snippets below are executed from the directory `Samples\Management\src`.
 
 ## Pre-requisites
 
@@ -13,26 +17,25 @@ This ASP.NET Core sample uses the Steeltoe Kubernetes management library. All sn
 Use docker to build an image with a version tag
 
 ```powershell
-docker build -t kubernetesmanagement:v1 .\Kubernetes\
+docker build -t steeltoe-management:v1 .\Kubernetes\
 ```
 
-## Create Deployment
+## Create Deployments
 
-Create a Kubernetes release that references the tagged image
+(Optionally) deploy a Spring Boot Admin server, exposed on port 9090 with the included yaml:
 
 ```powershell
-kubectl create deployment kubernetesmanagement --image kubernetesmanagement:v1
+kubectl apply -f .\Kubernetes\SpringBootAdmin.yaml
 ```
 
-## Expose Service
+Confirm the Spring Boot Admin server is up and running at <http://localhost:9090> before deploying the .NET application as Steeltoe's Spring Boot Admin Client will only attempt to register during application startup.
 
-Expose the service so it can be accessed from a browser
+Create a Kubernetes release that references the tagged image, exposing the app on port 5000:
 
 ```powershell
-kubectl expose deployment kubernetes --port 8080 --target-port 80 --type=LoadBalancer
+kubectl apply -f .\Kubernetes\SteeltoeDeployment.yaml
 ```
 
 ## View the service
 
-Open <http://localhost:8080> in your browser. You should see a welcome message and some placeholders for data that will be retrieved from configuration as soon as it is present.
-
+Open <http://localhost:5000> in your browser. The application itself is trivial, but you should see a welcome message for basic confirmation the app is running. Actuators should be accessible at <http://localhost:5000/actuators> or via the admin server at <http://localhost:9090>.
