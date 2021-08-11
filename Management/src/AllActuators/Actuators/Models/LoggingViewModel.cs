@@ -20,7 +20,7 @@ namespace Steeltoe.Actuators.Models
 
         public int TotalPages =>
             (int)Math.Ceiling(logLevels.Filter(SearchKeyword).Count() / (double)PageSize);
-        
+
 
         private readonly List<string> availableLevels;
         private readonly IEnumerable<LogLevel> logLevels;

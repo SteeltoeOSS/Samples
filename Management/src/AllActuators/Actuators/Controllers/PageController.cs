@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Steeltoe.Actuators.Extensions;
 using Steeltoe.Actuators.Models;
 using Steeltoe.Actuators.Providers;
 using Steeltoe.Actuators.Services;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 

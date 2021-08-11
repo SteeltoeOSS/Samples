@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Steeltoe.Actuators.Models;
 using Steeltoe.Management.Endpoint.Hypermedia;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Steeltoe.Actuators.Services
 {

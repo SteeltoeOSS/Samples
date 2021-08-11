@@ -33,10 +33,10 @@ namespace Steeltoe.Actuators
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Steeltoe Actuators", Version = "v1" });
             });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddTransient<IActuatorLinkService, ActuatorLinkService>();
 
-            services.AddHttpClient<ILogLevelService, LogLevelService>((provider, client) => 
+            services.AddHttpClient<ILogLevelService, LogLevelService>((provider, client) =>
             {
                 var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
                 var scheme = httpContextAccessor.HttpContext.Request.Scheme;
