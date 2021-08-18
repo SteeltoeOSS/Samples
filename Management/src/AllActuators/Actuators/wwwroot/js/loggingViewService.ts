@@ -1,7 +1,6 @@
 ﻿class LogViewService {
 
     dynamicLogLevels: IDynamicLogLevels;
-    pageIndex: number = 0;
     filter: string = "";
     readonly maxPageSize: number = 10;
 
@@ -21,48 +20,69 @@
         error => console.error(error));
     }
 
-    private buildNamespaces(): void {
-        const tableElement = document.getElementById(`logTable-body`);
-        tableElement.innerHTML = "";
-
-        let keys = Object.keys(this.dynamicLogLevels.loggers);
-    
-            if(this.filter.trim() !== "")
-            {
-                keys = keys.filter((key: string) => 
-                    key.toLowerCase().indexOf(this.filter.toLowerCase()) > -1);
-            }
-    
-            keys.slice().reverse().forEach((id: string) => {
-                let table = document.getElementById("logTable-body") as HTMLTableElement;
-                var row = table.insertRow(0);
-                var cell = row.insertCell(0);
-    
-                cell.innerHTML = `<span class="logger">${id}</span>
-                    <ul id="${id}-log-levels" class="inline-list">
-                        ${this.addLogLevels(
-                            id, 
-                            this.dynamicLogLevels.loggers[id].effectiveLevel)}
-                    </ul>`;
-            });
-    }
-
     public filterNamespaces(namespace: string): void {
         this.filter = namespace;
 
         this.buildNamespaces();
     }
 
-    private addLogLevels(namespace: string, currentLevel: string): string
-    {
+    public changePage(pageIndex: number): void {
+        this.buildNamespaces(pageIndex);
+    }
+
+    private buildNamespaces(pageIndex: number = 1): void {
+        const tableElement = document.getElementById(`logTable-body`);
+        tableElement.innerHTML = "";
+
+        let keys = Object.keys(this.dynamicLogLevels.loggers);
+    
+        if(this.filter.trim() !== "")
+        {
+            keys = keys.filter((key: string) => 
+                key.toLowerCase().indexOf(this.filter.toLowerCase()) > -1);
+        }
+
+        const pageCount = Math.ceil(keys.length / this.maxPageSize);
+        this.buildPages(pageIndex, pageCount);
+
+        // since table.insertRow places items on top, perform in reverse order
+        keys.slice(pageIndex, pageIndex + this.maxPageSize).reverse().forEach((id: string) => {
+            let table = document.getElementById("logTable-body") as HTMLTableElement;
+            var row = table.insertRow(0);
+            var cell = row.insertCell(0);
+
+            cell.innerHTML = `<span class="logger">${id}</span>
+                <ul id="${id}-log-levels" class="inline-list">
+                    ${this.addLogLevels(
+                        id, 
+                        this.dynamicLogLevels.loggers[id].effectiveLevel)}
+                </ul>`;
+        });
+    }
+
+    private buildPages(currentPage: number, pageCount: number): void {
+        let pageMarkup: string = "";
+
+        if (pageCount > 1) {
+            for(let i = 1; i <= pageCount; i++) {
+                pageMarkup += (i === currentPage) ?
+                    this.getActivePageDisplay(i) :
+                    this.getNonActivePageDisplay(i);
+            }
+        }
+
+        const pageListElement = document.getElementById("Page-List");
+        pageListElement.innerHTML = pageMarkup;
+    }
+
+    private addLogLevels(namespace: string, currentLevel: string): string {
         return this.dynamicLogLevels.levels.map(level => 
             level.toLowerCase() === currentLevel.toLowerCase() ? 
                 this.getActiveLogLevelDisplay(namespace, level) :
                 this.getNonActiveLogLevelDisplay(namespace, level)).join('');
     }
 
-    private updateLogLevels(namespace: string, level: string)
-    {
+    private updateLogLevels(namespace: string, level: string): void {
         const keys = Object.keys(this.dynamicLogLevels.loggers);
         
         keys.forEach((id: string) => {
@@ -74,15 +94,27 @@
         });
     }
 
-    private getActiveLogLevelDisplay(namespace: string, level: string)
+    private getActiveLogLevelDisplay(namespace: string, level: string): string
     {
-        return `<li id="${namespace}-${level}" class="log-level inline-list-item active">${level}</li>`;
+        return `<li id="${namespace}-${level}" class="inline-list-item active">${level}</li>`;
     }
 
     private getNonActiveLogLevelDisplay(namespace: string, level:string) : string
     {
-        return `<li id="${namespace}-${level}" class="log-level inline-list-item">
+        return `<li id="${namespace}-${level}" class="inline-list-item">
                     <a href="" onclick="setLogLevel('${namespace}','${level}'); return false;">${level}</a>
+                </li>`
+    }
+
+    private getActivePageDisplay(page: number): string
+    {
+        return `<li class="inline-list-item active">${page}</li>`;
+    }
+
+    private getNonActivePageDisplay(page: number) : string
+    {
+        return `<li class="inline-list-item">
+                    <a href="" onclick="changePage(${page}); return false;">${page}</a>
                 </li>`
     }
 }

@@ -10,3 +10,7 @@ function filterNamespaces(): void {
     const filter = (document.getElementById("searchFilter") as HTMLInputElement).value;
     logViewService.filterNamespaces(filter);
 }
+
+function changePage(pageNumber: number) {
+    logViewService.changePage(pageNumber);
+}
