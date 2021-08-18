@@ -39,13 +39,6 @@ namespace Steeltoe.Actuators.Controllers
             return View();
         }
 
-        public async Task<IActionResult> SetLogLevel(string logger, string newLevel, int pageIndex, string searchFilter = "")
-        {
-            _ = await logLevelService.SetLogLevels(name: logger, level: newLevel);
-
-            return RedirectToAction("Logging", new { pageIndex, searchFilter });
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

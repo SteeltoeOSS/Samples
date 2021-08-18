@@ -11,11 +11,6 @@ interface ILogConfiguration {
     effectiveLevel: string;
 }
 
-interface ILogRequest {
+interface IActuatorLoggerRequest {
     configuredLevel: string;
-}
-
-interface ILogLevel {
-    namespace: string;
-    level: string;
 }

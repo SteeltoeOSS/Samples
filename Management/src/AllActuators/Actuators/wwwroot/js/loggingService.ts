@@ -1,7 +1,7 @@
 ﻿
 class LogService
 {
-    public GetLogLevelsAndNamespaces() : Promise<IDynamicLogLevels> {
+    public static getLogLevelsAndNamespaces() : Promise<IDynamicLogLevels> {
         return new Promise<IDynamicLogLevels>((resolve, reject) => {
             fetch("/actuator/loggers")
                 .then((response: Response) => response.json())
@@ -12,11 +12,11 @@ class LogService
         });
     }
 
-    public SetLogLevel(name: string, level: string) : Promise<ILogConfiguration>
+    public static setLogLevel(name: string, level: string) : Promise<ILogConfiguration>
     {
         return new Promise<ILogConfiguration>((resolve, reject) => {
             
-            const requestBody: ILogRequest = { configuredLevel: level };
+            const requestBody: IActuatorLoggerRequest = { configuredLevel: level };
 
             fetch(`/actuator/loggers/${name}`, { method: 'POST', body: JSON.stringify(requestBody)})
                 .then((response: Response) =>
