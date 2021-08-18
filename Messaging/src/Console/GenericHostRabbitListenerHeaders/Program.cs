@@ -15,7 +15,7 @@ namespace ConsoleSendReceive
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            RabbitMQHost.CreateDefaultBuilder()
+            RabbitMQHost.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
                     // Add queue to be declared
