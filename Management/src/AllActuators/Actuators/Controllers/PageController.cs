@@ -4,7 +4,6 @@ using Steeltoe.Actuators.Providers;
 using Steeltoe.Actuators.Services;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Steeltoe.Actuators.Controllers
 {
@@ -12,16 +11,13 @@ namespace Steeltoe.Actuators.Controllers
     {
         private readonly EmployeeDataContext employeeDataContext;
         private readonly IActuatorLinkService actuatorLinkService;
-        private readonly ILogLevelService logLevelService;
 
         public PageController(
             EmployeeDataContext employeeDataContext,
-            IActuatorLinkService actuatorLinkService,
-            ILogLevelService logLevelService)
+            IActuatorLinkService actuatorLinkService)
         {
             this.employeeDataContext = employeeDataContext;
             this.actuatorLinkService = actuatorLinkService;
-            this.logLevelService = logLevelService;
         }
 
         public IActionResult Index()

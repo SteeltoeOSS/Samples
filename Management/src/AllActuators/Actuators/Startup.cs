@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,14 +34,6 @@ namespace Steeltoe.Actuators
 
             services.AddHttpContextAccessor();
             services.AddTransient<IActuatorLinkService, ActuatorLinkService>();
-
-            services.AddHttpClient<ILogLevelService, LogLevelService>((provider, client) =>
-            {
-                var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
-                var scheme = httpContextAccessor.HttpContext.Request.Scheme;
-                var host = httpContextAccessor.HttpContext.Request.Host.ToUriComponent();
-                client.BaseAddress = new System.Uri($"{scheme}://{host}");
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

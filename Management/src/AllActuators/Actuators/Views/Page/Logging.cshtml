@@ -26,25 +26,7 @@
                     </div>
                     <div>
                         <br />
-                        <ul id="Page-List" class="inline-list">
-                            @*@for (int i = 1; i <= Model.TotalPages; i++)
-                            {
-                                if (Model.PageIndex == i)
-                                {
-                                    <li class="inline-list-item active">@i</li>
-                                }
-                                else
-                                {
-                                    <li class="inline-list-item">
-                                        <a asp-action="Logging"
-                                            asp-route-pageIndex="@i"
-                                            asp-route-searchFilter="@ViewData["SearchFilter"]">
-                                            @i
-                                        </a>
-                                    </li>
-                                }
-                            }*@
-                        </ul>
+                        <ul id="Page-List" class="inline-list"></ul>
                     </div>
                 </th>
             </tr>
