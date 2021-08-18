@@ -6,6 +6,9 @@
     <title>@ViewData["Title"] - Steeltoe Actuators</title>
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/loggingService.js"></script>
+    <script src="~/js/loggingViewService.js"></script>
+    <script src="~/js/loggingFunctions.js"></script>
 </head>
 <body class="bg-midnight-blue text-white">
     <header>
@@ -20,6 +23,9 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Page" asp-action="Index">Actuators</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Page" asp-action="Logging">Logging</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Page" asp-action="Migration">Migration</a>

@@ -99,3 +99,44 @@ body {
     text-align: center;
 }
 
+ul.inline-list {
+    padding-left: 0px;
+}
+
+ul.inline-list li {
+    display: inline;
+    text-indent: 0px;
+}
+
+li.inline-list-item::after {
+    content: ' | ';
+    padding: 0px 10px;
+}
+
+ul.inline-list li:last-child::after {
+    content: '';
+}
+
+.inline-list-item, .logger {
+    font-size: .8em;
+}
+
+    .inline-list-item.active {
+        font-weight: bolder;
+    }
+
+.log-table {
+    border-top-style:none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table.log-table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    border-top-style: none;
+}
+
+.log-description {
+    padding: 10px 0px;
+}

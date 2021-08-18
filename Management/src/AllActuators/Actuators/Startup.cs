@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Steeltoe.Actuators.Providers;
+using Steeltoe.Actuators.Services;
 
 namespace Steeltoe.Actuators
 {
@@ -30,6 +31,9 @@ namespace Steeltoe.Actuators
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Steeltoe Actuators", Version = "v1" });
             });
+
+            services.AddHttpContextAccessor();
+            services.AddTransient<IActuatorLinkService, ActuatorLinkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
