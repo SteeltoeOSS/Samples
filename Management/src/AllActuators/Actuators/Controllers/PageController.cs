@@ -34,19 +34,9 @@ namespace Steeltoe.Actuators.Controllers
             return View(employeeDataContext?.Employees.ToArray());
         }
 
-        public async Task<IActionResult> Logging(int pageIndex = 1, string searchFilter = "")
+        public IActionResult Logging()
         {
-            ViewData["SearchFilter"] = searchFilter;
-
-            var dynamicLogLevels = await logLevelService.GetLogLevelsAndNamespaces();
-
-            var loggingViewModel = new LoggingViewModel(dynamicLogLevels)
-            {
-                PageIndex = pageIndex,
-                SearchKeyword = searchFilter
-            };
-
-            return View(loggingViewModel);
+            return View();
         }
 
         public async Task<IActionResult> SetLogLevel(string logger, string newLevel, int pageIndex, string searchFilter = "")

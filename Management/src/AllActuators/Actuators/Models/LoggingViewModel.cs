@@ -7,11 +7,6 @@ namespace Steeltoe.Actuators.Models
 {
     public class LoggingViewModel
     {
-        public List<string> AvailableLevels => availableLevels;
-
-        public IEnumerable<LogLevel> LogLevels =>
-            logLevels.Filter(SearchKeyword).Paginate(PageIndex, PageSize);
-
         public int PageIndex { get; set; }
 
         public int PageSize { get; } = 10;
@@ -27,8 +22,8 @@ namespace Steeltoe.Actuators.Models
 
         public LoggingViewModel(DynamicLogLevels dynamicLogLevels)
         {
-            availableLevels = dynamicLogLevels.Levels;
-            logLevels = dynamicLogLevels.ToLogLevels();
+            availableLevels = new();
+            logLevels = Enumerable.Empty<LogLevel>();
         }
     }
 }
