@@ -7,10 +7,9 @@ using Steeltoe.Common.Diagnostics;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Management.Census.Stats;
 using Steeltoe.Management.Endpoint.Health.Contributor;
-using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.EndpointOwin;
-using Steeltoe.Management.EndpointOwin.Health;
 using Steeltoe.Management.EndpointOwin.Metrics;
+using Steeltoe.Management.EndpointOwin.Refresh;
 using Steeltoe.Management.Exporter.Metrics;
 using Steeltoe.Management.Exporter.Metrics.CloudFoundryForwarder;
 using System.Collections.Generic;
@@ -35,10 +34,11 @@ namespace CloudFoundryOwin
                 LoggingConfig.LoggerProvider,
                 LoggingConfig.LoggerFactory);
 
-            // Uncomment if you want to enable metrics actuator endpoint, it's not enabled by default
-            // app.UseMetricsActuator(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
+            // Some actuator endpoints are not enabled by UseCloudFoundryActuators
+            app.UseMetricsActuator(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
+            app.UseRefreshActuator(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
 
-            //  Uncomment if you want to enable exporting of metrics toCloud Foundry metrics exporter, it's not enabled by default
+            //  Uncomment if you want to enable exporting of metrics to Cloud Foundry metrics exporter, it's not enabled by default
             // UseCloudFoundryMetricsExporter(ApplicationConfig.Configuration, LoggingConfig.LoggerFactory);
 
             Start();
