@@ -1,15 +1,16 @@
-﻿@{
-    ViewData["Title"]  =  "Configuration Settings for Spring Cloud Config Server";
+﻿@model Steeltoe.Extensions.Configuration.ConfigServer.ConfigServerClientSettingsOptions
+@{
+    ViewData["Title"] = "Configuration Settings for Spring Cloud Config Server";
 }
-
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>spring:cloud:config:enabled = @ViewData["Enabled"]</h4>
-<h4>spring:cloud:config:env = @ViewData["Environment"]</h4>
-<h4>spring:cloud:config:failFast = @ViewData["FailFast"]</h4>
-<h4>spring:cloud:config:name = @ViewData["Name"]</h4>
-<h4>spring:cloud:config:label = @ViewData["Label"]</h4>
-<h4>spring:cloud:config:username = @ViewData["Username"]</h4>
-<h4>spring:cloud:config:password = @ViewData["Password"]</h4>
-<h4>spring:cloud:config:validateCertificates = @ViewData["ValidateCertificates"]</h4>
+<h4>spring:cloud:config:uri = @Model.Uri</h4>
+<h4>spring:cloud:config:enabled = @Model.Enabled</h4>
+<h4>spring:cloud:config:env = @Model.Environment</h4>
+<h4>spring:cloud:config:failFast = @Model.FailFast</h4>
+<h4>spring:cloud:config:name = @Model.Name</h4>
+<h4>spring:cloud:config:label = @Model.Label</h4>
+<h4>spring:cloud:config:username = @Model.Username</h4>
+<h4>spring:cloud:config:password = @Model.Password</h4>
+<h4>spring:cloud:config:validateCertificates = @Model.ValidateCertificates</h4>

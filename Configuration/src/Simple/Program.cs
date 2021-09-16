@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Steeltoe;
 using Steeltoe.Extensions.Configuration.ConfigServer;
+using Steeltoe.Discovery.Client;
 
 namespace Simple
 {
@@ -13,6 +15,7 @@ namespace Simple
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                     .AddConfigServer()
+                    //.AddDiscoveryClient()
                     .UseStartup<Startup>()
                     .Build();
     }

@@ -3,10 +3,12 @@ applications:
 - name: redis-connector
   buildpacks:
    - dotnet_core_buildpack
-  memory: 128M
+  memory: 256M
   disk_quota: 200M
-  command: cd ${HOME} && ./Redis
+  random-route: true
   env:
     ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true
   services:
    - myRedisService

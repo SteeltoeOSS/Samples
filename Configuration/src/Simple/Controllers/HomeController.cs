@@ -15,7 +15,7 @@ namespace Simple.Controllers
 
         private IConfigurationRoot Config { get; set; }
 
-        public HomeController(IConfiguration config, IOptionsSnapshot<ConfigServerData> configServerData, IOptions<ConfigServerClientSettingsOptions> confgServerSettings)
+        public HomeController(IConfiguration config, IOptionsSnapshot<ConfigServerData> configServerData, IOptionsSnapshot<ConfigServerClientSettingsOptions> confgServerSettings)
         {
             // The ASP.NET DI mechanism injects the data retrieved from the Spring Cloud Config Server 
             // as an IOptionsSnapshot<ConfigServerData>. This happens because we added the call to:
@@ -54,12 +54,6 @@ namespace Simple.Controllers
             return View();
         }
 
-        public IActionResult ConfigServer()
-        {
-            CreateConfigServerDataViewData();
-            return View();
-        }
-
         public IActionResult Reload()
         {
             if (Config != null)
@@ -67,6 +61,12 @@ namespace Simple.Controllers
                 Config.Reload();
             }
 
+            return View();
+        }
+
+        public IActionResult ConfigServer()
+        {
+            CreateConfigServerDataViewData();
             return View();
         }
 
@@ -100,33 +100,6 @@ namespace Simple.Controllers
 
         }
 
-        public IActionResult ConfigServerSettings()
-        {
-            if (ConfigServerClientSettingsOptions != null)
-            {
-                ViewData["Enabled"] = ConfigServerClientSettingsOptions.Enabled;
-                ViewData["Environment"] = ConfigServerClientSettingsOptions.Environment;
-                ViewData["FailFast"] = ConfigServerClientSettingsOptions.FailFast;
-                ViewData["Label"] = ConfigServerClientSettingsOptions.Label;
-                ViewData["Name"] = ConfigServerClientSettingsOptions.Name;
-                ViewData["Password"] = ConfigServerClientSettingsOptions.Password;
-                ViewData["Uri"] = ConfigServerClientSettingsOptions.Uri;
-                ViewData["Username"] = ConfigServerClientSettingsOptions.Username;
-                ViewData["ValidateCertificates"] = ConfigServerClientSettingsOptions.ValidateCertificates;
-            } else
-            {
-
-                ViewData["Enabled"] = "Not Available";
-                ViewData["Environment"] = "Not Available";
-                ViewData["FailFast"] = "Not Available";
-                ViewData["Label"] = "Not Available";
-                ViewData["Name"] = "Not Available";
-                ViewData["Password"] = "Not Available";
-                ViewData["Uri"] = "Not Available";
-                ViewData["Username"] = "Not Available";
-                ViewData["ValidateCertificates"] = "Not Available";
-            }
-            return View();
-        }
+        public IActionResult ConfigServerSettings() => View(ConfigServerClientSettingsOptions);
     }
 }

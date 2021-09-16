@@ -18,7 +18,7 @@ docker run --rm -ti -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name ste
 To start a config server backed by the spring cloud samples repo:
 
 ```bash
-docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/configserver
+docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/config-server
 ```
 
 ### Run SCCS with Java
@@ -51,7 +51,7 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud C
 The Steeltoe team has built a docker image of a [basic Eureka server](https://github.com/SteeltoeOSS/Dockerfiles/tree/master/eureka-server) for an easy experience getting started:
 
 ```bash
-docker run --publish 8761:8761 steeltoeoss/eureka-server
+docker run --rm -ti -p 8761:8761 --name steeltoe-eureka steeltoeoss/eureka-server
 ```
 
 ### Run Eureka with Java
@@ -71,7 +71,7 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Regist
 This command starts a RabbitMQ server with the management plugin enabled with no credentials and default ports:
 
 ```script
-docker run --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+docker run --rm -ti -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-management
 ```
 
 ## Consul
@@ -79,7 +79,7 @@ docker run --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ### Run Consul Server with Docker
 
 ```script
-docker run --name=steeltoe-consul -p 8500:8500 consul
+docker run --rm -ti -p 8500:8500 --name=steeltoe-consul consul
 ```
 
 ## Spring Boot Admin
@@ -89,7 +89,7 @@ docker run --name=steeltoe-consul -p 8500:8500 consul
 There are multiple Spring Boot Admin images to choose from, this is only one option:
 
 ```script
-docker run --name --rm -it --name steeltoe-springbootadmin -p 8080:8080 steeltoeoss/spring-boot-admin
+docker run --rm -it -p 8080:8080 --name steeltoe-springbootadmin steeltoeoss/spring-boot-admin
 ```
 
 ## Redis
@@ -97,7 +97,7 @@ docker run --name --rm -it --name steeltoe-springbootadmin -p 8080:8080 steeltoe
 ### Run Redis server with Docker
 
 ```script
-docker run --name redis -p 6379:6379 redis
+docker run --rm -ti -p 6379:6379 --name redis redis
 ```
 
 ## MySQL
@@ -105,7 +105,7 @@ docker run --name redis -p 6379:6379 redis
 ### Run MySQL Server with Docker
 
 ```script
-docker run --name steeltoe-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
+docker run --rm -ti -p 3306:3306 --name steeltoe-mysql -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
 ```
 
 ## SQL Server
@@ -113,7 +113,7 @@ docker run --name steeltoe-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=steeltoe -e
 ### Run SQL Server with Docker
 
 ```script
-docker run --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' -p 1433:1433 mcr.microsoft.com/mssql/server
+docker run --rm -ti -p 1433:1433 --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' mcr.microsoft.com/mssql/server
 ```
 
 ## PostgreSQL
@@ -121,7 +121,7 @@ docker run --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR
 ### Run PostgreSQL Server with Docker
 
 ```script
-docker run --name steeltoe-postgres -d -p 5432:5432 -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+docker run --rm -ti-p 5432:5432 --name steeltoe-postgres  -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
 ```
 
 ## Zipkin
@@ -129,7 +129,7 @@ docker run --name steeltoe-postgres -d -p 5432:5432 -e POSTGRES_DB=steeltoe -e P
 ### Run Zipkin Server with Docker
 
 ```script
-docker run --name zipkin -p 9411:9411 openzipkin/zipkin
+docker run --rm -ti -p 9411:9411 --name zipkin openzipkin/zipkin
 ```
 
 ## Hystrix Dashboard

@@ -1,9 +1,14 @@
 ﻿---
 applications:
 - name: keystore
+  buildpacks:
+   - dotnet_core_buildpack
   memory: 256M
   command: cd ${HOME} && ./RedisDataProtectionKeyStore
+  random-route: true
   env:
-    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true
   services:
    - myRedisService

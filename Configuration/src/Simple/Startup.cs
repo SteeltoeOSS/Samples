@@ -12,8 +12,10 @@ namespace Simple
     // NOTE: This sample application assumes a running Spring Cloud Config Server is started
     //       with repository data for application named: foo, & profile: development
     //
-    //       The easiest way to get that to happen is clone the spring-cloud-config
-    //       repo and run the config-server.
+    //       The easiest way to get that to happen is with docker (for local development only):
+    //       > docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/config-server
+
+    //       alternatively, clone the spring-cloud-config repo and run the config-server.
     //          eg. git clone https://github.com/spring-cloud/spring-cloud-config.git
     //              cd spring-cloud-config\spring-cloud-config-server
     //              mvn spring-boot:run
@@ -41,7 +43,6 @@ namespace Simple
 
             // Adds the configuration data POCO configured with data returned from the Spring Cloud Config Server
             services.Configure<ConfigServerData>(Configuration);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
