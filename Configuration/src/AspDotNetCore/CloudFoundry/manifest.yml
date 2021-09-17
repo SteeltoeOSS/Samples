@@ -5,4 +5,4 @@ applications:
    - dotnet_core_buildpack
   memory: 128M
   env:
-    ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: Development

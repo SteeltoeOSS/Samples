@@ -39,11 +39,7 @@ namespace Simple
             services.AddConfiguration(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
 
             // Adds the configuration data POCO configured with data returned from the Spring Cloud Config Server
             services.Configure<ConfigServerData>(Configuration);
@@ -64,7 +60,6 @@ namespace Simple
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -72,15 +67,6 @@ namespace Simple
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
-
     }
 }

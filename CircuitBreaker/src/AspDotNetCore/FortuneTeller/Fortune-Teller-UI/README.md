@@ -14,7 +14,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 
 1. Refer to common steps for [running a local Eureka server](/CommonTasks.md#Spring-Cloud-Eureka-Server)
 1. Refer to common steps for [running a local Hystrix dashboard](/CommonTasks.md#Hystrix-Dashboard)
-1. Install .Net Core SDK 2.1.300+
+1. Install .Net Core SDK
 
 ### Building & Running - Local
 
@@ -23,7 +23,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. Set the `BUILD` environment variable to `LOCAL` (i.e. SET BUILD=LOCAL, export BUILD=LOCAL)
 1. Set PORT to listen on (i.e SET PORT=5555, export PORT=5555)
 1. `dotnet restore`
-1. `dotnet run -f netcoreapp2.1`
+1. `dotnet run -f netcoreapp3.1`
 
 ### What to expect - Local
 
@@ -31,7 +31,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI
-$ dotnet run -f netcoreapp2.1
+$ dotnet run -f netcoreapp3.1
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.
@@ -54,7 +54,7 @@ Once you have the two applications communicating, you use of the Hystrix dashboa
 
 1. Installed Pivotal CloudFoundry
 1. Installed Spring Cloud Services
-1. Install .NET Core SDK 2.1+
+1. Install .NET Core SDK
 
 ### Setup Service Registry on CloudFoundry
 
@@ -70,8 +70,8 @@ Using the service instance name of `myHystrixService`, complete the [common task
 1. cd samples/CircuitBreaker/src/AspDotNetCore/Fortune-Teller/Fortune-Teller-UI
 1. Make sure environment variable `BUILD` is not set to `LOCAL` (i.e. SET BUILD=, unset BUILD)
 1. `dotnet restore`
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp2.1 -r linux-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/linux-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp3.1 -r linux-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`)
 
 ### What to expect - CloudFoundry
 
