@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>2.5.3</SteeltoeVersion>
+    <SteeltoeVersion>2.5.5</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SteeltoeCommonVersion>$(SteeltoeVersion)</SteeltoeCommonVersion>

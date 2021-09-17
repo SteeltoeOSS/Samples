@@ -22,8 +22,8 @@ A clear and concise description of what you expected to happen.
  - Sample name: [e.g. RabbitMQ Connector, Discovery, etc.]
  - Platform: [e.g. Cloud Foundry, Azure, etc.) 
  - OS: [e.g. Windows, Linux, Mac OSX]
- - .NET Version [e.g. .NET Core 2.1.0, .NET Framework 4.7.1, etc.] 
- - Steeltoe Version [e.g. 2.3.0]
+ - .NET Version [e.g. .NET Core 3.1.0, .NET Framework 4.7.1, etc.] 
+ - Steeltoe Version [e.g. 2.5.0]
  - Any other library versions to note
 
 ## Screenshots

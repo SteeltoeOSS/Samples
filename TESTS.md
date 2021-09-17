@@ -37,7 +37,7 @@ C:> .\behave.ps1 Connectors\src\AspDotNetCore\RabbitMQ
 To run only a specific framework/runtime combination, use the `--tags` or `-t` parameter:
 
 ```dos
-C:> .\behave.ps1 Connectors\src\AspDotNetCore\RabbitMQ -t netcoreapp2.1 -t linux-x64
+C:> .\behave.ps1 Connectors\src\AspDotNetCore\RabbitMQ -t netcoreapp3.1 -t linux-x64
 ```
 
 ## Configuring

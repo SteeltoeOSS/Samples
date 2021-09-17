@@ -17,11 +17,7 @@ namespace RandomValue
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-#if NETCOREAPP3_1
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +34,6 @@ namespace RandomValue
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -46,14 +41,6 @@ namespace RandomValue
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }

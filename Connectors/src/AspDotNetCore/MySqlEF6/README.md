@@ -24,9 +24,9 @@ You must first create an instance of the MySql service in a org/space.
 1. `cd samples/Connectors/src/AspDotNetCore/MySqlEF6`
 1. `dotnet restore --configfile nuget.config`
 1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f net461 -r win10-x64`
+   * `dotnet publish -f netcoreapp3.1 -r win10-x64`
 1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish`
+   * `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
 
 > Note: The provided manifest will create an app named `mysqlef6-connector` and attempt to bind the app to MySql service `myMySqlService`.
 

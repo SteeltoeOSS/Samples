@@ -18,11 +18,7 @@ namespace Placeholder
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<SampleOptions>(Configuration);
-#if NETCOREAPP3_1
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +35,6 @@ namespace Placeholder
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -47,14 +42,6 @@ namespace Placeholder
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }

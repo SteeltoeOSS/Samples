@@ -12,13 +12,13 @@ To start a config server backed by a folder on your local disk, start the docker
 
 ```bash
 # Note: Ensure Docker is configured to share host drive/volume so the mount below will work correctly!
-docker run --rm -ti -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoeoss/configserver --spring.profiles.active=native
+docker run --rm -ti -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoeoss/config-server --spring.profiles.active=native
 ```
 
 To start a config server backed by the spring cloud samples repo:
 
 ```bash
-docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/configserver
+docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/config-server
 ```
 
 ### Run SCCS with Java

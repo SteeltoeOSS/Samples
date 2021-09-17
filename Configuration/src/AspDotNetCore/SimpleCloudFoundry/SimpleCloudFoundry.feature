@@ -21,24 +21,6 @@ Feature: Simple CloudFoundry Configuration
     When you get https://foo.x.y.z/Home/ConfigServerSettings
     Then you should see "spring:cloud:config:name = foo"
 
-  @netcoreapp2.1
-  @win10-x64
-  Scenario: Simple CloudFoundry Configuration (netcoreapp2.1/win10-x64)
-    When you run: dotnet publish -f netcoreapp2.1 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
-    And you wait until CloudFoundry app foo is started
-    When you get https://foo.x.y.z/Home/ConfigServerSettings
-    Then you should see "spring:cloud:config:name = foo"
-
-  @netcoreapp2.1
-  @linux-x64
-  Scenario: Simple CloudFoundry Configuration (netcoreapp2.1/linux-x64)
-    When you run: dotnet publish -f netcoreapp2.1 -r linux-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/linux-x64/publish
-    And you wait until CloudFoundry app foo is started
-    When you get https://foo.x.y.z/Home/ConfigServerSettings
-    Then you should see "spring:cloud:config:name = foo"
-
   @net5.0
   @win10-x64
   Scenario: Simple CloudFoundry Configuration (net5.0/win10-x64)
@@ -53,15 +35,6 @@ Feature: Simple CloudFoundry Configuration
   Scenario: Simple CloudFoundry Configuration (net5.0/linux-x64)
     When you run: dotnet publish -f net5.0 -r linux-x64
     And you run in the background: cf push -f manifest.yml -p bin/Debug/net5.0/linux-x64/publish
-    And you wait until CloudFoundry app foo is started
-    When you get https://foo.x.y.z/Home/ConfigServerSettings
-    Then you should see "spring:cloud:config:name = foo"
-
-  @net461
-  @win10-x64
-  Scenario: Simple CloudFoundry Configuration (net461/win10-x64)
-    When you run: dotnet publish -f net461 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
     And you wait until CloudFoundry app foo is started
     When you get https://foo.x.y.z/Home/ConfigServerSettings
     Then you should see "spring:cloud:config:name = foo"

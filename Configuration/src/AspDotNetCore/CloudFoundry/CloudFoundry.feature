@@ -21,24 +21,6 @@ Feature: CloudFoundry Configuration
     When you get https://cloud.x.y.z/Home/CloudFoundry
     Then you should see "vcap:application:application_name = cloud"
 
-  @netcoreapp2.1
-  @win10-x64
-  Scenario: CloudFoundry Configuration (netcoreapp2.1/win10-x64)
-    When you run: dotnet publish -f netcoreapp2.1 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
-    And you wait until CloudFoundry app cloud is started
-    When you get https://cloud.x.y.z/Home/CloudFoundry
-    Then you should see "vcap:application:application_name = cloud"
-
-  @netcoreapp2.1
-  @linux-x64
-  Scenario: CloudFoundry Configuration (netcoreapp2.1/linux-x64)
-    When you run: dotnet publish -f netcoreapp2.1 -r linux-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/netcoreapp2.1/linux-x64/publish
-    And you wait until CloudFoundry app cloud is started
-    When you get https://cloud.x.y.z/Home/CloudFoundry
-    Then you should see "vcap:application:application_name = cloud"
-
   @net5.0
   @win10-x64
   Scenario: CloudFoundry Configuration (net5.0/win10-x64)
@@ -53,15 +35,6 @@ Feature: CloudFoundry Configuration
   Scenario: CloudFoundry Configuration (net5.0/linux-x64)
     When you run: dotnet publish -f net5.0 -r linux-x64
     And you run in the background: cf push -f manifest.yml -p bin/Debug/net5.0/linux-x64/publish
-    And you wait until CloudFoundry app cloud is started
-    When you get https://cloud.x.y.z/Home/CloudFoundry
-    Then you should see "vcap:application:application_name = cloud"
-
-  @net461
-  @win10-x64
-  Scenario: CloudFoundry Configuration (net461/win10-x64)
-    When you run: dotnet publish -f net461 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
     And you wait until CloudFoundry app cloud is started
     When you get https://cloud.x.y.z/Home/CloudFoundry
     Then you should see "vcap:application:application_name = cloud"

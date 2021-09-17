@@ -22,19 +22,11 @@ namespace MySql
             services.AddMySqlConnection(Configuration);
 
             // Add framework services.
-#if NETCOREAPP3_1 || NET5_0
             services.AddControllersWithViews();
-#else
-            services.AddMvc();
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-#if NETCOREAPP3_1 || NET5_0
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
-#else
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
-#endif
         {
             if (env.IsDevelopment())
             {
@@ -47,7 +39,6 @@ namespace MySql
 
             app.UseStaticFiles();
 
-#if NETCOREAPP3_1 || NET5_0
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -55,14 +46,6 @@ namespace MySql
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-#else
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-#endif
         }
     }
 }
