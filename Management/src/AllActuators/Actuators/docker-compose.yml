@@ -1,0 +1,19 @@
+services:
+    steeltoe:
+        image: "steeltoe-actuators"
+        ports: 
+          - "8080:8080"
+    alv-server: 
+        image: "registry.tanzu.vmware.com/app-live-view/application-live-view-server:0.2.0"
+        ports:
+          - "5112:5112"
+          - "7000:7000"
+    alv-sidecar:
+        image: "registry.tanzu.vmware.com/app-live-view/application-live-view-sidecar:0.2.0"
+        environment: 
+          - app.live.view.sidecar.application-name=remote-steeltoe 
+          - app.live.view.sidecar.application-host=steeltoe 
+          - app.live.view.sidecar.application-protocol=http 
+          - app.live.view.sidecar.application-port=8080 
+          - app.live.view.sidecar.app-flavours=steeltoe 
+          - app.live.view.client.host=alv-server
