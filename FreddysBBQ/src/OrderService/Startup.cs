@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
+using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Discovery.Client;
 using Steeltoe.Security.Authentication.CloudFoundry;
-using Steeltoe.Connector.MySql.EFCore;
 
 namespace OrderService
 {
@@ -24,7 +23,7 @@ namespace OrderService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                  .AddCloudFoundryJwtBearer(Configuration);
@@ -48,6 +47,9 @@ namespace OrderService
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseAuthentication();
+
+            app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

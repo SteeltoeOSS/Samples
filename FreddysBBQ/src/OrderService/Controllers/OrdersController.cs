@@ -12,7 +12,7 @@ namespace OrderService.Controllers
 {
     [Route("/orders")]
     [Authorize(Policy = "AdminOrders")]
-    public class OrdersController : Controller
+    public class OrdersController : ControllerBase
     {
         private OrderContext _dbContext { get; }
         private ILogger<OrdersController> _logger;
