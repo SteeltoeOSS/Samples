@@ -27,7 +27,7 @@ namespace AdminPortal
         {
             services.Configure<Branding>(Configuration.GetSection("Branding"));
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
 
             services.AddAuthentication(options =>
                 {

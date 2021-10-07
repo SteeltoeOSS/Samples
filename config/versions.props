@@ -15,4 +15,8 @@
     <AspNetCoreVersion>5.0.0</AspNetCoreVersion>
     <EFCoreVersion>5.0.0</EFCoreVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <AspNetCoreVersion>6.0.0-rc.1.21452.15</AspNetCoreVersion>
+    <EFCoreVersion>6.0.0-rc.1.21452.10</EFCoreVersion>
+  </PropertyGroup>
 </Project>

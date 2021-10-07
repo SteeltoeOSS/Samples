@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace OrderService.Controllers
 {
     [Route("/myorders")]
-    public class CustomerOrderController : Controller
+    public class CustomerOrderController : ControllerBase
     {
         private OrderContext _dbContext;
         private ILogger<CustomerOrderController> _logger;
