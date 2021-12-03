@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>9a6afb20-f5c2-4d71-b868-8b372225619e</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
-    <PackageReference Include="Steeltoe.Management.KubernetesCore" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Management.KubernetesCore" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>

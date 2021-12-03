@@ -38,4 +38,4 @@ kubectl apply -f .\Kubernetes\SteeltoeDeployment.yaml
 
 ## View the service
 
-Open <http://localhost:5000> in your browser. The application itself is trivial, but you should see a welcome message for basic confirmation the app is running. Actuators should be accessible at <http://localhost:5000/actuators> or via the admin server at <http://localhost:9090>.
+Open <http://localhost:5000> in your browser. The application itself is trivial, but you should see a welcome message for basic confirmation the app is running. Actuators should be accessible at <http://localhost:5000/actuator> or via the admin server at <http://localhost:9090>.
