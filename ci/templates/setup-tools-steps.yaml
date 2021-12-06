@@ -7,7 +7,7 @@ steps:
   displayName: 'Setup DotNet6'
   inputs:
     packageType: sdk
-    version: ${{parameters.dotnet5Version}}
+    version: ${{parameters.dotnet6Version}}
 - task: UseDotNet@2
   displayName: 'Setup DotNet5'
   inputs:
