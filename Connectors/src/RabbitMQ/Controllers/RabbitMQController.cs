@@ -8,12 +8,12 @@ namespace RabbitMQ.Controllers
 {
     public class RabbitMQController : Controller
     {
-        ConnectionFactory _rabbitConnection;
+        readonly ConnectionFactory _rabbitConnection;
 
         public RabbitMQController([FromServices] ConnectionFactory rabbitConnection)
         {
             _rabbitConnection = rabbitConnection;
-            SslOption opt = _rabbitConnection.Ssl;
+            var opt = _rabbitConnection.Ssl;
             if (opt != null && opt.Enabled)
             {
                 opt.Version = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
@@ -33,7 +33,7 @@ namespace RabbitMQ.Controllers
                 CreateQueue(channel);
                 var data = channel.BasicGet("rabbit-test", true);
                 if (data != null) {
-                    ViewData["message"] = Encoding.UTF8.GetString(data.Body);
+                    ViewData["message"] = Encoding.UTF8.GetString(data.Body.ToArray());
                 }
             }
 
