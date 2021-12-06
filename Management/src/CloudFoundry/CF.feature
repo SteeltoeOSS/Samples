@@ -11,11 +11,11 @@ Feature: Cloud Foundry Samples
     And you wait until CloudFoundry app actuator is started
     Then you should be able to access CloudFoundry app actuator management endpoints
 
-  @net5.0
+  @net6.0
   @win10-x64
-  Scenario: CloudFoundry Management (net5.0/win10-x64)
-    When you run: dotnet publish -f net5.0 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net5.0/win10-x64/publish
+  Scenario: CloudFoundry Management (net6.0/win10-x64)
+    When you run: dotnet publish -f net6.0 -r win10-x64
+    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app actuator is started
     Then you should be able to access CloudFoundry app actuator management endpoints
 
@@ -27,10 +27,10 @@ Feature: Cloud Foundry Samples
     And you wait until CloudFoundry app actuator is started
     Then you should be able to access CloudFoundry app actuator management endpoints
 
-  @net5.0
+  @net6.0
   @linux-x64
-  Scenario: CloudFoundry Management (net5.0/linux-x64)
-    When you run: dotnet publish -f net5.0 -r linux-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/net5.0/linux-x64/publish
+  Scenario: CloudFoundry Management (net6.0/linux-x64)
+    When you run: dotnet publish -f net6.0 -r linux-x64
+    And you run in the background: cf push -f manifest.yml -p bin/Debug/net6.0/linux-x64/publish
     And you wait until CloudFoundry app actuator is started
     Then you should be able to access CloudFoundry app actuator management endpoints
