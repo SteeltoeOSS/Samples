@@ -5,7 +5,7 @@
   <PropertyGroup>
     <GitInfoVersion>2.0.20</GitInfoVersion>
     <JsonNetVersion>11.0.3</JsonNetVersion>
-    <RabbitMQVersion>5.1.0</RabbitMQVersion>
+    <RabbitMQVersion>6.2.2</RabbitMQVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
