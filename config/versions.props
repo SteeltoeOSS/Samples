@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>3.1.1</SteeltoeVersion>
+    <SteeltoeVersion>3.1.2-7335</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
     <GitInfoVersion>2.0.20</GitInfoVersion>
@@ -11,12 +11,12 @@
     <AspNetCoreVersion>3.1.0</AspNetCoreVersion>
     <EFCoreVersion>3.1.0</EFCoreVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <AspNetCoreVersion>5.0.0</AspNetCoreVersion>
     <EFCoreVersion>5.0.0</EFCoreVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <AspNetCoreVersion>6.0.0-rc.1.21452.15</AspNetCoreVersion>
-    <EFCoreVersion>6.0.0-rc.1.21452.10</EFCoreVersion>
+    <AspNetCoreVersion>6.0.0</AspNetCoreVersion>
+    <EFCoreVersion>6.0.0</EFCoreVersion>
   </PropertyGroup>
 </Project>

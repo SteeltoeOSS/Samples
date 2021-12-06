@@ -12,11 +12,11 @@ Feature: Simple CloudFoundry Configuration
     When you get https://foo.x.y.z/Home/ConfigServerSettings
     Then you should see "spring:cloud:config:name = foo"
 
-  @net5.0
+  @net6.0
   @win10-x64
-  Scenario: Simple CloudFoundry Configuration (net5.0/win10-x64)
-    When you run: dotnet publish -f net5.0 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net5.0/win10-x64/publish
+  Scenario: Simple CloudFoundry Configuration (net6.0/win10-x64)
+    When you run: dotnet publish -f net6.0 -r win10-x64
+    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app foo is started
     When you get https://foo.x.y.z/Home/ConfigServerSettings
     Then you should see "spring:cloud:config:name = foo"
@@ -30,11 +30,11 @@ Feature: Simple CloudFoundry Configuration
     When you get https://foo.x.y.z/Home/ConfigServerSettings
     Then you should see "spring:cloud:config:name = foo"
 
-  @net5.0
+  @net6.0
   @linux-x64
-  Scenario: Simple CloudFoundry Configuration (net5.0/linux-x64)
-    When you run: dotnet publish -f net5.0 -r linux-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/net5.0/linux-x64/publish
+  Scenario: Simple CloudFoundry Configuration (net6.0/linux-x64)
+    When you run: dotnet publish -f net6.0 -r linux-x64
+    And you run in the background: cf push -f manifest.yml -p bin/Debug/net6.0/linux-x64/publish
     And you wait until CloudFoundry app foo is started
     When you get https://foo.x.y.z/Home/ConfigServerSettings
     Then you should see "spring:cloud:config:name = foo"
