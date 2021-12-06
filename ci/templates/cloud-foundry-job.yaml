@@ -1,7 +1,7 @@
 parameters:
   feature: ''
   sample: ''
-  behave_args: '--stop --tags "~@wip"'
+  behave_args: '--stop'
 jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
