@@ -13,7 +13,7 @@ def setup(context):
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous apps
     cf.delete_app('single-signon')
-    cf.delete_app('uaa')
+    # cf.delete_app('uaa')
     # create UAA service and app
     if not cf.service_exists('myOAuthService'):
         credentials = '\'{{"client_id":"myTestApp", "client_secret":"myTestApp", "uri":"{}"}}\''.format(

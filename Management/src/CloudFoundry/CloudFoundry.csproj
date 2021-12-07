@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net5.0;</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net6.0;</TargetFrameworks>
     <!--
     Swap TargetFrameworks for one of these lines if you want to cf push without publishing first
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TargetFramework>net5.0</TargetFramework>
     -->
-    <SteeltoeVersion>3.1.1</SteeltoeVersion>
+    <SteeltoeVersion>3.1.2</SteeltoeVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +27,8 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="git.properties" CopyToOutputDirectory="PreserveNewest" />

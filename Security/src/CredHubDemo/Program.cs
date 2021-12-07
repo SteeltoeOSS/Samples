@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Extensions.Logging;
+using Steeltoe.Management.Endpoint;
 using Steeltoe.Security.DataProtection.CredHub;
 using System;
 using System.IO;
@@ -64,6 +65,7 @@ namespace CredHubDemo
                     loggingBuilder.AddDynamicConsole();
                 })
                 .UseCredHubInterpolation(GetLoggerFactory())
+                .AddAllActuators()
                 .Build();
 
             host.Run();

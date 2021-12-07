@@ -1,7 +1,7 @@
 parameters:
   feature: ''
   sample: ''
-  behave_args: '--stop --tags ~@wip'
+  behave_args: '--stop'
 jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
@@ -14,7 +14,7 @@ jobs:
   - template: setup-cloud-foundry-linux-steps.yaml
   - bash: touch reinit
     displayName: 'Reinit Virtual Python Environment'
-  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}}
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
     env:
       PYTHON: python3.7
@@ -34,7 +34,7 @@ jobs:
 #  - template: setup-cloud-foundry-osx-steps.yaml
 #  - bash: touch reinit
 #    displayName: 'Reinit Virtual Python Environment'
-#  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+#  - bash: ./behave.sh ${{parameters.feature}}/src/AspDotNetCore/${{parameters.sample}} ${{parameters.behave_args}}
 #    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
 #    env:
 #      PYTHON: python3.7
@@ -54,7 +54,7 @@ jobs:
   - template: setup-cloud-foundry-windows-steps.yaml
   - bash: touch reinit
     displayName: 'Reinit Virtual Python Environment'
-  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}} --tags ~@net461
+  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}}
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
     env:
       PYTHON: python

@@ -18,11 +18,11 @@ Feature: CloudFoundry Single SignOn
     Then you should be at https://single-signon.x.y.z/Home/About
     And you should see "Your About page."
 
-  @net5.0
+  @net6.0
   @win10-x64
-  Scenario: CloudFoundry Single SignOn (net5.0/win10-x64)
-    When you run: dotnet publish -f net5.0 -r win10-x64
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net5.0/win10-x64/publish
+  Scenario: CloudFoundry Single SignOn (net6.0/win10-x64)
+    When you run: dotnet publish -f net6.0 -r win10-x64
+    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app single-signon is started
     When you get https://single-signon.x.y.z/Home/About
     Then you should be at https://uaa.x.y.z/login
@@ -48,11 +48,11 @@ Feature: CloudFoundry Single SignOn
     Then you should be at https://single-signon.x.y.z/Home/About
     And you should see "Your About page."
 
-  @net5.0
+  @net6.0
   @linux-x64
-  Scenario: CloudFoundry Single SignOn (net5.0/linux-x64)
-    When you run: dotnet publish -f net5.0 -r linux-x64
-    And you run in the background: cf push -f manifest.yml -p bin/Debug/net5.0/linux-x64/publish
+  Scenario: CloudFoundry Single SignOn (net6.0/linux-x64)
+    When you run: dotnet publish -f net6.0 -r linux-x64
+    And you run in the background: cf push -f manifest.yml -p bin/Debug/net6.0/linux-x64/publish
     And you wait until CloudFoundry app single-signon is started
     When you get https://single-signon.x.y.z/Home/About
     Then you should be at https://uaa.x.y.z/login
