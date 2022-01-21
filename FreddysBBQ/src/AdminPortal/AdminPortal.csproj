@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />

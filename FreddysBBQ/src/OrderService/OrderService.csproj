@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0-rc.1.ci.20211007223757" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
