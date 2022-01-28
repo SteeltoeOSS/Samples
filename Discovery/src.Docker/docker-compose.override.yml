@@ -3,7 +3,7 @@ version: '3.4'
 #services:
   #fortune-teller-service:
   #  ports:
-  #    - "5000:5000"
+  #    - "5080:5080"
 
   #fortune-teller-ui:
   #  ports:
