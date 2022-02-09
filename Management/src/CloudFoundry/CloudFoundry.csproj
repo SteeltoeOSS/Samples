@@ -6,7 +6,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TargetFramework>net5.0</TargetFramework>
     -->
-    <SteeltoeVersion>3.1.2</SteeltoeVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,12 +22,7 @@
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicSerilogCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.TaskCore" Version="$(SteeltoeVersion)" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
   </ItemGroup>
   <ItemGroup>
     <None Include="git.properties" CopyToOutputDirectory="PreserveNewest" />

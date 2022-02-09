@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundry", "CloudFoundr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7AE4863D-B020-45B3-B8F7-DCFD8B964479}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\config\versions.props = ..\..\config\versions.props
+		..\..\configure.ps1 = ..\..\configure.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicrosoftHealthChecks", "MicrosoftHealthChecks\MicrosoftHealthChecks.csproj", "{76E3ED21-7B59-4E92-B8E6-2AF0AF4149F6}"
