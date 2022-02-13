@@ -2,21 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicStoreUI.Models;
 using MusicStoreUI.Services;
 using Steeltoe.CircuitBreaker.Hystrix;
-using Steeltoe.Common;
 using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Connector.Redis;
-using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Security.DataProtection;
 using System;
-using System.Linq;
 using Command = MusicStoreUI.Services.HystrixCommands;
 
 namespace MusicStoreUI
@@ -59,7 +55,7 @@ namespace MusicStoreUI
                     .AddDefaultTokenProviders();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
+            services.AddDistributedTracing();
 
             services
                 .AddHttpClient<IMusicStore, MusicStoreService>()
@@ -140,9 +136,6 @@ namespace MusicStoreUI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Startup Hystrix metrics stream
-            app.UseHystrixMetricsStream();
         }
     }
 }

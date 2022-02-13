@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <SteeltoeVersion>3.1.2</SteeltoeVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GitInfoVersion>2.0.20</GitInfoVersion>
+    <JsonNetVersion>11.0.3</JsonNetVersion>
+    <RabbitMQVersion>6.2.2</RabbitMQVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AspNetCoreVersion>6.0.0</AspNetCoreVersion>
+    <EFCoreVersion>6.0.0</EFCoreVersion>
+  </PropertyGroup>
+</Project>

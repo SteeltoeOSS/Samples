@@ -23,9 +23,7 @@ management:
   tracing:
     alwaysSample: true
     useShortTraceIds: true
-    exporter:
-      zipkin:
-        useShortTraceIds: true
+    exporterEndpoint: http://zipkinserver:9411/api/v2/spans
 ---
 spring:
   profiles: Docker

@@ -22,7 +22,7 @@ namespace ShoppingCartService
             // Add framework services.
             services.AddControllers();
 
-            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
+            services.AddDistributedTracing();
 
             // services.AddDbContext<ShoppingCartContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<ShoppingCartContext>(options => options.UseMySql(Configuration));
