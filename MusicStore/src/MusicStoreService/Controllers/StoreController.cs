@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -15,12 +14,10 @@ namespace MusicStore.Controllers
     [Route("api/[controller]")]
     public class StoreController : Controller
     {
-        private readonly AppSettings _appSettings;
         private readonly ILogger _logger;
         public StoreController(MusicStoreContext dbContext, IOptions<AppSettings> options, ILogger<StoreController> logger)
         {
             DbContext = dbContext;
-            _appSettings = options.Value;
             _logger = logger;
         }
 
@@ -111,7 +108,6 @@ namespace MusicStore.Controllers
                         albums.Add(album);
                     }
                 }
-       
             }
 
             var result = AlbumJson.From(albums);
@@ -174,7 +170,7 @@ namespace MusicStore.Controllers
                 .Include(a => a.Genre);
 
             List<Album> results = new List<Album>();
-            
+
             foreach(var a in ordered.AsEnumerable())
             {
                 results.Add(a);
@@ -206,8 +202,8 @@ namespace MusicStore.Controllers
             Artist artist = await DbContext.Artists
                                 .Where(a => a.ArtistId == id)
                                 .FirstOrDefaultAsync();
-            
-      
+
+
 
             if (artist == null)
             {
@@ -309,7 +305,7 @@ namespace MusicStore.Controllers
             existing.OrderCount = theUpdate.OrderCount;
             existing.Title = theUpdate.Title;
             existing.Price = theUpdate.Price;
-     
+
             DbContext.Entry(existing).State = EntityState.Modified;
 
             await DbContext.SaveChangesAsync();
@@ -326,7 +322,7 @@ namespace MusicStore.Controllers
             Album album = await DbContext.Albums
                                     .Where(a => a.AlbumId == id)
                                     .FirstOrDefaultAsync();
-   
+
 
             if (album == null)
             {

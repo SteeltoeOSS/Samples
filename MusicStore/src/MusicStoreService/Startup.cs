@@ -26,7 +26,7 @@ namespace MusicStore
             //services.AddDbContext<MusicStoreContext>(options => options.UseSqlServer(Configuration));
             services.AddDbContext<MusicStoreContext>(options => options.UseMySql(Configuration));
 
-            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
+            services.AddDistributedTracing();
 
             // Add Framework services
             services.AddControllers();

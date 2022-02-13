@@ -23,7 +23,7 @@ namespace OrderService
 
             // Add framework services.
             services.AddControllers();
-            services.AddDistributedTracing(Configuration, builder => builder.UseZipkinWithTraceOptions(services));
+            services.AddDistributedTracing();
 
             // services.AddDbContext<OrdersContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<OrdersContext>(options => options.UseMySql(Configuration));

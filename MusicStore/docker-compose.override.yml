@@ -6,23 +6,27 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
+      - eureka__instance__hostName=musicservice
 
   shoppingcartservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
+      - eureka__instance__hostName=shoppingcartservice
 
   orderservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
+      - eureka__instance__hostName=orderservice
 
   musicstore:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - PORT=80
       - eureka__instance__port=80
+      - eureka__instance__hostName=musicstore
     ports:
       - "5555:80"

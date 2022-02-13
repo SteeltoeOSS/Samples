@@ -17,19 +17,71 @@ $propsFilePath = "./config/Directory.Build.props"
 # copy props file only into samples which refers to Steeltoe libraries
 $libraryReference = '$(SteeltoeVersion)'
 
-try
-{
-    Set-Location $PSScriptRoot
-
-    $dirsToSync = Get-ChildItem *.csproj -Recurse | Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
-
-    foreach ($dir in $dirsToSync)
+function multitarget() {
+    Write-Host 'multitarget projects...'
+    try
     {
-        Write-Host $dir
-        Copy-Item $propsFilePath $dir -Force
+        Set-Location $PSScriptRoot
+
+        $multitargets = '<TargetFrameworks>';
+        $dirsToSync = Get-ChildItem *.csproj -Recurse | 
+            where { $_ | Select-String -SimpleMatch $multitargets } |
+            Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
+
+        foreach ($dir in $dirsToSync)
+        {
+            Write-Host $dir
+            Copy-Item $propsFilePath $dir -Force
+        }
+    }
+    finally
+    {
+        Set-Location $currentDirectory
     }
 }
-finally
-{
-    Set-Location $currentDirectory
+
+function net6only() {
+    Write-Host 'net 6.0 only projects...'
+    try
+    {
+        Set-Location $PSScriptRoot
+
+        $target6_0_only = '<TargetFramework>net6.0</TargetFramework>';
+        $dirsToSync = Get-ChildItem *.csproj -Recurse |
+            where { $_ | Select-String -SimpleMatch $target6_0_only } |
+            Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
+
+
+        $propsAsXml = [xml](Get-Content $propsFilePath)
+
+        $frameworkCondition = '''$(TargetFramework)'' == ''net6.0'''
+
+        $propsAsXml.SelectNodes("//Project/PropertyGroup[@Condition != """ + $frameworkCondition + """]") |
+            Foreach-Object {
+                $_.ParentNode.RemoveChild($_)
+            }
+
+        $propsAsXml.SelectSingleNode("//Project/PropertyGroup[@Condition = """ + $frameworkCondition + """]").Attributes.RemoveNamedItem("Condition");
+
+        $propsFileName = Split-Path $propsFilePath -leaf
+
+        foreach ($dir in $dirsToSync)
+        {
+            Write-Host $dir
+
+            $pathToProjectProps = Join-Path -Path $dir -ChildPath $propsFileName
+            $propsAsXml.Save($pathToProjectProps)
+        }
+    }
+    finally
+    {
+        Set-Location $currentDirectory
+    }
 }
+
+
+multitarget
+
+net6only
+
+
