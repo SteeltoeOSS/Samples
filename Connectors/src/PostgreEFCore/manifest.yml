@@ -4,7 +4,6 @@ applications:
   buildpacks:
    - dotnet_core_buildpack
   memory: 128M
-  disk_quota: 200M
   command: cd ${HOME} && ./PostgreEFCore
   env:
     ASPNETCORE_ENVIRONMENT: Development

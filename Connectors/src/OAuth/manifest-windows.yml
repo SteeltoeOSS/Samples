@@ -2,7 +2,6 @@
 applications:
 - name: oauth-connector
   memory: 256M
-  disk_quota: 200M
   stack: windows
   buildpacks:
    - hwc_buildpack

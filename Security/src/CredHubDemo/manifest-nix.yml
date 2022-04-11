@@ -2,7 +2,5 @@
 applications:
 - name: CredHubDemo-nix
   memory: 256M
-  disk_quota: 200M
   buildpacks:
    - dotnet_core_buildpack
-  command: cd ${HOME} && ./CredHubDemo

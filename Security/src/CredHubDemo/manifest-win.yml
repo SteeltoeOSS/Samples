@@ -4,6 +4,5 @@ applications:
   buildpacks:
    - hwc_buildpack
   memory: 256M
-  disk_quota: 200M
   stack: windows
   command: .\CredHubDemo
