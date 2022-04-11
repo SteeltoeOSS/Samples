@@ -6,4 +6,6 @@ applications:
   command: cmd /c .\CloudFoundry
   buildpack: binary_buildpack
   env:
-     ASPNETCORE_ENVIRONMENT: development
+    ASPNETCORE_ENVIRONMENT: development
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true

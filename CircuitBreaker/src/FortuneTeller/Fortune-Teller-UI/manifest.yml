@@ -5,6 +5,8 @@ applications:
    - dotnet_core_buildpack
   env:
     ASPNETCORE_ENVIRONMENT: Production
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true
   services:
     - myDiscoveryService
     - myHystrixService

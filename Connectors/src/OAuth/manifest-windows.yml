@@ -8,6 +8,8 @@ applications:
    - hwc_buildpack
   command: .\OAuth
   env:
-     ASPNETCORE_ENVIRONMENT: Development
+    ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true
   services:
    - myOAuthService
