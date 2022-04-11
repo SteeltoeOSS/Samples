@@ -4,7 +4,6 @@ applications:
   buildpacks:
    - dotnet_core_buildpack
   memory: 256M
-  disk_quota: 200M
   random-route: true
   env:
     ASPNETCORE_ENVIRONMENT: Development

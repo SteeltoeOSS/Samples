@@ -4,8 +4,6 @@ applications:
   buildpacks:
    - dotnet_core_buildpack
   memory: 128M
-  disk_quota: 200M
-  command: cd ${HOME} && ./RabbitMQ
   env:
     ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: true
