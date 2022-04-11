@@ -56,7 +56,7 @@ Setting this option will run backgrounded processes in their own dedicated windo
 
 ### Cloud Foundry
 
-If you don't specify Clound Foundry credentials, it is assumed you are already logged in to a Cloud Foundry endpoint.
+If you don't specify Cloud Foundry credentials, it is assumed you are already logged in to a Cloud Foundry endpoint.
 
 You can configure credentials by setting the following options in `user.ini`:
 
