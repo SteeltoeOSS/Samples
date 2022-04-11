@@ -3,13 +3,12 @@ applications:
 - name: mysqlefcore-connector
   buildpacks:
    - dotnet_core_buildpack
-  memory: 128M
-  disk_quota: 200M
+  memory: 256M
   command: cd ${HOME} && ./MySqlEFCore
   env:
     ASPNETCORE_ENVIRONMENT: Production
-    DOTNET_CLI_TELEMETRY_OPTOUT: true
-    DOTNET_NOLOGO: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
   services:
    - myMySqlService
   # - myOtherMySqlService

@@ -2,14 +2,13 @@
 applications:
 - name: mysqlefcore-connector
   memory: 256M
-  disk_quota: 200M
   stack: windows
   buildpacks:
    - hwc_buildpack
   command: .\MySqlEFCore
   env:
     ASPNETCORE_ENVIRONMENT: Production
-    DOTNET_CLI_TELEMETRY_OPTOUT: true
-    DOTNET_NOLOGO: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
   services:
    - myMySqlService

@@ -6,5 +6,5 @@ applications:
   memory: 128M
   env:
     ASPNETCORE_ENVIRONMENT: development
-    DOTNET_CLI_TELEMETRY_OPTOUT: true
-    DOTNET_NOLOGO: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
