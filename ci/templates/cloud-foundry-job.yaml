@@ -43,23 +43,23 @@ jobs:
 #      feature: ${{parameters.feature}}
 #      sample: ${{parameters.sample}}
 #      os: OSX
-- job: ${{parameters.feature}}_${{parameters.sample}}_Windows
-  displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
-  timeoutInMinutes: 90
-  pool:
-    vmImage: windows-latest
-  workspace:
-    clean: all
-  steps:
-  - template: setup-cloud-foundry-windows-steps.yaml
-  - bash: touch reinit
-    displayName: 'Reinit Virtual Python Environment'
-  - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}}
-    displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
-    env:
-      PYTHON: python
-  - template: publish-results-steps.yaml
-    parameters:
-      feature: ${{parameters.feature}}
-      sample: ${{parameters.sample}}
-      os: Windows
+# - job: ${{parameters.feature}}_${{parameters.sample}}_Windows
+#   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Windows)'
+#   timeoutInMinutes: 90
+#   pool:
+#     vmImage: windows-latest
+#   workspace:
+#     clean: all
+#   steps:
+#   - template: setup-cloud-foundry-windows-steps.yaml
+#   - bash: touch reinit
+#     displayName: 'Reinit Virtual Python Environment'
+#   - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}}
+#     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
+#     env:
+#       PYTHON: python
+#   - template: publish-results-steps.yaml
+#     parameters:
+#       feature: ${{parameters.feature}}
+#       sample: ${{parameters.sample}}
+#       os: Windows
