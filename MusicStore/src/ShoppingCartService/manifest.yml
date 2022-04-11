@@ -6,6 +6,8 @@ applications:
   memory: 256M
   env:
     ASPNETCORE_ENVIRONMENT: Production
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true
   services:
    - mStoreRegistry
    - mStoreConfig

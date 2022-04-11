@@ -7,5 +7,7 @@ applications:
   command: cd ${HOME} && ./CloudFoundry
   env:
     ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
+    DOTNET_NOLOGO: true
   services:
    - myMySqlService
