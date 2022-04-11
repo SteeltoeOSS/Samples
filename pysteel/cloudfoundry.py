@@ -89,7 +89,7 @@ class CloudFoundry(object):
                 self._context.log.info('service instance "{}" status not yet available'.format(service_instance))
             else:
                 self._context.log.info('service instance "{}" status: "{}"'.format(service_instance, status))
-            time.sleep(1)
+            time.sleep(5)
 
     def create_user_provided_service(self, service_instance, credentials=None):
         """

@@ -13,5 +13,5 @@ def setup(context):
     service = 'p.rabbitmq'
     plan = 'single-node'
     instance = 'myRabbitMQService'
-    cf.delete_service(instance)
+    #cf.delete_service(instance)
     cf.create_service(service, plan, instance)
