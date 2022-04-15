@@ -42,7 +42,8 @@ namespace Fortune_Teller_UI
             services.AddControllersWithViews();
 
             // Add Hystrix metrics stream to enable monitoring
-            services.AddHystrixMetricsStream(Configuration);
+            //  services.AddHystrixMetricsStream(Configuration);
+            services.AddHystrixMetricsEventSource();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
