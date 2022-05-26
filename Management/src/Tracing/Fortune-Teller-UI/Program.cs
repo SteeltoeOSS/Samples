@@ -20,6 +20,7 @@ namespace Fortune_Teller_UI
                     .UseCloudHosting(5555)
                     .AddAllActuators()
                     .AddDiscoveryClient()
+                   // .AddWavefrontMetrics()
                     .UseStartup<Startup>()
                     .Build();
     }

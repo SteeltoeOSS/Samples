@@ -53,16 +53,16 @@ Once you have the two applications communicating, you use of the Hystrix dashboa
 ### Pre-requisites - CloudFoundry
 
 1. Installed Pivotal CloudFoundry
-1. Installed Spring Cloud Services
+1. Installed Metrics registrar plugin
 1. Install .NET Core SDK
 
 ### Setup Service Registry on CloudFoundry
 
 Using the service instance name of `myDiscoveryService`, complete the [common task](/CommonTasks.md#Spring-Cloud-Eureka-Server) of provisioning a Eureka server.
 
-### Setup Circuit Breaker Dashboard service on CloudFoundry
+### Setup Metrics Registrar Plugin 
 
-Using the service instance name of `myHystrixService`, complete the [common task](/CommonTasks.md#Hystrix-Dashboard) of provisioning a Hystrix dashboard.
+Hystrix dashboard on Spring Cloud Services has been deprecated, so we will have to use a metrics registrar to forward the Hystrix metrics to App Metrics.  Follow [these instructions](https://docs.pivotal.io/application-service/2-12/metric-registrar/using.html) to add Hystrix metrics emitted by the app as custom metric source.
 
 ### Publish App & Push to CloudFoundry
 
@@ -95,13 +95,13 @@ At this point the Fortune Teller UI is up and running and ready for displaying y
 
 In addition to hitting <https://fortuneui.x.y.z/>, you can also hit: <https://fortuneui.x.y.z/#/multiple> to cause the UI to make use of a Hystrix Collapser to obtain multiple fortunes.
 
-### Using the Hystrix Dashboard - Cloud Foundry
+### Viewing the Hystrix Metrics - Cloud Foundry
 
-Once you have the two applications communicating, you can make use of the Hystrix dashboard by following the instructions below.
+Once you have the two applications communicating, you can view Hystrix metrics by following the instructions below.
 
 1. Open a browser or browser window and connect to the Pivotal Apps Manager.  You will have to use a link that is specific to your Cloud Foundry setup. (e.g. <https://apps.system.testcloud.com>)
-1. Follow [these instructions](https://docs.pivotal.io/spring-cloud-services/1-3/common/circuit-breaker/using-the-dashboard.html) to open the Hystrix dashboard service.
-1. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the Hystrix dashboard.  Click the refresh button on the UI app quickly to see the dashboard update.
+1. Follow [these instructions](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.1/app-metrics/GUID-using.html#custom-metrics) to add Hystrix metrics emitted by the app as custom metric source.
+1. Go back to the Fortune-Teller-UI application and obtain several fortunes.  Observe the values changing in the App Metrics view.
 
 ---
 

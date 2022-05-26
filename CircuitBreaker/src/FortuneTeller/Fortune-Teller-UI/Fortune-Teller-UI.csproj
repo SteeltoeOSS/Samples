@@ -10,6 +10,7 @@
     <PackageReference Include="Steeltoe.Discovery.Eureka" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(BUILD)' == 'LOCAL'">
