@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingCartService.Models;
+using Steeltoe.Connector.MySql;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.Tracing;
 
@@ -26,6 +27,7 @@ namespace ShoppingCartService
 
             // services.AddDbContext<ShoppingCartContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<ShoppingCartContext>(options => options.UseMySql(Configuration));
+            services.AddMySqlHealthContributor(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

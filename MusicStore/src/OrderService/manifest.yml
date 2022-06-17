@@ -1,6 +1,6 @@
 ---
 applications:
-- name: orderservice
+- name: OrderService
   buildpacks:
    - dotnet_core_buildpack
   memory: 256M

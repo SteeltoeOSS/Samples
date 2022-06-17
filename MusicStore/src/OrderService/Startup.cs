@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderService.Models;
+using Steeltoe.Connector.MySql;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.Tracing;
 
@@ -27,6 +28,7 @@ namespace OrderService
 
             // services.AddDbContext<OrdersContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<OrdersContext>(options => options.UseMySql(Configuration));
+            services.AddMySqlHealthContributor(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
