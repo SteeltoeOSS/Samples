@@ -8,6 +8,7 @@ using MusicStoreUI.Models;
 using MusicStoreUI.Services;
 using Steeltoe.CircuitBreaker.Hystrix;
 using Steeltoe.Common.Http.Discovery;
+using Steeltoe.Connector.MySql;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Connector.Redis;
 using Steeltoe.Management.Tracing;
@@ -49,6 +50,7 @@ namespace MusicStoreUI
 
             // services.AddDbContext<AccountsContext>(options => options.UseSqlServer(cstring));
             services.AddDbContext<AccountsContext>(options => options.UseMySql(Configuration));
+            services.AddMySqlHealthContributor(Configuration);
             services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/Home/AccessDenied");
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AccountsContext>()
