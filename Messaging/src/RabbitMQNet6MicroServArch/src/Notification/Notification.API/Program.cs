@@ -1,6 +1,5 @@
 using Common.SeedWork;
 using Notification.API;
-using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
 
