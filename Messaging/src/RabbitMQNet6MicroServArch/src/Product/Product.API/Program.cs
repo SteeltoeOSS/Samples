@@ -1,6 +1,5 @@
 using Common.SeedWork;
 using Product.API.Models.Requests;
-using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.RabbitMQ.Core;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
