@@ -20,8 +20,10 @@ When a request comes to `Product.API` to add a product, a notification will be g
 
     `builder.Services.ConfigureRabbitOptions(config);`
 
-    otherwise if you dont use that method then there is no need to specify any configuration in `AppSettings.{env}.json` until you have RabbitMQ running on
+    - If you dont use that method then there is no need to specify any configuration in `AppSettings.{env}.json` until you have RabbitMQ running on
     default url with default credentials.
+    - If you call that method but did not specify anything in appsettings.env.json then it will not throw any error and will pick default
+credentials automatically 
 
     **URL:**```http://localhost:15672/``` 
 

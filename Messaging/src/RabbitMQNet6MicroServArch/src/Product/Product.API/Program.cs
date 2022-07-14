@@ -7,7 +7,7 @@ using Steeltoe.Messaging.RabbitMQ.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 // Build a config object, using env vars and JSON providers.
 IConfiguration config = new ConfigurationBuilder()
-    .AddJsonFile($"appsettings.Development.json")
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json")
     .AddEnvironmentVariables()
     .Build();
 // Add services to the container.
@@ -17,8 +17,10 @@ builder.Services.AddSwaggerGen();
 
 
 #region SteelToeRabbitMQ Configuration
-//when you call ConfigureRabbitOptions method then appsettings.env.json specified connection configuration will be applied otherwise
+//When you call ConfigureRabbitOptions method then appsettings.env.json specified connection configuration will be applied otherwise
 //if you dont call that method then default settings will be picked and even you dont need to specify any configuration in appsettings
+//if you call that method but did not specify anything in appsettings.env.json then it will not throw any error and will pick default
+//credentials automatically
 builder.Services.ConfigureRabbitOptions(config);
 // Add Steeltoe Rabbit services, use JSON serialization
 builder.Services.AddRabbitServices(true);
@@ -51,7 +53,7 @@ app.MapPost("/product", async (AddProductRequestDTO request, RabbitTemplate _rab
 {
     var msg = new Message() {Type="Information", Body = "Hi there from over here." };
 
-    await _rabbitTemplate.ConvertAndSendAsync(Queues.ProductAddQueue, msg, cancellationToken);
+    _rabbitTemplate.ConvertAndSendAsync(Queues.ProductAddQueue, msg, cancellationToken);
 
     return Results.Ok("Product Added Successfully");
 })

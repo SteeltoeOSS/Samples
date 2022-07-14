@@ -4,10 +4,6 @@ using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-IConfiguration config = new ConfigurationBuilder()
-    .AddJsonFile($"appsettings.Development.json")
-    .AddEnvironmentVariables()
-    .Build();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,9 +16,7 @@ builder.Services.AddSingleton<ListenerService>();
 #endregion
 
 #region SteelToeRabbitMQ Configuration
-//when you call ConfigureRabbitOptions method then appsettings.env.json specified connection configuration will be applied otherwise
-//if you dont call that method then default settings will be picked and even you dont need to specify any configuration in appsettings
-builder.Services.ConfigureRabbitOptions(config);
+
 // Add Steeltoe Rabbit services, use JSON serialization
 builder.Services.AddRabbitServices(true);
 
