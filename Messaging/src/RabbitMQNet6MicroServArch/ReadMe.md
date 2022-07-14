@@ -1,5 +1,9 @@
 ﻿
 ## Basic App Flow:
+
+##### Prerequisite:
+RabbitMQ should be installed. If not then see this link https://medium.com/se.ahmedanwar/rabbitmq-installation-windows-e2072f60afe9
+
 In this example, we have setup a microservices architecture to understand the flow more easily and there are also some keypoints that I have noticed which I will share.
 
 There are two microservices
