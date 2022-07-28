@@ -31,7 +31,7 @@ def resolve_domainname(context, name):
     :type context: behave.runner.Context
     :type name: str
     """
-    resolved = name if name != 'x.y.z' else 'apps.pcfone.io'
+    resolved = name if name != 'x.y.z' else 'apps.longbeach.cf-app.com'
     context.log.info('resolved domain -> {}'.format(resolved))
     return resolved
 
