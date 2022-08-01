@@ -7,6 +7,29 @@ from behave.model import Status
 
 from pysteel import fs, tooling
 
+class LogObscurer(object):
+
+    def __init__(self, context, logger) -> None:
+        self._context = context
+        self._logger = logger
+
+    def info(self, message):
+        self._logger.info(self._obscure_message(message))
+
+    def _obscure_message(self, message, attr=None):
+        if attr:
+            if hasattr(self._context, 'options'):
+                if hasattr(self._context.options, 'cf'):
+                    try:
+                        message = message.replace(getattr(self._context.options.cf, attr), '***')
+                    except AttributeError:
+                        pass
+            return message
+        else:
+            message = self._obscure_message(message, 'username')
+            message = self._obscure_message(message, 'password')
+        return message
+
 
 #
 # hooks
@@ -20,7 +43,7 @@ def before_all(context):
     tooling.init()
     context.samples_dir = os.getcwd()
     context.config.setup_logging(configfile=os.path.join(context.samples_dir, 'logging.ini'))
-    context.log = logging.getLogger('pivotal')
+    context.log = LogObscurer(context, logging.getLogger('pivotal'))
     context.log.info("Steeltoe Samples test suite")
     context.log.info("samples directory: {}".format(context.samples_dir))
     setup_options(context)
@@ -174,7 +197,7 @@ def setup_options(context):
     context.options.cf.username = context.config.userdata.get('cf_username')
     context.log.info("option: CloudFoundry username -> {}".format(context.options.cf.username))
     context.options.cf.password = context.config.userdata.get('cf_password')
-    context.log.info("option: CloudFoundry password -> {}".format('*' if context.options.cf.password else None))
+    context.log.info("option: CloudFoundry password -> {}".format(context.options.cf.password))
     context.options.cf.org = context.config.userdata.get('cf_org')
     context.log.info("option: CloudFoundry org -> {}".format(context.options.cf.org))
     context.options.cf.domain = context.config.userdata.get('cf_domain')
