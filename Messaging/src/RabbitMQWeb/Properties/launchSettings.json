@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "rabbittest/",
+      "launchUrl": "rabbit/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
