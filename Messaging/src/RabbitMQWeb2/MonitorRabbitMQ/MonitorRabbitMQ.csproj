@@ -4,20 +4,18 @@
     <TargetFramework>net6.0</TargetFramework>
     <Description>MonitorRabbitMQ project</Description>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-  </PropertyGroup>
-
-  <PropertyGroup>
-	  <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="3.2.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.*" />
+    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="RabbitMQ.Client" Version="5.1.*" />
-    <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="3.2.1" />
+    <PackageReference Include="RabbitMQ.Client" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorCore" />
   </ItemGroup>
 
   <ItemGroup>
