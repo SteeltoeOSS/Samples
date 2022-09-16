@@ -38,4 +38,4 @@ curl http://localhost:5000/WriteMessageQueue
 ```
 You should see a response similar to the one below:
 
-![Expected Output](https://github.com/steeltoeoss/samples/blob/main/ExpectedOutput.PNG?raw=true)
+![Expected Output](https://raw.githubusercontent.com/SteeltoeOSS/Samples/main/Messaging/src/RabbitMQWeb2/images/ExpectedOutput.PNG)
