@@ -29,6 +29,6 @@ simplegeneric==0.8.1
 six==1.11.0
 sure==1.4.9
 traitlets==4.3.2
-urllib3==1.22
+urllib3==1.26.5
 wcwidth==0.1.7
 PyYAML==5.3.1
