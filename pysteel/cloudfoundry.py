@@ -34,7 +34,7 @@ class CloudFoundry(object):
         cmd_s = 'cf target'
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
-        m = re.search(r'^api endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
+        m = re.search(r'^API endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
         if not m:
             raise Exception("couldn't guess domain; cf target did not return api endpoint")
         return m.group(1)
