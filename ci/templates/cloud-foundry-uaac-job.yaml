@@ -15,7 +15,7 @@ jobs:
   - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}}
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
     env:
-      PYTHON: python3.7
+      PYTHON: python3.10
   - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
@@ -33,7 +33,7 @@ jobs:
 #   - bash: ./behave.sh ${{parameters.feature}}/src/${{parameters.sample}} ${{parameters.behave_args}}
 #     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
 #     env:
-#       PYTHON: python3.7
+#       PYTHON: python3.10
 #   - template: publish-results-steps.yaml
 #     parameters:
 #       feature: ${{parameters.feature}}

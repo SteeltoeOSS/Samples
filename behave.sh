@@ -5,7 +5,7 @@ set -e
 basedir=$(dirname $0)
 reinit_flag=$basedir/reinit
 PATH+=:~/.local/bin
-PYTHON=${PYTHON:-python3.7}
+PYTHON=${PYTHON:-python3.10}
 
 command_available() {
   local cmd=$1
