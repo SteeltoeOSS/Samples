@@ -122,7 +122,7 @@ class CloudFoundry(object):
             cmd.run()
             return True
         except command.CommandException as e:
-            if 'Service instance {} not found'.format(service_instance) in str(e):
+            if 'Service instance \'{}\' not found'.format(service_instance) in str(e):
                 return False
             raise e
 
