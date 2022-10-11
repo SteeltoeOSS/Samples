@@ -16,7 +16,7 @@ def resolve_hostname(context, name):
         host, domain = name.split('.', 1)
     else:
         host, domain = name, None
-    host = '{}-{}'.format(host, context.cf_space.replace('_', ''))
+    # host = '{}-{}'.format(host, context.cf_space.replace('_', '')) # now just using the app name
     context.log.info('host -> {}'.format(host))
     if domain:
         domain = resolve_domainname(context, domain)

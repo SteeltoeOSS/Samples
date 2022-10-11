@@ -138,11 +138,9 @@ class CloudFoundry(object):
             if 'Service instance {} not found'.format(service_instance) in str(e):
                 raise CloudFoundryObjectDoesNotExistError()
             raise e
-        match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
+        match = re.search(r'\s*status:\s+(.*)', cmd.stdout, re.MULTILINE)
         if match:
             return match.group(1)
-        match = re.search(r'^service:\s+(.*)', cmd.stdout, re.MULTILINE)
-        return match.group(1)
 
     def push_app(self, manifest):
         """

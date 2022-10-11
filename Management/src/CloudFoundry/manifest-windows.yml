@@ -10,4 +10,3 @@ applications:
     ASPNETCORE_ENVIRONMENT: Development
   services:
    - myMySqlService
-  random-route: true
