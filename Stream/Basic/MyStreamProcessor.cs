@@ -28,7 +28,7 @@ namespace Basic
         public string Handle(string input)
         {
             var output = input.ToUpper();
-            _logger?.LogInformation($"MyStreamProcssor changed input:{input} into output:{output} ");
+            _logger?.LogInformation($"MyStreamProcessor changed input:{input} into output:{output}");
             return output;
         }
     }

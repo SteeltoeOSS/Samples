@@ -1,6 +1,6 @@
 ﻿# Basic Stream Sample using WebApplication Builder
 
-This sample assumes you have rabbitMQ broker running with default credentials. 
+This sample assumes you have RabbitMQ broker running with default credentials. 
 
 # Running the sample
 
