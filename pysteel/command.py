@@ -151,7 +151,7 @@ def resolve_cf_args(context, args, cwd):
             match = re.search(r'- name:\s+(\S+)', doc)
             if match:
                 app = match.group(1)
-                args += ['--hostname', dns.resolve_hostname(context, app)]
+                # args += ['--hostname', dns.resolve_hostname(context, app)] <-- deprecated in cf cli v7, now requires use of cf map-route command
 
 
 def resolve_uaac_args(context, args, cwd):

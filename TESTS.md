@@ -7,6 +7,7 @@ This project's `behave` implementation requires Python 3.  See [Installing Pytho
 
 Two helper scripts, [behave.ps1](behave.ps1) and [behave.sh](behave.sh), are provided to simplify the setup and invocation of `behave`.
 These wrappers:
+
 1. install `pipenv` into the user's Python package install directory
 1. create a Python virtual environment for the project using `pipenv`
 1. install needed Python packages into the virtual environment
@@ -52,7 +53,7 @@ C:> copy user.ini.example user.ini
 The example file's options are commented with descriptions.
 
 One option you might want to enable is `windowed = yes`.
-Setting this option will run backgrounded processes in their own dedicated windows, making it easier to follow a test's progress.
+Setting this option will run background processes in their own dedicated windows, making it easier to follow a test's progress.
 
 ### Cloud Foundry
 
@@ -67,7 +68,7 @@ You can configure credentials by setting the following options in `user.ini`:
 
 Sample:
 
-```
+```text
 [behave.userdata]
 cf_apiurl = https://api.run.pcfone.io
 cf_username = myuser
@@ -80,6 +81,7 @@ The `development` space will be used as the target from which to create addition
 
 By default, each sample will use a dedicated space for its applications and services.
 The space is named `{feature}-{sample}-{os}` where:
+
 * `{feature}` is the feature name (the top directory node of the sample path)
 * `{sample}` is the sample name (the bottom directory node of the sample path)
 * `{os}` is one of: `windows`, `osx`, `linux` depending on the platform on which the tests are run
@@ -87,7 +89,8 @@ The space is named `{feature}-{sample}-{os}` where:
 As an example, if running the sample `Connectors\src\RabbitMQ` on Windows, it will use the space `connectors-rabbitmq-windows`.
 
 You can override this behavior by setting the `cf_space` option.
-```
+
+```text
 cf_space = myspace
 ```
 
@@ -100,6 +103,7 @@ Running the Samples tests requires Python 3 and its corresponding `pip` package 
 Install [Chocolatey][choco_url].
 
 Start a PowerShell as Administrator and run:
+
 ```dos
 C:> choco install -y python3
 ```
@@ -109,6 +113,7 @@ C:> choco install -y python3
 Install [Homebrew][brew_url].
 
 Start a terminal and run:
+
 ```sh
 $ brew install python3
 ```
@@ -116,8 +121,9 @@ $ brew install python3
 ### Ubuntu
 
 Start a terminal and run:
-```
-$ sudo apt install -y python3 python3-pip
+
+```sh
+sudo apt install -y python3 python3-pip
 ```
 
 [choco_url]: https://chocolatey.org/

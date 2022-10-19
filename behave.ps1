@@ -3,7 +3,7 @@
 $BaseDir = $PSScriptRoot
 $ReInitFlag = "reinit"
 $OldPath = $Env:Path
-$Env:Path += ";$Env:AppData\Python\Python38\Scripts"
+$Env:Path += ";$Env:AppData\Python\Python310\Scripts"
 
 function Command-Available {
     param($Command)
@@ -44,7 +44,7 @@ try {
     }
     if (!(Env-Exists)) {
         "installing env"
-         pipenv --three sync
+         pipenv sync
     }
 
     # run samples

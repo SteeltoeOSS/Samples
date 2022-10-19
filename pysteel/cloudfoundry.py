@@ -34,7 +34,7 @@ class CloudFoundry(object):
         cmd_s = 'cf target'
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
-        m = re.search(r'^api endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
+        m = re.search(r'^API endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
         if not m:
             raise Exception("couldn't guess domain; cf target did not return api endpoint")
         return m.group(1)
@@ -122,7 +122,7 @@ class CloudFoundry(object):
             cmd.run()
             return True
         except command.CommandException as e:
-            if 'Service instance {} not found'.format(service_instance) in str(e):
+            if 'Service instance \'{}\' not found'.format(service_instance) in str(e):
                 return False
             raise e
 
@@ -138,11 +138,9 @@ class CloudFoundry(object):
             if 'Service instance {} not found'.format(service_instance) in str(e):
                 raise CloudFoundryObjectDoesNotExistError()
             raise e
-        match = re.search(r'^status:\s+(.*)', cmd.stdout, re.MULTILINE)
+        match = re.search(r'\s*status:\s+(.*)', cmd.stdout, re.MULTILINE)
         if match:
             return match.group(1)
-        match = re.search(r'^service:\s+(.*)', cmd.stdout, re.MULTILINE)
-        return match.group(1)
 
     def push_app(self, manifest):
         """

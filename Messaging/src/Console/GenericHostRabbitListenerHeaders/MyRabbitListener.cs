@@ -1,12 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Steeltoe.Messaging;
 using Steeltoe.Messaging.Handler.Attributes;
-using Steeltoe.Messaging.RabbitMQ;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
-using Steeltoe.Messaging.Support;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleGenericHost
 {
