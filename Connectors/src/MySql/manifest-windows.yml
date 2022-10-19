@@ -2,14 +2,13 @@
 applications:
 - name: mysql-connector
   memory: 256M
-  disk_quota: 200M
   stack: windows
   buildpacks:
    - hwc_buildpack
   command: .\MySql
   env:
     ASPNETCORE_ENVIRONMENT: Development
-    DOTNET_CLI_TELEMETRY_OPTOUT: true
-    DOTNET_NOLOGO: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
   services:
    - myMySqlService
