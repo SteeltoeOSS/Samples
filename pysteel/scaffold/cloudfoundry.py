@@ -34,7 +34,7 @@ def setup(context, scenario):
     if not context.cf_space:
         tld = re.split('/|\\\\', scenario.filename)[0]
         feature_file = os.path.basename(scenario.filename)
-        context.cf_space = "{}-{}".format(
+        context.cf_space = "sample-{}-{}".format(
             tld,
             os.path.splitext(feature_file)[0]
         ).lower()
