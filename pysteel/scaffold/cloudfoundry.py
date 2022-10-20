@@ -34,10 +34,9 @@ def setup(context, scenario):
     if not context.cf_space:
         tld = re.split('/|\\\\', scenario.filename)[0]
         feature_file = os.path.basename(scenario.filename)
-        context.cf_space = "{}-{}-{}".format(
+        context.cf_space = "{}-{}".format(
             tld,
-            os.path.splitext(feature_file)[0],
-            context.platform
+            os.path.splitext(feature_file)[0]
         ).lower()
     context.log.info('CloudFoundry space -> {}'.format(context.cf_space))
     context.cf_domain = context.options.cf.domain
