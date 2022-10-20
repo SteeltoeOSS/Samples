@@ -177,7 +177,7 @@ class CloudFoundry(object):
         :type app_name: str
         """
         self._context.log.info('deleting Cloud Foundry app "{}"'.format(app_name))
-        cmd_s = 'cf delete -f {}'.format(app_name)
+        cmd_s = 'cf delete -f -r {}'.format(app_name)
         command.Command(self._context, cmd_s).run()
 
     def app_exists(self, app_name):
