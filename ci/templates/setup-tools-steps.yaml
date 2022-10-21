@@ -1,6 +1,5 @@
 parameters:
   dotnet6Version: 6.0.x
-  dotnet3Version: 3.1.x
 steps:
 - task: UseDotNet@2
   displayName: 'Setup DotNet6'
