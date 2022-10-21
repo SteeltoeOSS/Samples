@@ -164,12 +164,14 @@ class CloudFoundry(object):
             else:
                 self._context.log.info("attempt {}".format(attempts))
             status = self.get_app_status(app_name)
-            if status == 'running':
-                break
             if status is None:
                 self._context.log.info('app "{}" status not yet available'.format(app_name))
             else:
                 self._context.log.info('app "{}" status: "{}"'.format(app_name, status))
+            if status == 'running':
+                break
+            if status == 'crashed':
+                assert False, "app {} crashed".format(app_name)
             time.sleep(1)
 
     def delete_app(self, app_name):

@@ -82,7 +82,11 @@ def step_impl(context, app):
 
     def app_started():
         try:
-            return CloudFoundry(context).get_app_status(app) == 'running'
+            status = CloudFoundry(context).get_app_status(app)
+            context.log.info("app {} status: {}".format(app, status))
+            if status == 'crashed':
+                assert False, "app {} crashed".format(app)
+            return status == 'running'
         except CloudFoundryObjectDoesNotExistError:
             return False
 
