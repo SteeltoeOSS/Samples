@@ -110,4 +110,4 @@ def try_until(context, function, max_attempts):
             context.log.info("attempt {}".format(attempts))
         if function():
             break
-        time.sleep(1)
+        time.sleep(2)

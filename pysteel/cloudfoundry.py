@@ -172,7 +172,7 @@ class CloudFoundry(object):
                 break
             if status == 'crashed':
                 assert False, "app {} crashed".format(app_name)
-            time.sleep(1)
+            time.sleep(2)
 
     def delete_app(self, app_name):
         """
