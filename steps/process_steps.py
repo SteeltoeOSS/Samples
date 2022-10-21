@@ -70,7 +70,7 @@ def step_impl(context, port):
         except ConnectionRefusedError:
             return False
 
-    try_until(context, port_listening, context.options.max_attempts)
+    try_until(context, port_listening, context.options.cmd.max_attempts)
 
 
 @when(u'you wait until CloudFoundry app {app} is started')
