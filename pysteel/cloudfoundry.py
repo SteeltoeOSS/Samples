@@ -34,10 +34,10 @@ class CloudFoundry(object):
         cmd_s = 'cf target'
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
-        m = re.search(r'^API endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
+        m = re.search(r'^(API|api) endpoint:\s*(.*)', cmd.stdout, re.MULTILINE)
         if not m:
             raise Exception("couldn't guess domain; cf target did not return api endpoint")
-        return m.group(1)
+        return m.group(2)
 
     def create_space(self, name):
         """
@@ -89,7 +89,7 @@ class CloudFoundry(object):
                 self._context.log.info('service instance "{}" status not yet available'.format(service_instance))
             else:
                 self._context.log.info('service instance "{}" status: "{}"'.format(service_instance, status))
-            time.sleep(5)
+            time.sleep(self._context.options.cmd.loop_wait)
 
     def create_user_provided_service(self, service_instance, credentials=None):
         """
@@ -164,20 +164,22 @@ class CloudFoundry(object):
             else:
                 self._context.log.info("attempt {}".format(attempts))
             status = self.get_app_status(app_name)
-            if status == 'running':
-                break
             if status is None:
                 self._context.log.info('app "{}" status not yet available'.format(app_name))
             else:
                 self._context.log.info('app "{}" status: "{}"'.format(app_name, status))
-            time.sleep(1)
+            if status == 'running':
+                break
+            if status == 'crashed':
+                assert False, "app {} crashed".format(app_name)
+            time.sleep(self._context.options.cmd.loop_wait)
 
     def delete_app(self, app_name):
         """
         :type app_name: str
         """
         self._context.log.info('deleting Cloud Foundry app "{}"'.format(app_name))
-        cmd_s = 'cf delete -f {}'.format(app_name)
+        cmd_s = 'cf delete -f -r {}'.format(app_name)
         command.Command(self._context, cmd_s).run()
 
     def app_exists(self, app_name):
