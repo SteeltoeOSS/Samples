@@ -4,8 +4,8 @@ Feature: Redis Connector
   You can run some Redis connection samples
 
   @net6.0
-  @win10-x64
-  Scenario: Redis Connector (net6.0/win10-x64)
+  @win10
+  Scenario: Redis Connector (net6.0/win10)
     When you run: dotnet publish -r win10-x64
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app redis-connector is started
@@ -14,8 +14,8 @@ Feature: Redis Connector
     And you should see "Key2=Key2Value"
 
   @net6.0
-  @linux-x64
-  Scenario: Redis Connector (net6.0/linux-x64)
+  @linux
+  Scenario: Redis Connector (net6.0/linux)
     When you run in the background: cf push -f manifest.yml
     And you wait until CloudFoundry app redis-connector is started
     When you get https://redis-connector.x.y.z/Home/CacheData

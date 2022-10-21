@@ -70,7 +70,7 @@ def step_impl(context, port):
         except ConnectionRefusedError:
             return False
 
-    try_until(context, port_listening, context.options.max_attempts)
+    try_until(context, port_listening, context.options.cmd.max_attempts)
 
 
 @when(u'you wait until CloudFoundry app {app} is started')
@@ -82,7 +82,11 @@ def step_impl(context, app):
 
     def app_started():
         try:
-            return CloudFoundry(context).get_app_status(app) == 'running'
+            status = CloudFoundry(context).get_app_status(app)
+            context.log.info("app {} status: {}".format(app, status))
+            if status == 'crashed':
+                assert False, "app {} crashed".format(app)
+            return status == 'running'
         except CloudFoundryObjectDoesNotExistError:
             return False
 
@@ -106,4 +110,4 @@ def try_until(context, function, max_attempts):
             context.log.info("attempt {}".format(attempts))
         if function():
             break
-        time.sleep(1)
+        time.sleep(context.options.cmd.loop_wait)

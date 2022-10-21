@@ -27,7 +27,7 @@ def step_impl(context, url):
         context.log.info('failed to get {} [{}]'.format(url, resp.status_code))
         if attempt > 5:
             raise Exception('Unable to get page {} [{}]'.format(url, resp.status_code))
-        time.sleep(1)
+        time.sleep(context.options.cmd.loop_wait)
 
 
 @when(u'you post "{data}" to {url}')
