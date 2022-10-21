@@ -178,19 +178,27 @@ def setup_options(context):
         raise e
     context.log.info("option: cleanup? -> {}".format(context.options.do_cleanup))
     try:
-        context.options.max_attempts = context.config.userdata.getint('max_attempts')
-    except ValueError as e:
-        context.log.error("invalid config option: max_attempts -> {}".format(
-            context.config.userdata.get('max_attempts')))
-        raise e
-    context.log.info("option: max attempts -> {}".format(context.options.max_attempts))
-    try:
         context.options.debug_on_error = context.config.userdata.getbool('debug_on_error')
     except ValueError as e:
         context.log.error("invalid config option: debug_on_error -> {}".format(
             context.config.userdata.get('debug_on_error')))
         raise e
     context.log.info("option: debug on error? -> {}".format(context.options.debug_on_error))
+    context.options.cmd = type("", (), {})()
+    try:
+        context.options.cmd.max_attempts = context.config.userdata.getint('cmd_max_attempts')
+    except ValueError as e:
+        context.log.error("invalid config option: cmd_max_attempts -> {}".format(
+            context.config.userdata.get('cmd_max_attempts')))
+        raise e
+    context.log.info("option: cmd max attempts -> {}".format(context.options.cmd.max_attempts))
+    try:
+        context.options.cmd.loop_wait = context.config.userdata.getint('cmd_loop_wait')
+    except ValueError as e:
+        context.log.error(
+            "invalid config option: cmd_loop_wait -> {}".format(context.config.userdata.get('cmd_loop_wait')))
+        raise e
+    context.log.info("option: cmd loop wait -> {}".format(context.options.cmd.loop_wait))
     context.options.cf = type("", (), {})()
     context.options.cf.apiurl = context.config.userdata.get('cf_apiurl')
     context.log.info("option: CloudFoundry API URL -> {}".format(context.options.cf.apiurl))

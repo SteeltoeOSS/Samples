@@ -89,7 +89,7 @@ class CloudFoundry(object):
                 self._context.log.info('service instance "{}" status not yet available'.format(service_instance))
             else:
                 self._context.log.info('service instance "{}" status: "{}"'.format(service_instance, status))
-            time.sleep(5)
+            time.sleep(self._context.options.cmd.loop_wait)
 
     def create_user_provided_service(self, service_instance, credentials=None):
         """
@@ -172,7 +172,7 @@ class CloudFoundry(object):
                 break
             if status == 'crashed':
                 assert False, "app {} crashed".format(app_name)
-            time.sleep(2)
+            time.sleep(self._context.options.cmd.loop_wait)
 
     def delete_app(self, app_name):
         """
