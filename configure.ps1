@@ -61,7 +61,7 @@ function net6only() {
                 $_.ParentNode.RemoveChild($_)
             }
 
-        $propsAsXml.SelectSingleNode("//Project/PropertyGroup[@Condition = """ + $frameworkCondition + """]").Attributes.RemoveNamedItem("Condition");
+        #$propsAsXml.SelectSingleNode("//Project/PropertyGroup[@Condition = """ + $frameworkCondition + """]").Attributes.RemoveNamedItem("Condition");
 
         $propsFileName = Split-Path $propsFilePath -leaf
 
