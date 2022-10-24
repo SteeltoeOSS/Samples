@@ -3,7 +3,8 @@ steps:
     cat >> user.ini << EOF
     [behave.userdata]
     cleanup = no
-    max_attempts = $STEELTOE_MAX_ATTEMPTS
+    cmd_max_attempts = $STEELTOE_CMD_MAX_ATTEMPTS
+    cmd_loop_wait = $STEELTOE_CMD_LOOP_WAIT
     cf_apiurl = $STEELTOE_CF_APIURL
     cf_org = $STEELTOE_CF_ORG
     cf_username = $STEELTOE_CF_USERNAME
