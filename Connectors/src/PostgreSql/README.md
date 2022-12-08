@@ -2,7 +2,7 @@
 
 [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_PostgreSql%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=21&branchName=main)
 
-An ASP.NET Core sample application for the [Steeltoe PostgreSQL Connector](https://steeltoe.io/docs/steeltoe-connectors/#2-0-postgresql).
+An ASP.NET Core sample application for the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v3/connectors/postgresql.html).
 
 This sample uses `NpgsqlConnection` to issue commands to the bound database.
 There is another sample using [PostgreSQL with EFCore](./PostgreEFCore).
