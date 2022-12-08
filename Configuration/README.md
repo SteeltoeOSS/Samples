@@ -4,7 +4,7 @@ This repo tree contains several samples illustrating how to use the Steeltoe [Co
 
 * src/Simple - ASP.NET Core sample app illustrating how to use [Spring Cloud Config Server](https://projects.spring.io/spring-cloud/docs/1.0.3/spring-cloud.html#_spring_cloud_config_server) as a configuration source.
 * src/SimpleCloudFoundry - ASP.NET Core sample app illustrating how to use [Config Server for Pivotal CloudFoundry](https://docs.pivotal.io/spring-cloud-services/index.html) as a configuration source. It also shows how to access CloudFoundry `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables as configuration data.
-* src/CloudFoundry - ASP.NET Core sample app illustrating how to use the Steeltoe [CloudFoundry](https://github.com/SteeltoeOSS/Configuration/tree/master/src/Steeltoe.Extensions.Configuration.CloudFoundry) configuration provider to access CloudFoundry `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables as configuration data.
+* src/CloudFoundry - ASP.NET Core sample app illustrating how to use the Steeltoe [CloudFoundry](https://github.com/SteeltoeOSS/Configuration/tree/main/src/Steeltoe.Extensions.Configuration.CloudFoundry) configuration provider to access CloudFoundry `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables as configuration data.
 
 ## Building & Running
 
