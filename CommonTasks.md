@@ -6,7 +6,7 @@ This page contains information on basic tasks that are used throughout the Steel
 
 ### Run SCCS with Docker
 
-The Steeltoe team has built a docker image of a [basic Config server](https://github.com/SteeltoeOSS/Dockerfiles/tree/master/config-server) for an easy experience getting started
+The Steeltoe team has built a docker image of a [basic Config server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/config-server) for an easy experience getting started
 
 To start a config server backed by a folder on your local disk, start the docker image like this:
 
@@ -48,7 +48,7 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud C
 
 ### Run Eureka with Docker
 
-The Steeltoe team has built a docker image of a [basic Eureka server](https://github.com/SteeltoeOSS/Dockerfiles/tree/master/eureka-server) for an easy experience getting started:
+The Steeltoe team has built a docker image of a [basic Eureka server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/eureka-server) for an easy experience getting started:
 
 ```bash
 docker run --rm -ti -p 8761:8761 --name steeltoe-eureka steeltoeoss/eureka-server
