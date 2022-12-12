@@ -1,6 +1,6 @@
 # Cloud Foundry - ASP.NET Core Sample Application
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_CloudFoundry%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=15&branchName=main)
+[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=15&branchName=main)
 
 This ASP.NET Core sample app illustrates how to use the [Steeltoe Cloud Foundry configuration provider](https://steeltoe.io/app-configuration/get-started/cloudfoundry) to parse the VCAP_* environment variables and add them as a configuration source.
 
