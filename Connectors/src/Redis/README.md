@@ -1,6 +1,6 @@
 ﻿# Redis Connector Sample App
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_Redis%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=20&branchName=main)
+[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_Redis%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=20&branchName=main)
 
 This ASP.NET Core sample app uses the [Steeltoe Redis Connector](https://docs.steeltoe.io/api/v3/connectors/redis.html) to connect to Redis on Cloud Foundry.
 

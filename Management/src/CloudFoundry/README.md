@@ -1,6 +1,6 @@
 ﻿# Management Sample App for Cloud Foundry
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BManagement_CloudFoundry%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=23&branchName=main)
+[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BManagement_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=23&branchName=main)
 
 ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](https://docs.steeltoe.io/api/v3/management/) together with the [Pivotal Apps Manager](https://docs.pivotal.io/application-service/console/index.html) for monitoring and managing your applications on Cloud Foundry.  
 
