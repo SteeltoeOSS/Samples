@@ -2,7 +2,7 @@
 
 [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_MySql%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=17&branchName=main)
 
-ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/main/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry. This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional samples which illustrate how to use EF6 and EFCore.
+ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/main/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry. This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use Entity Framework Core.
 
 ## General Pre-requisites
 
@@ -13,7 +13,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https
 1. Installed MySQL Server
 1. Created MySQL database and user with appropriate access level
 1. Set [ASPNETCORE_ENVIRONMENT=Development] (<https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments>)
-1. Added your connection string to appsettings.development.json under mysql:client:ConnectionString
+1. Added your connection string to appsettings.development.json under MySql:Client:ConnectionString
 
 ## Running on CloudFoundry
 
@@ -23,7 +23,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https
 
 ## Create MySql Service Instance on CloudFoundry
 
-You must first create an instance of the MySql service in a org/space.
+You must first create an instance of the MySql service in an org/space.
 
 1. `cf target -o myorg -s development`
 1. `cf create-service p.mysql db-small myMySqlService`
@@ -33,10 +33,15 @@ You must first create an instance of the MySql service in a org/space.
 1. `cf target -o myorg -s development`
 1. `cd samples/Connectors/src/MySql`
 1. `dotnet restore --configfile nuget.config`
-1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp3.1 -r linux-x64`
-1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
+1. Push the app
+   - When using Windows containers:
+     - Publish app to a local directory, specifying the runtime:
+     * `dotnet publish -r win-x64`
+     - Push the app using the appropriate manifest:
+     * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+   - Otherwise:
+     - Push the app using the appropriate manifest:
+       * `cf push -f manifest.yml`
 
 > Note: The provided manifest will create an app named `mysql-connector` and attempt to bind the app to MySql service `myMySqlService`.
 
@@ -58,8 +63,8 @@ On a Windows cell, you should see something like this during startup:
 
 This sample will be available at <http://mysql-connector.[your-cf-apps-domain]/>.
 
-Upon startup, the app inserts a couple rows into the bound MySql database. To display those rows click on the `MySql Data` link in the menu.
+Upon startup, the app inserts a couple rows into the bound MySql database. To display those rows, click on the `MySql Data` link in the menu.
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
