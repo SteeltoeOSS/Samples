@@ -32,13 +32,13 @@ You must first create an instance of the MySql service in an org/space.
 
 1. `cf target -o myorg -s development`
 1. `cd samples/Connectors/src/MySqlEFCore`
-1. `dotnet restore --configfile nuget.config`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
-     * `dotnet publish -r win-x64`
+       * `dotnet restore --configfile nuget.config`
+       * `dotnet publish -r win-x64`
      - Push the app using the appropriate manifest:
-     * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
        * `cf push -f manifest.yml`
@@ -51,7 +51,7 @@ To see the logs as you startup and use the app: `cf logs mysqlefcore-connector`
 
 On a Windows cell, you should see something like this during startup:
 
-```bash
+```text
 2016-07-01T07:27:49.73-0600 [CELL/0]     OUT Creating container
 2016-07-01T07:27:51.11-0600 [CELL/0]     OUT Successfully created container
 2016-07-01T07:27:57.73-0600 [APP/0]      OUT Hosting environment: development
