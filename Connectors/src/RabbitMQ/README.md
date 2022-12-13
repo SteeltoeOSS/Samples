@@ -4,29 +4,42 @@
 
 ASP.NET Core sample app illustrating how to use [Steeltoe RabbitMQ Connector](https://docs.steeltoe.io/api/v3/connectors/rabbitmq.html) for connecting to a RabbitMQ service on CloudFoundry. This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound RabbitMQ service.
 
-## Pre-requisites - CloudFoundry
+## General Pre-requisites
+
+1. Installed .NET Core SDK
+
+## Running Locally
+
+1. Installed RabbitMQ Server
+1. Set [ASPNETCORE_ENVIRONMENT=Development] (<https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments>)
+
+## Running on CloudFoundry
 
 1. Installed Pivotal CloudFoundry 1.7+
 1. (Optional) installed Windows support
 1. Installed RabbitMQ CloudFoundry service
-1. Installed .NET Core SDK
 
 ## Create RabbitMQ Service Instance on CloudFoundry
 
-You must first create an instance of the RabbitMQ service in a org/space.
+You must first create an instance of the RabbitMQ service in an org/space.
 
 1. `cf target -o myorg -s development`
-1. `cf create-service p-rabbitmq standard myRabbitMQService`
+1. `cf create-service p.rabbitmq single-node myRabbitMQService`
 
 ## Publish App & Push to CloudFoundry
 
 1. `cf target -o myorg -s development`
 1. `cd samples/Connectors/src/RabbitMQ`
-1. `dotnet restore --configfile nuget.config`
-1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp3.1 -r linux-x64`
-1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
+1. Push the app
+   - When using Windows containers:
+     - Publish app to a local directory, specifying the runtime:
+       * `dotnet restore --configfile nuget.config`
+       * `dotnet publish -r win-x64`
+     - Push the app using the appropriate manifest:
+       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+   - Otherwise:
+     - Push the app using the appropriate manifest:
+       * `cf push -f manifest.yml`
 
 > Note: The provided manifest will create an app named `rabbitmq-connector` and attempt to bind the app to RabbitMQ service `myRabbitMQService`.
 
@@ -36,7 +49,7 @@ To see the logs as you startup and use the app: `cf logs rabbitmq-connector`
 
 On a Linux cell, you should see something like this during startup:
 
-```bash
+```text
 2016-08-24T12:22:42.68-0400 [CELL/0]     OUT Creating container
 2016-08-24T12:22:43.04-0400 [STG/0]      OUT Successfully destroyed container
 2016-08-24T12:22:43.95-0400 [CELL/0]     OUT Successfully created container
@@ -62,4 +75,4 @@ To receive a RabbitMQ message that you have sent: click "Receive" in the menu, a
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
