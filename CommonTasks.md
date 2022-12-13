@@ -124,6 +124,14 @@ docker run --rm -ti -p 1433:1433 --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 
 docker run --rm -ti -p 5432:5432 --name steeltoe-postgres  -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
 ```
 
+## MongoDB
+
+### Run MongoDB Server with Docker
+
+```script
+docker run --rm -ti -p 27017:27017 --name mongoserver mongo
+```
+
 ## Zipkin
 
 ### Run Zipkin Server with Docker
