@@ -121,7 +121,7 @@ docker run --rm -ti -p 1433:1433 --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 
 ### Run PostgreSQL Server with Docker
 
 ```script
-docker run --rm -ti-p 5432:5432 --name steeltoe-postgres  -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+docker run --rm -ti -p 5432:5432 --name steeltoe-postgres  -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
 ```
 
 ## Zipkin
