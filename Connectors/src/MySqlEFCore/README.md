@@ -1,4 +1,4 @@
-﻿# MySql Connector Sample App - EntityFramework Core
+﻿# MySql Connector Sample App - Entity Framework Core
 
 [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_MySqlEFCore%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=18&branchName=main)
 
