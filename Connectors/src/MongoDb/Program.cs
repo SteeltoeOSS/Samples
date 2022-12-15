@@ -4,7 +4,7 @@ using MongoDb.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Steeltoe.Common.Hosting;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 using System;
 using System.Collections.Generic;
@@ -26,8 +26,11 @@ namespace MongoDb
             Host.CreateDefaultBuilder(args)
                 .AddAllActuators()
                 .AddCloudFoundryConfiguration()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
-                .UseCloudHosting();
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseCloudHosting();
+                });
 
         private static void InitializeMongo(IServiceProvider services)
         {
