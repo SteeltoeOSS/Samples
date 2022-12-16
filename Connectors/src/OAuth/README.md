@@ -1,7 +1,7 @@
 ﻿# OAuth Connector Sample App
 
-This ASP.NET Core sample app uses the OAuth Connector to bind to a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) and expose the service's configuration data as ASP.NET Core `IOptions`.
-This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://github.com/SteeltoeOSS/Security).
+This ASP.NET Core sample app uses the OAuth Connector to bind to a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/)) and expose the service's configuration data as ASP.NET Core `IOptions`.
+This connector will typically be used in conjunction with the ASP.NET Core [CloudFoundry External Security Providers](https://docs.steeltoe.io/api/v3/security/).
 
 ## General Pre-requisites
 
@@ -20,7 +20,7 @@ You must first create an instance of a OAuth2 service in an org/space. As mentio
 1. `cf target -o myorg -s development`
 1. `cf cups myOAuthService -p oauth.json`
 
-If you want to use the [Pivotal Single Signon](https://docs.pivotal.io/p-identity/) service for your OAuth2 server, follow the installation and configuration instructions [here](https://docs.pivotal.io/p-identity/installation.html).
+If you want to use the [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/) service for your OAuth2 server, follow the installation and configuration instructions [here](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/1.14/sso/GUID-installation.html).
 
 ## Publish App & Push to CloudFoundry
 
@@ -61,4 +61,4 @@ On the app's menu, click on `OAuth Options` to see meaningful configuration data
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

@@ -1,6 +1,6 @@
 ﻿# SQL Server Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use Entity Framework Core together with [Steeltoe SQL Server Connector](https://github.com/SteeltoeOSS/Connectors) for connecting to a SqlServer service on CloudFoundry.
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with [Steeltoe SQL Server Connector](https://docs.steeltoe.io/api/v3/connectors/microsoft-sql-server.html) for connecting to a SQL Server service on CloudFoundry.
 
 ## General Pre-requisites
 
@@ -18,7 +18,7 @@ ASP.NET Core sample app illustrating how to use Entity Framework Core together w
 1. Installed Pivotal CloudFoundry
 1. (Optional) installed Windows support
 1. A SQL Server Instance
-1. (Optional) Installed [Microsoft SQL Server broker](https://github.com/cf-platform-eng/mssql-server-broker)
+1. (Optional) Installed [Cloud Service Broker for VMware Tanzu](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
 ## Create Sql Service Instance on CloudFoundry
 
@@ -69,4 +69,4 @@ Upon startup, the app inserts two rows into the bound SQL Server database. Those
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

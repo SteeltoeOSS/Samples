@@ -76,4 +76,4 @@ Upon startup, the app inserts a couple rows into the bound PostgreSQL database. 
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

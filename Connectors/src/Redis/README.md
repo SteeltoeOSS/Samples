@@ -4,7 +4,7 @@
 
 This ASP.NET Core sample app uses the [Steeltoe Redis Connector](https://docs.steeltoe.io/api/v3/connectors/redis.html) to connect to Redis on Cloud Foundry.
 
-This sample uses both [Microsoft RedisCache](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/StackExchange.Redis) to work with the same Redis service.
+This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.redis.rediscache) and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/StackExchange.Redis) to work with the same Redis service.
 
 ## General Pre-requisites
 
@@ -71,4 +71,4 @@ You can click on the `ConnectionMultiplexer Data` link to view data using the St
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
