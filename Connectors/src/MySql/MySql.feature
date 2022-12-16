@@ -9,7 +9,7 @@ Feature: MySql Connector
     When you run: dotnet publish -r win10-x64
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app mysql-connector is started
-    When you get https://mysql-connector.x.y.z/Home/MySqlData
+    When you get https://mysql-connector/Home/MySqlData
     Then you should see "Key 1 = Row1 Text"
     And you should see "Key 2 = Row2 Text"
 
@@ -18,6 +18,6 @@ Feature: MySql Connector
   Scenario: MySql Connector (net6.0/linux)
     When you run in the background: cf push -f manifest.yml
     And you wait until CloudFoundry app mysql-connector is started
-    When you get https://mysql-connector.x.y.z/Home/MySqlData
+    When you get https://mysql-connector/Home/MySqlData
     Then you should see "Key 1 = Row1 Text"
     And you should see "Key 2 = Row2 Text"

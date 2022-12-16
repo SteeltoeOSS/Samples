@@ -212,3 +212,20 @@ class CloudFoundry(object):
         if not match:
             return None
         return match.group(1)
+
+    def get_app_route(self, app_name):
+        """
+        :type app_name: str
+        """
+        cmd_s = 'cf app {}'.format(app_name)
+        cmd = command.Command(self._context, cmd_s)
+        try:
+            cmd.run()
+        except command.CommandException as e:
+            if "App '{}' not found".format(app_name) in str(e):
+                raise CloudFoundryObjectDoesNotExistError()
+            raise e
+        match = re.search(r'^routes:\s+(\S+)', cmd.stdout, re.MULTILINE)
+        if not match:
+            return None
+        return match.group(1)
