@@ -1,6 +1,7 @@
 ---
 applications:
 - name: oauth-connector
+  random-route: true
   memory: 256M
   stack: windows
   buildpacks:

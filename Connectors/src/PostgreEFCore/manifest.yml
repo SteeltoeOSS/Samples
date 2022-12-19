@@ -1,6 +1,7 @@
 ﻿---
 applications:
 - name: postgresefcore-connector
+  random-route: true
   buildpacks:
    - dotnet_core_buildpack
   memory: 128M
