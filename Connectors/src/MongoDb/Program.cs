@@ -18,7 +18,7 @@ namespace MongoDb
             var host = CreateHostBuilder(args).Build();
 
             InitializeMongo(host.Services);
-            
+
             host.Run();
         }
 
@@ -26,10 +26,7 @@ namespace MongoDb
             Host.CreateDefaultBuilder(args)
                 .AddAllActuators()
                 .AddCloudFoundryConfiguration()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
                 .UseCloudHosting();
 
         private static void InitializeMongo(IServiceProvider services)
@@ -41,8 +38,20 @@ namespace MongoDb
             collection.InsertMany(
                 new List<Person>
                 {
-                    new Person { Id = ObjectId.GenerateNewId(), FirstName = "Albert", LastName = "Einstein", FavoriteThing = "Relativity" },
-                    new Person { Id = ObjectId.GenerateNewId(), FirstName = "Isaac", LastName = "Newton", FavoriteThing = "Gravity" },
+                    new Person
+                    {
+                        Id = ObjectId.GenerateNewId(),
+                        FirstName = "Albert",
+                        LastName = "Einstein",
+                        FavoriteThing = "Relativity"
+                    },
+                    new Person
+                    {
+                        Id = ObjectId.GenerateNewId(),
+                        FirstName = "Isaac",
+                        LastName = "Newton",
+                        FavoriteThing = "Gravity"
+                    }
                 });
         }
     }
