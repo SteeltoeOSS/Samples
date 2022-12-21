@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Steeltoe.Common.Hosting;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
@@ -14,7 +13,6 @@ namespace RabbitMQ
                 .AddCloudFoundryConfiguration()
                 .AddAllActuators()
                 .UseStartup<Startup>()
-                .UseCloudHosting()
                 .Build();
 
             host.Run();

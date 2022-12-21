@@ -5,8 +5,8 @@ applications:
   memory: 256M
   stack: windows
   buildpacks:
-   - hwc_buildpack
-  command: .\MySqlEFCore
+   - binary_buildpack
+  command: cmd /c .\MySqlEFCore --urls=http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Production
     DOTNET_NOLOGO: "true"

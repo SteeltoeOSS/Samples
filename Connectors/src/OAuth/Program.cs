@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Steeltoe.Common.Hosting;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
@@ -19,7 +18,6 @@ namespace OAuth
                 .AddCloudFoundryConfiguration()
                 .AddAllActuators()
                 .UseStartup<Startup>()
-                .UseCloudHosting()
                 .Build();
         }
     }

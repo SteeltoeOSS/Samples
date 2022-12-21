@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MySql.Models;
-using Steeltoe.Common.Hosting;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 using System;
@@ -40,7 +39,6 @@ namespace MySql
                 .AddCloudFoundryConfiguration()
                 .AddAllActuators()
                 .UseStartup<Startup>()
-                .UseCloudHosting()
                 .Build();
         }
     }
