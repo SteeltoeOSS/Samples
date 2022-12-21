@@ -48,7 +48,7 @@ cf create-service postgresql-10-odb standalone myPostgres -c '{\"db_name\":\"pos
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
        * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64`
+       * `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
        * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
