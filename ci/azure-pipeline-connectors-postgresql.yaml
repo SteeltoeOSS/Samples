@@ -2,13 +2,11 @@ trigger:
   branches:
     include:
       - main
+      - latest
   paths:
     include:
       - config/*
       - Connectors/src/PostgreSql/*
-
-# skip pipeline for PRs
-pr: none
 
 variables:
   - group: 'PCFone Credentials'
