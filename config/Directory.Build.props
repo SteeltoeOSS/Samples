@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>3.2.*</SteeltoeVersion>
+    <SteeltoeVersion>[3.2.*-*,4.0)</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
     <GitInfoVersion>2.0.20</GitInfoVersion>
