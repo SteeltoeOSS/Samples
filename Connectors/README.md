@@ -5,13 +5,13 @@ This repo tree contains sample apps illustrating how to use the Steeltoe Connect
 ## ASP.NET Core Samples
 
 * src/MySql - connect to a MySql database on CloudFoundry.
-* src/MySqlEF6 - connect an EntityFramework6 `DbContext` to a MySql database on CloudFoundry.
+* src/MySqlEF6 - connect an Entity Framework 6 `DbContext` to a MySql database on CloudFoundry.
 * src/OAuth - connect to an OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) on CloudFoundry.
-* src/PostgreEFCore - connect an EntityFramework Core `DbContext` to a PostgreSQL database on CloudFoundry.
+* src/PostgreEFCore - connect an Entity Framework Core `DbContext` to a PostgreSQL database on CloudFoundry.
 * src/PostgreSql - connect to a Postgres database on CloudFoundry.
 * src/RabbitMQ - connect to RabbitMQ on CloudFoundry
 * src/Redis - connect a [Microsoft Redis Cache Extension](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) and/or a [ConnectionMultiplexor](https://github.com/StackExchange/StackExchange.Redis) to a Redis cache on CloudFoundry.
-* src/SqlServerEFCore - connect an EntityFramework Core `DbContext` to a Microsoft SQL database on CloudFoundry.
+* src/SqlServerEFCore - connect an Entity Framework Core `DbContext` to a Microsoft SQL database on CloudFoundry.
 
 ## Building & Running
 

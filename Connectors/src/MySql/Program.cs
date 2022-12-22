@@ -20,7 +20,8 @@ namespace MySql
             {
                 var services = scope.ServiceProvider;
                 try
-                {   // Insert couple rows into table
+                {
+                    // Insert couple rows into table
                     SampleData.InitializeMySqlData(services).Wait();
                 }
                 catch (Exception ex)
@@ -42,6 +43,5 @@ namespace MySql
                 .UseCloudHosting()
                 .Build();
         }
-
     }
 }

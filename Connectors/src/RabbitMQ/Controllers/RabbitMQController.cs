@@ -19,12 +19,11 @@ namespace RabbitMQ.Controllers
                 opt.Version = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12;
 
                 // Only needed if want to disable certificate validations
-                opt.AcceptablePolicyErrors = SslPolicyErrors.RemoteCertificateChainErrors | 
+                opt.AcceptablePolicyErrors = SslPolicyErrors.RemoteCertificateChainErrors |
                     SslPolicyErrors.RemoteCertificateNameMismatch | SslPolicyErrors.RemoteCertificateNotAvailable;
             }
         }
 
-    
         public IActionResult Receive()
         {
             using (var connection = _rabbitConnection.CreateConnection())
@@ -32,7 +31,8 @@ namespace RabbitMQ.Controllers
             {
                 CreateQueue(channel);
                 var data = channel.BasicGet("rabbit-test", true);
-                if (data != null) {
+                if (data != null)
+                {
                     ViewData["message"] = Encoding.UTF8.GetString(data.Body.ToArray());
                 }
             }
@@ -42,28 +42,30 @@ namespace RabbitMQ.Controllers
 
         public IActionResult Send(string message)
         {
-            if (message != null && message != "") {
+            if (!string.IsNullOrEmpty(message))
+            {
                 using (var connection = _rabbitConnection.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
                     CreateQueue(channel);
                     var body = Encoding.UTF8.GetBytes(message);
                     channel.BasicPublish(exchange: "",
-                                         routingKey: "rabbit-test",
-                                         basicProperties: null,
-                                         body: body);
+                        routingKey: "rabbit-test",
+                        basicProperties: null,
+                        body: body);
                 }
             }
+
             return View();
         }
 
         protected void CreateQueue(IModel channel)
         {
             channel.QueueDeclare(queue: "rabbit-test",
-                             durable: false,
-                             exclusive: false,
-                             autoDelete: false,
-                             arguments: null);
+                durable: false,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null);
         }
     }
 }

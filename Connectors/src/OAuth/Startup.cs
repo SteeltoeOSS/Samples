@@ -19,7 +19,6 @@ namespace OAuth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             // Configure and Add IOptions<OAuthServiceOptions> to the container
             services.AddOAuthServiceOptions(Configuration);
 

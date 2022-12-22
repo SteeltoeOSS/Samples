@@ -9,7 +9,7 @@ Feature: MySqlEFCore Connector
     When you run: dotnet publish -r win10-x64
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app mysqlefcore-connector is started
-    When you get https://mysqlefcore-connector.x.y.z/Home/MySqlData
+    When you get https://mysqlefcore-connector/Home/MySqlData
     Then you should see "1: Test Data 1 - EF Core TestContext A"
     And you should see "2: Test Data 2 - EF Core TestContext B"
 
@@ -18,6 +18,6 @@ Feature: MySqlEFCore Connector
   Scenario: MySqlEFCore Connector (net6.0/linux)
     When you run in the background: cf push -f manifest.yml
     And you wait until CloudFoundry app mysqlefcore-connector is started
-    When you get https://mysqlefcore-connector.x.y.z/Home/MySqlData
+    When you get https://mysqlefcore-connector/Home/MySqlData
     Then you should see "1: Test Data 1 - EF Core TestContext A"
     And you should see "2: Test Data 2 - EF Core TestContext B"

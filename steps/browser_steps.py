@@ -84,7 +84,7 @@ def step_impl(context, app):
     :type context: behave.runner.Context
     :type app: str
     """
-    url = dns.resolve_url(context, 'https://{}.x.y.z/cloudfoundryapplication'.format(app))
+    url = dns.resolve_url(context, 'https://{}/cloudfoundryapplication'.format(app))
     token = get_oauth_token(context)
     resp = requests.get(url, headers={'Authorization': token})
     resp.status_code.should.equal(200)

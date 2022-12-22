@@ -9,7 +9,7 @@ Feature: PostgreEFCore Connector
     When you run: dotnet publish -r win10-x64
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app postgresefcore-connector is started
-    When you get https://postgresefcore-connector.x.y.z/Home/PostgresData
+    When you get https://postgresefcore-connector/Home/PostgresData
     Then you should see "1: Test Data 1 - EF Core TestContext"
     And you should see "2: Test Data 2 - EF Core TestContext"
 
@@ -18,6 +18,6 @@ Feature: PostgreEFCore Connector
   Scenario: PostgreEFCore Connector (net6.0/linux)
     When you run in the background: cf push -f manifest.yml
     And you wait until CloudFoundry app postgresefcore-connector is started
-    When you get https://postgresefcore-connector.x.y.z/Home/PostgresData
+    When you get https://postgresefcore-connector/Home/PostgresData
     Then you should see "1: Test Data 1 - EF Core TestContext"
     And you should see "2: Test Data 2 - EF Core TestContext"
