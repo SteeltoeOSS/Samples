@@ -1,34 +1,31 @@
 ﻿# RabbitMQ Connector Sample App - RabbitMQConnection
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_RabbitMQ%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=14&branchName=main)
+ASP.NET Core sample app illustrating how to use [Steeltoe RabbitMQ Connector](https://docs.steeltoe.io/api/v3/connectors/rabbitmq.html) for connecting to a RabbitMQ service on CloudFoundry.
+This sample illustrates using a `RabbitMQ.Client` to send and receive messages on the bound RabbitMQ service.
 
-ASP.NET Core sample app illustrating how to use [Steeltoe RabbitMQ Connector](https://docs.steeltoe.io/api/v3/connectors/rabbitmq.html) for connecting to a RabbitMQ service on CloudFoundry. This specific sample illustrates how to use a `RabbitMQ.Client` to send and receive messages on the bound RabbitMQ service.
-
-## General Pre-requisites
+## General prerequisites
 
 1. Installed .NET Core SDK
 
-## Running Locally
+## Running locally
 
-1. Installed RabbitMQ Server
-1. Set [ASPNETCORE_ENVIRONMENT=Development] (<https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments>)
+1. Started RabbitMQ [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 
 ## Running on CloudFoundry
 
-1. Installed Pivotal CloudFoundry 1.7+
-1. (Optional) installed Windows support
+1. Installed VMware CloudFoundry (optionally with Windows support)
 1. Installed RabbitMQ CloudFoundry service
 
 ## Create RabbitMQ Service Instance on CloudFoundry
 
 You must first create an instance of the RabbitMQ service in an org/space.
 
-1. `cf target -o myorg -s development`
+1. `cf target -o your-org -s your-space`
 1. `cf create-service p.rabbitmq single-node myRabbitMQService`
 
 ## Publish App & Push to CloudFoundry
 
-1. `cf target -o myorg -s development`
+1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/RabbitMQ`
 1. Push the app
    - When using Windows containers:
@@ -36,7 +33,7 @@ You must first create an instance of the RabbitMQ service in an org/space.
        * `dotnet restore --configfile nuget.config`
        * `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       * `cf push -f manifest-windows.yml -p bin/Debug/net7.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
        * `cf push -f manifest.yml`
@@ -70,8 +67,8 @@ On a Linux cell, you should see something like this during startup:
 
 This sample will be available at <http://rabbitmq-connector.[your-cf-apps-domain]/>.
 
-To send a message over RabbitMQ: click "Send" in the menu, enter text and click the Send button.
-To receive a RabbitMQ message that you have sent: click "Receive" in the menu, and messages will be retrieved from the queue one at a time (per page view).
+To send a message over RabbitMQ: enter text and click the Send button.
+To receive a RabbitMQ message that you have sent: click the Receive button. Messages will be retrieved from the queue one at a time.
 
 ---
 

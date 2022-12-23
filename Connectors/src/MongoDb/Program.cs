@@ -1,56 +1,38 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using MongoDb.Models;
-using MongoDB.Bson;
-using MongoDB.Driver;
+using MongoDb;
 using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connector.MongoDb;
 using Steeltoe.Management.Endpoint;
-using System;
-using System.Collections.Generic;
 
-namespace MongoDb
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Steeltoe: Setup
+builder.AddCloudFoundryConfiguration();
+builder.AddAllActuators();
+builder.Services.AddMongoClient(builder.Configuration, addSteeltoeHealthChecks: true);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+WebApplication app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var host = CreateHostBuilder(args).Build();
-
-            InitializeMongo(host.Services);
-
-            host.Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .AddAllActuators()
-                .AddCloudFoundryConfiguration()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
-
-        private static void InitializeMongo(IServiceProvider services)
-        {
-            var mongo = services.GetService(typeof(IMongoClient)) as MongoClient;
-            var mongoInfo = services.GetService(typeof(MongoUrl)) as MongoUrl;
-            var db = mongo.GetDatabase(mongoInfo.DatabaseName ?? "TestData");
-            var collection = db.GetCollection<Person>("TestDataCollection");
-            collection.InsertMany(
-                new List<Person>
-                {
-                    new Person
-                    {
-                        Id = ObjectId.GenerateNewId(),
-                        FirstName = "Albert",
-                        LastName = "Einstein",
-                        FavoriteThing = "Relativity"
-                    },
-                    new Person
-                    {
-                        Id = ObjectId.GenerateNewId(),
-                        FirstName = "Isaac",
-                        LastName = "Newton",
-                        FavoriteThing = "Gravity"
-                    }
-                });
-        }
-    }
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+// Steeltoe: Insert some objects into MongoDB collection.
+await MongoDbSeeder.CreateSampleDataAsync(app.Services);
+
+app.Run();

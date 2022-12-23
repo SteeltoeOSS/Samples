@@ -8,8 +8,8 @@ applications:
    - binary_buildpack
   command: cmd /c .\MySqlEFCore --urls=http://0.0.0.0:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: Production
-    DOTNET_NOLOGO: "true"
+    ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
   services:
    - myMySqlService

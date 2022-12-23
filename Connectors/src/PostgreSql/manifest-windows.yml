@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: postgres-connector
+- name: postgresql-connector
   random-route: true
   memory: 256M
   stack: windows
@@ -12,4 +12,4 @@ applications:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - myPostgres
+   - myPostgreSqlService

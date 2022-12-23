@@ -6,7 +6,7 @@
   <PropertyGroup>
     <GitInfoVersion>2.3.*</GitInfoVersion>
     <RabbitMQVersion>6.4.*</RabbitMQVersion>
-    <AspNetCoreVersion>6.0.*</AspNetCoreVersion>
-    <EFCoreVersion>6.0.*</EFCoreVersion>
+    <AspNetCoreVersion>7.0.*</AspNetCoreVersion>
+    <EFCoreVersion>7.0.*</EFCoreVersion>
   </PropertyGroup>
 </Project>

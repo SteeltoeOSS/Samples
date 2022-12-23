@@ -1,0 +1,62 @@
+﻿@model RabbitViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Steeltoe: Form to send RabbitMQ message. -->
+<div class="p-3 mt-4 border border-secondary">
+    <form asp-action="Send">
+        <legend>Send RabbitMQ Message</legend>
+        <div class="mb-3">
+            <label asp-for="MessageToSend" class="form-label">Message to send</label>
+            <input asp-for="MessageToSend" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+    @if (Model.SendStatus == RabbitSendStatus.Succeeded)
+    {
+        <div class="mt-3 mb-0 alert alert-info alert-dismissible fade show" role="alert">
+            The message has been sent.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else if (Model.SendStatus == RabbitSendStatus.Failed)
+    {
+        <div class="mt-3 mb-0 alert alert-danger alert-dismissible fade show" role="alert">
+            Message must not be empty.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+</div>
+
+<!-- Steeltoe: Form to receive RabbitMQ message. -->
+<div class="p-3 mt-4 border border-secondary">
+    <form asp-action="Receive">
+        <legend>Receive RabbitMQ Message</legend>
+        <button type="submit" class="btn btn-primary">Receive</button>
+    </form>
+
+    @if (Model.MessageReceived != null)
+    {
+        if (Model.MessageReceived == string.Empty)
+        {
+            <div class="mt-3 mb-0 alert alert-warning alert-dismissible fade show" role="alert">
+                No more messages available.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        else
+        {
+            <div class="mt-3 mb-0 alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Message received:</strong> @Model.MessageReceived
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    }
+</div>

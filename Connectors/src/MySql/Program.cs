@@ -1,45 +1,38 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using MySql.Models;
+﻿using MySql;
 using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connector.MySql;
 using Steeltoe.Management.Endpoint;
-using System;
 
-namespace MySql
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Steeltoe: Setup
+builder.AddCloudFoundryConfiguration();
+builder.AddAllActuators();
+builder.Services.AddMySqlConnection(builder.Configuration);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+WebApplication app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var host = BuildWebHost(args);
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    // Insert couple rows into table
-                    SampleData.InitializeMySqlData(services).Wait();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
-                }
-            }
-
-            host.Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundryConfiguration()
-                .AddAllActuators()
-                .UseStartup<Startup>()
-                .Build();
-        }
-    }
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+// Steeltoe: Insert some rows into MySQL table.
+await MySqlSeeder.CreateSampleDataAsync(app.Services);
+
+app.Run();
