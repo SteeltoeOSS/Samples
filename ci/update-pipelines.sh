@@ -121,9 +121,6 @@ EOF
       - config/*
       - $sample/*
 
-# skip pipeline for PRs
-pr: none
-
 variables:
   - group: 'PCFone Credentials'
 
