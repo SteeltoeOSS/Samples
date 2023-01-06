@@ -132,8 +132,6 @@ def resolve_args(context, args, cwd):
     cmd = os.path.split(args[0])[-1]
     if cmd == 'cf':
         resolve_cf_args(context, args, cwd)
-    if cmd == 'uaac':
-        resolve_uaac_args(context, args, cwd)
     return args
 
 
@@ -151,15 +149,3 @@ def resolve_cf_args(context, args, cwd):
             match = re.search(r'- name:\s+(\S+)', doc)
             if match:
                 app = match.group(1)
-                # args += ['--hostname', dns.resolve_hostname(context, app)] <-- deprecated in cf cli v7, now requires use of cf map-route command
-
-
-def resolve_uaac_args(context, args, cwd):
-    """
-    :type context: behave.runner.Context
-    :type args: list
-    :type cwd: str
-    """
-    if '--redirect_uri' in args:
-        idx = args.index('--redirect_uri') + 1
-        args[idx] = dns.resolve_url(context, args[idx])

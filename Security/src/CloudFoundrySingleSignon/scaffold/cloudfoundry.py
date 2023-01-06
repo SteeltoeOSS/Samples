@@ -15,15 +15,14 @@ def setup(context):
     cf.delete_app('single-signon')
     # cf.delete_app('uaa')
     # create UAA service and app
+    domain = 'apps.{}'.format(context.options.cf.apiurl.removeprefix('https://api.sys.'))
+    uaa_app = 'uaa'
+    uaa_url = 'uaa://{}.{}'.format(uaa_app, domain)
     if not cf.service_exists('myOAuthService'):
-        credentials = '\'{{"client_id":"myTestApp", "client_secret":"myTestApp", "uri":"{}"}}\''.format(
-            dns.resolve_url(context, 'uaa://uaa'))
+        credentials = '\'{{"client_id":"myTestApp", "client_secret":"myTestApp", "uri":"{}"}}\''.format(uaa_url)
         cf.create_user_provided_service('myOAuthService', credentials)
-    uaa = 'uaa'
-    if not cf.app_exists(uaa):
-        fqdn = dns.resolve_hostname(context, uaa)
-        domain = fqdn.removeprefix("{}.".format(uaa))
-        uaa_repo = os.path.join(context.project_dir, uaa)
+    if not cf.app_exists(uaa_app):
+        uaa_repo = os.path.join(context.project_dir, uaa_app)
         if os.path.exists(uaa_repo):
             def remove_readonly(func, path, excinfo):
                 os.chmod(path, stat.S_IWRITE)
@@ -32,11 +31,12 @@ def setup(context):
         for cmd_s in [
             'git clone https://github.com/cloudfoundry/uaa.git',
             'git -C uaa checkout 4.7.1',
-            'uaa/gradlew -p uaa -Dapp={} -Dapp-domain={} manifests -Dorg.gradle.daemon=false'.format(uaa,
+            'uaa/gradlew -p uaa -Dapp={} -Dapp-domain={} manifests -Dorg.gradle.daemon=false'.format(uaa_app,
                                                                                                      domain),
         ]:
             Command(context, cmd_s).run()
         cf.push_app('uaa/build/sample-manifests/uaa-cf-application.yml')
+        single_signon_url = 'https://single-signon.{}'.format(domain)
         for cmd_s in [
             'uaac target {}'.format(dns.resolve_url(context, 'https://uaa')),
             'uaac token client get admin -s adminsecret',
@@ -45,6 +45,6 @@ def setup(context):
             'uaac user add testuser --given_name Test --family_name User --emails testuser@domain.com --password Password1!',
             'uaac member add testgroup testuser',
             'uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri {} --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp'.format(
-                'https://single-signon/signin-cloudfoundry'),
+                single_signon_url),
         ]:
             Command(context, cmd_s).run()
