@@ -6,7 +6,7 @@ Feature: PostgreSql Connector
   @net6.0
   @win10
   Scenario: PostgreSql Connector (net6.0/win10)
-    When you run: dotnet publish -r win10-x64
+    When you run: dotnet publish -r win10-x64 --self-contained
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win10-x64/publish
     And you wait until CloudFoundry app postgres-connector is started
     When you get https://postgres-connector/Home/PostgresData

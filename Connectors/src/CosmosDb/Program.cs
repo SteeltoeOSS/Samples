@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Common.Hosting;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 namespace CosmosDb
@@ -17,10 +16,6 @@ namespace CosmosDb
             Host.CreateDefaultBuilder(args)
                 .AddCloudFoundryConfiguration()
                 .AddAllActuators()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
-                .UseCloudHosting();
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
