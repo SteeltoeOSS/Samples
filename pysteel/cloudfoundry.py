@@ -11,6 +11,10 @@ class CloudFoundryObjectDoesNotExistError(Exception):
     pass
 
 
+class CloudFoundryRouteError(Exception):
+    pass
+
+
 class CloudFoundry(object):
 
     def __init__(self, context):
@@ -207,6 +211,8 @@ class CloudFoundry(object):
         except command.CommandException as e:
             if "App '{}' not found".format(app_name) in str(e):
                 raise CloudFoundryObjectDoesNotExistError()
+            if "Requested route" in str(e) and "does not exist" in str(e):
+                raise CloudFoundryRouteError()
             raise e
         match = re.search(r'^#0\s+(\S+)', cmd.stdout, re.MULTILINE)
         if not match:
