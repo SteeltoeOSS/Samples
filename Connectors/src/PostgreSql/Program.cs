@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Management.Endpoint;
 
 namespace PostgreSql
@@ -17,6 +18,7 @@ namespace PostgreSql
         {
             return WebHost.CreateDefaultBuilder(args)
                 .AddCloudFoundryConfiguration()
+                .ConfigureAppConfiguration(builder => builder.AddKubernetesServiceBindings())
                 .AddAllActuators()
                 .UseStartup<Startup>()
                 .UseCloudHosting()

@@ -1,0 +1,21 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: postgresql
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: postgresql
+spec:
+  params:
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
+  source:
+    image: us-central1-docker.pkg.dev/dotnet-developer-experience/dotnet-experience-containers/postgresql:latest
+  serviceClaims:
+  - name: postgres
+    ref:
+      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+      kind: ResourceClaim
+      name: postgres-sample
