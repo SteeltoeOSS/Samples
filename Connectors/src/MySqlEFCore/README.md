@@ -13,7 +13,7 @@ There is also an additional sample that illustrates how to use a `MySqlConnectio
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
+1. Installed CloudFoundry (optionally with Windows support)
 
 ## Create MySQL Service Instance on CloudFoundry
 

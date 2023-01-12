@@ -13,8 +13,8 @@ There is also an additional sample that illustrates how to use a `NpgsqlConnecti
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
-1. Installed [Cloud Service Broker for VMware Tanzu](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
+1. Installed CloudFoundry (optionally with Windows support)
+1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
 ## Create PostgreSQL Service Instance on CloudFoundry
 

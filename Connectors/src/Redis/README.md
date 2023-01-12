@@ -13,7 +13,7 @@ This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
+1. Installed CloudFoundry (optionally with Windows support)
 1. Installed Redis Cache service
 
 ## Create Redis Service Instance on CloudFoundry

@@ -13,7 +13,7 @@ This sample illustrates using a `MySqlConnection` to issue commands to the bound
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
+1. Installed CloudFoundry (optionally with Windows support)
 
 ## Create MySQL Service Instance on CloudFoundry
 

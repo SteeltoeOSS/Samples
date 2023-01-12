@@ -13,8 +13,8 @@ ASP.NET Core sample app illustrating how to use [Steeltoe CosmosDB Connector](ht
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
-1. Installed [Cloud Service Broker for VMware Tanzu](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
+1. Installed CloudFoundry (optionally with Windows support)
+1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
 ## Create CosmosDB Service Instance on CloudFoundry
 

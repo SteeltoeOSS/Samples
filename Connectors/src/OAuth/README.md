@@ -13,7 +13,7 @@ No installation required.
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
+1. Installed CloudFoundry (optionally with Windows support)
 1. OAuth2 Service Instance
 
 ## Create OAuth2 Service Instance on CloudFoundry

@@ -13,7 +13,7 @@ This sample illustrates using a `RabbitMQ.Client` to send and receive messages o
 
 ## Running on CloudFoundry
 
-1. Installed VMware CloudFoundry (optionally with Windows support)
+1. Installed CloudFoundry (optionally with Windows support)
 1. Installed RabbitMQ CloudFoundry service
 
 ## Create RabbitMQ Service Instance on CloudFoundry
