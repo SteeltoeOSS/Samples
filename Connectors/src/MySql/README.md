@@ -1,49 +1,43 @@
-﻿# MySql Connector Sample App - MySqlConnection
+﻿# MySQL Connector Sample App - MySqlConnection
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_MySql%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=17&branchName=main)
+ASP.NET Core sample app illustrating how to use [Steeltoe MySQL Connector](https://docs.steeltoe.io/api/v3/connectors/mysql.html) for connecting to a MySQL service on CloudFoundry.
+This sample illustrates using a `MySqlConnection` to issue commands to the bound database. There is also an additional sample that illustrates how to use Entity Framework Core.
 
-ASP.NET Core sample app illustrating how to use [Steeltoe MySql Connector](https://github.com/SteeltoeOSS/Connectors/tree/main/src/Steeltoe.CloudFoundry.Connector.MySql) for connecting to a MySql service on CloudFoundry. This specific sample illustrates how to use a `MySqlConnection` to issue commands to the bound database. There is also an additional sample which illustrates how to use Entity Framework Core.
-
-## General Pre-requisites
+## General prerequisites
 
 1. Installed .NET Core SDK
 
-## Running Locally
+## Running locally
 
-1. Installed MySQL Server
-1. Created MySQL database and user with appropriate access level
-1. Set [ASPNETCORE_ENVIRONMENT=Development] (<https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments>)
-1. Added your connection string to appsettings.development.json under MySql:Client:ConnectionString
+1. Started MySQL [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 
 ## Running on CloudFoundry
 
-1. Installed Pivotal CloudFoundry
-1. (Optional) installed Windows support
-1. Installed MySql CloudFoundry service
+1. Installed CloudFoundry (optionally with Windows support)
 
-## Create MySql Service Instance on CloudFoundry
+## Create MySQL Service Instance on CloudFoundry
 
-You must first create an instance of the MySql service in an org/space.
+You must first create an instance of the MySQL service in an org/space.
 
-1. `cf target -o myorg -s development`
+1. `cf target -o your-org -s your-space`
 1. `cf create-service p.mysql db-small myMySqlService`
 
 ## Publish App & Push to CloudFoundry
 
-1. `cf target -o myorg -s development`
+1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/MySql`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
        * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64`
+       * `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       * `cf push -f manifest-windows.yml -p bin/Debug/net7.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
        * `cf push -f manifest.yml`
 
-> Note: The provided manifest will create an app named `mysql-connector` and attempt to bind the app to MySql service `myMySqlService`.
+> Note: The provided manifest will create an app named `mysql-connector` and attempt to bind the app to MySQL service `myMySqlService`.
 
 ## What to expect - CloudFoundry
 
@@ -63,8 +57,8 @@ On a Windows cell, you should see something like this during startup:
 
 This sample will be available at <http://mysql-connector.[your-cf-apps-domain]/>.
 
-Upon startup, the app inserts a couple rows into the bound MySql database. To display those rows, click on the `MySql Data` link in the menu.
+Upon startup, the app inserts a couple of rows into the bound MySQL database. They are displayed on the home page.
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information.
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

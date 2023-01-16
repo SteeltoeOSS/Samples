@@ -14,7 +14,7 @@ Samples using the Spring Cloud Config Server and other Steeltoe configuration pr
 ## [Discovery](Discovery)
 Samples using Steeltoe Service Discovery microservices-based applications.
 
-## [Management](Management)
+## [Management](Management/src)
 Samples using the Steeltoe Management packages for adding Management REST endpoints to your application, as well as adding Distributed Tracing support.
 
 | Sample | main | latest |
@@ -53,14 +53,14 @@ A sample that uses all of the Steeltoe components together in a microservices-ba
 ## [FreddysBBQ](FreddysBBQ)
 A polyglot (Java and .NET) microservices-based sample demonstrating interoperability between Java and .NET on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
-## Branches
+# Branches
 
 All new development is done on the latest branch. Samples for the stable version of Steeltoe can be found on the main branch.
 
-## Documentation
+# Documentation
 
 If you are looking for documentation on how to use the Steeltoe components, you can find that [here](https://steeltoe.io/docs/).
 
-## Building & Running
+# Building & Running
 
 See the Readmes for each sample for instructions on how to build and run.

@@ -1,40 +1,46 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MongoDb.Models;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using MongoDb.Data;
 using MongoDB.Driver;
-using System.Diagnostics;
-using System.Linq;
+using MongoDb.Models;
 
-namespace MongoDb.Controllers
+namespace MongoDb.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly IMongoClient _mongoClient;
+
+    public HomeController(ILogger<HomeController> logger, IMongoClient mongoClient)
     {
-        private readonly IMongoCollection<Person> _mongoPeople;
-        
-        private readonly ILogger<HomeController> _logger;
+        _logger = logger;
+        _mongoClient = mongoClient;
+    }
 
-        public HomeController(IMongoClient mongoClient, MongoUrl mongoInfo, ILogger<HomeController> logger)
-        {
-            var db = mongoClient.GetDatabase(mongoInfo.DatabaseName ?? "TestData");
-            _mongoPeople = db.GetCollection<Person>("TestDataCollection");
-            _logger = logger;
-        }
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Fetch objects from MongoDB collection.
+        IMongoDatabase database = _mongoClient.GetDatabase("TestDatabase");
+        IMongoCollection<SampleObject> collection = database.GetCollection<SampleObject>("SampleObjects");
+        List<SampleObject> objects = await collection.Find(obj => true).ToListAsync(cancellationToken);
 
-        public IActionResult Index()
+        return View(new MongoDbViewModel
         {
-            var something = Builders<Person>.Filter.Where(p => !string.IsNullOrEmpty(p.FirstName));
-            return View(_mongoPeople.Find(something).ToList());
-        }
+            SampleObjects = objects
+        });
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }

@@ -1,65 +1,48 @@
 ﻿# PostgreSQL Connector Sample App - NpgsqlConnection
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConnectors_PostgreSql%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=21&branchName=main)
+ASP.NET Core sample app illustrating how to use [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v3/connectors/postgresql.html) for connecting to a PostgreSQL service on CloudFoundry.
+This sample illustrates using a `NpgsqlConnection` to issue commands to the bound database. There is also an additional sample that illustrates how to use Entity Framework Core.
 
-An ASP.NET Core sample application for the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v3/connectors/postgresql.html).
-
-This sample uses `NpgsqlConnection` to issue commands to the bound database.
-There is another sample using [PostgreSQL with Entity Framework Core](./PostgreEFCore).
-
-## General Pre-requisites
+## General prerequisites
 
 1. Installed .NET Core SDK
 
-## Running Locally
+## Running locally
 
-1. Installed PostgreSQL Server
-1. Created PostgreSQL database and user with appropriate access level
-1. Set [ASPNETCORE_ENVIRONMENT=Development] (<https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments>)
-1. Added your connection string to appsettings.development.json under Postgres:Client:ConnectionString
+1. Started PostgreSQL [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 
 ## Running on CloudFoundry
 
-1. Installed Pivotal CloudFoundry
-1. (Optional) installed Windows support
-1. Installed PostgreSQL database service (e.g. EDB Postgres)
+1. Installed CloudFoundry (optionally with Windows support)
+1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
 ## Create PostgreSQL Service Instance on CloudFoundry
 
-You must first create an instance of the PostgreSQL database service in an org/space.
+You must first create an instance of the PostgreSQL service in an org/space.
 
-```bash
-cf target -o myorg -s development
-
-# for EDB PostgreSQL:
-cf create-service EDB-Shared-PostgreSQL "Basic PostgreSQL Plan" myPostgres
-
-# for CrunchyPostgres:
-cf create-service postgresql-10-odb standalone myPostgres -c '{"db_name":"postgresample", "db_username": "steeltoe", "owner_name":"<your name>", "owner_email":"<your email>"}'
-# or with escaped double quotes for Powershell:
-cf create-service postgresql-10-odb standalone myPostgres -c '{\"db_name\":\"postgresample\", \"db_username\": \"steeltoe\", \"owner_name\":\"<your name>\", \"owner_email\":\"<your email>\"}'
-```
+1. `cf target -o your-org -s your-space`
+1. `cf create-service csb-azure-postgresql small myPostgreSqlService` or `cf create-service csb-google-postgres default myPostgreSqlService`
 
 ## Publish App & Push to CloudFoundry
 
-1. `cf target -o myorg -s development`
+1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/PostgreSql`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
        * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64`
+       * `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       * `cf push -f manifest-windows.yml -p bin/Debug/net7.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
        * `cf push -f manifest.yml`
 
-> Note: The provided manifest(s) will create an app named `postgres-connector` and attempt to bind the app to PostgreSQL service `myPostgres`.
+> Note: The provided manifest(s) will create an app named `postgres-connector` and attempt to bind the app to PostgreSQL service `myPostgreSqlService`.
 
 ## What to expect - CloudFoundry
 
-To see the logs as you startup and use the app: `cf logs postgres-connector`
+To see the logs as you startup and use the app: `cf logs postgresql-connector`
 
 On a Windows cell, you should see something like this during startup:
 
@@ -73,9 +56,9 @@ On a Windows cell, you should see something like this during startup:
 2016-08-05T07:23:14.68-0600 [APP/0]      OUT Now listening on: http://*:51217
 ```
 
-This sample will be available at <http://postgres-connector.[your-cf-apps-domain]/>.
+This sample will be available at <http://postgresql-connector.[your-cf-apps-domain]/>.
 
-Upon startup, the app inserts a couple rows into the bound PostgreSQL database. To display those rows, click on the `Postgres Data` link in the menu.
+Upon startup, the app inserts a couple of rows into the bound PostgreSQL database. They are displayed on the home page.
 
 ---
 
