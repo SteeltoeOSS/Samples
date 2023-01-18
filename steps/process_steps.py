@@ -3,7 +3,7 @@ import time
 
 from behave import *
 
-from pysteel.cloudfoundry import CloudFoundry, CloudFoundryObjectDoesNotExistError
+from pysteel.cloudfoundry import CloudFoundry, CloudFoundryObjectDoesNotExistError, CloudFoundryRouteError
 from pysteel.command import Command
 
 
@@ -88,6 +88,8 @@ def step_impl(context, app):
                 assert False, "app {} crashed".format(app)
             return status == 'running'
         except CloudFoundryObjectDoesNotExistError:
+            return False
+        except CloudFoundryRouteError:
             return False
 
     try_until(context, app_started, context.options.cf.max_attempts)
