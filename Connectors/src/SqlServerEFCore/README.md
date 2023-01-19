@@ -37,7 +37,7 @@ Alternatively, when using a user-provided service instead (replace values betwee
        * `dotnet restore --configfile nuget.config`
        * `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net7.0/win-x64/publish`
+       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
        * `cf push -f manifest.yml`
