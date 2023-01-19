@@ -21,7 +21,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe CosmosDB Connector](ht
 You must first create an instance of the CosmosDB service in an org/space.
 
 1. `cf target -o your-org -s your-space`
-1. `cf create-service csb-azure-cosmosdb-sql small myCosmosDbService`
+1. `cf create-service csb-azure-cosmosdb-sql mini myCosmosDbService`
 
 ## Publish App & Push to CloudFoundry
 

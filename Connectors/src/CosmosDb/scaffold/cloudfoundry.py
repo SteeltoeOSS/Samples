@@ -11,6 +11,6 @@ def setup(context):
     cf.delete_app(app)
     # create service
     service = 'csb-azure-cosmosdb-sql'
-    plan = 'small'
+    plan = 'mini'
     instance = 'myCosmosDbService'
     cf.create_service(service, plan, instance)
