@@ -1,5 +1,5 @@
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connector.RabbitMQ;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

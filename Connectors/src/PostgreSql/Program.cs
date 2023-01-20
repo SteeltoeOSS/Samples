@@ -1,6 +1,6 @@
 using PostgreSql;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connector.PostgreSql;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Steeltoe: Setup
 builder.AddCloudFoundryConfiguration();
 builder.AddAllActuators();
-builder.Services.AddPostgresConnection(builder.Configuration);
+builder.Services.AddPostgreSqlConnection(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -1,8 +1,8 @@
 using MySqlEFCore;
 using MySqlEFCore.Data;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connector.EntityFrameworkCore.MySql;
 using Steeltoe.Connector.MySql;
-using Steeltoe.Connector.MySql.EFCore;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
