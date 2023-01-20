@@ -1,17 +1,42 @@
-﻿using System;
-using System.Linq;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SqlServerEFCore.Data;
+using SqlServerEFCore.Models;
 
-namespace SqlServerEFCore.Controllers
+namespace SqlServerEFCore.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly AppDbContext _appDbContext;
+
+    public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
     {
-        public IActionResult Index([FromServices] TestContext context)
+        _logger = logger;
+        _appDbContext = appDbContext;
+    }
+
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Fetch data from SQL Server table.
+        return View(new SqlServerViewModel
         {
-            var connection = context.Database.GetDbConnection();
-            Console.WriteLine($"Retrieving data from {connection.DataSource}/{connection.Database}");
-            return View(context.TestData.ToList());
-        }
+            SampleEntities = await _appDbContext.SampleEntities.ToListAsync(cancellationToken)
+        });
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }

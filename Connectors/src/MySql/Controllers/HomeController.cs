@@ -1,40 +1,59 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using MySql.Models;
 
-namespace MySql.Controllers
+namespace MySql.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly MySqlConnection _mySqlConnection;
+
+    public HomeController(ILogger<HomeController> logger, MySqlConnection mySqlConnection)
     {
-        public IActionResult Index()
+        _logger = logger;
+        _mySqlConnection = mySqlConnection;
+    }
+
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Fetch data from MySQL table.
+        var model = new MySqlViewModel();
+
+        await _mySqlConnection.OpenAsync(cancellationToken);
+        var command = new MySqlCommand("SELECT * FROM TestData;", _mySqlConnection);
+        await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
+
+        while (await reader.ReadAsync(cancellationToken))
         {
-            return View();
+            string idValue = reader[0].ToString()!;
+            string? textValue = reader[1].ToString();
+
+            model.Rows.Add(idValue, textValue);
         }
 
-        public IActionResult MySqlData([FromServices] MySqlConnection dbConnection)
+        model.DatabaseName = _mySqlConnection.Database;
+
+#if DEBUG
+        model.ServerName = _mySqlConnection.DataSource;
+#endif
+
+        return View(model);
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            var viewData = new Dictionary<string, string>();
-            dbConnection.Open();
-
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM TestData;", dbConnection);
-            DbDataReader rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
-            {
-                viewData.Add(rdr[0].ToString(), rdr[1].ToString());
-            }
-            ViewBag.Database = dbConnection.Database;
-            ViewBag.DataSource = dbConnection.DataSource;
-
-            dbConnection.Close();
-
-            return View(viewData);
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }

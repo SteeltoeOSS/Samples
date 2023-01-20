@@ -1,0 +1,13 @@
+﻿---
+applications:
+- name: mongodb-connector
+  random-route: true
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
+  services:
+   - myMongoDbService

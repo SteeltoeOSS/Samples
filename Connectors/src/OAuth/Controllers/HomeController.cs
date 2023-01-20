@@ -1,32 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using OAuth.Models;
 using Steeltoe.Connector.OAuth;
-using System.Collections.Generic;
 
-namespace OAuth.Controllers
+namespace OAuth.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly OAuthServiceOptions _options;
+
+    public HomeController(ILogger<HomeController> logger, IOptions<OAuthServiceOptions> options)
     {
-        OAuthServiceOptions _options;
+        _logger = logger;
+        _options = options.Value;
+    }
 
-        public HomeController(IOptions<OAuthServiceOptions> oauthOptions)
+    public IActionResult Index()
+    {
+        _options.Scope = new List<string>
         {
-            _options = oauthOptions.Value;
-        }
+            "a",
+            "b",
+            "c",
+            "d"
+        };
 
-        public IActionResult Index()
+        return View(new OAuthViewModel
         {
-            return View();
-        }
+            Options = _options
+        });
+    }
 
-        public IActionResult Error()
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            return View();
-        }
-        public IActionResult OAuthOptions()
-        {
-            _options.Scope = new List<string> { "a", "b", "c", "d" };
-            return View(_options ?? new OAuthServiceOptions());
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }

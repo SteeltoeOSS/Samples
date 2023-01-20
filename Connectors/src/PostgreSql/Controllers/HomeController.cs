@@ -1,33 +1,59 @@
-﻿using System.Collections.Generic;
+﻿using System.Data.Common;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
+using PostgreSql.Models;
 
-namespace PostgreSql.Controllers
+namespace PostgreSql.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly NpgsqlConnection _npgsqlConnection;
+
+    public HomeController(ILogger<HomeController> logger, NpgsqlConnection npgsqlConnection)
     {
-        public IActionResult Index()
+        _logger = logger;
+        _npgsqlConnection = npgsqlConnection;
+    }
+
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Fetch data from PostgreSQL table.
+        var model = new PostgreSqlViewModel();
+
+        await _npgsqlConnection.OpenAsync(cancellationToken);
+        var command = new NpgsqlCommand("SELECT * FROM TestData;", _npgsqlConnection);
+        await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
+
+        while (await reader.ReadAsync(cancellationToken))
         {
-            return View();
+            string idValue = reader[0].ToString()!;
+            string? textValue = reader[1].ToString();
+
+            model.Rows.Add(idValue, textValue);
         }
 
-        public IActionResult PostgresData([FromServices] NpgsqlConnection dbConnection)
+        model.DatabaseName = _npgsqlConnection.Database;
+
+#if DEBUG
+        model.ServerName = _npgsqlConnection.DataSource;
+#endif
+
+        return View(model);
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            var viewData = new Dictionary<string, string>();
-            dbConnection.Open();
-
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM TestData;", dbConnection);
-            var rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
-            {
-                viewData.Add(rdr[0].ToString(), rdr[1].ToString());
-            }
-            ViewBag.Database = dbConnection.Database;
-            ViewBag.DataSource = dbConnection.DataSource;
-            rdr.Close();
-            dbConnection.Close();
-            return View(viewData);
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }
