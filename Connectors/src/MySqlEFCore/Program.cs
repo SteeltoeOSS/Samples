@@ -1,58 +1,66 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Common.Hosting;
+using MySqlEFCore;
+using MySqlEFCore.Data;
+using Steeltoe.Connector.MySql;
+using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
-using System;
 
-namespace MySqlEFCore
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Steeltoe: Setup
+builder.AddCloudFoundryConfiguration();
+builder.AddAllActuators();
+
+// Steeltoe: MySQL EF Core Setup.
+bool useMultipleDatabases = builder.Configuration.GetValue<bool>("useMultipleDatabases");
+
+if (useMultipleDatabases)
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var host = BuildWebHost(args);
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    SampleData.InitializeMyContexts(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
-                }
-                var config = services.GetService<IConfiguration>();
-                if (config.GetValue<bool>("multipleMySqlDatabases"))
-                {
-                    try
-                    {
-                        MoreSampleData.InitializeMyContexts(services);
-                    }
-                    catch (Exception ex)
-                    {
-                        var logger = services.GetRequiredService<ILogger<Program>>();
-                        logger.LogError(ex, "An error occurred seeding the second DB.");
-                    }
-                }
-            }
+    // When using multiple databases, specify the service binding name.
+    // Review appsettings.development.json to see how local connection info is provided.
 
-            host.Run();
-        }
+    const string serviceName = "myMySqlService";
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(builder.Configuration, serviceName));
+    builder.Services.AddMySqlHealthContributor(builder.Configuration, serviceName);
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .AddCloudFoundryConfiguration()
-                .AddAllActuators()
-                .UseStartup<Startup>()
-                .UseCloudHosting()
-                .Build();
-        }
-    }
+    const string otherServiceName = "myOtherMySqlService";
+    builder.Services.AddDbContext<OtherDbContext>(options => options.UseMySql(builder.Configuration, otherServiceName));
+    builder.Services.AddMySqlHealthContributor(builder.Configuration, otherServiceName);
 }
+else
+{
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(builder.Configuration));
+    builder.Services.AddMySqlHealthContributor(builder.Configuration);
+}
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+WebApplication app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+// Steeltoe: Insert some rows into MySQL table.
+await MySqlSeeder.CreateSampleDataAsync(app.Services);
+
+if (useMultipleDatabases)
+{
+    await MySqlSeeder.CreateOtherSampleDataAsync(app.Services);
+}
+
+app.Run();

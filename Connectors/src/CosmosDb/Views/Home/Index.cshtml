@@ -1,45 +1,32 @@
-﻿@model IEnumerable<CosmosDb.TestData>
-
+﻿@using CosmosDb.Data
+@model CosmosDbViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Home Page";
 }
 
-<h1>Cosmos Db Sample</h1>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
 
-<p>
-    <a href="/home/AddData">Add new data</a>
-</p>
-<table style="width:80%">
-    <thead>
+<!-- Steeltoe: Display information from CosmosDB. -->
+<div class="alert alert-secondary">
+    <h4>Objects stored in CosmosDB container</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SomeThing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SomeOtherThing)
-            </th>
-            <th></th>
+            <th scope="col">Id</th>
+            <th scope="col">Text</th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SomeThing)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SomeOtherThing)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (SampleObject sampleObject in Model.SampleObjects)
+        {
+            <tr>
+                <td>@sampleObject.Id</td>
+                <td>@sampleObject.Text</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

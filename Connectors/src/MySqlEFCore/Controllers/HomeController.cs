@@ -1,42 +1,53 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using MySqlEFCore.Data;
+using MySqlEFCore.Models;
 
-namespace MySqlEFCore.Controllers
+namespace MySqlEFCore.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly IServiceProvider _serviceProvider;
+
+    public HomeController(ILogger<HomeController> logger, IServiceProvider serviceProvider)
     {
-        private IConfiguration config;
+        _logger = logger;
+        _serviceProvider = serviceProvider;
+    }
 
-        public HomeController(IConfiguration config)
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Fetch data from MySQL table.
+        await using var appDbContext = _serviceProvider.GetRequiredService<AppDbContext>();
+
+        var model = new MySqlViewModel
         {
-            this.config = config;
+            SampleEntities = await appDbContext.SampleEntities.ToListAsync(cancellationToken)
+        };
+
+        await using var otherDbContext = _serviceProvider.GetService<OtherDbContext>();
+
+        if (otherDbContext != null)
+        {
+            model.OtherEntities = await otherDbContext.OtherEntities.ToListAsync(cancellationToken);
         }
 
-        public IActionResult Index()
-        {
-            AddMultiDbLink();
-            return View();
-        }
+        return View(model);
+    }
 
-        public IActionResult MySqlData([FromServices] TestContext context)
-        {
-            AddMultiDbLink();
-            return View(context.TestData.ToList());
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        public IActionResult MoreMySqlData([FromServices] SecondTestContext context)
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            AddMultiDbLink();
-            return View(context.MoreTestData.ToList());
-        }
-
-        private void AddMultiDbLink()
-        {
-            if (config.GetValue<bool>("multipleMySqlDatabases"))
-            {
-                ViewBag.MultipleDatabases = true;
-            }
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }

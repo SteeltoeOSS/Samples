@@ -6,9 +6,9 @@ applications:
    - dotnet_core_buildpack
   memory: 256M
   env:
-    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
    - myMySqlService
-  # - myOtherMySqlService
+   # - myOtherMySqlService

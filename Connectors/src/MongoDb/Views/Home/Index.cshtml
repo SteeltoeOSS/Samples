@@ -1,12 +1,32 @@
-﻿@model List<Person>
+﻿@using MongoDb.Data
+@model MongoDbViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-@foreach (var p in Model)
-{
-    <h4>@p.FirstName @p.LastName thinks @p.FavoriteThing is the best</h4>
-}
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Steeltoe: Display information from MongoDB. -->
+<div class="alert alert-secondary">
+    <h4>Objects stored in MongoDB collection</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (SampleObject sampleObject in Model.SampleObjects)
+        {
+            <tr>
+                <td>@sampleObject.Id</td>
+                <td>@sampleObject.Text</td>
+            </tr>
+        }
+        </tbody>
+    </table>
 </div>
