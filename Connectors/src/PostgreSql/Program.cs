@@ -7,8 +7,12 @@ using Steeltoe.Management.Endpoint;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Steeltoe: Setup
+
+// Add Service Bindings when running on CloudFoundry
 builder.AddCloudFoundryConfiguration();
-builder.ConfigureAppConfiguration(builder => builder.AddKubernetesServiceBindings())
+
+// Add Service Bindings when running on K8S
+builder.WebHost.ConfigureAppConfiguration(builder => builder.AddKubernetesServiceBindings());
 builder.AddAllActuators();
 builder.Services.AddPostgresConnection(builder.Configuration);
 
