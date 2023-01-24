@@ -62,4 +62,21 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
 
 ---
 
+> Note: The provided manifest(s) will create an app named `postgres-connector` and attempt to bind the app to PostgreSQL service `myPostgreSqlService`.
+
+## Running on Tanzu Application Platform (TAP)
+1. Set up Postgres services for [consumption by developers] (https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-getting-started-set-up-services.html)
+
+## Create PostgreSQL Service Instance/Binding on TAP
+1. Created a [Postgres Service Instance](https://docs.vmware.com/en/VMware-SQL-with-Postgres-for-Kubernetes/2.0/vmware-postgres-k8s/GUID-create-delete-postgres.html)
+1. Create a [Postgres Service Binding/Claim](https://docs.vmware.com/en/VMware-SQL-with-Postgres-for-Kubernetes/2.0/vmware-postgres-k8s/GUID-creating-service-bindings.html)
+
+
+## Publish App & Push to TAP
+1. `cd samples/Connectors/src/PostgreSql`
+1. Bind the TAP Workload to the Service Binding/Claim by modifying the provided `workload.yml` `serviceClaims` section with the claim name created above.
+1. Push the app to TAP:
+  * `tanzu app workload apply <app_name> --local-path .\bin\Debug\net6.0 --source-image <registry-reference> -f workload.yml`
+
+
 ### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
