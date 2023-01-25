@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using CosmosDb.Data;
 using Microsoft.Azure.Cosmos;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connector;
 using Steeltoe.Connector.CosmosDb;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace CosmosDb;
 

@@ -1,5 +1,5 @@
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connector.OAuth;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

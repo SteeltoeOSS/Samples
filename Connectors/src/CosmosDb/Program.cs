@@ -1,6 +1,6 @@
 using CosmosDb;
 using CosmosDb.Data;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

@@ -1,8 +1,8 @@
 using SqlServerEFCore;
 using SqlServerEFCore.Data;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connector.EntityFrameworkCore.SqlServer;
 using Steeltoe.Connector.SqlServer;
-using Steeltoe.Connector.SqlServer.EFCore;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

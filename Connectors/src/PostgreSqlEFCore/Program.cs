@@ -1,8 +1,8 @@
 using PostgreSqlEFCore;
 using PostgreSqlEFCore.Data;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connector.EntityFrameworkCore.PostgreSql;
 using Steeltoe.Connector.PostgreSql;
-using Steeltoe.Connector.PostgreSql.EFCore;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -10,7 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Steeltoe: Setup
 builder.AddCloudFoundryConfiguration();
 builder.AddAllActuators();
-builder.Services.AddPostgresHealthContributor(builder.Configuration);
+builder.Services.AddPostgreSqlHealthContributor(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration));
 
 // Add services to the container.
