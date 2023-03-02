@@ -67,7 +67,7 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
 Pre-requisites:
 
 1. Kubernetes with [Tanzu Application Platform](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
-1. Postgres services are set up for [consumption by developers](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-getting-started-set-up-services.html)
+1. Postgres services are set up for [consumption by developers](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/getting-started-set-up-services.html)
 
 ## Create PostgreSQL Service Instance/Binding on TAP
 
@@ -90,6 +90,6 @@ Yaml files for creating the needed resources are included with this project, and
    - `dotnet publish -r linux-x64 --no-self-contained`
 1. Push the app to TAP:
    - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image <registry-reference> -f ./config/workload.yaml -y`
-   - See the Tanzu [Apps CLI documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.3/tap/GUID-cli-plugins-apps-command-reference-tanzu-apps-workload-apply.html) for details.
+   - See the Tanzu [Apps CLI documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/cli-plugins-apps-command-reference-workload_create_update_apply.html) for details.
 
 ### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information
