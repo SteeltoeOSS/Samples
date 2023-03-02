@@ -2,13 +2,13 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: postgresql-connector
+  name: postgresqlefcore-connector
   labels:
     apps.tanzu.vmware.com/workload-type: web
-    app.kubernetes.io/part-of: postgresql-connector
+    app.kubernetes.io/part-of: postgresqlefcore-connector
     tanzu.app.live.view: "true"
     tanzu.app.live.view.application.flavours: steeltoe
-    tanzu.app.live.view.application.name: postgresql-connector
+    tanzu.app.live.view.application.name: postgresqlefcore-connector
 spec:
   params:
   - name: annotations
