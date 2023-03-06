@@ -1,13 +1,19 @@
 using PostgreSql;
 using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connector.PostgreSql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
+// Steeltoe: Add cloud service bindings.
 builder.AddCloudFoundryConfiguration();
+builder.Configuration.AddKubernetesServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
+
+// Steeltoe: Setup PostgreSQL options, connection factory and health checks.
 builder.Services.AddPostgreSqlConnection(builder.Configuration);
 
 // Add services to the container.

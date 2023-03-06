@@ -1,15 +1,21 @@
 using PostgreSqlEFCore;
 using PostgreSqlEFCore.Data;
 using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connector.EntityFrameworkCore.PostgreSql;
 using Steeltoe.Connector.PostgreSql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
+// Steeltoe: Add cloud service bindings.
 builder.AddCloudFoundryConfiguration();
+builder.Configuration.AddKubernetesServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
+
+// Steeltoe: Setup PostgreSQL options, connection factory, DbContext connection string and health checks.
 builder.Services.AddPostgreSqlHealthContributor(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration));
 

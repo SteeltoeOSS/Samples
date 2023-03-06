@@ -22,6 +22,7 @@ public class HomeController : Controller
         // Steeltoe: Fetch data from PostgreSQL table.
         return View(new PostgreSqlViewModel
         {
+            ConnectionString = _appDbContext.Database.GetConnectionString(),
             SampleEntities = await _appDbContext.SampleEntities.ToListAsync(cancellationToken)
         });
     }

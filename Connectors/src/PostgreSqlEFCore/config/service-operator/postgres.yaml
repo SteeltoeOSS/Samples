@@ -1,0 +1,18 @@
+# https://docs.vmware.com/en/VMware-Tanzu-SQL-with-Postgres-for-Kubernetes/1.9/tanzu-postgres-k8s/GUID-postgres-crd-reference.html
+apiVersion: sql.tanzu.vmware.com/v1
+kind: Postgres
+metadata:
+  name: my-postgresql-service
+  namespace: postgres-service-instances
+spec:
+  memory: 800Mi
+  cpu: "0.8"
+  postgresVersion:
+    name: postgres-14 # View available versions with `kubectl get postgresversion`
+  storageClassName: standard
+  monitorStorageClassName: standard
+  storageSize: 2G
+  pgConfig:
+    dbname: steeltoe-postgres-sample
+    username: pgadmin
+    appUser: pgappuser
