@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Steeltoe: Add cloud service bindings.
 builder.AddCloudFoundryConfiguration();
-builder.WebHost.ConfigureAppConfiguration(configurationBuilder => configurationBuilder.AddKubernetesServiceBindings());
+builder.Configuration.AddKubernetesServiceBindings();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
