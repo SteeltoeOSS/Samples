@@ -10,8 +10,8 @@ Steeltoe Connectors simplify the coding process of binding to and accessing Clou
 * src/MySql - Connect to a MySQL database on CloudFoundry.
 * src/MySqlEFCore - Connect to a MySQL database through an Entity Framework Core `DbContext` on CloudFoundry.
 * src/OAuth - Connect to an OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon](https://docs.pivotal.io/p-identity/)) on CloudFoundry.
-* src/PostgreSql - Connect to a PostgreSQL database on CloudFoundry.
-* src/PostgreSqlEFCore - Connect to a PostgreSQL database through an Entity Framework Core `DbContext` on CloudFoundry.
+* src/PostgreSql - Connect to a PostgreSQL database on CloudFoundry or Kubernetes.
+* src/PostgreSqlEFCore - Connect to a PostgreSQL database through an Entity Framework Core `DbContext` on CloudFoundry or Kubernetes.
 * src/RabbitMQ - Connect to a RabbitMQ server on CloudFoundry.
 * src/Redis - Connect a [Microsoft Redis Cache Extension](https://github.com/aspnet/Caching/tree/dev/src/Microsoft.Extensions.Caching.Redis) and/or a [ConnectionMultiplexor](https://github.com/StackExchange/StackExchange.Redis) to a Redis cache on CloudFoundry.
 * src/SqlServerEFCore - Connect to a Microsoft SQL Server database through an Entity Framework Core `DbContext` on CloudFoundry.

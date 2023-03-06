@@ -20,7 +20,10 @@ public class HomeController : Controller
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         // Steeltoe: Fetch data from PostgreSQL table.
-        var model = new PostgreSqlViewModel();
+        var model = new PostgreSqlViewModel
+        {
+            ConnectionString = _npgsqlConnection.ConnectionString
+        };
 
         await _npgsqlConnection.OpenAsync(cancellationToken);
         var command = new NpgsqlCommand("SELECT * FROM TestData;", _npgsqlConnection);
@@ -33,12 +36,6 @@ public class HomeController : Controller
 
             model.Rows.Add(idValue, textValue);
         }
-
-        model.DatabaseName = _npgsqlConnection.Database;
-
-#if DEBUG
-        model.ServerName = _npgsqlConnection.DataSource;
-#endif
 
         return View(model);
     }

@@ -1,0 +1,38 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: postgresql-connector
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: postgresql-connector
+    tanzu.app.live.view: "true"
+    tanzu.app.live.view.application.flavours: steeltoe
+    tanzu.app.live.view.application.name: postgresql-connector
+spec:
+  params:
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
+  env:
+  - name: DOTNET_CLI_TELEMETRY_OPTOUT
+    value: true
+  - name: DOTNET_NOLOGO
+    value: true
+  build:
+    env:
+    - name: DOTNET_CLI_TELEMETRY_OPTOUT
+      value: true
+    - name: DOTNET_NOLOGO
+      value: true
+  serviceClaims:
+  - name: db
+    ref:
+      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+      kind: ResourceClaim
+      name: steeltoe-postgres-claim
+  source:
+    git:
+      url: https://github.com/SteeltoeOSS/Samples.git
+      ref:
+        branch: main
