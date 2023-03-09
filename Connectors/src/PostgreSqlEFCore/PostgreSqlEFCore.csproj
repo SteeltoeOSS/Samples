@@ -8,10 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(EFCoreVersion)" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Configuration.Kubernetes.ServiceBinding" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using PostgreSqlEFCore.Data;
@@ -12,19 +11,10 @@ internal sealed class PostgreSqlSeeder
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
         await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        await using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        try
-        {
-            await using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-            await DropCreateTablesAsync(appDbContext);
-            await InsertSampleDataAsync(appDbContext);
-        }
-        catch (DbException exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<PostgreSqlSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        await DropCreateTablesAsync(appDbContext);
+        await InsertSampleDataAsync(appDbContext);
     }
 
     private static async Task DropCreateTablesAsync(DbContext dbContext)
