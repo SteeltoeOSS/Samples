@@ -1,36 +1,61 @@
+using MySql.EntityFrameworkCore.Infrastructure;
 using MySqlEFCore;
 using MySqlEFCore.Data;
-using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Connector.EntityFrameworkCore.MySql;
 using Steeltoe.Connector.MySql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
+// Steeltoe: Add cloud service bindings.
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
-// Steeltoe: MySQL EF Core Setup.
-bool useMultipleDatabases = builder.Configuration.GetValue<bool>("useMultipleDatabases");
+// Steeltoe: Setup MySQL options, connection factory and health checks.
+builder.AddMySql();
+
+// Steeltoe: Review appsettings.development.json to see how local connection strings are provided.
+bool useMultipleDatabases = builder.Configuration.GetValue("useMultipleDatabases", false);
 
 if (useMultipleDatabases)
 {
-    // When using multiple databases, specify the service binding name.
-    // Review appsettings.development.json to see how local connection info is provided.
+    // Steeltoe: When using multiple databases, specify the service binding name.
+    const string serviceOneName = "myMySqlServiceOne";
+    const string serviceTwoName = "myMySqlServiceTwo";
 
-    const string serviceName = "myMySqlService";
-    builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(builder.Configuration, serviceName));
-    builder.Services.AddMySqlHealthContributor(builder.Configuration, serviceName);
+    // Steeltoe: optionally change the MySQL connection strings at runtime.
+    builder.Services.Configure<MySqlOptions>(serviceOneName, options => options.ConnectionString += ";Use Compression=false");
+    builder.Services.Configure<MySqlOptions>(serviceTwoName, options => options.ConnectionString += ";Use Compression=true");
 
-    const string otherServiceName = "myOtherMySqlService";
-    builder.Services.AddDbContext<OtherDbContext>(options => options.UseMySql(builder.Configuration, otherServiceName));
-    builder.Services.AddMySqlHealthContributor(builder.Configuration, otherServiceName);
+    // Steeltoe: Setup DbContext connection strings, optionally changing MySQL options at runtime.
+    builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceOneName,
+        mySqlOptionsAction: untypedOptions =>
+        {
+            var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+            mySqlOptions.CommandTimeout(20);
+        }));
+
+    builder.Services.AddDbContext<OtherDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceTwoName,
+        mySqlOptionsAction: untypedOptions =>
+        {
+            var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+            mySqlOptions.CommandTimeout(25);
+        }));
 }
 else
 {
-    builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(builder.Configuration));
-    builder.Services.AddMySqlHealthContributor(builder.Configuration);
+    // Steeltoe: optionally change the MySQL connection string at runtime.
+    builder.Services.Configure<MySqlOptions>(options => options.ConnectionString += ";Use Compression=false");
+
+    // Steeltoe: Setup DbContext connection string, optionally changing MySQL options at runtime.
+    builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, mySqlOptionsAction: untypedOptions =>
+    {
+        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        mySqlOptions.CommandTimeout(15);
+    }));
 }
 
 // Add services to the container.

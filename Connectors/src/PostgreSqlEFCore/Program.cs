@@ -23,7 +23,7 @@ builder.AddPostgreSql();
 builder.Services.Configure<PostgreSqlOptions>(options => options.ConnectionString += ";Include Error Detail=true");
 
 // Steeltoe: Setup DbContext connection string, optionally changing PostgreSQL options at runtime.
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration, npgsqlOptionsAction: untypedOptions =>
+builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseNpgsql(serviceProvider, npgsqlOptionsAction: untypedOptions =>
 {
     var postgreSqlOptions = (NpgsqlDbContextOptionsBuilder)untypedOptions;
     postgreSqlOptions.CommandTimeout(15);

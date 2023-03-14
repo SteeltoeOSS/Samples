@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using MySqlEFCore.Data;
@@ -12,37 +11,19 @@ internal sealed class MySqlSeeder
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
         await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        await using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        try
-        {
-            await using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-            await DropCreateTablesAsync(appDbContext);
-            await InsertSampleDataAsync(appDbContext);
-        }
-        catch (DbException exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<MySqlSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        await DropCreateTablesAsync(appDbContext);
+        await InsertSampleDataAsync(appDbContext);
     }
 
     public static async Task CreateOtherSampleDataAsync(IServiceProvider serviceProvider)
     {
         await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        await using var otherDbContext = scope.ServiceProvider.GetRequiredService<OtherDbContext>();
 
-        try
-        {
-            await using var otherDbContext = scope.ServiceProvider.GetRequiredService<OtherDbContext>();
-
-            await DropCreateTablesAsync(otherDbContext);
-            await InsertOtherSampleDataAsync(otherDbContext);
-        }
-        catch (DbException exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<MySqlSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        await DropCreateTablesAsync(otherDbContext);
+        await InsertOtherSampleDataAsync(otherDbContext);
     }
 
     private static async Task DropCreateTablesAsync(DbContext dbContext)

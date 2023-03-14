@@ -1,5 +1,6 @@
-﻿using System.Data.Common;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using Steeltoe.Connector;
+using Steeltoe.Connector.MySql;
 
 namespace MySql;
 
@@ -7,21 +8,13 @@ internal sealed class MySqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<MySqlOptions, MySqlConnection>>();
+        await using MySqlConnection connection = connectionFactory.GetDefaultConnection();
 
-        try
-        {
-            await using var connection = scope.ServiceProvider.GetRequiredService<MySqlConnection>();
-            await connection.OpenAsync();
+        await connection.OpenAsync();
 
-            await DropCreateTableAsync(connection);
-            await InsertSampleDataAsync(connection);
-        }
-        catch (DbException exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<MySqlSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        await DropCreateTableAsync(connection);
+        await InsertSampleDataAsync(connection);
     }
 
     private static async Task DropCreateTableAsync(MySqlConnection connection)

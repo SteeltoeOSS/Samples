@@ -3,27 +3,33 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using MySql.Models;
+using Steeltoe.Connector;
+using Steeltoe.Connector.MySql;
 
 namespace MySql.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly MySqlConnection _mySqlConnection;
+    private readonly ConnectionFactory<MySqlOptions, MySqlConnection> _connectionFactory;
 
-    public HomeController(ILogger<HomeController> logger, MySqlConnection mySqlConnection)
+    public HomeController(ILogger<HomeController> logger, ConnectionFactory<MySqlOptions, MySqlConnection> connectionFactory)
     {
         _logger = logger;
-        _mySqlConnection = mySqlConnection;
+        _connectionFactory = connectionFactory;
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         // Steeltoe: Fetch data from MySQL table.
-        var model = new MySqlViewModel();
+        var model = new MySqlViewModel
+        {
+            ConnectionString = _connectionFactory.GetDefaultConnectionString()
+        };
 
-        await _mySqlConnection.OpenAsync(cancellationToken);
-        var command = new MySqlCommand("SELECT * FROM TestData;", _mySqlConnection);
+        await using MySqlConnection connection = _connectionFactory.GetDefaultConnection();
+        await connection.OpenAsync(cancellationToken);
+        var command = new MySqlCommand("SELECT * FROM TestData;", connection);
         await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
 
         while (await reader.ReadAsync(cancellationToken))
@@ -33,12 +39,6 @@ public class HomeController : Controller
 
             model.Rows.Add(idValue, textValue);
         }
-
-        model.DatabaseName = _mySqlConnection.Database;
-
-#if DEBUG
-        model.ServerName = _mySqlConnection.DataSource;
-#endif
 
         return View(model);
     }

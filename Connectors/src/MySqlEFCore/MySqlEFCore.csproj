@@ -11,11 +11,17 @@
     <!-- Either one of these MySQL EF Core NuGet packages should work in this sample.
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
     -->
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
+    <!--
+    <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
+    -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry.ServiceBinding\Steeltoe.Configuration.CloudFoundry.ServiceBinding.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Connectors\src\EntityFrameworkCore\Steeltoe.Connector.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Management\src\Endpoint\Steeltoe.Management.Endpoint.csproj" />
   </ItemGroup>
 
 </Project>

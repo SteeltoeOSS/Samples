@@ -11,6 +11,28 @@
 
 <!-- Steeltoe: Display information from EF Core DbContext. -->
 <div class="alert alert-secondary">
+    <h4>MySQL server info</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Connection String</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.ConnectionString</td>
+        </tr>
+
+        @if (Model.OtherConnectionString != null)
+        {
+            <tr>
+                <td>@Model.OtherConnectionString</td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+
     <h4>Rows stored in MySQL AppDbContext</h4>
     <table class="table table-bordered table-primary">
         <thead>

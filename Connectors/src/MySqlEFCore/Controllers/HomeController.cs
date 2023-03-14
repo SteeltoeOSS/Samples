@@ -24,6 +24,7 @@ public class HomeController : Controller
 
         var model = new MySqlViewModel
         {
+            ConnectionString = appDbContext.Database.GetConnectionString(),
             SampleEntities = await appDbContext.SampleEntities.ToListAsync(cancellationToken)
         };
 
@@ -31,6 +32,7 @@ public class HomeController : Controller
 
         if (otherDbContext != null)
         {
+            model.OtherConnectionString = otherDbContext.Database.GetConnectionString();
             model.OtherEntities = await otherDbContext.OtherEntities.ToListAsync(cancellationToken);
         }
 
