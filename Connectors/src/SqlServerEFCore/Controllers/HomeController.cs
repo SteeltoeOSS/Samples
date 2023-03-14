@@ -22,6 +22,7 @@ public class HomeController : Controller
         // Steeltoe: Fetch data from SQL Server table.
         return View(new SqlServerViewModel
         {
+            ConnectionString = _appDbContext.Database.GetConnectionString(),
             SampleEntities = await _appDbContext.SampleEntities.ToListAsync(cancellationToken)
         });
     }
