@@ -15,31 +15,31 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MongoDB Connector](htt
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
-## Create MongoDB Service Instance on CloudFoundry
+### Create MongoDB Service Instance on CloudFoundry
 
 You must first create an instance of the MongoDB service in an org/space.
 
 1. `cf target -o your-org -s your-space`
 1. `cf create-service csb-azure-mongodb small myMongoDbService`
 
-## Publish App & Push to CloudFoundry
+### Publish App & Push to CloudFoundry
 
 1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/MongoDb`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
-       * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64 --self-contained`
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       - `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest.yml`
+       - `cf push -f manifest.yml`
 
 > Note: The provided manifest will create an app named `mongodb-connector` and attempt to bind the app to MongoDB service `myMongoDbService`.
 
-## What to expect - CloudFoundry
+### What to expect - CloudFoundry
 
 To see the logs as you startup and use the app: `cf logs mysql-connector`
 

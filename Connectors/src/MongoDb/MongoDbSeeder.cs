@@ -1,5 +1,7 @@
 ﻿using MongoDb.Data;
 using MongoDB.Driver;
+using Steeltoe.Connector;
+using Steeltoe.Connector.MongoDb;
 
 namespace MongoDb;
 
@@ -7,18 +9,11 @@ internal sealed class MongoDbSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        try
-        {
-            var client = serviceProvider.GetRequiredService<IMongoClient>();
+        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<MongoDbOptions, MongoClient>>();
+        IMongoClient client = connectionFactory.GetDefaultConnection();
 
-            IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client);
-            await InsertSampleDataAsync(collection);
-        }
-        catch (Exception exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<MongoDbSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client);
+        await InsertSampleDataAsync(collection);
     }
 
     private static async Task<IMongoCollection<SampleObject>> DropCreateCollectionAsync(IMongoClient client)

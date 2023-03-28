@@ -11,6 +11,20 @@
 
 <!-- Steeltoe: Display information from MongoDB. -->
 <div class="alert alert-secondary">
+    <h4>MongoDB server info</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Connection String</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.ConnectionString</td>
+        </tr>
+        </tbody>
+    </table>
+
     <h4>Objects stored in MongoDB collection</h4>
     <table class="table table-bordered table-primary">
         <thead>

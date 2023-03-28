@@ -1,14 +1,30 @@
 using MongoDb;
-using Steeltoe.Configuration.CloudFoundry;
+using MongoDB.Driver;
+using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Connector.MongoDb;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
+// Steeltoe: Add cloud service bindings.
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
-builder.Services.AddMongoClient(builder.Configuration, addSteeltoeHealthChecks: true);
+
+// Steeltoe: Setup MongoDB options, connection factory and health checks.
+builder.AddMongoDb();
+
+// Steeltoe: optionally change the MongoDB connection URL at runtime.
+builder.Services.Configure<MongoDbOptions>(options =>
+{
+    var urlBuilder = new MongoUrlBuilder(options.ConnectionString)
+    {
+        ApplicationName = "mongodb-connector"
+    };
+
+    options.ConnectionString = urlBuilder.ToString();
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
