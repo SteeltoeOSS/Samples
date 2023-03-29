@@ -11,12 +11,12 @@ namespace MongoDb.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ConnectionFactory<MongoDbOptions, MongoClient> _connectionFactory;
+    private readonly ConnectionProvider<MongoDbOptions, MongoClient> _connectionProvider;
 
     public HomeController(ILogger<HomeController> logger, ConnectionFactory<MongoDbOptions, MongoClient> connectionFactory)
     {
         _logger = logger;
-        _connectionFactory = connectionFactory;
+        _connectionProvider = connectionFactory.GetDefault();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -24,11 +24,12 @@ public class HomeController : Controller
         // Steeltoe: Fetch objects from MongoDB collection.
         var model = new MongoDbViewModel
         {
-            ConnectionString = _connectionFactory.GetDefaultConnectionString()
+            ConnectionString = _connectionProvider.Options.ConnectionString,
+            Database = _connectionProvider.Options.Database
         };
 
-        IMongoClient client = _connectionFactory.GetDefaultConnection();
-        IMongoDatabase database = client.GetDatabase("TestDatabase");
+        IMongoClient client = _connectionProvider.CreateConnection();
+        IMongoDatabase database = client.GetDatabase(_connectionProvider.Options.Database);
         IMongoCollection<SampleObject> collection = database.GetCollection<SampleObject>("SampleObjects");
         model.SampleObjects = await collection.Find(obj => true).ToListAsync(cancellationToken);
 

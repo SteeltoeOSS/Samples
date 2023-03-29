@@ -9,7 +9,7 @@ internal sealed class MySqlSeeder
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
         var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<MySqlOptions, MySqlConnection>>();
-        await using MySqlConnection connection = connectionFactory.GetDefaultConnection();
+        await using MySqlConnection connection = connectionFactory.GetDefault().CreateConnection();
 
         await connection.OpenAsync();
 
