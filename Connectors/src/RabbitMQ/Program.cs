@@ -1,13 +1,31 @@
-using Steeltoe.Configuration.CloudFoundry;
+using RabbitMQ.Client;
+using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
+// Steeltoe: Add cloud service bindings.
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
-builder.Services.AddRabbitMQConnection(builder.Configuration);
+
+// Steeltoe: Setup RabbitMQ options, connection factory and health checks, optionally providing a callback to customize client settings.
+builder.AddRabbitMQ((options, _) =>
+{
+    var factory = new ConnectionFactory
+    {
+        ClientProvidedName = "rabbitmq-connector"
+    };
+
+    if (options.ConnectionString != null)
+    {
+        factory.Uri = new Uri(options.ConnectionString);
+    }
+
+    return factory.CreateConnection();
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
