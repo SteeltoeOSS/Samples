@@ -11,9 +11,9 @@ namespace MongoDb.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ConnectionProvider<MongoDbOptions, MongoClient> _connectionProvider;
+    private readonly ConnectionProvider<MongoDbOptions, IMongoClient> _connectionProvider;
 
-    public HomeController(ILogger<HomeController> logger, ConnectionFactory<MongoDbOptions, MongoClient> connectionFactory)
+    public HomeController(ILogger<HomeController> logger, ConnectionFactory<MongoDbOptions, IMongoClient> connectionFactory)
     {
         _logger = logger;
         _connectionProvider = connectionFactory.GetDefault();
