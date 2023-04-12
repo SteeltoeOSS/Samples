@@ -1,6 +1,7 @@
----
+﻿---
 applications:
 - name: redis-connector
+  random-route: true
   buildpacks:
    - dotnet_core_buildpack
   memory: 256M

@@ -1,11 +1,12 @@
 ﻿---
 applications:
 - name: mysql-connector
+  random-route: true
   memory: 256M
   stack: windows
   buildpacks:
-   - hwc_buildpack
-  command: .\MySql
+   - binary_buildpack
+  command: cmd /c .\MySql --urls=http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

@@ -1,0 +1,46 @@
+﻿@using PostgreSqlEFCore.Entities
+@model PostgreSqlViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Steeltoe: Display information from EF Core DbContext. -->
+<div class="alert alert-secondary">
+    <h4>PostgreSQL server info</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Connection String</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.ConnectionString</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>Rows stored in PostgreSQL AppDbContext</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (SampleEntity entity in Model.SampleEntities)
+        {
+            <tr>
+                <td>@entity.Id</td>
+                <td>@entity.Text</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

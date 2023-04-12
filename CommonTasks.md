@@ -6,7 +6,7 @@ This page contains information on basic tasks that are used throughout the Steel
 
 ### Run SCCS with Docker
 
-The Steeltoe team has built a docker image of a [basic Config server](https://github.com/SteeltoeOSS/Dockerfiles/tree/master/config-server) for an easy experience getting started
+The Steeltoe team has built a docker image of a [basic Config server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/config-server) for an easy experience getting started
 
 To start a config server backed by a folder on your local disk, start the docker image like this:
 
@@ -48,7 +48,7 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud C
 
 ### Run Eureka with Docker
 
-The Steeltoe team has built a docker image of a [basic Eureka server](https://github.com/SteeltoeOSS/Dockerfiles/tree/master/eureka-server) for an easy experience getting started:
+The Steeltoe team has built a docker image of a [basic Eureka server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/eureka-server) for an easy experience getting started:
 
 ```bash
 docker run --rm -ti -p 8761:8761 --name steeltoe-eureka steeltoeoss/eureka-server
@@ -113,7 +113,7 @@ docker run --rm -ti -p 3306:3306 --name steeltoe-mysql -e MYSQL_ROOT_PASSWORD=st
 ### Run SQL Server with Docker
 
 ```script
-docker run --rm -ti -p 1433:1433 --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' mcr.microsoft.com/mssql/server
+docker run --rm -ti -p 1433:1433 --name steeltoe-sqlserver -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' mcr.microsoft.com/mssql/server
 ```
 
 ## PostgreSQL
@@ -121,7 +121,15 @@ docker run --rm -ti -p 1433:1433 --name steeltoe-sqlserver-e 'ACCEPT_EULA=Y' -e 
 ### Run PostgreSQL Server with Docker
 
 ```script
-docker run --rm -ti-p 5432:5432 --name steeltoe-postgres  -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+docker run --rm -ti -p 5432:5432 --name steeltoe-postgres -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+```
+
+## MongoDB
+
+### Run MongoDB Server with Docker
+
+```script
+docker run --rm -ti -p 27017:27017 --name mongoserver mongo
 ```
 
 ## Zipkin

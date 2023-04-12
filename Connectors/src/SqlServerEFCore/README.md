@@ -1,37 +1,48 @@
-﻿# SQL Server Connector Sample App - EntityFramework Core
+﻿# SQL Server Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use the EntityFramework Core together with [Steeltoe SQL Server Connector](https://github.com/SteeltoeOSS/Connectors) for connecting to a SqlServer service on CloudFoundry.
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with [Steeltoe SQL Server Connector](https://docs.steeltoe.io/api/v3/connectors/microsoft-sql-server.html) for connecting to a Microsoft SQL Server service on CloudFoundry.
 
-## Pre-requisites - CloudFoundry
+## General prerequisites
 
-1. Installed Pivotal CloudFoundry
-1. (Optional) installed Windows support
-1. A SQL Server Instance
-1. (Optional) Installed [Microsoft SQL Server broker](https://github.com/cf-platform-eng/mssql-server-broker)
-1. Install .NET Core SDK
+1. Installed .NET Core SDK
 
-## Create Sql Service Instance on CloudFoundry
+## Running locally
 
-You must first create an instance of the SQL Server service in a org/space using either a user provided service ('cf cups...' replacing values between pipes as appropriate) OR bind a service using the SQL Server Connector
+1. Optional: Updated your connection string in appsettings.development.json under SqlServer:Credentials:ConnectionString if not using LocalDB
 
-```bash
-> cf target -o myorg -s development
-> cf cups mySqlServerService -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'
-# or
-> cf create-service SqlServer sharedVM mySqlServerService
-```
+## Running on CloudFoundry
+
+1. Installed CloudFoundry (optionally with Windows support)
+1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
+
+## Create SQL Server Service Instance on CloudFoundry
+
+You must first create an instance of the SQL Server service in an org/space.
+
+1. `cf target -o your-org -s your-space`
+1. `cf create-service csb-azure-mssql small-v2 mySqlServerService`
+
+Alternatively, when using a user-provided service instead (replace values between pipes as appropriate):
+
+1. `cf target -o your-org -s your-space`
+1. `cf cups mySqlServerService -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'`
 
 ## Publish App & Push to CloudFoundry
 
-1. `cf target -o myorg -s development`
+1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/SqlServerEFCore`
-1. `dotnet restore --configfile nuget.config`
-1. Publish app to a local directory, specifying the framework and runtime (select ONE of these commands):
-   * `dotnet publish -f netcoreapp3.1 -r linux-x64`
-1. Push the app using the appropriate manifest (select ONE of these commands):
-   * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
+1. Push the app
+   - When using Windows containers:
+     - Publish app to a local directory, specifying the runtime:
+       * `dotnet restore --configfile nuget.config`
+       * `dotnet publish -r win-x64 --self-contained`
+     - Push the app using the appropriate manifest:
+       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+   - Otherwise:
+     - Push the app using the appropriate manifest:
+       * `cf push -f manifest.yml`
 
-> Note: The provided manifest will create an app named `sqlserverefcore-connector` and attempt to bind the app to SQL Server service `mySqlServerService`.
+> Note: The provided manifest(s) will create an app named `sqlserverefcore-connector` and attempt to bind the app to SQL Server service `mySqlServerService`.
 
 ## What to expect - CloudFoundry
 
@@ -50,8 +61,8 @@ On a Windows cell, you should see something like this during startup:
 
 This sample will be available at <http://sqlserverefcore-connector.[your-cf-apps-domain]/>.
 
-Upon startup, the app inserts two rows into the bound SQL Server database. Those rows are displayed on the home page of the application.
+Upon startup, the app inserts a couple of rows into the bound SQL Server database. They are displayed on the home page.
 
 ---
 
-### See the Official [Steeltoe Service Connectors Documentation](https://steeltoe.io/docs/steeltoe-service-connectors) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

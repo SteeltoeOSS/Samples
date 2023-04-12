@@ -1,8 +1,6 @@
 ﻿# CloudFoundry Single Signon Security Sample App
 
-[![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BSecurity_CloudFoundrySingleSignon%5D?branchName=2.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=24&branchName=master)
-
-ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFoundry External Security Provider](https://github.com/SteeltoeOSS/Security) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/)).
+ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFoundry External Security Provider](https://docs.steeltoe.io/api/v3/security/) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/)).
 
 > NOTE: For simplicity, we've moved the [instructions for utilizing the SSO Tile](README-SSO.md) with this sample
 

@@ -1,38 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using CosmosDb.Data;
+using CosmosDb.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CosmosDb
+namespace CosmosDb.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly ICosmosDbService _cosmosDbService;
+
+    public HomeController(ILogger<HomeController> logger, ICosmosDbService cosmosDbService)
     {
-        private readonly ICosmosDbService _cosmosDbService;
+        _logger = logger;
+        _cosmosDbService = cosmosDbService;
+    }
 
-        public HomeController(ICosmosDbService cosmosDbService)
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Fetch objects from CosmosDB container.
+        var model = new CosmosDbViewModel();
+
+        await foreach (SampleObject sampleObject in _cosmosDbService.GetAllAsync(cancellationToken))
         {
-            _cosmosDbService = cosmosDbService;
+            model.SampleObjects.Add(sampleObject);
         }
 
-        // GET: /<controller>/
-        public async Task<IActionResult> Index()
+        return View(model);
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            var testData = await _cosmosDbService.GetTestDataAsync("SELECT * FROM c");
-
-            return View(testData);
-        }
-
-        public async Task<IActionResult> AddData()
-        {
-            await _cosmosDbService.AddTestDataAsync(new TestData { Id = Guid.NewGuid().ToString(), SomeThing = Guid.NewGuid().ToString(), SomeOtherThing = Guid.NewGuid().ToString() });
-
-            return LocalRedirect("/");
-        }
-
-        public async Task<IActionResult> Delete(string id)
-        {
-            await _cosmosDbService.DeleteTestDataAsync(id);
-
-            return LocalRedirect("/");
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }

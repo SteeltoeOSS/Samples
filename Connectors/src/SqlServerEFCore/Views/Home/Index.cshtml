@@ -1,11 +1,32 @@
-﻿@model IEnumerable<TestData>
+﻿@using SqlServerEFCore.Entities
+@model SqlServerViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
-<h2>Test data from Sql Server:</h2>
-<ul>
-    @foreach(var td in Model)
-    {
-        <li>@td.Id: @td.Data</li>
-    }
-</ul>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Steeltoe: Display information from EF Core DbContext. -->
+<div class="alert alert-secondary">
+    <h4>Rows stored in SQL Server AppDbContext</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (SampleEntity entity in Model.SampleEntities)
+        {
+            <tr>
+                <td>@entity.Id</td>
+                <td>@entity.Text</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
