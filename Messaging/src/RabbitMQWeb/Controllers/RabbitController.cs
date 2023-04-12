@@ -31,6 +31,7 @@ You can use these endpoints to interact with RabbitMQ
     /Rabbit/SendReceiveRabbitMessage
     /Rabbit/SendReceiveLongEaredRabbitMessage
     /Rabbit/DeleteQueues
+    /Rabbit/QuorumQueue
 ";
         }
 
@@ -85,6 +86,18 @@ You can use these endpoints to interact with RabbitMQ
             _rabbitAdmin.DeleteQueue(Queues.SendReceiveRabbitQueue);
             _logger.LogInformation("DeleteQueue: Deleted queue {Queue}", Queues.SendReceiveRabbitQueue);
             return ("Delete queue complete\n ... All done!");
+        }
+        [HttpGet("QuorumQueue")]
+        public ActionResult<string> QuorumQueue()
+        {
+            var msg = new RabbitMessage("hopping to and fro, quorum ");
+            _rabbitTemplate.ConvertAndSend(Queues.QuorumQueue, msg);
+            _logger.LogInformation("SendReceiveRabbitMessage: sent \"{Message}\" -> {Queue}", msg,
+                Queues.QuorumQueue);
+            msg = _rabbitTemplate.ReceiveAndConvert<RabbitMessage>(Queues.QuorumQueue, 10_000);
+            _logger.LogInformation("SendReceiveRabbitMessage: received \"{Message}\" <- {Queue}", msg,
+                Queues.QuorumQueue);
+            return msg.ToString();
         }
     }
 }

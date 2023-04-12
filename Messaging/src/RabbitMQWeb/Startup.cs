@@ -25,6 +25,9 @@ namespace RabbitMQWeb
             services.AddRabbitQueue(new Queue(Queues.InferredRabbitQueue));
             services.AddRabbitQueue(new Queue(Queues.InferredLongEaredRabbitQueue));
             services.AddRabbitQueue(new Queue(Queues.SendReceiveRabbitQueue));
+            IQueue quorum = QueueBuilder.Durable(Queues.QuorumQueue).Quorum().DeliveryLimit(10).Build();
+            services.AddRabbitQueue(quorum);
+
 
             // Add singleton that will process incoming messages
             services.AddSingleton<RabbitListener>();
