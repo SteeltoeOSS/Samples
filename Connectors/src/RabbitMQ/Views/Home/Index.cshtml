@@ -9,7 +9,7 @@
 </div>
 
 <!-- Steeltoe: Display information from RabbitMQ. -->
-@if (Model.ConnectionString != null)
+@if (!string.IsNullOrEmpty(Model.ConnectionString))
 {
     <div class="alert alert-secondary">
         <h4>RabbitMQ server info</h4>

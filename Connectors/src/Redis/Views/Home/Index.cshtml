@@ -10,7 +10,23 @@
 
 <!-- Steeltoe: Display information from Redis cache. -->
 <div class="alert alert-secondary">
-    <h4>Data stored in Redis cache</h4>
+    <h4>Redis server info</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Connection String</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.ConnectionString</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="alert alert-secondary">
+    <h4>Data stored in Redis cache (using IDistributedCache API)</h4>
     <table class="table table-bordered table-primary">
         <thead>
         <tr>
@@ -19,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ((string key, string? value) in Model.CacheData)
+        @foreach ((string key, string? value) in Model.DistributedCacheData)
         {
             <tr>
                 <td>@key</td>
@@ -29,7 +45,7 @@
         </tbody>
     </table>
 
-    <h4>Data stored via Connection Multiplexer</h4>
+    <h4>Data stored in Redis cache (using IConnectionMultiplexer API)</h4>
     <table class="table table-bordered table-primary">
         <thead>
         <tr>
@@ -38,7 +54,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ((string key, string? value) in Model.MultiplexerData)
+        @foreach ((string key, string? value) in Model.ConnectionMultiplexerData)
         {
             <tr>
                 <td>@key</td>

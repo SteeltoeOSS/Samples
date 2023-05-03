@@ -75,6 +75,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.EntityFr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.EntityFrameworkCore.Test", "..\..\..\Steeltoe\src\Connectors\test\EntityFrameworkCore.Test\Steeltoe.Connector.EntityFrameworkCore.Test.csproj", "{B12AF860-2196-47E7-832D-2CA944677C48}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Configuration.Kubernetes.ServiceBinding.Test", "..\..\..\Steeltoe\src\Configuration\test\Kubernetes.ServiceBinding.Test\Steeltoe.Configuration.Kubernetes.ServiceBinding.Test.csproj", "{51D76907-4187-49E4-B95C-F46DE0AA8200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -481,6 +483,18 @@ Global
 		{B12AF860-2196-47E7-832D-2CA944677C48}.Release|x64.Build.0 = Release|Any CPU
 		{B12AF860-2196-47E7-832D-2CA944677C48}.Release|x86.ActiveCfg = Release|Any CPU
 		{B12AF860-2196-47E7-832D-2CA944677C48}.Release|x86.Build.0 = Release|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Debug|x64.Build.0 = Debug|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Debug|x86.Build.0 = Debug|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Release|x64.ActiveCfg = Release|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Release|x64.Build.0 = Release|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Release|x86.ActiveCfg = Release|Any CPU
+		{51D76907-4187-49E4-B95C-F46DE0AA8200}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -509,6 +523,7 @@ Global
 		{F19DDCA1-76B0-4018-BFE1-11DFA8544A05} = {EDAF0D0C-BF43-4080-B7E3-519CFC5B9C2C}
 		{0D120D97-204B-4526-AFB8-A27ABA8F3509} = {EDAF0D0C-BF43-4080-B7E3-519CFC5B9C2C}
 		{B12AF860-2196-47E7-832D-2CA944677C48} = {EDAF0D0C-BF43-4080-B7E3-519CFC5B9C2C}
+		{51D76907-4187-49E4-B95C-F46DE0AA8200} = {EDAF0D0C-BF43-4080-B7E3-519CFC5B9C2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {20A5E3F4-9F66-4130-BB2B-F1BBE8BB4FCB}
