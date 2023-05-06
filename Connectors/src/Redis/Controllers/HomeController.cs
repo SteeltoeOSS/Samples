@@ -27,7 +27,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         // Steeltoe: Retrieve data from Redis cache. Do not dispose the IConnectionMultiplexer singleton.
-        IConnectionMultiplexer connectionMultiplexer = _connectionMultiplexerProvider.CreateConnection();
+        IConnectionMultiplexer connectionMultiplexer = _connectionMultiplexerProvider.GetConnection();
         IDatabase database = connectionMultiplexer.GetDatabase();
         List<string> keyNames = await GetKeyNamesAsync(connectionMultiplexer, cancellationToken);
 
@@ -68,7 +68,7 @@ public class HomeController : Controller
 
     private async Task<string?> GetValueFromDistributedCacheAsync(string instanceName, string keyName, CancellationToken cancellationToken)
     {
-        IDistributedCache distributedCache = _distributedCacheProvider.CreateConnection();
+        IDistributedCache distributedCache = _distributedCacheProvider.GetConnection();
 
         string appKeyName = keyName.StartsWith(instanceName, StringComparison.Ordinal) ? keyName[instanceName.Length..] : keyName;
         byte[]? value = await distributedCache.GetAsync(appKeyName, cancellationToken);

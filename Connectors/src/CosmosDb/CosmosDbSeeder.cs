@@ -16,7 +16,7 @@ internal sealed class CosmosDbSeeder
         ConnectionProvider<CosmosDbOptions, CosmosClient> connectionProvider = connectionFactory.GetDefault();
 
         // Do not dispose the CosmosClient singleton.
-        CosmosClient client = connectionProvider.CreateConnection();
+        CosmosClient client = connectionProvider.GetConnection();
         Container container = await DropCreateDatabaseAsync(client, connectionProvider.Options.Database);
 
         await InsertSampleDataAsync(container);

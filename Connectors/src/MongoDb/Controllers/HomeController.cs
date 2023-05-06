@@ -28,7 +28,7 @@ public class HomeController : Controller
             Database = _connectionProvider.Options.Database
         };
 
-        IMongoClient client = _connectionProvider.CreateConnection();
+        IMongoClient client = _connectionProvider.GetConnection();
         IMongoDatabase database = client.GetDatabase(_connectionProvider.Options.Database);
         IMongoCollection<SampleObject> collection = database.GetCollection<SampleObject>("SampleObjects");
         model.SampleObjects = await collection.Find(obj => true).ToListAsync(cancellationToken);

@@ -19,7 +19,7 @@ internal sealed class RedisSeeder
     {
         var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<RedisOptions, IDistributedCache>>();
         ConnectionProvider<RedisOptions, IDistributedCache> connectionProvider = connectionFactory.GetDefault();
-        IDistributedCache distributedCache = connectionProvider.CreateConnection();
+        IDistributedCache distributedCache = connectionProvider.GetConnection();
 
         var entryOptions = new DistributedCacheEntryOptions
         {
@@ -36,7 +36,7 @@ internal sealed class RedisSeeder
         ConnectionProvider<RedisOptions, IConnectionMultiplexer> connectionProvider = connectionFactory.GetDefault();
 
         // Do not dispose the IConnectionMultiplexer singleton.
-        IConnectionMultiplexer connectionMultiplexer = connectionProvider.CreateConnection();
+        IConnectionMultiplexer connectionMultiplexer = connectionProvider.GetConnection();
         IDatabase database = connectionMultiplexer.GetDatabase();
         string appName = connectionMultiplexer.ClientName;
 

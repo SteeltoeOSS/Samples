@@ -11,7 +11,7 @@ internal sealed class MongoDbSeeder
     {
         var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<MongoDbOptions, IMongoClient>>();
         ConnectionProvider<MongoDbOptions, IMongoClient> connectionProvider = connectionFactory.GetDefault();
-        IMongoClient client = connectionProvider.CreateConnection();
+        IMongoClient client = connectionProvider.GetConnection();
 
         IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client, connectionProvider.Options.Database);
         await InsertSampleDataAsync(collection);

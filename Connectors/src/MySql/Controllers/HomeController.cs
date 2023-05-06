@@ -27,7 +27,7 @@ public class HomeController : Controller
             ConnectionString = _connectionProvider.Options.ConnectionString
         };
 
-        await using MySqlConnection connection = _connectionProvider.CreateConnection();
+        await using MySqlConnection connection = _connectionProvider.GetConnection();
         await connection.OpenAsync(cancellationToken);
         var command = new MySqlCommand("SELECT * FROM TestData;", connection);
         await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);

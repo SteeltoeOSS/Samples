@@ -43,7 +43,7 @@ public class HomeController : Controller
         }
 
         // Do not dispose the IConnection singleton.
-        IConnection connection = _connectionProvider.CreateConnection();
+        IConnection connection = _connectionProvider.GetConnection();
         using IModel channel = connection.CreateModel();
 
         CreateQueue(channel);
@@ -62,7 +62,7 @@ public class HomeController : Controller
     {
         // Steeltoe: Receive RabbitMQ message from the queue. Do not dispose the IConnection singleton.
 
-        IConnection connection = _connectionProvider.CreateConnection();
+        IConnection connection = _connectionProvider.GetConnection();
         using IModel channel = connection.CreateModel();
 
         CreateQueue(channel);

@@ -25,7 +25,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         // Steeltoe: Fetch objects from CosmosDB container. Do not dispose the CosmosClient singleton.
-        CosmosClient client = _connectionProvider.CreateConnection();
+        CosmosClient client = _connectionProvider.GetConnection();
         Container container = client.GetContainer(_connectionProvider.Options.Database, CosmosDbSeeder.ContainerId);
 
         var model = new CosmosDbViewModel
