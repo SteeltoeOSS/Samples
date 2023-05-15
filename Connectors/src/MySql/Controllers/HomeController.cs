@@ -11,12 +11,12 @@ namespace MySql.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ConnectionProvider<MySqlOptions, MySqlConnection> _connectionProvider;
+    private readonly Connector<MySqlOptions, MySqlConnection> _connector;
 
-    public HomeController(ILogger<HomeController> logger, ConnectionFactory<MySqlOptions, MySqlConnection> connectionProvider)
+    public HomeController(ILogger<HomeController> logger, ConnectorFactory<MySqlOptions, MySqlConnection> connector)
     {
         _logger = logger;
-        _connectionProvider = connectionProvider.GetDefault();
+        _connector = connector.GetDefault();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -24,10 +24,10 @@ public class HomeController : Controller
         // Steeltoe: Fetch data from MySQL table.
         var model = new MySqlViewModel
         {
-            ConnectionString = _connectionProvider.Options.ConnectionString
+            ConnectionString = _connector.Options.ConnectionString
         };
 
-        await using MySqlConnection connection = _connectionProvider.GetConnection();
+        await using MySqlConnection connection = _connector.GetConnection();
         await connection.OpenAsync(cancellationToken);
         var command = new MySqlCommand("SELECT * FROM TestData;", connection);
         await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);

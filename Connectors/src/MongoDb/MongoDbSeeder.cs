@@ -9,11 +9,11 @@ internal sealed class MongoDbSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<MongoDbOptions, IMongoClient>>();
-        ConnectionProvider<MongoDbOptions, IMongoClient> connectionProvider = connectionFactory.GetDefault();
-        IMongoClient client = connectionProvider.GetConnection();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<MongoDbOptions, IMongoClient>>();
+        Connector<MongoDbOptions, IMongoClient> connector = connectorFactory.GetDefault();
+        IMongoClient client = connector.GetConnection();
 
-        IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client, connectionProvider.Options.Database);
+        IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client, connector.Options.Database);
         await InsertSampleDataAsync(collection);
     }
 

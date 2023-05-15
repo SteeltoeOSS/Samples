@@ -13,19 +13,19 @@ public class HomeController : Controller
     private const string RabbitQueueName = "rabbit-test";
 
     private readonly ILogger<HomeController> _logger;
-    private readonly ConnectionProvider<RabbitMQOptions, IConnection> _connectionProvider;
+    private readonly Connector<RabbitMQOptions, IConnection> _connector;
 
-    public HomeController(ILogger<HomeController> logger, ConnectionFactory<RabbitMQOptions, IConnection> connectionFactory)
+    public HomeController(ILogger<HomeController> logger, ConnectorFactory<RabbitMQOptions, IConnection> connectorFactory)
     {
         _logger = logger;
-        _connectionProvider = connectionFactory.GetDefault();
+        _connector = connectorFactory.GetDefault();
     }
 
     public IActionResult Index()
     {
         return View(new RabbitViewModel
         {
-            ConnectionString = _connectionProvider.Options.ConnectionString
+            ConnectionString = _connector.Options.ConnectionString
         });
     }
 
@@ -37,13 +37,13 @@ public class HomeController : Controller
         {
             return View("Index", new RabbitViewModel
             {
-                ConnectionString = _connectionProvider.Options.ConnectionString,
+                ConnectionString = _connector.Options.ConnectionString,
                 SendStatus = RabbitSendStatus.Failed
             });
         }
 
         // Do not dispose the IConnection singleton.
-        IConnection connection = _connectionProvider.GetConnection();
+        IConnection connection = _connector.GetConnection();
         using IModel channel = connection.CreateModel();
 
         CreateQueue(channel);
@@ -53,7 +53,7 @@ public class HomeController : Controller
 
         return View("Index", new RabbitViewModel
         {
-            ConnectionString = _connectionProvider.Options.ConnectionString,
+            ConnectionString = _connector.Options.ConnectionString,
             SendStatus = RabbitSendStatus.Succeeded
         });
     }
@@ -62,7 +62,7 @@ public class HomeController : Controller
     {
         // Steeltoe: Receive RabbitMQ message from the queue. Do not dispose the IConnection singleton.
 
-        IConnection connection = _connectionProvider.GetConnection();
+        IConnection connection = _connector.GetConnection();
         using IModel channel = connection.CreateModel();
 
         CreateQueue(channel);
@@ -73,7 +73,7 @@ public class HomeController : Controller
         {
             return View("Index", new RabbitViewModel
             {
-                ConnectionString = _connectionProvider.Options.ConnectionString,
+                ConnectionString = _connector.Options.ConnectionString,
                 MessageReceived = string.Empty
             });
         }
@@ -82,7 +82,7 @@ public class HomeController : Controller
 
         return View("Index", new RabbitViewModel
         {
-            ConnectionString = _connectionProvider.Options.ConnectionString,
+            ConnectionString = _connector.Options.ConnectionString,
             MessageReceived = messageReceived
         });
     }

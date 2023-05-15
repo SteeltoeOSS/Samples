@@ -13,27 +13,27 @@ namespace Redis.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ConnectionProvider<RedisOptions, IDistributedCache> _distributedCacheProvider;
-    private readonly ConnectionProvider<RedisOptions, IConnectionMultiplexer> _connectionMultiplexerProvider;
+    private readonly Connector<RedisOptions, IDistributedCache> _distributedCacheConnector;
+    private readonly Connector<RedisOptions, IConnectionMultiplexer> _connectionMultiplexerConnector;
 
-    public HomeController(ILogger<HomeController> logger, ConnectionFactory<RedisOptions, IDistributedCache> distributedCacheConnectionFactory,
-        ConnectionFactory<RedisOptions, IConnectionMultiplexer> connectionMultiplexerConnectionFactory)
+    public HomeController(ILogger<HomeController> logger, ConnectorFactory<RedisOptions, IDistributedCache> distributedCacheConnectorFactory,
+        ConnectorFactory<RedisOptions, IConnectionMultiplexer> connectionMultiplexerConnectorFactory)
     {
         _logger = logger;
-        _distributedCacheProvider = distributedCacheConnectionFactory.GetDefault();
-        _connectionMultiplexerProvider = connectionMultiplexerConnectionFactory.GetDefault();
+        _distributedCacheConnector = distributedCacheConnectorFactory.GetDefault();
+        _connectionMultiplexerConnector = connectionMultiplexerConnectorFactory.GetDefault();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         // Steeltoe: Retrieve data from Redis cache. Do not dispose the IConnectionMultiplexer singleton.
-        IConnectionMultiplexer connectionMultiplexer = _connectionMultiplexerProvider.GetConnection();
+        IConnectionMultiplexer connectionMultiplexer = _connectionMultiplexerConnector.GetConnection();
         IDatabase database = connectionMultiplexer.GetDatabase();
         List<string> keyNames = await GetKeyNamesAsync(connectionMultiplexer, cancellationToken);
 
         var model = new RedisViewModel
         {
-            ConnectionString = _connectionMultiplexerProvider.Options.ConnectionString,
+            ConnectionString = _connectionMultiplexerConnector.Options.ConnectionString,
             DistributedCacheData = new Dictionary<string, string?>(),
             ConnectionMultiplexerData = new Dictionary<string, string?>(),
             LuaResult = EvaluateLuaScript(database)
@@ -68,7 +68,7 @@ public class HomeController : Controller
 
     private async Task<string?> GetValueFromDistributedCacheAsync(string instanceName, string keyName, CancellationToken cancellationToken)
     {
-        IDistributedCache distributedCache = _distributedCacheProvider.GetConnection();
+        IDistributedCache distributedCache = _distributedCacheConnector.GetConnection();
 
         string appKeyName = keyName.StartsWith(instanceName, StringComparison.Ordinal) ? keyName[instanceName.Length..] : keyName;
         byte[]? value = await distributedCache.GetAsync(appKeyName, cancellationToken);

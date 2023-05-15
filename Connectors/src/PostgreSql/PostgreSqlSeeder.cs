@@ -8,8 +8,8 @@ internal sealed class PostgreSqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<PostgreSqlOptions, NpgsqlConnection>>();
-        await using NpgsqlConnection connection = connectionFactory.GetDefault().GetConnection();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<PostgreSqlOptions, NpgsqlConnection>>();
+        await using NpgsqlConnection connection = connectorFactory.GetDefault().GetConnection();
 
         await connection.OpenAsync();
 

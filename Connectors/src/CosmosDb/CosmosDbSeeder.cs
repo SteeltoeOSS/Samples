@@ -12,12 +12,12 @@ internal sealed class CosmosDbSeeder
 
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<CosmosDbOptions, CosmosClient>>();
-        ConnectionProvider<CosmosDbOptions, CosmosClient> connectionProvider = connectionFactory.GetDefault();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<CosmosDbOptions, CosmosClient>>();
+        Connector<CosmosDbOptions, CosmosClient> connector = connectorFactory.GetDefault();
 
         // Do not dispose the CosmosClient singleton.
-        CosmosClient client = connectionProvider.GetConnection();
-        Container container = await DropCreateDatabaseAsync(client, connectionProvider.Options.Database);
+        CosmosClient client = connector.GetConnection();
+        Container container = await DropCreateDatabaseAsync(client, connector.Options.Database);
 
         await InsertSampleDataAsync(container);
     }

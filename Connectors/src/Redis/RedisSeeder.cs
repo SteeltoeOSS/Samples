@@ -17,9 +17,9 @@ internal sealed class RedisSeeder
 
     private static async Task CreateSampleDataUsingDistributedCacheAsync(IServiceProvider serviceProvider)
     {
-        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<RedisOptions, IDistributedCache>>();
-        ConnectionProvider<RedisOptions, IDistributedCache> connectionProvider = connectionFactory.GetDefault();
-        IDistributedCache distributedCache = connectionProvider.GetConnection();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<RedisOptions, IDistributedCache>>();
+        Connector<RedisOptions, IDistributedCache> connector = connectorFactory.GetDefault();
+        IDistributedCache distributedCache = connector.GetConnection();
 
         var entryOptions = new DistributedCacheEntryOptions
         {
@@ -32,11 +32,11 @@ internal sealed class RedisSeeder
 
     private static async Task CreateSampleDataUsingConnectionMultiplexerAsync(IServiceProvider serviceProvider)
     {
-        var connectionFactory = serviceProvider.GetRequiredService<ConnectionFactory<RedisOptions, IConnectionMultiplexer>>();
-        ConnectionProvider<RedisOptions, IConnectionMultiplexer> connectionProvider = connectionFactory.GetDefault();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<RedisOptions, IConnectionMultiplexer>>();
+        Connector<RedisOptions, IConnectionMultiplexer> connector = connectorFactory.GetDefault();
 
         // Do not dispose the IConnectionMultiplexer singleton.
-        IConnectionMultiplexer connectionMultiplexer = connectionProvider.GetConnection();
+        IConnectionMultiplexer connectionMultiplexer = connector.GetConnection();
         IDatabase database = connectionMultiplexer.GetDatabase();
         string appName = connectionMultiplexer.ClientName;
 

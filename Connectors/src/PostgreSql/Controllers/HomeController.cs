@@ -11,12 +11,12 @@ namespace PostgreSql.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ConnectionProvider<PostgreSqlOptions, NpgsqlConnection> _connectionProvider;
+    private readonly Connector<PostgreSqlOptions, NpgsqlConnection> _connector;
 
-    public HomeController(ILogger<HomeController> logger, ConnectionFactory<PostgreSqlOptions, NpgsqlConnection> connectionFactory)
+    public HomeController(ILogger<HomeController> logger, ConnectorFactory<PostgreSqlOptions, NpgsqlConnection> connectorFactory)
     {
         _logger = logger;
-        _connectionProvider = connectionFactory.GetDefault();
+        _connector = connectorFactory.GetDefault();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -24,10 +24,10 @@ public class HomeController : Controller
         // Steeltoe: Fetch data from PostgreSQL table.
         var model = new PostgreSqlViewModel
         {
-            ConnectionString = _connectionProvider.Options.ConnectionString
+            ConnectionString = _connector.Options.ConnectionString
         };
 
-        await using NpgsqlConnection connection = _connectionProvider.GetConnection();
+        await using NpgsqlConnection connection = _connector.GetConnection();
         await connection.OpenAsync(cancellationToken);
         var command = new NpgsqlCommand("SELECT * FROM TestData;", connection);
         await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
