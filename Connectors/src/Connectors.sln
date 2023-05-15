@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDb", "MongoDb\MongoDb.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steeltoe", "Steeltoe", "{EDAF0D0C-BF43-4080-B7E3-519CFC5B9C2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector", "..\..\..\Steeltoe\src\Connectors\src\Connector\Steeltoe.Connector.csproj", "{EDA025B3-F9C1-4367-82F8-D6BBDA0AD316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connectors", "..\..\..\Steeltoe\src\Connectors\src\Connectors\Steeltoe.Connectors.csproj", "{EDA025B3-F9C1-4367-82F8-D6BBDA0AD316}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Common", "..\..\..\Steeltoe\src\Common\src\Common\Steeltoe.Common.csproj", "{F94B86B1-B4D1-469E-9A92-EBF0F592D778}"
 EndProject
@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Common.Abstraction
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Configuration.Abstractions", "..\..\..\Steeltoe\src\Configuration\src\Abstractions\Steeltoe.Configuration.Abstractions.csproj", "{0E86D48E-8255-4CB8-870B-9D59F13FB4F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.Abstractions", "..\..\..\Steeltoe\src\Connectors\src\Abstractions\Steeltoe.Connector.Abstractions.csproj", "{378A3FAC-528E-4095-870A-E69178B322D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connectors.Abstractions", "..\..\..\Steeltoe\src\Connectors\src\Abstractions\Steeltoe.Connectors.Abstractions.csproj", "{378A3FAC-528E-4095-870A-E69178B322D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Configuration.CloudFoundry.ServiceBinding", "..\..\..\Steeltoe\src\Configuration\src\CloudFoundry.ServiceBinding\Steeltoe.Configuration.CloudFoundry.ServiceBinding.csproj", "{F44CB2A2-BCEE-4E5C-B802-26B4F843D8F7}"
 EndProject
@@ -59,7 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Management.Abstrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Management.MetricCollectors", "..\..\..\Steeltoe\src\Management\src\MetricCollectors\Steeltoe.Management.MetricCollectors.csproj", "{92D3FAE5-72C5-4560-A091-1E113CE8DB8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.Test", "..\..\..\Steeltoe\src\Connectors\test\Connector.Test\Steeltoe.Connector.Test.csproj", "{AA0B7EA2-FB02-44F0-AD6D-BB89E770545B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connectors.Test", "..\..\..\Steeltoe\src\Connectors\test\Connectors.Test\Steeltoe.Connectors.Test.csproj", "{AA0B7EA2-FB02-44F0-AD6D-BB89E770545B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Common.TestResources", "..\..\..\Steeltoe\src\Common\test\Common.TestResources\Steeltoe.Common.TestResources.csproj", "{7F460865-1098-472D-BBEB-6758E962BA88}"
 EndProject
@@ -67,13 +67,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Common.Utils", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Configuration.CloudFoundry", "..\..\..\Steeltoe\src\Configuration\src\CloudFoundry\Steeltoe.Configuration.CloudFoundry.csproj", "{F1E79E51-CBCB-4DCD-9F5E-7DDCB9CE07C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.CloudFoundry", "..\..\..\Steeltoe\src\Connectors\src\CloudFoundry\Steeltoe.Connector.CloudFoundry.csproj", "{ABBCE29B-CA7D-4E11-94E6-00DF3235FE59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connectors.CloudFoundry", "..\..\..\Steeltoe\src\Connectors\src\CloudFoundry\Steeltoe.Connectors.CloudFoundry.csproj", "{ABBCE29B-CA7D-4E11-94E6-00DF3235FE59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Configuration.CloudFoundry.ServiceBinding.Test", "..\..\..\Steeltoe\src\Configuration\test\CloudFoundry.ServiceBinding.Test\Steeltoe.Configuration.CloudFoundry.ServiceBinding.Test.csproj", "{F19DDCA1-76B0-4018-BFE1-11DFA8544A05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.EntityFrameworkCore", "..\..\..\Steeltoe\src\Connectors\src\EntityFrameworkCore\Steeltoe.Connector.EntityFrameworkCore.csproj", "{0D120D97-204B-4526-AFB8-A27ABA8F3509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connectors.EntityFrameworkCore", "..\..\..\Steeltoe\src\Connectors\src\EntityFrameworkCore\Steeltoe.Connectors.EntityFrameworkCore.csproj", "{0D120D97-204B-4526-AFB8-A27ABA8F3509}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connector.EntityFrameworkCore.Test", "..\..\..\Steeltoe\src\Connectors\test\EntityFrameworkCore.Test\Steeltoe.Connector.EntityFrameworkCore.Test.csproj", "{B12AF860-2196-47E7-832D-2CA944677C48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Connectors.EntityFrameworkCore.Test", "..\..\..\Steeltoe\src\Connectors\test\EntityFrameworkCore.Test\Steeltoe.Connectors.EntityFrameworkCore.Test.csproj", "{B12AF860-2196-47E7-832D-2CA944677C48}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Configuration.Kubernetes.ServiceBinding.Test", "..\..\..\Steeltoe\src\Configuration\test\Kubernetes.ServiceBinding.Test\Steeltoe.Configuration.Kubernetes.ServiceBinding.Test.csproj", "{51D76907-4187-49E4-B95C-F46DE0AA8200}"
 EndProject

@@ -1,6 +1,6 @@
 using RabbitMQ.Client;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Connector.RabbitMQ;
+using Steeltoe.Connectors.RabbitMQ;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

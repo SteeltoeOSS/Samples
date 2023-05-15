@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-using Steeltoe.Connector;
-using Steeltoe.Connector.MySql;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.MySql;
 
 namespace MySql;
 

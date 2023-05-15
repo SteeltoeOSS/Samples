@@ -3,8 +3,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using MySql.Models;
-using Steeltoe.Connector;
-using Steeltoe.Connector.MySql;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.MySql;
 
 namespace MySql.Controllers;
 

@@ -1,7 +1,7 @@
 using Redis;
 using StackExchange.Redis;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Connector.Redis;
+using Steeltoe.Connectors.Redis;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

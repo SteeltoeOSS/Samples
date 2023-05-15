@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using SqlServerEFCore;
 using SqlServerEFCore.Data;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Connector.EntityFrameworkCore.SqlServer;
-using Steeltoe.Connector.SqlServer;
+using Steeltoe.Connectors.EntityFrameworkCore.SqlServer;
+using Steeltoe.Connectors.SqlServer;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

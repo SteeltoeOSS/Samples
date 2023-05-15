@@ -1,6 +1,6 @@
 ﻿using Npgsql;
-using Steeltoe.Connector;
-using Steeltoe.Connector.PostgreSql;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.PostgreSql;
 
 namespace PostgreSql;
 

@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDb.Data;
 using MongoDB.Driver;
 using MongoDb.Models;
-using Steeltoe.Connector;
-using Steeltoe.Connector.MongoDb;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.MongoDb;
 
 namespace MongoDb.Controllers;
 

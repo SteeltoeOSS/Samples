@@ -6,8 +6,8 @@ using CosmosDb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
-using Steeltoe.Connector;
-using Steeltoe.Connector.CosmosDb;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.CosmosDb;
 
 namespace CosmosDb.Controllers;
 

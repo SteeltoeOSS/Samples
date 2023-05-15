@@ -1,4 +1,4 @@
-﻿using Steeltoe.Connector.OAuth;
+﻿using Steeltoe.Connectors.OAuth;
 
 namespace OAuth.Models;
 

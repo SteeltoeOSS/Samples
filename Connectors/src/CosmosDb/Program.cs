@@ -1,7 +1,7 @@
 using CosmosDb;
 using Microsoft.Azure.Cosmos.Fluent;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Connector.CosmosDb;
+using Steeltoe.Connectors.CosmosDb;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

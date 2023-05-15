@@ -1,7 +1,7 @@
 using MongoDb;
 using MongoDB.Driver;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Connector.MongoDb;
+using Steeltoe.Connectors.MongoDb;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

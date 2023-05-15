@@ -3,8 +3,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using PostgreSql.Models;
-using Steeltoe.Connector;
-using Steeltoe.Connector.PostgreSql;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.PostgreSql;
 
 namespace PostgreSql.Controllers;
 

@@ -1,7 +1,7 @@
 ﻿using MongoDb.Data;
 using MongoDB.Driver;
-using Steeltoe.Connector;
-using Steeltoe.Connector.MongoDb;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.MongoDb;
 
 namespace MongoDb;
 

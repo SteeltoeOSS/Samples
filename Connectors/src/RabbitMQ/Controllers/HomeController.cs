@@ -3,8 +3,8 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using RabbitMQ.Models;
-using Steeltoe.Connector;
-using Steeltoe.Connector.RabbitMQ;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.RabbitMQ;
 
 namespace RabbitMQ.Controllers;
 

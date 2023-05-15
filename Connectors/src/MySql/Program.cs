@@ -1,6 +1,6 @@
 ﻿using MySql;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Connector.MySql;
+using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

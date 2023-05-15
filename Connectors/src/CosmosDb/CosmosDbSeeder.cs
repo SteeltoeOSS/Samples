@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using CosmosDb.Data;
 using Microsoft.Azure.Cosmos;
-using Steeltoe.Connector;
-using Steeltoe.Connector.CosmosDb;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.CosmosDb;
 
 namespace CosmosDb;
 

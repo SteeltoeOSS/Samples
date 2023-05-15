@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Redis.Models;
 using StackExchange.Redis;
-using Steeltoe.Connector;
-using Steeltoe.Connector.Redis;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.Redis;
 
 namespace Redis.Controllers;
 
