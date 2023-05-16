@@ -8,19 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(EFCoreVersion)" />
-    <!--
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Configuration.Kubernetes.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
-    -->
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry.ServiceBinding\Steeltoe.Configuration.CloudFoundry.ServiceBinding.csproj" />
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\Kubernetes.ServiceBinding\Steeltoe.Configuration.Kubernetes.ServiceBinding.csproj" />
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Connectors\src\EntityFrameworkCore\Steeltoe.Connectors.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Management\src\Endpoint\Steeltoe.Management.Endpoint.csproj" />
   </ItemGroup>
 
 </Project>
