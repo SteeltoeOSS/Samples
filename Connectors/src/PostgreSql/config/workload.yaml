@@ -5,6 +5,7 @@ metadata:
   name: postgresql-connector
   labels:
     apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/has-tests: "true"
     app.kubernetes.io/part-of: postgresql-connector
     tanzu.app.live.view: "true"
     tanzu.app.live.view.application.flavours: steeltoe
@@ -29,8 +30,8 @@ spec:
   - name: db
     ref:
       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-      kind: ResourceClaim
-      name: steeltoe-postgres-claim
+      kind: ClassClaim
+      name: my-postgresql-service
   source:
     git:
       url: https://github.com/SteeltoeOSS/Samples.git
