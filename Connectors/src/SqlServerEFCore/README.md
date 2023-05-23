@@ -8,14 +8,14 @@ ASP.NET Core sample app illustrating how to use Entity Framework Core together w
 
 ## Running locally
 
-1. Optional: Updated your connection string in appsettings.development.json under SqlServer:Credentials:ConnectionString if not using LocalDB
+1. Optional: Updated your connection string in appsettings.development.json under Steeltoe:Client:SqlServer:Default:ConnectionString if not using LocalDB
 
 ## Running on CloudFoundry
 
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
-## Create SQL Server Service Instance on CloudFoundry
+### Create SQL Server Service Instance on CloudFoundry
 
 You must first create an instance of the SQL Server service in an org/space.
 
@@ -27,24 +27,24 @@ Alternatively, when using a user-provided service instead (replace values betwee
 1. `cf target -o your-org -s your-space`
 1. `cf cups mySqlServerService -p '{\"pw\": \"|password|\",\"uid\": \"|user id|\",\"uri\": \"jdbc:sqlserver://|host|:|port|;databaseName=|database name|\"}'`
 
-## Publish App & Push to CloudFoundry
+### Publish App & Push to CloudFoundry
 
 1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/SqlServerEFCore`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
-       * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64 --self-contained`
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       - `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest.yml`
+       - `cf push -f manifest.yml`
 
 > Note: The provided manifest(s) will create an app named `sqlserverefcore-connector` and attempt to bind the app to SQL Server service `mySqlServerService`.
 
-## What to expect - CloudFoundry
+### What to expect - CloudFoundry
 
 To see the logs as you startup and use the app: `cf logs sqlserverefcore-connector`
 

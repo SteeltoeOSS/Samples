@@ -13,3 +13,5 @@ applications:
     DOTNET_NOLOGO: "true"
   services:
    - myMySqlService
+   #- myMySqlServiceOne
+   #- myMySqlServiceTwo

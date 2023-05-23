@@ -1,21 +1,24 @@
 using Redis;
-using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Connector.Redis;
+using StackExchange.Redis;
+using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Connectors.Redis;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
+// Steeltoe: Add cloud service bindings.
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
-// Steeltoe: Add the Redis distributed cache.
-// We are using the Steeltoe Redis Connector to pickup the CloudFoundry Redis Service binding and use it to configure
-// the underlying Redis cache. This adds an IDistributedCache to the container.
-builder.Services.AddDistributedRedisCache(builder.Configuration);
-
-// Steeltoe: This works like the above, but adds an IConnectionMultiplexer to the container.
-builder.Services.AddRedisConnectionMultiplexer(builder.Configuration);
+// Steeltoe: Setup Redis options, connection factory and health checks, optionally providing a callback to customize client settings.
+builder.AddRedis((options, _) =>
+{
+    ConfigurationOptions redisOptions = ConfigurationOptions.Parse(options.ConnectionString);
+    redisOptions.ClientName = "redis-connector";
+    return ConnectionMultiplexer.Connect(redisOptions);
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

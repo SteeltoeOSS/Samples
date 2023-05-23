@@ -1,40 +1,68 @@
-﻿using System.Text;
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.Redis;
 
 namespace Redis;
 
 internal sealed class RedisSeeder
 {
+    private static readonly TimeSpan ExampleSlidingExpiration = TimeSpan.FromSeconds(30);
+
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        await CreateSampleDataUsingDistributedCacheAsync(serviceProvider);
+        await CreateSampleDataUsingConnectionMultiplexerAsync(serviceProvider);
+    }
 
-        try
-        {
-            var cache = scope.ServiceProvider.GetRequiredService<IDistributedCache>();
+    private static async Task CreateSampleDataUsingDistributedCacheAsync(IServiceProvider serviceProvider)
+    {
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<RedisOptions, IDistributedCache>>();
+        Connector<RedisOptions, IDistributedCache> connector = connectorFactory.GetDefault();
+        IDistributedCache distributedCache = connector.GetConnection();
 
-            await cache.SetAsync("Key1", Encoding.UTF8.GetBytes("CacheValue1"));
-            await cache.SetAsync("Key2", Encoding.UTF8.GetBytes("CacheValue2"));
-        }
-        catch (RedisException exception)
+        var entryOptions = new DistributedCacheEntryOptions
         {
-            var logger = serviceProvider.GetRequiredService<ILogger<RedisSeeder>>();
-            logger.LogError(exception, "Failed to create sample data via IDistributedCache.");
+            SlidingExpiration = ExampleSlidingExpiration
+        };
+
+        await distributedCache.SetStringAsync("KeySetUsingMicrosoftApi1", "ValueSetUsingMicrosoftApi1", entryOptions);
+        await distributedCache.SetStringAsync("KeySetUsingMicrosoftApi2", "ValueSetUsingMicrosoftApi2", entryOptions);
+    }
+
+    private static async Task CreateSampleDataUsingConnectionMultiplexerAsync(IServiceProvider serviceProvider)
+    {
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<RedisOptions, IConnectionMultiplexer>>();
+        Connector<RedisOptions, IConnectionMultiplexer> connector = connectorFactory.GetDefault();
+
+        // Do not dispose the IConnectionMultiplexer singleton.
+        IConnectionMultiplexer connectionMultiplexer = connector.GetConnection();
+        IDatabase database = connectionMultiplexer.GetDatabase();
+        string appName = connectionMultiplexer.ClientName;
+
+        await SetMicrosoftCompatibleStringValue(database, appName, "KeySetUsingRedisApi1", "ValueSetUsingRedisApi1", ExampleSlidingExpiration);
+        await SetMicrosoftCompatibleStringValue(database, appName, "KeySetUsingRedisApi2", "ValueSetUsingRedisApi2", ExampleSlidingExpiration);
+    }
+
+    private static async Task SetMicrosoftCompatibleStringValue(IDatabase database, string appName, string keyName, string value, TimeSpan? slidingExpiration)
+    {
+        // Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache is unable to read values of type STRING, so fallback to HASH structure for interop.
+        HashEntry[] hashFields = GetHashFields(value, slidingExpiration);
+
+        // Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache silently prefixes all keys with the client name, so replicate that for interop.
+        await database.HashSetAsync(appName + keyName, hashFields);
+    }
+
+    private static HashEntry[] GetHashFields(string value, TimeSpan? slidingExpiration)
+    {
+        var hashFields = new List<HashEntry>();
+
+        if (slidingExpiration != null)
+        {
+            hashFields.Add(new HashEntry("sldexp", slidingExpiration.Value.Ticks));
         }
 
-        try
-        {
-            var multiplexer = scope.ServiceProvider.GetRequiredService<IConnectionMultiplexer>();
-
-            IDatabase database = multiplexer.GetDatabase();
-            database.StringSet("ConnectionMultiplexerKey1", "ConnectionMultiplexerValue1");
-            database.StringSet("ConnectionMultiplexerKey2", "ConnectionMultiplexerValue2");
-        }
-        catch (Exception exception) when (exception.InnerException is RedisException)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<RedisSeeder>>();
-            logger.LogError(exception, "Failed to create sample data via IConnectionMultiplexer.");
-        }
+        hashFields.Add(new HashEntry("data", value));
+        return hashFields.ToArray();
     }
 }

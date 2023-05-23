@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OAuth.Models;
-using Steeltoe.Connector.OAuth;
+using Steeltoe.Connectors.OAuth;
 
 namespace OAuth.Controllers;
 

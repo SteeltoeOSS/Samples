@@ -1,50 +1,25 @@
 ﻿using System.Net;
 using CosmosDb.Data;
 using Microsoft.Azure.Cosmos;
-using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Connector;
-using Steeltoe.Connector.CosmosDb;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.CosmosDb;
 
 namespace CosmosDb;
 
 internal sealed class CosmosDbSeeder
 {
-    private const string ContainerId = "TestContainer";
+    public const string ContainerId = "TestContainer";
 
-    public static async Task<ICosmosDbService> CreateSampleDataAsync(IConfiguration configuration)
+    public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        // Read settings from "CosmosDb:Client" and VCAP:services or services.
-        var connectionStringManager = new ConnectionStringManager(configuration);
-        Connection connection = connectionStringManager.Get<CosmosDbConnectionInfo>();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<CosmosDbOptions, CosmosClient>>();
+        Connector<CosmosDbOptions, CosmosClient> connector = connectorFactory.GetDefault();
 
-        string databaseId = connection.Properties["DatabaseId"];
-        string connectionString = connection.ConnectionString;
-        string applicationName = GetApplicationName(configuration);
+        // Do not dispose the CosmosClient singleton.
+        CosmosClient client = connector.GetConnection();
+        Container container = await DropCreateDatabaseAsync(client, connector.Options.Database);
 
-        var cosmosClientOptions = new CosmosClientOptions
-        {
-            ApplicationName = applicationName
-        };
-
-        try
-        {
-            var cosmosClient = new CosmosClient(connectionString, cosmosClientOptions);
-
-            Container container = await DropCreateDatabaseAsync(cosmosClient, databaseId);
-            await InsertSampleDataAsync(container);
-
-            return new CosmosDbService(cosmosClient, databaseId, ContainerId);
-        }
-        catch (CosmosException exception)
-        {
-            throw new Exception("An error occurred seeding the DB.", exception);
-        }
-    }
-
-    private static string GetApplicationName(IConfiguration configuration)
-    {
-        var options = new CloudFoundryApplicationOptions(configuration);
-        return options.ApplicationName ?? options.DefaultAppName;
+        await InsertSampleDataAsync(container);
     }
 
     private static async Task<Container> DropCreateDatabaseAsync(CosmosClient cosmosClient, string databaseId)

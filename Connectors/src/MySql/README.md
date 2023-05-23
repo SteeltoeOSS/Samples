@@ -15,31 +15,31 @@ This sample illustrates using a `MySqlConnection` to issue commands to the bound
 
 1. Installed CloudFoundry (optionally with Windows support)
 
-## Create MySQL Service Instance on CloudFoundry
+### Create MySQL Service Instance on CloudFoundry
 
 You must first create an instance of the MySQL service in an org/space.
 
 1. `cf target -o your-org -s your-space`
 1. `cf create-service p.mysql db-small myMySqlService`
 
-## Publish App & Push to CloudFoundry
+### Publish App & Push to CloudFoundry
 
 1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/MySql`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
-       * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64 --self-contained`
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       - `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest.yml`
+       - `cf push -f manifest.yml`
 
 > Note: The provided manifest will create an app named `mysql-connector` and attempt to bind the app to MySQL service `myMySqlService`.
 
-## What to expect - CloudFoundry
+### What to expect - CloudFoundry
 
 To see the logs as you startup and use the app: `cf logs mysql-connector`
 

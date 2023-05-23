@@ -9,38 +9,38 @@ This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/
 
 ## Running locally
 
-1. Installed Redis Server
+1. Started Redis [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 
 ## Running on CloudFoundry
 
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed Redis Cache service
 
-## Create Redis Service Instance on CloudFoundry
+### Create Redis Service Instance on CloudFoundry
 
 You must first create an instance of the Redis service in an org/space.
 
 1. `cf target -o your-org -s your-space`
 1. `cf create-service p-redis shared-vm myRedisService`
 
-## Publish App & Push to CloudFoundry
+### Publish App & Push to CloudFoundry
 
 1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/Redis`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
-       * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64 --self-contained`
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       - `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest.yml`
+       - `cf push -f manifest.yml`
 
 > Note: The provided manifest will create an app named `redis-connector` and attempt to bind the app to Redis service `myRedisService`.
 
-## What to expect - CloudFoundry
+### What to expect - CloudFoundry
 
 To see the logs as you startup and use the app: `cf logs redis-connector`
 
@@ -58,7 +58,7 @@ On a Windows cell, you should see something like this during startup:
 
 This sample will be available at <http://redis-connector.[your-cf-apps-domain]/>.
 
-Upon startup, the app inserts a couple of key/value pairs into the bound Redis cache. They are displayed on the home page.
+Upon startup, the app inserts a couple of key/value pairs into the bound Redis cache using both APIs. They are displayed on the home page.
 
 ---
 

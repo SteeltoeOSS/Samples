@@ -3,8 +3,8 @@ using PostgreSqlEFCore;
 using PostgreSqlEFCore.Data;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Configuration.Kubernetes.ServiceBinding;
-using Steeltoe.Connector.EntityFrameworkCore.PostgreSql;
-using Steeltoe.Connector.PostgreSql;
+using Steeltoe.Connectors.EntityFrameworkCore.PostgreSql;
+using Steeltoe.Connectors.PostgreSql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -23,7 +23,7 @@ builder.AddPostgreSql();
 builder.Services.Configure<PostgreSqlOptions>(options => options.ConnectionString += ";Include Error Detail=true");
 
 // Steeltoe: Setup DbContext connection string, optionally changing PostgreSQL options at runtime.
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration, npgsqlOptionsAction: untypedOptions =>
+builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseNpgsql(serviceProvider, npgsqlOptionsAction: untypedOptions =>
 {
     var postgreSqlOptions = (NpgsqlDbContextOptionsBuilder)untypedOptions;
     postgreSqlOptions.CommandTimeout(15);

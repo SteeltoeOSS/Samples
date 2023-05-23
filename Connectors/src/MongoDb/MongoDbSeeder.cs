@@ -1,5 +1,7 @@
 ﻿using MongoDb.Data;
 using MongoDB.Driver;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.MongoDb;
 
 namespace MongoDb;
 
@@ -7,23 +9,17 @@ internal sealed class MongoDbSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        try
-        {
-            var client = serviceProvider.GetRequiredService<IMongoClient>();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<MongoDbOptions, IMongoClient>>();
+        Connector<MongoDbOptions, IMongoClient> connector = connectorFactory.GetDefault();
+        IMongoClient client = connector.GetConnection();
 
-            IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client);
-            await InsertSampleDataAsync(collection);
-        }
-        catch (Exception exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<MongoDbSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client, connector.Options.Database);
+        await InsertSampleDataAsync(collection);
     }
 
-    private static async Task<IMongoCollection<SampleObject>> DropCreateCollectionAsync(IMongoClient client)
+    private static async Task<IMongoCollection<SampleObject>> DropCreateCollectionAsync(IMongoClient client, string databaseName)
     {
-        IMongoDatabase database = client.GetDatabase("TestDatabase");
+        IMongoDatabase database = client.GetDatabase(databaseName);
 
         await database.DropCollectionAsync("SampleObjects");
         return database.GetCollection<SampleObject>("SampleObjects");

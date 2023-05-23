@@ -8,6 +8,26 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<!-- Steeltoe: Display information from RabbitMQ. -->
+@if (!string.IsNullOrEmpty(Model.ConnectionString))
+{
+    <div class="alert alert-secondary">
+        <h4>RabbitMQ server info</h4>
+        <table class="table table-bordered table-primary">
+            <thead>
+            <tr>
+                <th scope="col">Connection String</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>@Model.ConnectionString</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
 <!-- Steeltoe: Form to send RabbitMQ message. -->
 <div class="p-3 mt-4 border border-secondary">
     <form asp-action="Send">

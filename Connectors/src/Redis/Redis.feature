@@ -10,10 +10,14 @@ Feature: Redis Connector
     And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish
     And you wait until CloudFoundry app redis-connector is started
     When you get https://redis-connector/
-    Then you should see "CacheValue1"
-    And you should see "CacheValue2"
-    And you should see "ConnectionMultiplexerValue1"
-    And you should see "ConnectionMultiplexerValue2"
+    Then you should see "redis-connectorKeySetUsingMicrosoftApi1"
+    Then you should see "ValueSetUsingMicrosoftApi1"
+    Then you should see "redis-connectorKeySetUsingMicrosoftApi2"
+    Then you should see "ValueSetUsingMicrosoftApi2"
+    Then you should see "redis-connectorKeySetUsingRedisApi1"
+    Then you should see "ValueSetUsingRedisApi1"
+    Then you should see "redis-connectorKeySetUsingRedisApi2"
+    Then you should see "ValueSetUsingRedisApi2"
     And you should see "Hello from Lua"
 
   @net6.0
@@ -22,8 +26,12 @@ Feature: Redis Connector
     When you run in the background: cf push -f manifest.yml
     And you wait until CloudFoundry app redis-connector is started
     When you get https://redis-connector/
-    Then you should see "CacheValue1"
-    And you should see "CacheValue2"
-    And you should see "ConnectionMultiplexerValue1"
-    And you should see "ConnectionMultiplexerValue2"
+    Then you should see "redis-connectorKeySetUsingMicrosoftApi1"
+    Then you should see "ValueSetUsingMicrosoftApi1"
+    Then you should see "redis-connectorKeySetUsingMicrosoftApi2"
+    Then you should see "ValueSetUsingMicrosoftApi2"
+    Then you should see "redis-connectorKeySetUsingRedisApi1"
+    Then you should see "ValueSetUsingRedisApi1"
+    Then you should see "redis-connectorKeySetUsingRedisApi2"
+    Then you should see "ValueSetUsingRedisApi2"
     And you should see "Hello from Lua"

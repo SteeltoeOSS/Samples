@@ -1,14 +1,21 @@
 ﻿using MySql;
-using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Connector.MySql;
+using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
+// Steeltoe: Add cloud service bindings.
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
-builder.Services.AddMySqlConnection(builder.Configuration);
+
+// Steeltoe: Setup MySQL options, connection factory and health checks.
+builder.AddMySql();
+
+// Steeltoe: optionally change the MySQL connection string at runtime.
+builder.Services.Configure<MySqlOptions>(options => options.ConnectionString += ";Use Compression=false");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

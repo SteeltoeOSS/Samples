@@ -92,4 +92,4 @@ Yaml files for creating the needed resources are included with this project, and
    - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image <registry-reference> -f ./config/workload.yaml -y`
    - See the Tanzu [Apps CLI documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/cli-plugins-apps-command-reference-workload_create_update_apply.html) for details.
 
-### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

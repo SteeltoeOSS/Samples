@@ -1,17 +1,31 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using SqlServerEFCore;
 using SqlServerEFCore.Data;
-using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Connector.EntityFrameworkCore.SqlServer;
-using Steeltoe.Connector.SqlServer;
+using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Connectors.EntityFrameworkCore.SqlServer;
+using Steeltoe.Connectors.SqlServer;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
+// Steeltoe: Add cloud service bindings.
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
-builder.Services.AddSqlServerHealthContributor(builder.Configuration);
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration));
+
+// Steeltoe: Setup SQL Server options, connection factory and health checks.
+builder.AddSqlServer();
+
+// Steeltoe: optionally change the SQL Server connection string at runtime.
+builder.Services.Configure<SqlServerOptions>(options => options.ConnectionString += ";Max Pool Size=50");
+
+// Steeltoe: Setup DbContext connection string, optionally changing SQL Server options at runtime.
+builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseSqlServer(serviceProvider, sqlServerOptionsAction: untypedOptions =>
+{
+    var sqlServerOptions = (SqlServerDbContextOptionsBuilder)untypedOptions;
+    sqlServerOptions.EnableRetryOnFailure();
+}));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

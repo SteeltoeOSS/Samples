@@ -9,38 +9,38 @@ ASP.NET Core sample app illustrating how to use [Steeltoe CosmosDB Connector](ht
 ## Running locally
 
 1. Installed Azure CosmosDB Emulator
-1. Updated your primary key in appsettings.development.json under CosmosDb:Client:ConnectionString
+1. Updated your primary key in appsettings.development.json under Steeltoe:Client:CosmosDb:Default:ConnectionString
 
 ## Running on CloudFoundry
 
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
-## Create CosmosDB Service Instance on CloudFoundry
+### Create CosmosDB Service Instance on CloudFoundry
 
 You must first create an instance of the CosmosDB service in an org/space.
 
 1. `cf target -o your-org -s your-space`
 1. `cf create-service csb-azure-cosmosdb-sql mini myCosmosDbService`
 
-## Publish App & Push to CloudFoundry
+### Publish App & Push to CloudFoundry
 
 1. `cf target -o your-org -s your-space`
 1. `cd samples/Connectors/src/CosmosDb`
 1. Push the app
    - When using Windows containers:
      - Publish app to a local directory, specifying the runtime:
-       * `dotnet restore --configfile nuget.config`
-       * `dotnet publish -r win-x64 --self-contained`
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r win-x64 --self-contained`
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
+       - `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`
    - Otherwise:
      - Push the app using the appropriate manifest:
-       * `cf push -f manifest.yml`
+       - `cf push -f manifest.yml`
 
 > Note: The provided manifest will create an app named `cosmosdb-connector` and attempt to bind the app to CosmosDB service `myCosmosDbService`.
 
-## What to expect - CloudFoundry
+### What to expect - CloudFoundry
 
 To see the logs as you startup and use the app: `cf logs mysql-connector`
 
