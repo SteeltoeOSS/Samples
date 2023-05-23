@@ -70,12 +70,15 @@ Pre-requisites:
 
 1. Kubernetes with [Tanzu Application Platform v1.5 or higher](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
 
-### Create PostgreSQL Service Instance on TAP
+### Create PostgreSQL Class Claim on TAP
 
-You must first create an instance of the PostgreSQL service in a namespace.
+In order to connect to PostgreSQL on TAP for this sample, you must have a class claim available for the application to bind to. The commands listed below will create the claim, and the claim will be bound to the application via the definition in the workload.yaml that is included in the `config` folder of this project. 
 
 1. `kubectl config set-context --current --namespace=your-namespace`
 1. `tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged`
+
+If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html) and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the TAP documentation.
+
 
 ### Publish App & Push to TAP
 
