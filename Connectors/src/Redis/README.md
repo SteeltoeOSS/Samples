@@ -13,6 +13,8 @@ This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/
 
 ## Running on CloudFoundry
 
+Pre-requisites:
+
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed Redis Cache service
 
@@ -59,6 +61,36 @@ On a Windows cell, you should see something like this during startup:
 This sample will be available at <http://redis-connector.[your-cf-apps-domain]/>.
 
 Upon startup, the app inserts a couple of key/value pairs into the bound Redis cache using both APIs. They are displayed on the home page.
+
+## Running on Tanzu Application Platform (TAP)
+
+Pre-requisites:
+
+1. Kubernetes with [Tanzu Application Platform v1.5 or higher](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
+
+### Create Redis Class Claim on TAP
+
+In order to connect to Redis on TAP for this sample, you must have a class claim available for the application to bind to. The commands listed below will create the claim, and the claim will be bound to the application via the definition in the workload.yaml that is included in the `config` folder of this project. 
+
+1. `kubectl config set-context --current --namespace=your-namespace`
+1. `tanzu service class-claim create my-redis-service --class redis-unmanaged`
+
+If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html) and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the TAP documentation.
+
+### Publish App & Push to TAP
+
+1. `kubectl config set-context --current --namespace=your-namespace`
+1. `cd samples/Connectors/src/Redis`
+1. Push the app
+   - From local source code:
+     - Push the app using the appropriate workload.yaml:
+       - `tanzu app workload apply --local-path . --source-image your-registry-reference --file ./config/workload.yaml -y`
+   - Alternatively, from locally built binaries:
+     - Publish app to a local directory, specifying the runtime:
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r linux-x64 --no-self-contained`
+     - Push the app using the appropriate workload.yaml:
+       - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image your-registry-reference --file ./config/workload.yaml -y`
 
 ---
 
