@@ -23,7 +23,7 @@ Feature: Redis Connector
   @net6.0
   @linux
   Scenario: Redis Connector (net6.0/linux)
-    When you run in the background: cf push -f manifest.yml
+    When you run: cf push -f manifest.yml
     And you wait until CloudFoundry app redis-connector is started
     When you get https://redis-connector/
     Then you should see "redis-connectorKeySetUsingMicrosoftApi1"
