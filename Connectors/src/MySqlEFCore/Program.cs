@@ -2,6 +2,7 @@ using MySql.EntityFrameworkCore.Infrastructure;
 using MySqlEFCore;
 using MySqlEFCore.Data;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
@@ -10,6 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Steeltoe: Add cloud service bindings.
 builder.Configuration.AddCloudFoundryServiceBindings();
+builder.Configuration.AddKubernetesServiceBindings();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();

@@ -12,6 +12,7 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
     -->
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Configuration.Kubernetes.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>
