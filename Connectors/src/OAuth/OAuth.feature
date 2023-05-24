@@ -7,7 +7,7 @@ Feature: OAuth Connector
   @windows
   Scenario: OAuth Connector (net6.0/windows)
     When you run: dotnet publish -r win-x64 --self-contained
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish
+    And you run: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish
     And you wait until CloudFoundry app oauth-connector is started
     When you get https://oauth-connector/
     Then you should see "a, b, c, d"
@@ -15,7 +15,7 @@ Feature: OAuth Connector
   @net6.0
   @linux
   Scenario: OAuth Connector (net6.0/linux)
-    When you run in the background: cf push -f manifest.yml
+    When you run: cf push -f manifest.yml
     And you wait until CloudFoundry app oauth-connector is started
     When you get https://oauth-connector/
     Then you should see "a, b, c, d"
