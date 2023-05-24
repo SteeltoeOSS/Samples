@@ -62,8 +62,6 @@ This sample will be available at <http://postgresql-connector.[your-cf-apps-doma
 
 Upon startup, the app inserts a couple of rows into the bound PostgreSQL database. They are displayed on the home page.
 
----
-
 ## Running on Tanzu Application Platform (TAP)
 
 Pre-requisites:
@@ -79,7 +77,6 @@ In order to connect to PostgreSQL on TAP for this sample, you must have a class 
 
 If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html) and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the TAP documentation.
 
-
 ### Publish App & Push to TAP
 
 1. `kubectl config set-context --current --namespace=your-namespace`
@@ -87,12 +84,14 @@ If you'd like to learn more about these services, see [claiming services](https:
 1. Push the app
    - From local source code:
      - Push the app using the appropriate workload.yaml:
-       - `tanzu app workload apply --local-path . --source-image <your-registry-reference> --file ./config/workload.yaml -y`
+       - `tanzu app workload apply --local-path . --source-image your-registry-reference --file ./config/workload.yaml -y`
    - Alternatively, from locally built binaries:
      - Publish app to a local directory, specifying the runtime:
        - `dotnet restore --configfile nuget.config`
        - `dotnet publish -r linux-x64 --no-self-contained`
      - Push the app using the appropriate workload.yaml:
-       - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image <your-registry-reference> --file ./config/workload.yaml -y`
+       - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image your-registry-reference --file ./config/workload.yaml -y`
+
+---
 
 ### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
