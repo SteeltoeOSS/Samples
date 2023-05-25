@@ -37,9 +37,6 @@ Samples using the Steeltoe Connectors for connecting to backing services. Steelt
 | [Redis](Connectors/src/Redis) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-Redis?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=20&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-Redis?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=20&branchName=latest) |
 | [SqlServerEFCore](Connectors/src/SqlServerEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-SqlServerEFCore?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=71&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-SqlServerEFCore?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=71&branchName=latest) |
 
-## [CircuitBreaker](CircuitBreaker)
-Samples using the Steeltoe Circuit Breaker packages for building scalable and resilient microservices-based applications.
-
 ## [Security](Security)
 Samples using the Steeltoe Security packages for Authentication and Authorization with Cloud Foundry auth services, using a Redis cache for DataProtection KeyRing storage and for interacting with CredHub.
 
