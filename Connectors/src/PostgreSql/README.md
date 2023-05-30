@@ -13,6 +13,8 @@ This sample illustrates using a `NpgsqlConnection` to issue commands to the boun
 
 ## Running on CloudFoundry
 
+Pre-requisites:
+
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
@@ -60,36 +62,36 @@ This sample will be available at <http://postgresql-connector.[your-cf-apps-doma
 
 Upon startup, the app inserts a couple of rows into the bound PostgreSQL database. They are displayed on the home page.
 
----
-
 ## Running on Tanzu Application Platform (TAP)
 
 Pre-requisites:
 
-1. Kubernetes with [Tanzu Application Platform](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
-1. Postgres services are set up for [consumption by developers](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/getting-started-set-up-services.html)
+1. Kubernetes with [Tanzu Application Platform v1.5 or higher](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
 
-## Create PostgreSQL Service Instance/Binding on TAP
+### Create PostgreSQL Class Claim on TAP
 
-Yaml files for creating the needed resources are included with this project, and their usage is specified below, but you are encouraged to review and/or customize the contents of the files before applying them.
+In order to connect to PostgreSQL on TAP for this sample, you must have a class claim available for the application to bind to. The commands listed below will create the claim, and the claim will be bound to the application via the definition in the workload.yaml that is included in the `config` folder of this project. 
 
-1. Create a Postgres Service Instance
-   - For complete instructions, follow the [documentation](https://docs.vmware.com/en/VMware-SQL-with-Postgres-for-Kubernetes/2.0/vmware-postgres-k8s/GUID-create-delete-postgres.html)
-   - For a simplified experience, use the yaml included with this project: `kubectl apply -f ./config/service-operator/postgres.yaml`
-1. Create a Postgres Service Binding/Claim
-   - For complete instructions, follow the [documentation](https://docs.vmware.com/en/VMware-SQL-with-Postgres-for-Kubernetes/2.0/vmware-postgres-k8s/GUID-creating-service-bindings.html)
-   - For a simplified experience, use the yaml included with this project: `kubectl apply -f ./config/app-operator/postgres-resource-claim.yaml`
-   - Optional: specify a resource claim policy (for using resources across namespaces): `kubectl apply -f ./config/app-operator/postgres-resource-claim-policy.yaml`
+1. `kubectl config set-context --current --namespace=your-namespace`
+1. `tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged`
 
-## Publish App & Push to TAP
+If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html) and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the TAP documentation.
 
+### Publish App & Push to TAP
+
+1. `kubectl config set-context --current --namespace=your-namespace`
 1. `cd samples/Connectors/src/PostgreSql`
-1. Optional: If you created your service or bindings without using the included yaml, modify the `serviceClaims` section of the included `workload.yaml` with claim details to match what you created.
-1. Publish app to a local directory, specifying the runtime:
-   - `dotnet restore --configfile nuget.config`
-   - `dotnet publish -r linux-x64 --no-self-contained`
-1. Push the app to TAP:
-   - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image <registry-reference> -f ./config/workload.yaml -y`
-   - See the Tanzu [Apps CLI documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/cli-plugins-apps-command-reference-workload_create_update_apply.html) for details.
+1. Push the app
+   - From local source code:
+     - Push the app using the appropriate workload.yaml:
+       - `tanzu app workload apply --local-path . --source-image your-registry-reference --file ./config/workload.yaml -y`
+   - Alternatively, from locally built binaries:
+     - Publish app to a local directory, specifying the runtime:
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r linux-x64 --no-self-contained`
+     - Push the app using the appropriate workload.yaml:
+       - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image your-registry-reference --file ./config/workload.yaml -y`
+
+---
 
 ### See the Official [Steeltoe Service Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.

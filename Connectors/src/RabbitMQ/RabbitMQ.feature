@@ -7,7 +7,7 @@ Feature: RabbitMQ Connector
   @windows
   Scenario: Rabbit Connector (net6.0/windows)
     When you run: dotnet publish -r win-x64 --self-contained
-    And you run in the background: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish
+    And you run: cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish
     And you wait until CloudFoundry app rabbitmq-connector is started
     When you post "MessageToSend=HEY THERE" to https://rabbitmq-connector/Home/Send
     And you get https://rabbitmq-connector/Home/Receive
@@ -16,7 +16,7 @@ Feature: RabbitMQ Connector
   @net6.0
   @linux
   Scenario: Rabbit Connector (net6.0/linux)
-    When you run in the background: cf push -f manifest.yml
+    When you run: cf push -f manifest.yml
     And you wait until CloudFoundry app rabbitmq-connector is started
     When you post "MessageToSend=HEY THERE" to https://rabbitmq-connector/Home/Send
     And you get https://rabbitmq-connector/Home/Receive

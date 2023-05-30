@@ -2,14 +2,14 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: postgresql-connector
+  name: mysqlefcore-connector
   labels:
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/has-tests: "true"
-    app.kubernetes.io/part-of: postgresql-connector
+    app.kubernetes.io/part-of: mysqlefcore-connector
     tanzu.app.live.view: "true"
     tanzu.app.live.view.application.flavours: steeltoe
-    tanzu.app.live.view.application.name: postgresql-connector
+    tanzu.app.live.view.application.name: mysqlefcore-connector
 spec:
   params:
   - name: annotations
@@ -31,7 +31,7 @@ spec:
     ref:
       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
       kind: ClassClaim
-      name: my-postgresql-service
+      name: my-mysql-service
   source:
     git:
       url: https://github.com/SteeltoeOSS/Samples.git

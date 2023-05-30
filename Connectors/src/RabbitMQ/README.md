@@ -13,6 +13,8 @@ This sample illustrates using a `RabbitMQ.Client` to send and receive messages o
 
 ## Running on CloudFoundry
 
+Pre-requisites:
+
 1. Installed CloudFoundry (optionally with Windows support)
 1. Installed RabbitMQ CloudFoundry service
 
@@ -69,6 +71,36 @@ This sample will be available at <http://rabbitmq-connector.[your-cf-apps-domain
 
 To send a message over RabbitMQ: enter text and click the Send button.
 To receive a RabbitMQ message that you have sent: click the Receive button. Messages will be retrieved from the queue one at a time.
+
+## Running on Tanzu Application Platform (TAP)
+
+Pre-requisites:
+
+1. Kubernetes with [Tanzu Application Platform v1.5 or higher](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
+
+### Create RabbitMQ Class Claim on TAP
+
+In order to connect to RabbitMQ on TAP for this sample, you must have a class claim available for the application to bind to. The commands listed below will create the claim, and the claim will be bound to the application via the definition in the workload.yaml that is included in the `config` folder of this project. 
+
+1. `kubectl config set-context --current --namespace=your-namespace`
+1. `tanzu service class-claim create my-rabbitmq-service --class rabbitmq-unmanaged`
+
+If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html) and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the TAP documentation.
+
+### Publish App & Push to TAP
+
+1. `kubectl config set-context --current --namespace=your-namespace`
+1. `cd samples/Connectors/src/RabbitMQ`
+1. Push the app
+   - From local source code:
+     - Push the app using the appropriate workload.yaml:
+       - `tanzu app workload apply --local-path . --source-image your-registry-reference --file ./config/workload.yaml -y`
+   - Alternatively, from locally built binaries:
+     - Publish app to a local directory, specifying the runtime:
+       - `dotnet restore --configfile nuget.config`
+       - `dotnet publish -r linux-x64 --no-self-contained`
+     - Push the app using the appropriate workload.yaml:
+       - `tanzu app workload apply --local-path ./bin/Debug/net6.0/linux-x64/publish --source-image your-registry-reference --file ./config/workload.yaml -y`
 
 ---
 
