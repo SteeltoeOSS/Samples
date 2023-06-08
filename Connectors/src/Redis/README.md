@@ -23,7 +23,7 @@ Pre-requisites:
 You must first create an instance of the Redis service in an org/space.
 
 1. `cf target -o your-org -s your-space`
-1. `cf create-service p-redis shared-vm myRedisService`
+1. `cf create-service p-redis shared-vm myRedisService` or `cf create-service csb-azure-redis mini myRedisService` or `cf create-service csb-google-redis basic myRedisService`
 
 ### Publish App & Push to CloudFoundry
 

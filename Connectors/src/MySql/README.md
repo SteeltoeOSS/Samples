@@ -22,7 +22,7 @@ Pre-requisites:
 You must first create an instance of the MySQL service in an org/space.
 
 1. `cf target -o your-org -s your-space`
-1. `cf create-service p.mysql db-small myMySqlService`
+1. `cf create-service p.mysql db-small myMySqlService` or `cf create-service csb-azure-mysql mini myMySqlService` or `cf create-service csb-google-mysql your-plan-name myMySqlService`
 
 ### Publish App & Push to CloudFoundry
 
