@@ -1,19 +1,25 @@
 using CosmosDb;
 using Microsoft.Azure.Cosmos.Fluent;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Microsoft.Extensions.Options;
 using Steeltoe.Connectors.CosmosDb;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Add cloud service bindings.
-builder.Configuration.AddCloudFoundryServiceBindings();
-
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
-// Steeltoe: Setup CosmosDB options, connection factory and health checks, optionally providing a callback to customize client settings.
-builder.AddCosmosDb((options, _) => new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector").Build());
+// Steeltoe: Setup CosmosDB options, connection factory and health checks.
+builder.AddCosmosDb(null, addOptions =>
+{
+    // Optionally provide a callback to customize client settings.
+    addOptions.CreateConnection = (serviceProvider, serviceBindingName) =>
+    {
+        var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<CosmosDbOptions>>();
+        CosmosDbOptions options = optionsMonitor.Get(serviceBindingName);
+        return new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector").Build();
+    };
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

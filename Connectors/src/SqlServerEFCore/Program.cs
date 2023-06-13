@@ -1,15 +1,12 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using SqlServerEFCore;
 using SqlServerEFCore.Data;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Connectors.EntityFrameworkCore.SqlServer;
 using Steeltoe.Connectors.SqlServer;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-// Steeltoe: Add cloud service bindings.
-builder.Configuration.AddCloudFoundryServiceBindings();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
@@ -18,7 +15,16 @@ builder.AddAllActuators();
 builder.AddSqlServer();
 
 // Steeltoe: optionally change the SQL Server connection string at runtime.
-builder.Services.Configure<SqlServerOptions>(options => options.ConnectionString += ";Max Pool Size=50");
+builder.Services.Configure<SqlServerOptions>(options =>
+{
+    var connectionStringBuilder = new SqlConnectionStringBuilder
+    {
+        ConnectionString = options.ConnectionString,
+        ["Max Pool Size"] = 50
+    };
+
+    options.ConnectionString = connectionStringBuilder.ConnectionString;
+});
 
 // Steeltoe: Setup DbContext connection string, optionally changing SQL Server options at runtime.
 builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseSqlServer(serviceProvider, sqlServerOptionsAction: untypedOptions =>

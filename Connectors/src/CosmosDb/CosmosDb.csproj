@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.33.0" />
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connectors" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>

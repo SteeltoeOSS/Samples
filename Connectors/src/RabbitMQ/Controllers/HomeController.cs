@@ -18,7 +18,7 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger, ConnectorFactory<RabbitMQOptions, IConnection> connectorFactory)
     {
         _logger = logger;
-        _connector = connectorFactory.GetDefault();
+        _connector = connectorFactory.Get();
     }
 
     public IActionResult Index()

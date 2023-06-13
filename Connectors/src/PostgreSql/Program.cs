@@ -1,14 +1,9 @@
+using Npgsql;
 using PostgreSql;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connectors.PostgreSql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-// Steeltoe: Add cloud service bindings.
-builder.Configuration.AddCloudFoundryServiceBindings();
-builder.Configuration.AddKubernetesServiceBindings();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
@@ -17,7 +12,16 @@ builder.AddAllActuators();
 builder.AddPostgreSql();
 
 // Steeltoe: optionally change the PostgreSQL connection string at runtime.
-builder.Services.Configure<PostgreSqlOptions>(options => options.ConnectionString += ";Include Error Detail=true");
+builder.Services.Configure<PostgreSqlOptions>(options =>
+{
+    var connectionStringBuilder = new NpgsqlConnectionStringBuilder
+    {
+        ConnectionString = options.ConnectionString,
+        IncludeErrorDetail = true
+    };
+
+    options.ConnectionString = connectionStringBuilder.ConnectionString;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

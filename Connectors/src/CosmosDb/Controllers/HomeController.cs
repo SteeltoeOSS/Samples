@@ -19,7 +19,7 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger, ConnectorFactory<CosmosDbOptions, CosmosClient> connectorFactory)
     {
         _logger = logger;
-        _connector = connectorFactory.GetDefault();
+        _connector = connectorFactory.Get();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)

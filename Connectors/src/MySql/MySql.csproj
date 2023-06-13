@@ -11,8 +11,6 @@
     <!-- Either one of these MySQL NuGet packages should work in this sample.
     <PackageReference Include="MySqlConnector" Version="2.2.*" />
     -->
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Configuration.Kubernetes.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connectors" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>

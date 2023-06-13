@@ -1,13 +1,9 @@
 using MongoDb;
 using MongoDB.Driver;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Connectors.MongoDb;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-// Steeltoe: Add cloud service bindings.
-builder.Configuration.AddCloudFoundryServiceBindings();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();

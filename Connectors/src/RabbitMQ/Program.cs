@@ -1,32 +1,34 @@
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connectors.RabbitMQ;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Add cloud service bindings.
-builder.Configuration.AddCloudFoundryServiceBindings();
-builder.Configuration.AddKubernetesServiceBindings();
-
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
-// Steeltoe: Setup RabbitMQ options, connection factory and health checks, optionally providing a callback to customize client settings.
-builder.AddRabbitMQ((options, _) =>
+// Steeltoe: Setup RabbitMQ options, connection factory and health checks.
+builder.AddRabbitMQ(null, addOptions =>
 {
-    var factory = new ConnectionFactory
+    // Optionally provide a callback to customize client settings.
+    addOptions.CreateConnection = (serviceProvider, serviceBindingName) =>
     {
-        ClientProvidedName = "rabbitmq-connector"
+        var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<RabbitMQOptions>>();
+        RabbitMQOptions options = optionsMonitor.Get(serviceBindingName);
+
+        var factory = new ConnectionFactory
+        {
+            ClientProvidedName = "rabbitmq-connector"
+        };
+
+        if (options.ConnectionString != null)
+        {
+            factory.Uri = new Uri(options.ConnectionString);
+        }
+
+        return factory.CreateConnection();
     };
-
-    if (options.ConnectionString != null)
-    {
-        factory.Uri = new Uri(options.ConnectionString);
-    }
-
-    return factory.CreateConnection();
 });
 
 // Add services to the container.
