@@ -1,6 +1,6 @@
 # Connector Sample Applications
 
-This repo tree contains sample apps illustrating how to use the Steeltoe Connectors for connecting to CloudFoundry services in your ASP.NET 7.x application.
+This repo tree contains sample apps illustrating how to use the Steeltoe Connectors for connecting to CloudFoundry services in your ASP.NET 6.x application.
 Steeltoe Connectors simplify the coding process of binding to and accessing CloudFoundry-based services.
 
 ## ASP.NET Core Samples
