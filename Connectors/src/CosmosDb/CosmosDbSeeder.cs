@@ -13,7 +13,7 @@ internal sealed class CosmosDbSeeder
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
         var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<CosmosDbOptions, CosmosClient>>();
-        Connector<CosmosDbOptions, CosmosClient> connector = connectorFactory.GetDefault();
+        Connector<CosmosDbOptions, CosmosClient> connector = connectorFactory.Get();
 
         // Do not dispose the CosmosClient singleton.
         CosmosClient client = connector.GetConnection();

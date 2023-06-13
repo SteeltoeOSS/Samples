@@ -16,7 +16,7 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger, ConnectorFactory<PostgreSqlOptions, NpgsqlConnection> connectorFactory)
     {
         _logger = logger;
-        _connector = connectorFactory.GetDefault();
+        _connector = connectorFactory.Get();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)

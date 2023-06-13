@@ -20,8 +20,8 @@ public class HomeController : Controller
         ConnectorFactory<RedisOptions, IConnectionMultiplexer> connectionMultiplexerConnectorFactory)
     {
         _logger = logger;
-        _distributedCacheConnector = distributedCacheConnectorFactory.GetDefault();
-        _connectionMultiplexerConnector = connectionMultiplexerConnectorFactory.GetDefault();
+        _distributedCacheConnector = distributedCacheConnectorFactory.Get();
+        _connectionMultiplexerConnector = connectionMultiplexerConnectorFactory.Get();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)

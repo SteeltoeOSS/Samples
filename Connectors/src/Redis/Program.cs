@@ -1,25 +1,27 @@
+using Microsoft.Extensions.Options;
 using Redis;
 using StackExchange.Redis;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
-using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connectors.Redis;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Add cloud service bindings.
-builder.Configuration.AddCloudFoundryServiceBindings();
-builder.Configuration.AddKubernetesServiceBindings();
-
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
 // Steeltoe: Setup Redis options, connection factory and health checks, optionally providing a callback to customize client settings.
-builder.AddRedis((options, _) =>
+builder.AddRedis(null, addOptions =>
 {
-    ConfigurationOptions redisOptions = ConfigurationOptions.Parse(options.ConnectionString);
-    redisOptions.ClientName = "redis-connector";
-    return ConnectionMultiplexer.Connect(redisOptions);
+    // Optionally provide a callback to customize client settings.
+    addOptions.CreateConnection = (serviceProvider, serviceBindingName) =>
+    {
+        var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<RedisOptions>>();
+        RedisOptions options = optionsMonitor.Get(serviceBindingName);
+
+        ConfigurationOptions redisOptions = ConfigurationOptions.Parse(options.ConnectionString);
+        redisOptions.ClientName = "redis-connector";
+        return ConnectionMultiplexer.Connect(redisOptions);
+    };
 });
 
 // Add services to the container.

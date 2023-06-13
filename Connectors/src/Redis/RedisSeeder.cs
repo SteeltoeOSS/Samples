@@ -18,7 +18,7 @@ internal sealed class RedisSeeder
     private static async Task CreateSampleDataUsingDistributedCacheAsync(IServiceProvider serviceProvider)
     {
         var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<RedisOptions, IDistributedCache>>();
-        Connector<RedisOptions, IDistributedCache> connector = connectorFactory.GetDefault();
+        Connector<RedisOptions, IDistributedCache> connector = connectorFactory.Get();
         IDistributedCache distributedCache = connector.GetConnection();
 
         var entryOptions = new DistributedCacheEntryOptions
@@ -33,7 +33,7 @@ internal sealed class RedisSeeder
     private static async Task CreateSampleDataUsingConnectionMultiplexerAsync(IServiceProvider serviceProvider)
     {
         var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<RedisOptions, IConnectionMultiplexer>>();
-        Connector<RedisOptions, IConnectionMultiplexer> connector = connectorFactory.GetDefault();
+        Connector<RedisOptions, IConnectionMultiplexer> connector = connectorFactory.Get();
 
         // Do not dispose the IConnectionMultiplexer singleton.
         IConnectionMultiplexer connectionMultiplexer = connector.GetConnection();
