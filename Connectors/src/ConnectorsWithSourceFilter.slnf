@@ -1,0 +1,32 @@
+{
+  "solution": {
+    "path": "ConnectorsWithSource.sln",
+    "projects": [
+      "..\\..\\..\\Steeltoe\\src\\Common\\src\\Abstractions\\Steeltoe.Common.Abstractions.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Common\\src\\Common.Hosting\\Steeltoe.Common.Hosting.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Common\\src\\Common.Http\\Steeltoe.Common.Http.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Common\\src\\Common\\Steeltoe.Common.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Configuration\\src\\Abstractions\\Steeltoe.Configuration.Abstractions.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Configuration\\src\\CloudFoundry.ServiceBinding\\Steeltoe.Configuration.CloudFoundry.ServiceBinding.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Configuration\\src\\Kubernetes.ServiceBinding\\Steeltoe.Configuration.Kubernetes.ServiceBinding.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Connectors\\src\\Abstractions\\Steeltoe.Connectors.Abstractions.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Connectors\\src\\Connectors\\Steeltoe.Connectors.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Connectors\\src\\EntityFrameworkCore\\Steeltoe.Connectors.EntityFrameworkCore.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Discovery\\src\\Abstractions\\Steeltoe.Discovery.Abstractions.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Logging\\src\\Abstractions\\Steeltoe.Logging.Abstractions.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Logging\\src\\DynamicLogger\\Steeltoe.Logging.DynamicLogger.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Management\\src\\Abstractions\\Steeltoe.Management.Abstractions.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Management\\src\\Endpoint\\Steeltoe.Management.Endpoint.csproj",
+      "..\\..\\..\\Steeltoe\\src\\Management\\src\\MetricCollectors\\Steeltoe.Management.MetricCollectors.csproj",
+      "CosmosDb\\CosmosDb.csproj",
+      "MongoDb\\MongoDb.csproj",
+      "MySqlEFCore\\MySqlEFCore.csproj",
+      "MySql\\MySql.csproj",
+      "PostgreSqlEFCore\\PostgreSqlEFCore.csproj",
+      "PostgreSql\\PostgreSql.csproj",
+      "RabbitMQ\\RabbitMQ.csproj",
+      "Redis\\Redis.csproj",
+      "SqlServerEFCore\\SqlServerEFCore.csproj"
+    ]
+  }
+}
