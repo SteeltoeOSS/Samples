@@ -5,7 +5,7 @@
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "",
-      "applicationUrl": "https://localhost:8081;http://localhost:8080",
+      "applicationUrl": "https://localhost:8081",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

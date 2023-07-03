@@ -1,70 +1,66 @@
-﻿# CloudFoundry Single Signon Security Sample App
+# CloudFoundry Single Signon Sample App (with TAS SSO Tile)
 
-ASP.NET Core sample app illustrating how to make use of the Steeltoe [CloudFoundry External Security Provider](https://docs.steeltoe.io/api/v3/security/) for Authentication and Authorization against a CloudFoundry OAuth2 security service (e.g. [UAA Server](https://github.com/cloudfoundry/uaa) or [Pivotal Single Signon Service](https://docs.pivotal.io/p-identity/)).
+ASP.NET Core sample app illustrating how to use the Steeltoe [Cloud Foundry external security libraries](https://docs.steeltoe.io/api/v3/security/) for Authentication and Authorization against [Enterprise SSO for TAS for VMs](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service).
 
-> NOTE: For simplicity, we've moved the [instructions for utilizing the SSO Tile](README-SSO.md) with this sample
-
-## Pre-requisites
+## Pre-requisites - Tanzu Application Service
 
 1. Cloud Foundry instance
-1. Windows support on Cloud Foundry (OPTIONAL)
-1. [.NET Core SDK](https://www.microsoft.com/net/download) installed
 1. [CloudFoundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) installed
+1. [SSO Tile](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service) installed
 
-### Create OAuth2 Service Instance on CloudFoundry
+### Create a Service Plan
 
-This sample requires an OAuth2 service in your org/space. These instructions will use the [UAA Server](https://github.com/cloudfoundry/uaa) as the OAuth2 service.
+In order to use the SSO tile in an application, you must first [create a service plan](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/1.14/sso/GUID-manage-service-plans.html).
+The rest of this page assumes the `Auth Domain` for your SSO service plan is `auth`.
 
-### Target your Environment with UAA Command Line Tools
+> Note: use the command `cf marketplace` to see your SSO plan once it has been created.
 
-Before creating the OAuth2 service instance, we need to use the UAA command line tool to establish some security credentials for our sample app. Target your UAA server:
+### Create a Service Instance
 
-1. uaac target uaa.`YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN` (e.g. `uaac target uaa.system.testcloud.com`)
+In order to bind SSO configuration information to our application, create a service instance: `cf create-service p-identity auth mySSOService`.
 
-Next, authenticate and obtain an access token for the `admin client` from the UAA server so that we can add our new application/user credentials. You will need the `Admin Client Secret` for your installation of CloudFoundry for this step. If you are using Pivotal CloudFoundry (PCF), you can obtain the secret from the `Ops Manager/Elastic Runtime` credentials page under the `UAA` section.  Look for `Admin Client Credentials` and then use it as follows:
+### Execute Script to Configure new User and Group
 
-1. uaac token client get admin -s `ADMIN_CLIENT_SECRET`
+Next, locate the sso-setup script you'd like to execute (.cmd/.sh) from the scripts folder in this repository.
+Update the variables to suit your environment - You will need the `Admin Client Secret` for your installation of CloudFoundry for this step.
+If you are using Tanzu Application Service (TAS), you can obtain the secret from the `Ops Manager/Tanzu Application Service` credentials page under the `UAA` section.  Look for `Admin Client Credentials`.
 
-> Note: To see the token that was retrieved, run the command `uaac contexts`
-
-### Add User and Group
-
-After authenticating, add a new `user` and `group` to the UAA Server database. Do NOT change the group name: `testgroup` as it is used for policy based authorization in the sample application. Feel free to change the username and password to anything you would like.
-
-1. uaac group add testgroup
-1. uaac user add dave --given_name Dave --family_name Tillman --emails dave@testcloud.com --password Password1!
-1. uaac member add testgroup dave
-
-### Add New Client for our App
-
-After adding the user and group, we are ready to add our application as a new client to the UAA server. This step will establish our application's credentials and allow it to interact with the UAA server. Use the line below once you have replaced the `YOUR-CLOUDFOUNDRY-APP-DOMAIN` with the domain used by your cloud foundry instance.
-
-```bash
-uaac client add myTestApp --scope cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --authorized_grant_types authorization_code,refresh_token --authorities uaa.resource --redirect_uri http://single-signon.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/signin-cloudfoundry --autoapprove cloud_controller.read,cloud_controller_service_permissions.read,openid,testgroup --secret myTestApp
-```
-
-### Add User-Provided Service with OAuth Details
-
-Last, we will create a user-provide service that includes the appropriate UAA server configuration data. Use the sample below to pass the parameters directly to the `cf cups` command, replacing `<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>` with your domain.
-
-```bash
-cf target -o myorg -s development
-cf cups myOAuthService -p "{\"client_id\": \"myTestApp\",\"client_secret\": \"myTestApp\",\"uri\": \"uaa://login.<YOUR-CLOUDFOUNDRY-SYSTEM-DOMAIN>\"}"
-```
-
-## Publish App & Push to CloudFoundry
+### Push to Cloud Foundry
 
 1. cf target -o myorg -s development
 1. cd samples/Security/src/CloudFoundrySingleSignon
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on.
-    * `dotnet publish -f netcoreapp3.1 -r linux-x64`
-    * `dotnet publish -f netcoreapp3.1 -r win10-x64`
-1. Push the app using the appropriate manifest.
-    * `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
-    * `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
+1. Push the app using the appropriate manifest:
+    * `cf push`
+    * `cf push -f manifest-windows.yml`
 
-> Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the user-provided service `myOAuthService`.
+> Note: The provided manifest(s) will create an app named `single-signon` and attempt to bind it to the SSO service `mySSOService`.
+
+### Configure SSO RedirectUri and Scope access
+
+The RedirectUri and Scope access settings should be automatically configured via the settings in `manifest.yml`. If that configuration fails, the instructions below may be used to manually update the configuration.
+
+For the application to access group information and handle login redirects correctly, configure two properties in the `sso` service dashboard. In order to access the `sso` dashboard, run the following command and go to the URL listed in `Dashboard` property:
+
+```bash
+$ cf service mySSOService
+
+Service instance: mySSOService
+Service: p-identity
+bound apps: single-signon
+Tags:
+Plan: auth
+Description: Single Sign-On as a Service
+Documentation url: https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service
+Dashboard: https://p-identity.mypcf.example.com/dashboard/identity-zones/{ZONE_GUID}/instances/{INSTANCE_GUID}/
+...
+```
+
+On the dashboard, under `Apps`:
+
+1. Select the `single-signon` app.
+1. Click "Select Scopes" and add the `testgroup` scope
+1. Add the URI `http://single-signon.<YOUR-SYSTEM-DOMAIN>/signin-cloudfoundry` under "Auth Redirect URIs"
+1. Click the "Save Config" button
 
 ## What to expect - CloudFoundry
 
@@ -84,39 +80,6 @@ At this point the app is up and running.  You can access it at <http://single-si
 
 > Note: To see the logs as the app runs, execute this command: `cf logs single-signon`
 
-On the app's menu, click on the `Log in` menu item and you should be redirected to the CloudFoundry login page. Enter `dave` and `Password1!`, or whatever name/password you used above,  and you should be authenticated and redirected back to the single-signon home page.
+On the apps menu, click on the `Log in` menu item and you should be redirected to the CloudFoundry login page. Enter `dave` and `Password1!`, or whatever name/password you used above,  and you should be authenticated and redirected back to the single-signon home page.
 
-Two of the endpoints in the `HomeController` have Authorization policies applied:
-
-```csharp
-[Authorize(Policy = "testgroup")]
-public IActionResult About()
-{
-    ViewData["Message"] = "Your application description page.";
-
-    return View();
-}
-
-
-[Authorize(Policy = "testgroup1")]
-public IActionResult Contact()
-{
-    ViewData["Message"] = "Your contact page.";
-
-    return View();
-}
-```
-
-If you try and access the `About` menu item you should see the `About` page as user `dave` is a member of that group and is authorized to access the end point.
-
-If you try and access the `Contact` menu item you should see `Access Denied, Insufficent permissions` as `dave` is not a member of the `testgroup1` and therefore can not access the end point.
-
-If you access the `InvokeJwtSample` menu item, you will find the app will attempt to invoke a secured endpoint in a second Security sample app [CloudFoundryJwtAuthentication][jwt]. In order for this to be functional you must first push the [CloudFoundryJwtAuthentication][jwt] sample using the Readme instructions.
-
-Once you have [CloudFoundryJwtAuthentication][jwt] up and running, then if you access the `InvokeJwtSample` menu item when you are logged in, you should see some `values` returned from the [CloudFoundryJwtAuthentication][jwt] app.  If you are logged out, then you will see a `401 (Unauthorized)` message.
-
-[jwt]: ../CloudFoundryJwtAuthentication
-
----
-
-### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/steeltoe-security) for a more in-depth walkthrough of the samples and more detailed information
+The Home page of the application includes instructions for how to interact with services secured with JWT and Mutual TLS authentication.

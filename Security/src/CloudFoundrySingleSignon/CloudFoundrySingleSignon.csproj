@@ -4,9 +4,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.1" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 </Project>

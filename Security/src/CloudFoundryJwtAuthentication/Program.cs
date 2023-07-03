@@ -1,22 +1,34 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Management.Endpoint;
+using Steeltoe.Security.Authentication.CloudFoundry;
 
-namespace CloudFoundryJwtAuthentication
+var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddCloudFoundry();
+builder.UseCloudHosting(null, 8083);
+builder.AddAllActuators();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+   .AddCloudFoundryJwtBearer(builder.Configuration);
+builder.Services.AddAuthorization(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
+    options.AddPolicy("testgroup", policy => policy.RequireClaim("scope", "testgroup"));
+    options.AddPolicy("testgroup1", policy => policy.RequireClaim("scope", "testgroup1"));
+});
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                    .UseCloudHosting(8082, 8083)
-                    .AddCloudFoundryConfiguration()
-                    .UseStartup<Startup>()
-                    .Build();
-    } 
-}
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
