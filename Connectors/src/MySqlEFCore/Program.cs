@@ -27,19 +27,17 @@ if (useMultipleDatabases)
     builder.Services.Configure<MySqlOptions>(serviceTwoName, options => options.ConnectionString += ";Use Compression=true");
 
     // Steeltoe: Setup DbContext connection strings, optionally changing MySQL options at runtime.
-    builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceOneName,
-        mySqlOptionsAction: untypedOptions =>
-        {
-            var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
-            mySqlOptions.CommandTimeout(20);
-        }));
+    builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceOneName, null, untypedOptions =>
+    {
+        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        mySqlOptions.CommandTimeout(20);
+    }));
 
-    builder.Services.AddDbContext<OtherDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceTwoName,
-        mySqlOptionsAction: untypedOptions =>
-        {
-            var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
-            mySqlOptions.CommandTimeout(25);
-        }));
+    builder.Services.AddDbContext<OtherDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceTwoName, null, untypedOptions =>
+    {
+        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        mySqlOptions.CommandTimeout(25);
+    }));
 }
 else
 {
@@ -47,7 +45,7 @@ else
     builder.Services.Configure<MySqlOptions>(options => options.ConnectionString += ";Use Compression=false");
 
     // Steeltoe: Setup DbContext connection string, optionally changing MySQL options at runtime.
-    builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, mySqlOptionsAction: untypedOptions =>
+    builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, null, null, untypedOptions =>
     {
         var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
         mySqlOptions.CommandTimeout(15);

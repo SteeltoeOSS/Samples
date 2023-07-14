@@ -27,7 +27,7 @@ builder.Services.Configure<PostgreSqlOptions>(options =>
 });
 
 // Steeltoe: Setup DbContext connection string, optionally changing PostgreSQL options at runtime.
-builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseNpgsql(serviceProvider, npgsqlOptionsAction: untypedOptions =>
+builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseNpgsql(serviceProvider, null, untypedOptions =>
 {
     var postgreSqlOptions = (NpgsqlDbContextOptionsBuilder)untypedOptions;
     postgreSqlOptions.CommandTimeout(15);

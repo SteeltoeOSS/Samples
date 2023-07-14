@@ -27,7 +27,7 @@ builder.Services.Configure<SqlServerOptions>(options =>
 });
 
 // Steeltoe: Setup DbContext connection string, optionally changing SQL Server options at runtime.
-builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseSqlServer(serviceProvider, sqlServerOptionsAction: untypedOptions =>
+builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseSqlServer(serviceProvider, null, untypedOptions =>
 {
     var sqlServerOptions = (SqlServerDbContextOptionsBuilder)untypedOptions;
     sqlServerOptions.EnableRetryOnFailure();
