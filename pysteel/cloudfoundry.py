@@ -30,7 +30,7 @@ class CloudFoundry(object):
         :type space: str
         """
         self._context.log.info('logging into Cloud Foundry')
-        cmd_s = 'cf login --skip-ssl-validation -a {} -u {} -p {} -o {} -s {}'.format(api_url, username, password, org, space)
+        cmd_s = 'cf login -a {} -u {} -p {} -o {} -s {}'.format(api_url, username, password, org, space)
         command.Command(self._context, cmd_s).run()
 
     def get_api_endpoint(self):
