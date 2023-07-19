@@ -13,7 +13,7 @@ internal sealed class MongoDbSeeder
         Connector<MongoDbOptions, IMongoClient> connector = connectorFactory.Get();
         IMongoClient client = connector.GetConnection();
 
-        IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client, connector.Options.Database);
+        IMongoCollection<SampleObject> collection = await DropCreateCollectionAsync(client, connector.Options.Database!);
         await InsertSampleDataAsync(collection);
     }
 
