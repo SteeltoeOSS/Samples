@@ -10,7 +10,7 @@ def setup(context):
     app = 'postgresql-connector'
     cf.delete_app(app)
     # create service
-    service = 'csb-azure-postgresql'
-    plan = 'small'
+    service = 'csb-google-postgres'
+    plan = 'default'
     instance = 'myPostgreSqlService'
     cf.create_service(service, plan, instance)
