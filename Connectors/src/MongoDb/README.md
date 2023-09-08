@@ -65,7 +65,7 @@ Upon startup, the app inserts a couple of objects into the bound MongoDB databas
 
 Pre-requisites:
 
-1. Kubernetes with [Tanzu Application Platform v1.5 or higher](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
+1. Kubernetes with [Tanzu Application Platform v1.6 or higher](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/index.html) installed
 
 ### Create MongoDB Class Claim on TAP
 
