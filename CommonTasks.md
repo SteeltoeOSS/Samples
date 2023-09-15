@@ -79,7 +79,7 @@ docker run --rm -ti -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-manag
 ### Run Consul Server with Docker
 
 ```script
-docker run --rm -ti -p 8500:8500 --name=steeltoe-consul consul
+docker run --rm -ti -p 8500:8500 --name=steeltoe-consul hashicorp/consul
 ```
 
 ## Spring Boot Admin
