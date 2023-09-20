@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.Hosting;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Configuration.Placeholder;
 using Steeltoe.Discovery.Client;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Configuration.Placeholder;
 using Steeltoe.Management.Endpoint;
 
 namespace FortuneTellerService
@@ -25,8 +25,6 @@ namespace FortuneTellerService
                 .AddAllActuators()
                 .AddDiscoveryClient()
                 .AddPlaceholderResolver()
-                .UseCloudHosting(5000)
                 .Build();
     }
-     
 }

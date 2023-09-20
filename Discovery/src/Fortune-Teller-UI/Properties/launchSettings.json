@@ -17,12 +17,14 @@
     },
     "Fortune-Teller-UI": {
       "commandName": "Project",
+      "applicationUrl": "http://localhost:5555",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Fortune-Teller-UI-Consul": {
       "commandName": "Project",
+      "applicationUrl": "http://localhost:5555",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "consul"
       }
