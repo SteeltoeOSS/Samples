@@ -20,7 +20,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 1. Clone this repo. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/Discovery/src/Fortune-Teller-Service
 1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp3.1
+1. dotnet run
 
 ## What to expect - Local
 
@@ -28,7 +28,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/Fortune-Teller-Service
-$ dotnet run -f netcoreapp3.1
+$ dotnet run
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production
@@ -50,20 +50,19 @@ At this point the Fortune Teller Service is up and running and ready for the For
 You must first create an instance of the Service Registry service in a org/space.
 
 1. cf target -o myorg -s development
-1. cf create-service p-service-registry standard myDiscoveryService
+1. cf create-service p.service-registry standard myDiscoveryService
 1. Wait for the service to become ready! (i.e. cf services)
 
 ## Publish App & Push to CloudFoundry
 
 1. cf target -o myorg -s development
 1. cd samples/Discovery/src/Fortune-Teller-Service
-1. dotnet restore --configfile nuget.config
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp3.1 -r linux-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -r linux-x64 --self-contained` or `dotnet publish -r win-x64 --self-contained`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/net6.0/linux-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/net6.0/win-x64/publish`)
 
 > Note: If you are using self-signed certificates it is possible that you might run into SSL certificate validation issues when pushing this app. The simplest way to fix this:
 
-1. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `eureka:client:validate_certificates=false`.
+1. Disable certificate validation for the Spring Cloud Discovery Client.  You can do this by editing `appsettings.json` and add `Eureka:Client:ValidateCertificates=false`.
 
 ## What to expect - CloudFoundry
 
@@ -74,29 +73,49 @@ To see the logs as you startup and use the app: `cf logs fortuneservice`
 On a Windows cell, you should see something like this during startup:
 
 ```bash
-2016-05-14T06:22:39.54-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
-2016-05-14T06:22:39.54-0600 [APP/0]      OUT       GetRequestContent generated JSON: ......
-2016-05-14T06:22:39.57-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
-2016-05-14T06:22:39.58-0600 [APP/0]      OUT       RegisterAsync .....
-2016-05-14T06:22:39.58-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
-2016-05-14T06:22:39.58-0600 [APP/0]      OUT       Register FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: NoContent
-2016-05-14T06:22:41.07-0600 [APP/0]      OUT info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
-2016-05-14T06:22:41.07-0600 [APP/0]      OUT       Saved 50 entities to in-memory store.
-2016-05-14T06:22:41.17-0600 [APP/0]      OUT       Hosting starting
-2016-05-14T06:22:41.17-0600 [APP/0]      OUT verb: Microsoft.AspNet.Hosting.Internal.HostingEngine[4]
-2016-05-14T06:22:41.19-0600 [APP/0]      OUT       Start
-2016-05-14T06:22:41.19-0600 [APP/0]      OUT info: Microsoft.Net.Http.Server.WebListener[0]
-2016-05-14T06:22:41.23-0600 [APP/0]      OUT       Listening on prefix: http://*:57991/
-2016-05-14T06:22:41.23-0600 [APP/0]      OUT info: Microsoft.Net.Http.Server.WebListener[0]
-2016-05-14T06:22:41.31-0600 [APP/0]      OUT verb: Microsoft.AspNet.Hosting.Internal.HostingEngine[5]
-2016-05-14T06:22:41.31-0600 [APP/0]      OUT       Hosting started
-2016-05-14T06:22:41.31-0600 [APP/0]      OUT Hosting environment: development
-2016-05-14T06:22:41.32-0600 [APP/0]      OUT Now listening on: http://*:57991
-2016-05-14T06:22:41.32-0600 [APP/0]      OUT Application started. Press Ctrl+C to shut down.
-2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
-2016-05-14T06:23:09.76-0600 [APP/0]      OUT       SendHeartbeatAsync ......., status: OK, instanceInfo: null
-2016-05-14T06:23:09.76-0600 [APP/0]      OUT dbug: Steeltoe.Discovery.Eureka.DiscoveryClient[0]
-2016-05-14T06:23:09.76-0600 [APP/0]      OUT       Renew FORTUNESERVICE/fortuneService.apps.testcloud.com:2f7a9e48-bb3e-402a-6b44-68e9386b3b15 returned: OK
+CELL/0] OUT Starting health monitoring of container
+   2023-09-19T17:55:15.82+0200 [APP/PROC/WEB/0] OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+   2023-09-19T17:55:15.82+0200 [APP/PROC/WEB/0] OUT GetRequestContent generated JSON: {"instance":{"instanceId":"fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:0fcfcd46-f4a2-4b0e-75aa-0f34","app":"FORTUNESERVICE","appGroupName":null,"ipAddr":"172.30.3.92","sid":"na","port":{"@enabled":"true","$":80},"securePort":{"@enabled":"false","$":443},"homePageUrl":"http://fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:80/","statusPageUrl":"http://fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:80/actuator/info","healthCheckUrl":"http://fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:80/actuator/health","secureHealthCheckUrl":null,"vipAddress":"fortuneService","secureVipAddress":"fortuneService","countryId":1,"dataCenterInfo":{"@class":"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo","name":"MyOwn"},"hostName":"fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com","status":"UP","overriddenstatus":"UNKNOWN","leaseInfo":{"renewalIntervalInSecs":30,"durationInSecs":90,"registrationTimestamp":"0","lastRenewalTimestamp":"0","renewalTimestamp":"0","evictionTimestamp":"0","serviceUpTimestamp":"0"},"isCoordinatingDiscoveryServer":"false","metadata":{"cfAppGuid":"06ccada2-c5b5-4306-97a6-900be018e700","cfInstanceIndex":"0","instanceId":"0fcfcd46-f4a2-4b0e-75aa-0f34","zone":"unknown"},"lastUpdatedTimestamp":"1695138914096","lastDirtyTimestamp":"1695138914096","actionType":"ADDED","asgName":null}}
+   2023-09-19T17:55:15.83+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.LogicalHandler[100]
+   2023-09-19T17:55:15.83+0200 [APP/PROC/WEB/0] OUT Start processing HTTP request POST https://service-registry-4124f73a-5077-42fd-9aa2-a9ffb51fd879.apps.clovis.cf-app.com/eureka/apps/FORTUNESERVICE
+   2023-09-19T17:55:15.83+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.ClientHandler[100]
+   2023-09-19T17:55:15.83+0200 [APP/PROC/WEB/0] OUT Sending HTTP request POST https://service-registry-4124f73a-5077-42fd-9aa2-a9ffb51fd879.apps.clovis.cf-app.com/eureka/apps/FORTUNESERVICE
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.ClientHandler[101]
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT Received HTTP response headers after 74.6557ms - 204
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.LogicalHandler[101]
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT End processing HTTP request after 94.694ms - 204
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT RegisterAsync https://service-registry-4124f73a-5077-42fd-9aa2-a9ffb51fd879.apps.clovis.cf-app.com/eureka/apps/FORTUNESERVICE, status: NoContent, retry: 0
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT info: Startup.Steeltoe.Discovery.Eureka.EurekaDiscoveryClient[0]
+   2023-09-19T17:55:15.93+0200 [APP/PROC/WEB/0] OUT Starting HeartBeat
+   2023-09-19T17:55:17.12+0200 [APP/PROC/WEB/0] OUT info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
+   2023-09-19T17:55:17.12+0200 [APP/PROC/WEB/0] OUT Entity Framework Core 6.0.22 initialized 'FortuneContext' using provider 'Microsoft.EntityFrameworkCore.InMemory:6.0.22' with options: StoreName=Fortunes
+   2023-09-19T17:55:17.15+0200 [APP/PROC/WEB/0] OUT info: Microsoft.EntityFrameworkCore.Update[30100]
+   2023-09-19T17:55:17.15+0200 [APP/PROC/WEB/0] OUT Saved 0 entities to in-memory store.
+   2023-09-19T17:55:17.33+0200 [APP/PROC/WEB/0] OUT info: Microsoft.EntityFrameworkCore.Update[30100]
+   2023-09-19T17:55:17.33+0200 [APP/PROC/WEB/0] OUT Saved 50 entities to in-memory store.
+   2023-09-19T17:55:17.52+0200 [APP/PROC/WEB/0] OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+   2023-09-19T17:55:17.52+0200 [APP/PROC/WEB/0] OUT GetRequestContent generated JSON: {"instance":{"instanceId":"fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:0fcfcd46-f4a2-4b0e-75aa-0f34","app":"FORTUNESERVICE","appGroupName":null,"ipAddr":"172.30.3.92","sid":"na","port":{"@enabled":"true","$":80},"securePort":{"@enabled":"false","$":443},"homePageUrl":"http://fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:80/","statusPageUrl":"http://fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:80/actuator/info","healthCheckUrl":"http://fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com:80/actuator/health","secureHealthCheckUrl":null,"vipAddress":"fortuneService","secureVipAddress":"fortuneService","countryId":1,"dataCenterInfo":{"@class":"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo","name":"MyOwn"},"hostName":"fortuneService-intelligent-quokka-zh.apps.clovis.cf-app.com","status":"UP","overriddenstatus":"UNKNOWN","leaseInfo":{"renewalIntervalInSecs":30,"durationInSecs":90,"registrationTimestamp":"0","lastRenewalTimestamp":"0","renewalTimestamp":"0","evictionTimestamp":"0","serviceUpTimestamp":"0"},"isCoordinatingDiscoveryServer":"false","metadata":{"cfAppGuid":"06ccada2-c5b5-4306-97a6-900be018e700","cfInstanceIndex":"0","instanceId":"0fcfcd46-f4a2-4b0e-75aa-0f34","zone":"unknown"},"lastUpdatedTimestamp":"1695138914096","lastDirtyTimestamp":"1695138914096","actionType":"ADDED","asgName":null}}
+   2023-09-19T17:55:17.52+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.LogicalHandler[100]
+   2023-09-19T17:55:17.52+0200 [APP/PROC/WEB/0] OUT Start processing HTTP request POST https://service-registry-4124f73a-5077-42fd-9aa2-a9ffb51fd879.apps.clovis.cf-app.com/eureka/apps/FORTUNESERVICE
+   2023-09-19T17:55:17.52+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.ClientHandler[100]
+   2023-09-19T17:55:17.52+0200 [APP/PROC/WEB/0] OUT Sending HTTP request POST https://service-registry-4124f73a-5077-42fd-9aa2-a9ffb51fd879.apps.clovis.cf-app.com/eureka/apps/FORTUNESERVICE
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.ClientHandler[101]
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT Received HTTP response headers after 26.902ms - 204
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT info: System.Net.Http.HttpClient.Eureka.LogicalHandler[101]
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT End processing HTTP request after 27.1231ms - 204
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT dbug: Steeltoe.Discovery.Eureka.Transport.EurekaHttpClient[0]
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT RegisterAsync https://service-registry-4124f73a-5077-42fd-9aa2-a9ffb51fd879.apps.clovis.cf-app.com/eureka/apps/FORTUNESERVICE, status: NoContent, retry: 0
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT info: Startup.Steeltoe.Discovery.Eureka.EurekaDiscoveryClient[0]
+   2023-09-19T17:55:17.54+0200 [APP/PROC/WEB/0] OUT Starting HeartBeat
+   2023-09-19T17:55:17.58+0200 [APP/PROC/WEB/0] OUT info: Microsoft.Hosting.Lifetime[14]
+   2023-09-19T17:55:17.58+0200 [APP/PROC/WEB/0] OUT Now listening on: http://0.0.0.0:8080
+   2023-09-19T17:55:17.58+0200 [APP/PROC/WEB/0] OUT info: Steeltoe.Management.Diagnostics.DiagnosticObserver[0]
+   2023-09-19T17:55:17.58+0200 [APP/PROC/WEB/0] OUT DiagnosticObserver TraceDiagnosticObserver Subscribed to Microsoft.AspNetCore
+   2023-09-19T17:55:17.58+0200 [APP/PROC/WEB/0] OUT info: Steeltoe.Management.Diagnostics.DiagnosticObserver[0]
+   2023-09-19T17:55:17.58+0200 [APP/PROC/WEB/0] OUT DiagnosticObserver AspNetCoreHostingObserver Subscribed to Microsoft.AspNetCore
+   2023-09-19T17:55:17.59+0200 [APP/PROC/WEB/0] OUT info: Microsoft.Hosting.Lifetime[0]
+   2023-09-19T17:55:17.59+0200 [APP/PROC/WEB/0] OUT Application started. Press Ctrl+C to shut down.
 ```
 
 At this point the Fortune Teller Service is up and running and ready for the Fortune Teller UI to ask for fortunes.

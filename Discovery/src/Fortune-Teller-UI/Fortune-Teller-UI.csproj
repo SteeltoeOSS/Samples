@@ -7,12 +7,12 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Connectors.CloudFoundry" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Discovery.Client" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Consul" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Eureka" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Kubernetes" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 </Project>
