@@ -23,7 +23,9 @@ Pre-requisites:
 You must first create an instance of the PostgreSQL service in an org/space.
 
 1. `cf target -o your-org -s your-space`
-1. `cf create-service csb-azure-postgresql small myPostgreSqlService` or `cf create-service csb-google-postgres default myPostgreSqlService`
+1. `cf create-service csb-azure-postgresql small myPostgreSqlService` or 
+   `cf create-service csb-google-postgres default myPostgreSqlService` or
+   `cf create-service postgres on-demand-postgres-db myPostgreSqlService`
 
 ### Publish App & Push to CloudFoundry
 
