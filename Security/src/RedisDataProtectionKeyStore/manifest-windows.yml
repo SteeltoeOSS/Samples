@@ -1,10 +1,15 @@
 ﻿---
 applications:
 - name: keystore
+  random-route: true
   memory: 256M
   stack: windows
-  command: .\RedisDataProtectionKeyStore
+  buildpacks:
+   - binary_buildpack
+  command: cmd /c .\RedisDataProtectionKeyStore --urls=http://0.0.0.0:%PORT%
   env:
-    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
   services:
    - myRedisService
