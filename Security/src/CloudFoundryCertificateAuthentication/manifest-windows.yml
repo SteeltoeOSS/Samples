@@ -2,7 +2,10 @@
 applications:
 - name: mtls-server
   buildpacks:
-   - hwc_buildpack
+   - binary_buildpack
   memory: 384M
   stack: windows
-  command: .\CloudFoundryCertificateAuthentication
+  env:
+     ASPNETCORE_ENVIRONMENT: Development
+     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+     DOTNET_NOLOGO: "true"

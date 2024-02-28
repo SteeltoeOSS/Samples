@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CloudFoundrySingleSignon</title>
+    <title>@ViewData["Title"] - Cloud Foundry Single Sign-on</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,16 +26,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CloudFoundrySingleSignon</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Cloud Foundry Security Sample</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="InvokeJwtSample">InvokeJwtSample</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="InvokeSameSpaceSample">InvokeSameSpaceSample</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="InvokeSameOrgSample">InvokeOrgSample</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="TestGroup">testgroup</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="AnotherTestGroup">testgroup1</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="InvokeJwtSample">JWT</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="InvokeSameSpaceSample">SameSpace</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="InvokeSameOrgSample">SameOrg</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -45,7 +44,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - CloudFoundrySingleSignon</p>
+            <p>&copy; 2024 - Cloud Foundry Single Sign-on</p>
         </footer>
     </div>
 

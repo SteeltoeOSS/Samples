@@ -6,7 +6,7 @@ SET UAA_ENDPOINT=uaa.systemdomain.com
 SET ADMIN_CLIENT_ID=admin
 :: also from ops manager
 SET ADMIN_CLIENT_SECRET=LhCN75-pYpm-7M0HFVdSwLKDGnLPxUk1
-:: this is the guid of the identity zone, it's the first guid in the URI for any page in the Pivotal SSO UI 
+:: this is the guid of the identity zone, it's the first guid in the URI for any page in the Tanzu SSO UI 
 SET IDENTITY_ZONE_ID=1d94b717-2f59-4e07-82aa-66e28dc649b1
 :: set an id for the zone-specific admin client we're going to create to be able to create groups and users
 SET ZONEADMIN_CLIENT_ID=adminclient
