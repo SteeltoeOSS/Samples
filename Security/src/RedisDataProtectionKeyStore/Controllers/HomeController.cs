@@ -1,73 +1,60 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Mvc;
+using RedisDataProtectionKeyStore.Models;
 
-using Microsoft.AspNetCore.Http;
+namespace RedisDataProtectionKeyStore.Controllers;
 
-namespace RedisDataProtectionKeyStore.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private const string ProtectionPurpose = "SteeltoeDataProtectionInSession";
+    private const string SessionKey = "ExampleSessionKey";
+
+    private readonly IDataProtectionProvider _dataProtectionProvider;
+
+    public HomeController(IDataProtectionProvider dataProtectionProvider)
     {
-        IDataProtectionProvider _protection;
-        private IHttpContextAccessor _httpContext;
+        _dataProtectionProvider = dataProtectionProvider;
+    }
 
-        public HomeController(IDataProtectionProvider protection, IHttpContextAccessor contextAccessor)
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    {
+        // Steeltoe: Obtain session information.
+        IDataProtector dataProtector = _dataProtectionProvider.CreateProtector(ProtectionPurpose);
+        string? sessionValue = HttpContext.Session.GetString(SessionKey);
+
+        if (string.IsNullOrEmpty(sessionValue))
         {
-            _protection = protection;
-            _httpContext = contextAccessor;
+            sessionValue = "Example Protected String - " + Guid.NewGuid();
+            HttpContext.Session.SetString(SessionKey, dataProtector.Protect(sessionValue));
+            await HttpContext.Session.CommitAsync(cancellationToken);
+        }
+        else
+        {
+            sessionValue = dataProtector.Unprotect(sessionValue);
         }
 
-        public IActionResult Index()
+        var model = new SessionStateViewModel
         {
-            return View();
-        }
+            InstanceIndex = Environment.GetEnvironmentVariable("CF_INSTANCE_INDEX"),
+            SessionId = HttpContext.Session.Id,
+            SessionValue = sessionValue
+        };
 
-        public IActionResult About()
+        return View(model);
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Protected()
-        {
-            ViewData["Message"] = "Protected page.";
-            var session = _httpContext.HttpContext.Session;
-
-        
-            string protectedString = session.GetString("SomethingProtected");
-            if (string.IsNullOrEmpty(protectedString)) {
-                protectedString = "My Protected String - " + Guid.NewGuid().ToString();
-                session.SetString("SomethingProtected",
-                    _protection.CreateProtector("MyProtectedData in Session").Protect(protectedString));
-                await session.CommitAsync();
-            } else
-            {
-                protectedString = _protection.CreateProtector("MyProtectedData in Session").Unprotect(protectedString);
-            }
-
-            ViewData["SessionID"] = session.Id;
-            ViewData["SomethingProtected"] = protectedString;
-            ViewData["InstanceIndex"] = GetInstanceIndex();
-            return View();
-        }
-
-        private string GetInstanceIndex()
-        {
-            return Environment.GetEnvironmentVariable("CF_INSTANCE_INDEX");
-        }
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }
