@@ -8,6 +8,12 @@ This page contains information on basic tasks that are used throughout the Steel
 
 The Steeltoe team has built a docker image of a [basic Config server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/config-server) for an easy experience getting started
 
+To start a config server backed by the Spring Cloud Samples repo:
+
+```bash
+docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/config-server
+```
+
 To start a config server backed by a folder on your local disk, start the docker image like this:
 
 ```bash
@@ -15,21 +21,15 @@ To start a config server backed by a folder on your local disk, start the docker
 docker run --rm -ti -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoeoss/configserver --spring.profiles.active=native
 ```
 
-To start a config server backed by the spring cloud samples repo:
-
-```bash
-docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/config-server
-```
-
 ### Run SCCS with Java
 
 To run a Spring Cloud Config Server without Docker:
 
-1. Install Java 8 JDK.
-1. Install Maven 3.x.
 1. Clone the Spring Cloud Config Server repository: `git clone https://github.com/spring-cloud/spring-cloud-config`
 1. Change to the directory the server is located in: `cd spring-cloud-config/spring-cloud-config-server`
-1. Start the server: `mvn spring-boot:run`
+1. Review the readme and ensure you have the required JDK installed
+1. Build the source: `.\mvnw install -DskipTests`
+1. Start the server: `.\mvnw spring-boot:run`
 
 The default configuration of the Config Server uses [this github repo](https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
 

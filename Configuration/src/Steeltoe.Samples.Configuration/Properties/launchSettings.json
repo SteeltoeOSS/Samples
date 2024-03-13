@@ -1,0 +1,15 @@
+﻿{
+  "profiles": {
+    "Steeltoe.Samples.Configuration": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7021;http://localhost:5021",
+      "environmentVariables": {
+        // ASPNETCORE_ENVIRONMENT is lower-cased here to match the files in the config repo
+        // https://github.com/spring-cloud-samples/config-repo
+        "ASPNETCORE_ENVIRONMENT": "development"
+      }
+    }
+  }
+}
