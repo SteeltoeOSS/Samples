@@ -21,10 +21,10 @@ namespace FortuneTellerService
                 {
                     host.UseStartup<Startup>();
                 })
+                .ConfigureAppConfiguration(builder => builder.AddPlaceholderResolver())
                 .AddCloudFoundryConfiguration()
                 .AddAllActuators()
                 .AddDiscoveryClient()
-                .AddPlaceholderResolver()
                 .Build();
     }
 }

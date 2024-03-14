@@ -23,6 +23,10 @@ namespace Steeltoe.Samples.Configuration.TagHelpers
                     GenerateCredentialHtml(pair.Key, pair.Value, output);
                 }
             }
+            else
+            {
+                output.Content.AppendHtml("<li>Credentials not found</li>");
+            }
             output.Content.AppendHtml("</ul>");
           
             base.Process(context, output);

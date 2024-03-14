@@ -39,9 +39,8 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud C
 
 1. `cf target -o myorg -s myspace`
 1. Use the correct escaping for your shell:
-   1. bash: `cf create-service p-config-server standard myConfigServerInstanceName -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
-   1. CMD: `cf create-service p-config-server standard myConfigServerInstanceName -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}"`
-   1. PowerShell: `cf create-service p-config-server standard myConfigServerInstanceName -c '{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}'`
+   1. bash or Powershell: `cf create-service p-config-server standard myConfigServerInstanceName -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
+   1. CMD: `cf create-service p.config-server standard myConfigServerInstanceName -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}"`
 1. Wait for service to be ready. (use `cf services` to check the status)
 
 ## Spring Cloud Eureka Server
@@ -56,12 +55,12 @@ docker run --rm -ti -p 8761:8761 --name steeltoe-eureka steeltoeoss/eureka-serve
 
 ### Run Eureka with Java
 
-### Provision Eureka on Cloud Foundry
+### Provision Service Registry on Cloud Foundry
 
 Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry service in a org/space.
 
 1. cf target -o myorg -s myspace
-1. cf create-service p-service-registry standard myDiscoveryServiceInstanceName
+1. cf create-service p.service-registry standard myDiscoveryServiceInstanceName
 1. Wait for service to be ready. (use `cf services` to check the status)
 
 ## RabbitMQ

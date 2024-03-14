@@ -10,6 +10,7 @@ In order to add Spring Cloud Config Server, we recommend Docker or an equivalent
 ## Running Locally
 
 Pre-requisites:
+
 1. Installed .NET SDK that supports .NET 8.0
 
 Refer to [common tasks](/CommonTasks.md#Spring-Cloud-Config-Server) for instructions on starting a Spring Cloud Config Server.
@@ -17,6 +18,7 @@ Refer to [common tasks](/CommonTasks.md#Spring-Cloud-Config-Server) for instruct
 ## Running on Cloud Foundry or Tanzu Application Service (TAS)
 
 Pre-requisites:
+
 1. Access to a Cloud Foundry based environment (such as TAS)
 1. Installed Spring Cloud Services
 1. Installed [cf cli](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
@@ -30,27 +32,28 @@ Refer to [common tasks](/CommonTasks.md#Spring-Cloud-Config-Server#provision-scc
 The [dotnet_core_buildpack](https://github.com/cloudfoundry/dotnet-core-buildpack) can build this application from source, so the process to deploy should be straightforward to follow from your preferred shell:
 
 1. Login to your Cloud Foundry environment and target your org/space:
-  - `cf target -o myorg -s development`
+   - `cf target -o myorg -s development`
 1. Move to the directory containing this sample:
-  - `cd src/Steeltoe.Samples.Configuration`
+   - `cd src/Steeltoe.Samples.Configuration`
 1. Push the app using the appropriate manifest:
-  - `cf push -f manifest.yml`
+   - `cf push -f manifest.yml`
 
 ### Deploy to Windows
 
 Additional Pre-requisites for this option:
+
 1. [Cloud Foundry support for Windows](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/windows-index.html)
 1. Installed .NET SDK that supports .NET 8.0
 
 >**_NOTE:_** Because there is no buildpack for Cloud Foundry that can build .NET applications from source for deployment to Windows, the sample must be precompiled before deployment.
 
 1. Login to your Cloud Foundry environment and target your org/space:
-  - `cf target -o myorg -s development`
+   - `cf target -o myorg -s development`
 1. Move to the directory containing this sample:
-  - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
+   - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
 1. Run `dotnet publish -r win-x64`
 1. Push the binary using the Windows manifest:
-  - `cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish/`
+   - `cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish/`
 
 ## Running on Tanzu Application Platform (TAP)
 
@@ -75,7 +78,7 @@ YAML files for creating the needed resources are included with this project, and
 ### Publish locally and/or deploy to TAP
 
 1. Move to the directory containing this sample:
-  - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
+   - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
 1. Publish app to a local directory, specifying the runtime:
    - `dotnet publish -r linux-x64 --no-self-contained`
 1. Push the app to TAP:

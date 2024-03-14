@@ -7,38 +7,26 @@ using Steeltoe.Configuration.CloudFoundry;
 
 namespace Steeltoe.Samples.Configuration.Controllers;
 
-public class HomeController : Controller
+public class HomeController(
+    IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot,
+    IOptionsSnapshot<ConfigServerClientSettingsOptions> configServerSettings,
+    IOptionsSnapshot<PlaceholderValues> placeholderValues,
+    IOptions<CloudFoundryApplicationOptions> appOptions,
+    IOptions<CloudFoundryServicesOptions> serviceOptions,
+    IConfiguration configuration,
+    ILogger<HomeController> logger)
+    : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<HomeController> _logger = logger;
 
-    private ExternalConfiguration DataSnapshot { get; set; }
+    private ExternalConfiguration DataSnapshot { get; set; } = configServerDataSnapshot.Value;
 
-    private ConfigServerClientSettingsOptions ConfigServerClientSettings { get; set; }
+    private ConfigServerClientSettingsOptions ConfigServerClientSettings { get; set; } = configServerSettings.Value;
 
-    private PlaceholderValues PlaceholderResolverValues { get; set; }
+    private PlaceholderValues PlaceholderResolverValues { get; set; } = placeholderValues.Value;
 
-    private CloudFoundryApplicationOptions ApplicationOptions { get; }
-    private CloudFoundryServicesOptions ServiceOptions { get; }
-
-    private IConfiguration _configuration;
-
-    public HomeController(
-        IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot,
-        IOptionsSnapshot<ConfigServerClientSettingsOptions> configServerSettings,
-        IOptionsSnapshot<PlaceholderValues> placeholderValues,
-        IOptions<CloudFoundryApplicationOptions> appOptions,
-        IOptions<CloudFoundryServicesOptions> serviceOptions,
-        IConfiguration configuration,
-        ILogger<HomeController> logger)
-    {
-        DataSnapshot = configServerDataSnapshot.Value;
-        ConfigServerClientSettings = configServerSettings.Value;
-        PlaceholderResolverValues = placeholderValues.Value;
-        ApplicationOptions = appOptions.Value;
-        ServiceOptions = serviceOptions.Value;
-        _configuration = configuration;
-        _logger = logger;
-    }
+    private CloudFoundryApplicationOptions ApplicationOptions { get; } = appOptions.Value;
+    private CloudFoundryServicesOptions ServiceOptions { get; } = serviceOptions.Value;
 
     public IActionResult Index()
     {
@@ -55,12 +43,12 @@ public class HomeController : Controller
         return View(ConfigServerClientSettings);
     }
 
-    public ActionResult RandomValues()
+    public IActionResult RandomValues()
     {
-        return View(_configuration);
+        return View(configuration);
     }
 
-    public ActionResult PlaceholderValues()
+    public IActionResult PlaceholderValues()
     {
         return View(PlaceholderResolverValues);
     }
