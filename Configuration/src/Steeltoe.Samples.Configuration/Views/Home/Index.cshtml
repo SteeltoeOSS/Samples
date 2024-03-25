@@ -2,6 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .overflow-scroll {
+        height: 100px;
+    }
+</style>
+
 <div class="text-center">
     <h1 class="display-4">Steeltoe Configuration Providers Sample</h1>
     <table class="table table-bordered">
@@ -30,7 +36,26 @@
         </tr>
         <tr>
             <td><a class="nav-link text-dark" href="/actuator/env">View All Configuration</a></td>
-            <td><a class="nav-link text-dark" href="/actuator/refresh">Reload Configuration</a></td>
+            <td><a class="nav-link text-dark" href="#" onclick="refreshActuator()">Refresh Configuration</a></td>
         </tr>
+        <tr><td colspan="2"><div id="refreshResult"></div></td></tr>
     </table>
 </div>
+                    
+<script>
+    function refreshActuator() {
+        if (!$("#refreshResult").hasClass("spinner-border")) {
+            $("#refreshResult").addClass("spinner-border");
+            $("#refreshResult").removeClass("overflow-scroll");
+            $("#refreshResult").html("");
+            $.post('/actuator/refresh', function (data) {
+                $("#refreshResult").append("<h4>Response from refresh actuator</h4>");
+                data.forEach((item) => {
+                    $("#refreshResult").append(item + "<br />");
+                });
+                $("#refreshResult").removeClass("spinner-border");
+                $("#refreshResult").addClass("overflow-scroll");
+            })
+        }
+    }
+</script>
