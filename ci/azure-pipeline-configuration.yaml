@@ -20,14 +20,14 @@ jobs:
   workspace:
     clean: all
   steps:
-  - template: setup-cloud-foundry-linux-steps.yaml
+  - template: templates/setup-cloud-foundry-linux-steps.yaml
   - bash: touch reinit
     displayName: 'Reinit Virtual Python Environment'
   - bash: ./behave.sh Configuration/src/Steeltoe.Samples.Configuration '--stop'
     displayName: 'Sample -> Configuration: All'
     env:
       PYTHON: python3.10
-  - template: publish-results-steps.yaml
+  - template: templates/publish-results-steps.yaml
     parameters:
       feature: Configuration
       sample: All
