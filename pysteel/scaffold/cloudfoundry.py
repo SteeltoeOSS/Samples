@@ -25,9 +25,7 @@ def setup(context, scenario):
             context.options.cf.apiurl,
             context.options.cf.username,
             context.options.cf.password,
-            context.options.cf.org,
-            'development'
-        )
+            context.options.cf.org)
     else:
         context.log.info('CloudFoundry credentials not provided, assuming already logged in')
     context.cf_space = context.options.cf.space
