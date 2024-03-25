@@ -7,11 +7,11 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'foo'
+    app = 'steeltoe-configuration-sample'
     cf.delete_app(app)
     # create service
     service = 'p.config-server'
     plan = 'standard'
     instance = 'myConfigServer'
-    args = ['-c', './config-server.json']
+    args = ['-c', '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}']
     cf.create_service(service, plan, instance, args)
