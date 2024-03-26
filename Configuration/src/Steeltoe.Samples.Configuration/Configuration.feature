@@ -19,7 +19,7 @@ Feature: Steeltoe Configuration
   @net8.0
   @windows
   Scenario: Steeltoe Configuration (net8.0/win)
-    When you run: dotnet publish -r win-x64
+    When you run: dotnet publish -r win-x64 --self-contained
     And you run in the background: cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
     And you wait until CloudFoundry app steeltoe-configuration-sample is started
     When you get https://steeltoe-configuration-sample/Home/ExternalConfigurationData

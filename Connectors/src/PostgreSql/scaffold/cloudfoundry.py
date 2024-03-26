@@ -11,6 +11,6 @@ def setup(context):
     cf.delete_app(app)
     # create service
     service = 'csb-azure-postgresql'
-    plan = 'small'
+    plan = 'mini'
     instance = 'myPostgreSqlService'
     cf.create_service(service, plan, instance)
