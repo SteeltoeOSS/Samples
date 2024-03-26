@@ -2,9 +2,9 @@
 
 namespace Steeltoe.Samples.Configuration.Models;
 
-public class CloudFoundryViewModel(CloudFoundryApplicationOptions appOptions, CloudFoundryServicesOptions servOptions)
+public class CloudFoundryViewModel(CloudFoundryApplicationOptions applicationOptions, CloudFoundryServicesOptions servicesOptions)
 {
-    public CloudFoundryApplicationOptions Application { get; } = appOptions;
+    public CloudFoundryApplicationOptions Application { get; } = applicationOptions;
 
-    public CloudFoundryServicesOptions Services { get; } = servOptions;
+    public CloudFoundryServicesOptions Services { get; } = servicesOptions;
 }

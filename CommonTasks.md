@@ -55,7 +55,7 @@ docker run --rm -ti -p 8761:8761 --name steeltoe-eureka steeltoeoss/eureka-serve
 
 ### Run Eureka with Java
 
-### Provision Service Registry on Cloud Foundry
+### Provision Eureka on Cloud Foundry
 
 Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry service in a org/space.
 

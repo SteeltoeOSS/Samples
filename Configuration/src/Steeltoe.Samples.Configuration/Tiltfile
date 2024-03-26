@@ -3,7 +3,7 @@ NAMESPACE = os.getenv("NAMESPACE", default="apps")
 WAIT_TIMEOUT = os.getenv("WAIT_TIMEOUT", default='10m00s')
 TYPE = os.getenv("TYPE", default='web')
 NAME = "steeltoe-samples-configuration"
-LIVE_UPDATE_PATH = os.getenv("LIVE_UPDATE_PATH", default="bin\\Debug\\net6.0")
+LIVE_UPDATE_PATH = os.getenv("LIVE_UPDATE_PATH", default="bin\\Debug\\net8.0")
 
 k8s_custom_deploy(
   NAME,
@@ -19,7 +19,7 @@ k8s_custom_deploy(
   deps=['./bin'],
   container_selector='workload',
   live_update=[
-    sync('bin\\Debug\\net6.0\\linux-x64\\publish', '/workspace')
+    sync('bin\\Debug\\net8.0\\linux-x64\\publish', '/workspace')
   ]
 )
 
