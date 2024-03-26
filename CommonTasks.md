@@ -39,7 +39,7 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud C
 
 1. `cf target -o myorg -s myspace`
 1. Use the correct escaping for your shell:
-   1. bash or Powershell: `cf create-service p-config-server standard myConfigServerInstanceName -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
+   1. bash or PowerShell: `cf create-service p-config-server standard myConfigServerInstanceName -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
    1. CMD: `cf create-service p.config-server standard myConfigServerInstanceName -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}"`
 1. Wait for service to be ready. (use `cf services` to check the status)
 

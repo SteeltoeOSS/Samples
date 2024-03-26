@@ -8,24 +8,25 @@ using Steeltoe.Samples.Configuration.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Steeltoe Configuration Providers
+// Steeltoe: Add Configuration providers.
 builder.Configuration.AddRandomValueSource();
 builder.Configuration.AddKubernetesServiceBindings();
-
 builder.Configuration.AddCloudFoundry();
 builder.Configuration.AddPlaceholderResolver();
 builder.AddConfigServer();
 
-// Add services to the container.
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
+
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.ConfigureCloudFoundryOptions(builder.Configuration);
 
-// Optional: Adds ConfigServerClientOptions to service container
+// Steeltoe: Optionally enables usage of "spring:cloud:config" keys to configure Spring Cloud Config Server.
 builder.Services.ConfigureConfigServerClientOptions();
 
-// Adds the configuration data POCO configured with data returned from the Spring Cloud Config Server
+// Steeltoe: Add the configuration data POCO configured with data returned from the Spring Cloud Config Server.
 builder.Services.Configure<ExternalConfiguration>(builder.Configuration);
 builder.Services.Configure<PlaceholderValues>(builder.Configuration);
 

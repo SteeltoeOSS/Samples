@@ -14,7 +14,8 @@ publish/
 tools/
 
 # user-specific state
-*.sln.DotSettings.user
+*.DotSettings.user
+
 
 ### VS Code ###
 .vscode

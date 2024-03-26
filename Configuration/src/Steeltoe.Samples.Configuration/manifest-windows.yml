@@ -7,7 +7,8 @@ applications:
   stack: windows
   command: cmd /c .\Steeltoe.Samples.Configuration
   env:
-    # ASPNETCORE_ENVIRONMENT is lower-cased here to match the files in the config repo
+    # ASPNETCORE_ENVIRONMENT value is lower-cased here to match the files in the config repository at:
+
     # https://github.com/spring-cloud-samples/config-repo
     ASPNETCORE_ENVIRONMENT: development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

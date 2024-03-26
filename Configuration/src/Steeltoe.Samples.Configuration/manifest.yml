@@ -6,7 +6,8 @@ applications:
   memory: 256M
   stack: cflinuxfs4
   env:
-    # ASPNETCORE_ENVIRONMENT is lower-cased here to match the files in the config repo
+    # ASPNETCORE_ENVIRONMENT value is lower-cased here to match the files in the config repository at:
+
     # https://github.com/spring-cloud-samples/config-repo
     ASPNETCORE_ENVIRONMENT: development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
