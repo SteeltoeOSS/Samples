@@ -5,7 +5,6 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D291523F-9962-4000-9C11-9FC9BD202AC5}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\CommonTasks.md = ..\..\CommonTasks.md
-		..\configure.ps1 = ..\configure.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.Configuration", "Steeltoe.Samples.Configuration\Steeltoe.Samples.Configuration.csproj", "{82489734-D845-44FA-9EAB-1ED0A7013E51}"

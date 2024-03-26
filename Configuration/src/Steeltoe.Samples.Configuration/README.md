@@ -59,7 +59,7 @@ Additional prerequisites for this option:
 
 1. Move to the directory containing this sample:
    - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
-1. Run `dotnet publish -r win-x64`
+1. Run `dotnet publish -r win-x64 --self-contained`
 1. Push the binary using the Windows manifest:
    - `cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish/`
 

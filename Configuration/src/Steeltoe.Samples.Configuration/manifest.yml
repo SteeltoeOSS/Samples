@@ -3,7 +3,8 @@ applications:
 - name: steeltoe-configuration-sample
   buildpacks:
    - dotnet_core_buildpack
-  memory: 256M
+  memory: 128M
+  random-route: true
   stack: cflinuxfs4
   env:
     # ASPNETCORE_ENVIRONMENT value is lower-cased here to match the files in the config repository at:
