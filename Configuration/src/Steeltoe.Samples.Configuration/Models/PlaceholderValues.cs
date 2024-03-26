@@ -2,9 +2,9 @@
 
 public class PlaceholderValues
 {
-      public string? ResolvedPlaceholderFromEnvVariables { get; set; }
+      public string? ResolvedFromEnvironmentVariables { get; set; }
 
-      public string? UnresolvedPlaceholder { get; set; }
+      public string? Unresolved { get; set; }
 
-      public string? ResolvedPlaceholderFromJson { get; set; }
+      public string? ResolvedFromJson { get; set; }
 }

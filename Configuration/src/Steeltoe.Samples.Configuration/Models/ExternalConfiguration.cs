@@ -10,12 +10,5 @@ public class ExternalConfiguration
 
     public string Foo { get; set; } = "Not Set";
 
-    public Info Info { get; set; } = new Info();
-}
-
-public class Info
-{
-    public string Description { get; set; } = "Not Set";
-
-    public string Url { get; set; } = "Not Set";
+    public ExternalConfigurationInfo ExternalConfigurationInfo { get; set; } = new();
 }

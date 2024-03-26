@@ -13,5 +13,5 @@ def setup(context):
     service = 'p.config-server'
     plan = 'standard'
     instance = 'myConfigServer'
-    args = ['-c', '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}']
+    args = ['-c', './config-server.json']
     cf.create_service(service, plan, instance, args)

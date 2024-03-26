@@ -19,6 +19,7 @@ tools/
 
 ### VS Code ###
 .vscode
+*.code-workspace
 
 ### Visual Studio ###
 .vs
