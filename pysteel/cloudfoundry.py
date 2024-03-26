@@ -20,16 +20,17 @@ class CloudFoundry(object):
     def __init__(self, context):
         self._context = context
 
-    def login(self, api_url, username, password, org):
+    def login(self, api_url, username, password, org, space):
         """
         Login to Cloud Foundry
         :type api_url: str
         :type username: str
         :type password: str
         :type org: str
+        :type space: str
         """
         self._context.log.info('logging into Cloud Foundry')
-        cmd_s = 'cf login -a {} -u {} -p {} -o {}'.format(api_url, username, password, org)
+        cmd_s = 'cf login -a {} -u {} -p {} -o {} -s {}'.format(api_url, username, password, org, space)
         command.Command(self._context, cmd_s).run()
 
     def get_api_endpoint(self):

@@ -1,6 +1,6 @@
 ---
 applications:
-- name: steeltoe-configuration-sample-windows
+- name: steeltoe-configuration-sample
   buildpacks:
   - binary_buildpack
   memory: 128M
