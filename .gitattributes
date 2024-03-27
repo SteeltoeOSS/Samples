@@ -11,7 +11,6 @@
 
 *.ps1 eol=crlf
 *.sh eol=lf
-*.config eol=lf
 
 *.jpg  	binary
 *.png 	binary

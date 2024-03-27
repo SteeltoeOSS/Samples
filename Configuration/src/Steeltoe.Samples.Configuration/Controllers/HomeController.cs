@@ -13,12 +13,9 @@ public class HomeController(
     IOptionsSnapshot<PlaceholderValues> placeholderValues,
     IOptions<CloudFoundryApplicationOptions> appOptions,
     IOptions<CloudFoundryServicesOptions> serviceOptions,
-    IConfiguration configuration,
-    ILogger<HomeController> logger)
+    IConfiguration configuration)
     : Controller
 {
-    private readonly ILogger<HomeController> _logger = logger;
-
     private ExternalConfiguration DataSnapshot { get; set; } = configServerDataSnapshot.Value;
 
     private ConfigServerClientSettingsOptions ConfigServerClientSettings { get; set; } = configServerSettings.Value;

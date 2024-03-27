@@ -21,6 +21,7 @@ builder.AddAllActuators();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Steeltoe: map VCAP_APPLICATION and VCAP_SERVICES to IOptions<CloudFoundryApplicationOptions> and IOptions<CloudFoundryServicesOptions>
 builder.Services.ConfigureCloudFoundryOptions(builder.Configuration);
 
 // Steeltoe: Optionally enables usage of "spring:cloud:config" keys to configure Spring Cloud Config Server.
