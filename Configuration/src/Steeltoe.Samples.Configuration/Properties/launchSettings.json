@@ -7,7 +7,6 @@
       "applicationUrl": "https://localhost:7021;http://localhost:5021",
       "environmentVariables": {
         // ASPNETCORE_ENVIRONMENT value is lower-cased here to match the files in the config repository at:
-
         // https://github.com/spring-cloud-samples/config-repo
         "ASPNETCORE_ENVIRONMENT": "development"
       }

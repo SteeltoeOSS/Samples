@@ -2,12 +2,10 @@
 
 This is an ASP.NET Core application that shows how to use various `IConfiguration` providers that are part of the Steeltoe project.
 
-
 ## General Pre-Requisites
 
 In order to run this sample locally, you will need a .NET SDK capable of building a target framework of .NET 8.0 or higher.
 In order to add Spring Cloud Config Server, we recommend using a docker container.
-
 
 ## Running Locally
 
@@ -35,10 +33,8 @@ The [dotnet_core_buildpack](https://github.com/cloudfoundry/dotnet-core-buildpac
 
 1. Login to your Cloud Foundry environment and target your org/space:
    - `cf target -o your-org -s your-space`
-
 1. Move to the directory containing this sample:
    - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
-
 1. Push the app using the appropriate manifest:
    - `cf push -f manifest.yml`
 
@@ -46,17 +42,14 @@ The [dotnet_core_buildpack](https://github.com/cloudfoundry/dotnet-core-buildpac
 
 Additional prerequisites for this option:
 
-
 1. [Cloud Foundry support for Windows](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/windows-index.html)
 1. Installed .NET SDK that supports .NET 8.0
 
 > [!NOTE]
 > Because there is no buildpack for Cloud Foundry that can build .NET applications from source for deployment to Windows, the sample must be precompiled before deployment.
 
-
 1. Login to your Cloud Foundry environment and target your org/space:
    - `cf target -o your-org -s your-space`
-
 1. Move to the directory containing this sample:
    - `cd Samples/Configuration/src/Steeltoe.Samples.Configuration`
 1. Run `dotnet publish -r win-x64 --self-contained`
@@ -91,7 +84,6 @@ YAML files for creating the needed resources are included with this project, and
    - `dotnet publish -r linux-x64 --no-self-contained`
 1. Push the app to TAP:
    - `tanzu app workload apply --local-path ./bin/Debug/net8.0/linux-x64/publish --file ./config/workload.yaml -y`
-
    - See the Tanzu [documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.8/tap/getting-started-deploy-first-app.html) for details.
 
 ### See the Official [Steeltoe Configuration Documentation](https://docs.steeltoe.io/api/v3/configuration/) for a more in-depth walkthrough of the samples and more detailed information.

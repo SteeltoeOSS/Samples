@@ -16,7 +16,6 @@ tools/
 # user-specific state
 *.DotSettings.user
 
-
 ### VS Code ###
 .vscode
 *.code-workspace
