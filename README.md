@@ -3,18 +3,22 @@
 This repository contains a variety of sample applications illustrating how to use the Steeltoe framework:
 
 ## [Configuration](Configuration)
+
 Samples using the Spring Cloud Config Server and other Steeltoe configuration providers.
 
 | Sample | main | latest |
 | --- | --- | --- |
-| [Simple](Configuration/src/Simple) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_Simple%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=16&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_Simple%5D?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=16&branchName=latest) |
-| [SimpleCloudFoundry](Configuration/src/SimpleCloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_SimpleCloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=13&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_SimpleCloudFoundry%5D?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=13&branchName=latest) |
-| [CloudFoundry](Configuration/src/CloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=15&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_CloudFoundry%5D?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=15&branchName=latest) |
+| [Simple](Configuration/src/Simple) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_Simple%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=16&branchName=main) | |
+| [SimpleCloudFoundry](Configuration/src/SimpleCloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_SimpleCloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=13&branchName=main) | |
+| [CloudFoundry](Configuration/src/CloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=15&branchName=main) | |
+| [Configuration](Configuration/src/Steeltoe.Samples.Configuration) | | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FConfiguration?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=73&branchName=latest) |
 
 ## [Discovery](Discovery)
+
 Samples using Steeltoe Service Discovery microservices-based applications.
 
 ## [Management](Management/src)
+
 Samples using the Steeltoe Management packages for adding Management REST endpoints to your application, as well as adding Distributed Tracing support.
 
 | Sample | main | latest |
@@ -22,6 +26,7 @@ Samples using the Steeltoe Management packages for adding Management REST endpoi
 | [CloudFoundry](Management/src/CloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BManagement_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=23&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BManagement_CloudFoundry%5D?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=23&branchName=latest) |
 
 ## [Connectors](Connectors)
+
 Samples using the Steeltoe Connectors for connecting to backing services. Steeltoe Connectors simplify the coding process of binding to and accessing Cloud Foundry-based services.
 
 | Sample | main | latest |
@@ -38,6 +43,7 @@ Samples using the Steeltoe Connectors for connecting to backing services. Steelt
 | [SqlServerEFCore](Connectors/src/SqlServerEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-SqlServerEFCore?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=71&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-SqlServerEFCore?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=71&branchName=latest) |
 
 ## [Security](Security)
+
 Samples using the Steeltoe Security packages for Authentication and Authorization with Cloud Foundry auth services, using a Redis cache for DataProtection KeyRing storage and for interacting with CredHub.
 
 | Sample | main | latest |
@@ -45,19 +51,21 @@ Samples using the Steeltoe Security packages for Authentication and Authorizatio
 | [CloudFoundrySingleSignon](Security/src/CloudFoundrySingleSignon) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BSecurity_CloudFoundrySingleSignon%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=24&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BSecurity_CloudFoundrySingleSignon%5D?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=24&branchName=latest) |
 
 ## [MusicStore](MusicStore)
+
 A sample that uses all of the Steeltoe components together in a microservices-based ASP.NET Core application. Adapted from the ASP.NET Core reference app: [MusicStore by Microsoft](https://github.com/aspnet/AspNetCore/tree/main/src/MusicStore).
 
 ## [FreddysBBQ](FreddysBBQ)
+
 A polyglot (Java and .NET) microservices-based sample demonstrating interoperability between Java and .NET on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
-# Branches
+## Branches
 
 All new development is done on the latest branch. Samples for the stable version of Steeltoe can be found on the main branch.
 
-# Documentation
+## Documentation
 
 If you are looking for documentation on how to use the Steeltoe components, you can find that [here](https://steeltoe.io/docs/).
 
-# Building & Running
+## Building & Running
 
 See the Readmes for each sample for instructions on how to build and run.
