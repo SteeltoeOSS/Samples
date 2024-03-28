@@ -55,6 +55,11 @@ public class HomeController(
         return View(new CloudFoundryViewModel(ApplicationOptions ?? new CloudFoundryApplicationOptions(), ServiceOptions ?? new CloudFoundryServicesOptions()));
     }
 
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

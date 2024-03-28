@@ -8,6 +8,9 @@ using Steeltoe.Samples.Configuration.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
 // Steeltoe: Add Configuration providers.
 builder.Configuration.AddRandomValueSource();
 builder.Configuration.AddKubernetesServiceBindings();
@@ -17,9 +20,6 @@ builder.AddConfigServer();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 // Steeltoe: map VCAP_APPLICATION and VCAP_SERVICES to IOptions<CloudFoundryApplicationOptions> and IOptions<CloudFoundryServicesOptions>
 builder.Services.ConfigureCloudFoundryOptions(builder.Configuration);

@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Steeltoe.Samples.Configuration": {
+    "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
