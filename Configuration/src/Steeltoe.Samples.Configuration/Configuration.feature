@@ -15,6 +15,8 @@ Feature: Steeltoe Configuration
     Then you should see "spring:cloud:config:name = foo"
     When you get https://steeltoe-configuration-sample/Home/CloudFoundry
     Then you should see "vcap:application:application_name = steeltoe-configuration-sample"
+    When you get https://steeltoe-configuration-sample/Home/PlaceholderValues
+    Then you should see "<td>ResolvedFromJson</td><td>Information</td>"
 
   @net8.0
   @windows
@@ -28,3 +30,5 @@ Feature: Steeltoe Configuration
     Then you should see "spring:cloud:config:name = foo"
     When you get https://steeltoe-configuration-sample/Home/CloudFoundry
     Then you should see "vcap:application:application_name = steeltoe-configuration-sample"
+    When you get https://steeltoe-configuration-sample/Home/PlaceholderValues
+    Then you should see "<td>ResolvedFromJson</td><td>Information</td>"
