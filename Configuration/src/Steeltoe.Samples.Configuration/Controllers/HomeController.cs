@@ -1,29 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Steeltoe.Samples.Configuration.Models;
-using Steeltoe.Configuration.ConfigServer;
-using System.Diagnostics;
 using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Configuration.ConfigServer;
+using Steeltoe.Samples.Configuration.Models;
 
 namespace Steeltoe.Samples.Configuration.Controllers;
 
-public class HomeController(
-    IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot,
-    IOptionsSnapshot<ConfigServerClientSettingsOptions> configServerSettings,
-    IOptionsSnapshot<PlaceholderValues> placeholderValues,
-    IOptions<CloudFoundryApplicationOptions> appOptions,
-    IOptions<CloudFoundryServicesOptions> serviceOptions,
-    IConfiguration configuration)
-    : Controller
+public sealed class HomeController(
+    IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot, IOptionsSnapshot<ConfigServerClientSettingsOptions> configServerSettings,
+    IOptionsSnapshot<PlaceholderValues> placeholderValues, IOptions<CloudFoundryApplicationOptions> appOptions,
+    IOptions<CloudFoundryServicesOptions> serviceOptions, IConfiguration configuration) : Controller
 {
-    private ExternalConfiguration DataSnapshot { get; set; } = configServerDataSnapshot.Value;
+    private readonly ExternalConfiguration _dataSnapshot  = configServerDataSnapshot.Value;
 
-    private ConfigServerClientSettingsOptions ConfigServerClientSettings { get; set; } = configServerSettings.Value;
+    private readonly ConfigServerClientSettingsOptions _configServerClientSettings  = configServerSettings.Value;
 
-    private PlaceholderValues PlaceholderResolverValues { get; set; } = placeholderValues.Value;
+    private readonly PlaceholderValues _placeholderResolverValues  = placeholderValues.Value;
 
-    private CloudFoundryApplicationOptions ApplicationOptions { get; } = appOptions.Value;
-    private CloudFoundryServicesOptions ServiceOptions { get; } = serviceOptions.Value;
+    private readonly CloudFoundryApplicationOptions _applicationOptions = appOptions.Value;
+    private readonly CloudFoundryServicesOptions _serviceOptions = serviceOptions.Value;
 
     public IActionResult Index()
     {
@@ -32,12 +28,12 @@ public class HomeController(
 
     public IActionResult ExternalConfigurationData()
     {
-        return View(DataSnapshot);
+        return View(_dataSnapshot);
     }
 
     public IActionResult ConfigServerSettings()
     {
-        return View(ConfigServerClientSettings);
+        return View(_configServerClientSettings);
     }
 
     public IActionResult RandomValues()
@@ -47,12 +43,12 @@ public class HomeController(
 
     public IActionResult PlaceholderValues()
     {
-        return View(PlaceholderResolverValues);
+        return View(_placeholderResolverValues);
     }
 
     public IActionResult CloudFoundry()
     {
-        return View(new CloudFoundryViewModel(ApplicationOptions ?? new CloudFoundryApplicationOptions(), ServiceOptions ?? new CloudFoundryServicesOptions()));
+        return View(new CloudFoundryViewModel(_applicationOptions, _serviceOptions));
     }
 
     public IActionResult Privacy()
@@ -63,6 +59,9 @@ public class HomeController(
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(new ErrorViewModel
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 }
