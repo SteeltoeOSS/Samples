@@ -1,0 +1,36 @@
+### Git ###
+.git/
+.github/
+.gitmodules
+**/.gitattributes
+**/.gitignore
+
+### DotNet ###
+bin/
+obj/
+publish/
+
+# local tools
+tools/
+
+# user-specific state
+*.DotSettings.user
+
+### VS Code ###
+.vscode
+*.code-workspace
+
+### Visual Studio ###
+.vs
+
+### JetBrains ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Tilt ###
+Tiltfile
+
+### Accelerator ###
+accelerator-log.md

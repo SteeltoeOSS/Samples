@@ -1,0 +1,14 @@
+﻿@model PlaceholderValues
+@{
+    ViewData["Title"] = "Placeholder Values";
+}
+<div class="text-center">
+    <h1>Result of Placeholder Resolution from Configuration</h1>
+    <table class="table table-bordered">
+        <tr><th>Configuration key</th><th>Resolved value</th></tr>
+        <tr><td>ResolvedFromEnvironmentVariables</td><td>@Model.ResolvedFromEnvironmentVariables</td></tr>
+        <tr><td>Unresolved</td><td>@Model.Unresolved</td></tr>
+        <tr><td>ResolvedFromJson</td><td>@Model.ResolvedFromJson</td></tr>
+    </table>
+    <h4>Review the contents of appsettings.json to see the original values assigned to these keys</h4>
+</div>

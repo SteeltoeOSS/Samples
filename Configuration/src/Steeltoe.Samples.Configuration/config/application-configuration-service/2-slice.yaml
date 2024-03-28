@@ -1,0 +1,11 @@
+﻿apiVersion: "config.apps.tanzu.vmware.com/v1alpha4"
+kind: ConfigurationSlice
+metadata:
+  name: config-slice
+  namespace: apps
+spec:
+  configurationSource: config-source
+  content:
+  - application/default
+  - foo/default
+  - foo/development
