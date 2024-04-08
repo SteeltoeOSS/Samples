@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <!---->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="$(MatchTargetFrameworkVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MatchTargetFrameworkVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--<ProjectReference Include="..\..\..\..\..\dotnet\aspnetcore\src\Security\Authentication\Certificate\src\Microsoft.AspNetCore.Authentication.Certificate.csproj" />
+    <ProjectReference Include="..\..\..\..\..\dotnet\aspnetcore\src\Security\Authentication\Certificate\src\Microsoft.AspNetCore.Authentication.Certificate.csproj" />-->
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Common\src\Common.Security\Steeltoe.Common.Security.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry.ServiceBinding\Steeltoe.Configuration.CloudFoundry.ServiceBinding.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry\Steeltoe.Configuration.CloudFoundry.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Management\src\Endpoint\Steeltoe.Management.Endpoint.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Security\src\Authorization.Certificate\Steeltoe.Security.Authorization.Certificate.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Security\src\Authentication.Jwt\Steeltoe.Security.Authentication.JwtBearer.csproj" />
+    <!--
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\Kubernetes.ServiceBinding\Steeltoe.Configuration.Kubernetes.ServiceBinding.csproj" />
+    <ProjectReference Include="..\..\..\..\Steeltoe\src\Management\src\Endpoint\Steeltoe.Management.Endpoint.csproj" />
+    -->
+  </ItemGroup>
+
+</Project>

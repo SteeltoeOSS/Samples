@@ -7,9 +7,9 @@ cf create-service smb Existing SERVICE-INSTANCE-NAME -c '{"share":"//SERVER/SHAR
 #!/bin/bash
 set -ex
 # vars to define
-SYSTEM_DOMAIN=systemdomain.com
+SYSTEM_DOMAIN=sys.dhaka.cf-app.com
 # UAA_ENDPOINT eg uaa.systemdomain.com
-UAA_ENDPOINT=uaa.$SYSTEM_DOMAIN
+UAA_ENDPOINT=uaa-server.apps.dhaka.cf-app.com
 # Get credentials from the runtime tile (eg: Tanzu Application Service) in Ops Manager, under UAA -> Admin Client
 ADMIN_CLIENT_ID=admin
 # ADMIN_CLIENT_SECRET get this from ops manager
@@ -48,7 +48,7 @@ uaac client delete temp
 uaac target $ZONE_ENDPOINT --skip-ssl-validation
 uaac token client get $ZONEADMIN_CLIENT_ID -s $ZONEADMIN_CLIENT_SECRET
 uaac user add $SSO_USER --email $SSO_USER_EMAIL --given_name $SSO_USER_FN --family_name $SSO_USER_LN -p $SSO_USER_PASSWORD
-uaac group add testgroup
+uaac group add test.group
 uaac member add testgroup $SSO_USER
 
 

@@ -1,6 +1,6 @@
 ﻿# Management Sample App for Cloud Foundry
 
-ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](https://docs.steeltoe.io/api/v3/management/) together with the [Pivotal Apps Manager](https://docs.pivotal.io/application-service/console/index.html) for monitoring and managing your applications on Cloud Foundry.  
+ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](https://docs.steeltoe.io/api/v3/management/) together with the [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/manage-apps.html) for monitoring and managing your applications on Cloud Foundry.  
 
 This application also illustrates how to have application metrics captured and exported to the [Metrics Registrar for PCF](https://docs.pivotal.io/platform/application-service/2-9/metric-registrar/index.html) service so that applications metrics can be viewed in any tool that is able to consume those metrics from the [Cloud Foundry Loggregator Firehose](https://docs.pivotal.io/pivotalcf/2-1/loggregator/architecture.html#firehose).  Several tools exist that can do this, including [PCF Metrics](https://docs.pivotal.io/app-metrics/1-6/using.html) from Pivotal.
 
@@ -92,4 +92,4 @@ To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/pro
 
 ---
 
-### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/steeltoe-management) for a more in-depth walk-through of the samples and more detailed information
+### See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for a more in-depth walk-through of the samples and more detailed information
