@@ -5,10 +5,10 @@ using Microsoft.Extensions.Logging;
 using Steeltoe.Common.Discovery;
 using Steeltoe.Common.Logging.Autofac;
 using Steeltoe.Common.Options.Autofac;
+using Steeltoe.Discovery;
 using Steeltoe.Discovery.Client;
 using System.Reflection;
 using System.Web.Http;
-
 
 namespace FortuneTellerService4
 {
@@ -18,7 +18,6 @@ namespace FortuneTellerService4
 
         protected void Application_Start()
         {
-
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             var config = GlobalConfiguration.Configuration;

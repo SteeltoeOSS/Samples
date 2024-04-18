@@ -19,7 +19,7 @@ namespace FortuneTellerService4
                 .SetBasePath(GetContentRoot())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                 .AddJsonFile($"appsettings.{environment}.json", optional: true)
-                .AddCloudFoundryConfiguration()
+                .AddCloudFoundry()
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
