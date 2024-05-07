@@ -21,6 +21,12 @@ To start a config server backed by a folder on your local disk, start the docker
 docker run --rm -ti -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoeoss/configserver --spring.profiles.active=native
 ```
 
+To start a config server that registers itself with Eureka at startup (discovery-first):
+
+```bash
+docker run --rm -ti -p 8888:8888 --name steeltoe-config -e eureka.client.enabled=true steeltoeoss/config-server
+```
+
 ### Run SCCS with Java
 
 To run a Spring Cloud Config Server without Docker:
