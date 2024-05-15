@@ -1,0 +1,45 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Consul": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7233;http://localhost:5271",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Consul discovery client.
+        "Consul__Discovery__Enabled": "true"
+      }
+    },
+    "Eureka": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7233;http://localhost:5271",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Eureka discovery client.
+        "Eureka__Client__Enabled": "true"
+      }
+    },
+    "Configuration": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7233;http://localhost:5271",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Configure service instances.
+        "Discovery__Services__0__ServiceId": "fortuneService",
+        "Discovery__Services__0__Host": "localhost",
+        "Discovery__Services__0__Port": "7251",
+        "Discovery__Services__0__IsSecure": "true",
+        "Discovery__Services__1__ServiceId": "fortuneService",
+        "Discovery__Services__1__Host": "localhost",
+        "Discovery__Services__1__Port": "5160",
+        "Discovery__Services__1__IsSecure": "false"
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Consul": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://*:7251;http://*:5160",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Consul discovery client.
+        "Consul__Discovery__Enabled": "true",
+        // Steeltoe: Using "localhost" because that's what ASP.NET generates a development certificate for.
+        "Consul__Discovery__HostName": "localhost"
+      }
+    },
+    "ConsulActuator": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://*:7251;http://*:5160",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Consul discovery client.
+        "Consul__Discovery__Enabled": "true",
+        // Steeltoe: Using "localhost" because that's what ASP.NET generates a development certificate for.
+        "Consul__Discovery__HostName": "localhost",
+        // Steeltoe: Use health actuator management endpoint.
+        "Consul__Discovery__Heartbeat__Enabled": "false",
+        "Consul__Discovery__HealthCheckUrl": "https://host.docker.internal:7251/actuator/health",
+        "Consul__Discovery__HealthCheckTlsSkipVerify": "true" // ASP.NET dev-cert is unavailable in Consul docker container.
+      }
+    },
+    "Eureka": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://*:7251;http://*:5160",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Eureka discovery client.
+        "Eureka__Client__Enabled": "true",
+        // Steeltoe: Using "localhost" because that's what ASP.NET generates a development certificate for.
+        "Eureka__Instance__HostName": "localhost",
+        // Steeltoe: Resolve the URL to Config Server from Eureka (discovery-first).
+        "Spring__Cloud__Config__Discovery__Enabled": "true"
+      }
+    },
+    "EurekaActuator": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://*:7251;http://*:5160",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Eureka discovery client.
+        "Eureka__Client__Enabled": "true",
+        // Steeltoe: Using "localhost" because that's what ASP.NET generates a development certificate for.
+        "Eureka__Instance__HostName": "localhost",
+        // Steeltoe: Use health actuator management endpoint.
+        "Eureka__Client__Health__CheckEnabled": "true"
+      }
+    },
+    "EurekaDynamicPorts": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://*:0;http://*:0",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        // Steeltoe: Activate the Eureka discovery client.
+        "Eureka__Client__Enabled": "true",
+        // Steeltoe: Using "localhost" because that's what ASP.NET generates a development certificate for.
+        "Eureka__Instance__HostName": "localhost"
+      }
+    },
+    "None": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://*:7251;http://*:5160",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
