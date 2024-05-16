@@ -30,7 +30,7 @@
         // Steeltoe: Use health actuator management endpoint.
         "Consul__Discovery__Heartbeat__Enabled": "false",
         "Consul__Discovery__HealthCheckUrl": "https://host.docker.internal:7251/actuator/health",
-        "Consul__Discovery__HealthCheckTlsSkipVerify": "true" // ASP.NET dev-cert is unavailable in Consul docker container.
+        "Consul__Discovery__HealthCheckTlsSkipVerify": "true" // ASP.NET dev-cert is not trusted by Consul docker container.
       }
     },
     "Eureka": {
