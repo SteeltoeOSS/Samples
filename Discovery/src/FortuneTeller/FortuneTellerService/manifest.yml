@@ -1,0 +1,16 @@
+﻿---
+applications:
+- name: fortuneService
+  random-route: true
+  buildpacks:
+   - dotnet_core_buildpack
+  memory: 128M
+  stack: cflinuxfs4
+  env:
+    ASPNETCORE_ENVIRONMENT: Development
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
+    # Uncomment the following line to use Container-to-Container (C2C)
+    #Eureka__Instance__RegistrationMethod: "direct"
+  services:
+   - myDiscoveryService
