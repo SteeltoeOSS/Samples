@@ -1,8 +1,0 @@
-﻿---
-applications:
-- name: CredHubDemo-win
-  buildpacks:
-   - hwc_buildpack
-  memory: 256M
-  stack: windows
-  command: .\CredHubDemo

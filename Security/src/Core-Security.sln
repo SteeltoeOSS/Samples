@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 15.0.26124.0
@@ -8,12 +8,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudFoundrySingleSignon", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDataProtectionKeyStore", "RedisDataProtectionKeyStore\RedisDataProtectionKeyStore.csproj", "{3393201D-0A45-4812-9888-5BFB89F5F76D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CredHubDemo", "CredHubDemo\CredHubDemo.csproj", "{7DC7077F-E876-4F1C-92A3-7B161C93A762}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{4E1E88D9-D6CB-4864-BAFD-F840CA3BBB7F}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\scripts\credhub-setup.cmd = ..\..\scripts\credhub-setup.cmd
-		..\..\scripts\credhub-setup.sh = ..\..\scripts\credhub-setup.sh
 		..\..\scripts\sso-setup.cmd = ..\..\scripts\sso-setup.cmd
 		..\..\scripts\sso-setup.sh = ..\..\scripts\sso-setup.sh
 	EndProjectSection
@@ -71,18 +67,6 @@ Global
 		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x64.Build.0 = Release|Any CPU
 		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x86.ActiveCfg = Release|Any CPU
 		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x86.Build.0 = Release|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x64.Build.0 = Debug|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Debug|x86.Build.0 = Debug|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x64.ActiveCfg = Release|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x64.Build.0 = Release|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x86.ActiveCfg = Release|Any CPU
-		{7DC7077F-E876-4F1C-92A3-7B161C93A762}.Release|x86.Build.0 = Release|Any CPU
 		{D5F0FF6D-56B1-48AE-BDC6-15DE3AB00F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D5F0FF6D-56B1-48AE-BDC6-15DE3AB00F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5F0FF6D-56B1-48AE-BDC6-15DE3AB00F79}.Debug|x64.ActiveCfg = Debug|Any CPU
