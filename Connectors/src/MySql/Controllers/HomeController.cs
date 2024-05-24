@@ -1,8 +1,8 @@
 ﻿using System.Data.Common;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
 using MySql.Models;
+using MySqlConnector;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MySql;
 

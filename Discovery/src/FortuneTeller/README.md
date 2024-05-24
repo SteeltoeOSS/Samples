@@ -1,4 +1,4 @@
-# FortuneTeller Discovery Sample Application
+﻿# FortuneTeller Discovery Sample Application
 
 This sample demonstrates Steeltoe Service Discovery. It consists of the following projects:
 
@@ -12,7 +12,10 @@ switching to `http` or `https` and replacing `fortuneService` with the real host
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: Cloud Foundry-based platform such as Tanzu Application Service (optionally with Windows support)
+1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
+   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
+   with [Spring Cloud Services for VMware Tanzu](https://docs.vmware.com/en/Spring-Cloud-Services-for-VMware-Tanzu/index.html)
+   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
 ## Configuration-based discovery
 
@@ -126,7 +129,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
    ```
 1. Navigate to the [app](https://localhost:7233) in your browser and observe a random fortune
 
-### Running on CloudFoundry (Go-router)
+### Running on Tanzu Platform for Cloud Foundry (Go-router)
 
 1. Create a Eureka service instance in an org/space:
    ```
@@ -141,7 +144,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
 
-### Running on CloudFoundry (Container-to-Container)
+### Running on Tanzu Platform for Cloud Foundry (Container-to-Container)
 
 Same steps as above, but uncomment the related line in `manifest.yaml` before push. Additionally:
 1. In **Apps Manager**, go to **fortuneWeb** in your org/space
@@ -219,4 +222,4 @@ with Eureka at startup. FortuneTellerService is configured to obtain the URL to 
 
 ---
 
-### See the Official [Steeltoe Service Discovery Documentation](https://docs.steeltoe.io/api/v3/discovery) and [Steeltoe Getting Started with Discovery Guide](https://docs.steeltoe.io/guides/service-discovery/eureka.html) for a more in-depth walkthrough of the samples and more detailed information.
+### See the Official [Steeltoe Service Discovery Documentation](https://docs.steeltoe.io/api/v3/discovery) for a more in-depth walkthrough of the samples and more detailed information.
