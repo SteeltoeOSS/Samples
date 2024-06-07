@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Common\src\Common.Security\Steeltoe.Common.Security.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry.ServiceBinding\Steeltoe.Configuration.CloudFoundry.ServiceBinding.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry\Steeltoe.Configuration.CloudFoundry.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Configuration\src\Kubernetes.ServiceBinding\Steeltoe.Configuration.Kubernetes.ServiceBinding.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Management\src\Endpoint\Steeltoe.Management.Endpoint.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Security\src\Authorization.Certificate\Steeltoe.Security.Authorization.Certificate.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Steeltoe\src\Security\src\Authentication.OpenIdConnect\Steeltoe.Security.Authentication.OpenIdConnect.csproj" />
+  </ItemGroup>
+
+</Project>

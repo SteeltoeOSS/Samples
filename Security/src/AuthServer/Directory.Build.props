@@ -1,0 +1,33 @@
+<Project>
+  <PropertyGroup>
+    <SteeltoeVersion>4.0.*-*</SteeltoeVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GitInfoVersion>2.3.*</GitInfoVersion>
+    <RabbitMQVersion>6.5.*</RabbitMQVersion>
+    <AspNetCoreVersion>8.0.*</AspNetCoreVersion>
+    <EFCoreVersion>8.0.*</EFCoreVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <MatchTargetFrameworkVersion>
+      <!--
+        Package versions of this category are bound to the target framework, so they cannot be updated to the latest version.
+        For example, v6 targets only .NET 6; v7 targets only .NET 7; v8 targets only .NET 8.
+        Caution: some packages additionally target netstandard, but result in compile-time/runtime errors or reduced API surface.
+      -->
+      8.0.*
+    </MatchTargetFrameworkVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <MatchTargetFrameworkVersion>
+      <!--
+        Package versions of this category are bound to the target framework, so they cannot be updated to the latest version.
+        For example, v6 targets only .NET 6; v7 targets only .NET 7; v8 targets only .NET 8.
+        Caution: some packages additionally target netstandard, but result in compile-time/runtime errors or reduced API surface.
+      -->
+      6.0.*
+    </MatchTargetFrameworkVersion>
+  </PropertyGroup>
+
+</Project>

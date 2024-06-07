@@ -1,8 +1,0 @@
-﻿---
-applications:
-- name: mtls-server
-  buildpacks:
-   - hwc_buildpack
-  memory: 384M
-  stack: windows
-  command: .\CloudFoundryCertificateAuthentication
