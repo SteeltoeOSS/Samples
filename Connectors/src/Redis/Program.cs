@@ -6,6 +6,9 @@ using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
@@ -18,14 +21,14 @@ builder.AddRedis(null, addOptions =>
         var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<RedisOptions>>();
         RedisOptions options = optionsMonitor.Get(serviceBindingName);
 
-        ConfigurationOptions redisOptions = ConfigurationOptions.Parse(options.ConnectionString);
+        ConfigurationOptions redisOptions = !string.IsNullOrWhiteSpace(options.ConnectionString)
+            ? ConfigurationOptions.Parse(options.ConnectionString)
+            : new ConfigurationOptions();
+
         redisOptions.ClientName = "redis-connector";
         return ConnectionMultiplexer.Connect(redisOptions);
     };
 });
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
 

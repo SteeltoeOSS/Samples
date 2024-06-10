@@ -5,6 +5,9 @@ using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
@@ -30,9 +33,6 @@ builder.AddRabbitMQ(null, addOptions =>
         return factory.CreateConnection();
     };
 });
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
 

@@ -58,9 +58,12 @@ public class HomeController : Controller
 
         var keyNames = new List<string>();
 
-        await foreach (string keyName in server.KeysAsync().WithCancellation(cancellationToken))
+        await foreach (string? keyName in server.KeysAsync().WithCancellation(cancellationToken))
         {
-            keyNames.Add(keyName);
+            if (keyName != null)
+            {
+                keyNames.Add(keyName);
+            }
         }
 
         return keyNames;

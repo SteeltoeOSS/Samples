@@ -1,4 +1,4 @@
-using MySql.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using MySqlEFCore;
 using MySqlEFCore.Data;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
@@ -6,6 +6,9 @@ using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
@@ -29,13 +32,13 @@ if (useMultipleDatabases)
     // Steeltoe: Setup DbContext connection strings, optionally changing MySQL options at runtime.
     builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceOneName, null, untypedOptions =>
     {
-        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        var mySqlOptions = (MySqlDbContextOptionsBuilder)untypedOptions;
         mySqlOptions.CommandTimeout(20);
     }));
 
     builder.Services.AddDbContext<OtherDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceTwoName, null, untypedOptions =>
     {
-        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        var mySqlOptions = (MySqlDbContextOptionsBuilder)untypedOptions;
         mySqlOptions.CommandTimeout(25);
     }));
 }
@@ -47,13 +50,10 @@ else
     // Steeltoe: Setup DbContext connection string, optionally changing MySQL options at runtime.
     builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, null, null, untypedOptions =>
     {
-        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        var mySqlOptions = (MySqlDbContextOptionsBuilder)untypedOptions;
         mySqlOptions.CommandTimeout(15);
     }));
 }
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
 

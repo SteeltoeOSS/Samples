@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySqlConnector;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MySql;
 
