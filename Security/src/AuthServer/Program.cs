@@ -13,36 +13,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddCloudFoundry() // needed for actuators
     .AddCloudFoundryServiceBindings()
-    .AddContainerIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"))
-;
+    .AddAppInstanceIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
 
 builder.Services.ConfigureJwtBearerForCloudFoundry();
-builder.Services.AddCertificateAuthorizationServer(builder.Configuration);
-
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer()
     .AddCertificate();
 
-builder.Services.AddAuthorization(options =>
-    {
-        options.AddPolicy(Globals.RequiredJwtScope, policy =>
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(Globals.RequiredJwtScope, policy =>
         {
             policy.RequireClaim("scope", Globals.RequiredJwtScope);
-        });
-
-        options.AddPolicy(CertificateAuthorizationDefaults.SameOrganizationAuthorizationPolicy, authorizationPolicyBuilder =>
+        })
+    .AddPolicy(CertificateAuthorizationDefaults.SameOrganizationAuthorizationPolicy, authorizationPolicyBuilder =>
         {
             authorizationPolicyBuilder.AddAuthenticationSchemes([CertificateAuthenticationDefaults.AuthenticationScheme]);
-            authorizationPolicyBuilder.SameOrg();
-        });
-
-        options.AddPolicy(CertificateAuthorizationDefaults.SameSpaceAuthorizationPolicy, authorizationPolicyBuilder =>
+            authorizationPolicyBuilder.RequireSameOrg();
+        })
+    .AddPolicy(CertificateAuthorizationDefaults.SameSpaceAuthorizationPolicy, authorizationPolicyBuilder =>
         {
             authorizationPolicyBuilder.AddAuthenticationSchemes([CertificateAuthenticationDefaults.AuthenticationScheme]);
-            authorizationPolicyBuilder.SameSpace();
+            authorizationPolicyBuilder.RequireSameSpace();
         });
-    });
+
+builder.Services.AddCertificateAuthorizationServer();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -19,11 +19,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddCloudFoundry() // needed for actuators
     .AddCloudFoundryServiceBindings()
-    .AddContainerIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
+    .AddAppInstanceIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
 
 builder.Services.ConfigureOpenIdConnectForCloudFoundry();
-builder.Services.AddCertificateAuthorizationClient(builder.Configuration);
-
 builder.Services
     .AddAuthentication(options =>
     {
@@ -36,11 +34,12 @@ builder.Services
     })
     .AddOpenIdConnect();
 
-
 builder.Services.AddSession();
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
+
+builder.Services.AddCertificateAuthorizationClient();
 
 builder.Services.AddControllersWithViews();
 
