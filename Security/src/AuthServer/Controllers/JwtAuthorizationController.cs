@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Steeltoe.Samples.AuthServer.Controllers;
 
 [Route("api/JwtAuthorization")]
-public class JwtAuthorizationController() : Controller
+public class JwtAuthorizationController : Controller
 {
     [HttpGet]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Globals.RequiredJwtScope)]

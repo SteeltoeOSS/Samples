@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Common.Security;
+using Steeltoe.Common.Certificate;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
@@ -21,7 +21,6 @@ builder.Configuration
     .AddCloudFoundryServiceBindings()
     .AddAppInstanceIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
 
-builder.Services.ConfigureOpenIdConnectForCloudFoundry();
 builder.Services
     .AddAuthentication(options =>
     {
@@ -33,6 +32,7 @@ builder.Services
         options.AccessDeniedPath = new PathString("/Home/AccessDenied");
     })
     .AddOpenIdConnect();
+builder.Services.ConfigureOpenIdConnectForCloudFoundry();
 
 builder.Services.AddSession();
 builder.Services.AddAuthorizationBuilder()

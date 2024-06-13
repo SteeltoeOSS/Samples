@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Steeltoe.Common.Security;
+using Steeltoe.Common.Certificate;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
@@ -15,7 +15,6 @@ builder.Configuration
     .AddCloudFoundryServiceBindings()
     .AddAppInstanceIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
 
-builder.Services.ConfigureJwtBearerForCloudFoundry();
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer()
@@ -37,6 +36,7 @@ builder.Services.AddAuthorizationBuilder()
             authorizationPolicyBuilder.RequireSameSpace();
         });
 
+builder.Services.ConfigureJwtBearerForCloudFoundry();
 builder.Services.AddCertificateAuthorizationServer();
 
 builder.Services.AddControllers();

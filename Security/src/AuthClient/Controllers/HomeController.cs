@@ -47,7 +47,7 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
     {
         ViewData["Message"] = $"You have the '{Globals.UnknownJwtScope}' permission.";
 
-        return View();
+        return View("TestGroup");
     }
 
     [HttpGet]

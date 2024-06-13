@@ -1,5 +1,5 @@
 ﻿
-@if (User?.Identity?.IsAuthenticated == true)
+@if (User.Identity?.IsAuthenticated == true)
 {
     <form asp-area="" asp-controller="Home" asp-action="LogOff" method="post" id="logoutForm">
         <ul class="nav navbar-nav navbar-right">
