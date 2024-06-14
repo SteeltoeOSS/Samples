@@ -2,7 +2,7 @@
 applications:
 - name: steeltoe-samples-authserver
   buildpacks:
-  - hwc_buildpack
+  - binary_buildpack
   memory: 256M
   stack: windows
   env:

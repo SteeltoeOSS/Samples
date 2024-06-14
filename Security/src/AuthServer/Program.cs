@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Steeltoe.Common.Certificate;
+using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
@@ -8,16 +7,19 @@ using Steeltoe.Samples.AuthServer;
 using Steeltoe.Security.Authentication.JwtBearer;
 using Steeltoe.Security.Authorization.Certificate;
 
-var builder = WebApplication.CreateBuilder(args);
+const string organizationId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
+const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .AddCloudFoundry() // needed for actuators
     .AddCloudFoundryServiceBindings()
-    .AddAppInstanceIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
+    .AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer()
+    .AddJwtBearer().ConfigureJwtBearerForCloudFoundry()
     .AddCertificate();
 
 builder.Services.AddAuthorizationBuilder()
@@ -25,19 +27,7 @@ builder.Services.AddAuthorizationBuilder()
         {
             policy.RequireClaim("scope", Globals.RequiredJwtScope);
         })
-    .AddPolicy(CertificateAuthorizationDefaults.SameOrganizationAuthorizationPolicy, authorizationPolicyBuilder =>
-        {
-            authorizationPolicyBuilder.AddAuthenticationSchemes([CertificateAuthenticationDefaults.AuthenticationScheme]);
-            authorizationPolicyBuilder.RequireSameOrg();
-        })
-    .AddPolicy(CertificateAuthorizationDefaults.SameSpaceAuthorizationPolicy, authorizationPolicyBuilder =>
-        {
-            authorizationPolicyBuilder.AddAuthenticationSchemes([CertificateAuthenticationDefaults.AuthenticationScheme]);
-            authorizationPolicyBuilder.RequireSameSpace();
-        });
-
-builder.Services.ConfigureJwtBearerForCloudFoundry();
-builder.Services.AddCertificateAuthorizationServer();
+    .AddAppInstanceIdentityCertificate();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -16,4 +16,3 @@ applications:
     SSO_SCOPES: openid, profile, sampleapi.read
   services:
   - mySSOService
-#  - myRedisService

@@ -5,21 +5,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Common.Certificate;
+using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
 using System;
+using System.Linq;
+using System.Net.Http;
+using Microsoft.Extensions.Options;
+using Steeltoe.Common;
 using Steeltoe.Samples.AuthClient;
 
-var builder = WebApplication.CreateBuilder(args);
+const string organizationId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
+const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .AddCloudFoundry() // needed for actuators
     .AddCloudFoundryServiceBindings()
-    .AddAppInstanceIdentityCertificate(new Guid("a8fef16f-94c0-49e3-aa0b-ced7c3da6229"), new Guid("122b942a-d7b9-4839-b26e-836654b9785f"));
+    .AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
 
 builder.Services
     .AddAuthentication(options =>
@@ -31,15 +38,18 @@ builder.Services
     {
         options.AccessDeniedPath = new PathString("/Home/AccessDenied");
     })
-    .AddOpenIdConnect();
-builder.Services.ConfigureOpenIdConnectForCloudFoundry();
+    .AddOpenIdConnect()
+    .ConfigureOpenIdConnectForCloudFoundry();
 
 builder.Services.AddSession();
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
 
-builder.Services.AddCertificateAuthorizationClient();
+builder.Services.ConfigureCloudFoundryOptions(builder.Configuration);
+
+builder.Services.AddHttpClient("default", SetBaseAddress);
+builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddClientCertificateForAppInstance();
 
 builder.Services.AddControllersWithViews();
 
@@ -67,3 +77,26 @@ app.UseAuthorization();
 app.MapDefaultControllerRoute();
 
 app.Run();
+return;
+
+void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
+{
+
+    if (Platform.IsCloudFoundry)
+    {
+        var cloudFoundryOptions = serviceProvider.GetRequiredService<IOptions<CloudFoundryApplicationOptions>>();
+        var address = cloudFoundryOptions.Value.ApplicationUris?.First();
+
+        if (address == null)
+        {
+            throw new NotImplementedException();
+        }
+
+        var baseAddress = address.Replace("steeltoe-samples-authclient", "steeltoe-samples-authserver");
+        client.BaseAddress = new Uri($"https://{baseAddress}");
+    }
+    else
+    {
+        client.BaseAddress = new Uri("https://localhost:7184");
+    }
+}

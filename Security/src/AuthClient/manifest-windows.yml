@@ -2,7 +2,7 @@
 applications:
 - name: steeltoe-samples-authclient
   buildpacks:
-  - hwc_buildpack
+  - binary_buildpack
   memory: 256M
   stack: windows
   env:
@@ -16,4 +16,3 @@ applications:
     SSO_SCOPES: openid, profile, sampleapi.read
   services:
   - mySSOService
-#  - myRedisService

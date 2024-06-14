@@ -22,7 +22,7 @@ public class CertificateAuthorizationController(ILogger<CertificateAuthorization
         return "This action requires a client certificate to be provided";
     }
 
-    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme, Policy = CertificateAuthorizationDefaults.SameOrganizationAuthorizationPolicy)]
+    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme, Policy = CertificateAuthorizationPolicies.SameOrganization)]
     [HttpGet]
     public string SameOrg()
     {
@@ -30,7 +30,7 @@ public class CertificateAuthorizationController(ILogger<CertificateAuthorization
         return "Certificate is valid, client and server are in the same org.";
     }
 
-    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme, Policy = CertificateAuthorizationDefaults.SameSpaceAuthorizationPolicy)]
+    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme, Policy = CertificateAuthorizationPolicies.SameSpace)]
     [HttpGet]
     public string SameSpace()
     {

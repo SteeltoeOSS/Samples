@@ -1,31 +1,20 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Steeltoe.Samples.AuthClient.Models;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Samples.AuthClient.Models;
-using Steeltoe.Security.Authorization.Certificate;
 
 namespace Steeltoe.Samples.AuthClient.Controllers;
 
 public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<HomeController> logger) : Controller
 {
-    private string? _backendBaseAddress;
-    private readonly HttpClient _jwtHttpClient = clientFactory.CreateClient("default");
-    private readonly HttpClient _mutualTlsHttpClient = clientFactory.CreateClient(CertificateAuthorizationDefaults.HttpClientName);
     private readonly ILogger<HomeController> _logger = logger;
-
-    public override void OnActionExecuting(ActionExecutingContext context)
-    {
-        _backendBaseAddress = GetSamplesUrl(HttpContext);
-        base.OnActionExecuting(context);
-    }
 
     public IActionResult Index()
     {
@@ -74,11 +63,12 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
     [Authorize(Policy = Globals.RequiredJwtScope)]
     public async Task<IActionResult> InvokeJwtSample()
     {
-        var token = await HttpContext.GetTokenAsync("access_token");
+        using HttpClient jwtHttpClient = clientFactory.CreateClient("default");
+        string? token = await HttpContext.GetTokenAsync("access_token");
         if (!string.IsNullOrEmpty(token))
         {
-            _jwtHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            return View("InvokeService", await SendRequestToBackend(_jwtHttpClient, $"{_backendBaseAddress}/api/JwtAuthorization"));
+            jwtHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            return View("InvokeService", await SendRequestToBackend(jwtHttpClient, "/api/JwtAuthorization"));
         }
         else
         {
@@ -90,12 +80,14 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
 
     public async Task<IActionResult> InvokeSameOrgSample()
     {
-        return View("InvokeService", await SendRequestToBackend(_mutualTlsHttpClient, $"{_backendBaseAddress}/api/certificate/SameOrg"));
+        using HttpClient mutualTlsHttpClient = clientFactory.CreateClient("AppInstanceIdentity");
+        return View("InvokeService", await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameOrg"));
     }
 
     public async Task<IActionResult> InvokeSameSpaceSample()
     {
-        return View("InvokeService", await SendRequestToBackend(_mutualTlsHttpClient, $"{_backendBaseAddress}/api/certificate/SameSpace"));
+        using HttpClient mutualTlsHttpClient = clientFactory.CreateClient("AppInstanceIdentity");
+        return View("InvokeService", await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameSpace"));
     }
 
     #endregion
@@ -112,17 +104,6 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    private const string FrontendHostname = "steeltoe-samples-authclient";
-    private const string BackendHostname = "steeltoe-samples-authserver";
-    private static string GetSamplesUrl(HttpContext httpContext)
-    {
-        string serviceHostname = httpContext.Request.Host.Host.Contains(FrontendHostname)
-            ? httpContext.Request.Host.Host.Replace(FrontendHostname, BackendHostname)
-            : "localhost:7184";
-
-        return "https://" + serviceHostname;
-    }
-
     private async Task<string> SendRequestToBackend(HttpClient client, string requestUri)
     {
         string result;
@@ -131,9 +112,9 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
             _logger.LogTrace("Sending request to {requestUri}", requestUri);
             result = await client.GetStringAsync(requestUri);
         }
-        catch (Exception e)
+        catch (Exception exception)
         {
-            result = $"Request failed: {e.Message}, at: {requestUri}";
+            result = $"Request failed: {exception.Message}, at: {requestUri}";
         }
         return result;
     }

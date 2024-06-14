@@ -14,7 +14,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 
 1. Start a UAA Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. `dotnet run`
-1. Don't forget to start the [AuthServer](../AuthServer/README.md) application
+1. Please note that some of the links in the menu won't work until you also start the [AuthServer](../AuthServer/README.md) application
 
 ## Running on Tanzu Platform for Cloud Foundry
 
@@ -73,6 +73,7 @@ The menu of the application includes links for testing the permissions of the us
    * Locally, certificates for both the client and server are created by Steeltoe.
    * On Cloud Foundry, certificates are provisioned by the platform, with OrgId and SpaceId populated based on where the applications are deployed.
 * While logged in, view information about the testuser account by clicking on "Hello testuser!" next to the "Log off".
+* If needed, sign out of the UAA server using the dropdown menu in the top right corner at <http://localhost:8080>.
 
 ---
 ### See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information.
