@@ -6,6 +6,9 @@ using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
@@ -20,9 +23,6 @@ builder.AddCosmosDb(null, addOptions =>
         return new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector").Build();
     };
 });
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
 

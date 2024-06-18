@@ -1,9 +1,12 @@
 ﻿using MySql;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
@@ -22,9 +25,6 @@ builder.Services.Configure<MySqlOptions>(options =>
 
     options.ConnectionString = connectionStringBuilder.ConnectionString;
 });
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
 
