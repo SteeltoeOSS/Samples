@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Samples.AuthClient.Models;
@@ -14,8 +13,6 @@ namespace Steeltoe.Samples.AuthClient.Controllers;
 
 public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<HomeController> logger) : Controller
 {
-    private readonly ILogger<HomeController> _logger = logger;
-
     public IActionResult Index()
     {
         return View();
@@ -109,7 +106,7 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         string result;
         try
         {
-            _logger.LogTrace("Sending request to {requestUri}", requestUri);
+            logger.LogTrace("Sending request to {requestUri}", requestUri);
             result = await client.GetStringAsync(requestUri);
         }
         catch (Exception exception)

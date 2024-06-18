@@ -27,7 +27,7 @@ builder.Services.AddAuthorizationBuilder()
         {
             policy.RequireClaim("scope", Globals.RequiredJwtScope);
         })
-    .AddAppInstanceIdentityCertificate();
+    .AddOrgAndSpacePolicies();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

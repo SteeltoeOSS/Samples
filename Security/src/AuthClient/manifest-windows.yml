@@ -15,5 +15,6 @@ applications:
     SSO_AUTHORITIES: uaa.resource, sampleapi.read
     SSO_IDENTITY_PROVIDERS: steeltoe-uaa
     SSO_SCOPES: openid, profile, sampleapi.read
+    SSO_SHOW_ON_HOME_PAGE: "true"
   services:
   - mySSOService

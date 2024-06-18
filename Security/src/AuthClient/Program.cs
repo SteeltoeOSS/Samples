@@ -5,18 +5,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.AuthClient;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
 using System;
 using System.Linq;
 using System.Net.Http;
-using Microsoft.Extensions.Options;
-using Steeltoe.Common;
-using Steeltoe.Samples.AuthClient;
 
 const string organizationId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
 const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
@@ -46,10 +45,17 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
 
-builder.Services.ConfigureCloudFoundryOptions(builder.Configuration);
+if (Platform.IsCloudFoundry)
+{
+    builder.Services.RegisterCloudFoundryApplicationInstanceInfo();
+}
+else
+{
+    builder.Services.RegisterDefaultApplicationInstanceInfo();
+}
 
 builder.Services.AddHttpClient("default", SetBaseAddress);
-builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddClientCertificateForAppInstance();
+builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddAppInstanceIdentityCertificate();
 
 builder.Services.AddControllersWithViews();
 
@@ -81,11 +87,10 @@ return;
 
 void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
-
-    if (Platform.IsCloudFoundry)
+    var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
+    if (instanceInfo.Uris != null && instanceInfo.Uris.Any())
     {
-        var cloudFoundryOptions = serviceProvider.GetRequiredService<IOptions<CloudFoundryApplicationOptions>>();
-        var address = cloudFoundryOptions.Value.ApplicationUris?.First();
+        var address = instanceInfo.Uris.First();
 
         if (address == null)
         {
