@@ -4,7 +4,8 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 
 This sample illustrates how you can secure your web api endpoints using JWT Bearer tokens and client certificates.
 
-> Note: This application is intended to be used in conjunction with the [AuthClient](../AuthClient) sample app.
+> [!NOTE]
+> This application is intended to be used in conjunction with the [AuthClient](../AuthClient) sample app.
 
 ---
 ### See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information.

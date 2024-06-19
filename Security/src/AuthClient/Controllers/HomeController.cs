@@ -69,7 +69,7 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         }
         else
         {
-            return View("InvokeService", model: "No access token found in user session. Perhaps you need to Authentication:Schemes:OpenIdConnect:SaveTokens to 'true'?");
+            return View("InvokeService", model: "No access token found in user session. Perhaps you need to set Authentication:Schemes:OpenIdConnect:SaveTokens to 'true'?");
         }
     }
 

@@ -29,7 +29,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 1. Create a service instance:
    * `cf create-service p-identity <your service plan name> mySSOService`
 1. Push AuthServer to Cloud Foundry
-   1. `cf target -o myorg -s development`
+   1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthServer`
    1. `cf push`
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
@@ -42,7 +42,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
       * External Group Name = openid
       * Permissions = sampleapi.read (If this option isn't available, ensure AuthServer has been deployed)
 1. Push AuthClient to Cloud Foundry
-   1. `cf target -o myorg -s development`
+   1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthClient`
    1. `cf push`
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
@@ -51,7 +51,9 @@ This application shows how to use the Steeltoe [security libraries](https://docs
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
 
-> Note: The provided manifests will create apps named `steeltoe-samples-authclient` and `steeltoe-samples-authserver` and attempt to bind both to the SSO service `mySSOService`.
+> [!NOTE]
+> The provided manifests will create apps named `steeltoe-samples-authclient` and `steeltoe-samples-authserver`
+> and attempt to bind both to the SSO service `mySSOService`.
 
 ### RedirectUri and Scope access
 
@@ -80,17 +82,18 @@ dashboard url:   https://p-identity.sys.cf-app.com/developer/identity-zones/15aa
 
 At this point the app is up and running.  You can access it at <https://localhost:7072> or <https://steeltoe-samples-authclient.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
-> Note: To see the logs on Cloud Foundry as the app runs, execute this command: `cf logs steeltoe-samples-authclient`
+> [!NOTE]
+> To see the logs on Cloud Foundry as the app runs, execute this command: `cf logs steeltoe-samples-authclient`
 
 From the website's menu, click on the `Log in` menu item and you should be redirected to the UAA server's login page. Enter `testuser` and `password`, and you should be authenticated and redirected back to the auth client home page.
 
 The menu of the application includes links for testing the permissions of the user in the current application and interact with another service that has been secured with JWT and client certificates.
 
-* The JWT menu item uses the current user's token to communicate with the backing service.
-* The "SameSpace" and "SameOrg" menu items interact with the backing service using an identity certificate that belongs to the application.
+* The JWT menu item uses the current user's token to communicate with the backend service.
+* The "SameSpace" and "SameOrg" menu items interact with the backend service using an identity certificate that belongs to the application.
    * Locally, certificates for both the client and server are created by Steeltoe.
    * On Cloud Foundry, certificates are provisioned by the platform, with OrgId and SpaceId populated based on where the applications are deployed.
-* While logged in, view information about the testuser account by clicking on "Hello testuser!" next to the "Log off".
+* While logged in, view information about the testuser account by clicking on "Hello testuser!" next to the "Log out" link.
 * If needed, sign out of the UAA server using the dropdown menu in the top right corner at <http://localhost:8080>(locally) or use the command `cf app steeltoe-uaa` to get the address of the server deployed to Cloud Foundry.
 
 ---
