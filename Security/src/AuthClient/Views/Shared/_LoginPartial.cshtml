@@ -1,7 +1,7 @@
 ﻿
 @if (User.Identity?.IsAuthenticated == true)
 {
-    <form asp-area="" asp-controller="Home" asp-action="LogOff" method="post" id="logoutForm">
+    <form asp-area="" asp-controller="Home" asp-action="Logout" method="post" id="logoutForm">
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <a asp-area="" asp-controller="Home" asp-action="Manage" style="display:block;padding-top:6px;">Hello @User.Identity.Name!</a>

@@ -18,7 +18,10 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         return View();
     }
 
-    #region SSO
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
     [Authorize(Policy = Globals.RequiredJwtScope)]
     public IActionResult TestGroup()
@@ -49,13 +52,11 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
     }
 
     [HttpPost]
-    public async Task<IActionResult> LogOff()
+    public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync();
         return RedirectToAction(nameof(Index), "Home");
     }
-
-    #endregion
 
     [Authorize(Policy = Globals.RequiredJwtScope)]
     public async Task<IActionResult> InvokeJwtSample()
@@ -65,7 +66,8 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         if (!string.IsNullOrEmpty(token))
         {
             jwtHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            return View("InvokeService", await SendRequestToBackend(jwtHttpClient, "/api/JwtAuthorization"));
+            string model = await SendRequestToBackend(jwtHttpClient, "/api/JwtAuthorization");
+            return View("InvokeService", model);
         }
         else
         {
@@ -73,21 +75,19 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         }
     }
 
-    #region Client Certificate (Mutual TLS)
-
     public async Task<IActionResult> InvokeSameOrgSample()
     {
         using HttpClient mutualTlsHttpClient = clientFactory.CreateClient("AppInstanceIdentity");
-        return View("InvokeService", await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameOrg"));
+        string model = await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameOrg");
+        return View("InvokeService", model);
     }
 
     public async Task<IActionResult> InvokeSameSpaceSample()
     {
         using HttpClient mutualTlsHttpClient = clientFactory.CreateClient("AppInstanceIdentity");
-        return View("InvokeService", await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameSpace"));
+        string model = await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameSpace");
+        return View("InvokeService", model);
     }
-
-    #endregion
 
     public IActionResult AccessDenied()
     {

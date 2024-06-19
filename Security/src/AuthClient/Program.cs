@@ -22,11 +22,13 @@ const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Steeltoe: Add Cloud Foundry application and service info and instance identity certificate to configuration
 builder.Configuration
-    .AddCloudFoundry() // needed for actuators
+    .AddCloudFoundry()
     .AddCloudFoundryServiceBindings()
     .AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
 
+// Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry
 builder.Services
     .AddAuthentication(options =>
     {
@@ -45,6 +47,7 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
 
+// Steeltoe: Register application instance information
 if (Platform.IsCloudFoundry)
 {
     builder.Services.RegisterCloudFoundryApplicationInstanceInfo();
@@ -54,15 +57,18 @@ else
     builder.Services.RegisterDefaultApplicationInstanceInfo();
 }
 
+// Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization
 builder.Services.AddHttpClient("default", SetBaseAddress);
 builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddAppInstanceIdentityCertificate();
 
 builder.Services.AddControllersWithViews();
 
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
 var app = builder.Build();
 
+// Steeltoe: Direct ASP.NET Core to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry)
 app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto });
 
 // Configure the HTTP request pipeline.

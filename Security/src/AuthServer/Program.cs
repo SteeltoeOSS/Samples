@@ -12,11 +12,13 @@ const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+// Steeltoe: Add Cloud Foundry application and service info and instance identity certificate to configuration
 builder.Configuration
-    .AddCloudFoundry() // needed for actuators
+    .AddCloudFoundry()
     .AddCloudFoundryServiceBindings()
     .AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
 
+// Steeltoe: Configure Microsoft's JWT Bearer and Certificate libraries for authentication and authorization with UAA/Cloud Foundry
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer().ConfigureJwtBearerForCloudFoundry()
@@ -33,10 +35,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
 var app = builder.Build();
 
+// Steeltoe: Use certificate and header forwarding along with ASP.NET Core Authentication and Authorization middlewares
 app.UseCertificateAuthorization();
 
 // Configure the HTTP request pipeline.
