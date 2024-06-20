@@ -42,7 +42,7 @@ builder.Services
     .AddOpenIdConnect()
     .ConfigureOpenIdConnectForCloudFoundry();
 
-builder.Services.AddSession();
+// Steeltoe: register Microsoft authorization services and claim-based policies requiring specific scopes
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
