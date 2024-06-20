@@ -8,9 +8,6 @@ Samples using the Spring Cloud Config Server and other Steeltoe configuration pr
 
 | Sample | main | latest |
 | --- | --- | --- |
-| [Simple](Configuration/src/Simple) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_Simple%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=16&branchName=main) | |
-| [SimpleCloudFoundry](Configuration/src/SimpleCloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_SimpleCloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=13&branchName=main) | |
-| [CloudFoundry](Configuration/src/CloudFoundry) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BConfiguration_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=15&branchName=main) | |
 | [Configuration](Configuration/src/Steeltoe.Samples.Configuration) | | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FConfiguration?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=73&branchName=latest) |
 
 ## [Discovery](Discovery)
@@ -44,11 +41,7 @@ Samples using the Steeltoe Connectors for connecting to backing services. Steelt
 
 ## [Security](Security)
 
-Samples using the Steeltoe Security packages for Authentication and Authorization with Cloud Foundry auth services, using a Redis cache for DataProtection KeyRing storage and for interacting with CredHub.
-
-| Sample | main | latest |
-| --- | --- | --- |
-| [CloudFoundrySingleSignon](Security/src/CloudFoundrySingleSignon) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BSecurity_CloudFoundrySingleSignon%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=24&branchName=main) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BSecurity_CloudFoundrySingleSignon%5D?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=24&branchName=latest) |
+Samples using the Steeltoe Security packages for Authentication and Authorization with Cloud Foundry auth services and using a Redis cache for DataProtection KeyRing storage.
 
 ## [MusicStore](MusicStore)
 

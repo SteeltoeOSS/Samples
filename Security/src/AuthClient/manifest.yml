@@ -3,7 +3,7 @@ applications:
 - name: steeltoe-samples-authclient
   buildpacks:
   - dotnet_core_buildpack
-  memory: 256M
+  memory: 128M
   stack: cflinuxfs4
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

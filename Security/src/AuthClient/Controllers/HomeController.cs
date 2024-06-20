@@ -58,7 +58,7 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         return RedirectToAction(nameof(Index), "Home");
     }
 
-    [Authorize(Policy = Globals.RequiredJwtScope)]
+    [Authorize]
     public async Task<IActionResult> InvokeJwtSample()
     {
         using HttpClient jwtHttpClient = clientFactory.CreateClient("default");
