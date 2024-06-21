@@ -137,6 +137,20 @@ docker run --rm -ti -p 5432:5432 --name steeltoe-postgres -e POSTGRES_DB=steelto
 docker run --rm -ti -p 27017:27017 --name mongoserver mongo
 ```
 
+## UAA Server for Steeltoe Samples
+
+The Steeltoe team has created a [UAA configuration](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/uaa.yml) to use with the sample applications in this repository.
+
+### Run UAA Server with Docker
+
+```script
+docker run --rm -it -p 8080:8080 --name steeltoe-uaa steeltoe.azurecr.io/uaa-server:77.10
+```
+
+### Run Steeltoe UAA on Cloud Foundry
+
+Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server/README.md) for instructions.
+
 ## Zipkin
 
 ### Run Zipkin Server with Docker
