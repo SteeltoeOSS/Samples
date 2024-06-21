@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Samples.AuthClient.Models;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Steeltoe.Samples.AuthClient.Models;
 
 namespace Steeltoe.Samples.AuthClient.Controllers;
 
@@ -29,7 +29,6 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         ViewData["Message"] = $"You have the '{Globals.RequiredJwtScope}' permission.";
         return View();
     }
-
 
     [Authorize(Policy = Globals.UnknownJwtScope)]
     public IActionResult AnotherTestGroup()
@@ -63,16 +62,16 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
     {
         using HttpClient jwtHttpClient = clientFactory.CreateClient("default");
         string? token = await HttpContext.GetTokenAsync("access_token");
+
         if (!string.IsNullOrEmpty(token))
         {
             jwtHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             string model = await SendRequestToBackend(jwtHttpClient, "/api/JwtAuthorization");
             return View("InvokeService", model);
         }
-        else
-        {
-            return View("InvokeService", model: "No access token found in user session. Perhaps you need to set Authentication:Schemes:OpenIdConnect:SaveTokens to 'true'?");
-        }
+
+        return View("InvokeService",
+            "No access token found in user session. Perhaps you need to set Authentication:Schemes:OpenIdConnect:SaveTokens to 'true'?");
     }
 
     public async Task<IActionResult> InvokeSameOrgSample()
@@ -98,12 +97,16 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(new ErrorViewModel
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
     }
 
     private async Task<string> SendRequestToBackend(HttpClient client, string requestUri)
     {
         string result;
+
         try
         {
             logger.LogTrace("Sending request to {requestUri}", requestUri);
@@ -113,6 +116,7 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         {
             result = $"Request failed: {exception.Message}, at: {requestUri}";
         }
+
         return result;
     }
 }

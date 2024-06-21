@@ -28,9 +28,9 @@ builder.Services
 builder.Services.AddAuthorizationBuilder()
     // Steeltoe: register a claim-based policy requiring a specific scope
     .AddPolicy(Globals.RequiredJwtScope, policy =>
-        {
-            policy.RequireClaim("scope", Globals.RequiredJwtScope);
-        })
+    {
+        policy.RequireClaim("scope", Globals.RequiredJwtScope);
+    })
     // Steeltoe: register policies requiring space or org to match between client and server certificates
     .AddOrgAndSpacePolicies();
 
@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen();
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Steeltoe: Use certificate and header forwarding along with ASP.NET Core Authentication and Authorization middlewares
 app.UseCertificateAuthorization();

@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using System.Net.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -13,9 +16,6 @@ using Steeltoe.Management.Endpoint;
 using Steeltoe.Samples.AuthClient;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
-using System;
-using System.Linq;
-using System.Net.Http;
 
 const string organizationId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
 const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
@@ -66,10 +66,13 @@ builder.Services.AddControllersWithViews();
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Steeltoe: Direct ASP.NET Core to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry)
-app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto });
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -94,16 +97,17 @@ return;
 void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
     var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
+
     if (instanceInfo.Uris != null && instanceInfo.Uris.Any())
     {
-        var address = instanceInfo.Uris.First();
+        string? address = instanceInfo.Uris.First();
 
         if (address == null)
         {
             throw new NotImplementedException();
         }
 
-        var baseAddress = address.Replace("steeltoe-samples-authclient", "steeltoe-samples-authserver");
+        string baseAddress = address.Replace("steeltoe-samples-authclient", "steeltoe-samples-authserver");
         client.BaseAddress = new Uri($"https://{baseAddress}");
     }
     else
