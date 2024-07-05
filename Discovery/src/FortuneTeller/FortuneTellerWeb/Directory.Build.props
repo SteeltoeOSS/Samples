@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
     <SteeltoeVersion>4.0.*-*</SteeltoeVersion>
+    <OpenTelemetryVersion>1.9.0</OpenTelemetryVersion>
   </PropertyGroup>
 </Project>

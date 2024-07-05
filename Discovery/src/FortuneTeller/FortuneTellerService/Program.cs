@@ -1,6 +1,9 @@
 using FortuneTellerService;
 using FortuneTellerService.Data;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using Steeltoe.Common;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
@@ -38,6 +41,28 @@ builder.AddAllActuators();
 
 // Steeltoe: Change line below to HealthStatus.Down to observe this app marked as DOWN in discovery server (using *Actuator launch profile).
 builder.Services.AddSingleton<IHealthContributor>(_ => new ExampleHealthContributor(HealthStatus.Up));
+
+// Add OpenTelemetry
+builder.Services
+    .AddOpenTelemetry()
+    .WithTracing(tracerProviderBuilder =>
+    {
+        tracerProviderBuilder.AddAspNetCoreInstrumentation();
+        tracerProviderBuilder.AddOtlpExporter(otlpExporterOptions =>
+        {
+            // otlpExporterOptions.Endpoint = new Uri("<OTLP Export Address>");
+        });
+        tracerProviderBuilder.AddZipkinExporter(zipkinExporterOptions =>
+        {
+            zipkinExporterOptions.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
+        });
+    });
+builder.Services.ConfigureOpenTelemetryTracerProvider((serviceProvider, tracerProviderBuilder) =>
+{
+    var appName = serviceProvider.GetRequiredService<IApplicationInstanceInfo>()
+        .GetApplicationNameInContext(SteeltoeComponent.Management);
+    tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appName));
+});
 
 WebApplication app = builder.Build();
 
