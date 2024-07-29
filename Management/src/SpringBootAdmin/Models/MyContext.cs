@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Steeltoe.Connector.MySql.EFCore;
+using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 
 namespace CloudFoundry
 {
@@ -19,7 +19,7 @@ namespace CloudFoundry
         }
     }
 
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MyContext>
+    /*public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MyContext>
     {
         public MyContext CreateDbContext(string[] args)
         {
@@ -28,10 +28,10 @@ namespace CloudFoundry
                 .AddJsonFile($"appsettings.Development.json", optional: true)
                 .Build();
             var services = new ServiceCollection();
-            services.AddDbContext<MyContext>(options => options.UseMySql(config), ServiceLifetime.Singleton);
+            services.AddDbContext<MyContext>(options => options.UseMySql(config));
             var container = services.BuildServiceProvider();
             var context = container.GetRequiredService<MyContext>();
             return context;
         }
-    }
+    }*/
 }

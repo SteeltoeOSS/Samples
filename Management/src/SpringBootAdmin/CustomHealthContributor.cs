@@ -1,4 +1,6 @@
 ﻿using Steeltoe.Common.HealthChecks;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CloudFoundry
 {
@@ -9,15 +11,15 @@ namespace CloudFoundry
     {
         public string Id => "CustomHealthContributor";
 
-
-        public HealthCheckResult Health()
+        public Task<HealthCheckResult> CheckHealthAsync(CancellationToken cancellationToken)
         {
             var result = new HealthCheckResult {
-                Status = HealthStatus.UP, // this is used as part of the aggregate, it is not directly part of the middleware response
+                Status = HealthStatus.Up, // this is used as part of the aggregate, it is not directly part of the middleware response
                 Description = "This health check does not check anything"
             };
-            result.Details.Add("status", HealthStatus.UP.ToString());
-            return result;
+            result.Details.Add("status", HealthStatus.Up.ToString());
+
+            return Task.FromResult(result);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Steeltoe.Management.Endpoint.Info;
 using Steeltoe.Management.Info;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CloudFoundry
 {
@@ -11,11 +13,10 @@ namespace CloudFoundry
         /// <summary>
         /// This is where you add your information
         /// </summary>
-        /// <param name="builder"></param>
-        public void Contribute(IInfoBuilder builder)
+        public Task ContributeAsync(IInfoBuilder builder, CancellationToken cancellationToken)
         {
-            // pass in the info 
             builder.WithInfo("arbitraryInfo", new { someProperty = "someValue" });
+            return Task.CompletedTask;
         }
     }
 }

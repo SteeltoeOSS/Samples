@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Management.Endpoint;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Configuration.CloudFoundry;
 
 namespace SpringBootAdmin
 {
@@ -18,8 +18,10 @@ namespace SpringBootAdmin
                 .AddCloudFoundryConfiguration()
                 .ConfigureWebHost(configure =>
                 {
-                    configure.UseStartup<Startup>().UseKestrel();
-                    configure.UseUrls("http://host.docker.internal:5000");
+                    //configure.UseStartup<Startup>().UseKestrel();
+                    configure.UseStartup<Startup>().UseIIS();
+                    //configure.UseUrls("http://host.docker.internal:5000");
+                    //configure.UseUrls("http://localhost:5000");
                 })
                .AddAllActuators(endpoints => endpoints.RequireAuthorization("actuators.read"))
                .Build();

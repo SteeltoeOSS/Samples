@@ -41,6 +41,8 @@ namespace SpringBootAdmin
                 options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
             });
 
+            services.AddSpringBootAdminClient();
+
             // Add framework services.
             services.AddControllersWithViews();
         }
@@ -76,7 +78,7 @@ namespace SpringBootAdmin
             // Start up the metrics forwarder service added above
             // Remove comment below to enable
             // app.UseMetricsExporter();
-            app.RegisterWithSpringBootAdmin(Configuration);
+            //app.RegisterWithSpringBootAdmin(Configuration);
         }
     }
 }
