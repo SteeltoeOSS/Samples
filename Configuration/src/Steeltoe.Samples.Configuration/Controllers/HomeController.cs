@@ -8,13 +8,13 @@ using Steeltoe.Samples.Configuration.Models;
 namespace Steeltoe.Samples.Configuration.Controllers;
 
 public sealed class HomeController(
-    IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot, IOptionsSnapshot<ConfigServerClientSettingsOptions> configServerSettings,
+    IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot, IOptionsSnapshot<ConfigServerClientOptions> configServerClientOptions,
     IOptionsSnapshot<PlaceholderValues> placeholderValues, IOptions<CloudFoundryApplicationOptions> appOptions,
     IOptions<CloudFoundryServicesOptions> serviceOptions, IConfiguration configuration) : Controller
 {
     private readonly ExternalConfiguration _dataSnapshot  = configServerDataSnapshot.Value;
 
-    private readonly ConfigServerClientSettingsOptions _configServerClientSettings  = configServerSettings.Value;
+    private readonly ConfigServerClientOptions _configServerClientOptions  = configServerClientOptions.Value;
 
     private readonly PlaceholderValues _placeholderResolverValues  = placeholderValues.Value;
 
@@ -33,7 +33,7 @@ public sealed class HomeController(
 
     public IActionResult ConfigServerSettings()
     {
-        return View(_configServerClientSettings);
+        return View(_configServerClientOptions);
     }
 
     public IActionResult RandomValues()

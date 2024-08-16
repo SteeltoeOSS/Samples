@@ -1,3 +1,4 @@
+using Steeltoe.Common.Logging;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.ConfigServer;
 using Steeltoe.Configuration.Kubernetes.ServiceBinding;
@@ -12,17 +13,17 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add Configuration providers.
-builder.Configuration.AddRandomValueSource();
+builder.Configuration.AddRandomValueSource(BootstrapLoggerFactory.Default);
 builder.Configuration.AddKubernetesServiceBindings();
-builder.Configuration.AddCloudFoundry();
-builder.Configuration.AddPlaceholderResolver();
-builder.AddConfigServer();
+builder.Configuration.AddCloudFoundry(null, BootstrapLoggerFactory.Default);
+builder.Configuration.AddPlaceholderResolver(BootstrapLoggerFactory.Default);
+builder.AddConfigServer(BootstrapLoggerFactory.Default);
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
 // Steeltoe: map VCAP_APPLICATION and VCAP_SERVICES to IOptions<CloudFoundryApplicationOptions> and IOptions<CloudFoundryServicesOptions>
-builder.Services.ConfigureCloudFoundryOptions(builder.Configuration);
+builder.Services.AddCloudFoundryOptions();
 
 // Steeltoe: Optionally enables usage of "spring:cloud:config" keys to configure Spring Cloud Config Server.
 builder.Services.ConfigureConfigServerClientOptions();
