@@ -1,4 +1,4 @@
-﻿namespace PostgreSqlEFCore.Entities;
+﻿namespace Steeltoe.Samples.PostgreSqlEFCore.Entities;
 
 public sealed class SampleEntity
 {

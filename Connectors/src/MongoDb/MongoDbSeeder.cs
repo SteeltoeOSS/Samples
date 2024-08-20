@@ -1,9 +1,9 @@
-﻿using MongoDb.Data;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MongoDb;
+using Steeltoe.Samples.MongoDb.Data;
 
-namespace MongoDb;
+namespace Steeltoe.Samples.MongoDb;
 
 internal sealed class MongoDbSeeder
 {

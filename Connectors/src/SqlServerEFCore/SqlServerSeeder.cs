@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using SqlServerEFCore.Data;
-using SqlServerEFCore.Entities;
+using Steeltoe.Samples.SqlServerEFCore.Data;
+using Steeltoe.Samples.SqlServerEFCore.Entities;
 
-namespace SqlServerEFCore;
+namespace Steeltoe.Samples.SqlServerEFCore;
 
 internal sealed class SqlServerSeeder
 {

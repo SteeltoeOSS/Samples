@@ -1,7 +1,7 @@
-using MongoDb;
 using MongoDB.Driver;
 using Steeltoe.Connectors.MongoDb;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.MongoDb;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ builder.Services.Configure<MongoDbOptions>(options =>
 {
     var urlBuilder = new MongoUrlBuilder(options.ConnectionString)
     {
-        ApplicationName = "mongodb-connector"
+        ApplicationName = "mongodb-connector-sample"
     };
 
     options.ConnectionString = urlBuilder.ToString();

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using MySqlEFCore.Data;
-using MySqlEFCore.Entities;
+using Steeltoe.Samples.MySqlEFCore.Data;
+using Steeltoe.Samples.MySqlEFCore.Entities;
 
-namespace MySqlEFCore;
+namespace Steeltoe.Samples.MySqlEFCore;
 
 internal sealed class MySqlSeeder
 {

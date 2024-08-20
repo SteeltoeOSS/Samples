@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
-using PostgreSql.Models;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.PostgreSql;
+using Steeltoe.Samples.PostgreSql.Models;
 
-namespace PostgreSql.Controllers;
+namespace Steeltoe.Samples.PostgreSql.Controllers;
 
 public class HomeController : Controller
 {

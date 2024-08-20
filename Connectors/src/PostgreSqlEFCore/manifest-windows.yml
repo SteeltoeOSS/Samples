@@ -1,15 +1,15 @@
 ﻿---
 applications:
-- name: postgresqlefcore-connector
+- name: postgresql-efcore-connector-sample
   random-route: true
   memory: 256M
   stack: windows
   buildpacks:
    - binary_buildpack
-  command: cmd /c .\PostgreSqlEFCore --urls=http://0.0.0.0:%PORT%
+  command: cmd /c .\Steeltoe.Samples.PostgreSqlEFCore --urls=http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - myPostgreSqlService
+   - samplePostgreSqlService

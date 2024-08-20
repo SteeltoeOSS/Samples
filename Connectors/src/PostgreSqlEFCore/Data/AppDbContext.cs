@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PostgreSqlEFCore.Entities;
+using Steeltoe.Samples.PostgreSqlEFCore.Entities;
 
-namespace PostgreSqlEFCore.Data;
+namespace Steeltoe.Samples.PostgreSqlEFCore.Data;
 
-public sealed class AppDbContext : DbContext
+public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<SampleEntity> SampleEntities => Set<SampleEntity>();
-
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    {
-    }
 }

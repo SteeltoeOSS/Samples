@@ -1,15 +1,15 @@
 ﻿---
 applications:
-- name: redis-connector
+- name: redis-connector-sample
   random-route: true
   memory: 256M
   stack: windows
   buildpacks:
    - binary_buildpack
-  command: cmd /c .\Redis --urls=http://0.0.0.0:%PORT%
+  command: cmd /c .\Steeltoe.Samples.Redis --urls=http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - myRedisService
+   - sampleRedisService

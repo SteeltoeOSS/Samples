@@ -2,7 +2,7 @@
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.PostgreSql;
 
-namespace PostgreSql;
+namespace Steeltoe.Samples.PostgreSql;
 
 internal sealed class PostgreSqlSeeder
 {

@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MySqlEFCore.Data;
-using MySqlEFCore.Models;
+using Steeltoe.Samples.MySqlEFCore.Data;
+using Steeltoe.Samples.MySqlEFCore.Models;
 
-namespace MySqlEFCore.Controllers;
+namespace Steeltoe.Samples.MySqlEFCore.Controllers;
 
 public class HomeController : Controller
 {

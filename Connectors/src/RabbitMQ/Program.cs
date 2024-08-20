@@ -22,7 +22,7 @@ builder.AddRabbitMQ(null, addOptions =>
 
         var factory = new ConnectionFactory
         {
-            ClientProvidedName = "rabbitmq-connector"
+            ClientProvidedName = "rabbitmq-connector-sample"
         };
 
         if (options.ConnectionString != null)

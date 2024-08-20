@@ -7,10 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'mongodb-connector'
+    app = 'mongodb-connector-sample'
     cf.delete_app(app)
     # create service
     service = 'csb-azure-mongodb'
     plan = 'small'
-    instance = 'myMongoDbService'
+    instance = 'sampleMongoDbService'
     cf.create_service(service, plan, instance)

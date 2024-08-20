@@ -33,14 +33,14 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
    ```
    - When using the Cloud Service Broker for Azure:
      ```
-     cf create-service csb-azure-postgresql mini myPostgreSqlService
+     cf create-service csb-azure-postgresql mini samplePostgreSqlService
      ```
    - When using the Cloud Service Broker for GCP:
      ```
-     cf create-service csb-google-postgres gcp-postgres-tiny myPostgreSqlService
+     cf create-service csb-google-postgres gcp-postgres-tiny samplePostgreSqlService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs postgresql-connector`)
+1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs postgresql-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```
      dotnet publish -r win-x64 --self-contained

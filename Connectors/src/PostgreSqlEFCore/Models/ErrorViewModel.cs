@@ -1,4 +1,4 @@
-namespace PostgreSqlEFCore.Models;
+namespace Steeltoe.Samples.PostgreSqlEFCore.Models;
 
 public class ErrorViewModel
 {

@@ -1,4 +1,4 @@
-﻿namespace PostgreSql.Models;
+﻿namespace Steeltoe.Samples.PostgreSql.Models;
 
 public sealed class PostgreSqlViewModel
 {

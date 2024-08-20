@@ -1,10 +1,10 @@
 ﻿using System.Net;
-using CosmosDb.Data;
 using Microsoft.Azure.Cosmos;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.CosmosDb;
+using Steeltoe.Samples.CosmosDb.Data;
 
-namespace CosmosDb;
+namespace Steeltoe.Samples.CosmosDb;
 
 internal sealed class CosmosDbSeeder
 {

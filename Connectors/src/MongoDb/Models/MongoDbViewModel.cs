@@ -1,11 +1,11 @@
-﻿using MongoDb.Data;
+﻿using Steeltoe.Samples.MongoDb.Data;
 
-namespace MongoDb.Models;
+namespace Steeltoe.Samples.MongoDb.Models;
 
 public sealed class MongoDbViewModel
 {
     public string? ConnectionString { get; set; }
     public string? Database { get; set; }
 
-    public List<SampleObject> SampleObjects { get; set; } = new();
+    public List<SampleObject> SampleObjects { get; set; } = [];
 }

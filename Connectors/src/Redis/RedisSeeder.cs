@@ -3,7 +3,7 @@ using StackExchange.Redis;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.Redis;
 
-namespace Redis;
+namespace Steeltoe.Samples.Redis;
 
 internal sealed class RedisSeeder
 {

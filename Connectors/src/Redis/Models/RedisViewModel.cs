@@ -1,4 +1,4 @@
-﻿namespace Redis.Models;
+﻿namespace Steeltoe.Samples.Redis.Models;
 
 public sealed class RedisViewModel
 {

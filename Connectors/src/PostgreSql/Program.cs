@@ -1,7 +1,7 @@
 using Npgsql;
-using PostgreSql;
 using Steeltoe.Connectors.PostgreSql;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.PostgreSql;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
