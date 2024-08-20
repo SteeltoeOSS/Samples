@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34707.107
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDataProtectionKeyStore", "RedisDataProtectionKeyStore\RedisDataProtectionKeyStore.csproj", "{3393201D-0A45-4812-9888-5BFB89F5F76D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E89A1BB6-1F81-4C2A-9F4A-936EE33ACD8B}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\CommonTasks.md = ..\..\CommonTasks.md
@@ -13,6 +11,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthClient", "AuthClient\Steeltoe.Samples.AuthClient.csproj", "{CBBCE83B-8AF2-40BB-A7E0-11AA4CA61FD2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthServer", "AuthServer\Steeltoe.Samples.AuthServer.csproj", "{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steeltoe.Samples.DataProtection.Redis", "Steeltoe.Samples.DataProtection.Redis\Steeltoe.Samples.DataProtection.Redis.csproj", "{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,18 +24,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Debug|x64.Build.0 = Debug|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Debug|x86.Build.0 = Debug|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x64.ActiveCfg = Release|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x64.Build.0 = Release|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x86.ActiveCfg = Release|Any CPU
-		{3393201D-0A45-4812-9888-5BFB89F5F76D}.Release|x86.Build.0 = Release|Any CPU
 		{CBBCE83B-8AF2-40BB-A7E0-11AA4CA61FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBBCE83B-8AF2-40BB-A7E0-11AA4CA61FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBBCE83B-8AF2-40BB-A7E0-11AA4CA61FD2}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -60,6 +48,18 @@ Global
 		{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}.Release|x64.Build.0 = Release|Any CPU
 		{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}.Release|x86.Build.0 = Release|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Debug|x64.Build.0 = Debug|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Debug|x86.Build.0 = Debug|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Release|x64.Build.0 = Release|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

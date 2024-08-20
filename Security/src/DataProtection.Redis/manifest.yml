@@ -1,0 +1,12 @@
+﻿---
+applications:
+- name: steeltoe-samples-dataprotection-redis
+  buildpacks:
+   - dotnet_core_buildpack
+  env:
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"
+  memory: 128M
+  random-route: true
+  services:
+   - myRedisService
