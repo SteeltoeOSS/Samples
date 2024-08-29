@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: steeltoe-samples-authserver
+- name: auth-server-sample
   buildpacks:
   - dotnet_core_buildpack
   memory: 128M
@@ -15,4 +15,4 @@ applications:
     SSO_RESOURCES: sampleapi.read
     SSO_SHOW_ON_HOME_PAGE: "false"
   services:
-  - mySSOService
+  - sampleSSOService

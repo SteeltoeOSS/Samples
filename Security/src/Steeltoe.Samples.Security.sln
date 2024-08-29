@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthClient
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthServer", "AuthServer\Steeltoe.Samples.AuthServer.csproj", "{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steeltoe.Samples.DataProtection.Redis", "Steeltoe.Samples.DataProtection.Redis\Steeltoe.Samples.DataProtection.Redis.csproj", "{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.RedisDataProtection", "RedisDataProtection\Steeltoe.Samples.RedisDataProtection.csproj", "{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
