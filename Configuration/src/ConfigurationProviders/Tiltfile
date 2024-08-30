@@ -2,7 +2,7 @@ LOCAL_PATH = os.getenv("LOCAL_PATH", default=".")
 NAMESPACE = os.getenv("NAMESPACE", default="apps")
 WAIT_TIMEOUT = os.getenv("WAIT_TIMEOUT", default='10m00s')
 TYPE = os.getenv("TYPE", default='web')
-NAME = "steeltoe-samples-configuration"
+NAME = "configuration-providers-sample"
 LIVE_UPDATE_PATH = os.getenv("LIVE_UPDATE_PATH", default="bin\\Debug\\net8.0")
 
 k8s_custom_deploy(
@@ -24,6 +24,6 @@ k8s_custom_deploy(
 )
 
 k8s_resource(NAME, port_forwards=["8080:8080"],
-            extra_pod_selectors=[{'carto.run/workload-name': 'steeltoe-samples-configuration', 'app.kubernetes.io/component': 'run'}])
+            extra_pod_selectors=[{'carto.run/workload-name': 'configuration-providers-sample', 'app.kubernetes.io/component': 'run'}])
 
 allow_k8s_contexts('tap-sandbox')

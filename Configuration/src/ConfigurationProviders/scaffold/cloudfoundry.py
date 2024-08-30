@@ -7,11 +7,11 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'steeltoe-configuration-sample'
+    app = 'configuration-providers-sample'
     cf.delete_app(app)
     # create service
     service = 'p.config-server'
     plan = 'standard'
-    instance = 'myConfigServer'
+    instance = 'sampleConfigServer'
     args = ['-c', './config-server.json']
     cf.create_service(service, plan, instance, args)

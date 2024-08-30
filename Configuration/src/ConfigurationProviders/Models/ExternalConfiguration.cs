@@ -1,4 +1,4 @@
-﻿namespace Steeltoe.Samples.Configuration.Models;
+﻿namespace Steeltoe.Samples.ConfigurationProviders.Models;
 
 /// <summary>
 /// This object contains the configuration values provided by a configuration service. The source of these values is here:

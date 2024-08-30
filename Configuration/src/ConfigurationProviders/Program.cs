@@ -5,7 +5,7 @@ using Steeltoe.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Configuration.Placeholder;
 using Steeltoe.Configuration.RandomValue;
 using Steeltoe.Management.Endpoint;
-using Steeltoe.Samples.Configuration.Models;
+using Steeltoe.Samples.ConfigurationProviders.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -49,8 +49,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
