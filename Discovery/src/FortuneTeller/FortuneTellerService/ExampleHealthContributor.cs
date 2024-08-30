@@ -1,6 +1,6 @@
 ﻿using Steeltoe.Common.HealthChecks;
 
-namespace FortuneTellerService;
+namespace Steeltoe.Samples.FortuneTellerService;
 
 internal sealed class ExampleHealthContributor(HealthStatus? healthStatus) : IHealthContributor
 {

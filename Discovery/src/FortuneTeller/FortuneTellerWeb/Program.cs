@@ -1,10 +1,10 @@
-using FortuneTellerWeb.Services;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Discovery.Configuration;
 using Steeltoe.Discovery.Consul;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Discovery.HttpClients;
+using Steeltoe.Samples.FortuneTellerWeb.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

@@ -1,7 +1,7 @@
-﻿using FortuneTellerService.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Steeltoe.Samples.FortuneTellerService.Models;
 
-namespace FortuneTellerService.Data;
+namespace Steeltoe.Samples.FortuneTellerService.Data;
 
 public sealed class FortuneDbContext(DbContextOptions<FortuneDbContext> options) : DbContext(options)
 {

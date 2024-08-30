@@ -1,7 +1,7 @@
-using FortuneTellerService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Steeltoe.Samples.FortuneTellerService.Models;
 
-namespace FortuneTellerService.Controllers;
+namespace Steeltoe.Samples.FortuneTellerService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -24,7 +24,9 @@ public class ConfigurationController(IConfiguration configuration, ILogger<Confi
         }
 
         string? configServerUri = _configuration.GetValue<string?>("Spring:Cloud:Config:Uri");
-        _logger.LogInformation($"GET api/configuration: Resolved key '{ConfigurationKey}' to '{value}' from Config Server at '{configServerUri}'.");
+
+        _logger.LogInformation("GET api/configuration: Resolved key '{Key}' to '{Value}' from Config Server at '{Uri}'.", ConfigurationKey, value,
+            configServerUri);
 
         return new ConfigurationLookupResult
         {
