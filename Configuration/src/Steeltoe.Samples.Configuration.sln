@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\CommonTasks.md = ..\..\CommonTasks.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.Configuration", "Steeltoe.Samples.Configuration\Steeltoe.Samples.Configuration.csproj", "{82489734-D845-44FA-9EAB-1ED0A7013E51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.ConfigurationProviders", "ConfigurationProviders\Steeltoe.Samples.ConfigurationProviders.csproj", "{82489734-D845-44FA-9EAB-1ED0A7013E51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

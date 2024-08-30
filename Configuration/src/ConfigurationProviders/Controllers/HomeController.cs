@@ -3,21 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.ConfigServer;
-using Steeltoe.Samples.Configuration.Models;
+using Steeltoe.Samples.ConfigurationProviders.Models;
 
-namespace Steeltoe.Samples.Configuration.Controllers;
+namespace Steeltoe.Samples.ConfigurationProviders.Controllers;
 
 public sealed class HomeController(
     IOptionsSnapshot<ExternalConfiguration> configServerDataSnapshot, IOptionsSnapshot<ConfigServerClientOptions> configServerClientOptions,
     IOptionsSnapshot<PlaceholderValues> placeholderValues, IOptions<CloudFoundryApplicationOptions> appOptions,
     IOptions<CloudFoundryServicesOptions> serviceOptions, IConfiguration configuration) : Controller
 {
-    private readonly ExternalConfiguration _dataSnapshot  = configServerDataSnapshot.Value;
-
-    private readonly ConfigServerClientOptions _configServerClientOptions  = configServerClientOptions.Value;
-
-    private readonly PlaceholderValues _placeholderResolverValues  = placeholderValues.Value;
-
+    private readonly ExternalConfiguration _dataSnapshot = configServerDataSnapshot.Value;
+    private readonly ConfigServerClientOptions _configServerClientOptions = configServerClientOptions.Value;
+    private readonly PlaceholderValues _placeholderResolverValues = placeholderValues.Value;
     private readonly CloudFoundryApplicationOptions _applicationOptions = appOptions.Value;
     private readonly CloudFoundryServicesOptions _serviceOptions = serviceOptions.Value;
 

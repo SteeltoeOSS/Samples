@@ -1,7 +1,7 @@
 ﻿apiVersion: "services.apps.tanzu.vmware.com/v1alpha1"
 kind: ResourceClaim
 metadata:
- name: my-config
+ name: sample-config-server
  namespace: apps
 spec:
   ref:

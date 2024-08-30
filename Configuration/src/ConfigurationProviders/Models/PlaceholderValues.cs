@@ -1,4 +1,4 @@
-﻿namespace Steeltoe.Samples.Configuration.Models;
+﻿namespace Steeltoe.Samples.ConfigurationProviders.Models;
 
 public sealed class PlaceholderValues
 {

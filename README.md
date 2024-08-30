@@ -8,7 +8,7 @@ Samples using the Spring Cloud Config Server and other Steeltoe configuration pr
 
 | Sample | main | latest |
 | --- | --- | --- |
-| [Configuration](Configuration/src/Steeltoe.Samples.Configuration) | | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FConfiguration?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=73&branchName=latest) |
+| [ConfigurationProviders](Configuration/src/ConfigurationProviders) | | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FConfiguration?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=73&branchName=latest) |
 
 ## [Discovery](Discovery)
 
