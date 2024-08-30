@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
+using Steeltoe.Common.Extensions;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
@@ -23,10 +24,7 @@ const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Steeltoe: Add Cloud Foundry application and service info and instance identity certificate to configuration
-builder.Configuration
-    .AddCloudFoundry()
-    .AddCloudFoundryServiceBindings()
-    .AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
+builder.Configuration.AddCloudFoundry().AddCloudFoundryServiceBindings().AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
 
 // Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry
 builder.Services
@@ -50,11 +48,11 @@ builder.Services.AddAuthorizationBuilder()
 // Steeltoe: Register application instance information
 if (Platform.IsCloudFoundry)
 {
-    builder.Services.RegisterCloudFoundryApplicationInstanceInfo();
+    builder.Services.AddCloudFoundryOptions();
 }
 else
 {
-    builder.Services.RegisterDefaultApplicationInstanceInfo();
+    builder.Services.AddApplicationInstanceInfo();
 }
 
 // Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization
@@ -99,16 +97,10 @@ void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
     var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
 
-    if (instanceInfo.Uris != null && instanceInfo.Uris.Any())
+    if (instanceInfo is CloudFoundryApplicationOptions { Uris.Count: > 0 } options)
     {
-        string? address = instanceInfo.Uris.First();
-
-        if (address == null)
-        {
-            throw new NotImplementedException();
-        }
-
-        string baseAddress = address.Replace("steeltoe-samples-authclient", "steeltoe-samples-authserver");
+        string address = options.Uris.First();
+        string baseAddress = address.Replace("auth-client-sample", "auth-server-sample");
         client.BaseAddress = new Uri($"https://{baseAddress}");
     }
     else

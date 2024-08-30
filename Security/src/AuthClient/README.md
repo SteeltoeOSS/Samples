@@ -27,7 +27,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
       * Credentials for connecting to the UAA server can be found or customized before deployment in [uaa.yml](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/uaa.yml#L124)
    1. Save changes, but keep this page open
 1. Create a service instance:
-   * `cf create-service p-identity <your service plan name> mySSOService`
+   * `cf create-service p-identity <your service plan name> sampleSSOService`
 1. Push AuthServer to Cloud Foundry
    1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthServer`
@@ -52,8 +52,8 @@ This application shows how to use the Steeltoe [security libraries](https://docs
      ```
 
 > [!NOTE]
-> The provided manifests will create apps named `steeltoe-samples-authclient` and `steeltoe-samples-authserver`
-> and attempt to bind both to the SSO service `mySSOService`.
+> The provided manifests will create apps named `auth-client-sample` and `auth-server-sample`
+> and attempt to bind both to the SSO service `sampleSSOService`.
 
 ### RedirectUri and Scope access
 
@@ -62,9 +62,9 @@ The RedirectUri and Scope access settings should be automatically configured via
 If you want to access the `sso` dashboard, run the following command and go to the URL listed in `dashboard url` property:
 
 ```bash
-$ cf service mySSOService
+$ cf service sampleSSOService
 
-name:            mySSOService
+name:            sampleSSOService
 guid:            ea8b8ac0-ce85-4726-8b39-d1b2eb55b45b
 type:            managed
 broker:          identity-service-broker
@@ -80,10 +80,10 @@ dashboard url:   https://p-identity.sys.cf-app.com/developer/identity-zones/15aa
 
 ## What to expect
 
-At this point the app is up and running.  You can access it at <https://localhost:7072> or <https://steeltoe-samples-authclient.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
+At this point the app is up and running.  You can access it at <https://localhost:7072> or <https://auth-client-sample.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
 > [!NOTE]
-> To see the logs on Cloud Foundry as the app runs, execute this command: `cf logs steeltoe-samples-authclient`
+> To see the logs on Cloud Foundry as the app runs, execute this command: `cf logs auth-client-sample`
 
 From the website's menu, click on the `Log in` menu item and you should be redirected to the UAA server's login page. Enter `testuser` and `password`, and you should be authenticated and redirected back to the auth client home page.
 

@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: steeltoe-samples-authclient
+- name: auth-client-sample
   buildpacks:
   - dotnet_core_buildpack
   memory: 128M
@@ -16,4 +16,4 @@ applications:
     SSO_SCOPES: openid, profile, sampleapi.read
     SSO_SHOW_ON_HOME_PAGE: "true"
   services:
-  - mySSOService
+  - sampleSSOService

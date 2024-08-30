@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <SteeltoeVersion>4.0.*-*</SteeltoeVersion>
+  </PropertyGroup>
+</Project>
