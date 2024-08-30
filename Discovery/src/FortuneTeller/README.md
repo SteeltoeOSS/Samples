@@ -134,7 +134,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 1. Create a Eureka service instance in an org/space:
    ```
    cf target -o your-org -s your-space
-   cf create-service p.service-registry standard myDiscoveryService
+   cf create-service p.service-registry standard sampleDiscoveryService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command from the FortuneTellerService directory, wait until it has started, then run it from the FortuneTellerWeb directory
@@ -147,10 +147,10 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 ### Running on Tanzu Platform for Cloud Foundry (Container-to-Container)
 
 Same steps as above, but uncomment the related line in `manifest.yaml` before push. Additionally:
-1. In **Apps Manager**, go to **fortuneWeb** in your org/space
+1. In **Apps Manager**, go to **fortune-web-sample** in your org/space
 1. Go to **Container Networking** in the left-side menu
 1. Click **CREATE POLICY**
-1. Select the **fortuneService** app and specify **port** `8080`
+1. Select the **fortune-service-sample** app and specify **port** `8080`
 
 For more information, read the Cloud Foundry documentation on [container-to-container](https://docs.cloudfoundry.org/devguide/deploy-apps/cf-networking.html) and [custom ports](https://docs.cloudfoundry.org/devguide/custom-ports.html).
 
@@ -218,7 +218,8 @@ with Eureka at startup. FortuneTellerService is configured to obtain the URL to 
    ```
 1. Navigate to the [Eureka dashboard](http://localhost:8761/) in your browser and observe both "FORTUNESERVICE" and "CONFIGSERVER" are registered
    - Detailed information about the registrations can be viewed using the [Eureka API](http://localhost:8761/eureka/apps)
-1. Navigate to the [configuration endpoint](https://localhost:7251/api/configuration) in your browser and observe the configuration source is `http://host.docker.internal:8888/`. Without using discovery-first, the configuration source would have been `http://localhost:8888`.
+1. Navigate to the [configuration endpoint](https://localhost:7251/api/configuration) in your browser and observe the configuration source is `http://host.docker.internal:8888/`.
+   Without using discovery-first, the configuration source would have been `http://localhost:8888`.
 
 ---
 

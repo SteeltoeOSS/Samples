@@ -1,4 +1,4 @@
-namespace FortuneTellerWeb.Models;
+namespace Steeltoe.Samples.FortuneTellerWeb.Models;
 
 public class ErrorViewModel
 {

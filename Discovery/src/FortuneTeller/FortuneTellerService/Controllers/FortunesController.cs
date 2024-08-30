@@ -1,9 +1,9 @@
-using FortuneTellerService.Data;
-using FortuneTellerService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Steeltoe.Samples.FortuneTellerService.Data;
+using Steeltoe.Samples.FortuneTellerService.Models;
 
-namespace FortuneTellerService.Controllers;
+namespace Steeltoe.Samples.FortuneTellerService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

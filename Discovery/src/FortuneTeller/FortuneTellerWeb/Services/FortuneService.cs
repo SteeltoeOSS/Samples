@@ -1,6 +1,6 @@
-﻿using FortuneTellerWeb.Models;
+﻿using Steeltoe.Samples.FortuneTellerWeb.Models;
 
-namespace FortuneTellerWeb.Services;
+namespace Steeltoe.Samples.FortuneTellerWeb.Services;
 
 public sealed class FortuneService(HttpClient httpClient, ILogger<FortuneService> logger)
 {
