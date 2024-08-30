@@ -1,10 +1,10 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using SqlServerEFCore;
-using SqlServerEFCore.Data;
 using Steeltoe.Connectors.EntityFrameworkCore.SqlServer;
 using Steeltoe.Connectors.SqlServer;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.SqlServerEFCore;
+using Steeltoe.Samples.SqlServerEFCore.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

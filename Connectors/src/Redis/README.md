@@ -36,22 +36,22 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis c
    ```
    - When using Redis for VMware Tanzu Application Service:
      ```
-     cf create-service p.redis on-demand-cache myRedisService
+     cf create-service p.redis on-demand-cache sampleRedisService
      ```
      or:
      ```
-     cf create-service p-redis shared-vm myRedisService
+     cf create-service p-redis shared-vm sampleRedisService
      ```
    - When using the Cloud Service Broker for Azure:
      ```
-     cf create-service csb-azure-redis your-plan myRedisService
+     cf create-service csb-azure-redis your-plan sampleRedisService
      ```
    - When using the Cloud Service Broker for GCP:
      ```
-     cf create-service csb-google-redis your-plan myRedisService
+     cf create-service csb-google-redis your-plan sampleRedisService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-connector`)
+1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```
      dotnet publish -r win-x64 --self-contained

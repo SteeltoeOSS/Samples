@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MongoDb.Data;
 using MongoDB.Driver;
-using MongoDb.Models;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MongoDb;
+using Steeltoe.Samples.MongoDb.Data;
+using Steeltoe.Samples.MongoDb.Models;
 
-namespace MongoDb.Controllers;
+namespace Steeltoe.Samples.MongoDb.Controllers;
 
 public class HomeController : Controller
 {

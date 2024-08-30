@@ -7,10 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'sqlserverefcore-connector'
+    app = 'sqlserver-efcore-connector-sample'
     cf.delete_app(app)
     # create service
     service = 'csb-azure-mssql'
     plan = 'small-v2'
-    instance = 'mySqlServerService'
+    instance = 'sampleSqlServerService'
     cf.create_service(service, plan, instance)

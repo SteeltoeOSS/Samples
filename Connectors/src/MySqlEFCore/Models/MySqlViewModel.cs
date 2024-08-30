@@ -1,6 +1,6 @@
-﻿using MySqlEFCore.Entities;
+﻿using Steeltoe.Samples.MySqlEFCore.Entities;
 
-namespace MySqlEFCore.Models;
+namespace Steeltoe.Samples.MySqlEFCore.Models;
 
 public sealed class MySqlViewModel
 {

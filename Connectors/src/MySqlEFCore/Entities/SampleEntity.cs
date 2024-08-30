@@ -1,4 +1,4 @@
-﻿namespace MySqlEFCore.Entities;
+﻿namespace Steeltoe.Samples.MySqlEFCore.Entities;
 
 public sealed class SampleEntity
 {

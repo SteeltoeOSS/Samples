@@ -1,12 +1,12 @@
 ﻿using System.Data.Common;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Models;
 using MySqlConnector;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MySql;
+using Steeltoe.Samples.MySql.Models;
 
-namespace MySql.Controllers;
+namespace Steeltoe.Samples.MySql.Controllers;
 
 public class HomeController : Controller
 {

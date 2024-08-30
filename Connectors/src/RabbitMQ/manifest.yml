@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: rabbitmq-connector
+- name: rabbitmq-connector-sample
   random-route: true
   buildpacks:
    - dotnet_core_buildpack
@@ -11,4 +11,4 @@ applications:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - myRabbitMQService
+   - sampleRabbitMQService

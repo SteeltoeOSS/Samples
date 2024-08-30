@@ -1,16 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace CosmosDb.Data;
+namespace Steeltoe.Samples.CosmosDb.Data;
 
-public sealed class SampleObject
+public sealed class SampleObject(string id)
 {
     [JsonProperty(PropertyName = "id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = id;
 
     public string? Text { get; set; }
-
-    public SampleObject(string id)
-    {
-        Id = id;
-    }
 }

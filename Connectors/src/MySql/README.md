@@ -34,18 +34,18 @@ Upon startup, the app inserts a couple of rows into the bound MySQL database. Th
    ```
    - When using VMware MySQL for Tanzu Application Service:
      ```
-     cf create-service p.mysql db-small myMySqlService
+     cf create-service p.mysql db-small sampleMySqlService
      ```
    - When using the Cloud Service Broker for Azure:
      ```
-     cf create-service csb-azure-mysql small myMySqlService
+     cf create-service csb-azure-mysql small sampleMySqlService
      ```
    - When using the Cloud Service Broker for GCP:
      ```
-     cf create-service csb-google-mysql your-plan myMySqlService
+     cf create-service csb-google-mysql your-plan sampleMySqlService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs mysql-connector`)
+1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs mysql-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```
      dotnet publish -r win-x64 --self-contained

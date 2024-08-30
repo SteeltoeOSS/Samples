@@ -1,8 +1,8 @@
-using CosmosDb;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.Extensions.Options;
 using Steeltoe.Connectors.CosmosDb;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.CosmosDb;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +20,7 @@ builder.AddCosmosDb(null, addOptions =>
     {
         var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<CosmosDbOptions>>();
         CosmosDbOptions options = optionsMonitor.Get(serviceBindingName);
-        return new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector").Build();
+        return new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector-sample").Build();
     };
 });
 

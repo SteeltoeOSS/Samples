@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySqlEFCore.Entities;
+using Steeltoe.Samples.MySqlEFCore.Entities;
 
-namespace MySqlEFCore.Data;
+namespace Steeltoe.Samples.MySqlEFCore.Data;
 
-internal sealed class OtherDbContext : DbContext
+internal sealed class OtherDbContext(DbContextOptions<OtherDbContext> options) : DbContext(options)
 {
     public DbSet<OtherEntity> OtherEntities => Set<OtherEntity>();
-
-    public OtherDbContext(DbContextOptions<OtherDbContext> options)
-        : base(options)
-    {
-    }
 }

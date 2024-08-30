@@ -1,6 +1,6 @@
-﻿using SqlServerEFCore.Entities;
+﻿using Steeltoe.Samples.SqlServerEFCore.Entities;
 
-namespace SqlServerEFCore.Models;
+namespace Steeltoe.Samples.SqlServerEFCore.Models;
 
 public sealed class SqlServerViewModel
 {

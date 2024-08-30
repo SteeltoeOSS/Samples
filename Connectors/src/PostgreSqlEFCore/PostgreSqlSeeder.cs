@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using PostgreSqlEFCore.Data;
-using PostgreSqlEFCore.Entities;
+using Steeltoe.Samples.PostgreSqlEFCore.Data;
+using Steeltoe.Samples.PostgreSqlEFCore.Entities;
 
-namespace PostgreSqlEFCore;
+namespace Steeltoe.Samples.PostgreSqlEFCore;
 
 internal sealed class PostgreSqlSeeder
 {

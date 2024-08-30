@@ -3,12 +3,12 @@ using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using Redis.Models;
 using StackExchange.Redis;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.Redis;
+using Steeltoe.Samples.Redis.Models;
 
-namespace Redis.Controllers;
+namespace Steeltoe.Samples.Redis.Controllers;
 
 public class HomeController : Controller
 {
@@ -84,7 +84,7 @@ public class HomeController : Controller
         return value.ToString();
     }
 
-    private static string? EvaluateLuaScript(IDatabase database)
+    private static string EvaluateLuaScript(IDatabase database)
     {
         try
         {

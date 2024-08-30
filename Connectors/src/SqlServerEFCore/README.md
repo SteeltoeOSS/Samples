@@ -27,10 +27,10 @@ Upon startup, the app inserts a couple of rows into the bound SQL Server databas
 1. Create a SQL Server service instance in an org/space
    ```
    cf target -o your-org -s your-space
-   cf create-service csb-azure-mssql mini mySqlServerService
+   cf create-service csb-azure-mssql mini sampleSqlServerService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs sqlserverefcore-connector`)
+1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs sqlserver-efcore-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```
      dotnet publish -r win-x64 --self-contained
