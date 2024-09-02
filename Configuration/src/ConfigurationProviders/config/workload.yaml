@@ -32,7 +32,7 @@ spec:
     ref:
       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
       kind: ResourceClaim
-      name: sample-config-server
+      name: sample-config-service
   source:
     git:
       url: https://github.com/SteeltoeOSS/Samples
