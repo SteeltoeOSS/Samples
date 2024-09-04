@@ -53,7 +53,7 @@ A sample that uses all of the Steeltoe components together in a microservices-ba
 
 ## [FreddysBBQ](FreddysBBQ)
 
-A polyglot (Java and .NET) microservices-based sample demonstrating interoperability between Java and .NET on CloudFoundry, secured with OAuth2 Security Services and using Spring Cloud Services.
+A polyglot (Java and .NET) microservices-based sample demonstrating interoperability between Java and .NET on Cloud Foundry, secured with OAuth2 Security Services and using Spring Cloud Services.
 
 # Branches
 
