@@ -1,6 +1,6 @@
 ﻿---
 applications:
-- name: fortuneService
+- name: fortune-service-sample
   random-route: true
   buildpacks:
    - dotnet_core_buildpack
@@ -13,4 +13,4 @@ applications:
     # Uncomment the following line to use Container-to-Container (C2C)
     #Eureka__Instance__RegistrationMethod: "direct"
   services:
-   - myDiscoveryService
+   - sampleDiscoveryService

@@ -2,14 +2,14 @@
 apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
-  name: mongodb-connector
+  name: mongodb-connector-sample
   labels:
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/has-tests: "true"
-    app.kubernetes.io/part-of: mongodb-connector
+    app.kubernetes.io/part-of: mongodb-connector-sample
     tanzu.app.live.view: "true"
     tanzu.app.live.view.application.flavours: steeltoe
-    tanzu.app.live.view.application.name: mongodb-connector
+    tanzu.app.live.view.application.name: mongodb-connector-sample
 spec:
   params:
   - name: annotations
@@ -31,7 +31,7 @@ spec:
     ref:
       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
       kind: ClassClaim
-      name: my-mongodb-service
+      name: sample-mongodb-service
   source:
     git:
       url: https://github.com/SteeltoeOSS/Samples.git

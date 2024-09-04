@@ -7,10 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'rabbitmq-connector'
+    app = 'rabbitmq-connector-sample'
     cf.delete_app(app)
     # create service
     service = 'p.rabbitmq'
     plan = 'single-node'
-    instance = 'myRabbitMQService'
+    instance = 'sampleRabbitMQService'
     cf.create_service(service, plan, instance)

@@ -2,7 +2,7 @@
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MySql;
 
-namespace MySql;
+namespace Steeltoe.Samples.MySql;
 
 internal sealed class MySqlSeeder
 {

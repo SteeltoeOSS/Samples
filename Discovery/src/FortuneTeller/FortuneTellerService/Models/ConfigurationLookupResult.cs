@@ -1,4 +1,4 @@
-﻿namespace FortuneTellerService.Models;
+﻿namespace Steeltoe.Samples.FortuneTellerService.Models;
 
 public sealed class ConfigurationLookupResult
 {

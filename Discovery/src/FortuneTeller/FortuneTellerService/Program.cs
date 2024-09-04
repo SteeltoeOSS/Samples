@@ -1,5 +1,3 @@
-using FortuneTellerService;
-using FortuneTellerService.Data;
 using Microsoft.EntityFrameworkCore;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Configuration.CloudFoundry;
@@ -8,6 +6,8 @@ using Steeltoe.Configuration.ConfigServer;
 using Steeltoe.Discovery.Consul;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.FortuneTellerService;
+using Steeltoe.Samples.FortuneTellerService.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FortuneDbContext>(options => options.UseInMemoryDatabase("Fortunes"));
 builder.Services.AddHostedService<DatabaseSeederHostedService>();
 
-// Steeltoe: Read credentials to Eureka server from VCAP_SERVICES on CloudFoundry.
+// Steeltoe: Read credentials to Eureka server from VCAP_SERVICES on Cloud Foundry.
 builder.AddCloudFoundryConfiguration();
 builder.Configuration.AddCloudFoundryServiceBindings();
 

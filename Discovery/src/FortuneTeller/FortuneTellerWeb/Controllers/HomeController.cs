@@ -1,9 +1,9 @@
 using System.Diagnostics;
-using FortuneTellerWeb.Models;
-using FortuneTellerWeb.Services;
 using Microsoft.AspNetCore.Mvc;
+using Steeltoe.Samples.FortuneTellerWeb.Models;
+using Steeltoe.Samples.FortuneTellerWeb.Services;
 
-namespace FortuneTellerWeb.Controllers;
+namespace Steeltoe.Samples.FortuneTellerWeb.Controllers;
 
 public sealed class HomeController(FortuneService fortuneService) : Controller
 {

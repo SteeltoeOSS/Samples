@@ -6,7 +6,7 @@ trigger:
   paths:
     include:
       - config/*
-      - Configuration/src/Steeltoe.Samples.Configuration/*
+      - Configuration/src/*
 
 variables:
   - group: 'PCFone Credentials'
@@ -23,12 +23,12 @@ jobs:
   - template: templates/setup-cloud-foundry-linux-steps.yaml
   - bash: touch reinit
     displayName: 'Reinit Virtual Python Environment'
-  - bash: ./behave.sh Configuration/src/Steeltoe.Samples.Configuration '--stop'
+  - bash: ./behave.sh Configuration/src/ConfigurationProviders '--stop'
     displayName: 'Sample -> Configuration: All'
     env:
       PYTHON: python3.10
   - template: templates/publish-results-steps.yaml
     parameters:
-      feature: Configuration
+      feature: ConfigurationProviders
       sample: All
       os: Linux

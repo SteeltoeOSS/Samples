@@ -7,10 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'cosmosdb-connector'
+    app = 'cosmosdb-connector-sample'
     cf.delete_app(app)
     # create service
     service = 'csb-azure-cosmosdb-sql'
     plan = 'mini'
-    instance = 'myCosmosDbService'
+    instance = 'sampleCosmosDbService'
     cf.create_service(service, plan, instance)

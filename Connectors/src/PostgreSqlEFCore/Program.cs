@@ -1,10 +1,10 @@
 using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
-using PostgreSqlEFCore;
-using PostgreSqlEFCore.Data;
 using Steeltoe.Connectors.EntityFrameworkCore.PostgreSql;
 using Steeltoe.Connectors.PostgreSql;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.PostgreSqlEFCore;
+using Steeltoe.Samples.PostgreSqlEFCore.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

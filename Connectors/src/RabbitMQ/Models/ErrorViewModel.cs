@@ -1,4 +1,4 @@
-namespace RabbitMQ.Models;
+namespace Steeltoe.Samples.RabbitMQ.Models;
 
 public class ErrorViewModel
 {

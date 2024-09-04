@@ -1,4 +1,4 @@
-namespace SqlServerEFCore.Models;
+namespace Steeltoe.Samples.SqlServerEFCore.Models;
 
 public class ErrorViewModel
 {

@@ -1,7 +1,7 @@
-﻿using MySql;
-using MySqlConnector;
+﻿using MySqlConnector;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.MySql;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

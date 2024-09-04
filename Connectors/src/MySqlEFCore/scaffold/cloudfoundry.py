@@ -7,10 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'mysqlefcore-connector'
+    app = 'mysql-efcore-connector-sample'
     cf.delete_app(app)
     # create service
     service = 'p.mysql'
     plan = 'db-small'
-    instance = 'myMySqlService'
+    instance = 'sampleMySqlService'
     cf.create_service(service, plan, instance)

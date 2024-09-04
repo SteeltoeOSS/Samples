@@ -1,4 +1,4 @@
-namespace CosmosDb.Models;
+namespace Steeltoe.Samples.CosmosDb.Models;
 
 public class ErrorViewModel
 {

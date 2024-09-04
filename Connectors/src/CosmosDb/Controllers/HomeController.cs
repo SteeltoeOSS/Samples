@@ -1,15 +1,15 @@
 ﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using CosmosDb.Data;
-using CosmosDb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.CosmosDb;
+using Steeltoe.Samples.CosmosDb.Data;
+using Steeltoe.Samples.CosmosDb.Models;
 
-namespace CosmosDb.Controllers;
+namespace Steeltoe.Samples.CosmosDb.Controllers;
 
 public class HomeController : Controller
 {

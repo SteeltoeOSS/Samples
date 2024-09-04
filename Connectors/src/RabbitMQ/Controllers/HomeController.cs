@@ -2,11 +2,11 @@
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
-using RabbitMQ.Models;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.RabbitMQ;
+using Steeltoe.Samples.RabbitMQ.Models;
 
-namespace RabbitMQ.Controllers;
+namespace Steeltoe.Samples.RabbitMQ.Controllers;
 
 public class HomeController : Controller
 {

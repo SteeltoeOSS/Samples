@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using MySqlEFCore;
-using MySqlEFCore.Data;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.MySqlEFCore;
+using Steeltoe.Samples.MySqlEFCore.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +22,8 @@ bool useMultipleDatabases = builder.Configuration.GetValue("useMultipleDatabases
 if (useMultipleDatabases)
 {
     // Steeltoe: When using multiple databases, specify the service binding name.
-    const string serviceOneName = "myMySqlServiceOne";
-    const string serviceTwoName = "myMySqlServiceTwo";
+    const string serviceOneName = "sampleMySqlServiceOne";
+    const string serviceTwoName = "sampleMySqlServiceTwo";
 
     // Steeltoe: optionally change the MySQL connection strings at runtime.
     builder.Services.Configure<MySqlOptions>(serviceOneName, options => options.ConnectionString += ";Use Compression=false");

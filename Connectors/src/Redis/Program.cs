@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Options;
-using Redis;
 using StackExchange.Redis;
 using Steeltoe.Connectors.Redis;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Samples.Redis;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +25,7 @@ builder.AddRedis(null, addOptions =>
             ? ConfigurationOptions.Parse(options.ConnectionString)
             : new ConfigurationOptions();
 
-        redisOptions.ClientName = "redis-connector";
+        redisOptions.ClientName = "redis-connector-sample";
         return ConnectionMultiplexer.Connect(redisOptions);
     };
 });

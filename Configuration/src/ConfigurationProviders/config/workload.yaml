@@ -1,0 +1,41 @@
+---
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: configuration-providers-sample
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: steeltoe-samples
+    tanzu.app.live.view: "true"
+    tanzu.app.live.view.application.flavours: steeltoe
+    tanzu.app.live.view.application.name: configuration-providers-sample
+spec:
+  build:
+    env:
+    - name: DOTNET_CLI_TELEMETRY_OPTOUT
+      value: "true"
+    - name: DOTNET_NOLOGO
+      value: "true"
+  env:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: development
+    - name: DOTNET_CLI_TELEMETRY_OPTOUT
+      value: "true"
+    - name: DOTNET_NOLOGO
+      value: "true"
+  params:
+  - name: annotations
+    value:
+      autoscaling.knative.dev/minScale: "1"
+  serviceClaims:
+  - name: acs-data
+    ref:
+      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+      kind: ResourceClaim
+      name: sample-config-service
+  source:
+    git:
+      url: https://github.com/SteeltoeOSS/Samples
+      subPath: Configuration/src/ConfigurationProviders
+      ref:
+        branch: latest
