@@ -43,6 +43,7 @@ builder.Services
     .AddCookie(options =>
     {
         options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+        options.Cookie.Expiration = TimeSpan.FromMinutes(30);
     })
     .AddOpenIdConnect()
     .ConfigureOpenIdConnectForCloudFoundry();

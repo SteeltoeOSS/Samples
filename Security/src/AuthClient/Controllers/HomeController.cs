@@ -110,7 +110,23 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         try
         {
             logger.LogTrace("Sending request to {requestUri}", requestUri);
-            result = await client.GetStringAsync(requestUri);
+            var response = await client.GetAsync(requestUri);
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                result = $"Request failed with status '{response.StatusCode}'. ";
+                if (response.Headers.WwwAuthenticate != null)
+                {
+                    result += response.Headers.WwwAuthenticate.ToString();
+                }
+                else
+                {
+                    result += await response.Content.ReadAsStringAsync();
+                }
+            }
         }
         catch (Exception exception)
         {
