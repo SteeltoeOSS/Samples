@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
-using Steeltoe.Common.Extensions;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
 using Steeltoe.Management.Endpoint;
@@ -23,10 +22,18 @@ const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Add Cloud Foundry application and service info and instance identity certificate to configuration
-builder.Configuration.AddCloudFoundry().AddCloudFoundryServiceBindings().AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
+// Add services to the container.
 
-// Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry
+builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry application and service info to configuration.
+builder.AddCloudFoundryConfiguration();
+builder.Configuration.AddCloudFoundryServiceBindings();
+
+// Steeltoe: Add instance identity certificate to configuration.
+builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
+
+// Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry.
 builder.Services
     .AddAuthentication(options =>
     {
@@ -40,33 +47,21 @@ builder.Services
     .AddOpenIdConnect()
     .ConfigureOpenIdConnectForCloudFoundry();
 
-// Steeltoe: register Microsoft authorization services and claim-based policies requiring specific scopes
+// Steeltoe: Register Microsoft authorization services and claim-based policies requiring specific scopes.
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
 
-// Steeltoe: Register application instance information
-if (Platform.IsCloudFoundry)
-{
-    builder.Services.AddCloudFoundryOptions();
-}
-else
-{
-    builder.Services.AddApplicationInstanceInfo();
-}
-
-// Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization
+// Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization.
 builder.Services.AddHttpClient("default", SetBaseAddress);
 builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddAppInstanceIdentityCertificate();
-
-builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
 
 WebApplication app = builder.Build();
 
-// Steeltoe: Direct ASP.NET Core to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry)
+// Steeltoe: Direct ASP.NET Core to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry).
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto
@@ -93,7 +88,7 @@ app.MapDefaultControllerRoute();
 app.Run();
 return;
 
-void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
+static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
     var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
 

@@ -11,7 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Steeltoe: Read credentials to Eureka server from VCAP_SERVICES on CloudFoundry.
+// Steeltoe: Read credentials to Eureka server from VCAP_SERVICES on Cloud Foundry.
 builder.AddCloudFoundryConfiguration();
 builder.Configuration.AddCloudFoundryServiceBindings();
 

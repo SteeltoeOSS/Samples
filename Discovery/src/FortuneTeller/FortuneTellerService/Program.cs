@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Steeltoe.Common;
-using Steeltoe.Common.Extensions;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
@@ -24,19 +22,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FortuneDbContext>(options => options.UseInMemoryDatabase("Fortunes"));
 builder.Services.AddHostedService<DatabaseSeederHostedService>();
 
+// Steeltoe: Read credentials to Eureka server from VCAP_SERVICES on Cloud Foundry.
+builder.AddCloudFoundryConfiguration();
+builder.Configuration.AddCloudFoundryServiceBindings();
+
 // Steeltoe: Add service discovery clients for Consul and Eureka.
 builder.Services.AddConsulDiscoveryClient();
 builder.Services.AddEurekaDiscoveryClient();
 
 // Steeltoe: Add Config Server to demonstrate discovery-first (resolves the URL to Config Server from Eureka).
 builder.Configuration.AddConfigServer();
-
-if (Platform.IsCloudFoundry)
-{
-    // Steeltoe: Read credentials to Eureka server from VCAP_SERVICES on CloudFoundry.
-    builder.AddCloudFoundryConfiguration();
-    builder.Configuration.AddCloudFoundryServiceBindings();
-}
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
