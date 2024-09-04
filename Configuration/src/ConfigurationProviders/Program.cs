@@ -7,17 +7,29 @@ using Steeltoe.Configuration.RandomValue;
 using Steeltoe.Management.Endpoint;
 using Steeltoe.Samples.ConfigurationProviders.Models;
 
+// Steeltoe: Log to the console until the app has fully started.
+var bootstrapLoggerFactory = BootstrapLoggerFactory.CreateConsole(loggingBuilder =>
+{
+    loggingBuilder.AddConfiguration(new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+    {
+        ["LogLevel:Steeltoe.Configuration"] = "Trace"
+    }).Build());
+});
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add Configuration providers.
-builder.Configuration.AddRandomValueSource(BootstrapLoggerFactory.Default);
+builder.Configuration.AddRandomValueSource(bootstrapLoggerFactory);
 builder.Configuration.AddKubernetesServiceBindings();
-builder.Configuration.AddCloudFoundry(null, BootstrapLoggerFactory.Default);
-builder.Configuration.AddPlaceholderResolver(BootstrapLoggerFactory.Default);
-builder.AddConfigServer(BootstrapLoggerFactory.Default);
+builder.Configuration.AddCloudFoundry(null, bootstrapLoggerFactory);
+builder.Configuration.AddPlaceholderResolver(bootstrapLoggerFactory);
+builder.AddConfigServer(bootstrapLoggerFactory);
+
+// Steeltoe: Upgrade the created bootstrap loggers from settings in the service container.
+builder.Services.UpgradeBootstrapLoggerFactory(bootstrapLoggerFactory);
 
 // Steeltoe: Add actuator endpoints.
 builder.AddAllActuators();
