@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 using Steeltoe.Connectors.Redis;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.Redis;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -10,7 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup Redis options, connection factory and health checks, optionally providing a callback to customize client settings.
 builder.AddRedis(null, addOptions =>

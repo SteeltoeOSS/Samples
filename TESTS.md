@@ -3,7 +3,7 @@
 ## Using the `behave` Wrappers
 
 The Samples tests are run using [behave][behave_url], a Cucumber-style BDD framework written in Python.
-This project's `behave` implementation requires Python 3.  See [Installing Python 3](#installing-python-3) for platform-specific instructions.
+This project's `behave` implementation requires Python 3. See [Installing Python 3](#installing-python-3) for platform-specific instructions.
 
 Two helper scripts, [behave.ps1](behave.ps1) and [behave.sh](behave.sh), are provided to simplify the setup and invocation of `behave`.
 These wrappers:
@@ -38,7 +38,7 @@ C:> .\behave.ps1 Connectors\src\RabbitMQ
 To run only a specific framework/runtime combination, use the `--tags` or `-t` parameter:
 
 ```dos
-C:> .\behave.ps1 Connectors\src\RabbitMQ -t netcoreapp2.1 -t ubuntu.16.04-x64
+C:> .\behave.ps1 Connectors\src\RabbitMQ -t net8.0 -t linux
 ```
 
 ## Configuring

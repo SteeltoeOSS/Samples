@@ -1,0 +1,24 @@
+﻿@page
+@model             WeatherModel
+@{
+    ViewData["Title"] = "Weather Forecast";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <tr class="">
+        <th>Date</th>
+        <th>Summary</th>
+        <th>F</th>
+        <th>C</th>
+    </tr>
+@foreach(var day in Model.Forecasts)
+{
+    <tr class="">
+        <td>@day.Date</td>
+        <td>@day.Summary</td>
+        <td>@day.TemperatureF</td>
+        <td>@day.TemperatureC</td>
+    </tr>
+}
+</table>

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 using Steeltoe.Connectors.MySql;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.MySqlEFCore;
 using Steeltoe.Samples.MySqlEFCore.Data;
 
@@ -11,7 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup MySQL options, connection factory and health checks.
 builder.AddMySql();

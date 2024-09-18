@@ -2,7 +2,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Steeltoe.Connectors.EntityFrameworkCore.SqlServer;
 using Steeltoe.Connectors.SqlServer;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.SqlServerEFCore;
 using Steeltoe.Samples.SqlServerEFCore.Data;
 
@@ -12,7 +12,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup SQL Server options, connection factory and health checks.
 builder.AddSqlServer();

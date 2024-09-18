@@ -4,7 +4,7 @@ using Steeltoe.Configuration.ConfigServer;
 using Steeltoe.Configuration.Kubernetes.ServiceBindings;
 using Steeltoe.Configuration.Placeholder;
 using Steeltoe.Configuration.RandomValue;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.ConfigurationProviders.Models;
 
 // Steeltoe: Log to the console until the app has fully started.
@@ -32,7 +32,7 @@ builder.AddConfigServer(bootstrapLoggerFactory);
 builder.Services.UpgradeBootstrapLoggerFactory(bootstrapLoggerFactory);
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: map VCAP_APPLICATION and VCAP_SERVICES to IOptions<CloudFoundryApplicationOptions> and IOptions<CloudFoundryServicesOptions>
 builder.Services.AddCloudFoundryOptions();

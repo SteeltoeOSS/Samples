@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Steeltoe.Connectors.RabbitMQ;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup RabbitMQ options, connection factory and health checks.
 builder.AddRabbitMQ(null, addOptions =>

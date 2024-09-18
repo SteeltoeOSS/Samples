@@ -2,7 +2,7 @@ using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 using Steeltoe.Connectors.EntityFrameworkCore.PostgreSql;
 using Steeltoe.Connectors.PostgreSql;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.PostgreSqlEFCore;
 using Steeltoe.Samples.PostgreSqlEFCore.Data;
 
@@ -12,7 +12,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup PostgreSQL options, connection factory and health checks.
 builder.AddPostgreSql();

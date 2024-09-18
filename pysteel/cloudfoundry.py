@@ -219,6 +219,22 @@ class CloudFoundry(object):
         if not match:
             return None
         return match.group(1)
+    
+    def get_task_status(self, app_name, task_name):
+        """
+        :type app_name: str
+        :type task_name: str
+        """
+        cmd_s = 'cf tasks {}'.format(app_name)
+        cmd = command.Command(self._context, cmd_s)
+        try:
+            cmd.run()
+        except command.CommandException as e:
+            if "App '{}' not found".format(app_name) in str(e):
+                raise CloudFoundryObjectDoesNotExistError()
+            raise e
+        match = re.search('(.*?--name {})'.format(task_name), cmd.stdout, re.MULTILINE)
+        return match.group(1).split()[2]
 
     def get_app_route(self, app_name):
         """
