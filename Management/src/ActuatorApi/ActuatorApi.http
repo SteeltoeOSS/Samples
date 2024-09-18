@@ -1,0 +1,85 @@
+@ActuatorApi_HostAddress = http://localhost:5140
+
+### Get the default day-count forecast starting from today
+GET {{ActuatorApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###  Get the default day-count forecast starting from a certain date
+GET {{ActuatorApi_HostAddress}}/weatherforecast?fromDate=9/1/2024
+Accept: application/json
+
+###  Get a specified-number-of-days forecast starting from today
+GET {{ActuatorApi_HostAddress}}/weatherforecast?daysCount=2
+Accept: application/json
+
+### Get all forecast data
+GET {{ActuatorApi_HostAddress}}/AllForecastData
+Accept: application/json
+
+### ACTUATORS
+### Hypermedia (list all actuators)
+GET {{ActuatorApi_HostAddress}}/actuator
+Accept: application/json
+
+### Beans actuator, list registered services ("Beans" comes from the Spring world)
+GET {{ActuatorApi_HostAddress}}/actuator/beans
+Accept: application/json
+
+### DB Migrations actuator, list pending and applied database migrations
+GET {{ActuatorApi_HostAddress}}/actuator/dbmigrations
+Accept: application/json
+
+### Env actuator, list environment/configuration sources and data
+GET {{ActuatorApi_HostAddress}}/actuator/env
+Accept: application/json
+
+### Info actuator
+GET {{ActuatorApi_HostAddress}}/actuator/info
+Accept: application/json
+
+### Health actuator
+GET {{ActuatorApi_HostAddress}}/actuator/health
+Accept: application/json
+
+### Health actuator, check a specified group of contributors
+GET {{ActuatorApi_HostAddress}}/actuator/health/readiness
+Accept: application/json
+
+### Loggers actuator, list all loggers
+GET {{ActuatorApi_HostAddress}}/actuator/loggers
+Accept: application/json
+
+### Loggers actuator, update logging level for a logger
+POST {{ActuatorApi_HostAddress}}/actuator/loggers/Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware
+Accept: application/json
+{
+  "configuredLevel": "TRACE"
+}
+
+### HTTP Exchanges actuator
+GET {{ActuatorApi_HostAddress}}/actuator/httpexchanges
+Accept: application/json
+
+### Mappings actuator, list registered HTTP routes
+GET {{ActuatorApi_HostAddress}}/actuator/mappings
+Accept: application/json
+
+### Metrics actuator, list all metrics
+GET {{ActuatorApi_HostAddress}}/actuator/metrics
+Accept: application/json
+
+### Metrics actuator, check a meter
+GET {{ActuatorApi_HostAddress}}/actuator/metrics/clr.process.uptime
+Accept: application/json
+
+### Refresh actuator, refresh application configuration
+GET {{ActuatorApi_HostAddress}}/actuator/refresh
+Accept: application/json
+
+### Thread dump actuator
+GET {{ActuatorApi_HostAddress}}/actuator/threaddump
+Accept: application/json
+
+### Heap dump actuator
+GET {{ActuatorApi_HostAddress}}/actuator/heapdump
+Accept: application/json

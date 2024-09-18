@@ -1,0 +1,69 @@
+@ActuatorWeb_HostAddress = http://localhost:5126
+
+### ACTUATORS
+### Hypermedia (list all actuators)
+GET {{ActuatorWeb_HostAddress}}/actuator
+Accept: application/json
+
+### Beans actuator, list registered services ("Beans" comes from the Spring world)
+GET {{ActuatorWeb_HostAddress}}/actuator/beans
+Accept: application/json
+
+### DB Migrations actuator, list pending and applied database migrations
+GET {{ActuatorWeb_HostAddress}}/actuator/dbmigrations
+Accept: application/json
+
+### Env actuator, list environment/configuration sources and data
+GET {{ActuatorWeb_HostAddress}}/actuator/env
+Accept: application/json
+
+### Info actuator
+GET {{ActuatorWeb_HostAddress}}/actuator/info
+Accept: application/json
+
+### Health actuator
+GET {{ActuatorWeb_HostAddress}}/actuator/health
+Accept: application/json
+
+### Health actuator, check a specified group of contributors
+GET {{ActuatorWeb_HostAddress}}/actuator/health/readiness
+Accept: application/json
+
+### Loggers actuator, list all loggers
+GET {{ActuatorWeb_HostAddress}}/actuator/loggers
+Accept: application/json
+
+### Loggers actuator, update logging level for a logger
+POST {{ActuatorWeb_HostAddress}}/actuator/loggers/Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware
+Accept: application/json
+{
+  "configuredLevel": "TRACE"
+}
+
+### HTTP Exchanges actuator
+GET {{ActuatorWeb_HostAddress}}/actuator/httpexchanges
+Accept: application/json
+
+### Mappings actuator, list registered HTTP routes
+GET {{ActuatorWeb_HostAddress}}/actuator/mappings
+Accept: application/json
+
+### Metrics actuator, list all metrics
+GET {{ActuatorWeb_HostAddress}}/actuator/metrics
+Accept: application/json
+
+### Metrics actuator, check a meter
+GET {{ActuatorWeb_HostAddress}}/actuator/metrics/clr.process.uptime
+Accept: application/json
+
+### Refresh actuator, refresh application configuration
+GET {{ActuatorWeb_HostAddress}}/actuator/refresh
+Accept: application/json
+
+### Thread dump actuator
+GET {{ActuatorWeb_HostAddress}}/actuator/threaddump
+Accept: application/json
+
+### Heap dump actuator
+GET {{ActuatorWeb_HostAddress}}/actuator/heapdump
+Accept: application/json
