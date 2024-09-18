@@ -89,7 +89,7 @@ def step_impl(context, app):
     resp = requests.get(url, headers={'Authorization': token})
     resp.status_code.should.equal(200)
     # context.log.info(resp.content)
-    for endpoint in ['info', 'health', 'loggers', 'httptrace', 'mappings']:
+    for endpoint in ['info', 'health', 'loggers', 'httpexchanges', 'mappings', 'metrics', 'threaddump']:
         resp.text.should.contain('/cloudfoundryapplication/{}'.format(endpoint))
 
 

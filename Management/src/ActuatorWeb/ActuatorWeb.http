@@ -1,0 +1,76 @@
+@ActuatorWeb_HostAddress = http://localhost:5126
+
+#@ActuatorWeb_ManagementAddress = http://localhost:5126
+@ActuatorWeb_ManagementAddress = http://localhost:9990
+
+### ACTUATORS
+### Hypermedia (list all actuators)
+GET {{ActuatorWeb_ManagementAddress}}/actuator
+Accept: application/json
+
+### Beans actuator, list registered services ("Beans" comes from the Spring world)
+GET {{ActuatorWeb_ManagementAddress}}/actuator/beans
+Accept: application/json
+
+### DB Migrations actuator, list pending and applied database migrations
+GET {{ActuatorWeb_ManagementAddress}}/actuator/dbmigrations
+Accept: application/json
+
+### Env actuator, list environment/configuration sources and data
+GET {{ActuatorWeb_ManagementAddress}}/actuator/env
+Accept: application/json
+
+### Info actuator
+GET {{ActuatorWeb_ManagementAddress}}/actuator/info
+Accept: application/json
+
+### Health actuator
+GET {{ActuatorWeb_ManagementAddress}}/actuator/health
+Accept: application/json
+
+### Health actuator, check a specified group of contributors
+GET {{ActuatorWeb_ManagementAddress}}/actuator/health/readiness
+Accept: application/json
+
+### Loggers actuator, list all loggers
+GET {{ActuatorWeb_ManagementAddress}}/actuator/loggers
+Accept: application/json
+
+### Loggers actuator, update logging level for a logger
+POST {{ActuatorWeb_ManagementAddress}}/actuator/loggers/Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware
+Accept: application/json
+{
+  "configuredLevel": "TRACE"
+}
+
+### HTTP Exchanges actuator
+GET {{ActuatorWeb_ManagementAddress}}/actuator/httpexchanges
+Accept: application/json
+
+### Mappings actuator, list registered HTTP routes
+GET {{ActuatorWeb_ManagementAddress}}/actuator/mappings
+Accept: application/json
+
+### Metrics actuator, list all metrics
+GET {{ActuatorWeb_ManagementAddress}}/actuator/metrics
+Accept: application/json
+
+### Metrics actuator, check a meter
+GET {{ActuatorWeb_ManagementAddress}}/actuator/metrics/clr.process.uptime
+Accept: application/json
+
+### Prometheus endpoint, list all metrics
+GET {{ActuatorWeb_ManagementAddress}}/actuator/prometheus
+Accept: application/json
+
+### Refresh actuator, refresh application configuration
+POST {{ActuatorWeb_ManagementAddress}}/actuator/refresh
+Accept: application/json
+
+### Thread dump actuator
+GET {{ActuatorWeb_ManagementAddress}}/actuator/threaddump
+Accept: application/json
+
+### Heap dump actuator
+GET {{ActuatorWeb_ManagementAddress}}/actuator/heapdump
+Accept: application/json

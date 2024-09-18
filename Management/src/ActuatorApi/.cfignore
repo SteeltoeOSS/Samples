@@ -1,0 +1,7 @@
+bin
+obj
+Properties
+scaffold
+*.http
+manifest*
+appsettings.Development.json

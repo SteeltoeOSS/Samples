@@ -94,6 +94,27 @@ def step_impl(context, app):
 
     try_until(context, app_started, context.options.cf.max_attempts)
 
+@when(u'you wait until CloudFoundry task {task} for {app} is successful')
+def step_impl(context, task, app):
+    """
+    :type context: behave.runner.Context
+    :type task: str
+    :type app: str
+    """
+
+    def task_succeeded():
+        try:
+            context.log.info("checking status for task {} on app {}".format(task, app))
+            status = CloudFoundry(context).get_task_status(app, task)
+            context.log.info("task {} status: {}".format(task, status))
+            if status == 'FAILED':
+                assert False, "task {} failed".format(task)
+            return status == 'SUCCEEDED'
+        except CloudFoundryObjectDoesNotExistError:
+            return False
+
+    try_until(context, task_succeeded, context.options.cf.max_attempts)
+
 
 def try_until(context, function, max_attempts):
     """

@@ -6,7 +6,7 @@ trigger:
   paths:
     include:
       - config/*
-      - Management/src/CloudFoundry/*
+      - Management/src/ActuatorApi/*
 
 variables:
   - group: 'PCFone Credentials'
@@ -15,4 +15,4 @@ jobs:
   - template: templates/cloud-foundry-job.yaml
     parameters:
       feature: Management
-      sample: CloudFoundry
+      sample: ActuatorApi
