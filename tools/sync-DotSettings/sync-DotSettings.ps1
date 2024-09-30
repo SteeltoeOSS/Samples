@@ -2,6 +2,7 @@
 
 # This script copies the Resharper/Rider code style settings (.sln.DotSettings file) from Steeltoe, 
 # patches it for use in samples, then distributes it across the samples. It enables IDE IntelliSense and code cleanup.
+# The patch file was created with: `git diff --unified=0 > DotSettings.patch`
 
 # https://stackoverflow.com/a/48877892
 $ErrorActionPreference = "Stop"
