@@ -1,4 +1,4 @@
-namespace Steeltoe.Samples.AuthClient.Models;
+namespace Steeltoe.Samples.AuthWeb.Models;
 
 public sealed class ErrorViewModel
 {

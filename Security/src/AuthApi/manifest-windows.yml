@@ -3,7 +3,7 @@ applications:
 - name: auth-server-sample
   buildpacks:
   - binary_buildpack
-  command: cmd /c .\Steeltoe.Samples.AuthServer --urls=http://0.0.0.0:%PORT%
+  command: cmd /c .\Steeltoe.Samples.AuthApi --urls=http://0.0.0.0:%PORT%
   memory: 128M
   stack: windows
   env:

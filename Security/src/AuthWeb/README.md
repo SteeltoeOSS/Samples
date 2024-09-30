@@ -13,8 +13,8 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 ## Running locally
 
 1. Start a UAA Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. `dotnet run` both AuthClient and AuthServer
-1. Please note that some of the links in the menu won't work until you also start the [AuthServer](../AuthServer/README.md) application
+1. `dotnet run` both AuthWeb and AuthApi
+1. Please note that some of the links in the menu won't work until you also start the [AuthApi](../AuthApi/README.md) application
 
 ## Running on Tanzu Platform for Cloud Foundry
 
@@ -28,9 +28,9 @@ This application shows how to use the Steeltoe [security libraries](https://docs
    1. Save changes, but keep this page open
 1. Create a service instance:
    * `cf create-service p-identity <your service plan name> sampleSSOService`
-1. Push AuthServer to Cloud Foundry
+1. Push AuthApi to Cloud Foundry
    1. `cf target -o your-org -s your-space`
-   1. `cd samples/Security/src/AuthServer`
+   1. `cd samples/Security/src/AuthApi`
    1. `cf push`
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```
@@ -40,10 +40,10 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 1. Return to the service plan setup page and add an External Group Mapping with these values:
       * OIDC Groups Claim Name = scope
       * External Group Name = openid
-      * Permissions = sampleapi.read (If this option isn't available, ensure AuthServer has been deployed)
-1. Push AuthClient to Cloud Foundry
+      * Permissions = sampleapi.read (If this option isn't available, ensure AuthApi has been deployed)
+1. Push AuthWeb to Cloud Foundry
    1. `cf target -o your-org -s your-space`
-   1. `cd samples/Security/src/AuthClient`
+   1. `cd samples/Security/src/AuthWeb`
    1. `cf push`
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```

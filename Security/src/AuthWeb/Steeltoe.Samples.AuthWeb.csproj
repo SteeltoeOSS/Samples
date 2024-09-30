@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.OpenIdConnect" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authorization.Certificate" Version="$(SteeltoeVersion)" />

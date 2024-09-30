@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Samples.AuthClient.Models;
+using Steeltoe.Samples.AuthWeb.Models;
 
-namespace Steeltoe.Samples.AuthClient.Controllers;
+namespace Steeltoe.Samples.AuthWeb.Controllers;
 
 public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<HomeController> logger) : Controller
 {

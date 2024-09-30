@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Steeltoe.Security.Authorization.Certificate;
 
-namespace Steeltoe.Samples.AuthServer.Controllers;
+namespace Steeltoe.Samples.AuthApi.Controllers;
 
 [Route("api/certificate/[action]")]
 [ApiController]

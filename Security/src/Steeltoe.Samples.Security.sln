@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthClient", "AuthClient\Steeltoe.Samples.AuthClient.csproj", "{CBBCE83B-8AF2-40BB-A7E0-11AA4CA61FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthWeb", "AuthWeb\Steeltoe.Samples.AuthWeb.csproj", "{CBBCE83B-8AF2-40BB-A7E0-11AA4CA61FD2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthServer", "AuthServer\Steeltoe.Samples.AuthServer.csproj", "{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.AuthApi", "AuthApi\Steeltoe.Samples.AuthApi.csproj", "{D3CBBDCC-2BF2-4917-9A56-AEED28FBC6E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.RedisDataProtection", "RedisDataProtection\Steeltoe.Samples.RedisDataProtection.csproj", "{A0EDA633-4FF3-40A5-BA7D-2516F6AD2C8C}"
 EndProject

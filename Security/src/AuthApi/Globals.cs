@@ -1,4 +1,4 @@
-﻿namespace Steeltoe.Samples.AuthServer;
+﻿namespace Steeltoe.Samples.AuthApi;
 
 internal static class Globals
 {

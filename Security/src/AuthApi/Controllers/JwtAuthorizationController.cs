@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Steeltoe.Samples.AuthServer.Controllers;
+namespace Steeltoe.Samples.AuthApi.Controllers;
 
 [Route("api/JwtAuthorization")]
 public class JwtAuthorizationController : Controller

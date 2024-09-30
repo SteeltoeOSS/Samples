@@ -11,9 +11,9 @@ using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
 using Steeltoe.Management.Endpoint;
-using Steeltoe.Samples.AuthClient;
+using Steeltoe.Samples.AuthWeb;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
 

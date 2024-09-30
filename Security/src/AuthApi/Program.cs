@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
 using Steeltoe.Management.Endpoint;
-using Steeltoe.Samples.AuthServer;
+using Steeltoe.Samples.AuthApi;
 using Steeltoe.Security.Authentication.JwtBearer;
 using Steeltoe.Security.Authorization.Certificate;
 
