@@ -2,10 +2,10 @@
 
 This sample demonstrates Steeltoe Service Discovery. It consists of the following projects:
 
-* FortuneTellerService - ASP.NET microservice illustrating how to register with Consul or Eureka at startup.
+* FortuneTellerApi - ASP.NET microservice illustrating how to register with Consul or Eureka at startup.
 * FortuneTellerWeb - ASP.NET MVC app illustrating how to consume registered services using Consul, Eureka or Configuration.
 
-FortuneTellerService provides an API endpoint that returns a random fortune. FortuneTellerWeb accesses the API endpoint
+FortuneTellerApi provides an API endpoint that returns a random fortune. FortuneTellerWeb accesses the API endpoint
 at `https://fortuneService/api/fortunes/random`. The `https://fortuneService` part gets resolved using service discovery,
 switching to `http` or `https` and replacing `fortuneService` with the real host name or IP and port number.
 
@@ -45,9 +45,9 @@ This variant uses service instances that are registered in the .NET configuratio
 > }
 > ```
 
-1. Start FortuneTellerService with the **None** launch profile
+1. Start FortuneTellerApi with the **None** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "None"
    ```
 1. Navigate to the [fortune endpoint](https://localhost:7251/api/fortunes/random) in your browser and observe a random fortune
@@ -61,14 +61,14 @@ This variant uses service instances that are registered in the .NET configuratio
 ## Consul
 
 This variant uses service instances that are registered in [HashiCorp Consul](https://www.consul.io/).
-To determine liveliness, FortuneTellerService periodically sends TTL heartbeats to Consul.
+To determine liveliness, FortuneTellerApi periodically sends TTL heartbeats to Consul.
 
 ### Running locally
 
 1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. Start FortuneTellerService with the **Consul** launch profile
+1. Start FortuneTellerApi with the **Consul** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "Consul"
    ```
 1. Navigate to the [fortune endpoint](https://localhost:7251/api/fortunes/random) in your browser and observe a random fortune
@@ -83,15 +83,15 @@ To determine liveliness, FortuneTellerService periodically sends TTL heartbeats 
 
 ## Consul with health actuator
 
-Instead of sending TTL heartbeats, the Steeltoe health actuator endpoint (`/actuator/health`) of FortuneTellerService
+Instead of sending TTL heartbeats, the Steeltoe health actuator endpoint (`/actuator/health`) of FortuneTellerApi
 is periodically queried by Consul to determine liveliness.
 
 ### Running locally
 
 1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. Start FortuneTellerService with the **ConsulActuator** launch profile
+1. Start FortuneTellerApi with the **ConsulActuator** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "ConsulActuator"
    ```
 1. Navigate to the [fortune endpoint](https://localhost:7251/api/fortunes/random) in your browser and observe a random fortune
@@ -99,7 +99,7 @@ is periodically queried by Consul to determine liveliness.
    - Detailed information about the registrations can be viewed using the [Services API](http://localhost:8500/v1/agent/services) and [Health API](http://localhost:8500/v1/agent/checks)
 1. Wait a few seconds, refreshing the Health API, and observe **Status** `passing` with **Type** `http`
 1. In `Program.cs`, change the line with `ExampleHealthContributor` to report `HealthStatus.Down`
-1. Restart FortuneTellerService with the **ConsulActuator** launch profile
+1. Restart FortuneTellerApi with the **ConsulActuator** launch profile
 1. Wait a few seconds, refreshing the Health API, and observe **Status** `critical` with **Type** `http`
 
 ## Eureka
@@ -114,9 +114,9 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 ### Running locally
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. Start FortuneTellerService with the **Eureka** launch profile
+1. Start FortuneTellerApi with the **Eureka** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "Eureka"
    ```
 1. Navigate to the [fortune endpoint](https://localhost:7251/api/fortunes/random) in your browser and observe a random fortune
@@ -137,7 +137,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
    cf create-service p.service-registry standard sampleDiscoveryService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the `cf push` command from the FortuneTellerService directory, wait until it has started, then run it from the FortuneTellerWeb directory
+1. Run the `cf push` command from the FortuneTellerApi directory, wait until it has started, then run it from the FortuneTellerWeb directory
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```
      dotnet publish -r win-x64 --self-contained
@@ -157,15 +157,15 @@ For more information, read the Cloud Foundry documentation on [container-to-cont
 ## Eureka with health actuator
 
 Aside from sending heartbeats, Steeltoe queries ASP.NET health checks and `IHealthContributor`s
-(basically what runs behind the health actuator endpoint `/actuator/health`) of FortuneTellerService
+(basically what runs behind the health actuator endpoint `/actuator/health`) of FortuneTellerApi
 to determine the local instance status during registration and renewals.
 
 ### Running locally
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. Start FortuneTellerService with the **EurekaActuator** launch profile
+1. Start FortuneTellerApi with the **EurekaActuator** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "EurekaActuator"
    ```
 1. Navigate to the [fortune endpoint](https://localhost:7251/api/fortunes/random) in your browser and observe a random fortune
@@ -173,21 +173,21 @@ to determine the local instance status during registration and renewals.
    - Detailed information about the registrations can be viewed using the [Eureka API](http://localhost:8761/eureka/apps)
 1. Wait a few seconds, refreshing the Eureka API, and observe **status** `UP`
 1. In `Program.cs`, change the line with `ExampleHealthContributor` to report `HealthStatus.Down`
-1. Restart FortuneTellerService with the **EurekaActuator** launch profile
+1. Restart FortuneTellerApi with the **EurekaActuator** launch profile
 1. Wait a few seconds, refreshing the Eureka API, and observe **status** `DOWN`
 
 ## Eureka with dynamic port bindings
 
 ### Running locally
 
-This variant registers FortuneTellerService with Eureka as before, but configures ASP.NET to dynamically assign ports.
+This variant registers FortuneTellerApi with Eureka as before, but configures ASP.NET to dynamically assign ports.
 Because port assignment occurs very late in the startup phase (after Eureka registration),
 Steeltoe adds a random number to the Instance ID during registration to avoid collisions.
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. Start FortuneTellerService with the **EurekaDynamicPorts** launch profile
+1. Start FortuneTellerApi with the **EurekaDynamicPorts** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "EurekaDynamicPorts"
    ```
 1. Navigate to the [Eureka API](http://localhost:8761/eureka/apps) in your browser to determine the assigned port numbers.
@@ -205,15 +205,15 @@ Steeltoe adds a random number to the Instance ID during registration to avoid co
 ## Eureka with Config Server Discovery-First
 
 This variant uses [Config Server](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/) that registers itself
-with Eureka at startup. FortuneTellerService is configured to obtain the URL to Config Server from Eureka.
+with Eureka at startup. FortuneTellerApi is configured to obtain the URL to Config Server from Eureka.
 
 ### Running locally
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md) (pick the one for discovery-first)
 1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-1. Start FortuneTellerService with the **Eureka** launch profile
+1. Start FortuneTellerApi with the **Eureka** launch profile
    ```
-   cd FortuneTellerService
+   cd FortuneTellerApi
    dotnet run --launch-profile "Eureka"
    ```
 1. Navigate to the [Eureka dashboard](http://localhost:8761/) in your browser and observe both "FORTUNESERVICE" and "CONFIGSERVER" are registered

@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Configuration.CloudFoundry;
-using Steeltoe.Configuration.CloudFoundry.ServiceBinding;
+using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
 using Steeltoe.Configuration.ConfigServer;
 using Steeltoe.Discovery.Consul;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Management.Endpoint;
-using Steeltoe.Samples.FortuneTellerService;
-using Steeltoe.Samples.FortuneTellerService.Data;
+using Steeltoe.Samples.FortuneTellerApi;
+using Steeltoe.Samples.FortuneTellerApi.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

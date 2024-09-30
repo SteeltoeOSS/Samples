@@ -1,9 +1,9 @@
 ﻿using Steeltoe.Discovery.Eureka;
 using Steeltoe.Discovery.Eureka.AppInfo;
-using Steeltoe.Samples.FortuneTellerService.Data;
-using Steeltoe.Samples.FortuneTellerService.Models;
+using Steeltoe.Samples.FortuneTellerApi.Data;
+using Steeltoe.Samples.FortuneTellerApi.Models;
 
-namespace Steeltoe.Samples.FortuneTellerService;
+namespace Steeltoe.Samples.FortuneTellerApi;
 
 internal sealed class DatabaseSeederHostedService(IServiceProvider serviceProvider, EurekaApplicationInfoManager appManager) : IHostedService
 {
