@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-Steeltoe.Samples.FortuneTellerConsole-076bd137-517d-4eb9-8100-6dfdca0251fd</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
