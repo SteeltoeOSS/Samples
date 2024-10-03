@@ -1,0 +1,9 @@
+--- a/tools/sync-DotSettings/baseline.DotSettings
++++ b/tools/sync-DotSettings/baseline.DotSettings
+@@ -1,0 +2 @@
++	<s:String x:Key="/Default/CodeInspection/GeneratedCode/GeneratedFileMasks/=_005FLayout_002Ecshtml/@EntryIndexedValue">_Layout.cshtml</s:String>
+@@ -596,4 +596,0 @@
+-	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">Licensed to the .NET Foundation under one or more agreements.&#xD;
+-The .NET Foundation licenses this file to you under the Apache 2.0 License.&#xD;
+-See the LICENSE file in the project root for more information.&#xD;
+-</s:String>

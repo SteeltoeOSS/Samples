@@ -4,7 +4,7 @@ This section of the Samples repository contains applications that use the [Steel
 
 ## ASP.NET Core Samples
 
-* [AuthClient](src/AuthClient/README.md) and [AuthServer](src/AuthServer/README.md) - authenticate and authorize with OpenID Connect and JWT Bearer tokens using [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service)) and client certificates.
+* [AuthWeb](src/AuthWeb/README.md) and [AuthApi](src/AuthApi/README.md) - authenticate and authorize with OpenID Connect and JWT Bearer tokens using [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service)) and client certificates.
 * [RedisDataProtection](src/RedisDataProtection/README.md) - use Redis provisioned on Cloud Foundry as a DataProtection Key Store.  Sample illustrates sharing encrypted data stored in an ASP.NET session across multiple instances of an application.
 
 ---

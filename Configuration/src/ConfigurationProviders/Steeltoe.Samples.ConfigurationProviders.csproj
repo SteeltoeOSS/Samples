@@ -10,7 +10,7 @@
     <PackageReference Include="Steeltoe.Common.Logging" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Configuration.ConfigServer" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Configuration.Kubernetes.ServiceBinding" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Configuration.Kubernetes.ServiceBindings" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Configuration.Placeholder" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Configuration.RandomValue" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />

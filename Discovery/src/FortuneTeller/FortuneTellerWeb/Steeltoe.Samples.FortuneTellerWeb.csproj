@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry.ServiceBinding" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Configuration" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Consul" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Eureka" Version="$(SteeltoeVersion)" />

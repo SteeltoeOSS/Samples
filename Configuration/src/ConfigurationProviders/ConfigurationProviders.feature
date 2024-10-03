@@ -16,7 +16,8 @@ Feature: Steeltoe Configuration
     When you get https://configuration-providers-sample/Home/CloudFoundry
     Then you should see "vcap:application:application_name = configuration-providers-sample"
     When you get https://configuration-providers-sample/Home/PlaceholderValues
-    Then you should see "ResolvedFromJsonInformation"
+    Then you should see "ResolvedFromJson"
+    And you should see "Information"
 
   @net8.0
   @windows
@@ -31,4 +32,5 @@ Feature: Steeltoe Configuration
     When you get https://configuration-providers-sample/Home/CloudFoundry
     Then you should see "vcap:application:application_name = configuration-providers-sample"
     When you get https://configuration-providers-sample/Home/PlaceholderValues
-    Then you should see "ResolvedFromJsonInformation"
+    Then you should see "ResolvedFromJson"
+    And you should see "Information"
