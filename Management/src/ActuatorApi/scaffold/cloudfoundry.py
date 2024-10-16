@@ -10,7 +10,6 @@ def setup(context):
     instance = 'sampleMySqlService'
     # remove previous app
     app = 'actuator-api-management-sample'
-    #cf.delete_app(app)
-    #cf.delete_service(instance)
+    cf.delete_app(app)
     # create service
     cf.create_service(service, plan, instance)
