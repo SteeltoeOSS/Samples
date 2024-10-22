@@ -9,6 +9,7 @@ using Steeltoe.Connectors.EntityFrameworkCore;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Prometheus;
 using Steeltoe.Management.Tasks;
@@ -24,25 +25,24 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Steeltoe: Add Cloud Foundry configuration provider and options classes
+builder.AddCloudFoundryConfiguration();
+
+// Steeltoe: Add all actuators, specifying an authorization policy for use outside of the Cloud Foundry context
+builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
+{
+    if (!Platform.IsCloudFoundry)
+    {
+        configureEndpoints.RequireAuthorization("actuator.read");
+    }
+});
+builder.Services.ConfigureActuatorAuth();
+builder.Services.AddAllActuators();
+builder.Services.AddPrometheusActuator();
 if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
 {
     builder.Services.AddSpringBootAdminClient();
-    builder.Services.SecureActuatorsWithBasicAuth();
 }
-else
-{
-    builder.AddCloudFoundryConfiguration();
-}
-
-// Steeltoe: Add actuator endpoints, with an authorization policy outside of Cloud Foundry
-builder.AddAllActuators(configureEndpoints =>
-{
-    if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
-    {
-        configureEndpoints.RequireAuthorization("actuators.read");
-    }
-});
-builder.Services.AddPrometheusActuator();
 
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 
@@ -66,12 +66,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Causes certificate trust issues with SBA, port issues with ManagementPortMiddleware
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.MapGet("/WeatherForecast", ([FromServices]WeatherContext context, [FromServices]ILoggerFactory loggerFactory, [FromQuery]string? fromDate, [FromQuery]int daysCount = 5) =>
 {
+    // Log messages at various levels for loggers actuator demonstration
     var _logger = loggerFactory.CreateLogger<WeatherForecast>();
+    _logger.LogCritical("Test Critical message");
+    _logger.LogError("Test Error message");
+    _logger.LogWarning("Test Warning message");
+    _logger.LogInformation("Test Informational message");
+    _logger.LogDebug("Test Debug message");
+    _logger.LogTrace("Test Trace message");
+
     var queryDate = string.IsNullOrEmpty(fromDate) ? DateTime.Now : DateTime.Parse(fromDate);
     _logger.LogInformation("Determining the {daysCount}-day forecast starting from {ForecastQueryDate}.", daysCount, DateOnly.FromDateTime(queryDate));
     var forecast = context.Forecasts.Where(f => f.Date >= DateOnly.FromDateTime(queryDate) && f.Date < DateOnly.FromDateTime(queryDate.AddDays(daysCount)));
@@ -81,23 +88,16 @@ app.MapGet("/WeatherForecast", ([FromServices]WeatherContext context, [FromServi
         _logger.LogError("Relevant forecast data for only {forecastCount} day(s) was found. Use the forecast task to generate the missing data.", forecast.Count());
         if (Platform.IsCloudFoundry)
         {
-            _logger.LogInformation("cf run-task ./??? runtask=Forecast --fromDate={fromDate} --days={daysCount}", fromDate, daysCount);
+            _logger.LogInformation("cf run-task actuator-api-management-sample --command \"./Steeltoe.Samples.ActuatorApi runtask=Forecast --fromDate={fromDate} --days={daysCount}\"", queryDate, daysCount);
         }
         else
         {
-            _logger.LogInformation("dotnet run --runtask=Forecast --fromDate={fromDate} --days={daysCount}", fromDate, daysCount);
+            _logger.LogInformation("dotnet run --runtask=Forecast --fromDate={fromDate} --days={daysCount}", queryDate, daysCount);
         }
     }
 
     // sleep a random amount of milliseconds for variance in trace data
     Thread.Sleep(Random.Shared.Next(10, 3000));
-
-    _logger.LogCritical("Test Critical message");
-    _logger.LogError("Test Error message");
-    _logger.LogWarning("Test Warning message");
-    _logger.LogInformation("Test Informational message");
-    _logger.LogDebug("Test Debug message");
-    _logger.LogTrace("Test Trace message");
 
     return forecast;
 }).WithName("GetWeatherForecast").WithOpenApi().AllowAnonymous();

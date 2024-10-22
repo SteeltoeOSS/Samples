@@ -1,93 +1,114 @@
-@ActuatorApi_HostAddress = http://localhost:5140
-
-@ActuatorApi_ManagementAddress = http://localhost:5140
-#@ActuatorApi_ManagementAddress = http://localhost:9999
+@Actuator_Context=actuator
+#@Actuator_Context=cloudfoundryapplication
 
 ### Get the default day-count forecast starting from today
-GET {{ActuatorApi_HostAddress}}/weatherforecast/
+GET {{HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###  Get the default day-count forecast starting from a certain date
-GET {{ActuatorApi_HostAddress}}/weatherforecast?fromDate=9/1/2024
+GET {{HostAddress}}/weatherforecast?fromDate=9/1/2024
 Accept: application/json
 
 ###  Get a specified-number-of-days forecast starting from today
-GET {{ActuatorApi_HostAddress}}/weatherforecast?daysCount=2
+GET {{HostAddress}}/weatherforecast?daysCount=2
 Accept: application/json
 
 ### Get all forecast data
-GET {{ActuatorApi_HostAddress}}/AllForecastData
+GET {{HostAddress}}/AllForecastData
 Accept: application/json
 
 ### ACTUATORS
+### Check CORS
+OPTIONS {{ManagementAddress}}/{{Actuator_Context}}
+access-control-request-method: GET
+access-control-request-headers: authorization
+origin: https://apps.sys.dhaka.cf-app.com
+
 ### Hypermedia (list all actuators)
-GET {{ActuatorApi_ManagementAddress}}/actuator
+GET {{ManagementAddress}}/{{Actuator_Context}}
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Beans actuator, list registered services ("Beans" comes from the Spring world)
-GET {{ActuatorApi_ManagementAddress}}/actuator/beans
+GET {{ManagementAddress}}/{{Actuator_Context}}/beans
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### DB Migrations actuator, list pending and applied database migrations
-GET {{ActuatorApi_ManagementAddress}}/actuator/dbmigrations
+GET {{ManagementAddress}}/{{Actuator_Context}}/dbmigrations
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Env actuator, list environment/configuration sources and data
-GET {{ActuatorApi_ManagementAddress}}/actuator/env
+GET {{ManagementAddress}}/{{Actuator_Context}}/env
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Info actuator
-GET {{ActuatorApi_ManagementAddress}}/actuator/info
+GET {{ManagementAddress}}/{{Actuator_Context}}/info
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Health actuator
-GET {{ActuatorApi_ManagementAddress}}/actuator/health
+GET {{ManagementAddress}}/{{Actuator_Context}}/health
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Health actuator, check a specified group of contributors
-GET {{ActuatorApi_ManagementAddress}}/actuator/health/readiness
+GET {{ManagementAddress}}/{{Actuator_Context}}/health/readiness
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Loggers actuator, list all loggers
-GET {{ActuatorApi_ManagementAddress}}/actuator/loggers
+GET {{ManagementAddress}}/{{Actuator_Context}}/loggers
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Loggers actuator, update logging level for a logger
-POST {{ActuatorApi_ManagementAddress}}/actuator/loggers/Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware
+POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 {
   "configuredLevel": "TRACE"
 }
 
 ### HTTP Exchanges actuator
-GET {{ActuatorApi_ManagementAddress}}/actuator/httpexchanges
+GET {{ManagementAddress}}/{{Actuator_Context}}/httpexchanges
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Mappings actuator, list registered HTTP routes
-GET {{ActuatorApi_ManagementAddress}}/actuator/mappings
+GET {{ManagementAddress}}/{{Actuator_Context}}/mappings
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Metrics actuator, list all metrics
-GET {{ActuatorApi_ManagementAddress}}/actuator/metrics
+GET {{ManagementAddress}}/{{Actuator_Context}}/metrics
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Metrics actuator, check a meter
-GET {{ActuatorApi_ManagementAddress}}/actuator/metrics/clr.process.uptime
+GET {{ManagementAddress}}/{{Actuator_Context}}/metrics/clr.process.uptime
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Prometheus endpoint, list all metrics
-GET {{ActuatorApi_ManagementAddress}}/actuator/prometheus
+GET {{ManagementAddress}}/{{Actuator_Context}}/prometheus
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 
 ### Refresh actuator, refresh application configuration
-POST {{ActuatorApi_ManagementAddress}}/actuator/refresh
+POST {{ManagementAddress}}/{{Actuator_Context}}/refresh
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Thread dump actuator
-GET {{ActuatorApi_ManagementAddress}}/actuator/threaddump
+GET {{ManagementAddress}}/{{Actuator_Context}}/threaddump
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}
 
 ### Heap dump actuator
-GET {{ActuatorApi_ManagementAddress}}/actuator/heapdump
+GET {{ManagementAddress}}/{{Actuator_Context}}/heapdump
 Accept: application/json
+Authorization: {{Authorization_Header_Value}}

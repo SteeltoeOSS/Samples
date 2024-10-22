@@ -2,38 +2,38 @@
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using ActuatorWeb.Pages;
 using Steeltoe.Common;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Prometheus;
 using Steeltoe.Samples.ActuatorWeb;
+using Steeltoe.Samples.ActuatorWeb.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Steeltoe: Add Cloud Foundry configuration provider and options classes
+builder.AddCloudFoundryConfiguration();
+
+// Steeltoe: Add all actuators, specifying an authorization policy for use outside of the Cloud Foundry context
+builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
+{
+    if (!Platform.IsCloudFoundry)
+    {
+        configureEndpoints.RequireAuthorization("actuator.read");
+    }
+});
+builder.Services.ConfigureActuatorAuth();
+builder.Services.AddAllActuators();
+builder.Services.AddPrometheusActuator();
 if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
 {
     builder.Services.AddSpringBootAdminClient();
-    builder.Services.SecureActuatorsWithBasicAuth();
 }
-else
-{
-    builder.AddCloudFoundryConfiguration();
-}
-
-// Steeltoe: Add actuator endpoints, with an authorization policy outside of Cloud Foundry
-builder.AddAllActuators(configureEndpoints =>
-{
-    if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
-    {
-        configureEndpoints.RequireAuthorization("actuators.read");
-    }
-});
-builder.Services.AddPrometheusActuator();
 
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 
@@ -50,8 +50,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Causes certificate trust issues with SBA, port issues with ManagementPortMiddleware
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
@@ -61,7 +60,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.MapPrometheusActuator();
+app.UsePrometheusActuator();
 
 app.Run();
 return;
