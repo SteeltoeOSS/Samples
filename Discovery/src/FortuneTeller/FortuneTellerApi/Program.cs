@@ -5,7 +5,7 @@ using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
 using Steeltoe.Configuration.ConfigServer;
 using Steeltoe.Discovery.Consul;
 using Steeltoe.Discovery.Eureka;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.FortuneTellerApi;
 using Steeltoe.Samples.FortuneTellerApi.Data;
 
@@ -34,7 +34,7 @@ builder.Services.AddEurekaDiscoveryClient();
 builder.Configuration.AddConfigServer();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Change line below to HealthStatus.Down to observe this app marked as DOWN in discovery server (using *Actuator launch profile).
 builder.Services.AddSingleton<IHealthContributor>(_ => new ExampleHealthContributor(HealthStatus.Up));
