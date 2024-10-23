@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 using Steeltoe.Connectors.MongoDb;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.MongoDb;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup MongoDB options, connection factory and health checks.
 builder.AddMongoDb();

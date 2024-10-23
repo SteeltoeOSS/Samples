@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.AuthApi;
 using Steeltoe.Security.Authentication.JwtBearer;
 using Steeltoe.Security.Authorization.Certificate;
@@ -40,7 +40,7 @@ builder.Services.AddAuthorizationBuilder()
     .AddOrgAndSpacePolicies();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 WebApplication app = builder.Build();
 

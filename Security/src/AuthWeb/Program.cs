@@ -12,7 +12,7 @@ using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.AuthWeb;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
@@ -57,7 +57,7 @@ builder.Services.AddHttpClient("default", SetBaseAddress);
 builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddAppInstanceIdentityCertificate();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 WebApplication app = builder.Build();
 

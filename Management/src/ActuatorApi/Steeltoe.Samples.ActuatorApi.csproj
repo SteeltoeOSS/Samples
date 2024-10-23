@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GitVersion>false</GitVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="git.properties" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="git.properties" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(AspNetCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.Tasks" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
+    <PackageReference Include="System.Text.Json" Version="$(AspNetCoreVersion)" />
+
+    <!-- GitInfo provides $(Git*) properties used below -->
+    <PackageReference Include="GitInfo" Version="3.3.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)" />
+  </ItemGroup>
+
+  <Target Name="_GitProperties" AfterTargets="CoreCompile" Condition="!Exists('git.properties')">
+    <!-- https://github.com/devlooped/GitInfo/blob/main/src/GitInfo/build/GitInfo.targets -->
+    <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRepositoryUrl)" Overwrite="true" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.user.email=user@email.com" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id=$(GitSha)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.commit.time=$(GitCommitDate)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.tags=$(GitTag)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.branch=$(GitBranch)" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.time=$([System.DateTime]::Now.ToString('O'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.user.name=$([System.Environment]::GetEnvironmentVariable('USERNAME'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
+  </Target>
+
+</Project>
