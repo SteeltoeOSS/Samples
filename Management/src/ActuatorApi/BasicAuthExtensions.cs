@@ -1,4 +1,4 @@
-﻿using idunno.Authentication.Basic;
+using idunno.Authentication.Basic;
 using System.Security.Claims;
 
 namespace Steeltoe.Samples.ActuatorApi;
@@ -15,13 +15,13 @@ public static class BasicAuthExtensions
 
             options.Events = new BasicAuthenticationEvents
             {
-                OnValidateCredentials = (context) =>
+                OnValidateCredentials = (validateCredentialsContext) =>
                 {
-                    // HardCoded as an example, do not use any of this in Production!
-                    if (context.Username == "actuatorUser" && context.Password == "actuatorPassword")
+                    // This sample hard-codes the username and password for simplicity. In a real-world scenario, they are typically fetched from an external system.
+                    if (validateCredentialsContext.Username == "actuatorUser" && validateCredentialsContext.Password == "actuatorPassword")
                     {
-                        context.Principal = new ClaimsPrincipal(new ClaimsIdentity([new Claim("scope", "actuator.read")]));
-                        context.Success();
+                        validateCredentialsContext.Principal = new ClaimsPrincipal(new ClaimsIdentity([new Claim("scope", "actuator.read")]));
+                        validateCredentialsContext.Success();
                     }
 
                     return Task.CompletedTask;

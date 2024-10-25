@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint.Actuators.All;
@@ -9,6 +10,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors)
+builder.AddCloudFoundryConfiguration();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();

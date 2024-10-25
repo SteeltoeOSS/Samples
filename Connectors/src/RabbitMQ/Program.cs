@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.RabbitMQ;
 using Steeltoe.Management.Endpoint.Actuators.All;
 
@@ -7,6 +8,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors)
+builder.AddCloudFoundryConfiguration();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();

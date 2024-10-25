@@ -1,7 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information.
-
 using Steeltoe.Common;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
@@ -16,10 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// Steeltoe: Add Cloud Foundry configuration provider and options classes
+// Steeltoe: Add Cloud Foundry configuration provider and options classes.
 builder.AddCloudFoundryConfiguration();
 
-// Steeltoe: Add all actuators, specifying an authorization policy for use outside of the Cloud Foundry context
+// Steeltoe: Add all actuators, specifying an authorization policy for use outside the Cloud Foundry context.
 builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
 {
     if (!Platform.IsCloudFoundry)
@@ -37,7 +33,7 @@ if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
 
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 
-// Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization.
+// Steeltoe: Register HttpClients for communicating with a backend service.
 builder.Services.AddHttpClient<WeatherModel>(SetBaseAddress);
 
 var app = builder.Build();
@@ -80,7 +76,7 @@ static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
     }
 
     var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-    var logger = loggerFactory.CreateLogger("HttpClientSetup");
+    var logger = loggerFactory.CreateLogger<Program>();
 
     logger.LogInformation("HttpClient BaseAddress set to {BaseAddress}", client.BaseAddress);
 }

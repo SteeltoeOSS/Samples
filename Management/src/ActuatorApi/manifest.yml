@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: actuator-api-management-sample
   buildpacks:
@@ -9,3 +9,4 @@ applications:
     DOTNET_NOLOGO: "true"
   services:
    - sampleMySqlService
+  random-route: true

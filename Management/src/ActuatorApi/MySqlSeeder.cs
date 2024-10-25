@@ -1,14 +1,11 @@
-﻿// using Microsoft.EntityFrameworkCore;
-// using Microsoft.EntityFrameworkCore.Infrastructure;
-// using Microsoft.EntityFrameworkCore.Storage;
 using Steeltoe.Samples.ActuatorApi.Data;
 using Steeltoe.Samples.ActuatorApi.Models;
 
 namespace Steeltoe.Samples.ActuatorApi;
 
-internal sealed class MySqlSeeder
+internal static class MySqlSeeder
 {
-    private static readonly string[] summaries =
+    private static readonly string[] Summaries =
     [
         "Freezing",
         "Bracing",
@@ -78,6 +75,6 @@ internal sealed class MySqlSeeder
 
     internal static WeatherForecast MakeForecast(DateOnly date)
     {
-        return new WeatherForecast(date, Random.Shared.Next(-20, 55), summaries[Random.Shared.Next(summaries.Length)]);
+        return new WeatherForecast(date, Random.Shared.Next(-20, 55), Summaries[Random.Shared.Next(Summaries.Length)]);
     }
 }

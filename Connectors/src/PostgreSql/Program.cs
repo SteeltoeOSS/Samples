@@ -1,4 +1,5 @@
 using Npgsql;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.PostgreSql;
 using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.PostgreSql;
@@ -7,6 +8,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors)
+builder.AddCloudFoundryConfiguration();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
