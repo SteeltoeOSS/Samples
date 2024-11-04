@@ -8,27 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="git.properties" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="git.properties" />
-  </ItemGroup>
-
-  <!--
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Configuration\src\CloudFoundry\Steeltoe.Configuration.CloudFoundry.csproj" />
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Connectors\src\EntityFrameworkCore\Steeltoe.Connectors.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Management\src\Endpoint\Steeltoe.Management.Endpoint.csproj" />
-    <ProjectReference Include="..\..\..\..\Steeltoe\src\Management\src\Tasks\Steeltoe.Management.Tasks.csproj" />
-  </ItemGroup>
-  -->
-
-  <ItemGroup>
-    <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0" />
-    <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="4.0.498-alpha" />
-    <!--<PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />-->
-    <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0"/>
+    <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="4.0.498-alpha"/>
+    <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)"/>
 
     <!-- GitInfo provides $(Git*) properties used below -->
     <PackageReference Include="GitInfo" Version="3.3.5">
@@ -38,25 +20,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />
-    <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)"/>
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)"/>
+    <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="git.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="_GitProperties" AfterTargets="CoreCompile" Condition="!Exists('git.properties')">
     <!-- https://github.com/devlooped/GitInfo/blob/main/src/GitInfo/build/GitInfo.targets -->
-    <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRepositoryUrl)" Overwrite="true" />
-    <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.build.user.email=user@email.com" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.commit.id=$(GitSha)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.commit.time=$(GitCommitDate)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.tags=$(GitTag)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.branch=$(GitBranch)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.build.time=$([System.DateTime]::Now.ToString('O'))" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.build.user.name=$([System.Environment]::GetEnvironmentVariable('USERNAME'))" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
+    <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRepositoryUrl)" Overwrite="true"/>
+    <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.build.user.email=user@email.com" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.commit.id=$(GitSha)" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.commit.time=$(GitCommitDate)" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.tags=$(GitTag)" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.branch=$(GitBranch)" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.build.time=$([System.DateTime]::Now.ToString('O'))" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.build.user.name=$([System.Environment]::GetEnvironmentVariable('USERNAME'))" Overwrite="false"/>
+    <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false"/>
   </Target>
 
 </Project>

@@ -1,21 +1,25 @@
-using idunno.Authentication.Basic;
 using System.Security.Claims;
+using idunno.Authentication.Basic;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Steeltoe.Samples.ActuatorWeb;
 
-public static class BasicAuthExtensions
+internal static class BasicAuthExtensions
 {
-    public static void ConfigureActuatorAuth(this IServiceCollection serviceCollection)
+    public static void ConfigureActuatorAuth(this IServiceCollection services)
     {
-        var builder = serviceCollection.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme);
+        AuthenticationBuilder builder = services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme);
+
         builder.AddBasic(BasicAuthenticationDefaults.AuthenticationScheme, options =>
         {
-            options.ForwardDefaultSelector = httpContext => httpContext.Request.Path.StartsWithSegments("/actuator") ? BasicAuthenticationDefaults.AuthenticationScheme : null;
+            options.ForwardDefaultSelector = httpContext =>
+                httpContext.Request.Path.StartsWithSegments("/actuator") ? BasicAuthenticationDefaults.AuthenticationScheme : null;
+
             options.ForwardChallenge = BasicAuthenticationDefaults.AuthenticationScheme;
 
             options.Events = new BasicAuthenticationEvents
             {
-                OnValidateCredentials = (validateCredentialsContext) =>
+                OnValidateCredentials = validateCredentialsContext =>
                 {
                     // This sample hard-codes the username and password for simplicity. In a real-world scenario, they are typically fetched from an external system.
                     if (validateCredentialsContext.Username == "actuatorUser" && validateCredentialsContext.Password == "actuatorPassword")
@@ -29,7 +33,6 @@ public static class BasicAuthExtensions
             };
         });
 
-        serviceCollection.AddAuthorizationBuilder()
-            .AddPolicy("actuator.read", policy => policy.RequireClaim("scope", "actuator.read"));
+        services.AddAuthorizationBuilder().AddPolicy("actuator.read", policy => policy.RequireClaim("scope", "actuator.read"));
     }
 }

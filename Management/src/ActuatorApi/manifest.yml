@@ -9,4 +9,3 @@ applications:
     DOTNET_NOLOGO: "true"
   services:
    - sampleMySqlService
-  random-route: true

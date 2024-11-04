@@ -1,8 +1,11 @@
 # Management Sample Applications
 
-This repo tree contains sample apps illustrating how to use the Steeltoe Actuator Endpoints for managing and monitoring your ASP.NET Core application. Steeltoe Actuator endpoints can be used to expose services for checking health, adjusting logging, etc. of your applications. The endpoints also seemlessly integrate with the Pivotal Applications Manager for Cloud Foundry providing more information on how your application is behaving.
+This repo tree contains sample apps illustrating how to use the Steeltoe Management Endpoints and Management Tasks for managing and monitoring ASP.NET Core applications. Steeltoe Management Endpoints can be used to expose services for checking health, adjusting logging, etc. of your applications. The endpoints also seamlessly integrate with [Tanzu Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/console-index.html), providing more information on how your application is behaving.
 
-* src/CloudFoundry - ASP.NET Core sample app illustrating how to use all of the Actuator endpoints which are capable of integrating with the Pivotal Apps Manager console for Cloud Foundry.
+## ASP.NET Core Samples
+
+* src/ActuatorWeb - use Management Endpoints and distributed tracing. Some functionality depends on ActuatorApi.
+* src/ActuatorApi - use Management Endpoints, Management Tasks and distributed tracing.
 
 ## Building & Running
 
@@ -10,4 +13,4 @@ See the Readme for instructions on building and running each app.
 
 ---
 
-### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/steeltoe-management) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for a more in-depth walkthrough of the samples and more detailed information.

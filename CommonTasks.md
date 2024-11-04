@@ -2,28 +2,36 @@
 
 This page contains information on basic tasks that are used throughout the Steeltoe Samples. Use this page to quickly get your local development environment up and running.
 
+Containers images produced by the Steeltoe team (all images hosted at `steeltoe.azurecr.io`) are *For local development purposes only*. Images are generally very basic and formal support should not be expected. To see how the images are built and/or participate in improving them, visit [this repository](https://github.com/SteeltoeOSS/Dockerfiles).
+
+Feel free to modify these commands as needed, knowing that commands provided in this document will result in:
+
+* The latest available (tag-matching) image being used: `--pull=always`
+* Servers that are automatically removed when the container is stopped: `--rm`
+* An attached pseudo-TTY with STDIN kept open: `-it` [read more](https://docs.docker.com/reference/cli/docker/container/run/#tty)
+* Published ports: `-p <hostPort>:<containerPort>`
+* Named containers: `--name <name>`. If the command has Steeltoe-specific configuration and/or the image was built by the Steeltoe team, the name starts with 'steeltoe-'
+
 ## Spring Cloud Config Server
 
 ### Run SCCS with Docker
 
-The Steeltoe team has built a docker image of a [basic Config server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/config-server) for an easy experience getting started
-
 To start a config server backed by the Spring Cloud Samples repo:
 
-```bash
+```shell
 docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config steeltoe.azurecr.io/config-server
 ```
 
 To start a config server backed by a folder on your local disk, start the docker image like this:
 
-```bash
+```shell
 # Note: Ensure Docker is configured to share host drive/volume so the mount below will work correctly!
 docker run --rm -it --pull=always -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoe.azurecr.io/configserver --spring.profiles.active=native
 ```
 
 To start a config server that registers itself with Eureka at startup (discovery-first):
 
-```bash
+```shell
 docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config -e eureka.client.enabled=true steeltoe.azurecr.io/config-server
 ```
 
@@ -53,13 +61,9 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud C
 
 ### Run Eureka with Docker
 
-The Steeltoe team has built a docker image of a [basic Eureka server](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/eureka-server) for an easy experience getting started:
-
-```bash
+```shell
 docker run --rm -it --pull=always -p 8761:8761 --name steeltoe-eureka steeltoe.azurecr.io/eureka-server
 ```
-
-### Run Eureka with Java
 
 ### Provision Eureka on Cloud Foundry
 
@@ -69,72 +73,71 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Regist
 1. cf create-service p.service-registry standard myDiscoveryServiceInstanceName
 1. Wait for service to be ready. (use `cf services` to check the status)
 
-## RabbitMQ
-
-### Run RabbitMQ Server with Docker
-
-This command starts a RabbitMQ server with the management plugin enabled with no credentials and default ports:
-
-```script
-docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-management
-```
-
-## Consul
-
-### Run Consul Server with Docker
-
-```script
-docker run --rm -it --pull=always -p 8500:8500 --name=steeltoe-consul hashicorp/consul
-```
-
 ## Spring Boot Admin
 
 ### Run Spring Boot Admin Server with Docker
 
-There are multiple Spring Boot Admin images to choose from, this is only one option:
-
-```script
-docker run --rm -it --pull=always -p 9090:9090 --name steeltoe-springbootadmin steeltoe.azurecr.io/spring-boot-admin
+```shell
+docker run --rm -it --pull=always -p 9090:9090 --name steeltoe-SpringBootAdmin steeltoe.azurecr.io/spring-boot-admin
 ```
 
-## Redis
+## HashiCorp Consul
 
-### Run Redis server with Docker
+### Run HashiCorp Consul Server with Docker
 
-```script
-docker run --rm -it --pull=always -p 6379:6379 --name redis redis
-```
-
-## MySQL
-
-### Run MySQL Server with Docker
-
-```script
-docker run --rm -it --pull=always -p 3306:3306 --name steeltoe-mysql -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
-```
-
-## SQL Server
-
-### Run SQL Server with Docker
-
-```script
-docker run --rm -it --pull=always -p 1433:1433 --name steeltoe-sqlserver -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' mcr.microsoft.com/mssql/server
-```
-
-## PostgreSQL
-
-### Run PostgreSQL Server with Docker
-
-```script
-docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+```shell
+docker run --rm -it --pull=always -p 8500:8500 --name consul hashicorp/consul
 ```
 
 ## MongoDB
 
 ### Run MongoDB Server with Docker
 
-```script
-docker run --rm -it --pull=always -p 27017:27017 --name mongoserver mongo
+```shell
+docker run --rm -it --pull=always -p 27017:27017 --name mongo mongo
+```
+
+## MySQL
+
+### Run MySQL Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 3306:3306 --name steeltoe-mysql -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
+```
+
+## PostgreSQL
+
+### Run PostgreSQL Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+```
+
+## RabbitMQ
+
+### Run RabbitMQ Server with Docker
+
+> [!NOTE]  
+> Note that this image has the management plugin enabled and no credentials set:
+
+```shell
+docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-management
+```
+
+## Redis
+
+### Run Redis server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 6379:6379 --name redis redis
+```
+
+## SQL Server
+
+### Run SQL Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 1433:1433 --name mssql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' mcr.microsoft.com/mssql/server
 ```
 
 ## UAA Server for Steeltoe Samples
@@ -143,7 +146,7 @@ The Steeltoe team has created a [UAA configuration](https://github.com/SteeltoeO
 
 ### Run UAA Server with Docker
 
-```script
+```shell
 docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azurecr.io/uaa-server:77.10
 ```
 
@@ -155,6 +158,6 @@ Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeO
 
 ### Run Zipkin Server with Docker
 
-```script
+```shell
 docker run --rm -it --pull=always -p 9411:9411 --name zipkin openzipkin/zipkin
 ```

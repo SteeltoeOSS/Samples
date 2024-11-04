@@ -7,7 +7,7 @@ using Steeltoe.Management.Prometheus;
 using Steeltoe.Samples.ActuatorWeb;
 using Steeltoe.Samples.ActuatorWeb.Pages;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -23,9 +23,12 @@ builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
         configureEndpoints.RequireAuthorization("actuator.read");
     }
 });
+
 builder.Services.ConfigureActuatorAuth();
 builder.Services.AddAllActuators();
 builder.Services.AddPrometheusActuator();
+
+// Steeltoe: Register with Spring Boot Admin.
 if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
 {
     builder.Services.AddSpringBootAdminClient();
@@ -36,7 +39,7 @@ builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 // Steeltoe: Register HttpClients for communicating with a backend service.
 builder.Services.AddHttpClient<WeatherModel>(SetBaseAddress);
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -46,7 +49,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// Steeltoe: The next line is commented out because Actuators are listening on a dedicated port, which does not support https.
+// app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
@@ -56,14 +60,17 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+// Steeltoe: Use the Prometheus Actuator, which is not automatically included in the middleware pipeline.
 app.UsePrometheusActuator();
 
 app.Run();
-return;
 
+// This code is used to limit complexity in the sample. A real application should use Service Discovery.
+// To learn more about service discovery, review the documentation: https://docs.steeltoe.io/api/v3/discovery/
 static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
     var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
+
     if (instanceInfo is CloudFoundryApplicationOptions { Uris.Count: > 0 } options)
     {
         string address = options.Uris.First();
@@ -76,7 +83,7 @@ static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
     }
 
     var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-    var logger = loggerFactory.CreateLogger<Program>();
+    ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
 
     logger.LogInformation("HttpClient BaseAddress set to {BaseAddress}", client.BaseAddress);
 }

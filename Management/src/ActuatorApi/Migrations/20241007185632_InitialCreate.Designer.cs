@@ -8,7 +8,7 @@ using Steeltoe.Samples.ActuatorApi.Data;
 
 namespace Steeltoe.Samples.ActuatorApi.Migrations;
 
-[DbContext(typeof(WeatherContext))]
+[DbContext(typeof(WeatherDbContext))]
 [Migration("20241007185632_InitialCreate")]
 partial class InitialCreate
 {

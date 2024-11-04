@@ -1,10 +1,30 @@
 ﻿@page
-@model             WeatherModel
+@model WeatherModel
 @{
     ViewData["Title"] = "Weather Forecast";
 }
 <h1>@ViewData["Title"]</h1>
-
+@if (Model.RequestException != null)
+{
+    <h2 class="alert-danger">@Model.RequestException.Message</h2>
+    <pre>
+        @Model.RequestException.StackTrace
+    </pre>
+}
+<p>
+    Start date:
+    <input id="fromDate" placeholder="yyyy-MM-dd"/>
+    Forecast length:
+    <select id="days" title="Length of Forecast">
+        <option value="">default</option>
+        <option value="1">1 day</option>
+        <option value="3">3 days</option>
+        <option value="7">7 days</option>
+        <option value="14">14 days</option>
+        <option value="30">30 days</option>
+    </select>
+    <button onclick="getForecast();">Get Forecast</button>
+</p>
 <table class="table">
     <tr class="">
         <th>Date</th>
@@ -12,13 +32,30 @@
         <th>F</th>
         <th>C</th>
     </tr>
-@foreach(var day in Model.Forecasts)
-{
-    <tr class="">
-        <td>@day.Date</td>
-        <td>@day.Summary</td>
-        <td>@day.TemperatureF</td>
-        <td>@day.TemperatureC</td>
-    </tr>
-}
+    @foreach (WeatherForecast day in Model.Forecasts)
+    {
+        <tr>
+            <td>@day.Date</td>
+            <td>@day.Summary</td>
+            <td>@day.TemperatureF</td>
+            <td>@day.TemperatureC</td>
+        </tr>
+    }
 </table>
+
+@section Scripts
+{
+    <script>
+        function getForecast() {
+            if ('URLSearchParams' in window) {
+                var searchParams = new URLSearchParams(window.location.search);
+                searchParams.set("days", $("#days").val());
+                window.location.search = searchParams.toString();
+            }
+        }
+        $(function () {
+            $("#fromDate").val("@Model.ForecastStartDate");
+            $("#days").val("@Model.DaysSelected");
+        });
+    </script>
+}

@@ -1,23 +1,26 @@
 {
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "http": {
       "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5126",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      // Wildcard used instead of "localhost" here in order to support connections from local containers
+      // Steeltoe: Wildcard used instead of "localhost" here to support connections from local containers.
       "applicationUrl": "http://+:5126"
+    },
+    "https": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:7188",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://+:7188;http://+:5126"
     }
-    //, HTTPS configuration is disabled in anticipation of hostname-based certificate trust issues
-    //"https": {
-    //  "commandName": "Project",
-    //  "environmentVariables": {
-    //    "ASPNETCORE_ENVIRONMENT": "Development"
-    //  },
-    //  "dotnetRunMessages": true,
-    //  "applicationUrl": "https://+:7188;http://+:5126"
-    //}
-  },
-  "$schema": "http://json.schemastore.org/launchsettings.json"
+  }
 }

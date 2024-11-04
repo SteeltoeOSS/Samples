@@ -1,14 +1,18 @@
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Steeltoe.Samples.ActuatorWeb.Pages;
 
 public class WeatherModel(IHttpClientFactory httpClientFactory, ILogger<WeatherModel> logger) : PageModel
 {
-    public required WeatherForecast[] Forecasts { get; set; } = [];
+    internal string? ForecastStartDate { get; set; }
+    internal string DaysSelected { get; set; } = string.Empty;
+    internal WeatherForecast[] Forecasts { get; set; } = [];
+    internal Exception? RequestException { get; set; }
 
-    public async Task OnGet()
+    public async Task OnGet(string? fromDate, int? days)
     {
-        // Log messages at various levels for loggers actuator demonstration
+        // Use these log entries to demonstrate changing log levels with the loggers actuator.
         logger.LogCritical("Test Critical message");
         logger.LogError("Test Error message");
         logger.LogWarning("Test Warning message");
@@ -16,20 +20,41 @@ public class WeatherModel(IHttpClientFactory httpClientFactory, ILogger<WeatherM
         logger.LogDebug("Test Debug message");
         logger.LogTrace("Test Trace message");
 
-        using var httpClient = httpClientFactory.CreateClient(nameof(WeatherModel));
+        using HttpClient httpClient = httpClientFactory.CreateClient(nameof(WeatherModel));
+
         try
         {
-            var response = await httpClient.GetAsync("weatherforecast");
-            Forecasts = await response.Content.ReadFromJsonAsync<WeatherForecast[]>() ?? [new WeatherForecast(DateOnly.FromDateTime(DateTime.Now), 0, "Failed to read response.")];
+            string requestUri = BuildRequestUri(fromDate, days);
+
+            HttpResponseMessage response = await httpClient.GetAsync(requestUri);
+
+            Forecasts = await response.Content.ReadFromJsonAsync<WeatherForecast[]>() ?? [];
         }
         catch (Exception exception) when (exception is HttpRequestException)
         {
-            Forecasts = [new WeatherForecast(DateOnly.FromDateTime(DateTime.Now), 0, $"Encountered {exception.GetType().Name} connecting to {httpClient.BaseAddress}. Confirm the API is running/deployed.")];
+            RequestException = exception;
         }
+
+        ForecastStartDate = fromDate ?? DateTime.Now.ToString("yyyy-MM-dd");
+        DaysSelected = days?.ToString() ?? string.Empty;
+    }
+
+    private static string BuildRequestUri(string? fromDate, int? days)
+    {
+        var builder = new QueryBuilder();
+
+        if (fromDate != null)
+        {
+            builder.Add("fromDate", fromDate);
+        }
+
+        if (days != null)
+        {
+            builder.Add("days", days.Value.ToString());
+        }
+
+        return "weatherForecast" + builder.ToQueryString();
     }
 }
 
-public sealed record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+public sealed record WeatherForecast(DateOnly Date, int TemperatureC, int TemperatureF, string? Summary);

@@ -3,7 +3,7 @@ using Steeltoe.Samples.ActuatorApi.Data;
 
 namespace Steeltoe.Samples.ActuatorApi.AdminTasks;
 
-public class ResetTask(WeatherContext weatherContext, ILogger<ForecastTask> logger) : IApplicationTask
+internal class ResetTask(WeatherDbContext weatherContext, ILogger<ForecastTask> logger) : IApplicationTask
 {
     public async Task RunAsync(CancellationToken cancellationToken)
     {

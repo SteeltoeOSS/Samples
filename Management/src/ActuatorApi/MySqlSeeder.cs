@@ -21,52 +21,31 @@ internal static class MySqlSeeder
 
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        // Exit early if command-line args are present to avoid conflict with Steeltoe.Samples.ActuatorApi.ForecastTask
-        var args = Environment.GetCommandLineArgs();
-        if (args.Length != 0)
-        {
-            return;
-        }
+        await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        await using var appDbContext = scope.ServiceProvider.GetRequiredService<WeatherDbContext>();
 
-        await using var scope = serviceProvider.CreateAsyncScope();
-        await using var appDbContext = scope.ServiceProvider.GetRequiredService<WeatherContext>();
-
-        // Code-first schema management retained here for potential use in the future
-        // await CreateTablesAsync(appDbContext);
         await ForecastTheNextWeekAsync(appDbContext);
     }
 
-    //private static async Task CreateTablesAsync(DbContext dbContext)
-    //{
-        //var wasCreated = await dbContext.Database.EnsureCreatedAsync();
-        //if (wasCreated)
-        //{
-        //    // The database already existed. Because apps usually don't have permission to drop the database,
-        //    // we drop and recreate all the tables in the DbContext instead.
-        //    var databaseCreator = (RelationalDatabaseCreator)dbContext.Database.GetService<IDatabaseCreator>();
-        //    await databaseCreator.CreateTablesAsync();
-        //}
-    //}
-
     /// <summary>
-    /// Predict the weather for the 7 days after the last date that was previously forecast
+    /// Predict the weather for the 7 days after the last date that was previously forecast.
     /// </summary>
-    private static async Task ForecastTheNextWeekAsync(WeatherContext dbContext)
+    private static async Task ForecastTheNextWeekAsync(WeatherDbContext dbContext)
     {
-        var firstNewForecastDate = DateOnly.FromDateTime(DateTime.Now);
+        DateOnly firstNewForecastDate = DateOnly.FromDateTime(DateTime.Now);
+
         try
         {
             firstNewForecastDate = dbContext.Forecasts.Max(wf => wf.Date).AddDays(1);
         }
-        catch
+        catch (InvalidOperationException)
         {
-            // At startup, throws 'System.InvalidOperationException: Sequence contains no elements.'
-            // TODO: determine if there is anything else we want to handle
+            // 'Sequence contains no elements.' is expected when there is no existing forecast data.
         }
 
-        for (var index = 0; index < 7; index++)
+        for (int index = 0; index < 7; index++)
         {
-            var dateToForecast = firstNewForecastDate.AddDays(index);
+            DateOnly dateToForecast = firstNewForecastDate.AddDays(index);
             dbContext.Forecasts.Add(MakeForecast(dateToForecast));
         }
 
