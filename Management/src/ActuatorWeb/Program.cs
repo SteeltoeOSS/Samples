@@ -5,6 +5,7 @@ using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Prometheus;
 using Steeltoe.Samples.ActuatorWeb;
+using Steeltoe.Samples.ActuatorWeb.CustomActuators.LocalTime;
 using Steeltoe.Samples.ActuatorWeb.Pages;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,10 @@ builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
 builder.Services.ConfigureActuatorAuth();
 builder.Services.AddAllActuators();
 builder.Services.AddPrometheusActuator();
+
+// Steeltoe: Add custom actuator that displays the local server time.
+// See appsettings.Development.json for how the response format can be configured.
+builder.Services.AddLocalTimeActuator();
 
 // Steeltoe: Register with Spring Boot Admin.
 if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))

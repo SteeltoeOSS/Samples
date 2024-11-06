@@ -18,14 +18,13 @@ including [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1.
-
-Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-* [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-* [Metrics Registrar](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/metric-registrar-index.html)
-* [App Metrics](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-index.html)
-* [VMware MySQL for Tanzu Application Service](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/index.html)
-or [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
+1. Optional:
+    * [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
+    * [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+    * [Metrics Registrar for VMware Tanzu Application Service](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/metric-registrar-index.html)
+    * [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-index.html)
+    * [VMware MySQL for Tanzu Application Service](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/index.html)
+    or [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
 
 ## Running locally
 
@@ -87,7 +86,7 @@ As ActuatorWeb is a Razor Pages app, you can use a browser to [access the web UI
 is running. To request a weather forecast (and generate HTTP request traces) from ActuatorApi, click "Weather Forecast"
 in the site menu.
 
-### Interacting with actuators
+### Interacting with Management Endpoints
 
 Each app instance registers with Spring Boot Admin and can be viewed from the web interface at <http://localhost:9090>.
 
@@ -100,6 +99,11 @@ initially look like `env: <none>` or `Run With: No Environment`, although those 
 time. You will need to either make an environment selection or define variables like `HostAddress` directly in the .http
 file in order for requests to work (review the .json file mentioned previously for variable examples). Please note that
 the "dhaka" environment is not expected to be available for use by those not on the Steeltoe team.
+
+#### Custom Management Endpoints
+
+This sample includes a custom actuator that can be used to return the time on the server where the app is running.
+Review the contents of [./CustomActuators](./CustomActuators/) to see how this integration is accomplished.
 
 ### Reviewing HTTP Traces
 
