@@ -1,16 +1,15 @@
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Steeltoe.Samples.ActuatorWeb.Pages;
 
-public class WeatherModel(IHttpClientFactory httpClientFactory, ILogger<WeatherModel> logger) : PageModel
+public class WeatherModel(ActuatorApiClient actuatorApiClient, ILogger<WeatherModel> logger) : PageModel
 {
     internal string? ForecastStartDate { get; set; }
     internal string DaysSelected { get; set; } = string.Empty;
-    internal WeatherForecast[] Forecasts { get; set; } = [];
+    internal List<WeatherForecast> Forecasts { get; set; } = [];
     internal Exception? RequestException { get; set; }
 
-    public async Task OnGet(string? fromDate, int? days)
+    public async Task OnGet(string? fromDate, int? days, CancellationToken cancellationToken)
     {
         // Use these log entries to demonstrate changing log levels with the loggers actuator.
         logger.LogCritical("Test Critical message");
@@ -20,15 +19,9 @@ public class WeatherModel(IHttpClientFactory httpClientFactory, ILogger<WeatherM
         logger.LogDebug("Test Debug message");
         logger.LogTrace("Test Trace message");
 
-        using HttpClient httpClient = httpClientFactory.CreateClient(nameof(WeatherModel));
-
         try
         {
-            string requestUri = BuildRequestUri(fromDate, days);
-
-            HttpResponseMessage response = await httpClient.GetAsync(requestUri);
-
-            Forecasts = await response.Content.ReadFromJsonAsync<WeatherForecast[]>() ?? [];
+            Forecasts = await actuatorApiClient.GetWeatherForecastsAsync(fromDate, days, cancellationToken);
         }
         catch (Exception exception) when (exception is HttpRequestException)
         {
@@ -37,23 +30,6 @@ public class WeatherModel(IHttpClientFactory httpClientFactory, ILogger<WeatherM
 
         ForecastStartDate = fromDate ?? DateTime.Now.ToString("yyyy-MM-dd");
         DaysSelected = days?.ToString() ?? string.Empty;
-    }
-
-    private static string BuildRequestUri(string? fromDate, int? days)
-    {
-        var builder = new QueryBuilder();
-
-        if (fromDate != null)
-        {
-            builder.Add("fromDate", fromDate);
-        }
-
-        if (days != null)
-        {
-            builder.Add("days", days.Value.ToString());
-        }
-
-        return "weatherForecast" + builder.ToQueryString();
     }
 }
 

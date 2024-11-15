@@ -41,8 +41,8 @@ if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
 
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 
-// Steeltoe: Register HttpClients for communicating with a backend service.
-builder.Services.AddHttpClient<WeatherModel>(SetBaseAddress);
+// Steeltoe: Register typed HttpClient for communicating with the backend service.
+builder.Services.AddHttpClient<ActuatorApiClient>(SetBaseAddress);
 
 WebApplication app = builder.Build();
 
