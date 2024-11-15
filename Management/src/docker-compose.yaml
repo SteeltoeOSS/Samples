@@ -1,0 +1,38 @@
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3001:3000
+    volumes:
+      - type: bind
+        source: ./grafana/config
+        target: /etc/grafana
+        read_only: true
+      - type: bind
+        source: ./grafana/dashboards
+        target: /var/lib/grafana/dashboards
+        read_only: true
+    depends_on:
+      - prometheus
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: steeltoe
+      MYSQL_DATABASE: steeltoe
+      MYSQL_USER: steeltoe
+      MYSQL_PASSWORD: steeltoe
+    ports:
+      - 3306:3306
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9091:9090
+    volumes:
+      - type: bind
+        source: ./prometheus
+        target: /etc/prometheus
+        read_only: true
+  spring-boot-admin:
+    image: steeltoe.azurecr.io/spring-boot-admin
+    ports:
+    - 9999:9090

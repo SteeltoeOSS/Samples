@@ -118,7 +118,7 @@ docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTG
 ### Run RabbitMQ Server with Docker
 
 > [!NOTE]  
-> Note that this image has the management plugin enabled and no credentials set:
+> This image has the management plugin enabled and no credentials set.
 
 ```shell
 docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-management

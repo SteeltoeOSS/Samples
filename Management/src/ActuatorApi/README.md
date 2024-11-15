@@ -21,31 +21,32 @@ that matches the credentials defined in [appsettings.Development.json](./appsett
 In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v3/management/tasks.html), the database
 schema and its contents are managed as administrative tasks.
 
-To apply Entity Framework database schema migration scripts:
+1. Apply Entity Framework database schema migration scripts:
 
-```shell
-dotnet run --runtask=MigrateDatabase
-```
+    ```shell
+    dotnet run --runtask=MigrateDatabase
+    ```
 
-[Add forecast data](./AdminTasks/ForecastTask.cs) for the next 7 days:
+1. Run [`ForecastTask`](./AdminTasks/ForecastTask.cs) to predict weather for the next 7 days:
 
-```shell
-dotnet run --runtask=ForecastWeather
-```
+    ```shell
+    dotnet run --runtask=ForecastWeather
+    ```
 
-*OPTIONAL* - ForecastTask supports parameters for the starting date and number of days:
+    *Optional* - Add forecast data starting from specific date and/or number of days:
 
-```shell
-dotnet run --runtask=ForecastWeather --fromDate=2024-10-18 --days=30
-```
+    ```shell
+    dotnet run --runtask=ForecastWeather --fromDate=10/18/2024 --days=30
+    ```
 
-> Values passed for `fromDate` should be in a format that is valid on your machine
+    > [!NOTE]  
+    > Use values formatted for invariant culture (`MM/dd/yyyy`) for the `fromDate` parameter.
 
-**CAUTION** REMOVE ALL forecast data - [Reset data](./AdminTasks/ResetTask.cs):
+1. *\*CAUTION\** Run [`ResetTask`](./AdminTasks/ResetTask.cs) to remove all forecast data:
 
-```shell
-dotnet run --runtask=ResetWeather
-```
+    ```shell
+    dotnet run --runtask=ResetWeather
+    ```
 
 ## Running on Tanzu Platform for Cloud Foundry
 
@@ -94,20 +95,20 @@ Depending on the steps taken to push the application to Cloud Foundry, the comma
 example, if the application was published before pushing, the path in the command should be shortened to
 `./Steeltoe.Samples.ActuatorApi`)
 
-Apply Entity Framework database migration scripts as a Cloud Foundry task:
+1. Apply Entity Framework database migration scripts:
 
-```shell
-cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
-```
+    ```shell
+    cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
+    ```
 
-Add forecast data:
+1. Run `ForecastTask` to predict weather for the next 7 days:
 
-```shell
-cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
-```
+    ```shell
+    cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
+    ```
 
-*caution* REMOVE ALL forecast data:
+1. *\*CAUTION\** Run `ResetTask` to remove all forecast data:
 
-```shell
-cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
-```
+    ```shell
+    cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
+    ```

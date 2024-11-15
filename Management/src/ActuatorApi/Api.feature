@@ -7,7 +7,7 @@ Feature: Api
   @windows
   Scenario: CloudFoundry Management (net8.0/windows)
     When you run: dotnet publish -r win-x64 --self-contained
-    And you run: cf push -f manifest-windows.yml -p ./bin/Release/net8.0/win-x64/publish
+    And you run: cf push -f manifest-windows.yml -p ./bin/Release/net8.0/win-x64/publish --random-route
     And you wait until CloudFoundry app actuator-api-management-sample is started
     Then you should be able to access CloudFoundry app actuator-api-management-sample management endpoints
     When you run: cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase --name MigrateDatabase"
@@ -20,7 +20,7 @@ Feature: Api
   @net8.0
   @linux
   Scenario: CloudFoundry Management (net8.0/linux)
-    When you run: cf push -f manifest.yml
+    When you run: cf push -f manifest.yml --random-route
     And you wait until CloudFoundry app actuator-api-management-sample is started
     Then you should be able to access CloudFoundry app actuator-api-management-sample management endpoints
     When you run: cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase --name MigrateDatabase"

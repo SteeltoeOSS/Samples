@@ -12,6 +12,7 @@ the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-rele
 Several tools exist that can do this,
 including [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-index.html).
 
+> [!NOTE]  
 > While this application is intended to be used with [ActuatorApi](../ActuatorApi/), it _can_ be used on its own if you
 > are looking for a simpler actuator or metrics example.
 
@@ -36,8 +37,6 @@ of the functionality in a local environment, you will need to meet additional pr
 * Optional: an IDE (such as Visual Studio), for performing the requests defined
   in [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http).
 
-<!-- TODO: add OpenTelemetry content -->
-
 ### Spring Boot Admin
 
 Because Steeltoe Management Endpoints are compatible with Spring Boot Actuator, they can also be used
@@ -54,20 +53,14 @@ port 9999.
 
 ### Zipkin Server
 
-These applications [configure OpenTelemetry](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
+> [!NOTE]  
+> Previous versions of Steeltoe included distributed tracing functionality. That functionality has moved to OpenTelemetry.
+> We expect many Steeltoe users still want distributed tracing, so this sample includes a basic OpenTelemetry setup.
+> Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more. 
+
+These applications use [OpenTelemetry](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
 trace information and export those traces to Zipkin so that individual requests across the system can be analyzed. Refer
 to [Common Tasks](../../../CommonTasks.md#zipkin) to start Zipkin.
-
-<!-- ### TODO: Grafana Alloy
-
-https://grafana.com/docs/alloy/latest/set-up/install/docker/
-
-https://grafana.com/docs/grafana/latest/datasources/zipkin/
-
-```
-docker run --rm -it -p 12345:12345 -p 9090:9090 -v .\config.alloy:/etc/alloy/config.alloy --name grafana-alloy grafana/alloy:latest run --server.http.listen-addr=0.0.0.0:12345 /etc/alloy/config.alloy
-```
--->
 
 ### Starting the application
 
@@ -77,6 +70,7 @@ You should now be able to run this sample, either from your IDE or with this com
 dotnet run
 ```
 
+> [!NOTE]  
 > If you are only looking for an actuator demo, you _may_ proceed from here without starting ActuatorApi, but for full
 > functionality, review the [ActuatorApi README](../ActuatorApi/README.md) and get that app running as well.
 
