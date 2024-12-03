@@ -16,11 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.Redis", "R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.SqlServerEFCore", "SqlServerEFCore\Steeltoe.Samples.SqlServerEFCore.csproj", "{0D565A7E-221F-4271-8876-1A4A223F6B7D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6297031D-2427-4A59-8D6E-73355360E72A}"
-	ProjectSection(SolutionItems) = preProject
-		..\configure.ps1 = ..\configure.ps1
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.CosmosDb", "CosmosDb\Steeltoe.Samples.CosmosDb.csproj", "{3B35FC0B-47AE-417E-9F0B-9277286E60B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.MongoDb", "MongoDb\Steeltoe.Samples.MongoDb.csproj", "{29BF56DA-1534-43F3-97FF-563F03C6A72E}"

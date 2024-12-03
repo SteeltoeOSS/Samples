@@ -1,6 +1,7 @@
 ﻿using MySqlConnector;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.MySql;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.MySql;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -8,8 +9,11 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors).
+builder.AddCloudFoundryConfiguration();
+
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup MySQL options, connection factory and health checks.
 builder.AddMySql();
