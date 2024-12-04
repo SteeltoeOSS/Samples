@@ -12,7 +12,7 @@ using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.AuthWeb;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
@@ -57,7 +57,7 @@ builder.Services.AddHttpClient("default", SetBaseAddress);
 builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddAppInstanceIdentityCertificate();
 
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 WebApplication app = builder.Build();
 
@@ -88,6 +88,8 @@ app.MapDefaultControllerRoute();
 app.Run();
 return;
 
+// This code is used to limit complexity in the sample. A real application should use Service Discovery.
+// To learn more about service discovery, review the documentation: https://docs.steeltoe.io/api/v3/discovery/
 static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
     var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();

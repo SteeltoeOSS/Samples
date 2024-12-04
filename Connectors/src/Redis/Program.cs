@@ -1,7 +1,8 @@
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
+using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.Redis;
-using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.Redis;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -9,8 +10,11 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors).
+builder.AddCloudFoundryConfiguration();
+
 // Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
+builder.Services.AddAllActuators();
 
 // Steeltoe: Setup Redis options, connection factory and health checks, optionally providing a callback to customize client settings.
 builder.AddRedis(null, addOptions =>
