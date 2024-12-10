@@ -78,7 +78,7 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Regist
 ### Run Spring Boot Admin Server with Docker
 
 ```shell
-docker run --rm -it --pull=always -p 9090:9090 --name steeltoe-SpringBootAdmin steeltoe.azurecr.io/spring-boot-admin
+docker run --rm -it --pull=always -p 9099:9099 --name steeltoe-SpringBootAdmin steeltoe.azurecr.io/spring-boot-admin
 ```
 
 ## HashiCorp Consul
