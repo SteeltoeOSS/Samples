@@ -1,6 +1,10 @@
-﻿using OpenTelemetry.Resources;
+using OpenTelemetry;
+using OpenTelemetry.Context.Propagation;
+using OpenTelemetry.Instrumentation.AspNetCore;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Steeltoe.Common;
+using B3Propagator = OpenTelemetry.Extensions.Propagators.B3Propagator;
 
 namespace Steeltoe.Samples.ActuatorApi;
 
@@ -12,14 +16,7 @@ internal static class OpenTelemetryExtensions
         {
             tracerProviderBuilder.AddAspNetCoreInstrumentation();
 
-            string? otlpExporterAddress = configuration.GetValue<string>("OpenTelemetry:OTLPExporterAddress");
-
-            if (!string.IsNullOrEmpty(otlpExporterAddress))
-            {
-                tracerProviderBuilder.AddOtlpExporter(otlpExporterOptions => otlpExporterOptions.Endpoint = new Uri(otlpExporterAddress));
-            }
-
-            string? zipkinExporterAddress = configuration.GetValue<string>("OpenTelemetry:ZipkinExporterAddress");
+            string? zipkinExporterAddress = configuration.GetValue<string>("OTEL_EXPORTER_ZIPKIN_ENDPOINT");
 
             if (!string.IsNullOrEmpty(zipkinExporterAddress))
             {
@@ -30,7 +27,23 @@ internal static class OpenTelemetryExtensions
         services.ConfigureOpenTelemetryTracerProvider((serviceProvider, tracerProviderBuilder) =>
         {
             var appInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
-            tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appInfo.ApplicationName ?? "ActuatorWeb-fallback"));
+            tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appInfo.ApplicationName ?? "ActuatorApi-fallback"));
+
+            // For traces, use B3 (Zipkin) headers instead of W3C.
+            List<TextMapPropagator> propagators =
+            [
+                new B3Propagator(),
+                new BaggagePropagator()
+            ];
+
+            Sdk.SetDefaultTextMapPropagator(new CompositeTextMapPropagator(propagators));
+        });
+
+        // Avoid clogging tracing/metric stores with requests for Actuator Endpoints.
+        services.AddOptions<AspNetCoreTraceInstrumentationOptions>().Configure(instrumentationOptions =>
+        {
+            instrumentationOptions.Filter += context => !context.Request.Path.StartsWithSegments("/actuator", StringComparison.OrdinalIgnoreCase) &&
+                !context.Request.Path.StartsWithSegments("/cloudfoundryapplication", StringComparison.OrdinalIgnoreCase);
         });
     }
 }

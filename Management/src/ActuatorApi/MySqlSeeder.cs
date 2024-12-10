@@ -1,3 +1,4 @@
+using MySqlConnector;
 using Steeltoe.Samples.ActuatorApi.Data;
 using Steeltoe.Samples.ActuatorApi.Models;
 
@@ -21,22 +22,29 @@ internal static class MySqlSeeder
 
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
+        var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+        ILogger logger = loggerFactory.CreateLogger(nameof(MySqlSeeder));
         await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
         await using var appDbContext = scope.ServiceProvider.GetRequiredService<WeatherDbContext>();
 
-        await ForecastTheNextWeekAsync(appDbContext);
+        await ForecastTheNextWeekAsync(appDbContext, logger);
     }
 
     /// <summary>
     /// Predict the weather for the 7 days after the last date that was previously forecast.
     /// </summary>
-    private static async Task ForecastTheNextWeekAsync(WeatherDbContext dbContext)
+    private static async Task ForecastTheNextWeekAsync(WeatherDbContext dbContext, ILogger logger)
     {
         DateOnly firstNewForecastDate = DateOnly.FromDateTime(DateTime.Now);
 
         try
         {
             firstNewForecastDate = dbContext.Forecasts.Max(wf => wf.Date).AddDays(1);
+        }
+        catch (MySqlException mySqlException)
+        {
+            logger.LogCritical(mySqlException, "Encountered a serious issue with the database. Run the MigrateDatabase task to ensure the schema is correct.");
+            return;
         }
         catch (InvalidOperationException)
         {

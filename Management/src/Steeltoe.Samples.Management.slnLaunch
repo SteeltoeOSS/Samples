@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Web + API, with https target",
+    "Projects": [
+      {
+        "Path": "ActuatorApi\\Steeltoe.Samples.ActuatorApi.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "ActuatorWeb\\Steeltoe.Samples.ActuatorWeb.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

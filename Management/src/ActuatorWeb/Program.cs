@@ -4,9 +4,9 @@ using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Prometheus;
+using Steeltoe.Management.Tracing;
 using Steeltoe.Samples.ActuatorWeb;
 using Steeltoe.Samples.ActuatorWeb.CustomActuators.LocalTime;
-using Steeltoe.Samples.ActuatorWeb.Pages;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,9 @@ builder.Services.AddRazorPages();
 builder.AddCloudFoundryConfiguration();
 
 // Steeltoe: Add all actuators, specifying an authorization policy for use outside the Cloud Foundry context.
+builder.Services.AddAllActuators();
+builder.Services.ConfigureActuatorAuth();
+
 builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
 {
     if (!Platform.IsCloudFoundry)
@@ -25,8 +28,15 @@ builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
     }
 });
 
-builder.Services.ConfigureActuatorAuth();
-builder.Services.AddAllActuators();
+// Steeltoe: Map Steeltoe-configured OpenTelemetry Prometheus exporter
+//builder.Services.AddPrometheusActuator(true, branchedApplicationBuilder =>
+//{
+//    if (!Platform.IsCloudFoundry)
+//    {
+//        branchedApplicationBuilder.UseAuthorization();
+//    }
+//});
+// TODO: switch to above after PR merges
 builder.Services.AddPrometheusActuator();
 
 // Steeltoe: Add custom actuator that displays the local server time.
@@ -39,6 +49,11 @@ if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
     builder.Services.AddSpringBootAdminClient();
 }
 
+// Steeltoe: Ensure log entries include "[app-name, traceId, spanId]" for log correlation.
+// TODO: uncomment after PR merges
+//builder.Services.AddTracingLogProcessor();
+
+// Steeltoe: Configure OpenTelemetry app instrumentation and export of metrics and traces.
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 
 // Steeltoe: Register typed HttpClient for communicating with the backend service.
@@ -63,10 +78,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
-
-// Steeltoe: Use the Prometheus Actuator, which is not automatically included in the middleware pipeline.
+// TODO: remove this line after PR merges
 app.UsePrometheusActuator();
+
+app.MapRazorPages();
 
 app.Run();
 

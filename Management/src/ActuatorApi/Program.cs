@@ -8,6 +8,7 @@ using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Management.Endpoint.SpringBootAdminClient;
 using Steeltoe.Management.Prometheus;
 using Steeltoe.Management.Tasks;
+using Steeltoe.Management.Tracing;
 using Steeltoe.Samples.ActuatorApi;
 using Steeltoe.Samples.ActuatorApi.AdminTasks;
 using Steeltoe.Samples.ActuatorApi.Data;
@@ -23,6 +24,9 @@ builder.Services.AddSwaggerGen();
 builder.AddCloudFoundryConfiguration();
 
 // Steeltoe: Add all actuators, specifying an authorization policy for use outside the Cloud Foundry context.
+builder.Services.AddAllActuators();
+builder.Services.ConfigureActuatorAuth();
+
 builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
 {
     if (!Platform.IsCloudFoundry)
@@ -31,8 +35,15 @@ builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
     }
 });
 
-builder.Services.ConfigureActuatorAuth();
-builder.Services.AddAllActuators();
+// Steeltoe: Map Steeltoe-configured OpenTelemetry Prometheus exporter
+//builder.Services.AddPrometheusActuator(true, branchedApplicationBuilder =>
+//{
+//    if (!Platform.IsCloudFoundry)
+//    {
+//        branchedApplicationBuilder.UseAuthorization();
+//    }
+//});
+// TODO: switch to above after PR merges
 builder.Services.AddPrometheusActuator();
 
 // Steeltoe: Register with Spring Boot Admin.
@@ -41,6 +52,11 @@ if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
     builder.Services.AddSpringBootAdminClient();
 }
 
+// Steeltoe: Ensure log entries include "[app-name, traceId, spanId]" for log correlation.
+// TODO: uncomment after PR merges
+//builder.Services.AddTracingLogProcessor();
+
+// Steeltoe: Configure OpenTelemetry app instrumentation and export of metrics and traces.
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 
 // Steeltoe: Setup MySQL options, connection factory and health checks.
@@ -65,6 +81,9 @@ if (app.Environment.IsDevelopment())
 
 // Steeltoe: The next line is commented out because Actuators are listening on a dedicated port, which does not support https.
 // app.UseHttpsRedirection();
+
+// TODO: remove this line after PR merges
+app.UsePrometheusActuator();
 
 // Steeltoe: Map weather-related endpoints.
 WeatherEndpoints.Map(app);

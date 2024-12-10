@@ -1,4 +1,4 @@
-﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
 Steeltoe libraries on their own and with additional tools such
@@ -33,9 +33,12 @@ This application has a number of moving pieces, some of which can be used in mul
 of the functionality in a local environment, you will need to meet additional pre-requisites:
 
 * Installed container orchestrator (such as [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-  or [Podman Desktop](hhttps://podman-desktop.io/))
+  or [Podman Desktop](https://podman-desktop.io/))
 * Optional: an IDE (such as Visual Studio), for performing the requests defined
   in [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http).
+
+> [!NOTE]  
+> Use the [docker-compose file](../docker-compose.yaml) to run all of the backing services used by these samples.
 
 ### Spring Boot Admin
 
@@ -49,7 +52,7 @@ configuration defined in [appsettings.Development.json](./appsettings.Developmen
 in [appsettings.json](./appsettings.json)), using basic authentication and a hostname (`host.docker.internal`) that is
 routeable from within the container network. Change the configuration if you are using Podman or don't want actuators on
 a dedicated port. All of the above is also true for ActuatorApi, except that application has actuators configured on
-port 9999.
+port 9991.
 
 ### Zipkin Server
 
@@ -161,4 +164,4 @@ metrics will be collected and automatically exported to the Metrics Forwarder se
 
 ---
 
-### See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information
+See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information.

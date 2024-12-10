@@ -6,11 +6,11 @@ GET {{HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###  Get the default day-count forecast starting from a certain date
-GET {{HostAddress}}/weatherforecast?fromDate=9/1/2024
+GET {{HostAddress}}/weatherforecast?fromDate=12/8/2024
 Accept: application/json
 
 ###  Get a specified-number-of-days forecast starting from today
-GET {{HostAddress}}/weatherforecast?daysCount=2
+GET {{HostAddress}}/weatherforecast?days=2
 Accept: application/json
 
 ### Get all forecast data
@@ -22,7 +22,7 @@ Accept: application/json
 OPTIONS {{ManagementAddress}}/{{Actuator_Context}}
 access-control-request-method: GET
 access-control-request-headers: authorization
-origin: https://apps.sys.dhaka.cf-app.com
+origin: https://your-apps-manager.origin
 
 ### Hypermedia (list all actuators)
 GET {{ManagementAddress}}/{{Actuator_Context}}

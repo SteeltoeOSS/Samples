@@ -12,6 +12,9 @@ internal static class BasicAuthExtensions
 
         builder.AddBasic(BasicAuthenticationDefaults.AuthenticationScheme, options =>
         {
+            // AllowInsecureProtocol = true is not secure. Do not use in a real application.
+            options.AllowInsecureProtocol = true;
+
             options.ForwardDefaultSelector = httpContext =>
                 httpContext.Request.Path.StartsWithSegments("/actuator") ? BasicAuthenticationDefaults.AuthenticationScheme : null;
 

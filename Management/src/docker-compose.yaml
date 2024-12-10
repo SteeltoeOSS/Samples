@@ -2,7 +2,7 @@ services:
   grafana:
     image: grafana/grafana
     ports:
-      - 3001:3000
+      - 3000:3000
     volumes:
       - type: bind
         source: ./grafana/config
@@ -26,7 +26,7 @@ services:
   prometheus:
     image: prom/prometheus
     ports:
-      - 9091:9090
+      - 9090:9090
     volumes:
       - type: bind
         source: ./prometheus
@@ -35,4 +35,8 @@ services:
   spring-boot-admin:
     image: steeltoe.azurecr.io/spring-boot-admin
     ports:
-    - 9999:9090
+    - 9099:9099
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+    - 9411:9411

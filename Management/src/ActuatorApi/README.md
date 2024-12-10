@@ -75,7 +75,7 @@ schema and its contents are managed as administrative tasks.
       ```
 
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
+1. Run the command `cf push` to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
     * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
 
       ```shell
@@ -83,7 +83,7 @@ schema and its contents are managed as administrative tasks.
       cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
       ```
 
-1. Copy the value of `routes` in the output and open in your browser
+1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
 
 > [!NOTE]  
 > The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind to the the app to
@@ -112,3 +112,7 @@ example, if the application was published before pushing, the path in the comman
     ```shell
     cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
     ```
+
+---
+
+See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information.

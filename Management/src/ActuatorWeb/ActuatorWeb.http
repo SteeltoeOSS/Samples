@@ -91,7 +91,6 @@ Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 
 ### CUSTOM Actuator
-
 GET {{ManagementAddress}}/{{Actuator_Context}}/local-time
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
