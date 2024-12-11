@@ -39,6 +39,11 @@ of the functionality in a local environment, you will need to meet additional pr
 
 > [!NOTE]  
 > Use the [docker-compose file](../docker-compose.yaml) to run all of the backing services used by these samples.
+>
+> ```bash
+> cd Management\src
+> docker-compose up
+> ```
 
 ### Spring Boot Admin
 
@@ -47,10 +52,10 @@ Refer to [Common Tasks](../../../CommonTasks.md#spring-boot-admin) to start Spri
 
 This application is configured to register itself with Spring Boot Admin running at <http://localhost:9099>. The
 configuration defined in [appsettings.Development.json](./appsettings.Development.json) (under `Spring:Boot:Admin:Client`)
-instructs Spring Boot Admin to reach this instance's actuators on port 9990 (defined in [appsettings.json](./appsettings.json)),
+instructs Spring Boot Admin to reach this instance's actuators on port 8090 (defined in [appsettings.json](./appsettings.json)),
 using basic authentication and a hostname (`host.docker.internal`) that is routable from within the container network.
 Change the configuration if you are using Podman (see the section [Using Podman](#using-podman)) or don't want actuators on a dedicated port.
-All of the above is also true for ActuatorApi, except that application has actuators configured on port 9991.
+All of the above is also true for ActuatorApi, except that application has actuators configured on port 8091.
 
 ### Zipkin Server
 
@@ -83,7 +88,7 @@ in the site menu.
 
 ### Interacting with Management Endpoints
 
-Each app instance registers with Spring Boot Admin and can be viewed from the web interface at <http://localhost:9090>.
+Each app instance registers with Spring Boot Admin and can be viewed from the web interface at <http://localhost:9099>.
 
 [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http) are also provided for
 experimentation with the exposed actuators. Variables for the .http files are stored
@@ -103,17 +108,17 @@ Review the contents of [./CustomActuators](./CustomActuators/) to see how this i
 
 1. Open the [Zipkin web UI on your machine](http://localhost:9411)
 1. Click the plus button near the top of the page
-1. Select `serviceName`, then `steeltoe.samples.actuatorweb`
+1. Select `serviceName`, then `actuatorweb`
 1. Click `RUN QUERY`
 1. Explore trace data
 
 > [!TIP]
-> Only requests for `steeltoe.samples.actuatorweb: get weather` will actually be distributed traces. You may want to
+> Only requests for `actuatorweb: get weather` will actually be distributed traces. You may want to
 > request the weather from ActuatorWeb a few times to generate interesting data.
 
 ### Viewing Metric Dashboards
 
-If you have used the docker compose file to start all of the services, Prometheus and Grafana should already be running (and regularly capturing your app metrics). Use [this link](http://localhost:3000) to access Grafana, where you should be greeted by a dashboard showing metrics from the sample app. You can also access the [Prometheus web interface](http://localhost:9090) if you'd like.
+If you have used the docker compose file to start all of the services, Prometheus and Grafana should already be running (and regularly capturing your app metrics). Use [this link](http://localhost:3000) to access Grafana, where you should be greeted by a dashboard showing metrics from the sample app. You can also access the [Prometheus web interface](http://localhost:9090) if you'd like, but instructions for using Prometheus go beyond the scope of this document.
 
 #### Prometheus
 
@@ -178,9 +183,9 @@ the metric-registrar cli plugin should be installed, and your Prometheus endpoin
 
 1. `cf install-plugin -r CF-Community "metric-registrar"`
 1. `cf target -o myOrg -s development`
-1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 9990`
+1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 8090`
 1. `cf restart actuator-web-management-sample`
-1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 9991`
+1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 8091`
 1. `cf restart actuator-api-management-sample`
 1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/using.html#custom-metrics)
 

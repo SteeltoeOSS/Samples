@@ -1,7 +1,7 @@
 ﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
-Steeltoe libraries on their own and with additional tools
+Steeltoe libraries on their own and with additional tools.
 
 In order to avoid duplicating a significant amount of content, the [ActuatorWeb Readme](../ActuatorWeb/README.md)
 contains the shared information and this document only holds content unique to ActuatorApi.
@@ -42,11 +42,11 @@ schema and its contents are managed as administrative tasks.
     > [!NOTE]  
     > Use values formatted for invariant culture (`MM/dd/yyyy`) for the `fromDate` parameter.
 
-1. *\*CAUTION\** Run [`ResetTask`](./AdminTasks/ResetTask.cs) to remove all forecast data:
+    > [!TIP]
+    > The task [`ResetTask`](./AdminTasks/ResetTask.cs) can be used to remove all forecast data:
+    > `dotnet run --runtask=ResetWeather`
 
-    ```shell
-    dotnet run --runtask=ResetWeather
-    ```
+1. Use your preferred IDE or `dotnet run` to start the application.
 
 ## Running on Tanzu Platform for Cloud Foundry
 
@@ -91,27 +91,27 @@ schema and its contents are managed as administrative tasks.
 
 ### Running Tasks
 
-Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for
-example, if the application was published before pushing, the path in the command should be shortened to
-`./Steeltoe.Samples.ActuatorApi`)
+Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example,
+if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
 
 1. Apply Entity Framework database migration scripts:
 
     ```shell
-    cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
+    cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
     ```
 
 1. Run `ForecastTask` to predict weather for the next 7 days:
 
     ```shell
-    cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
+    cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
     ```
 
-1. *\*CAUTION\** Run `ResetTask` to remove all forecast data:
+    > [!NOTE]  
+    > To remove all forecast data, run `ResetTask`:
 
-    ```shell
-    cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
-    ```
+    > ```shell
+    > cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
+    > ```
 
 ---
 

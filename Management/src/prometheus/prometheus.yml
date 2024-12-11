@@ -7,12 +7,12 @@ scrape_configs:
       username: actuatorUser
       password: actuatorPassword
     static_configs:
-      - targets: ['host.docker.internal:9990']
+      - targets: ['host.docker.internal:8090']
     metrics_path: /actuator/prometheus
   - job_name: 'ActuatorApi'
     basic_auth:
       username: actuatorUser
       password: actuatorPassword
     static_configs:
-      - targets: ['host.docker.internal:9991']
+      - targets: ['host.docker.internal:8091']
     metrics_path: /actuator/prometheus
