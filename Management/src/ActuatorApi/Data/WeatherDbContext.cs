@@ -6,5 +6,5 @@ namespace Steeltoe.Samples.ActuatorApi.Data;
 public sealed class WeatherDbContext(DbContextOptions<WeatherDbContext> options)
     : DbContext(options)
 {
-    public DbSet<WeatherForecast> Forecasts { get; set; }
+    public DbSet<WeatherForecast> Forecasts => Set<WeatherForecast>();
 }

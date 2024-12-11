@@ -4,7 +4,7 @@ using Steeltoe.Samples.ActuatorApi.Data;
 
 namespace Steeltoe.Samples.ActuatorApi.AdminTasks;
 
-internal class ForecastTask(WeatherDbContext weatherContext, ILogger<ForecastTask> logger) : IApplicationTask
+internal class ForecastTask(WeatherDbContext weatherDbContext, ILogger<ForecastTask> logger) : IApplicationTask
 {
     public async Task RunAsync(CancellationToken cancellationToken)
     {
@@ -17,9 +17,9 @@ internal class ForecastTask(WeatherDbContext weatherContext, ILogger<ForecastTas
         {
             DateOnly dateToForecast = fromDate.AddDays(index);
 
-            if (!weatherContext.Forecasts.Any(weather => weather.Date == dateToForecast))
+            if (!weatherDbContext.Forecasts.Any(weather => weather.Date == dateToForecast))
             {
-                weatherContext.Forecasts.Add(MySqlSeeder.MakeForecast(dateToForecast));
+                weatherDbContext.Forecasts.Add(MySqlSeeder.MakeForecast(dateToForecast));
             }
             else
             {
@@ -27,6 +27,6 @@ internal class ForecastTask(WeatherDbContext weatherContext, ILogger<ForecastTas
             }
         }
 
-        await weatherContext.SaveChangesAsync(cancellationToken);
+        await weatherDbContext.SaveChangesAsync(cancellationToken);
     }
 }

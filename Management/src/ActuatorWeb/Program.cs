@@ -16,28 +16,28 @@ builder.Services.AddRazorPages();
 // Steeltoe: Add Cloud Foundry configuration provider and options classes.
 builder.AddCloudFoundryConfiguration();
 
-// Steeltoe: Add all actuators, specifying an authorization policy for use outside the Cloud Foundry context.
+// Steeltoe: Add all actuators.
 builder.Services.AddAllActuators();
-builder.Services.ConfigureActuatorAuth();
 
-builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
+// Steeltoe: Add Prometheus and specify an authorization policy for use outside Cloud Foundry.
+if (!Platform.IsCloudFoundry)
 {
-    if (!Platform.IsCloudFoundry)
+    builder.Services.ConfigureActuatorAuth();
+    builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
     {
         configureEndpoints.RequireAuthorization("actuator.read");
-    }
-});
-
-// Steeltoe: Map Steeltoe-configured OpenTelemetry Prometheus exporter
-//builder.Services.AddPrometheusActuator(true, branchedApplicationBuilder =>
-//{
-//    if (!Platform.IsCloudFoundry)
-//    {
-//        branchedApplicationBuilder.UseAuthorization();
-//    }
-//});
-// TODO: switch to above after PR merges
-builder.Services.AddPrometheusActuator();
+    });
+    // Steeltoe: Map Steeltoe-configured OpenTelemetry Prometheus exporter with authorization middleware in the pipeline.
+    builder.Services.AddPrometheusActuator(true, branchedApplicationBuilder =>
+    {
+        branchedApplicationBuilder.UseAuthorization();
+    });
+}
+else
+{
+    // Steeltoe: Map Steeltoe-configured OpenTelemetry Prometheus exporter.
+    builder.Services.AddPrometheusActuator();
+}
 
 // Steeltoe: Add custom actuator that displays the local server time.
 // See appsettings.Development.json for how the response format can be configured.
@@ -50,8 +50,7 @@ if (builder.Configuration.GetValue<bool>("UseSpringBootAdmin"))
 }
 
 // Steeltoe: Ensure log entries include "[app-name, traceId, spanId]" for log correlation.
-// TODO: uncomment after PR merges
-//builder.Services.AddTracingLogProcessor();
+builder.Services.AddTracingLogProcessor();
 
 // Steeltoe: Configure OpenTelemetry app instrumentation and export of metrics and traces.
 builder.Services.ConfigureOpenTelemetry(builder.Configuration);
@@ -77,9 +76,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
-// TODO: remove this line after PR merges
-app.UsePrometheusActuator();
 
 app.MapRazorPages();
 

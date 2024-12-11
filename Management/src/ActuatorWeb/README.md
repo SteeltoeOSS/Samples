@@ -2,15 +2,15 @@
 
 ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
 Steeltoe libraries on their own and with additional tools such
-as [Tanzu Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/console-index.html)
+as [Tanzu Apps Manager](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/console-index.html)
 and [Spring Boot Admin](https://docs.spring-boot-admin.com/) used for managing and monitoring applications.
 
-This application also illustrates how to have application metrics captured and exported to
+These samples also illustrate how to have application metrics captured and exported to
 the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
 service so that application metrics can be viewed in any tool that is able to consume those metrics from
 the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
 Several tools exist that can do this,
-including [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-index.html).
+including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html).
 
 > [!NOTE]  
 > While this application is intended to be used with [ActuatorApi](../ActuatorApi/), it _can_ be used on its own if you
@@ -20,12 +20,12 @@ including [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-
 
 1. Installed .NET 8 SDK
 1. Optional:
-    * [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
+    * [VMware Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
     * [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-    * [Metrics Registrar for VMware Tanzu Application Service](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/metric-registrar-index.html)
-    * [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-index.html)
-    * [VMware MySQL for Tanzu Application Service](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/index.html)
-    or [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
+    * [Metrics Registrar for VMware Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
+    * [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
+    * [VMware MySQL for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/3-3/mysql-for-tpcf/about_mysql_vms.html)
+    or a [VMware Tanzu Cloud Service Broker](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services.html)
 
 ## Running locally
 
@@ -159,14 +159,13 @@ When running with Podman, update these files to use `host.containers.internal`:
 
 ### What to expect
 
-Once the app is up and running, then you can access the management endpoints exposed by Steeltoe
-using [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/manage-apps.html).
+Once the app is up and running, then you can access the management endpoints exposed by Steeltoe using Apps Manager.
 
 Steeltoe exposes Spring Boot Actuator compatible Endpoints which can be accessed via the Tanzu Apps Manager. By using
 the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or
 change the application's logging levels.
 
-Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/using-actuators.html)
+Check out the Apps Manager, [Using Spring Boot Actuators](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/using-actuators.html)
 for more information.
 
 Apps Manager should be accessible at <https://apps.sys.your.domain>, contact your platform administrator for assistance as needed.
@@ -177,13 +176,13 @@ App Metrics should be accessible at <https://metrics.sys.your.domain>, contact y
 If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured,
 the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
 
-1. cf install-plugin -r CF-Community "metric-registrar"
-1. cf target -o myOrg -s development
-1. cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 9990
-1. cf restart actuator-web-management-sample
-1. cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 9991
-1. cf restart actuator-api-management-sample
-1. [Add your own metric charts](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-using.html#adding-custom-metric-charts-9)
+1. `cf install-plugin -r CF-Community "metric-registrar"`
+1. `cf target -o myOrg -s development`
+1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 9990`
+1. `cf restart actuator-web-management-sample`
+1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 9991`
+1. `cf restart actuator-api-management-sample`
+1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/using.html#custom-metrics)
 
 > [!NOTE]
 > Prometheus scraping on Cloud Foundry cannot be configured with authentication. As such, we recommend using a dedicated port that is not internet-routable.
