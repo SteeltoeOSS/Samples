@@ -1,4 +1,4 @@
-# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
 Steeltoe libraries on their own and with additional tools such
@@ -6,7 +6,7 @@ as [Tanzu Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Serv
 and [Spring Boot Admin](https://docs.spring-boot-admin.com/) used for managing and monitoring applications.
 
 This application also illustrates how to have application metrics captured and exported to
-the [Metrics Registrar](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/metric-registrar-index.html)
+the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
 service so that application metrics can be viewed in any tool that is able to consume those metrics from
 the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
 Several tools exist that can do this,
@@ -42,24 +42,22 @@ of the functionality in a local environment, you will need to meet additional pr
 
 ### Spring Boot Admin
 
-Because Steeltoe Management Endpoints are compatible with Spring Boot Actuator, they can also be used
-with [Spring Boot Admin](https://docs.spring-boot-admin.com/). Refer
-to [Common Tasks](../../../CommonTasks.md#spring-boot-admin) to start Spring Boot Admin.
+Because Steeltoe Management Endpoints are compatible with Spring Boot Actuator, they can also be used with [Spring Boot Admin](https://docs.spring-boot-admin.com/).
+Refer to [Common Tasks](../../../CommonTasks.md#spring-boot-admin) to start Spring Boot Admin.
 
-This application is configured to register itself with Spring Boot Admin running at <http://localhost:9090>. The
-configuration defined in [appsettings.Development.json](./appsettings.Development.json) (under
-`Spring:Boot:Admin:Client`) instructs Spring Boot Admin to reach this instance's actuators on port 9990 (defined
-in [appsettings.json](./appsettings.json)), using basic authentication and a hostname (`host.docker.internal`) that is
-routeable from within the container network. Change the configuration if you are using Podman or don't want actuators on
-a dedicated port. All of the above is also true for ActuatorApi, except that application has actuators configured on
-port 9991.
+This application is configured to register itself with Spring Boot Admin running at <http://localhost:9099>. The
+configuration defined in [appsettings.Development.json](./appsettings.Development.json) (under `Spring:Boot:Admin:Client`)
+instructs Spring Boot Admin to reach this instance's actuators on port 9990 (defined in [appsettings.json](./appsettings.json)),
+using basic authentication and a hostname (`host.docker.internal`) that is routable from within the container network.
+Change the configuration if you are using Podman (see the section [Using Podman](#using-podman)) or don't want actuators on a dedicated port.
+All of the above is also true for ActuatorApi, except that application has actuators configured on port 9991.
 
 ### Zipkin Server
 
 > [!NOTE]  
 > Previous versions of Steeltoe included distributed tracing functionality. That functionality has moved to OpenTelemetry.
-> We expect many Steeltoe users still want distributed tracing, so this sample includes a basic OpenTelemetry setup.
-> Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more. 
+> We expect many Steeltoe users still use distributed tracing, so this sample includes a basic OpenTelemetry setup.
+> Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more.
 
 These applications use [OpenTelemetry](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
 trace information and export those traces to Zipkin so that individual requests across the system can be analyzed. Refer
@@ -73,7 +71,7 @@ You should now be able to run this sample, either from your IDE or with this com
 dotnet run
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > If you are only looking for an actuator demo, you _may_ proceed from here without starting ActuatorApi, but for full
 > functionality, review the [ActuatorApi README](../ActuatorApi/README.md) and get that app running as well.
 
@@ -90,8 +88,7 @@ Each app instance registers with Spring Boot Admin and can be viewed from the we
 [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http) are also provided for
 experimentation with the exposed actuators. Variables for the .http files are stored
 in [http-client.env.json](./http-client.env.json). In both Visual Studio and Rider, when you open the .http file there
-is a dropdown box that can be used to switch between localhost variations (for example: actuators listening on an
-alternate port, basic authentication on/off) or environments. The dropdown is probably at the top of the window and may
+is a dropdown box that can be used to select the environment you're working in (for example: running locally with actuators listening on an alternate port with basic authentication on). The dropdown is probably at the top of the window and may
 initially look like `env: <none>` or `Run With: No Environment`, although those interfaces are subject to change over
 time. You will need to either make an environment selection or define variables like `HostAddress` directly in the .http
 file in order for requests to work (review the .json file mentioned previously for variable examples). Please note that
@@ -110,8 +107,41 @@ Review the contents of [./CustomActuators](./CustomActuators/) to see how this i
 1. Click `RUN QUERY`
 1. Explore trace data
 
+> [!TIP]
 > Only requests for `steeltoe.samples.actuatorweb: get weather` will actually be distributed traces. You may want to
 > request the weather from ActuatorWeb a few times to generate interesting data.
+
+### Viewing Metric Dashboards
+
+If you have used the docker compose file to start all of the services, Prometheus and Grafana should already be running (and regularly capturing your app metrics). Use [this link](http://localhost:3000) to access Grafana, where you should be greeted by a dashboard showing metrics from the sample app. You can also access the [Prometheus web interface](http://localhost:9090) if you'd like.
+
+#### Prometheus
+
+To launch Prometheus with the configuration for this demo, but without using the docker compose file:
+
+1. Open a shell, `cd` to `\Management\src`
+1. `docker run  --rm -it --pull=always -p 9090:9090 -v $PWD/prometheus:/etc/prometheus prom/prometheus`
+
+#### Grafana
+
+To launch Grafana with the configuration for this demo, but without using the docker compose file:
+
+1. Open a shell, `cd` to `\Management\src`
+1. `docker run  --rm -it --pull=always -p 3000:3000 -v $PWD/grafana/config:/etc/grafana -v $PWD/grafana/dashboards:/var/lib/grafana/dashboards grafana/grafana`
+
+For more information about using Grafana dashboards, see the [Grafana documentation](https://grafana.com/docs/grafana/latest/dashboards/use-dashboards/).
+
+## Using Podman
+
+Because Podman is generally compatible with Docker, the only changes necessary to run this sample with Podman is to change
+the hostname in places where `host.docker.internal` is used.
+
+When running with Podman, update these files to use `host.containers.internal`:
+
+* [ActuatorWeb appsettings.Development.json](./appsettings.Development.json)
+* [ActuatorApi appsettings.Development.json](../ActuatorApi/appsettings.Development.json)
+* [prometheus.yml](../prometheus/prometheus.yml)
+* [Grafana data source definition](../grafana/config/provisioning/datasources/default.yaml)
 
 ## Running on Tanzu Platform for Cloud Foundry
 
@@ -133,34 +163,31 @@ Once the app is up and running, then you can access the management endpoints exp
 using [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/manage-apps.html).
 
 Steeltoe exposes Spring Boot Actuator compatible Endpoints which can be accessed via the Tanzu Apps Manager. By using
-the Apps Manager, you can view the App's Health, Build Information (for example: Git info, etc), as well as view or
+the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or
 change the application's logging levels.
 
-Check out the Apps
-Manager, [Using Spring Boot Actuators](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/using-actuators.html)
+Check out the Apps Manager, [Using Spring Boot Actuators](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/using-actuators.html)
 for more information.
 
-### Install the Metrics Registrar CLI Plugin
-
-1. cf install-plugin -r CF-Community "metric-registrar"
+Apps Manager should be accessible at <https://apps.sys.your.domain>, contact your platform administrator for assistance as needed.
 
 ### View Application Metrics in App Metrics
 
-If you wish to collect and view applications metrics
-in [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/index.html), you must first
-configure [Metrics Registrar](https://docs.pivotal.io/platform/application-service/2-9/metric-registrar/index.html) in
-the TAS for VMs tile. There is no separate product tile (unlike the metrics forwarder). Once thats complete custom
-metrics will be collected and automatically exported to the Metrics Forwarder service.
+App Metrics should be accessible at <https://metrics.sys.your.domain>, contact your platform administrator for assistance as needed. Container metrics should automatically be available.
+If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured,
+the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
 
+1. cf install-plugin -r CF-Community "metric-registrar"
 1. cf target -o myOrg -s development
-2. cf register-metrics-endpoint actuator-web-management-sample actuator/metrics
-3. cf restart actuator-api-management-sample
+1. cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 9990
+1. cf restart actuator-web-management-sample
+1. cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 9991
+1. cf restart actuator-api-management-sample
+1. [Add your own metric charts](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/2.2/app-metrics/GUID-using.html#adding-custom-metric-charts-9)
 
-If you wish to collect and view applications metrics
-in [App Metrics for VMware Tanzu](https://docs.vmware.com/en/App-Metrics-for-VMware-Tanzu/index.html), you must first
-configure [Metrics Registrar](https://docs.pivotal.io/platform/application-service/2-9/metric-registrar/index.html) in
-the TAS for VMs tile. There is no separate product tile (unlike the metrics forwarder). Once that's complete, custom
-metrics will be collected and automatically exported to the Metrics Forwarder service.
+> [!NOTE]
+> Prometheus scraping on Cloud Foundry cannot be configured with authentication. As such, we recommend using a dedicated port that is not internet-routable.
+> This is the reason these applications are configured to map actuators (and the Prometheus exporter) to dedicated ports that are not exposed to the internet.
 
 ---
 

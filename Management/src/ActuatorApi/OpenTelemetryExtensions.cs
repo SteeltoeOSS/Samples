@@ -1,6 +1,7 @@
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
 using OpenTelemetry.Instrumentation.AspNetCore;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Steeltoe.Common;
@@ -12,7 +13,10 @@ internal static class OpenTelemetryExtensions
 {
     public static void ConfigureOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOpenTelemetry().WithTracing(tracerProviderBuilder =>
+        services.AddOpenTelemetry().WithMetrics(metrics =>
+        {
+            metrics.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation().AddRuntimeInstrumentation();
+        }).WithTracing(tracerProviderBuilder =>
         {
             tracerProviderBuilder.AddAspNetCoreInstrumentation();
 
