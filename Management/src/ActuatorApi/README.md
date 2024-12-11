@@ -40,7 +40,7 @@ schema and its contents are managed as administrative tasks.
     ```
 
     > [!NOTE]  
-    > Use values formatted for invariant culture (`MM/dd/yyyy`) for the `fromDate` parameter.
+    > For the `fromDate` parameter, use values formatted as `yyyy-dd-MM` or `MM/dd/yyyy`.
 
     > [!TIP]
     > The task [`ResetTask`](./AdminTasks/ResetTask.cs) can be used to remove all forecast data:

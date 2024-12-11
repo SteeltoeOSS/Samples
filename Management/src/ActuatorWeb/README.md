@@ -120,6 +120,9 @@ Review the contents of [./CustomActuators](./CustomActuators/) to see how this i
 
 If you have used the docker compose file to start all of the services, Prometheus and Grafana should already be running (and regularly capturing your app metrics). Use [this link](http://localhost:3000) to access Grafana, where you should be greeted by a dashboard showing metrics from the sample app. You can also access the [Prometheus web interface](http://localhost:9090) if you'd like, but instructions for using Prometheus go beyond the scope of this document.
 
+> [!TIP]
+> To quickly confirm that Prometheus is able to scrape the application endpoints, check [the target health page](http://localhost:9090/targets)
+
 #### Prometheus
 
 To launch Prometheus with the configuration for this demo, but without using the docker compose file:
