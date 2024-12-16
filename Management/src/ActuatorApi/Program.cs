@@ -30,14 +30,16 @@ builder.Services.AddAllActuators();
 if (!Platform.IsCloudFoundry)
 {
     builder.Services.ConfigureActuatorAuth();
+
     builder.Services.ConfigureActuatorEndpoints(configureEndpoints =>
     {
         configureEndpoints.RequireAuthorization("actuator.read");
     });
+
     // Steeltoe: Map Steeltoe-configured OpenTelemetry Prometheus exporter with authorization middleware in the pipeline.
-    builder.Services.AddPrometheusActuator(true, branchedApplicationBuilder =>
+    builder.Services.AddPrometheusActuator(true, configurePrometheusPipeline =>
     {
-        branchedApplicationBuilder.UseAuthorization();
+        configurePrometheusPipeline.UseAuthorization();
     });
 }
 else

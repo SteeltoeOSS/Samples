@@ -16,15 +16,15 @@ internal static class OpenTelemetryExtensions
         services.AddOpenTelemetry().WithMetrics(metrics =>
         {
             metrics.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation().AddRuntimeInstrumentation();
-        }).WithTracing(tracerProviderBuilder =>
+        }).WithTracing(tracing =>
         {
-            tracerProviderBuilder.AddAspNetCoreInstrumentation();
+            tracing.AddAspNetCoreInstrumentation();
 
             string? zipkinExporterAddress = configuration.GetValue<string>("OTEL_EXPORTER_ZIPKIN_ENDPOINT");
 
             if (!string.IsNullOrEmpty(zipkinExporterAddress))
             {
-                tracerProviderBuilder.AddZipkinExporter(zipkinExporterOptions => zipkinExporterOptions.Endpoint = new Uri(zipkinExporterAddress));
+                tracing.AddZipkinExporter(zipkinExporterOptions => zipkinExporterOptions.Endpoint = new Uri(zipkinExporterAddress));
             }
         });
 

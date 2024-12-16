@@ -21,7 +21,7 @@ that matches the credentials defined in [appsettings.Development.json](./appsett
 In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v3/management/tasks.html), the database
 schema and its contents are managed as administrative tasks.
 
-1. Apply Entity Framework database schema migration scripts:
+1. Apply Entity Framework Core database schema migration scripts:
 
     ```shell
     dotnet run --runtask=MigrateDatabase
@@ -33,7 +33,7 @@ schema and its contents are managed as administrative tasks.
     dotnet run --runtask=ForecastWeather
     ```
 
-    *Optional* - Add forecast data starting from specific date and/or number of days:
+    *Optional* - Add forecast data starting from a specific date and/or number of days:
 
     ```shell
     dotnet run --runtask=ForecastWeather --fromDate=10/18/2024 --days=30
@@ -94,23 +94,23 @@ schema and its contents are managed as administrative tasks.
 Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example,
 if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
 
-1. Apply Entity Framework database migration scripts:
+1. Apply Entity Framework Core database migration scripts:
 
     ```shell
     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
     ```
 
-1. Run `ForecastTask` to predict weather for the next 7 days:
+1. Run [`ForecastTask`](./AdminTasks/ForecastTask.cs) to predict weather for the next 7 days:
 
     ```shell
     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
     ```
 
-    > [!NOTE]  
-    > To remove all forecast data, run `ResetTask`:
-
+    > [!TIP]  
+    > To remove all forecast data, run [`ResetTask`](./AdminTasks/ResetTask.cs):
+    >
     > ```shell
-    > cf run-task actuator-api-management-sample --command "./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
+    > cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
     > ```
 
 ---

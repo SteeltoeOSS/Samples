@@ -1,4 +1,4 @@
-﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
 Steeltoe libraries on their own and with additional tools such
@@ -86,6 +86,9 @@ As ActuatorWeb is a Razor Pages app, you can use a browser to [access the web UI
 is running. To request a weather forecast (and generate HTTP request traces) from ActuatorApi, click "Weather Forecast"
 in the site menu.
 
+> [!NOTE]
+> The Weather Forecast API endpoint is delayed randomly up to three seconds to generate interesting trace data.
+
 ### Interacting with Management Endpoints
 
 Each app instance registers with Spring Boot Admin and can be viewed from the web interface at <http://localhost:9099>.
@@ -169,7 +172,7 @@ When running with Podman, update these files to use `host.containers.internal`:
 
 Once the app is up and running, then you can access the management endpoints exposed by Steeltoe using Apps Manager.
 
-Steeltoe exposes Spring Boot Actuator compatible Endpoints which can be accessed via the Tanzu Apps Manager. By using
+Steeltoe exposes Spring Boot Actuator compatible endpoints which can be accessed via the Tanzu Apps Manager. By using
 the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or
 change the application's logging levels.
 

@@ -42,7 +42,7 @@ GET {{ManagementAddress}}/{{Actuator_Context}}/loggers
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 
-### Loggers actuator, update logging level for a logger
+### Loggers actuator, update minimum level for a logger
 POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
