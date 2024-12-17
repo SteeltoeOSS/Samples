@@ -6,7 +6,7 @@ GET {{HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###  Get the default day-count forecast starting from a certain date
-GET {{HostAddress}}/weatherforecast?fromDate=12/8/2024
+GET {{HostAddress}}/weatherforecast?fromDate=2024-12-08
 Accept: application/json
 
 ###  Get a specified-number-of-days forecast starting from today
@@ -22,7 +22,7 @@ Accept: application/json
 OPTIONS {{ManagementAddress}}/{{Actuator_Context}}
 access-control-request-method: GET
 access-control-request-headers: authorization
-origin: https://your-apps-manager.origin
+origin: {{AppsManagerOrigin}}
 
 ### Hypermedia (list all actuators)
 GET {{ManagementAddress}}/{{Actuator_Context}}
@@ -64,12 +64,20 @@ GET {{ManagementAddress}}/{{Actuator_Context}}/loggers
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 
-### Loggers actuator, update minimum level for a logger  
+### Loggers actuator, update minimum level for a logger
 POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 {
   "configuredLevel": "TRACE"
+}
+
+### Loggers actuator, reset minimum level for a logger  
+POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples  
+Accept: application/json  
+Authorization: {{Authorization_Header_Value}}  
+{  
+  "configuredLevel": null  
 }
 
 ### HTTP Exchanges actuator

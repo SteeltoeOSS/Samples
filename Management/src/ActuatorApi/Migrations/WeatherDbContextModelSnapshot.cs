@@ -8,7 +8,7 @@ using Steeltoe.Samples.ActuatorApi.Data;
 namespace Steeltoe.Samples.ActuatorApi.Migrations;
 
 [DbContext(typeof(WeatherDbContext))]
-partial class WeatherContextModelSnapshot : ModelSnapshot
+partial class WeatherDbContextModelSnapshot : ModelSnapshot
 {
     protected override void BuildModel(ModelBuilder modelBuilder)
     {

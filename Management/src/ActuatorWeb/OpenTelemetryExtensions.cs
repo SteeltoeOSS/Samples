@@ -14,28 +14,29 @@ namespace Steeltoe.Samples.ActuatorWeb;
 internal static class OpenTelemetryExtensions
 {
     private const string DefaultEgressIgnorePattern = "/api/v2/spans|/v2/apps/.*/permissions";
+    private static readonly Regex PathMatcher = new(DefaultEgressIgnorePattern, RegexOptions.Compiled | RegexOptions.CultureInvariant, TimeSpan.FromSeconds(1));
 
     public static void ConfigureOpenTelemetry(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddOpenTelemetry().WithMetrics(metrics =>
+        services.AddOpenTelemetry().WithMetrics(meterProviderBuilder =>
         {
-            metrics.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation().AddRuntimeInstrumentation();
-        }).WithTracing(tracing =>
+            meterProviderBuilder.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation().AddRuntimeInstrumentation();
+        }).WithTracing(tracerProviderBuilder =>
         {
-            tracing.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation();
+            tracerProviderBuilder.AddAspNetCoreInstrumentation().AddHttpClientInstrumentation();
 
             string? zipkinExporterAddress = configuration.GetValue<string>("OTEL_EXPORTER_ZIPKIN_ENDPOINT");
 
             if (!string.IsNullOrEmpty(zipkinExporterAddress))
             {
-                tracing.AddZipkinExporter(zipkinExporterOptions => zipkinExporterOptions.Endpoint = new Uri(zipkinExporterAddress));
+                tracerProviderBuilder.AddZipkinExporter(zipkinExporterOptions => zipkinExporterOptions.Endpoint = new Uri(zipkinExporterAddress));
             }
         });
 
         services.ConfigureOpenTelemetryTracerProvider((serviceProvider, tracerProviderBuilder) =>
         {
             var appInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
-            tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appInfo.ApplicationName ?? "ActuatorWeb-fallback"));
+            tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appInfo.ApplicationName!));
 
             // For traces, use B3 (Zipkin) headers instead of W3C.
             List<TextMapPropagator> propagators =
@@ -64,9 +65,7 @@ internal static class OpenTelemetryExtensions
                     return false;
                 }
 
-                var pathMatcher = new Regex(DefaultEgressIgnorePattern, RegexOptions.None, TimeSpan.FromSeconds(1));
-
-                return !pathMatcher.IsMatch(requestMessage.RequestUri.PathAndQuery);
+                return !PathMatcher.IsMatch(requestMessage.RequestUri.PathAndQuery);
             };
         });
     }

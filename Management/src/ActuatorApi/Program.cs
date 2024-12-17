@@ -63,7 +63,7 @@ builder.Services.ConfigureOpenTelemetry(builder.Configuration);
 // Steeltoe: Setup MySQL options, connection factory and health checks.
 builder.AddMySql();
 
-// Steeltoe: Add Entity Framework db context, bound to connection string in configuration.
+// Steeltoe: Add Entity Framework Core DbContext, bound to connection string in configuration.
 builder.Services.AddDbContext<WeatherDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider));
 
 // Steeltoe: Register tasks for managing DbContext migrations and data.

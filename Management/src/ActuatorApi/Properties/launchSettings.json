@@ -22,8 +22,7 @@
         "OTEL_EXPORTER_ZIPKIN_ENDPOINT": "http://localhost:9411/api/v2/spans"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://+:7120;http://+:5140",
-      "hotReloadEnabled": false
+      "applicationUrl": "https://+:7120;http://+:5140"
     }
   }
 }

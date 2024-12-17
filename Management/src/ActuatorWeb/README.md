@@ -23,7 +23,7 @@ including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmw
     * [VMware Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
     * [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
     * [Metrics Registrar for VMware Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
-    * [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
+    * [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html)
     * [VMware MySQL for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/3-3/mysql-for-tpcf/about_mysql_vms.html)
     or a [VMware Tanzu Cloud Service Broker](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services.html)
 
@@ -42,7 +42,7 @@ of the functionality in a local environment, you will need to meet additional pr
 >
 > ```bash
 > cd Management\src
-> docker-compose up
+> docker-compose up --pull always --detach --wait
 > ```
 
 ### Spring Boot Admin
@@ -64,7 +64,7 @@ All of the above is also true for ActuatorApi, except that application has actua
 > We expect many Steeltoe users still use distributed tracing, so this sample includes a basic OpenTelemetry setup.
 > Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more.
 
-These applications use [OpenTelemetry](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
+These applications use [OpenTelemetry extension methods](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
 trace information and export those traces to Zipkin so that individual requests across the system can be analyzed. Refer
 to [Common Tasks](../../../CommonTasks.md#zipkin) to start Zipkin.
 
