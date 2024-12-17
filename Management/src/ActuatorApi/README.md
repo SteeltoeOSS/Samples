@@ -75,7 +75,7 @@ schema and its contents are managed as administrative tasks.
       ```
 
 1. Wait for the service to become ready (you can check with `cf services`)
-1. Run the command `cf push` to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
+1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
     * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
 
       ```shell

@@ -70,7 +70,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Steeltoe: The next line is commented out because Actuators are listening on a dedicated port, which does not support https.
+// Steeltoe: See the note in the README under "Regarding HTTPS and Basic Authentication"
 // app.UseHttpsRedirection();
 
 app.UseStaticFiles();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Mvc;
 using Steeltoe.Common;
 using Steeltoe.Samples.ActuatorApi.Data;
 using Steeltoe.Samples.ActuatorApi.Models;
@@ -19,13 +20,11 @@ internal static class WeatherEndpoints
             logger.LogInformation("Test Informational message");
             logger.LogDebug("Test Debug message");
             logger.LogTrace("Test Trace message");
-            DateTime queryDate = string.IsNullOrEmpty(fromDate) ? DateTime.Now : DateTime.Parse(fromDate, CultureInfo.InvariantCulture);
-            DateTime queryDate = string.IsNullOrEmpty(fromDate) ? DateTime.Now : DateTime.Parse(fromDate);
+            DateOnly queryDate = string.IsNullOrEmpty(fromDate) ? DateOnly.FromDateTime(DateTime.Now) : DateOnly.Parse(fromDate, CultureInfo.InvariantCulture);
 
-            logger.LogInformation("Determining the {DayCount}-day forecast starting from {ForecastQueryDate}.", days, DateOnly.FromDateTime(queryDate));
+            logger.LogInformation("Determining the {DayCount}-day forecast starting from {ForecastQueryDate}.", days, queryDate);
 
-            IQueryable<WeatherForecast> forecast = context.Forecasts.Where(forecast =>
-                forecast.Date >= DateOnly.FromDateTime(queryDate) && forecast.Date < DateOnly.FromDateTime(queryDate.AddDays(days)));
+            IQueryable<WeatherForecast> forecast = context.Forecasts.Where(forecast => forecast.Date >= queryDate && forecast.Date < queryDate.AddDays(days));
 
             if (forecast.Count() < days)
             {

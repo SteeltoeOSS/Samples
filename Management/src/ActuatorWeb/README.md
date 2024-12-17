@@ -40,7 +40,7 @@ of the functionality in a local environment, you will need to meet additional pr
 > [!NOTE]  
 > Use the [docker-compose file](../docker-compose.yaml) to run all of the backing services used by these samples.
 >
-> ```bash
+> ```shell
 > cd Management\src
 > docker-compose up --pull always --detach --wait
 > ```
@@ -101,6 +101,14 @@ initially look like `env: <none>` or `Run With: No Environment`, although those 
 time. You will need to either make an environment selection or define variables like `HostAddress` directly in the .http
 file in order for requests to work (review the .json file mentioned previously for variable examples). Please note that
 the "dhaka" environment is not expected to be available for use by those not on the Steeltoe team.
+
+#### Regarding HTTPS and Basic Authentication
+
+> [!NOTE]
+> In order to provide a simple example of applying custom authorization policies to actuator endpoints, these applications use [Basic Authentication](https://github.com/blowdart/idunno.Authentication/tree/dev/src/idunno.Authentication.Basic).
+> Do NOT consider this a recommendation or a good example to follow, it is merely a general demonstration of how to apply [ASP.NET Core Authorization](https://learn.microsoft.com/aspnet/core/security/authorization/introduction). Please use something else with your applications.
+>
+> Furthermore, in order to work around certificate trust issues with connections from containerized servers, these applications are configured to allow HTTP requests to the actuator endpoints. Outside of a private network, __this is generally not secure and is a BAD idea.__
 
 #### Custom Management Endpoints
 
@@ -174,7 +182,7 @@ Once the app is up and running, then you can access the management endpoints exp
 
 Steeltoe exposes Spring Boot Actuator compatible endpoints which can be accessed via the Tanzu Apps Manager. By using
 the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or
-change the application's logging levels.
+change the application's minimum logging levels.
 
 Check out the Apps Manager, [Using Spring Boot Actuators](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/using-actuators.html)
 for more information.

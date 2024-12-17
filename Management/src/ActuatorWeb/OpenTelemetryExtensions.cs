@@ -58,15 +58,7 @@ internal static class OpenTelemetryExtensions
         // Avoid clogging tracing/metric stores with Zipkin exports and Cloud Foundry permission checks (from Actuators).
         services.AddOptions<HttpClientTraceInstrumentationOptions>().Configure(instrumentationOptions =>
         {
-            instrumentationOptions.FilterHttpRequestMessage += requestMessage =>
-            {
-                if (string.IsNullOrEmpty(requestMessage.RequestUri?.PathAndQuery))
-                {
-                    return false;
-                }
-
-                return !PathMatcher.IsMatch(requestMessage.RequestUri.PathAndQuery);
-            };
+            instrumentationOptions.FilterHttpRequestMessage += requestMessage => !PathMatcher.IsMatch(requestMessage.RequestUri?.PathAndQuery ?? string.Empty);
         });
     }
 }

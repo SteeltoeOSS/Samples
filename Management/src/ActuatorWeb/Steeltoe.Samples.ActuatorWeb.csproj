@@ -4,18 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- The properties below avoid build issues when the .git directory is not found, like when using dotnet-core-buildpack. -->
+    <!-- Do not override package/assembly/file version with the version from git metadata. -->
     <GitVersion>false</GitVersion>
+    <!-- Do not generate C# classes from git metadata. -->
+    <GitThisAssembly>false</GitThisAssembly>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- GitInfo provides $(Git*) properties used below -->
-    <PackageReference Include="GitInfo" Version="3.3.5">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="GitInfo" Version="3.5.0" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-
     <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0" />
-
     <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Extensions.Propagators" Version="$(OpenTelemetryVersion)" />
@@ -28,13 +29,8 @@
     <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="git.properties">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <Target Name="_GitProperties" AfterTargets="CoreCompile" Condition="!Exists('git.properties')">
+  <Target Name="WriteGitPropertiesToFile" AfterTargets="CoreCompile" Condition="'$(CF_STACK)' == ''">
+    <!-- Generate git.properties file from the MSBuild properties provided by the GitInfo NuGet package. -->
     <!-- https://github.com/devlooped/GitInfo/blob/main/src/GitInfo/build/GitInfo.targets -->
     <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRepositoryUrl)" Overwrite="true" />
     <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
@@ -49,4 +45,9 @@
     <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
   </Target>
 
+  <ItemGroup>
+    <None Update="git.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

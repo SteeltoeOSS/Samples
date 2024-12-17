@@ -11,3 +11,4 @@ applications:
     DOTNET_NOLOGO: "true"
   services:
    - sampleMySqlService
+  timeout: 90

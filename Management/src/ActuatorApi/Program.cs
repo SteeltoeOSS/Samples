@@ -80,16 +80,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Steeltoe: The next line is commented out because Actuators are listening on a dedicated port, which does not support https.
+// Steeltoe: See the note in the ActuatorWeb README under "Regarding HTTPS and Basic Authentication"
 // app.UseHttpsRedirection();
 
 // Steeltoe: Map weather-related endpoints.
 WeatherEndpoints.Map(app);
-
-// Steeltoe: Insert some rows into MySQL table when not running as a task.
-if (!app.HasApplicationTask())
-{
-    await MySqlSeeder.CreateSampleDataAsync(app.Services);
-}
 
 await app.RunWithTasksAsync(default);

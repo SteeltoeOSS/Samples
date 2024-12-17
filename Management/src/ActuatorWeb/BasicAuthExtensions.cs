@@ -12,7 +12,7 @@ internal static class BasicAuthExtensions
 
         builder.AddBasic(BasicAuthenticationDefaults.AuthenticationScheme, options =>
         {
-            // AllowInsecureProtocol = true is not secure. Do not use in a real application.
+            // This line allows basic auth to work over HTTP. See the note in the README under "Regarding HTTPS and Basic Authentication"
             options.AllowInsecureProtocol = true;
 
             options.ForwardDefaultSelector = httpContext =>

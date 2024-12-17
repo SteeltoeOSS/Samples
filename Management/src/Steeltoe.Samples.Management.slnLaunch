@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Web + API, with https target",
+    "Name": "Web and API",
     "Projects": [
       {
         "Path": "ActuatorApi\\Steeltoe.Samples.ActuatorApi.csproj",
