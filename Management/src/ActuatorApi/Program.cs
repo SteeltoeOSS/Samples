@@ -20,6 +20,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Steeltoe: Add system clock abstraction.
+builder.Services.AddSingleton(TimeProvider.System);
+
 // Steeltoe: Add Cloud Foundry configuration provider and options classes.
 builder.AddCloudFoundryConfiguration();
 
@@ -86,4 +89,5 @@ if (app.Environment.IsDevelopment())
 // Steeltoe: Map weather-related endpoints.
 WeatherEndpoints.Map(app);
 
+// Steeltoe: Run an application task if available, or start the application normally otherwise.
 await app.RunWithTasksAsync(default);

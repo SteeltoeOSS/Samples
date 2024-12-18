@@ -10,7 +10,14 @@ public sealed class ActuatorApiClient(HttpClient httpClient)
         string requestUri = BuildWeatherForecastRequestUri(fromDate, days);
         HttpResponseMessage response = await httpClient.GetAsync(requestUri, cancellationToken);
 
-        return await response.Content.ReadFromJsonAsync<List<WeatherForecast>>(cancellationToken) ?? [];
+        if (response.IsSuccessStatusCode)
+        {
+            return await response.Content.ReadFromJsonAsync<List<WeatherForecast>>(cancellationToken) ?? [];
+        }
+
+        string responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+        string errorMessage = $"Failed to retrieve weather forecasts. Server response HTTP {(int)response.StatusCode}:{Environment.NewLine}{responseBody}";
+        throw new HttpRequestException(errorMessage);
     }
 
     private static string BuildWeatherForecastRequestUri(string? fromDate, int? days)

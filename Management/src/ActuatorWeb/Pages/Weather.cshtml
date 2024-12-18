@@ -3,14 +3,8 @@
 @{
     ViewData["Title"] = "Weather Forecast";
 }
+
 <h1>@ViewData["Title"]</h1>
-@if (Model.RequestException != null)
-{
-    <h2 class="alert-danger">@Model.RequestException.Message</h2>
-    <pre>
-        @Model.RequestException.StackTrace
-    </pre>
-}
 <p>
     Start date:
     <input id="fromDate" placeholder="yyyy-MM-dd"/>
@@ -25,23 +19,33 @@
     </select>
     <button onclick="getForecast();">Get Forecast</button>
 </p>
-<table class="table">
-    <tr class="">
-        <th>Date</th>
-        <th>Summary</th>
-        <th>&#176;F</th>
-        <th>&#176;C</th>
-    </tr>
-    @foreach (WeatherForecast day in Model.Forecasts)
-    {
-        <tr>
-            <td>@day.Date</td>
-            <td>@day.Summary</td>
-            <td>@day.TemperatureF</td>
-            <td>@day.TemperatureC</td>
+
+
+@if (Model.RequestException != null)
+{
+    <h2 class="alert-danger">Error</h2>
+    <pre>@Model.RequestException.ToString()</pre>
+}
+else
+{
+    <table class="table">
+        <tr class="">
+            <th>Date</th>
+            <th>Summary</th>
+            <th>&#176;F</th>
+            <th>&#176;C</th>
         </tr>
-    }
-</table>
+        @foreach (WeatherForecast forecast in Model.Forecasts)
+        {
+            <tr>
+                <td>@forecast.Date</td>
+                <td>@forecast.Summary</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.TemperatureC</td>
+            </tr>
+        }
+    </table>
+}
 
 @section Scripts
 {
@@ -50,6 +54,7 @@
             if ('URLSearchParams' in window) {
                 var searchParams = new URLSearchParams(window.location.search);
                 searchParams.set("days", $("#days").val());
+                searchParams.set("fromDate", $("#fromDate").val());
                 window.location.search = searchParams.toString();
             }
         }
