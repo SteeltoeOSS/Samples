@@ -10,7 +10,7 @@
         "OTEL_EXPORTER_ZIPKIN_ENDPOINT": "http://localhost:9411/api/v2/spans"
       },
       "dotnetRunMessages": true,
-      // Steeltoe: Wildcard used instead of "localhost" here in order to support connections from local containers.
+      // Steeltoe: Wildcard used instead of "localhost" here to support connections from local containers.
       "applicationUrl": "http://+:5140"
     },
     "https": {

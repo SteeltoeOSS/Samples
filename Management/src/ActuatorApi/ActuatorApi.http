@@ -105,7 +105,6 @@ GET {{ManagementAddress}}/{{Actuator_Context}}/prometheus
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 
-
 ### Refresh actuator, refresh application configuration
 POST {{ManagementAddress}}/{{Actuator_Context}}/refresh
 Accept: application/json
