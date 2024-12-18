@@ -49,6 +49,7 @@ Authorization: {{Authorization_Header_Value}}
 {
   "configuredLevel": "TRACE"
 }
+
 ### Loggers actuator, reset minimum level for a logger  
 POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples  
 Accept: application/json  

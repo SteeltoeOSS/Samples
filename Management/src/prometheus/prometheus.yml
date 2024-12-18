@@ -9,10 +9,6 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:8090']
     metrics_path: /actuator/prometheus
-    # The configuration below skips certificate validation
-    # scheme: https
-    # tls_config:
-    #   insecure_skip_verify: true
   - job_name: 'ActuatorApi'
     basic_auth:
       username: actuatorUser
@@ -20,6 +16,3 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:8091']
     metrics_path: /actuator/prometheus
-    # scheme: https
-    # tls_config:
-    #   insecure_skip_verify: true

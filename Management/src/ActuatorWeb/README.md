@@ -104,11 +104,13 @@ the "dhaka" environment is not expected to be available for use by those not on 
 
 #### Regarding HTTPS and Basic Authentication
 
-> [!NOTE]
-> In order to provide a simple example of applying custom authorization policies to actuator endpoints, these applications use [Basic Authentication](https://github.com/blowdart/idunno.Authentication/tree/dev/src/idunno.Authentication.Basic).
-> Do NOT consider this a recommendation or a good example to follow, it is merely a general demonstration of how to apply [ASP.NET Core Authorization](https://learn.microsoft.com/aspnet/core/security/authorization/introduction). Please use something else with your applications.
->
-> Furthermore, in order to work around certificate trust issues with connections from containerized servers, these applications are configured to allow HTTP requests to the actuator endpoints. Outside of a private network, __this is generally not secure and is a BAD idea.__
+In order to work around certificate trust issues with requests to the application from containerized servers (such as Spring Boot Admin), these applications are configured to allow _HTTP_ requests to the actuator endpoints. This has the unfortunate side effect of requiring HTTPS redirection to be turned off, lest requests to the actuators' dedicated HTTP port be forwarded to the application's HTTPS port.
+
+In order to provide a simple example of applying custom authorization policies to actuator endpoints, these applications use [idunno.Authentication.Basic](https://github.com/blowdart/idunno.Authentication/tree/dev/src/idunno.Authentication.Basic).
+Do NOT consider this a recommendation or a good example to follow, it is merely a general demonstration of how to apply [ASP.NET Core Authorization](https://learn.microsoft.com/aspnet/core/security/authorization/introduction).
+Use a more robust authorization mechanism with your applications.
+
+__Outside of a private network, this combination is effectively unsecured and is a BAD idea.__
 
 #### Custom Management Endpoints
 
@@ -165,12 +167,17 @@ When running with Podman, update these files to use `host.containers.internal`:
 ## Running on Tanzu Platform for Cloud Foundry
 
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-web-management-sample`)
-    * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+    * When deploying to Windows (or to see `git.properties` in the Info actuator response*), binaries must be built locally before push. Use the following commands instead:
 
       ```shell
       dotnet publish -r win-x64 --self-contained
       cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
       ```
+
+      > [!NOTE]
+      > * These applications use the GitInfo NuGet package to write a `git.properties` if the .git folder is found.
+      > When the staging process runs on Cloud Foundry, that information is not available.
+      > If you want to see git properties returned when the application is running on Cloud Foundry, publish the application before pushing.
 
 1. Copy the value of `routes` in the output and open in your browser
 1. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional

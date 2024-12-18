@@ -70,7 +70,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Steeltoe: See the note in the README under "Regarding HTTPS and Basic Authentication"
+// Steeltoe: HTTPS redirection affects requests to Actuators, which are listening on HTTP.
+// See the note in the README regarding HTTPS and Basic authentication for a more complete explanation.
 // app.UseHttpsRedirection();
 
 app.UseStaticFiles();

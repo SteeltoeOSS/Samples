@@ -12,7 +12,7 @@ internal static class BasicAuthExtensions
 
         builder.AddBasic(BasicAuthenticationDefaults.AuthenticationScheme, options =>
         {
-            // This line allows basic auth to work over HTTP. See the note in the README under "Regarding HTTPS and Basic Authentication"
+            // This line allows basic auth to work over HTTP (which is insecure), because docker containers don't trust the ASP.NET dev certificate.
             options.AllowInsecureProtocol = true;
 
             options.ForwardDefaultSelector = httpContext =>

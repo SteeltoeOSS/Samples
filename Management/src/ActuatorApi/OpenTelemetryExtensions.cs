@@ -31,7 +31,7 @@ internal static class OpenTelemetryExtensions
         services.ConfigureOpenTelemetryTracerProvider((serviceProvider, tracerProviderBuilder) =>
         {
             var appInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
-            tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appInfo.ApplicationName ?? "ActuatorApi-fallback"));
+            tracerProviderBuilder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(appInfo.ApplicationName!));
 
             // For traces, use B3 (Zipkin) headers instead of W3C.
             List<TextMapPropagator> propagators =

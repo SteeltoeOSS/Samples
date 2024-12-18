@@ -13,9 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitInfo" Version="3.5.0" PrivateAssets="all">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0" />
     <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
@@ -29,12 +26,17 @@
     <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(CF_STACK)' == ''">
+    <PackageReference Include="GitInfo" Version="3.5.0" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <Target Name="WriteGitPropertiesToFile" AfterTargets="CoreCompile" Condition="'$(CF_STACK)' == ''">
     <!-- Generate git.properties file from the MSBuild properties provided by the GitInfo NuGet package. -->
     <!-- https://github.com/devlooped/GitInfo/blob/main/src/GitInfo/build/GitInfo.targets -->
     <WriteLinesToFile File="git.properties" Lines="git.remote.origin.url=$(GitRepositoryUrl)" Overwrite="true" />
     <WriteLinesToFile File="git.properties" Lines="git.build.version=$(GitBaseVersion)" Overwrite="false" />
-    <WriteLinesToFile File="git.properties" Lines="git.build.user.email=user@email.com" Overwrite="false" />
     <WriteLinesToFile File="git.properties" Lines="git.commit.id.abbrev=$(GitCommit)" Overwrite="false" />
     <WriteLinesToFile File="git.properties" Lines="git.commit.id=$(GitSha)" Overwrite="false" />
     <WriteLinesToFile File="git.properties" Lines="git.commit.time=$(GitCommitDate)" Overwrite="false" />
@@ -45,7 +47,7 @@
     <WriteLinesToFile File="git.properties" Lines="git.build.host=$([System.Environment]::GetEnvironmentVariable('COMPUTERNAME'))" Overwrite="false" />
   </Target>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(CF_STACK)' == ''">
     <None Update="git.properties">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

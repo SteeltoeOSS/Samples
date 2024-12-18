@@ -83,7 +83,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Steeltoe: See the note in the ActuatorWeb README under "Regarding HTTPS and Basic Authentication"
+// Steeltoe: HTTPS redirection affects requests to Actuators, which are listening on HTTP.
+// See the note in the ActuatorWeb README regarding HTTPS and Basic authentication for a more complete explanation.
 // app.UseHttpsRedirection();
 
 // Steeltoe: Map weather-related endpoints.
