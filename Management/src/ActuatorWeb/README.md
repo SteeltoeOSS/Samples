@@ -1,6 +1,6 @@
 # Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
-ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
+ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several
 Steeltoe libraries on their own and with additional tools such
 as [Tanzu Apps Manager](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/console-index.html)
 and [Spring Boot Admin](https://docs.spring-boot-admin.com/) used for managing and monitoring applications.
@@ -57,11 +57,14 @@ using basic authentication and a hostname (`host.docker.internal`) that is routa
 Change the configuration if you are using Podman (see the section [Using Podman](#using-podman)) or don't want actuators on a dedicated port.
 All of the above is also true for ActuatorApi, except that application has actuators configured on port 8091.
 
+> [!NOTE]  
+> Please be aware that changes to the actuator port (or scheme) will also affect Prometheus. Be sure to update [prometheus.yml](../prometheus/prometheus.yml) accordingly.
+
 ### Zipkin Server
 
 > [!NOTE]  
 > Previous versions of Steeltoe included distributed tracing functionality. That functionality has moved to OpenTelemetry.
-> We expect many Steeltoe users still use distributed tracing, so this sample includes a basic OpenTelemetry setup.
+> We expect many Steeltoe users still use distributed tracing, so this sample includes the same OpenTelemetry configuration as prior versions of Steeltoe.
 > Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more.
 
 These applications use [OpenTelemetry extension methods](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
@@ -175,7 +178,7 @@ When running with Podman, update these files to use `host.containers.internal`:
       ```
 
       > [!NOTE]
-      > * These applications use the GitInfo NuGet package to write a `git.properties` if the .git folder is found.
+      > \* These applications use the GitInfo NuGet package to write a `git.properties` if the .git folder is found.
       > When the staging process runs on Cloud Foundry, that information is not available.
       > If you want to see git properties returned when the application is running on Cloud Foundry, publish the application before pushing.
 

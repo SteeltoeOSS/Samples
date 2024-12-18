@@ -1,6 +1,6 @@
 ﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
-ActuatorWeb and ActuatorAPI form an ASP.NET Core-powered sample application that demonstrates how to use several
+ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several
 Steeltoe libraries on their own and with additional tools.
 
 In order to avoid duplicating a significant amount of content, the [ActuatorWeb Readme](../ActuatorWeb/README.md)
@@ -39,12 +39,12 @@ schema and its contents are managed as administrative tasks.
     dotnet run --runtask=ForecastWeather --fromDate=10/18/2024 --days=30
     ```
 
-    > [!NOTE]  
-    > For the `fromDate` parameter, use values formatted as `yyyy-dd-MM` or `MM/dd/yyyy`.
+> [!NOTE]  
+> For the `fromDate` parameter, use values formatted as `yyyy-dd-MM` or `MM/dd/yyyy`.
 
-    > [!TIP]
-    > The task [`ResetTask`](./AdminTasks/ResetTask.cs) can be used to remove all forecast data:
-    > `dotnet run --runtask=ResetWeather`
+> [!TIP]
+> The task [`ResetTask`](./AdminTasks/ResetTask.cs) can be used to remove all forecast data:
+> `dotnet run --runtask=ResetWeather`
 
 1. Use your preferred IDE or `dotnet run` to start the application.
 
@@ -86,8 +86,7 @@ schema and its contents are managed as administrative tasks.
 1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
 
 > [!NOTE]  
-> The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind to the the app to
-> MySql service `sampleMySqlService`.
+> The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind it to the MySql service `sampleMySqlService`.
 
 ### Running Tasks
 
@@ -106,12 +105,12 @@ if the application was not published before pushing to a Linux cell, the path fo
     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
     ```
 
-    > [!TIP]  
-    > To remove all forecast data, run [`ResetTask`](./AdminTasks/ResetTask.cs):
-    >
-    > ```shell
-    > cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
-    > ```
+> [!TIP]  
+> To remove all forecast data, run [`ResetTask`](./AdminTasks/ResetTask.cs):
+>
+> ```shell
+> cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
+> ```
 
 ---
 
