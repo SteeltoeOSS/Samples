@@ -153,7 +153,7 @@ class CloudFoundry(object):
         manifest_yaml = yaml.safe_load(open(os.path.join(self._context.project_dir, manifest), 'r'))
         app_name = manifest_yaml['applications'][0]['name']
         self._context.log.info('pushing Cloud Foundry app "{}" ({})'.format(app_name, manifest))
-        cmd_s = 'cf push -t 90 -f {}'.format(manifest)
+        cmd_s = 'cf push -t 120 -f {}'.format(manifest)
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
         if cmd.rc != 0:
