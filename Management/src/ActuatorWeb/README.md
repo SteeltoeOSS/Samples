@@ -1,16 +1,11 @@
 # Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
-ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several
-Steeltoe libraries on their own and with additional tools such
-as [Tanzu Apps Manager](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/console-index.html)
-and [Spring Boot Admin](https://docs.spring-boot-admin.com/) used for managing and monitoring applications.
+ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools such as
+[Tanzu Apps Manager](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/console-index.html) and
+[Spring Boot Admin](https://docs.spring-boot-admin.com/) used for managing and monitoring applications.
 
-These samples also illustrate how to have application metrics captured and exported to
-the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
-service so that application metrics can be viewed in any tool that is able to consume those metrics from
-the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
-Several tools exist that can do this,
-including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html).
+These samples also illustrate how to have application metrics captured and exported to the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html) service so that application metrics can be viewed in any tool that is able to consume those metrics from the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
+Several tools exist that can do this, including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html).
 
 > [!NOTE]  
 > While this application is intended to be used with [ActuatorApi](../ActuatorApi/), it _can_ be used on its own if you
@@ -29,13 +24,11 @@ including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmw
 
 ## Running locally
 
-This application has a number of moving pieces, some of which can be used in multiple ways. In order to experience all
-of the functionality in a local environment, you will need to meet additional pre-requisites:
+This application has a number of moving pieces, some of which can be used in multiple ways.
+In order to experience all of the functionality in a local environment, you will need to meet additional pre-requisites:
 
-* Installed container orchestrator (such as [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-  or [Podman Desktop](https://podman-desktop.io/))
-* Optional: an IDE (such as Visual Studio), for performing the requests defined
-  in [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http).
+* Installed container orchestrator (such as [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Podman Desktop](https://podman-desktop.io/))
+* Optional: an IDE (such as Visual Studio), for performing the requests defined in [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http).
 
 > [!NOTE]  
 > Use the [docker-compose file](../docker-compose.yaml) to run all of the backing services used by these samples.
@@ -50,10 +43,7 @@ of the functionality in a local environment, you will need to meet additional pr
 Because Steeltoe Management Endpoints are compatible with Spring Boot Actuator, they can also be used with [Spring Boot Admin](https://docs.spring-boot-admin.com/).
 Refer to [Common Tasks](../../../CommonTasks.md#spring-boot-admin) to start Spring Boot Admin.
 
-This application is configured to register itself with Spring Boot Admin running at <http://localhost:9099>. The
-configuration defined in [appsettings.Development.json](./appsettings.Development.json) (under `Spring:Boot:Admin:Client`)
-instructs Spring Boot Admin to reach this instance's actuators on port 8090 (defined in [appsettings.json](./appsettings.json)),
-using basic authentication and a hostname (`host.docker.internal`) that is routable from within the container network.
+This application is configured to register itself with Spring Boot Admin running at <http://localhost:9099>. The configuration defined in [appsettings.Development.json](./appsettings.Development.json) (under `Spring:Boot:Admin:Client`) instructs Spring Boot Admin to reach this instance's actuators on port 8090 (defined in [appsettings.json](./appsettings.json)), using basic authentication and a hostname (`host.docker.internal`) that is routable from within the container network.
 Change the configuration if you are using Podman (see the section [Using Podman](#using-podman)) or don't want actuators on a dedicated port.
 All of the above is also true for ActuatorApi, except that application has actuators configured on port 8091.
 
@@ -67,9 +57,8 @@ All of the above is also true for ActuatorApi, except that application has actua
 > We expect many Steeltoe users still use distributed tracing, so this sample includes the same OpenTelemetry configuration as prior versions of Steeltoe.
 > Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more.
 
-These applications use [OpenTelemetry extension methods](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with
-trace information and export those traces to Zipkin so that individual requests across the system can be analyzed. Refer
-to [Common Tasks](../../../CommonTasks.md#zipkin) to start Zipkin.
+These applications use [OpenTelemetry extension methods](./OpenTelemetryExtensions.cs) to instrument all HTTP interactions with trace information and export those traces to Zipkin so that individual requests across the system can be analyzed.
+Refer to [Common Tasks](../../../CommonTasks.md#zipkin) to start Zipkin.
 
 ### Starting the application
 
@@ -80,14 +69,12 @@ dotnet run
 ```
 
 > [!NOTE]
-> If you are only looking for an actuator demo, you _may_ proceed from here without starting ActuatorApi, but for full
-> functionality, review the [ActuatorApi README](../ActuatorApi/README.md) and get that app running as well.
+> If you are only looking for an actuator demo, you _may_ proceed from here without starting ActuatorApi, but for full functionality, review the [ActuatorApi README](../ActuatorApi/README.md) and get that app running as well.
 
 ### Interacting with the application
 
-As ActuatorWeb is a Razor Pages app, you can use a browser to [access the web UI](http://localhost:5126) while the app
-is running. To request a weather forecast (and generate HTTP request traces) from ActuatorApi, click "Weather Forecast"
-in the site menu.
+As ActuatorWeb is a Razor Pages app, you can use a browser to [access the web UI](http://localhost:5126) while the app is running.
+To request a weather forecast (and generate HTTP request traces) from ActuatorApi, click "Weather Forecast" in the site menu.
 
 > [!NOTE]
 > The Weather Forecast API endpoint is delayed randomly up to three seconds to generate interesting trace data.
@@ -96,14 +83,12 @@ in the site menu.
 
 Each app instance registers with Spring Boot Admin and can be viewed from the web interface at <http://localhost:9099>.
 
-[ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http) are also provided for
-experimentation with the exposed actuators. Variables for the .http files are stored
-in [http-client.env.json](./http-client.env.json). In both Visual Studio and Rider, when you open the .http file there
-is a dropdown box that can be used to select the environment you're working in (for example: running locally with actuators listening on an alternate port with basic authentication on). The dropdown is probably at the top of the window and may
-initially look like `env: <none>` or `Run With: No Environment`, although those interfaces are subject to change over
-time. You will need to either make an environment selection or define variables like `HostAddress` directly in the .http
-file in order for requests to work (review the .json file mentioned previously for variable examples). Please note that
-the "dhaka" environment is not expected to be available for use by those not on the Steeltoe team.
+[ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http) are also provided for experimentation with the exposed actuators.
+Variables for the .http files are stored in [http-client.env.json](./http-client.env.json).
+In both Visual Studio and Rider, when you open the .http file there is a dropdown box that can be used to select the environment you're working in (for example: running locally with actuators listening on an alternate port with basic authentication on).
+The dropdown is probably at the top of the window and may initially look like `env: <none>` or `Run With: No Environment`, although those interfaces are subject to change over time.
+You will need to either make an environment selection or define variables like `HostAddress` directly in the .http file in order for requests to work (review the .json file mentioned previously for variable examples).
+Please note that the "dhaka" environment is not expected to be available for use by those not on the Steeltoe team.
 
 #### Regarding HTTPS and Basic Authentication
 
@@ -129,8 +114,7 @@ Review the contents of [./CustomActuators](./CustomActuators/) to see how this i
 1. Explore trace data
 
 > [!TIP]
-> Only requests for `actuatorweb: get weather` will actually be distributed traces. You may want to
-> request the weather from ActuatorWeb a few times to generate interesting data.
+> Only requests for `actuatorweb: get weather` will actually be distributed traces. You may want to request the weather from ActuatorWeb a few times to generate interesting data.
 
 ### Viewing Metric Dashboards
 
@@ -157,8 +141,7 @@ For more information about using Grafana dashboards, see the [Grafana documentat
 
 ## Using Podman
 
-Because Podman is generally compatible with Docker, the only changes necessary to run this sample with Podman is to change
-the hostname in places where `host.docker.internal` is used.
+Because Podman is generally compatible with Docker, the only changes necessary to run this sample with Podman is to change the hostname in places where `host.docker.internal` is used.
 
 When running with Podman, update these files to use `host.containers.internal`:
 
@@ -183,27 +166,23 @@ When running with Podman, update these files to use `host.containers.internal`:
       > If you want to see git properties returned when the application is running on Cloud Foundry, publish the application before pushing.
 
 1. Copy the value of `routes` in the output and open in your browser
-1. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional
-   instructions.
+1. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional instructions.
 
 ### What to expect
 
 Once the app is up and running, then you can access the management endpoints exposed by Steeltoe using Apps Manager.
 
-Steeltoe exposes Spring Boot Actuator compatible endpoints which can be accessed via the Tanzu Apps Manager. By using
-the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or
-change the application's minimum logging levels.
+Steeltoe exposes Spring Boot Actuator compatible endpoints which can be accessed via the Tanzu Apps Manager.
+By using the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or change the application's minimum logging levels.
 
-Check out the Apps Manager, [Using Spring Boot Actuators](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/using-actuators.html)
-for more information.
+Check out the Apps Manager, [Using Spring Boot Actuators](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/using-actuators.html) for more information.
 
 Apps Manager should be accessible at <https://apps.sys.your.domain>, contact your platform administrator for assistance as needed.
 
 ### View Application Metrics in App Metrics
 
 App Metrics should be accessible at <https://metrics.sys.your.domain>, contact your platform administrator for assistance as needed. Container metrics should automatically be available.
-If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured,
-the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
+If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured, the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
 
 1. `cf install-plugin -r CF-Community "metric-registrar"`
 1. `cf target -o myOrg -s development`

@@ -1,25 +1,20 @@
 ﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
-ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several
-Steeltoe libraries on their own and with additional tools.
+ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools.
 
-In order to avoid duplicating a significant amount of content, the [ActuatorWeb Readme](../ActuatorWeb/README.md)
-contains the shared information and this document only holds content unique to ActuatorApi.
+In order to avoid duplicating a significant amount of content, the [ActuatorWeb Readme](../ActuatorWeb/README.md) contains the shared information and this document only holds content unique to ActuatorApi.
 
 ## Running locally
 
-Be sure to follow the [ActuatorWeb Readme](../ActuatorWeb/README.md) to the point where that application is running
-before continuing here.
+Be sure to follow the [ActuatorWeb Readme](../ActuatorWeb/README.md) to the point where that application is running before continuing here.
 
 ### MySQL
 
-This application depends on a MySQL database. Refer to [Common Tasks](../../../CommonTasks.md#MySQL) to start a server
-that matches the credentials defined in [appsettings.Development.json](./appsettings.Development.json).
+This application depends on a MySQL database. Refer to [Common Tasks](../../../CommonTasks.md#MySQL) to start a server that matches the credentials defined in [appsettings.Development.json](./appsettings.Development.json).
 
 ### Administrative Tasks (initialize the database)
 
-In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v3/management/tasks.html), the database
-schema and its contents are managed as administrative tasks.
+In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v3/management/tasks.html), the database schema and its contents are managed as administrative tasks.
 
 1. Apply Entity Framework Core database schema migration scripts:
 
@@ -90,8 +85,7 @@ schema and its contents are managed as administrative tasks.
 
 ### Running Tasks
 
-Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example,
-if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
+Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example, if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
 
 1. Apply Entity Framework Core database migration scripts:
 
