@@ -91,4 +91,4 @@ if (app.Environment.IsDevelopment())
 WeatherEndpoints.Map(app);
 
 // Steeltoe: Run an application task if available, or start the application normally otherwise.
-await app.RunWithTasksAsync(default);
+await app.RunWithTasksAsync(CancellationToken.None);
