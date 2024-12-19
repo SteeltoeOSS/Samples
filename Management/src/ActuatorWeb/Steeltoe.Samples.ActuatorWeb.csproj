@@ -14,12 +14,10 @@
   <ItemGroup>
     <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0" />
     <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Extensions.Propagators" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryVersion)" />
-
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
@@ -52,7 +50,8 @@
 
   <ItemGroup Condition="'$(CF_STACK)' == ''">
     <None Update="git.properties">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <!-- Ensure that the git.properties file ends up in the Publish directory. --> 
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

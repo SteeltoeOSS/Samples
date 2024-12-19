@@ -93,11 +93,6 @@ GET {{ManagementAddress}}/{{Actuator_Context}}/threaddump
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 
-### Heap dump actuator
-GET {{ManagementAddress}}/{{Actuator_Context}}/heapdump
-Accept: application/json
-Authorization: {{Authorization_Header_Value}}
-
 ### CUSTOM Actuator
 GET {{ManagementAddress}}/{{Actuator_Context}}/local-time
 Accept: application/json

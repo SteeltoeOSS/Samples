@@ -22,7 +22,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
     dotnet run --runtask=MigrateDatabase
     ```
 
-1. Run [`ForecastTask`](./AdminTasks/ForecastTask.cs) to predict weather for the next 7 days:
+2. Run [`ForecastTask`](./AdminTasks/ForecastTask.cs) to predict weather for the next 7 days:
 
     ```shell
     dotnet run --runtask=ForecastWeather
@@ -41,7 +41,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 > The task [`ResetTask`](./AdminTasks/ResetTask.cs) can be used to remove all forecast data:
 > `dotnet run --runtask=ResetWeather`
 
-1. Use your preferred IDE or `dotnet run` to start the application.
+3. Use your preferred IDE or `dotnet run` to start the application.
 
 ## Running on Tanzu Platform for Cloud Foundry
 

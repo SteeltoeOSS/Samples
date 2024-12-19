@@ -184,6 +184,9 @@ Apps Manager should be accessible at <https://apps.sys.your.domain>, contact you
 App Metrics should be accessible at <https://metrics.sys.your.domain>, contact your platform administrator for assistance as needed. Container metrics should automatically be available.
 If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured, the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
 
+> [!CAUTION]
+> The command `register-metrics-endpoint` described below does not work in Windows, but does work in WSL [more information](https://github.com/pivotal-cf/metric-registrar-cli/issues/4).
+
 1. `cf install-plugin -r CF-Community "metric-registrar"`
 1. `cf target -o myOrg -s development`
 1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 8090`

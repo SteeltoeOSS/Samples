@@ -114,8 +114,3 @@ Authorization: {{Authorization_Header_Value}}
 GET {{ManagementAddress}}/{{Actuator_Context}}/threaddump
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
-
-### Heap dump actuator
-GET {{ManagementAddress}}/{{Actuator_Context}}/heapdump
-Accept: application/json
-Authorization: {{Authorization_Header_Value}}
