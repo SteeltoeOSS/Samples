@@ -23,6 +23,8 @@ def step_impl(context, url):
         if resp.status_code < 500:
             context.log.info('GET {} [{}]'.format(url, resp.status_code))
             resp.status_code.should.equal(200)
+            if context.browser.page is None:
+                context.response_text = resp.text
             break
         context.log.info('failed to get {} [{}]'.format(url, resp.status_code))
         if attempt > 5:
@@ -75,8 +77,16 @@ def step_impl(context, text):
     :type context: behave.runner.Context
     :type text: str
     """
-    context.browser.get_current_page().get_text().should.match(r'.*{}.*'.format(text))
+    context.browser.page.get_text().should.match(r'.*{}.*'.format(text))
 
+
+@then(u'the response should contain "{text}"')
+def step_impl(context, text):
+    """
+    :type context: behave.runner.Context
+    :type text: str
+    """
+    context.response_text.should.match(r'.*{}.*'.format(text))
 
 @then(u'you should be able to access CloudFoundry app {app} management endpoints')
 def step_impl(context, app):
@@ -89,7 +99,7 @@ def step_impl(context, app):
     resp = requests.get(url, headers={'Authorization': token})
     resp.status_code.should.equal(200)
     # context.log.info(resp.content)
-    for endpoint in ['info', 'health', 'loggers', 'httptrace', 'mappings']:
+    for endpoint in ['beans', 'dbmigrations', 'env', 'health', 'heapdump', 'httpexchanges', 'info', 'loggers', 'mappings', 'metrics', 'prometheus', 'refresh', 'threaddump']:
         resp.text.should.contain('/cloudfoundryapplication/{}'.format(endpoint))
 
 

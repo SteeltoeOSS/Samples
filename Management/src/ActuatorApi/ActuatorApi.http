@@ -1,0 +1,116 @@
+@Actuator_Context=actuator
+#@Actuator_Context=cloudfoundryapplication
+
+### Get the default day-count forecast starting from today
+GET {{HostAddress}}/weatherforecast/
+Accept: application/json
+
+###  Get the default day-count forecast starting from a certain date
+GET {{HostAddress}}/weatherforecast?fromDate=2024-12-08
+Accept: application/json
+
+###  Get a specified-number-of-days forecast starting from today
+GET {{HostAddress}}/weatherforecast?days=2
+Accept: application/json
+
+### Get all forecast data
+GET {{HostAddress}}/AllForecastData
+Accept: application/json
+
+### ACTUATORS
+### Check CORS
+OPTIONS {{ManagementAddress}}/{{Actuator_Context}}
+access-control-request-method: GET
+access-control-request-headers: authorization
+origin: {{AppsManagerOrigin}}
+
+### Hypermedia (list all actuators)
+GET {{ManagementAddress}}/{{Actuator_Context}}
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Beans actuator, list registered services ("Beans" comes from the Spring world)
+GET {{ManagementAddress}}/{{Actuator_Context}}/beans
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### DB Migrations actuator, list pending and applied database migrations
+GET {{ManagementAddress}}/{{Actuator_Context}}/dbmigrations
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Env actuator, list environment/configuration sources and data
+GET {{ManagementAddress}}/{{Actuator_Context}}/env
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Info actuator
+GET {{ManagementAddress}}/{{Actuator_Context}}/info
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Health actuator
+GET {{ManagementAddress}}/{{Actuator_Context}}/health
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Health actuator, check a specified group of contributors
+GET {{ManagementAddress}}/{{Actuator_Context}}/health/readiness
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Loggers actuator, list all loggers
+GET {{ManagementAddress}}/{{Actuator_Context}}/loggers
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Loggers actuator, update minimum level for a logger
+POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+{
+  "configuredLevel": "TRACE"
+}
+
+### Loggers actuator, reset minimum level for a logger  
+POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples  
+Accept: application/json  
+Authorization: {{Authorization_Header_Value}}  
+{  
+  "configuredLevel": null  
+}
+
+### HTTP Exchanges actuator
+GET {{ManagementAddress}}/{{Actuator_Context}}/httpexchanges
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Mappings actuator, list registered HTTP routes
+GET {{ManagementAddress}}/{{Actuator_Context}}/mappings
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Metrics actuator, list all metrics
+GET {{ManagementAddress}}/{{Actuator_Context}}/metrics
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Metrics actuator, check a meter
+GET {{ManagementAddress}}/{{Actuator_Context}}/metrics/clr.process.uptime
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Prometheus endpoint, list all metrics
+GET {{ManagementAddress}}/{{Actuator_Context}}/prometheus
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Refresh actuator, refresh application configuration
+POST {{ManagementAddress}}/{{Actuator_Context}}/refresh
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+
+### Thread dump actuator
+GET {{ManagementAddress}}/{{Actuator_Context}}/threaddump
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}

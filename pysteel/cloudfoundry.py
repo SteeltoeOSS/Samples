@@ -153,7 +153,7 @@ class CloudFoundry(object):
         manifest_yaml = yaml.safe_load(open(os.path.join(self._context.project_dir, manifest), 'r'))
         app_name = manifest_yaml['applications'][0]['name']
         self._context.log.info('pushing Cloud Foundry app "{}" ({})'.format(app_name, manifest))
-        cmd_s = 'cf push -f {}'.format(manifest)
+        cmd_s = 'cf push -t 120 -f {}'.format(manifest)
         cmd = command.Command(self._context, cmd_s)
         cmd.run()
         if cmd.rc != 0:
@@ -219,6 +219,22 @@ class CloudFoundry(object):
         if not match:
             return None
         return match.group(1)
+    
+    def get_task_status(self, app_name, task_name):
+        """
+        :type app_name: str
+        :type task_name: str
+        """
+        cmd_s = 'cf tasks {}'.format(app_name)
+        cmd = command.Command(self._context, cmd_s)
+        try:
+            cmd.run()
+        except command.CommandException as e:
+            if "App '{}' not found".format(app_name) in str(e):
+                raise CloudFoundryObjectDoesNotExistError()
+            raise e
+        match = re.search('(.*?--name {})'.format(task_name), cmd.stdout, re.MULTILINE)
+        return match.group(1).split()[2]
 
     def get_app_route(self, app_name):
         """

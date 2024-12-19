@@ -1,0 +1,37 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35209.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.ActuatorWeb", "ActuatorWeb\Steeltoe.Samples.ActuatorWeb.csproj", "{2933961C-2494-4916-AB57-300B396F2594}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.ActuatorApi", "ActuatorApi\Steeltoe.Samples.ActuatorApi.csproj", "{DE305318-B134-426B-B393-AE4CE9312E5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89CA792C-9219-42A6-9025-6D9A6EC75D9D}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+		prometheus\prometheus.yml = prometheus\prometheus.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE305318-B134-426B-B393-AE4CE9312E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE305318-B134-426B-B393-AE4CE9312E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE305318-B134-426B-B393-AE4CE9312E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE305318-B134-426B-B393-AE4CE9312E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2933961C-2494-4916-AB57-300B396F2594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2933961C-2494-4916-AB57-300B396F2594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2933961C-2494-4916-AB57-300B396F2594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2933961C-2494-4916-AB57-300B396F2594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E7CD10D-564E-495A-9423-CAAA6C8E7BAB}
+	EndGlobalSection
+EndGlobal
