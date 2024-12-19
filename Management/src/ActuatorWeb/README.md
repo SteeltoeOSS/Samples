@@ -98,7 +98,8 @@ In order to provide a simple example of applying custom authorization policies t
 Do NOT consider this a recommendation or a good example to follow, it is merely a general demonstration of how to apply [ASP.NET Core Authorization](https://learn.microsoft.com/aspnet/core/security/authorization/introduction).
 Use a more robust authorization mechanism with your applications.
 
-__Outside of a private network, this combination is effectively unsecured and is a BAD idea.__
+> [!CAUTION]
+> Outside of a private network, this combination is effectively unsecured and is not recommended.
 
 #### Custom Management Endpoints
 
@@ -153,20 +154,20 @@ When running with Podman, update these files to use `host.containers.internal`:
 ## Running on Tanzu Platform for Cloud Foundry
 
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-web-management-sample`)
-    * When deploying to Windows (or to see `git.properties` in the Info actuator response*), binaries must be built locally before push. Use the following commands instead:
+    * When deploying to Windows (or to see `git.properties` in the Info actuator response), binaries must be built locally before push. Use the following commands instead:
 
       ```shell
       dotnet publish -r win-x64 --self-contained
       cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
       ```
 
-      > [!NOTE]
-      > \* These applications use the GitInfo NuGet package to write a `git.properties` if the .git folder is found.
-      > When the staging process runs on Cloud Foundry, that information is not available.
-      > If you want to see git properties returned when the application is running on Cloud Foundry, publish the application before pushing.
+> [!NOTE]
+> These applications use the GitInfo NuGet package to write a `git.properties` if the .git folder is found.
+> When the staging process runs on Cloud Foundry, that information is not available.
+> If you want to see git properties returned when the application is running on Cloud Foundry, publish the application before pushing.
 
-1. Copy the value of `routes` in the output and open in your browser
-1. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional instructions.
+2. Copy the value of `routes` in the output and open in your browser
+3. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional instructions.
 
 ### What to expect
 
@@ -185,7 +186,7 @@ App Metrics should be accessible at <https://metrics.sys.your.domain>, contact y
 If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured, the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
 
 > [!CAUTION]
-> The command `register-metrics-endpoint` described below does not work in Windows, but does work in WSL [more information](https://github.com/pivotal-cf/metric-registrar-cli/issues/4).
+> The command `register-metrics-endpoint` described below does not work in Windows, but does work in WSL. See [here](https://github.com/pivotal-cf/metric-registrar-cli/issues/4) for more information.
 
 1. `cf install-plugin -r CF-Community "metric-registrar"`
 1. `cf target -o myOrg -s development`
