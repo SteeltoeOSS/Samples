@@ -14,6 +14,7 @@ using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
 using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Samples.AuthWeb;
+using Steeltoe.Samples.AuthWeb.ApiClients;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
 
@@ -48,8 +49,8 @@ builder.Services.AddAuthorizationBuilder().AddPolicy(Globals.RequiredJwtScope, p
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
 
 // Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization.
-builder.Services.AddHttpClient("default", SetBaseAddress);
-builder.Services.AddHttpClient("AppInstanceIdentity", SetBaseAddress).AddAppInstanceIdentityCertificate();
+builder.Services.AddHttpClient<JwtAuthorizationApiClient>(SetBaseAddress).ConfigureLogging();
+builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress).AddAppInstanceIdentityCertificate().ConfigureLogging();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();

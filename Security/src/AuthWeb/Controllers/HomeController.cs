@@ -1,17 +1,16 @@
-using System;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Steeltoe.Samples.AuthWeb.ApiClients;
 using Steeltoe.Samples.AuthWeb.Models;
 
 namespace Steeltoe.Samples.AuthWeb.Controllers;
 
-public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<HomeController> logger) : Controller
+public sealed class HomeController(
+    JwtAuthorizationApiClient jwtAuthorizationApiClient, CertificateAuthorizationApiClient certificateAuthorizationApiClient) : Controller
 {
     public IActionResult Index()
     {
@@ -58,33 +57,22 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
     }
 
     [Authorize]
-    public async Task<IActionResult> InvokeJwtSample()
+    public async Task<IActionResult> InvokeJwtSample(CancellationToken cancellationToken)
     {
-        using HttpClient jwtHttpClient = clientFactory.CreateClient("default");
-        string? token = await HttpContext.GetTokenAsync("access_token");
-
-        if (!string.IsNullOrEmpty(token))
-        {
-            jwtHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            string model = await SendRequestToBackend(jwtHttpClient, "/api/JwtAuthorization");
-            return View("InvokeService", model);
-        }
-
-        return View("InvokeService",
-            "No access token found in user session. Perhaps you need to set Authentication:Schemes:OpenIdConnect:SaveTokens to 'true'?");
-    }
-
-    public async Task<IActionResult> InvokeSameOrgSample()
-    {
-        using HttpClient mutualTlsHttpClient = clientFactory.CreateClient("AppInstanceIdentity");
-        string model = await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameOrg");
+        string? accessToken = await HttpContext.GetTokenAsync("access_token");
+        AuthApiResponseModel model = await jwtAuthorizationApiClient.GetAuthorizationAsync(accessToken, cancellationToken);
         return View("InvokeService", model);
     }
 
-    public async Task<IActionResult> InvokeSameSpaceSample()
+    public async Task<IActionResult> InvokeSameOrgSample(CancellationToken cancellationToken)
     {
-        using HttpClient mutualTlsHttpClient = clientFactory.CreateClient("AppInstanceIdentity");
-        string model = await SendRequestToBackend(mutualTlsHttpClient, "/api/certificate/SameSpace");
+        AuthApiResponseModel model = await certificateAuthorizationApiClient.GetSameOrgAsync(cancellationToken);
+        return View("InvokeService", model);
+    }
+
+    public async Task<IActionResult> InvokeSameSpaceSample(CancellationToken cancellationToken)
+    {
+        AuthApiResponseModel model = await certificateAuthorizationApiClient.GetSameSpaceAsync(cancellationToken);
         return View("InvokeService", model);
     }
 
@@ -101,22 +89,5 @@ public sealed class HomeController(IHttpClientFactory clientFactory, ILogger<Hom
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
         });
-    }
-
-    private async Task<string> SendRequestToBackend(HttpClient client, string requestUri)
-    {
-        string result;
-
-        try
-        {
-            logger.LogTrace("Sending request to {requestUri}", requestUri);
-            result = await client.GetStringAsync(requestUri);
-        }
-        catch (Exception exception)
-        {
-            result = $"Request failed: {exception.Message}, at: {requestUri}";
-        }
-
-        return result;
     }
 }

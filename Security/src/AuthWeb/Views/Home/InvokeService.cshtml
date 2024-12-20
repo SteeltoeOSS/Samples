@@ -1,6 +1,21 @@
-﻿@model string
+﻿@model Steeltoe.Samples.AuthWeb.Models.AuthApiResponseModel
 @{
     ViewData["Title"] = "Invoke a backend service";
 }
+
 <h2>@ViewData["Title"].</h2>
-<h3>@Model</h3>
+
+@if (Model.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <h2>Error</h2>
+        <pre>@Model.Error.ToString()</pre>
+    </div>
+}
+else
+{
+    <div class="alert alert-success" role="alert">
+        <h2>Success</h2>
+        @Model.Message
+    </div>
+}
