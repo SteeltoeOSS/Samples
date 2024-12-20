@@ -40,4 +40,4 @@ Upon startup, the app inserts a couple of objects into the bound CosmosDB databa
 
 ---
 
-### See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
