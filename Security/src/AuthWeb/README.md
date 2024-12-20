@@ -97,4 +97,5 @@ The menu of the application includes links for testing the permissions of the us
 * If needed, sign out of the UAA server using the dropdown menu in the top right corner at <http://localhost:8080>(locally) or use the command `cf app steeltoe-uaa` to get the address of the server deployed to Cloud Foundry.
 
 ---
-### See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information.
+
+See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information.

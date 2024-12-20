@@ -8,4 +8,5 @@ This sample illustrates how you can secure your web api endpoints using JWT Bear
 > This application is intended to be used in conjunction with the [AuthWeb](../AuthWeb) sample app.
 
 ---
-### See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information.
+
+See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information.

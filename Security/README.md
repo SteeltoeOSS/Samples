@@ -8,4 +8,5 @@ This section of the Samples repository contains applications that use the [Steel
 * [RedisDataProtection](src/RedisDataProtection/README.md) - use Redis provisioned on Cloud Foundry as a DataProtection Key Store.  Sample illustrates sharing encrypted data stored in an ASP.NET session across multiple instances of an application.
 
 ---
-### See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information
+
+See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information
