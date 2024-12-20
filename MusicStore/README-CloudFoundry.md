@@ -62,7 +62,7 @@ Once you have pushed all the applications to Cloud Foundry, if you do a `cf a`, 
 * orderprocessing - Order processing micro-service
 * shoppingcart - Shopping cart micro-service
 
-```bash
+```shell
 name              requested state   instances   memory   disk   urls
 musicstore        started           1/1         1G       1G     musicstore.apps.testcloud.com
 musicui           started           1/1         1G       1G     musicui.apps.testcloud.com
