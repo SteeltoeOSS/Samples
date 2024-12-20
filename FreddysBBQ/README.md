@@ -31,7 +31,7 @@ Once you have finished deploying and verifing the Java version, you are then rea
 
 First you will need to create a new MySql service for our .NET version of the `Order REST API` service. Run the following commands:
 
-```bash
+```shell
 cf create-service p.mysql db-small mysql-orders
 ```
 
@@ -39,7 +39,7 @@ cf create-service p.mysql db-small mysql-orders
 
 Next, we have to make one small change to `Redirect URIs` for the admin-portal component in the SSO dashboard. To do this we need to access the `SSO` service dashboard. In order to access the dashboard, run the following command and go to the URL listed in `Dashboard` property:
 
-```bash
+```shell
 $ cf service sso
 
 Service instance: sso
@@ -57,13 +57,13 @@ Once you are in the dashboard select the `admin-portal`.  Next in the `Auth Redi
 
 So for example, if you started with:
 
-```bash
+```shell
 https://admin-portal.apps.testcloud.com
 ```
 
 then after making the changes, the Auth Redirect URIs would look as follows:
 
-```bash
+```shell
 https://admin-portal.apps.testcloud.com,https://admin-portal.apps.testcloud.com/signin-cloudfoundry
 ```
 
@@ -73,7 +73,7 @@ Save your changes  .... (i.e. `Save Config`)
 
 At this point you are ready to replace the existing Java based services with the .NET versions. To do this enter the following commands:
 
-```bash
+```shell
 cd Samples\FreddysBBQ\src\OrderService
 cf delete order-service -f
 # Publish & Push to run on Windows

@@ -61,7 +61,7 @@ The RedirectUri and Scope access settings should be automatically configured via
 
 If you want to access the `sso` dashboard, run the following command and go to the URL listed in `dashboard url` property:
 
-```bash
+```shell
 $ cf service sampleSSOService
 
 name:            sampleSSOService
