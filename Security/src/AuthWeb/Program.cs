@@ -34,22 +34,17 @@ builder.Configuration.AddCloudFoundryServiceBindings();
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
 
 // Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry.
-builder.Services
-    .AddAuthentication(options =>
-    {
-        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-    })
-    .AddCookie(options =>
-    {
-        options.AccessDeniedPath = new PathString("/Home/AccessDenied");
-    })
-    .AddOpenIdConnect()
-    .ConfigureOpenIdConnectForCloudFoundry();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+}).AddOpenIdConnect().ConfigureOpenIdConnectForCloudFoundry();
 
 // Steeltoe: Register Microsoft authorization services and claim-based policies requiring specific scopes.
-builder.Services.AddAuthorizationBuilder()
-    .AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
+builder.Services.AddAuthorizationBuilder().AddPolicy(Globals.RequiredJwtScope, policy => policy.RequireClaim("scope", Globals.RequiredJwtScope))
     .AddPolicy(Globals.UnknownJwtScope, policy => policy.RequireClaim("scope", Globals.UnknownJwtScope));
 
 // Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization.

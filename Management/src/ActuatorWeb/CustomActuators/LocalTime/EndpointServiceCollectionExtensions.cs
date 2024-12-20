@@ -1,4 +1,4 @@
-﻿using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint;
 
 namespace Steeltoe.Samples.ActuatorWeb.CustomActuators.LocalTime;
 
