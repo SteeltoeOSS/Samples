@@ -24,7 +24,7 @@ internal static class OpenTelemetryExtensions
 
             if (!string.IsNullOrEmpty(zipkinExporterAddress))
             {
-                tracerProviderBuilder.AddZipkinExporter(zipkinExporterOptions => zipkinExporterOptions.Endpoint = new Uri(zipkinExporterAddress));
+                tracerProviderBuilder.AddZipkinExporter();
             }
         });
 
