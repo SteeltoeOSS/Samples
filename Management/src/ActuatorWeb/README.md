@@ -191,9 +191,7 @@ If you wish to collect and view application metrics, the [Metrics Registrar](htt
 1. `cf install-plugin -r CF-Community "metric-registrar"`
 1. `cf target -o myOrg -s development`
 1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 8090`
-1. `cf restart actuator-web-management-sample`
 1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 8091`
-1. `cf restart actuator-api-management-sample`
 1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/using.html#custom-metrics)
 
 > [!NOTE]
