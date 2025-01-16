@@ -15,8 +15,6 @@ trigger:
     - ci/templates
     - Security/src/RedisDataProtection
     - Security/src/*.sln*
-    exclude:
-    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'
