@@ -1,16 +1,7 @@
 pr:
   paths:
     include:
-    - '**/*.py'
-    - '**/*.sh'
-    - '**/*.ini'
-    - '**/*.ps1'
-    - .editorconfig
-    - .gitattributes
-    - .gitignore
-    - ci/templates
     - Connectors/src/MySqlEFCore
-    - Connectors/src/*.sln*
 
 variables:
   - group: 'PCFone Credentials'
