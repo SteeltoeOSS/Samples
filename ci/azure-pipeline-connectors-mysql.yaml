@@ -5,9 +5,6 @@ trigger:
     - pr-build-changed
   paths:
     include:
-    - .editorconfig
-    - .gitattributes
-    - .gitignore
     - ci/templates
     - Connectors/src/MySql
     - Connectors/src/*.sln*
