@@ -4,6 +4,7 @@ pr:
     - Security/src/RedisDataProtection
     exclude:
     - '*'
+    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'

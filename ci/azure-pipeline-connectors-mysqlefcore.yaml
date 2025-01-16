@@ -4,6 +4,7 @@ pr:
     - Connectors/src/MySqlEFCore
     exclude:
     - '*'
+    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'

@@ -4,6 +4,7 @@ pr:
     - Connectors/src/PostgreSqlEFCore
     exclude:
     - '*'
+    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'
