@@ -6,9 +6,7 @@ trigger:
     - pr-build-changed
   paths:
     include:
-    - ci/templates
     - Security/src/RedisDataProtection
-    - Security/src/*.sln*
 
 variables:
   - group: 'PCFone Credentials'

@@ -6,9 +6,7 @@ trigger:
     - pr-build-changed
   paths:
     include:
-    - ci/templates
     - Management/src/ActuatorApi
-    - Management/src/*.sln*
 
 variables:
   - group: 'PCFone Credentials'
