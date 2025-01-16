@@ -4,6 +4,9 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    exclude:
+    - '*'
+    - '**/*'
     include:
     - Connectors/src/SqlServerEFCore
 
