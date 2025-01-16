@@ -5,11 +5,11 @@ trigger:
     - latest
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/MySql
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/MySql
 
 variables:
   - group: 'PCFone Credentials'

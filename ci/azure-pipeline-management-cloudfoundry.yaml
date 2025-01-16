@@ -5,11 +5,11 @@ trigger:
     - latest
     - pr-build-changed
   paths:
+    include:
+    - Management/src/ActuatorApi
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Management/src/ActuatorApi
 
 variables:
   - group: 'PCFone Credentials'

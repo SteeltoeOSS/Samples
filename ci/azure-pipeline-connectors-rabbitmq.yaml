@@ -5,11 +5,11 @@ trigger:
     - latest
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/RabbitMQ
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/RabbitMQ
 
 variables:
   - group: 'PCFone Credentials'
