@@ -17,7 +17,7 @@ trigger:
     - Connectors/src/RabbitMQ
     - Connectors/src/*.sln*
     exclude:
-    - '*'
+    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'
