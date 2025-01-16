@@ -1,16 +1,7 @@
 pr:
   paths:
     include:
-    - '**/*.py'
-    - '**/*.sh'
-    - '**/*.ini'
-    - '**/*.ps1'
-    - .editorconfig
-    - .gitattributes
-    - .gitignore
-    - ci/templates
     - Management/src/ActuatorApi
-    - Management/src/*.sln*
 
 variables:
   - group: 'PCFone Credentials'
