@@ -2,6 +2,8 @@ pr:
   paths:
     include:
     - Management/src/ActuatorApi
+    exclude:
+    - '*'
 
 variables:
   - group: 'PCFone Credentials'
