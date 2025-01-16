@@ -5,10 +5,6 @@ trigger:
     - pr-build-changed
   paths:
     include:
-    - '**/*.py'
-    - '**/*.sh'
-    - '**/*.ini'
-    - '**/*.ps1'
     - .editorconfig
     - .gitattributes
     - .gitignore
