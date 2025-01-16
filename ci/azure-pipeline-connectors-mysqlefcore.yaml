@@ -3,10 +3,7 @@ pr:
     include:
     - Connectors/src/MySqlEFCore
     exclude:
-    - '*'
     - '/*'
-    - '**/'
-    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'
