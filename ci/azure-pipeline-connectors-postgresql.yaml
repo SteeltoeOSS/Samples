@@ -1,11 +1,22 @@
 trigger:
   branches:
     include:
-      - main
+    - main
+    - pr-build-changed
   paths:
     include:
-      - config/*
-      - Connectors/src/PostgreSql/*
+    - '**/*.py'
+    - '**/*.sh'
+    - '**/*.ini'
+    - '**/*.ps1'
+    - .editorconfig
+    - .gitattributes
+    - .gitignore
+    - ci/templates
+    - Connectors/src/PostgreSql
+    - Connectors/src/*.sln*
+    exclude:
+    - '*'
 
 variables:
   - group: 'PCFone Credentials'

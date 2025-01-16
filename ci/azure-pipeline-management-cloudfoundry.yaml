@@ -1,11 +1,22 @@
 trigger:
   branches:
     include:
-      - main
+    - main
+    - pr-build-changed
   paths:
     include:
-      - config/*
-      - Management/src/ActuatorApi/*
+    - '**/*.py'
+    - '**/*.sh'
+    - '**/*.ini'
+    - '**/*.ps1'
+    - .editorconfig
+    - .gitattributes
+    - .gitignore
+    - ci/templates
+    - Management/src/ActuatorApi
+    - Management/src/*.sln*
+    exclude:
+    - '*'
 
 variables:
   - group: 'PCFone Credentials'
