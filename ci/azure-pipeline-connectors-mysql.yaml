@@ -5,9 +5,7 @@ trigger:
     - pr-build-changed
   paths:
     include:
-    - ci/templates
     - Connectors/src/MySql
-    - Connectors/src/*.sln*
 
 variables:
   - group: 'PCFone Credentials'
