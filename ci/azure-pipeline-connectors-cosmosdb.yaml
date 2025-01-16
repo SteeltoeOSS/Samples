@@ -6,9 +6,6 @@ trigger:
     - pr-build-changed
   paths:
     include:
-    - .editorconfig
-    - .gitattributes
-    - .gitignore
     - ci/templates
     - Connectors/src/CosmosDb
     - Connectors/src/*.sln*
