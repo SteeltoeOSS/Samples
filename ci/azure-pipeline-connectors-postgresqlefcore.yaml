@@ -5,11 +5,11 @@ trigger:
     - latest
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/PostgreSqlEFCore
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/PostgreSqlEFCore
 
 variables:
   - group: 'PCFone Credentials'

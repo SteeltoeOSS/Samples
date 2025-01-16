@@ -5,11 +5,11 @@ trigger:
     - latest
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/SqlServerEFCore
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/SqlServerEFCore
 
 variables:
   - group: 'PCFone Credentials'

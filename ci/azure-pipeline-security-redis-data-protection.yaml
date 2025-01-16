@@ -5,11 +5,11 @@ trigger:
     - latest
     - pr-build-changed
   paths:
+    include:
+    - Security/src/RedisDataProtection
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Security/src/RedisDataProtection
 
 variables:
   - group: 'PCFone Credentials'
