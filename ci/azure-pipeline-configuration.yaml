@@ -16,8 +16,6 @@ trigger:
     - ci/templates
     - Configuration
     - Configuration/src/*.sln*
-    exclude:
-    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'

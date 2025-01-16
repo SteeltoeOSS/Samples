@@ -16,8 +16,6 @@ trigger:
     - ci/templates
     - Connectors/src/PostgreSqlEFCore
     - Connectors/src/*.sln*
-    exclude:
-    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'
