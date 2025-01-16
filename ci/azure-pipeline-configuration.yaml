@@ -4,11 +4,11 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    include:
+    - Configuration
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Configuration
 
 variables:
   - group: 'PCFone Credentials'

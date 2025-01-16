@@ -4,11 +4,11 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/MongoDb
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/MongoDb
 
 variables:
   - group: 'PCFone Credentials'

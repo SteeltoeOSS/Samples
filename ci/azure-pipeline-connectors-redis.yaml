@@ -4,11 +4,11 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/Redis
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/Redis
 
 variables:
   - group: 'PCFone Credentials'

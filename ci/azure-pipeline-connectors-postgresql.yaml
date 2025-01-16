@@ -4,11 +4,11 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/PostgreSql
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/PostgreSql
 
 variables:
   - group: 'PCFone Credentials'

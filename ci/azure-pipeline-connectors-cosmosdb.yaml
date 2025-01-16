@@ -4,11 +4,11 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/CosmosDb
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/CosmosDb
 
 variables:
   - group: 'PCFone Credentials'

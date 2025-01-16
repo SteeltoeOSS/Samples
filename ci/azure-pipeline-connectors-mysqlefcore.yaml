@@ -4,11 +4,11 @@ trigger:
     - main
     - pr-build-changed
   paths:
+    include:
+    - Connectors/src/MySqlEFCore
     exclude:
     - '*'
     - '**/*'
-    include:
-    - Connectors/src/MySqlEFCore
 
 variables:
   - group: 'PCFone Credentials'
