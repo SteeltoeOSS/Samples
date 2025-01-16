@@ -16,7 +16,7 @@ trigger:
     - Connectors/src/MySqlEFCore
     - Connectors/src/*.sln*
     exclude:
-    - '*'
+    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'

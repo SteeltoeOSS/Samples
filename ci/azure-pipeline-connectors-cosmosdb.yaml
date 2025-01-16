@@ -16,7 +16,7 @@ trigger:
     - Connectors/src/CosmosDb
     - Connectors/src/*.sln*
     exclude:
-    - '*'
+    - '**/*'
 
 variables:
   - group: 'PCFone Credentials'
