@@ -2,6 +2,8 @@ pr:
   paths:
     include:
     - Connectors/src/Redis
+    exclude:
+    - '*'
 
 variables:
   - group: 'PCFone Credentials'

@@ -2,6 +2,8 @@ pr:
   paths:
     include:
     - Connectors/src/MongoDb
+    exclude:
+    - '*'
 
 variables:
   - group: 'PCFone Credentials'

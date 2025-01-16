@@ -2,6 +2,8 @@ pr:
   paths:
     include:
     - Connectors/src/PostgreSql
+    exclude:
+    - '*'
 
 variables:
   - group: 'PCFone Credentials'
