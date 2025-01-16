@@ -4,6 +4,7 @@ pr:
     - Management/src/ActuatorApi
     exclude:
     - '*'
+    - '/*'
     - '**/'
     - '**/*'
 
