@@ -1,14 +1,16 @@
-trigger:
-  branches:
-    include:
-    - main
-    - pr-build-changed
+pr:
   paths:
     include:
+    - '**/*.py'
+    - '**/*.sh'
+    - '**/*.ini'
+    - '**/*.ps1'
+    - .editorconfig
+    - .gitattributes
+    - .gitignore
+    - ci/templates
     - Connectors/src/Redis
-    exclude:
-    - '*'
-    - '**/*'
+    - Connectors/src/*.sln*
 
 variables:
   - group: 'PCFone Credentials'
