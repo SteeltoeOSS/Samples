@@ -193,6 +193,8 @@ If you wish to collect and view application metrics, the [Metrics Registrar](htt
 1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 8090`
 1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 8091`
 1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/using.html#custom-metrics)
+   1. Use an included .http file to send a request to the Prometheus to see what metrics are available
+   1. Try the query `sum(process_runtime_dotnet_gc_objects_size_bytes{source_id="$sourceId"})` to see how much memory is in use by objects in the GC heap that haven't been collected yet
 
 > [!NOTE]
 > Prometheus scraping on Cloud Foundry cannot be configured with authentication. As such, we recommend using a dedicated port that is not internet-routable.
