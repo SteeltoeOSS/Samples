@@ -68,16 +68,18 @@ Authorization: {{Authorization_Header_Value}}
 POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
+Content-Type: application/json
 {
   "configuredLevel": "TRACE"
 }
 
-### Loggers actuator, reset minimum level for a logger  
-POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples  
-Accept: application/json  
-Authorization: {{Authorization_Header_Value}}  
-{  
-  "configuredLevel": null  
+### Loggers actuator, reset minimum level for a logger
+POST {{ManagementAddress}}/{{Actuator_Context}}/loggers/Steeltoe.Samples
+Accept: application/json
+Authorization: {{Authorization_Header_Value}}
+Content-Type: application/json
+{
+  "configuredLevel": null
 }
 
 ### HTTP Exchanges actuator
@@ -87,16 +89,6 @@ Authorization: {{Authorization_Header_Value}}
 
 ### Mappings actuator, list registered HTTP routes
 GET {{ManagementAddress}}/{{Actuator_Context}}/mappings
-Accept: application/json
-Authorization: {{Authorization_Header_Value}}
-
-### Metrics actuator, list all metrics
-GET {{ManagementAddress}}/{{Actuator_Context}}/metrics
-Accept: application/json
-Authorization: {{Authorization_Header_Value}}
-
-### Metrics actuator, check a meter
-GET {{ManagementAddress}}/{{Actuator_Context}}/metrics/clr.process.uptime
 Accept: application/json
 Authorization: {{Authorization_Header_Value}}
 
