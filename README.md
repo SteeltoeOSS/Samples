@@ -48,10 +48,6 @@ Samples using the Steeltoe Security packages for Authentication and Authorizatio
 | --- | --- | --- |
 | [RedisDataProtection](Security/src/RedisDataProtection) | | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FSteeltoe-Samples-Security-RedisDataProtection?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=74&branchName=latest) |
 
-## [MusicStore](MusicStore)
-
-A sample that uses all of the Steeltoe components together in a microservices-based ASP.NET Core application. Adapted from the ASP.NET Core reference app: [MusicStore by Microsoft](https://github.com/aspnet/AspNetCore/tree/main/src/MusicStore).
-
 ## [FreddysBBQ](FreddysBBQ)
 
 A polyglot (Java and .NET) microservices-based sample demonstrating interoperability between Java and .NET on Cloud Foundry, secured with OAuth2 Security Services and using Spring Cloud Services.

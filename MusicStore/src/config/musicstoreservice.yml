@@ -1,6 +1,0 @@
-eureka:
-  client:
-    shouldFetchRegistry: false
-mysql:
-  client:
-    database: MusicService
