@@ -1,9 +1,0 @@
-eureka:
-  client:
-    shouldFetchRegistry: false
-mysql:
-  client:
-    database: ShoppingCart
-sqlserver:
-  credentials:
-    database: ShoppingCart
