@@ -7,7 +7,7 @@ ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that
 These samples also illustrate how to have application metrics captured and exported to the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html) service so that application metrics can be viewed in any tool that is able to consume those metrics from the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
 Several tools exist that can do this, including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html).
 
-> [!NOTE]  
+> [!NOTE]
 > While this application is intended to be used with [ActuatorApi](../ActuatorApi/), it _can_ be used on its own if you
 > are looking for a simpler actuator or metrics example.
 
@@ -30,7 +30,7 @@ In order to experience all of the functionality in a local environment, you will
 * Installed container orchestrator (such as [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Podman Desktop](https://podman-desktop.io/))
 * Optional: an IDE (such as Visual Studio), for performing the requests defined in [ActuatorWeb.http](./ActuatorWeb.http) and [ActuatorApi.http](../ActuatorApi/ActuatorApi.http).
 
-> [!NOTE]  
+> [!NOTE]
 > Use the [docker-compose file](../docker-compose.yaml) to run all of the backing services used by these samples.
 >
 > ```shell
@@ -47,12 +47,12 @@ This application is configured to register itself with Spring Boot Admin running
 Change the configuration if you are using Podman (see the section [Using Podman](#using-podman)) or don't want actuators on a dedicated port.
 All of the above is also true for ActuatorApi, except that application has actuators configured on port 8091.
 
-> [!NOTE]  
+> [!NOTE]
 > Please be aware that changes to the actuator port (or scheme) will also affect Prometheus. Be sure to update [prometheus.yml](../prometheus/prometheus.yml) accordingly.
 
 ### Zipkin Server
 
-> [!NOTE]  
+> [!NOTE]
 > Previous versions of Steeltoe included distributed tracing functionality. That functionality has moved to OpenTelemetry.
 > We expect many Steeltoe users still use distributed tracing, so this sample includes the same OpenTelemetry configuration as prior versions of Steeltoe.
 > Visit [OpenTelemetry](https://opentelemetry.io/docs/languages/net/) to learn more.
@@ -193,7 +193,7 @@ If you wish to collect and view application metrics, the [Metrics Registrar](htt
 1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 8090`
 1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 8091`
 1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/using.html#custom-metrics)
-   1. Use an included .http file to send a request to the Prometheus to see what metrics are available
+   1. Use an included .http file to send a request to the Prometheus endpoint to see what metrics are available
    1. Try the query `sum(process_runtime_dotnet_gc_objects_size_bytes{source_id="$sourceId"})` to see how much memory is in use by objects in the GC heap that haven't been collected yet
 
 > [!NOTE]
