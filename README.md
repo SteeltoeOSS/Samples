@@ -48,18 +48,14 @@ Samples using the Steeltoe Security packages for Authentication and Authorizatio
 | --- | --- | --- |
 | [RedisDataProtection](Security/src/RedisDataProtection) | | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FSteeltoe-Samples-Security-RedisDataProtection?branchName=latest)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=74&branchName=latest) |
 
-## [FreddysBBQ](FreddysBBQ)
-
-A polyglot (Java and .NET) microservices-based sample demonstrating interoperability between Java and .NET on Cloud Foundry, secured with OAuth2 Security Services and using Spring Cloud Services.
-
-# Branches
+## Branches
 
 All new development is done on the latest branch. Samples for the stable version of Steeltoe can be found on the main branch.
 
-# Documentation
+## Documentation
 
 If you are looking for documentation on how to use the Steeltoe components, you can find that [here](https://steeltoe.io/docs/).
 
-# Building & Running
+## Building & Running
 
 See the Readmes for each sample for instructions on how to build and run.
