@@ -22,7 +22,7 @@ public class CertificateAuthorizationController(ILogger<CertificateAuthorization
         return "This action requires a client certificate to be provided";
     }
 
-    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme, Policy = CertificateAuthorizationPolicies.SameOrganization)]
+    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme, Policy = CertificateAuthorizationPolicies.SameOrg)]
     [HttpGet]
     public string SameOrg()
     {
