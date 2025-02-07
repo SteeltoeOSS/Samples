@@ -18,7 +18,7 @@ using Steeltoe.Samples.AuthWeb.ApiClients;
 using Steeltoe.Security.Authentication.OpenIdConnect;
 using Steeltoe.Security.Authorization.Certificate;
 
-const string organizationId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
+const string orgId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
 const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -32,7 +32,7 @@ builder.AddCloudFoundryConfiguration();
 builder.Configuration.AddCloudFoundryServiceBindings();
 
 // Steeltoe: Add instance identity certificate to configuration.
-builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(organizationId), new Guid(spaceId));
+builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
 
 // Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry.
 builder.Services.AddAuthentication(options =>
