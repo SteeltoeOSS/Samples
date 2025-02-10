@@ -14,7 +14,7 @@ and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/Sta
    or [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
    and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
    > [!NOTE]
-   > ASP.NET requires that Lua scripting is activated, which is disabled by default on Cloud Foundry (check your plan settings)
+   > ASP.NET before v9 requires that Lua scripting is activated, which is disabled by default on Cloud Foundry (check your plan settings)
 1. Optional: [VMware Tanzu Platform for Kubernetes](https://docs.vmware.com/en/VMware-Tanzu-Platform/services/create-manage-apps-tanzu-platform-k8s/overview.html) v1.5 or higher
    and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
 
