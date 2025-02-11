@@ -1,12 +1,9 @@
-trigger:
-  branches:
-    include:
-      - main
-      - latest
+pr:
   paths:
     include:
-      - config/*
-      - Connectors/src/PostgreSqlEFCore/*
+    - Connectors/src/PostgreSqlEFCore
+    exclude:
+    - '/*'
 
 variables:
   - group: 'PCFone Credentials'

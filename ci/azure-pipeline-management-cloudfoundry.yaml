@@ -1,12 +1,9 @@
-trigger:
-  branches:
-    include:
-      - main
-      - latest
+pr:
   paths:
     include:
-      - config/*
-      - Management/src/ActuatorApi/*
+    - Management/src/ActuatorApi
+    exclude:
+    - '/*'
 
 variables:
   - group: 'PCFone Credentials'

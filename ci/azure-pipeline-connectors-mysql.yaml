@@ -1,12 +1,9 @@
-trigger:
-  branches:
-    include:
-      - main
-      - latest
+pr:
   paths:
     include:
-      - config/*
-      - Connectors/src/MySql/*
+    - Connectors/src/MySql
+    exclude:
+    - '/*'
 
 variables:
   - group: 'PCFone Credentials'

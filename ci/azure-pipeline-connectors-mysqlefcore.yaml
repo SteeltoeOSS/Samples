@@ -1,12 +1,9 @@
-trigger:
-  branches:
-    include:
-      - main
-      - latest
+pr:
   paths:
     include:
-      - config/*
-      - Connectors/src/MySqlEFCore/*
+    - Connectors/src/MySqlEFCore
+    exclude:
+    - '/*'
 
 variables:
   - group: 'PCFone Credentials'

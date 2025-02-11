@@ -1,12 +1,9 @@
-trigger:
-  branches:
-    include:
-      - main
-      - latest
+pr:
   paths:
     include:
-      - config/*
-      - Connectors/src/PostgreSql/*
+    - Connectors/src/PostgreSql
+    exclude:
+    - '/*'
 
 variables:
   - group: 'PCFone Credentials'
