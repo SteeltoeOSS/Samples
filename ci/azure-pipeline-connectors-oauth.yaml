@@ -1,11 +1,4 @@
-trigger:
-  branches:
-    include:
-      - main
-  paths:
-    include:
-      - config/*
-      - Connectors/src/OAuth/*
+trigger: none
 
 variables:
   - group: 'PCFone Credentials'
