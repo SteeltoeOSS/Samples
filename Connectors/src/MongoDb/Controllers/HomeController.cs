@@ -1,33 +1,39 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MongoDb.Data;
 using MongoDB.Driver;
-using MongoDb.Models;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.MongoDb;
+using Steeltoe.Samples.MongoDb.Data;
+using Steeltoe.Samples.MongoDb.Models;
 
-namespace MongoDb.Controllers;
+namespace Steeltoe.Samples.MongoDb.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IMongoClient _mongoClient;
+    private readonly Connector<MongoDbOptions, IMongoClient> _connector;
 
-    public HomeController(ILogger<HomeController> logger, IMongoClient mongoClient)
+    public HomeController(ILogger<HomeController> logger, ConnectorFactory<MongoDbOptions, IMongoClient> connectorFactory)
     {
         _logger = logger;
-        _mongoClient = mongoClient;
+        _connector = connectorFactory.Get();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         // Steeltoe: Fetch objects from MongoDB collection.
-        IMongoDatabase database = _mongoClient.GetDatabase("TestDatabase");
-        IMongoCollection<SampleObject> collection = database.GetCollection<SampleObject>("SampleObjects");
-        List<SampleObject> objects = await collection.Find(obj => true).ToListAsync(cancellationToken);
-
-        return View(new MongoDbViewModel
+        var model = new MongoDbViewModel
         {
-            SampleObjects = objects
-        });
+            ConnectionString = _connector.Options.ConnectionString,
+            Database = _connector.Options.Database
+        };
+
+        IMongoClient client = _connector.GetConnection();
+        IMongoDatabase database = client.GetDatabase(_connector.Options.Database);
+        IMongoCollection<SampleObject> collection = database.GetCollection<SampleObject>("SampleObjects");
+        model.SampleObjects = await collection.Find(obj => true).ToListAsync(cancellationToken);
+
+        return View(model);
     }
 
     public IActionResult Privacy()

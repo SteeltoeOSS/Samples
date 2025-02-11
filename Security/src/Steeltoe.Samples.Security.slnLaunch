@@ -1,0 +1,27 @@
+[
+  {
+    "Name": "Auth Samples",
+    "Projects": [
+      {
+        "Path": "AuthApi\\Steeltoe.Samples.AuthApi.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "AuthWeb\\Steeltoe.Samples.AuthWeb.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  },
+  {
+    "Name": "Redis Sample",
+    "Projects": [
+      {
+        "Path": "RedisDataProtection\\Steeltoe.Samples.RedisDataProtection.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

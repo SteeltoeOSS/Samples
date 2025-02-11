@@ -1,20 +1,32 @@
-using CosmosDb;
-using CosmosDb.Data;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.Endpoint;
+using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.Extensions.Options;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connectors.CosmosDb;
+using Steeltoe.Management.Endpoint.Actuators.All;
+using Steeltoe.Samples.CosmosDb;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
-builder.AddAllActuators();
-
-// Steeltoe: Insert some objects into CosmosDB container.
-ICosmosDbService cosmosDbService = await CosmosDbSeeder.CreateSampleDataAsync(builder.Configuration);
-builder.Services.AddSingleton(cosmosDbService);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors).
+builder.AddCloudFoundryConfiguration();
+
+// Steeltoe: Add actuator endpoints.
+builder.Services.AddAllActuators();
+
+// Steeltoe: Setup CosmosDB options, connection factory and health checks.
+builder.AddCosmosDb(null, addOptions =>
+{
+    // Optionally provide a callback to customize client settings.
+    addOptions.CreateConnection = (serviceProvider, serviceBindingName) =>
+    {
+        var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<CosmosDbOptions>>();
+        CosmosDbOptions options = optionsMonitor.Get(serviceBindingName);
+        return new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector-sample").Build();
+    };
+});
 
 WebApplication app = builder.Build();
 
@@ -34,5 +46,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+
+// Steeltoe: Insert some objects into CosmosDB collection.
+await CosmosDbSeeder.CreateSampleDataAsync(app.Services);
 
 app.Run();

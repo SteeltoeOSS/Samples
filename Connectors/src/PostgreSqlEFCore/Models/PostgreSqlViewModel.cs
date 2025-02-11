@@ -1,6 +1,6 @@
-﻿using PostgreSqlEFCore.Entities;
+﻿using Steeltoe.Samples.PostgreSqlEFCore.Entities;
 
-namespace PostgreSqlEFCore.Models;
+namespace Steeltoe.Samples.PostgreSqlEFCore.Models;
 
 public sealed class PostgreSqlViewModel
 {

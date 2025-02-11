@@ -1,4 +1,4 @@
-namespace MongoDb.Models;
+namespace Steeltoe.Samples.MongoDb.Models;
 
 public class ErrorViewModel
 {

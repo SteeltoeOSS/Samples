@@ -1,16 +1,30 @@
-﻿@using SqlServerEFCore.Entities
-@model SqlServerViewModel
+﻿@using Steeltoe.Samples.SqlServerEFCore.Entities
+@model Steeltoe.Samples.SqlServerEFCore.Models.SqlServerViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 <!-- Steeltoe: Display information from EF Core DbContext. -->
 <div class="alert alert-secondary">
+    <h4>SQL Server server info</h4>
+    <table class="table table-bordered table-primary">
+        <thead>
+        <tr>
+            <th scope="col">Connection String</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>@Model.ConnectionString</td>
+        </tr>
+        </tbody>
+    </table>
+
     <h4>Rows stored in SQL Server AppDbContext</h4>
     <table class="table table-bordered table-primary">
         <thead>

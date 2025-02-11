@@ -1,17 +1,46 @@
-﻿@using CosmosDb.Data
-@model CosmosDbViewModel
+﻿@using Steeltoe.Samples.CosmosDb.Data
+@model Steeltoe.Samples.CosmosDb.Models.CosmosDbViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    th:first-child, td:first-child {
+        left: 1px;
+        position: sticky;
+    }
+</style>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 <!-- Steeltoe: Display information from CosmosDB. -->
 <div class="alert alert-secondary">
-    <h4>Objects stored in CosmosDB container</h4>
+    <h4>CosmosDB server info</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-primary mb-0">
+            <tbody>
+            <tr>
+                <th>Connection String</th>
+                <td>@Model.ConnectionString</td>
+            </tr>
+            <tr>
+                <th>Options</th>
+                <td>
+                    <pre>@Html.Raw(Model.OptionsJson)</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>Database</th>
+                <td>@Model.Database</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4 class="mt-3">Objects stored in CosmosDB container</h4>
     <table class="table table-bordered table-primary">
         <thead>
         <tr>

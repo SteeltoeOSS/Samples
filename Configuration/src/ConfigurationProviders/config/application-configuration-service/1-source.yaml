@@ -1,0 +1,10 @@
+﻿apiVersion: "config.apps.tanzu.vmware.com/v1alpha4"
+kind: ConfigurationSource
+metadata:
+  name: config-source
+  namespace: apps
+spec:
+  backends:
+    - type: git
+      uri: https://github.com/spring-cloud-samples/config-repo
+      defaultLabel: main

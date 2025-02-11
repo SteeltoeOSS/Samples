@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SqlServerEFCore.Data;
-using SqlServerEFCore.Models;
+using Steeltoe.Samples.SqlServerEFCore.Data;
+using Steeltoe.Samples.SqlServerEFCore.Models;
 
-namespace SqlServerEFCore.Controllers;
+namespace Steeltoe.Samples.SqlServerEFCore.Controllers;
 
 public class HomeController : Controller
 {
@@ -22,6 +22,7 @@ public class HomeController : Controller
         // Steeltoe: Fetch data from SQL Server table.
         return View(new SqlServerViewModel
         {
+            ConnectionString = _appDbContext.Database.GetConnectionString(),
             SampleEntities = await _appDbContext.SampleEntities.ToListAsync(cancellationToken)
         });
     }

@@ -1,27 +1,20 @@
-﻿using System.Data.Common;
-using Npgsql;
+﻿using Npgsql;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.PostgreSql;
 
-namespace PostgreSql;
+namespace Steeltoe.Samples.PostgreSql;
 
 internal sealed class PostgreSqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
-        await using AsyncServiceScope scope = serviceProvider.CreateAsyncScope();
+        var connectorFactory = serviceProvider.GetRequiredService<ConnectorFactory<PostgreSqlOptions, NpgsqlConnection>>();
+        await using NpgsqlConnection connection = connectorFactory.Get().GetConnection();
 
-        try
-        {
-            await using var connection = scope.ServiceProvider.GetRequiredService<NpgsqlConnection>();
-            await connection.OpenAsync();
+        await connection.OpenAsync();
 
-            await DropCreateTableAsync(connection);
-            await InsertSampleDataAsync(connection);
-        }
-        catch (DbException exception)
-        {
-            var logger = serviceProvider.GetRequiredService<ILogger<PostgreSqlSeeder>>();
-            logger.LogError(exception, "An error occurred seeding the DB.");
-        }
+        await DropCreateTableAsync(connection);
+        await InsertSampleDataAsync(connection);
     }
 
     private static async Task DropCreateTableAsync(NpgsqlConnection connection)

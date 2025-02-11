@@ -1,24 +1,38 @@
-using Redis;
-using Steeltoe.Connector.Redis;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.Endpoint;
+using Microsoft.Extensions.Options;
+using StackExchange.Redis;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connectors.Redis;
+using Steeltoe.Management.Endpoint.Actuators.All;
+using Steeltoe.Samples.Redis;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
-builder.AddAllActuators();
-
-// Steeltoe: Add the Redis distributed cache.
-// We are using the Steeltoe Redis Connector to pickup the CloudFoundry Redis Service binding and use it to configure
-// the underlying Redis cache. This adds an IDistributedCache to the container.
-builder.Services.AddDistributedRedisCache(builder.Configuration);
-
-// Steeltoe: This works like the above, but adds an IConnectionMultiplexer to the container.
-builder.Services.AddRedisConnectionMultiplexer(builder.Configuration);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors).
+builder.AddCloudFoundryConfiguration();
+
+// Steeltoe: Add actuator endpoints.
+builder.Services.AddAllActuators();
+
+// Steeltoe: Setup Redis options, connection factory and health checks, optionally providing a callback to customize client settings.
+builder.AddRedis(null, addOptions =>
+{
+    // Optionally provide a callback to customize client settings.
+    addOptions.CreateConnection = (serviceProvider, serviceBindingName) =>
+    {
+        var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<RedisOptions>>();
+        RedisOptions options = optionsMonitor.Get(serviceBindingName);
+
+        ConfigurationOptions redisOptions = !string.IsNullOrWhiteSpace(options.ConnectionString)
+            ? ConfigurationOptions.Parse(options.ConnectionString)
+            : new ConfigurationOptions();
+
+        redisOptions.ClientName = "redis-connector-sample";
+        return ConnectionMultiplexer.Connect(redisOptions);
+    };
+});
 
 WebApplication app = builder.Build();
 

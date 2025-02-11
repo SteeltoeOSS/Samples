@@ -1,0 +1,70 @@
+﻿@using Steeltoe.Common
+@using Steeltoe.Configuration.CloudFoundry
+@model Steeltoe.Samples.ConfigurationProviders.Models.CloudFoundryViewModel
+@{
+    ViewData["Title"] = "Cloud Foundry Configuration data from VCAP_APPLICATION and VCAP_SERVICES";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Platform.IsCloudFoundry)
+{
+    <h3 class="text-center">Configuration Data from VCAP_APPLICATION</h3>
+
+    <h4>vcap:application:application_name = @Model.Application.ApplicationName</h4>
+    <h4>vcap:application:application_id = @Model.Application.ApplicationId</h4>
+    <h4>vcap:application:application_version = @Model.Application.ApplicationVersion</h4>
+    <h4>vcap:application:application_uris = @(Model.Application.Uris.FirstOrDefault())</h4>
+
+    <h4>vcap:application:space_name = @Model.Application.SpaceName</h4>
+    <h4>vcap:application:space_id = @Model.Application.SpaceId</h4>
+
+    <h4>vcap:application:instance_id = @Model.Application.InstanceId</h4>
+    <h4>vcap:application:instance_index = @Model.Application.InstanceIndex</h4>
+
+    <h4>vcap:application:limits:disk = @Model.Application.Limits?.Disk</h4>
+    <h4>vcap:application:limits:mem = @Model.Application.Limits?.Memory</h4>
+    <h4>vcap:application:limits:fds = @Model.Application.Limits?.FileDescriptor</h4>
+
+    <h4>vcap:application:start = @Model.Application.Start</h4>
+
+    <h3 class="text-center">Configuration Data from VCAP_SERVICES</h3>
+
+    @if (!Model.Services.GetAllServices().Any())
+    {
+        <h4 class="text-warning">No service bindings found!</h4>
+    }
+
+    @foreach (CloudFoundryService service in Model.Services.GetAllServices())
+    {
+        <h4>vcap:services:@(service.Label):label = @service.Label</h4>
+        <h4>vcap:services:@(service.Label):plan = @service.Plan</h4>
+        <h4>vcap:services:@(service.Label):name = @service.Name</h4>
+        <h4>
+            vcap:services:@(service.Label):tags =
+            @foreach (string tag in service.Tags)
+            {
+                @(tag + " ")
+            }
+        </h4>
+        <h4>vcap:services:@(service.Label):credentials =</h4>
+
+        @if (service.Credentials.Keys.First() == "credhub-ref")
+        {
+            <h4>Credentials are stored in credhub, there's nothing to see here</h4>
+        }
+        else
+        {
+            <ul>
+                @foreach (KeyValuePair<string, CloudFoundryCredentials> pair in service.Credentials)
+                {
+                    <li>@pair.Key = @pair.Value.Value</li>
+                }
+            </ul>
+        }
+    }
+}
+else
+{
+    <h3 class="alert-danger text-center">This page is far more interesting when running on Cloud Foundry</h3>
+}

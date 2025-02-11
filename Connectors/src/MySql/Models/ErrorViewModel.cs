@@ -1,4 +1,4 @@
-namespace MySql.Models;
+namespace Steeltoe.Samples.MySql.Models;
 
 public class ErrorViewModel
 {

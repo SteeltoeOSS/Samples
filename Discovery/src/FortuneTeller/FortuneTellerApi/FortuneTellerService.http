@@ -1,0 +1,36 @@
+@FortuneTellerApi_HostAddress = https://localhost:7251
+@Consul_HostAddress = http://localhost:8500
+@Eureka_HostAddress = http://localhost:8761
+
+GET {{FortuneTellerApi_HostAddress}}/api/fortunes
+Accept: application/json
+
+###
+
+GET {{FortuneTellerApi_HostAddress}}/api/fortunes/random
+Accept: application/json
+
+###
+
+GET {{FortuneTellerApi_HostAddress}}/api/configuration
+Accept: application/json
+
+###
+
+GET {{FortuneTellerApi_HostAddress}}/actuator/health
+Accept: application/json
+
+###
+
+GET {{Consul_HostAddress}}/v1/agent/services
+Accept: application/json
+
+###
+
+GET {{Consul_HostAddress}}/v1/agent/checks
+Accept: application/json
+
+###
+
+GET {{Eureka_HostAddress}}/eureka/apps
+Accept: application/json

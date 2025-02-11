@@ -1,14 +1,16 @@
 ﻿---
 applications:
-- name: mysqlefcore-connector
+- name: mysql-efcore-connector-sample
   random-route: true
   buildpacks:
    - dotnet_core_buildpack
   memory: 256M
+  stack: cflinuxfs4
   env:
     ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - myMySqlService
-   # - myOtherMySqlService
+   - sampleMySqlService
+   #- sampleMySqlServiceOne
+   #- sampleMySqlServiceTwo

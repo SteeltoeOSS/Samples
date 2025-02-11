@@ -1,9 +1,8 @@
-﻿namespace MySql.Models;
+﻿namespace Steeltoe.Samples.MySql.Models;
 
 public sealed class MySqlViewModel
 {
-    public string? DatabaseName { get; set; }
-    public string? ServerName { get; set; }
+    public string? ConnectionString { get; set; }
 
     public Dictionary<string, string?> Rows { get; set; } = new();
 }

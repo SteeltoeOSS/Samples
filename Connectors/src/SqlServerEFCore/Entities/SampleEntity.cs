@@ -1,4 +1,4 @@
-﻿namespace SqlServerEFCore.Entities;
+﻿namespace Steeltoe.Samples.SqlServerEFCore.Entities;
 
 public sealed class SampleEntity
 {

@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PostgreSqlEFCore.Data;
-using PostgreSqlEFCore.Models;
+using Steeltoe.Samples.PostgreSqlEFCore.Data;
+using Steeltoe.Samples.PostgreSqlEFCore.Models;
 
-namespace PostgreSqlEFCore.Controllers;
+namespace Steeltoe.Samples.PostgreSqlEFCore.Controllers;
 
 public class HomeController : Controller
 {

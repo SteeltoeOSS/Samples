@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.FortuneTellerWeb", "FortuneTellerWeb\Steeltoe.Samples.FortuneTellerWeb.csproj", "{BAB80D02-6C31-4772-9C43-E08A309DA7B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Samples.FortuneTellerApi", "FortuneTellerApi\Steeltoe.Samples.FortuneTellerApi.csproj", "{57A04D00-FAC2-4AD1-847B-03E58A95CAED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1073526A-A0F2-4EE7-8EE5-6D95EA4ADBD1}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steeltoe.Samples.FortuneTellerConsole", "FortuneTellerConsole\Steeltoe.Samples.FortuneTellerConsole.csproj", "{D2DAB311-4D1B-41C2-9E65-068CBBAE310D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAB80D02-6C31-4772-9C43-E08A309DA7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB80D02-6C31-4772-9C43-E08A309DA7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB80D02-6C31-4772-9C43-E08A309DA7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB80D02-6C31-4772-9C43-E08A309DA7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A04D00-FAC2-4AD1-847B-03E58A95CAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A04D00-FAC2-4AD1-847B-03E58A95CAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A04D00-FAC2-4AD1-847B-03E58A95CAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A04D00-FAC2-4AD1-847B-03E58A95CAED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2DAB311-4D1B-41C2-9E65-068CBBAE310D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DAB311-4D1B-41C2-9E65-068CBBAE310D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DAB311-4D1B-41C2-9E65-068CBBAE310D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DAB311-4D1B-41C2-9E65-068CBBAE310D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1364BBFB-6AF2-415B-A263-4B496CE3A988}
+	EndGlobalSection
+EndGlobal

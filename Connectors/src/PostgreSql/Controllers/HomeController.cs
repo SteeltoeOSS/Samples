@@ -2,19 +2,21 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
-using PostgreSql.Models;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.PostgreSql;
+using Steeltoe.Samples.PostgreSql.Models;
 
-namespace PostgreSql.Controllers;
+namespace Steeltoe.Samples.PostgreSql.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly NpgsqlConnection _npgsqlConnection;
+    private readonly Connector<PostgreSqlOptions, NpgsqlConnection> _connector;
 
-    public HomeController(ILogger<HomeController> logger, NpgsqlConnection npgsqlConnection)
+    public HomeController(ILogger<HomeController> logger, ConnectorFactory<PostgreSqlOptions, NpgsqlConnection> connectorFactory)
     {
         _logger = logger;
-        _npgsqlConnection = npgsqlConnection;
+        _connector = connectorFactory.Get();
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -22,11 +24,12 @@ public class HomeController : Controller
         // Steeltoe: Fetch data from PostgreSQL table.
         var model = new PostgreSqlViewModel
         {
-            ConnectionString = _npgsqlConnection.ConnectionString
+            ConnectionString = _connector.Options.ConnectionString
         };
 
-        await _npgsqlConnection.OpenAsync(cancellationToken);
-        var command = new NpgsqlCommand("SELECT * FROM TestData;", _npgsqlConnection);
+        await using NpgsqlConnection connection = _connector.GetConnection();
+        await connection.OpenAsync(cancellationToken);
+        var command = new NpgsqlCommand("SELECT * FROM TestData;", connection);
         await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
 
         while (await reader.ReadAsync(cancellationToken))

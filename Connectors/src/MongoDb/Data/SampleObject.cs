@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace MongoDb.Data;
+namespace Steeltoe.Samples.MongoDb.Data;
 
 public sealed class SampleObject
 {

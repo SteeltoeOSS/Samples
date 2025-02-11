@@ -7,10 +7,10 @@ def setup(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     # remove previous app
-    app = 'postgresql-connector'
+    app = 'postgresql-connector-sample'
     cf.delete_app(app)
     # create service
-    service = 'csb-azure-postgresql'
-    plan = 'small'
-    instance = 'myPostgreSqlService'
+    service = 'csb-google-postgres'
+    plan = 'gcp-postgres-tiny'
+    instance = 'samplePostgreSqlService'
     cf.create_service(service, plan, instance)

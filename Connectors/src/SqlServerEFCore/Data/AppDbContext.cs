@@ -1,14 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SqlServerEFCore.Entities;
+using Steeltoe.Samples.SqlServerEFCore.Entities;
 
-namespace SqlServerEFCore.Data;
+namespace Steeltoe.Samples.SqlServerEFCore.Data;
 
-public sealed class AppDbContext : DbContext
+public sealed class AppDbContext(DbContextOptions<AppDbContext> options)
+    : DbContext(options)
 {
     public DbSet<SampleEntity> SampleEntities => Set<SampleEntity>();
-
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    {
-    }
 }

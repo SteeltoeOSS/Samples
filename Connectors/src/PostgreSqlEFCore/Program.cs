@@ -1,26 +1,44 @@
-using PostgreSqlEFCore;
-using PostgreSqlEFCore.Data;
-using Steeltoe.Connector.PostgreSql;
-using Steeltoe.Connector.PostgreSql.EFCore;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding;
-using Steeltoe.Management.Endpoint;
+using Npgsql;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connectors.EntityFrameworkCore.PostgreSql;
+using Steeltoe.Connectors.PostgreSql;
+using Steeltoe.Management.Endpoint.Actuators.All;
+using Steeltoe.Samples.PostgreSqlEFCore;
+using Steeltoe.Samples.PostgreSqlEFCore.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Add cloud service bindings.
-builder.AddCloudFoundryConfiguration();
-builder.Configuration.AddKubernetesServiceBindings();
-
-// Steeltoe: Add actuator endpoints.
-builder.AddAllActuators();
-
-// Steeltoe: Setup PostgreSQL options, connection factory, DbContext connection string and health checks.
-builder.Services.AddPostgresHealthContributor(builder.Configuration);
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration));
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors).
+builder.AddCloudFoundryConfiguration();
+
+// Steeltoe: Add actuator endpoints.
+builder.Services.AddAllActuators();
+
+// Steeltoe: Setup PostgreSQL options, connection factory and health checks.
+builder.AddPostgreSql();
+
+// Steeltoe: optionally change the PostgreSQL connection string at runtime.
+builder.Services.Configure<PostgreSqlOptions>(options =>
+{
+    var connectionStringBuilder = new NpgsqlConnectionStringBuilder
+    {
+        ConnectionString = options.ConnectionString,
+        IncludeErrorDetail = true
+    };
+
+    options.ConnectionString = connectionStringBuilder.ConnectionString;
+});
+
+// Steeltoe: Setup DbContext connection string, optionally changing PostgreSQL options at runtime.
+builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseNpgsql(serviceProvider, null, untypedOptions =>
+{
+    var postgreSqlOptions = (NpgsqlDbContextOptionsBuilder)untypedOptions;
+    postgreSqlOptions.CommandTimeout(15);
+}));
 
 WebApplication app = builder.Build();
 

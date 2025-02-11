@@ -1,8 +1,0 @@
-<Project>
-  <ItemGroup>
-    <PackageVersion Include="Steeltoe.Messaging.RabbitMQ" Version="3.2.1" />
-    <PackageVersion Include="Steeltoe.Connector.ConnectorCore" Version="3.2.1" />
-    <PackageVersion Include="RabbitMQ.Client" Version="5.1.2" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="5.6.0" />
-   </ItemGroup>
-</Project>

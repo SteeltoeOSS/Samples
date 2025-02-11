@@ -1,17 +1,4 @@
-parameters:
-  dotnet6Version: 6.0.x
-  dotnet7Version: 7.0.x
 steps:
-- task: UseDotNet@2
-  displayName: 'Setup DotNet6'
-  inputs:
-    packageType: sdk
-    version: ${{parameters.dotnet6Version}}
-- task: UseDotNet@2
-  displayName: 'Setup DotNet7'
-  inputs:
-    packageType: sdk
-    version: ${{parameters.dotnet7Version}}
 - task: UsePythonVersion@0
   displayName: 'Setup Python'
   inputs:

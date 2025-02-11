@@ -1,17 +1,33 @@
-using MongoDb;
-using Steeltoe.Connector.MongoDb;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
-using Steeltoe.Management.Endpoint;
+using MongoDB.Driver;
+using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Connectors.MongoDb;
+using Steeltoe.Management.Endpoint.Actuators.All;
+using Steeltoe.Samples.MongoDb;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Steeltoe: Setup
-builder.AddCloudFoundryConfiguration();
-builder.AddAllActuators();
-builder.Services.AddMongoClient(builder.Configuration, addSteeltoeHealthChecks: true);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Steeltoe: Add Cloud Foundry Configuration Provider for Actuator integration (not required for connectors).
+builder.AddCloudFoundryConfiguration();
+
+// Steeltoe: Add actuator endpoints.
+builder.Services.AddAllActuators();
+
+// Steeltoe: Setup MongoDB options, connection factory and health checks.
+builder.AddMongoDb();
+
+// Steeltoe: optionally change the MongoDB connection URL at runtime.
+builder.Services.Configure<MongoDbOptions>(options =>
+{
+    var urlBuilder = new MongoUrlBuilder(options.ConnectionString)
+    {
+        ApplicationName = "mongodb-connector-sample"
+    };
+
+    options.ConnectionString = urlBuilder.ToString();
+});
 
 WebApplication app = builder.Build();
 
