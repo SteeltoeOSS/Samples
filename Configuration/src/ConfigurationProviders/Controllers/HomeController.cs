@@ -5,8 +5,6 @@ using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.ConfigServer;
 using Steeltoe.Samples.ConfigurationProviders.Models;
 
-// Added test comment to trigger cibuild change.
-
 namespace Steeltoe.Samples.ConfigurationProviders.Controllers;
 
 public sealed class HomeController(
