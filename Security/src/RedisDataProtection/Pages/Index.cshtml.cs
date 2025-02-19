@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Steeltoe.Samples.RedisDataProtection.Models;
 
-// Added test comment to trigger cibuild change.
-
 namespace Steeltoe.Samples.RedisDataProtection.Pages;
 
 public class IndexModel(
