@@ -3,6 +3,11 @@ trigger:
     exclude:
     - /*
     - !/Configuration/**
+pr:
+  paths:
+    exclude:
+    - /*
+    - !/Configuration/**
 
 variables:
   - group: 'PCFone Credentials'
