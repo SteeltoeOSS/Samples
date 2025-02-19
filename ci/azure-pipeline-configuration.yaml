@@ -2,12 +2,14 @@ trigger:
   paths:
     exclude:
     - /*
-    - !/Configuration/**
+    include:
+    - Configuration
 pr:
   paths:
     exclude:
     - /*
-    - !/Configuration/**
+    include:
+    - Configuration
 
 variables:
   - group: 'PCFone Credentials'
