@@ -1,13 +1,13 @@
 trigger:
   paths:
     exclude:
-    - /*
+    - "/*"
     include:
     - Connectors/src/MySql
 pr:
   paths:
     exclude:
-    - /*
+    - "/*"
     include:
     - Connectors/src/MySql
 

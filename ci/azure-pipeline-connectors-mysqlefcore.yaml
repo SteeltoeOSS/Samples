@@ -1,10 +1,15 @@
-trigger: none
-pr:
+trigger:
   paths:
-    include:
-    - Connectors/src/MySqlEFCore
     exclude:
     - '/*'
+    include:
+    - Connectors/src/MySqlEFCore
+pr:
+  paths:
+    exclude:
+    - '/*'
+    include:
+    - Connectors/src/MySqlEFCore
 
 variables:
   - group: 'PCFone Credentials'
