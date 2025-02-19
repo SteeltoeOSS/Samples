@@ -6,6 +6,8 @@ using Steeltoe.Connectors;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Samples.MySql.Models;
 
+// Added test comment to trigger cibuild change.
+
 namespace Steeltoe.Samples.MySql.Controllers;
 
 public class HomeController : Controller

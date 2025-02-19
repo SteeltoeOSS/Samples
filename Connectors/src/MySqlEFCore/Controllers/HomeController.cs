@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Steeltoe.Samples.MySqlEFCore.Data;
 using Steeltoe.Samples.MySqlEFCore.Models;
 
+// Added test comment to trigger cibuild change.
+
 namespace Steeltoe.Samples.MySqlEFCore.Controllers;
 
 public class HomeController : Controller
