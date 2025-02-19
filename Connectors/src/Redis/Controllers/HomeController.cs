@@ -8,8 +8,6 @@ using Steeltoe.Connectors;
 using Steeltoe.Connectors.Redis;
 using Steeltoe.Samples.Redis.Models;
 
-// Added test comment to trigger cibuild change.
-
 namespace Steeltoe.Samples.Redis.Controllers;
 
 public class HomeController : Controller
