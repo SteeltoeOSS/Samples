@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Steeltoe.Samples.PostgreSqlEFCore.Data;
 using Steeltoe.Samples.PostgreSqlEFCore.Models;
 
+// Added test comment to trigger cibuild change.
+
 namespace Steeltoe.Samples.PostgreSqlEFCore.Controllers;
 
 public class HomeController : Controller
