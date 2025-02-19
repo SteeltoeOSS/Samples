@@ -36,7 +36,7 @@ A polyglot (Java and .NET) microservices-based sample demonstrating interoperabi
 
 # Branches
 
-All new development is done on the latest branch. Samples for the stable version of Steeltoe can be found on the main branch.
+All new development is done on the main branch. Samples for released Steeltoe versions can be found in their respective branches. For example, branch "3.x" contains samples for the latest Steeltoe 3.x release.
 
 # Documentation
 
