@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Steeltoe.Samples.ActuatorApi.Data;
 
-// Added test comment to trigger cibuild change.
-
 #nullable disable
 
 namespace Steeltoe.Samples.ActuatorApi.Migrations;
