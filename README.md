@@ -48,7 +48,7 @@ Samples using the Steeltoe Security packages for Authentication and Authorizatio
 
 # Branches
 
-All new development is done on the main branch. Samples for 2.x and 3.x version of Steeltoe can be found in branches 2.x and 3.x.
+All new development is done on the main branch. Samples for released Steeltoe versions can be found in their respective branches. For example, branch "3.x" contains samples for the latest Steeltoe 3.x release.
 
 # Documentation
 
