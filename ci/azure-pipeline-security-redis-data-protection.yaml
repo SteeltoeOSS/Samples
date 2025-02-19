@@ -1,10 +1,18 @@
-trigger: none
-pr:
+trigger:
+  branches:
+    include:
+    - main
   paths:
+    exclude:
+    - /*
     include:
     - Security/src/RedisDataProtection
+pr:
+  paths:
     exclude:
-    - '/*'
+    - /*
+    include:
+    - Security/src/RedisDataProtection
 
 variables:
   - group: 'PCFone Credentials'
