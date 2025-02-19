@@ -6,6 +6,8 @@ using Steeltoe.Connectors;
 using Steeltoe.Connectors.RabbitMQ;
 using Steeltoe.Samples.RabbitMQ.Models;
 
+// Added test comment to trigger cibuild change.
+
 namespace Steeltoe.Samples.RabbitMQ.Controllers;
 
 public class HomeController : Controller
