@@ -1,4 +1,9 @@
-trigger: none
+trigger:
+  paths:
+    include:
+    - Configuration
+    exclude:
+    - '/*'
 pr:
   paths:
     include:
