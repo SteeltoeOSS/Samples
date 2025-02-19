@@ -6,13 +6,13 @@ trigger:
     exclude:
     - /*
     include:
-    - Configuration
+    - Configuration/src/ConfigurationProviders
 pr:
   paths:
     exclude:
     - /*
     include:
-    - Configuration
+    - Configuration/src/ConfigurationProviders
 
 variables:
   - group: 'PCFone Credentials'

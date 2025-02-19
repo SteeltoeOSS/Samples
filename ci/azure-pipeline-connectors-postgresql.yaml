@@ -3,16 +3,16 @@ trigger:
     include:
     - main
   paths:
-    include:
-    - Connectors/src/PostgreSql
     exclude:
     - /*
+    include:
+    - Connectors/src/PostgreSql
 pr:
   paths:
-    include:
-    - Connectors/src/PostgreSql
     exclude:
     - /*
+    include:
+    - Connectors/src/PostgreSql
 
 variables:
   - group: 'PCFone Credentials'
