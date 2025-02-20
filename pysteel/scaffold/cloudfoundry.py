@@ -34,7 +34,7 @@ def setup(context, scenario):
     if not context.cf_space:
         tld = re.split('/|\\\\', scenario.filename)[0]
         feature_file = os.path.basename(scenario.filename)
-        branch_name = context.env['BUILD_SOURCEBRANCHNAME'] or 'unknown-branch'
+        branch_name = os.getenv('BUILD_SOURCEBRANCHNAME') or 'unknown-branch'
         context.cf_space = "sample-{}-{}-{}".format(
             tld,
             os.path.splitext(feature_file)[0],
