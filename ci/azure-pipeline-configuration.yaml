@@ -35,6 +35,18 @@ jobs:
   timeoutInMinutes: 90
   pool:
     vmImage: ubuntu-latest
+  workspace:
+    clean: all
   steps:
-  - bash: echo Hello
-    displayName: 'Display Hello'
+  - template: templates/setup-cloud-foundry-linux-steps.yaml
+  - bash: touch reinit
+    displayName: 'Reinit Virtual Python Environment'
+  - bash: ./behave.sh Configuration/src/ConfigurationProviders '--stop'
+    displayName: 'Sample -> Configuration: All'
+    env:
+      PYTHON: python3.10
+  - template: templates/publish-results-steps.yaml
+    parameters:
+      feature: ConfigurationProviders
+      sample: All
+      os: Linux
