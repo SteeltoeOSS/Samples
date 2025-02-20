@@ -28,6 +28,11 @@ pr:
 
 variables:
   - group: 'PCFone Credentials'
+  - name: GIT_BRANCH
+    ${{ if eq(variables['build.reason'], 'PullRequest') }}:
+      value : $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+    ${{ else }}:
+      value : ${{ variables['Build.SourceBranchName'] }}
 
 jobs:
 - job: Configuration_All_Linux
