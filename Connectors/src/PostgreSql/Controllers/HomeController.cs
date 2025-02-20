@@ -6,8 +6,6 @@ using Steeltoe.Connectors;
 using Steeltoe.Connectors.PostgreSql;
 using Steeltoe.Samples.PostgreSql.Models;
 
-// Added test comment to trigger cibuild change.
-
 namespace Steeltoe.Samples.PostgreSql.Controllers;
 
 public class HomeController : Controller
