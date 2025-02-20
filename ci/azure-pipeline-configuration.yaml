@@ -30,11 +30,7 @@ variables:
   - group: 'PCFone Credentials'
 
 jobs:
-- job: Configuration_All_Linux
-  displayName: 'Configuration: All (Linux)'
-  timeoutInMinutes: 90
-  pool:
-    vmImage: ubuntu-latest
-  steps:
-  - bash: echo Hello
-    displayName: 'Display Hello'
+  - template: templates/cloud-foundry-job.yaml
+    parameters:
+      feature: ConfigurationProviders
+      sample: All
