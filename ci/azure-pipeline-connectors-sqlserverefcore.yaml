@@ -6,12 +6,24 @@ trigger:
     exclude:
     - /*
     include:
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-connectors-sqlserverefcore.yaml
     - Connectors/src/SqlServerEFCore
 pr:
   paths:
     exclude:
     - /*
     include:
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-connectors-sqlserverefcore.yaml
     - Connectors/src/SqlServerEFCore
 
 variables:

@@ -6,12 +6,24 @@ trigger:
     exclude:
     - /*
     include:
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-security-redis-data-protection.yaml
     - Security/src/RedisDataProtection
 pr:
   paths:
     exclude:
     - /*
     include:
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-security-redis-data-protection.yaml
     - Security/src/RedisDataProtection
 
 variables:
