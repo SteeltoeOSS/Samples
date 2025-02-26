@@ -1,33 +1,36 @@
 trigger:
   branches:
     include:
-      - main
+    - main
   paths:
+    exclude:
+    - /*
     include:
-      - config/*
-      - Configuration/src/*
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-configuration.yaml
+    - Configuration/src/ConfigurationProviders
+pr:
+  paths:
+    exclude:
+    - /*
+    include:
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-configuration.yaml
+    - Configuration/src/ConfigurationProviders
 
 variables:
   - group: 'PCFone Credentials'
 
 jobs:
-- job: Configuration_All_Linux
-  displayName: 'Configuration: All (Linux)'
-  timeoutInMinutes: 90
-  pool:
-    vmImage: ubuntu-latest
-  workspace:
-    clean: all
-  steps:
-  - template: templates/setup-cloud-foundry-linux-steps.yaml
-  - bash: touch reinit
-    displayName: 'Reinit Virtual Python Environment'
-  - bash: ./behave.sh Configuration/src/ConfigurationProviders '--stop'
-    displayName: 'Sample -> Configuration: All'
-    env:
-      PYTHON: python3.10
-  - template: templates/publish-results-steps.yaml
+  - template: templates/cloud-foundry-job.yaml
     parameters:
-      feature: ConfigurationProviders
-      sample: All
-      os: Linux
+      feature: Configuration
+      sample: ConfigurationProviders

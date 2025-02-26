@@ -1,11 +1,30 @@
 trigger:
   branches:
     include:
-      - main
+    - main
   paths:
+    exclude:
+    - /*
     include:
-      - config/*
-      - Management/src/ActuatorApi/*
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-management-cloudfoundry.yaml
+    - Management/src/ActuatorApi
+pr:
+  paths:
+    exclude:
+    - /*
+    include:
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - ci/templates/*.yaml
+    - ci/azure-pipeline-management-cloudfoundry.yaml
+    - Management/src/ActuatorApi
 
 variables:
   - group: 'PCFone Credentials'
