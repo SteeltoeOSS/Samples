@@ -6,6 +6,8 @@ trigger:
     exclude:
     - /*
     include:
+    - .gitattributes
+    - .gitignore
     - behave*
     - Pipfile*
     - pyenv.pkgs
@@ -18,6 +20,8 @@ pr:
     exclude:
     - /*
     include:
+    - .gitattributes
+    - .gitignore
     - behave*
     - Pipfile*
     - pyenv.pkgs
