@@ -1,4 +1,6 @@
-﻿namespace Steeltoe.Samples.RedisDataProtection.Models;
+﻿// Test dummy change
+
+namespace Steeltoe.Samples.RedisDataProtection.Models;
 
 public sealed class SessionStateViewModel
 {
