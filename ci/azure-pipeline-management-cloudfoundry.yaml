@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-management-cloudfoundry.yaml
-    - Management/src/ActuatorApi
+    - Management/src/ActuatorApi/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-management-cloudfoundry.yaml
-    - Management/src/ActuatorApi
+    - Management/src/ActuatorApi/**
 
 variables:
   - group: 'PCFone Credentials'

@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-rabbitmq.yaml
-    - Connectors/src/RabbitMQ
+    - Connectors/src/RabbitMQ/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-rabbitmq.yaml
-    - Connectors/src/RabbitMQ
+    - Connectors/src/RabbitMQ/**
 
 variables:
   - group: 'PCFone Credentials'

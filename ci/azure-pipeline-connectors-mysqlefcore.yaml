@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-mysqlefcore.yaml
-    - Connectors/src/MySqlEFCore
+    - Connectors/src/MySqlEFCore/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-mysqlefcore.yaml
-    - Connectors/src/MySqlEFCore
+    - Connectors/src/MySqlEFCore/**
 
 variables:
   - group: 'PCFone Credentials'

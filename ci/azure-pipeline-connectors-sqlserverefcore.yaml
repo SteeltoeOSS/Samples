@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-sqlserverefcore.yaml
-    - Connectors/src/SqlServerEFCore
+    - Connectors/src/SqlServerEFCore/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-sqlserverefcore.yaml
-    - Connectors/src/SqlServerEFCore
+    - Connectors/src/SqlServerEFCore/**
 
 variables:
   - group: 'PCFone Credentials'

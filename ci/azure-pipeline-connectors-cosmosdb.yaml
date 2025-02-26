@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-cosmosdb.yaml
-    - Connectors/src/CosmosDb
+    - Connectors/src/CosmosDb/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-cosmosdb.yaml
-    - Connectors/src/CosmosDb
+    - Connectors/src/CosmosDb/**
 
 variables:
   - group: 'PCFone Credentials'

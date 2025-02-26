@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-mongodb.yaml
-    - Connectors/src/MongoDb
+    - Connectors/src/MongoDb/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-mongodb.yaml
-    - Connectors/src/MongoDb
+    - Connectors/src/MongoDb/**
 
 variables:
   - group: 'PCFone Credentials'

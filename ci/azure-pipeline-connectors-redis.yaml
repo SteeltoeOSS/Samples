@@ -14,7 +14,7 @@ trigger:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-redis.yaml
-    - Connectors/src/Redis
+    - Connectors/src/Redis/**
 pr:
   paths:
     exclude:
@@ -28,7 +28,7 @@ pr:
     - '**/*.py'
     - ci/templates/*.yaml
     - ci/azure-pipeline-connectors-redis.yaml
-    - Connectors/src/Redis
+    - Connectors/src/Redis/**
 
 variables:
   - group: 'PCFone Credentials'
