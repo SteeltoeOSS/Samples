@@ -12,7 +12,7 @@ trigger:
     - Pipfile*
     - pyenv.pkgs
     - '**/*.py'
-    - ci/templates/*.yaml
+    - ci/templates
     - ci/azure-pipeline-security-redis-data-protection.yaml
     - Security/src/RedisDataProtection
 pr:
@@ -26,7 +26,7 @@ pr:
     - Pipfile*
     - pyenv.pkgs
     - '**/*.py'
-    - ci/templates/*.yaml
+    - ci/templates
     - ci/azure-pipeline-security-redis-data-protection.yaml
     - Security/src/RedisDataProtection
 
