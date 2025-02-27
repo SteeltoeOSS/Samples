@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
@@ -8,16 +8,9 @@ using Steeltoe.Samples.PostgreSql.Models;
 
 namespace Steeltoe.Samples.PostgreSql.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(ConnectorFactory<PostgreSqlOptions, NpgsqlConnection> connectorFactory) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly Connector<PostgreSqlOptions, NpgsqlConnection> _connector;
-
-    public HomeController(ILogger<HomeController> logger, ConnectorFactory<PostgreSqlOptions, NpgsqlConnection> connectorFactory)
-    {
-        _logger = logger;
-        _connector = connectorFactory.Get();
-    }
+    private readonly Connector<PostgreSqlOptions, NpgsqlConnection> _connector = connectorFactory.Get();
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {

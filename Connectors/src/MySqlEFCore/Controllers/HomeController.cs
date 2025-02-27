@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Steeltoe.Samples.MySqlEFCore.Data;
@@ -6,16 +6,9 @@ using Steeltoe.Samples.MySqlEFCore.Models;
 
 namespace Steeltoe.Samples.MySqlEFCore.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(IServiceProvider serviceProvider) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IServiceProvider _serviceProvider;
-
-    public HomeController(ILogger<HomeController> logger, IServiceProvider serviceProvider)
-    {
-        _logger = logger;
-        _serviceProvider = serviceProvider;
-    }
+    private readonly IServiceProvider _serviceProvider = serviceProvider;
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {

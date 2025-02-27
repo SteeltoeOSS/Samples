@@ -34,7 +34,8 @@ builder.AddRabbitMQ(null, addOptions =>
             factory.Uri = new Uri(options.ConnectionString);
         }
 
-        return factory.CreateConnection();
+        Task<IConnection> connectionTask = factory.CreateConnectionAsync();
+        return connectionTask.GetAwaiter().GetResult();
     };
 });
 

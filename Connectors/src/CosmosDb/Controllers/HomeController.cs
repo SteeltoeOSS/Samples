@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
@@ -11,16 +11,14 @@ using Steeltoe.Samples.CosmosDb.Models;
 
 namespace Steeltoe.Samples.CosmosDb.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(ConnectorFactory<CosmosDbOptions, CosmosClient> connectorFactory) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly Connector<CosmosDbOptions, CosmosClient> _connector;
-
-    public HomeController(ILogger<HomeController> logger, ConnectorFactory<CosmosDbOptions, CosmosClient> connectorFactory)
+    private static readonly JsonSerializerOptions SerializerOptions = new()
     {
-        _logger = logger;
-        _connector = connectorFactory.Get();
-    }
+        WriteIndented = true
+    };
+
+    private readonly Connector<CosmosDbOptions, CosmosClient> _connector = connectorFactory.Get();
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
@@ -31,10 +29,7 @@ public class HomeController : Controller
         var model = new CosmosDbViewModel
         {
             ConnectionString = _connector.Options.ConnectionString,
-            OptionsJson = JsonSerializer.Serialize(client.ClientOptions, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            }),
+            OptionsJson = JsonSerializer.Serialize(client.ClientOptions, SerializerOptions),
             Database = _connector.Options.Database
         };
 
@@ -46,7 +41,7 @@ public class HomeController : Controller
         return View(model);
     }
 
-    private async IAsyncEnumerable<SampleObject> GetAllAsync(Container container, [EnumeratorCancellation] CancellationToken cancellationToken)
+    private static async IAsyncEnumerable<SampleObject> GetAllAsync(Container container, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         using FeedIterator<SampleObject> iterator = container.GetItemLinqQueryable<SampleObject>().ToFeedIterator();
 

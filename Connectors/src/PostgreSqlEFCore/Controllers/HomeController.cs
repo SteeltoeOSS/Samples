@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Steeltoe.Samples.PostgreSqlEFCore.Data;
@@ -6,16 +6,9 @@ using Steeltoe.Samples.PostgreSqlEFCore.Models;
 
 namespace Steeltoe.Samples.PostgreSqlEFCore.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(AppDbContext appDbContext) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly AppDbContext _appDbContext;
-
-    public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
-    {
-        _logger = logger;
-        _appDbContext = appDbContext;
-    }
+    private readonly AppDbContext _appDbContext = appDbContext;
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {

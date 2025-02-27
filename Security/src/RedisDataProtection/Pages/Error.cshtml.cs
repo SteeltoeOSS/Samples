@@ -8,15 +8,8 @@ namespace Steeltoe.Samples.RedisDataProtection.Pages;
 [IgnoreAntiforgeryToken]
 public class ErrorModel : PageModel
 {
-    private readonly ILogger<ErrorModel> _logger;
-
     public string? RequestId { get; set; }
     public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-    public ErrorModel(ILogger<ErrorModel> logger)
-    {
-        _logger = logger;
-    }
 
     public void OnGet()
     {
