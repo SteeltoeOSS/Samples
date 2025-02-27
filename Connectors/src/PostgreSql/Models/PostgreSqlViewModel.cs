@@ -1,8 +1,8 @@
-﻿namespace Steeltoe.Samples.PostgreSql.Models;
+namespace Steeltoe.Samples.PostgreSql.Models;
 
 public sealed class PostgreSqlViewModel
 {
     public string? ConnectionString { get; set; }
 
-    public Dictionary<string, string?> Rows { get; set; } = new();
+    public IDictionary<string, string?> Rows { get; } = new Dictionary<string, string?>();
 }

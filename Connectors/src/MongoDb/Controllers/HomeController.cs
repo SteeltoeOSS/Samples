@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using Steeltoe.Connectors;
@@ -8,16 +8,9 @@ using Steeltoe.Samples.MongoDb.Models;
 
 namespace Steeltoe.Samples.MongoDb.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(ConnectorFactory<MongoDbOptions, IMongoClient> connectorFactory) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly Connector<MongoDbOptions, IMongoClient> _connector;
-
-    public HomeController(ILogger<HomeController> logger, ConnectorFactory<MongoDbOptions, IMongoClient> connectorFactory)
-    {
-        _logger = logger;
-        _connector = connectorFactory.Get();
-    }
+    private readonly Connector<MongoDbOptions, IMongoClient> _connector = connectorFactory.Get();
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {

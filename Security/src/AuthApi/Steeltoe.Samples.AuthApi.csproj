@@ -11,7 +11,7 @@
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.JwtBearer" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authorization.Certificate" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.*" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspNetCoreVersion)" />
   </ItemGroup>

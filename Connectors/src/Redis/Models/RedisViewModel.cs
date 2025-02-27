@@ -1,10 +1,10 @@
-﻿namespace Steeltoe.Samples.Redis.Models;
+namespace Steeltoe.Samples.Redis.Models;
 
 public sealed class RedisViewModel
 {
     public string? ConnectionString { get; set; }
 
-    public Dictionary<string, string?> DistributedCacheData { get; set; } = new();
-    public Dictionary<string, string?> ConnectionMultiplexerData { get; set; } = new();
+    public IDictionary<string, string?> DistributedCacheData { get; set; } = new Dictionary<string, string?>();
+    public IDictionary<string, string?> ConnectionMultiplexerData { get; set; } = new Dictionary<string, string?>();
     public string? LuaResult { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
@@ -8,18 +8,13 @@ using Steeltoe.Samples.RabbitMQ.Models;
 
 namespace Steeltoe.Samples.RabbitMQ.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(ConnectorFactory<RabbitMQOptions, IConnection> connectorFactory) : Controller
 {
-    private const string RabbitQueueName = "rabbit-test";
+    private const string RabbitQueueName = "rabbit-test-queue";
+    private const string RabbitExchangeName = "rabbit-test-exchange";
+    private const string RabbitRoutingKey = "rabbit-test-routing-key";
 
-    private readonly ILogger<HomeController> _logger;
-    private readonly Connector<RabbitMQOptions, IConnection> _connector;
-
-    public HomeController(ILogger<HomeController> logger, ConnectorFactory<RabbitMQOptions, IConnection> connectorFactory)
-    {
-        _logger = logger;
-        _connector = connectorFactory.Get();
-    }
+    private readonly Connector<RabbitMQOptions, IConnection> _connector = connectorFactory.Get();
 
     public IActionResult Index()
     {
@@ -29,7 +24,7 @@ public class HomeController : Controller
         });
     }
 
-    public IActionResult Send(string? messageToSend)
+    public async Task<IActionResult> Send(string? messageToSend, CancellationToken cancellationToken)
     {
         // Steeltoe: Send RabbitMQ message to the queue.
 
@@ -44,12 +39,11 @@ public class HomeController : Controller
 
         // Do not dispose the IConnection singleton.
         IConnection connection = _connector.GetConnection();
-        using IModel channel = connection.CreateModel();
-
-        CreateQueue(channel);
+        await using IChannel channel = await connection.CreateChannelAsync(cancellationToken: cancellationToken);
+        await CreateQueueAsync(channel, cancellationToken);
 
         byte[] body = Encoding.UTF8.GetBytes(messageToSend);
-        channel.BasicPublish("", RabbitQueueName, null, body);
+        await channel.BasicPublishAsync(RabbitExchangeName, RabbitRoutingKey, false, new BasicProperties(), body, cancellationToken);
 
         return View("Index", new RabbitViewModel
         {
@@ -58,16 +52,15 @@ public class HomeController : Controller
         });
     }
 
-    public IActionResult Receive()
+    public async Task<IActionResult> Receive(CancellationToken cancellationToken)
     {
         // Steeltoe: Receive RabbitMQ message from the queue. Do not dispose the IConnection singleton.
 
         IConnection connection = _connector.GetConnection();
-        using IModel channel = connection.CreateModel();
+        await using IChannel channel = await connection.CreateChannelAsync(cancellationToken: cancellationToken);
+        await CreateQueueAsync(channel, cancellationToken);
 
-        CreateQueue(channel);
-
-        BasicGetResult? result = channel.BasicGet(RabbitQueueName, true);
+        BasicGetResult? result = await channel.BasicGetAsync(RabbitQueueName, true, cancellationToken);
 
         if (result == null)
         {
@@ -87,9 +80,11 @@ public class HomeController : Controller
         });
     }
 
-    private static void CreateQueue(IModel channel)
+    private static async Task CreateQueueAsync(IChannel channel, CancellationToken cancellationToken)
     {
-        channel.QueueDeclare(RabbitQueueName, false, false, false, null);
+        await channel.ExchangeDeclareAsync(RabbitExchangeName, ExchangeType.Direct, cancellationToken: cancellationToken);
+        await channel.QueueDeclareAsync(RabbitQueueName, false, false, false, cancellationToken: cancellationToken);
+        await channel.QueueBindAsync(RabbitQueueName, RabbitExchangeName, RabbitRoutingKey, cancellationToken: cancellationToken);
     }
 
     public IActionResult Privacy()

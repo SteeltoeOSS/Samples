@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
@@ -8,16 +8,9 @@ using Steeltoe.Samples.MySql.Models;
 
 namespace Steeltoe.Samples.MySql.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(ConnectorFactory<MySqlOptions, MySqlConnection> connector) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly Connector<MySqlOptions, MySqlConnection> _connector;
-
-    public HomeController(ILogger<HomeController> logger, ConnectorFactory<MySqlOptions, MySqlConnection> connector)
-    {
-        _logger = logger;
-        _connector = connector.Get();
-    }
+    private readonly Connector<MySqlOptions, MySqlConnection> _connector = connector.Get();
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {

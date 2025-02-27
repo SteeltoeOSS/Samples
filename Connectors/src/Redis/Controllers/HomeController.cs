@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +10,12 @@ using Steeltoe.Samples.Redis.Models;
 
 namespace Steeltoe.Samples.Redis.Controllers;
 
-public class HomeController : Controller
+public sealed class HomeController(
+    ConnectorFactory<RedisOptions, IDistributedCache> distributedCacheConnectorFactory,
+    ConnectorFactory<RedisOptions, IConnectionMultiplexer> connectionMultiplexerConnectorFactory) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly Connector<RedisOptions, IDistributedCache> _distributedCacheConnector;
-    private readonly Connector<RedisOptions, IConnectionMultiplexer> _connectionMultiplexerConnector;
-
-    public HomeController(ILogger<HomeController> logger, ConnectorFactory<RedisOptions, IDistributedCache> distributedCacheConnectorFactory,
-        ConnectorFactory<RedisOptions, IConnectionMultiplexer> connectionMultiplexerConnectorFactory)
-    {
-        _logger = logger;
-        _distributedCacheConnector = distributedCacheConnectorFactory.Get();
-        _connectionMultiplexerConnector = connectionMultiplexerConnectorFactory.Get();
-    }
+    private readonly Connector<RedisOptions, IDistributedCache> _distributedCacheConnector = distributedCacheConnectorFactory.Get();
+    private readonly Connector<RedisOptions, IConnectionMultiplexer> _connectionMultiplexerConnector = connectionMultiplexerConnectorFactory.Get();
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
@@ -34,8 +27,6 @@ public class HomeController : Controller
         var model = new RedisViewModel
         {
             ConnectionString = _connectionMultiplexerConnector.Options.ConnectionString,
-            DistributedCacheData = new Dictionary<string, string?>(),
-            ConnectionMultiplexerData = new Dictionary<string, string?>(),
             LuaResult = EvaluateLuaScript(database)
         };
 

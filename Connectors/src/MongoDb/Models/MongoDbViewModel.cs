@@ -1,4 +1,4 @@
-﻿using Steeltoe.Samples.MongoDb.Data;
+using Steeltoe.Samples.MongoDb.Data;
 
 namespace Steeltoe.Samples.MongoDb.Models;
 
