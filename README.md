@@ -8,7 +8,7 @@ Samples using the Spring Cloud Config Server and other Steeltoe configuration pr
 
 | Sample | Status |
 | --- | --- |
-| [ConfigurationProviders](Configuration/src/ConfigurationProviders) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FConfiguration?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=73&branchName=main) |
+| [ConfigurationProviders](Configuration/src/ConfigurationProviders) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FConfiguration?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=73&branchName=4.x) |
 
 ## [Discovery](Discovery)
 
@@ -20,7 +20,7 @@ Samples using the Steeltoe Management packages for adding Management REST endpoi
 
 | Sample | Status |
 | --- | --- |
-| [ActuatorWeb](./Management/src/ActuatorWeb/) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BManagement_CloudFoundry%5D?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=23&branchName=main) |
+| [ActuatorWeb](./Management/src/ActuatorWeb/) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/SteeltoeOSS.Samples%20%5BManagement_CloudFoundry%5D?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=23&branchName=4.x) |
 
 ## [Connectors](Connectors)
 
@@ -28,15 +28,15 @@ Samples using the Steeltoe Connectors for connecting to backing services. Steelt
 
 | Sample | Status |
 | --- | --- |
-| [CosmosDb](Connectors/src/CosmosDb) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-CosmosDb?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=69&branchName=main) |
-| [MongoDb](Connectors/src/MongoDb) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-MongoDb?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=70&branchName=main) |
-| [MySql](Connectors/src/MySql) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-MySql?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=17&branchName=main) |
-| [MySqlEFCore](Connectors/src/MySqlEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-MySqlEFCore?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=18&branchName=main) |
-| [PostgreSql](Connectors/src/PostgreSql) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-PostgreSql?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=21&branchName=main) |
-| [PostgreSqlEFCore](Connectors/src/PostgreSqlEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-PostgreSqlEFCore?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=22&branchName=main) |
-| [RabbitMQ](Connectors/src/RabbitMQ) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-RabbitMQ?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=14&branchName=main) |
-| [Redis](Connectors/src/Redis) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-Redis?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=20&branchName=main) |
-| [SqlServerEFCore](Connectors/src/SqlServerEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-SqlServerEFCore?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=71&branchName=main) |
+| [CosmosDb](Connectors/src/CosmosDb) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-CosmosDb?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=69&branchName=4.x) |
+| [MongoDb](Connectors/src/MongoDb) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-MongoDb?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=70&branchName=4.x) |
+| [MySql](Connectors/src/MySql) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-MySql?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=17&branchName=4.x) |
+| [MySqlEFCore](Connectors/src/MySqlEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-MySqlEFCore?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=18&branchName=4.x) |
+| [PostgreSql](Connectors/src/PostgreSql) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-PostgreSql?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=21&branchName=4.x) |
+| [PostgreSqlEFCore](Connectors/src/PostgreSqlEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-PostgreSqlEFCore?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=22&branchName=4.x) |
+| [RabbitMQ](Connectors/src/RabbitMQ) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-RabbitMQ?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=14&branchName=4.x) |
+| [Redis](Connectors/src/Redis) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-Redis?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=20&branchName=4.x) |
+| [SqlServerEFCore](Connectors/src/SqlServerEFCore) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status/Samples/Steeltoe-Samples-Connectors-SqlServerEFCore?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=71&branchName=4.x) |
 
 ## [Security](Security)
 
@@ -44,7 +44,7 @@ Samples using the Steeltoe Security packages for Authentication and Authorizatio
 
 | Sample | Status |
 | --- | --- |
-| [RedisDataProtection](Security/src/RedisDataProtection) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FSteeltoe-Samples-Security-RedisDataProtection?branchName=main)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=74&branchName=main) |
+| [RedisDataProtection](Security/src/RedisDataProtection) | [![Build Status](https://dev.azure.com/SteeltoeOSS/Steeltoe/_apis/build/status%2FSamples%2FSteeltoe-Samples-Security-RedisDataProtection?branchName=4.x)](https://dev.azure.com/SteeltoeOSS/Steeltoe/_build/latest?definitionId=74&branchName=4.x) |
 
 # Branches
 
