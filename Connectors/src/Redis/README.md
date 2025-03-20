@@ -1,7 +1,7 @@
-﻿# Redis Connector Sample App
+# Redis Connector Sample App
 
 ASP.NET Core sample app illustrating how to use the [Steeltoe Redis Connector](https://docs.steeltoe.io/api/v3/connectors/redis.html)
-to connect to a Redis server.
+to connect to a Redis or Valkey server.
 This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.redis.rediscache)
 and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/StackExchange.Redis) to work with the same Redis service.
 
@@ -20,13 +20,13 @@ and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/Sta
 
 ## Running locally
 
-1. Start a Redis [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Redis or Valkey [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Run the sample
    ```
    dotnet run
    ```
 
-Upon startup, the app inserts a couple of key/value pairs into the bound Redis cache using both APIs. They are displayed on the home page.
+Upon startup, the app inserts a couple of key/value pairs into the bound Redis/Valkey cache using both APIs. They are displayed on the home page.
 
 ## Running on Tanzu Platform for Cloud Foundry
 

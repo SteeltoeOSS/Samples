@@ -132,6 +132,14 @@ docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq ra
 docker run --rm -it --pull=always -p 6379:6379 --name redis redis
 ```
 
+## Valkey
+
+### Run Valkey server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 6379:6379 --name valkey valkey/valkey
+```
+
 ## SQL Server
 
 ### Run SQL Server with Docker

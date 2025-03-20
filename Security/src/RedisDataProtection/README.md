@@ -1,6 +1,7 @@
-﻿# ASP.NET Core Data Protection with Redis Keystore Sample App
+# ASP.NET Core Data Protection with Redis Keystore Sample App
 
-ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtection Key Storage Provider for Redis](https://github.com/SteeltoeOSS/Steeltoe/tree/main/src/Security/src/DataProtection.Redis). Simplifies using a Redis cache on Cloud Foundry for storing encrypted session state.
+ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtection Key Storage Provider for Redis](https://github.com/SteeltoeOSS/Steeltoe/tree/main/src/Security/src/DataProtection.Redis).
+Simplifies using a Redis or Valkey cache on Cloud Foundry for storing encrypted session state.
 
 ## General pre-requisites
 
@@ -10,7 +11,7 @@ ASP.NET Core sample app illustrating how to make use of the Steeltoe [DataProtec
 
 ## Running locally
 
-1. Start a Redis [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Redis or Valkey [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Run the sample
    ```
    dotnet run
