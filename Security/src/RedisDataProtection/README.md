@@ -6,8 +6,16 @@ Simplifies using a Redis or Valkey cache on Cloud Foundry for storing encrypted 
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   and one of the following service brokers:
+
+   - [Redis for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/redis-for-tanzu-application-service/3-5/redis-for-tas/index.html)
+   - [Tanzu for Valkey on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-valkey-on-cloud-foundry/4-0/valkey-on-cf/index.html)
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-redis.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-5/csb-gcp/reference-gcp-redis.html)
+
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
 
 ## Running locally
 
@@ -28,8 +36,23 @@ Upon startup, the app displays session information on the home page, something l
 1. Create a Redis service instance in an org/space
    ```
    cf target -o your-org -s your-space
-   cf create-service p.redis on-demand-cache sampleRedisService
    ```
+   - When using Redis for Tanzu Application Service or Tanzu for Valkey on Cloud Foundry:
+     ```
+     cf create-service p.redis on-demand-cache sampleRedisService
+     ```
+     or:
+     ```
+     cf create-service p-redis shared-vm sampleRedisService
+     ```
+   - When using Tanzu Cloud Service Broker for Microsoft Azure:
+     ```
+     cf create-service csb-azure-redis your-plan sampleRedisService
+     ```
+   - When using Tanzu Cloud Service Broker for GCP:
+     ```
+     cf create-service csb-google-redis your-plan sampleRedisService
+     ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-data-protection-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:

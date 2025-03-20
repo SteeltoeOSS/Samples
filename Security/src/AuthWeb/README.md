@@ -1,14 +1,14 @@
 # Steeltoe Application Security Client-side Authentication and Authorization
 
-This application shows how to use the Steeltoe [security libraries](https://docs.steeltoe.io/api/v3/security/) for authentication and authorization with OpenID Connect against [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service) and using client certificates provided by Cloud Foundry or Steeltoe (when running locally).
+This application shows how to use the Steeltoe [security libraries](https://docs.steeltoe.io/api/v3/security/) for authentication and authorization with OpenID Connect against [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html) and using client certificates provided by Cloud Foundry or Steeltoe (when running locally).
 
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   with [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html)
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
 
 ## Running locally
 
@@ -18,11 +18,11 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 
 ## Running on Tanzu Platform for Cloud Foundry
 
-1. Install [Single Sign-On for VMware Tanzu Application Service](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service)
+1. Install [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html)
 1. Deploy [UAA with the Steeltoe Samples configuration](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server#customizing-for-your-environment)
-1. Create a [service plan](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/1.14/sso/GUID-manage-service-plans.html)
+1. Create a [service plan](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/manage-service-plans.html)
 1. Configure federated authentication on the service plan
-   1. Add the UAA server from step 2 to the service as an [OIDC Provider](https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/1.14/sso/GUID-configure-external-id.html#config-ext-oidc)
+   1. Add the UAA server from step 2 to the service as an [OIDC Provider](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/configure-external-id.html)
       * Name the identity provider `steeltoe-uaa` (or update `SSO_IDENTITY_PROVIDERS` in manifest.yml accordingly)
       * Credentials for connecting to the UAA server can be found or customized before deployment in [uaa.yml](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/uaa.yml#L124)
    1. Save changes, but keep this page open
@@ -94,7 +94,7 @@ The menu of the application includes links for testing the permissions of the us
    * Locally, certificates for both the client and server are created by Steeltoe.
    * On Cloud Foundry, certificates are provisioned by the platform, with OrgId and SpaceId populated based on where the applications are deployed.
 * While logged in, view information about the testuser account by clicking on "Hello testuser!" next to the "Log out" link.
-* If needed, sign out of the UAA server using the dropdown menu in the top right corner at <http://localhost:8080>(locally) or use the command `cf app steeltoe-uaa` to get the address of the server deployed to Cloud Foundry.
+* If needed, sign out of the UAA server using the dropdown menu in the top right corner at <http://localhost:8080> (locally) or use the command `cf app steeltoe-uaa` to get the address of the server deployed to Cloud Foundry.
 
 ---
 

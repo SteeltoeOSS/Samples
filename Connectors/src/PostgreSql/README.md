@@ -1,4 +1,4 @@
-﻿# PostgreSQL Connector Sample App - NpgsqlConnection
+# PostgreSQL Connector Sample App - NpgsqlConnection
 
 ASP.NET Core sample app illustrating how to use the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v3/connectors/postgresql.html)
 for connecting to a PostgreSQL database.
@@ -8,11 +8,15 @@ There is also an additional sample that illustrates how to use Entity Framework 
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-1. Optional: [VMware Tanzu Platform for Kubernetes](https://docs.vmware.com/en/VMware-Tanzu-Platform/services/create-manage-apps-tanzu-platform-k8s/overview.html) v1.5 or higher
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   and one of the following service brokers:
+
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-9/csb-azure/reference-azure-postgresql.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-8/csb-gcp/reference-gcp-postgresql.html)
+
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
+1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
    and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
 
 ## Running locally
@@ -31,11 +35,11 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
    ```
    cf target -o your-org -s your-space
    ```
-   - When using the Cloud Service Broker for Azure:
+   - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```
      cf create-service csb-azure-postgresql mini samplePostgreSqlService
      ```
-   - When using the Cloud Service Broker for GCP:
+   - When using Tanzu Cloud Service Broker for GCP:
      ```
      cf create-service csb-google-postgres gcp-postgres-tiny samplePostgreSqlService
      ```

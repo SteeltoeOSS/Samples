@@ -1,16 +1,16 @@
-﻿# Steeltoe Configuration Providers Sample App
+# Steeltoe Configuration Providers Sample App
 
 This is an ASP.NET Core application that shows how to use various `IConfiguration` providers that are part of the Steeltoe project.
 
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [Spring Cloud Services for VMware Tanzu](https://docs.vmware.com/en/Spring-Cloud-Services-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-1. Optional: [VMware Tanzu Platform for Kubernetes](https://docs.vmware.com/en/VMware-Tanzu-Platform/services/create-manage-apps-tanzu-platform-k8s/overview.html) v1.5 or higher
-   with [Application Configuration Service](https://docs.vmware.com/en/Application-Configuration-Service-for-VMware-Tanzu/index.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   with [Spring Cloud Services for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-cloud-services-for-cloud-foundry/3-3/scs-tanzu/index.html)
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
+1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
+   with [Application Configuration Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/application-configuration-service-for-tanzu/2-4/app-config-service/overview.html)
    and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
 
 ## Running locally
@@ -55,7 +55,7 @@ kubectl config set-context --current --namespace=your-namespace
 kubectl apply -f ./config/application-configuration-service
 ```
 
-For complete instructions, follow the [documentation](https://docs.vmware.com/en/Application-Configuration-Service-for-VMware-Tanzu/index.html).
+For complete instructions, follow the [documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/application-configuration-service-for-tanzu/2-4/app-config-service/overview.html).
 
 ### App deployment
 

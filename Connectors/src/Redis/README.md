@@ -8,15 +8,21 @@ and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/Sta
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [Redis for VMware Tanzu Application Service](https://docs.vmware.com/en/Redis-for-VMware-Tanzu-Application-Service/index.html)
-   or [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-   > [!NOTE]
-   > ASP.NET before v9 requires that Lua scripting is activated, which is disabled by default on Cloud Foundry (check your plan settings)
-1. Optional: [VMware Tanzu Platform for Kubernetes](https://docs.vmware.com/en/VMware-Tanzu-Platform/services/create-manage-apps-tanzu-platform-k8s/overview.html) v1.5 or higher
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   and one of the following service brokers:
+
+   - [Redis for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/redis-for-tanzu-application-service/3-5/redis-for-tas/index.html)
+   - [Tanzu for Valkey on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-valkey-on-cloud-foundry/4-0/valkey-on-cf/index.html)
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-redis.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-5/csb-gcp/reference-gcp-redis.html)
+
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
+1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
    and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+
+> [!NOTE]
+> Versions of ASP.NET before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
 
 ## Running locally
 
@@ -34,7 +40,7 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis/V
    ```
    cf target -o your-org -s your-space
    ```
-   - When using Redis for VMware Tanzu Application Service:
+   - When using Redis for Tanzu Application Service or Tanzu for Valkey on Cloud Foundry:
      ```
      cf create-service p.redis on-demand-cache sampleRedisService
      ```
@@ -42,11 +48,11 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis/V
      ```
      cf create-service p-redis shared-vm sampleRedisService
      ```
-   - When using the Cloud Service Broker for Azure:
+   - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```
      cf create-service csb-azure-redis your-plan sampleRedisService
      ```
-   - When using the Cloud Service Broker for GCP:
+   - When using Tanzu Cloud Service Broker for GCP:
      ```
      cf create-service csb-google-redis your-plan sampleRedisService
      ```

@@ -1,4 +1,4 @@
-﻿# RabbitMQ Connector Sample App - RabbitMQConnection
+# RabbitMQ Connector Sample App - RabbitMQConnection
 
 ASP.NET Core sample app illustrating how to use the [Steeltoe RabbitMQ Connector](https://docs.steeltoe.io/api/v3/connectors/rabbitmq.html)
 for connecting to a RabbitMQ server.
@@ -7,11 +7,11 @@ This sample illustrates using an `IConnection` to send and receive messages on t
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [VMware Tanzu RabbitMQ for Tanzu Application Service](https://docs.vmware.com/en/VMware-Tanzu-RabbitMQ-for-Tanzu-Application-Service/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-1. Optional: [VMware Tanzu Platform for Kubernetes](https://docs.vmware.com/en/VMware-Tanzu-Platform/services/create-manage-apps-tanzu-platform-k8s/overview.html) v1.5 or higher
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   with [Tanzu RabbitMQ on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-rabbitmq-on-cloud-foundry/10-0/tanzu-rabbitmq-cloud-foundry/index.html)
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
+1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
    and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
 
 ## Running locally

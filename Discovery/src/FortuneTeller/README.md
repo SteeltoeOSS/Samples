@@ -1,4 +1,4 @@
-﻿# FortuneTeller Discovery Sample Application
+# FortuneTeller Discovery Sample Application
 
 This sample demonstrates Steeltoe Service Discovery. It consists of the following projects:
 
@@ -12,10 +12,10 @@ switching to `http` or `https` and replacing `fortuneService` with the real host
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [Spring Cloud Services for VMware Tanzu](https://docs.vmware.com/en/Spring-Cloud-Services-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   with [Spring Cloud Services for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-cloud-services-for-cloud-foundry/3-3/scs-tanzu/index.html)
+   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
 
 ## Configuration-based discovery
 
