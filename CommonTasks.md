@@ -160,7 +160,7 @@ docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azur
 
 ### Run Steeltoe UAA on Cloud Foundry
 
-Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server/README.md) for instructions.
+Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/README.md) for instructions.
 
 ## Zipkin
 

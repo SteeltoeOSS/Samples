@@ -1,6 +1,6 @@
 # MySQL Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe MySQL Connector](https://docs.steeltoe.io/api/v4/connectors/mysql.html#entity-framework-core)
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe MySQL Connector](https://docs.steeltoe.io/api/v4/connectors/mysql.html#use-entity-framework-core)
 for connecting to a MySQL database.
 There is also an additional sample that illustrates how to use a `MySqlConnection` to issue commands to the bound database.
 

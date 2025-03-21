@@ -2,8 +2,8 @@
 
 ASP.NET Core sample app illustrating how to use the [Steeltoe Redis Connector](https://docs.steeltoe.io/api/v4/connectors/redis.html)
 to connect to a Redis or Valkey server.
-This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.redis.rediscache)
-and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/StackExchange.Redis) to work with the same Redis service.
+This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis) and
+[Microsoft.Extensions.Caching.Redis](https://www.nuget.org/packages/StackExchange.Redis) to work with the same Redis service.
 
 ## General pre-requisites
 

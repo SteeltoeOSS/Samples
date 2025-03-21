@@ -1,6 +1,6 @@
 # PostgreSQL Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v4/connectors/postgresql.html#add-dbcontext)
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v4/connectors/postgresql.html#use-entity-framework-core)
 for connecting to a PostgreSQL database.
 There is also an additional sample that illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
 

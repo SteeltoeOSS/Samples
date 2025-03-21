@@ -19,7 +19,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 ## Running on Tanzu Platform for Cloud Foundry
 
 1. Install [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html)
-1. Deploy [UAA with the Steeltoe Samples configuration](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server#customizing-for-your-environment)
+1. Deploy [UAA with the Steeltoe Samples configuration](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server#customizing-for-your-cloud-foundry-environment)
 1. Create a [service plan](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/manage-service-plans.html)
 1. Configure federated authentication on the service plan
    1. Add the UAA server from step 2 to the service as an [OIDC Provider](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/configure-external-id.html)
