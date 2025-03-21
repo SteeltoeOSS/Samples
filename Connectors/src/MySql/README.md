@@ -70,8 +70,8 @@ kubectl config set-context --current --namespace=your-namespace
 tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged
 ```
 
-If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html)
-and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the documentation.
+If you'd like to learn more about these services, see [claiming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-claim-services.html)
+and [consuming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-consume-services.html) in the documentation.
 
 ### App deployment
 
@@ -86,7 +86,7 @@ dotnet publish -r linux-x64 --no-self-contained
 tanzu app workload apply --local-path ./bin/Release/net8.0/linux-x64/publish --file ./config/workload.yaml -y
 ```
 
-See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/application-configuration-service-for-tanzu/2-4/app-config-service/gettingstarted-index.html) for details.
+See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-deploy-first-app.html) for details.
 
 ---
 
