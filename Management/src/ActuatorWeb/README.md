@@ -16,7 +16,7 @@ Several tools exist that can do this, including [App Metrics for VMware Tanzu](h
 1. Installed .NET 8 SDK
 1. Optional:
     * [VMware Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-    * [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+    * [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
     * [Metrics Registrar for VMware Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
     * [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html)
     * [VMware MySQL for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/3-3/mysql-for-tpcf/about_mysql_vms.html)

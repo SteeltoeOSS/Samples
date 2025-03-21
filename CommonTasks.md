@@ -49,7 +49,7 @@ The default configuration of the Config Server uses [this github repo](https://g
 
 ### Provision SCCS on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud Config Server in a org/space, backed by a given git repo. Many of the Steeltoe samples use the `spring-cloud-samples` repo, but you may need to alter the parameter used.
+Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Spring Cloud Config Server in an org/space, backed by a given git repo. Many of the Steeltoe samples use the `spring-cloud-samples` repo, but you may need to alter the parameter used.
 
 1. `cf target -o myorg -s myspace`
 1. Use the correct escaping for your shell:

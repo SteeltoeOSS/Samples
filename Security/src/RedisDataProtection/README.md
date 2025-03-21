@@ -15,7 +15,7 @@ Simplifies using a Redis or Valkey cache on Cloud Foundry for storing encrypted 
    - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-redis.html)
    - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-5/csb-gcp/reference-gcp-redis.html)
 
-   and [Cloud Foundry CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/6-0/tpcf/cf-cli-index.html)
+   and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Running locally
 
