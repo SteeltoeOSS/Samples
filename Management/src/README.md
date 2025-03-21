@@ -15,4 +15,4 @@ See the Readme for instructions on building and running each app.
 
 ---
 
-See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information.
+See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v4/management/) for more detailed information.

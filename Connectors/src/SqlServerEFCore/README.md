@@ -1,6 +1,6 @@
 # SQL Server Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe SQL Server Connector](https://docs.steeltoe.io/api/v3/connectors/microsoft-sql-server.html)
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe SQL Server Connector](https://docs.steeltoe.io/api/v4/connectors/microsoft-sql-server.html)
 for connecting to a Microsoft SQL Server database.
 
 ## General pre-requisites
@@ -40,4 +40,4 @@ Upon startup, the app inserts a couple of rows into the bound SQL Server databas
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.

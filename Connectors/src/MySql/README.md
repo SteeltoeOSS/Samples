@@ -1,6 +1,6 @@
 # MySQL Connector Sample App - MySqlConnection
 
-ASP.NET Core sample app illustrating how to use the [Steeltoe MySQL Connector](https://docs.steeltoe.io/api/v3/connectors/mysql.html)
+ASP.NET Core sample app illustrating how to use the [Steeltoe MySQL Connector](https://docs.steeltoe.io/api/v4/connectors/mysql.html)
 for connecting to a MySQL database.
 This sample illustrates using a `MySqlConnection` to issue commands to the bound database.
 There is also an additional sample that illustrates how to use Entity Framework Core.
@@ -90,4 +90,4 @@ See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/s
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.

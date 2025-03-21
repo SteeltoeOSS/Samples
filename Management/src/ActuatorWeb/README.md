@@ -202,4 +202,4 @@ If you wish to collect and view application metrics, the [Metrics Registrar](htt
 
 ---
 
-See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information.
+See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v4/management/) for more detailed information.

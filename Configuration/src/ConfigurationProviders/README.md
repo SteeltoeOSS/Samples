@@ -74,4 +74,4 @@ See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/s
 
 ---
 
-See the Official [Steeltoe Configuration Documentation](https://docs.steeltoe.io/api/v3/configuration/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Configuration Documentation](https://docs.steeltoe.io/api/v4/configuration/) for more detailed information.

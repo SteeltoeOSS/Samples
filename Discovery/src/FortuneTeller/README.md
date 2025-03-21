@@ -223,4 +223,4 @@ with Eureka at startup. FortuneTellerApi is configured to obtain the URL to Conf
 
 ---
 
-See the Official [Steeltoe Service Discovery Documentation](https://docs.steeltoe.io/api/v3/discovery) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Service Discovery Documentation](https://docs.steeltoe.io/api/v4/discovery) for more detailed information.

@@ -81,4 +81,4 @@ and therefore the session data can be decrypted by any instance of the applicati
 
 ---
 
-See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v4/security/) for more detailed information.

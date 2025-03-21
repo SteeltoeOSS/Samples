@@ -1,6 +1,6 @@
 # Redis Connector Sample App
 
-ASP.NET Core sample app illustrating how to use the [Steeltoe Redis Connector](https://docs.steeltoe.io/api/v3/connectors/redis.html)
+ASP.NET Core sample app illustrating how to use the [Steeltoe Redis Connector](https://docs.steeltoe.io/api/v4/connectors/redis.html)
 to connect to a Redis or Valkey server.
 This sample uses both [Microsoft RedisCache](https://learn.microsoft.com/dotnet/api/microsoft.extensions.caching.redis.rediscache)
 and [StackExchange `ConnectionMultiplexer`](https://github.com/StackExchange/StackExchange.Redis) to work with the same Redis service.
@@ -98,4 +98,4 @@ See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/s
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.

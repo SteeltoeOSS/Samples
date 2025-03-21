@@ -1,6 +1,6 @@
 # MongoDB Connector Sample App
 
-ASP.NET Core sample app illustrating how to use the [Steeltoe MongoDB Connector](https://docs.steeltoe.io/api/v3/connectors/mongodb.html)
+ASP.NET Core sample app illustrating how to use the [Steeltoe MongoDB Connector](https://docs.steeltoe.io/api/v4/connectors/mongodb.html)
 for connecting to a MongoDB database.
 
 ## General pre-requisites
@@ -72,4 +72,4 @@ See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/s
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.

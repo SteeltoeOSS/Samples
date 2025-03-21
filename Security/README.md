@@ -1,6 +1,6 @@
 # Steeltoe Security Sample Applications
 
-This section of the Samples repository contains applications that use the [Steeltoe Security Packages](https://docs.steeltoe.io/api/v3/security/) for authentication, authorization, and data protection.
+This section of the Samples repository contains applications that use the [Steeltoe Security Packages](https://docs.steeltoe.io/api/v4/security/) for authentication, authorization, and data protection.
 
 ## ASP.NET Core Samples
 
@@ -9,4 +9,4 @@ This section of the Samples repository contains applications that use the [Steel
 
 ---
 
-See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v3/security/) for more detailed information
+See the Official [Steeltoe Security Documentation](https://docs.steeltoe.io/api/v4/security/) for more detailed information.

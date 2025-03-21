@@ -1,6 +1,6 @@
 # PostgreSQL Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v3/connectors/postgresql.html#add-dbcontext)
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v4/connectors/postgresql.html#add-dbcontext)
 for connecting to a PostgreSQL database.
 There is also an additional sample that illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
 
@@ -84,4 +84,4 @@ See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/s
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.

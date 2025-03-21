@@ -1,6 +1,6 @@
 # RabbitMQ Connector Sample App - RabbitMQConnection
 
-ASP.NET Core sample app illustrating how to use the [Steeltoe RabbitMQ Connector](https://docs.steeltoe.io/api/v3/connectors/rabbitmq.html)
+ASP.NET Core sample app illustrating how to use the [Steeltoe RabbitMQ Connector](https://docs.steeltoe.io/api/v4/connectors/rabbitmq.html)
 for connecting to a RabbitMQ server.
 This sample illustrates using an `IConnection` to send and receive messages on the bound RabbitMQ service.
 
@@ -74,4 +74,4 @@ See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/s
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.
