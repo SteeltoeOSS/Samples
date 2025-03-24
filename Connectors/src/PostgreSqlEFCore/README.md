@@ -1,18 +1,22 @@
-﻿# PostgreSQL Connector Sample App - Entity Framework Core
+# PostgreSQL Connector Sample App - Entity Framework Core
 
-ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v3/connectors/postgresql.html#add-dbcontext)
+ASP.NET Core sample app illustrating how to use Entity Framework Core together with the [Steeltoe PostgreSQL Connector](https://docs.steeltoe.io/api/v4/connectors/postgresql.html#use-entity-framework-core)
 for connecting to a PostgreSQL database.
 There is also an additional sample that illustrates how to use a `NpgsqlConnection` to issue commands to the bound database.
 
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
-1. Optional: [VMware Tanzu Platform for Kubernetes](https://docs.vmware.com/en/VMware-Tanzu-Platform/services/create-manage-apps-tanzu-platform-k8s/overview.html) v1.5 or higher
-   and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   and one of the following service brokers:
+
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-9/csb-azure/reference-azure-postgresql.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-8/csb-gcp/reference-gcp-postgresql.html)
+
+   and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
+1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
+   and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 ## Running locally
 
@@ -30,11 +34,11 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
    ```
    cf target -o your-org -s your-space
    ```
-   - When using the Cloud Service Broker for Azure:
+   - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```
      cf create-service csb-azure-postgresql mini samplePostgreSqlService
      ```
-   - When using the Cloud Service Broker for GCP:
+   - When using Tanzu Cloud Service Broker for GCP:
      ```
      cf create-service csb-google-postgres gcp-postgres-tiny samplePostgreSqlService
      ```
@@ -60,8 +64,8 @@ kubectl config set-context --current --namespace=your-namespace
 tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged
 ```
 
-If you'd like to learn more about these services, see [claiming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-claim-services.html)
-and [consuming services](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-consume-services.html) in the documentation.
+If you'd like to learn more about these services, see [claiming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-claim-services.html)
+and [consuming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-consume-services.html) in the documentation.
 
 ### App deployment
 
@@ -76,8 +80,8 @@ dotnet publish -r linux-x64 --no-self-contained
 tanzu app workload apply --local-path ./bin/Release/net8.0/linux-x64/publish --file ./config/workload.yaml -y
 ```
 
-See the [Tanzu documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.8/tap/getting-started-deploy-first-app.html) for details.
+See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-deploy-first-app.html) for details.
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.

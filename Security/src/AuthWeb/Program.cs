@@ -85,7 +85,7 @@ app.Run();
 return;
 
 // This code is used to limit complexity in the sample. A real application should use Service Discovery.
-// To learn more about service discovery, review the documentation: https://docs.steeltoe.io/api/v3/discovery/
+// To learn more about service discovery, review the documentation at: https://docs.steeltoe.io/api/v4/discovery/
 static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
     var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();

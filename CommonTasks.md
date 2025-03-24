@@ -49,7 +49,7 @@ The default configuration of the Config Server uses [this github repo](https://g
 
 ### Provision SCCS on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud Config Server in a org/space, backed by a given git repo. Many of the Steeltoe samples use the `spring-cloud-samples` repo, but you may need to alter the parameter used.
+Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Spring Cloud Config Server in an org/space, backed by a given git repo. Many of the Steeltoe samples use the `spring-cloud-samples` repo, but you may need to alter the parameter used.
 
 1. `cf target -o myorg -s myspace`
 1. Use the correct escaping for your shell:
@@ -132,6 +132,14 @@ docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq ra
 docker run --rm -it --pull=always -p 6379:6379 --name redis redis
 ```
 
+## Valkey
+
+### Run Valkey server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 6379:6379 --name valkey valkey/valkey
+```
+
 ## SQL Server
 
 ### Run SQL Server with Docker
@@ -152,7 +160,7 @@ docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azur
 
 ### Run Steeltoe UAA on Cloud Foundry
 
-Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server/README.md) for instructions.
+Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/README.md) for instructions.
 
 ## Zipkin
 

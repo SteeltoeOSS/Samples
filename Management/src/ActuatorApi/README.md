@@ -1,4 +1,4 @@
-﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools.
 
@@ -14,7 +14,7 @@ This application depends on a MySQL database. Refer to [Common Tasks](../../../C
 
 ### Administrative Tasks (initialize the database)
 
-In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v3/management/tasks.html), the database schema and its contents are managed as administrative tasks.
+In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v4/management/tasks.html), the database schema and its contents are managed as administrative tasks.
 
 1. Apply Entity Framework Core database schema migration scripts:
 
@@ -108,4 +108,4 @@ Depending on the steps taken to push the application to Cloud Foundry, the comma
 
 ---
 
-See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information.
+See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v4/management/) for more detailed information.

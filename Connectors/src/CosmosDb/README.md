@@ -1,19 +1,19 @@
-﻿# CosmosDB Connector Sample App
+# CosmosDB Connector Sample App
 
-ASP.NET Core sample app illustrating how to use the [Steeltoe CosmosDB Connector](https://docs.steeltoe.io/api/v3/connectors/cosmosdb.html)
+ASP.NET Core sample app illustrating how to use the [Steeltoe CosmosDB Connector](https://docs.steeltoe.io/api/v4/connectors/cosmosdb.html)
 for connecting to a CosmosDB database.
 
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [VMware Tanzu Cloud Service Broker](https://docs.vmware.com/en/Cloud-Service-Broker-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   with [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-10/csb-azure/reference-azure-cosmosdb-sql.html)
+   and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Running locally
 
-1. Start the [Azure CosmosDB Emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator)
+1. Start the [Azure CosmosDB Emulator](https://learn.microsoft.com/azure/cosmos-db/how-to-develop-emulator)
 1. Update your local primary key in `appsettings.development.json` at `Steeltoe:Client:CosmosDb:Default:ConnectionString`
 1. Run the sample
    ```
@@ -40,4 +40,4 @@ Upon startup, the app inserts a couple of objects into the bound CosmosDB databa
 
 ---
 
-See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v3/connectors/) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Connectors Documentation](https://docs.steeltoe.io/api/v4/connectors/) for more detailed information.
