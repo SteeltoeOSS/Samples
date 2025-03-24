@@ -12,7 +12,7 @@ This sample illustrates using an `IConnection` to send and receive messages on t
    with [Tanzu RabbitMQ on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-rabbitmq-on-cloud-foundry/10-0/tanzu-rabbitmq-cloud-foundry/index.html)
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
-   and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+   and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 ## Running locally
 

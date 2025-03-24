@@ -19,7 +19,7 @@ This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExcha
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
-   and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+   and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 > [!NOTE]
 > Versions of ASP.NET before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.

@@ -11,7 +11,7 @@ for connecting to a MongoDB database.
    with [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-cosmosdb-mongo.html)
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.6 or higher
-   and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+   and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 ## Running locally
 

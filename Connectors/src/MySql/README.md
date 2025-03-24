@@ -18,7 +18,7 @@ There is also an additional sample that illustrates how to use Entity Framework 
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
-   and [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+   and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 ## Running locally
 
