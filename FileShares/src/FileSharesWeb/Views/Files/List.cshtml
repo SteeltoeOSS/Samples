@@ -1,0 +1,33 @@
+@model IEnumerable<string>
+@{
+    ViewData["Title"] = "List files";
+}
+
+@if (!Model.Any())
+{
+    <h2>No files found</h2>
+    <h3><a class="" asp-area="" asp-controller="Files" asp-action="Upload">Upload Files</a></h3>
+}
+else
+{
+     <h2>Files found in network share</h2>
+     <table class="table">
+        <thead>
+            <tr>
+                <th>File path</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var file in Model)
+        {
+            <tr>
+                <td>@file</td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Files" asp-action="Delete" asp-route-fileToDelete="@file">Delete file</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

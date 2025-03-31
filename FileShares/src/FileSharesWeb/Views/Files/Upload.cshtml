@@ -1,0 +1,27 @@
+@model Dictionary<string, string>
+@{
+    ViewData["Title"] = "Upload Files";
+}
+
+@if (Model.Count > 0)
+{
+    <h2>Files were uploaded successfully</h2>
+    @foreach (var file in Model)
+    {
+        <h3>Original file name: @file.Key, saved as: @file.Value</h3>
+    }
+}
+
+<h2>@ViewData["Title"]</h2>
+<form enctype="multipart/form-data" method="post" asp-controller="Files" asp-action="Upload">
+    <dl>
+        <dt>
+            <label for="files">Upload one or more files with this form:</label>
+        </dt>
+        <dd>
+            <input type="file" name="files" id="files" multiple class="form-control" />
+        </dd>
+    </dl>
+    <input class="btn btn-primary" type="submit" value="Upload file(s)" />
+</form>
+
