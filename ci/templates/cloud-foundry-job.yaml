@@ -2,6 +2,7 @@ parameters:
   feature: ''
   sample: ''
   behave_args: '--stop'
+  custom_variable: ''
 jobs:
 - job: ${{parameters.feature}}_${{parameters.sample}}_Linux
   displayName: '${{parameters.feature}}: ${{parameters.sample}} (Linux)'
@@ -18,6 +19,7 @@ jobs:
     displayName: 'Sample -> ${{parameters.feature}}: ${{parameters.sample}}'
     env:
       PYTHON: python3.11
+      CUSTOM_VARIABLE: ${{parameters.custom_variable}}
   - template: publish-results-steps.yaml
     parameters:
       feature: ${{parameters.feature}}
