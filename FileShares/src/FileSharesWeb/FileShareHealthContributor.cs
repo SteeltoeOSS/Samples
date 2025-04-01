@@ -1,33 +1,15 @@
-using System.Net;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Options;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Common.Net;
-using Steeltoe.Configuration.CloudFoundry;
+using Steeltoe.Samples.FileSharesWeb.Models;
 
 namespace Steeltoe.Samples.FileSharesWeb;
 
-public class FileShareHealthContributor : IHealthContributor
+internal partial class FileShareHealthContributor(IOptionsMonitor<FileShareOptions> fileShareOptionsMonitor) : IHealthContributor
 {
+    private static ulong ThresholdInBytes => 10 * 1024 * 1024;
     public string Id => "fileShareHealthContributor";
-    private static ulong Threshold => 10 * 1024 * 1024;
-
-    private readonly string _sharePath;
-    private NetworkCredential ShareCredentials { get; }
-
-    public FileShareHealthContributor(IOptions<CloudFoundryServicesOptions> serviceOptions)
-    {
-        if (!serviceOptions.Value.Services.TryGetValue("credhub", out IList<CloudFoundryService>? value))
-        {
-            throw new InvalidOperationException();
-        }
-        var credHubEntry = value.FirstOrDefault(service => service.Name == "sampleNetworkShare");
-        _sharePath = credHubEntry?.Credentials["location"].Value ?? throw new InvalidOperationException("Network share path is required for this application.");
-
-        var userName = credHubEntry.Credentials["username"].Value ?? throw new InvalidOperationException("File share username is required.");
-        var password = credHubEntry.Credentials["password"].Value ?? throw new InvalidOperationException("File share password is required.");
-        ShareCredentials = new NetworkCredential(userName, password);
-    }
 
     public Task<HealthCheckResult?> CheckHealthAsync(CancellationToken cancellationToken)
     {
@@ -37,41 +19,48 @@ public class FileShareHealthContributor : IHealthContributor
 
     private HealthCheckResult? Health()
     {
-        if (!string.IsNullOrEmpty(_sharePath))
+        FileShareOptions fileShareOptions = fileShareOptionsMonitor.CurrentValue;
+
+        if (!string.IsNullOrEmpty(fileShareOptions.Location))
         {
             try
             {
-                using var networkPath = new WindowsNetworkFileShare(_sharePath, ShareCredentials);
+                using var networkPath = new WindowsNetworkFileShare(fileShareOptions.Location, fileShareOptions.Credential);
             }
-            catch(Exception e)
+            catch (Exception exception)
             {
                 return new HealthCheckResult
                 {
                     Status = HealthStatus.Down,
-                    Description = "Failed to determine file share health.",
+                    Description = $"Failed to connect to file share at '{fileShareOptions.Location}'.",
                     Details =
                     {
-                        ["error"] = e.Message
+                        ["error"] = exception.Message
                     }
                 };
             }
 
-            string absolutePath = Path.GetFullPath(_sharePath);
-
-            if (Directory.Exists(absolutePath))
+            if (Directory.Exists(fileShareOptions.Location))
             {
-                if (GetDiskFreeSpaceEx(_sharePath, out var freeBytesAvailable, out var totalNumberOfBytes, out var totalNumberOfFreeBytes))
+#pragma warning disable IDE0059 // Unnecessary assignment of a value
+#pragma warning disable IDE0018 // Inline variable declaration
+                // If GetDiskFreeSpaceEx fails, these variables will have a value instead of undefined.
+                ulong freeBytesAvailable = 0, totalNumberOfBytes = 0, totalNumberOfFreeBytes = 0;
+#pragma warning restore IDE0018 // Inline variable declaration
+#pragma warning restore IDE0059 // Unnecessary assignment of a value
+
+                if (GetDiskFreeSpaceEx(fileShareOptions.Location, out freeBytesAvailable, out totalNumberOfBytes, out totalNumberOfFreeBytes))
                 {
                     var result = new HealthCheckResult
                     {
-                        Status = totalNumberOfFreeBytes >= Threshold ? HealthStatus.Up : HealthStatus.Down
+                        Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down
                     };
 
                     result.Details.Add("totalBytes", totalNumberOfBytes);
                     result.Details.Add("freeBytes", totalNumberOfFreeBytes);
                     result.Details.Add("freeBytesAvailable", freeBytesAvailable);
-                    result.Details.Add("threshold", Threshold);
-                    result.Details.Add("path", absolutePath);
+                    result.Details.Add("minimumFreeBytes", ThresholdInBytes);
+                    result.Details.Add("path", fileShareOptions.Location);
                     return result;
                 }
             }
@@ -80,7 +69,7 @@ public class FileShareHealthContributor : IHealthContributor
         return new HealthCheckResult
         {
             Status = HealthStatus.Unknown,
-            Description = "Failed to determine file share health.",
+            Description = $"Failed to determine file share health. The configured path is '{fileShareOptions.Location}'.",
             Details =
             {
                 ["error"] = "The configured path is invalid or does not exist."
@@ -88,7 +77,8 @@ public class FileShareHealthContributor : IHealthContributor
         };
     }
 
+    [LibraryImport("kernel32.dll", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-    private static extern bool GetDiskFreeSpaceEx(string lpDirectoryName, out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
+    private static partial bool GetDiskFreeSpaceEx(string lpDirectoryName, out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes,
+        out ulong lpTotalNumberOfFreeBytes);
 }

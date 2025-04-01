@@ -1,13 +1,13 @@
 ---
 applications:
 - name: fileshares-sample
+  random-route: true
+  memory: 256M
+  stack: windows
   buildpacks:
    - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.FileSharesWeb --urls=http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Production
-  memory: 256M
-  random-route: true
   services:
     - sampleNetworkShare
-  stack: windows

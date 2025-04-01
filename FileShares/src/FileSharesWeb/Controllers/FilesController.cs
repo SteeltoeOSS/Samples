@@ -1,41 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Steeltoe.Common.Net;
-using Steeltoe.Configuration.CloudFoundry;
-using System.Net;
+using Steeltoe.Samples.FileSharesWeb.Models;
+using SystemFile = System.IO.File;
 
 namespace Steeltoe.Samples.FileSharesWeb.Controllers;
 
-public class FilesController : Controller
+public sealed class FilesController(IOptionsMonitor<FileShareOptions> serviceOptionsMonitor, TimeProvider timeProvider) : Controller
 {
-    private readonly string _sharePath;
-    private NetworkCredential ShareCredentials { get; }
-
-    public FilesController(IOptions<CloudFoundryServicesOptions> serviceOptions, ILogger<FilesController> logger)
-    {
-        if (!serviceOptions.Value.Services.TryGetValue("credhub", out IList<CloudFoundryService>? value))
-        {
-            throw new InvalidOperationException();
-        }
-        var credHubEntry = value.FirstOrDefault(service => service.Name!.Equals("sampleNetworkShare"));
-        _sharePath = credHubEntry?.Credentials["location"].Value ?? throw new InvalidOperationException("Network share path is required.");
-        var userName = credHubEntry.Credentials["username"].Value ?? throw new InvalidOperationException("Network share username is required.");
-        var password = credHubEntry.Credentials["password"].Value ?? throw new InvalidOperationException("Network share password is required.");
-        ShareCredentials = new NetworkCredential(userName, password);
-        logger.LogDebug("File share path found in configuration: {path}", _sharePath);
-    }
-
     public async Task<IActionResult> Upload(List<IFormFile>? files)
     {
-        Dictionary<string, string> filesUploaded = new();
+        FileShareOptions fileShareOptions = serviceOptionsMonitor.CurrentValue;
+        Dictionary<string, string> filesUploaded = [];
+
+        if (Request.Method == HttpMethod.Post.ToString() && files is null)
+        {
+            throw new InvalidOperationException("No files were uploaded, this could happen if the file is too large.");
+        }
+
         if (files is { Count: > 0 })
         {
-            using var networkPath = new WindowsNetworkFileShare(_sharePath, ShareCredentials);
-            foreach (var file in files.Where(file => file.Length > 0))
+            using var fileShare = new WindowsNetworkFileShare(fileShareOptions.Location, fileShareOptions.Credential);
+
+            foreach (IFormFile file in files)
             {
-                var fileExtension = Path.GetExtension(file.FileName);
-                var saveFileAs = Guid.NewGuid() + fileExtension;
-                await using var stream = new FileStream(Path.Combine(_sharePath, saveFileAs), FileMode.Create);
+                string fileExtension = Path.GetExtension(file.FileName);
+                string saveFileAs = $"UPLOADED_{timeProvider.GetUtcNow():yyyyMMdd-hhmmss.fff}{fileExtension}";
+                await using var stream = new FileStream(Path.Combine(fileShareOptions.Location, saveFileAs), FileMode.Create);
                 await file.CopyToAsync(stream);
                 filesUploaded.Add(file.FileName, saveFileAs);
             }
@@ -46,14 +37,16 @@ public class FilesController : Controller
 
     public ActionResult List()
     {
-        using var networkPath = new WindowsNetworkFileShare(_sharePath, ShareCredentials);
-        return View(Directory.EnumerateFiles(_sharePath));
+        FileShareOptions fileShareOptions = serviceOptionsMonitor.CurrentValue;
+        using var fileShare = new WindowsNetworkFileShare(fileShareOptions.Location, fileShareOptions.Credential);
+        return View(Directory.EnumerateFiles(fileShareOptions.Location));
     }
 
     public ActionResult<string> Delete(string fileToDelete)
     {
-        using var networkPath = new WindowsNetworkFileShare(_sharePath, ShareCredentials);
-        System.IO.File.Delete(Path.Combine(_sharePath, fileToDelete));
+        FileShareOptions fileShareOptions = serviceOptionsMonitor.CurrentValue;
+        using var fileShare = new WindowsNetworkFileShare(fileShareOptions.Location, fileShareOptions.Credential);
+        SystemFile.Delete(Path.Combine(fileShareOptions.Location, fileToDelete));
 
         return RedirectToAction("List");
     }

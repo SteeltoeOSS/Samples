@@ -16,14 +16,14 @@ Before running the app, you need to create the fileshare or update `appsettings.
 ### Create a file share
 
 > [!CAUTION]
-> The script [create-user-and-share.ps1](../../Scripts/create-user-and-share.ps1) must be run as administrator.
+> The script [create-user-and-share.ps1](../../scripts/create-user-and-share.ps1) must be run as administrator, in Windows.
 > As with any script found on the internet, review the contents before running it.
 
 1. Open a PowerShell window as an administrator
 1. `cd` to the `scripts` directory`
 1. Run [create-user-and-share.ps1](../../scripts/create-user-and-share.ps1), optionally using parameters to override the default values:
    * `-ShareName steeltoe_network_share` - the name of the share
-   * `-SharePath c:\steeltoe_network_share` - the path to the share
+   * `-FolderPath c:\steeltoe_network_share` - the path to the share
    * `-UserName shareWriteUser` - the name of the user
    * `-Password thisIs1Pass!` - the password for the user
 
@@ -41,6 +41,25 @@ Before running the app, you need to create the fileshare or update `appsettings.
     ```shell
     dotnet run
     ```
+
+Once the app is running, you should be able to [upload files](https://localhost:7032/files/upload) and [list files](https://localhost:7032/files/list) in the file share.
+Multiple files can be uploaded at once using the form provided, but you should be aware that files are renamed when they are saved in order to prevent issues with improper characters.
+You can also delete files by clicking the "Delete file" button in the same row as the file name on the list files page.
+
+### Removing the local user and file share
+
+> [!CAUTION]
+> The script [remove-user-and-share.ps1](../../scripts/remove-user-and-share.ps1) must be run as administrator, in Windows.
+> As with any script found on the internet, review the contents before running it.
+
+When you are done working with the sample, you can remove the user and file share with the following steps:
+
+1. Open a PowerShell window as an administrator
+1. `cd` to the `scripts` directory`
+1. Run [remove-user-and-share.ps1](../../scripts/remove-user-and-share.ps1), optionally using parameters to override the default values:
+   * `-ShareName steeltoe_network_share` - the name of the share
+   * `-FolderPath c:\steeltoe_network_share` - the path to the share
+   * `-UserName shareWriteUser` - the name of the user
 
 ## Running on Tanzu Platform for Cloud Foundry
 
@@ -61,3 +80,7 @@ Before deploying the app, you must create an entry in CredHub to contain the cre
     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
     ```
 1. Copy the value of `routes` in the output and open in your browser
+
+---
+
+See the Official [Steeltoe Windows Network File Shares Documentation](https://docs.steeltoe.io/api/v4/fileshares/) for more detailed information.
