@@ -21,8 +21,9 @@ public class FileShareHealthContributor : IHealthContributor
         {
             throw new InvalidOperationException();
         }
-        var credHubEntry = value.FirstOrDefault(service => service.Name!.Equals("sampleNetworkShare"));
+        var credHubEntry = value.FirstOrDefault(service => service.Name == "sampleNetworkShare");
         _sharePath = credHubEntry?.Credentials["location"].Value ?? throw new InvalidOperationException("Network share path is required for this application.");
+
         var userName = credHubEntry.Credentials["username"].Value ?? throw new InvalidOperationException("File share username is required.");
         var password = credHubEntry.Credentials["password"].Value ?? throw new InvalidOperationException("File share password is required.");
         ShareCredentials = new NetworkCredential(userName, password);
