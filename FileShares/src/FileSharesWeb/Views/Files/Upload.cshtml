@@ -1,15 +1,26 @@
-@model Dictionary<string, string>
+@model Dictionary<string, string>?
 @{
     ViewData["Title"] = "Upload Files";
 }
 
-@if (Model.Count > 0)
+@if (Model?.Count > 0)
 {
-    <h2>Files were uploaded successfully</h2>
-
-    @foreach (KeyValuePair<string, string> file in Model)
+    if (Model.Any(file => file.Key == "error"))
     {
-        <h3>Original file name: @file.Key, saved as: @file.Value</h3>
+        <h2 class="alert alert-danger">There was an error uploading the files</h2>
+        <h3 class="alert">@Model["error"]</h3>
+        <hr class="hr"/>
+    }
+    else
+    {
+        <h2 class="alert alert-info">Files were uploaded successfully</h2>
+
+        @foreach ((string? originalFilename, string? savedFilename) in Model)
+        {
+            <p>Original file name: @originalFilename, saved as: @savedFilename</p>
+        }
+
+        <hr class="hr"/>
     }
 }
 

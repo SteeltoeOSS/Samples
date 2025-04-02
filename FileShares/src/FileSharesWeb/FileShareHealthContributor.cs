@@ -1,84 +1,62 @@
 using System.Runtime.InteropServices;
-using Microsoft.Extensions.Options;
 using Steeltoe.Common.HealthChecks;
-using Steeltoe.Common.Net;
-using Steeltoe.Samples.FileSharesWeb.Models;
 
 namespace Steeltoe.Samples.FileSharesWeb;
 
-internal partial class FileShareHealthContributor(IOptionsMonitor<FileShareOptions> fileShareOptionsMonitor) : IHealthContributor
+internal class FileShareHealthContributor : IHealthContributor
 {
-    private static ulong ThresholdInBytes => 10 * 1024 * 1024;
+    private const ulong ThresholdInBytes = 10 * 1024 * 1024;
     public string Id => "fileShareHealthContributor";
 
     public Task<HealthCheckResult?> CheckHealthAsync(CancellationToken cancellationToken)
     {
-        HealthCheckResult? result = Health();
-        return Task.FromResult(result);
+        HealthCheckResult result = Health();
+        return Task.FromResult<HealthCheckResult?>(result);
     }
 
-    private HealthCheckResult? Health()
+    private static HealthCheckResult Health()
     {
-        FileShareOptions fileShareOptions = fileShareOptionsMonitor.CurrentValue;
-
-        if (!string.IsNullOrEmpty(fileShareOptions.Location))
+        if (!string.IsNullOrEmpty(FileShareHostedService.Location) && Directory.Exists(FileShareHostedService.Location))
         {
-            try
+            if (NativeMethods.GetDiskFreeSpaceEx(FileShareHostedService.Location, out ulong freeBytesAvailable, out ulong totalNumberOfBytes,
+                out ulong totalNumberOfFreeBytes))
             {
-                using var networkPath = new WindowsNetworkFileShare(fileShareOptions.Location, fileShareOptions.Credential);
-            }
-            catch (Exception exception)
-            {
-                return new HealthCheckResult
+                var result = new HealthCheckResult
                 {
-                    Status = HealthStatus.Down,
-                    Description = $"Failed to connect to file share at '{fileShareOptions.Location}'.",
-                    Details =
-                    {
-                        ["error"] = exception.Message
-                    }
+                    Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down
                 };
+
+                result.Details.Add("totalBytes", totalNumberOfBytes);
+                result.Details.Add("freeBytes", totalNumberOfFreeBytes);
+                result.Details.Add("freeBytesAvailable", freeBytesAvailable);
+                result.Details.Add("minimumFreeBytes", ThresholdInBytes);
+                result.Details.Add("path", FileShareHostedService.Location);
+                return result;
             }
 
-            if (Directory.Exists(fileShareOptions.Location))
+            int errorCode = Marshal.GetLastWin32Error();
+
+            return new HealthCheckResult
             {
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-#pragma warning disable IDE0018 // Inline variable declaration
-                // If GetDiskFreeSpaceEx fails, these variables will have a value instead of undefined.
-                ulong freeBytesAvailable = 0, totalNumberOfBytes = 0, totalNumberOfFreeBytes = 0;
-#pragma warning restore IDE0018 // Inline variable declaration
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-
-                if (GetDiskFreeSpaceEx(fileShareOptions.Location, out freeBytesAvailable, out totalNumberOfBytes, out totalNumberOfFreeBytes))
+                Status = HealthStatus.Down,
+                Description = "Failed to check free space.",
+                Details =
                 {
-                    var result = new HealthCheckResult
-                    {
-                        Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down
-                    };
-
-                    result.Details.Add("totalBytes", totalNumberOfBytes);
-                    result.Details.Add("freeBytes", totalNumberOfFreeBytes);
-                    result.Details.Add("freeBytesAvailable", freeBytesAvailable);
-                    result.Details.Add("minimumFreeBytes", ThresholdInBytes);
-                    result.Details.Add("path", fileShareOptions.Location);
-                    return result;
+                    ["error"] = $"GetDiskFreeSpaceEx failed with error code {errorCode}.",
+                    ["path"] = FileShareHostedService.Location
                 }
-            }
+            };
         }
 
         return new HealthCheckResult
         {
             Status = HealthStatus.Unknown,
-            Description = $"Failed to determine file share health. The configured path is '{fileShareOptions.Location}'.",
+            Description = "Failed to determine file share health.",
             Details =
             {
-                ["error"] = "The configured path is invalid or does not exist."
+                ["error"] = "The configured path is invalid or does not exist.",
+                ["path"] = FileShareHostedService.Location!
             }
         };
     }
-
-    [LibraryImport("kernel32.dll", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static partial bool GetDiskFreeSpaceEx(string lpDirectoryName, out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes,
-        out ulong lpTotalNumberOfFreeBytes);
 }

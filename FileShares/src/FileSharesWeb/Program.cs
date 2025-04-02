@@ -1,11 +1,8 @@
-using System.Net;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint.Actuators.All;
 using Steeltoe.Management.Endpoint.Actuators.Health;
 using Steeltoe.Samples.FileSharesWeb;
-using Steeltoe.Samples.FileSharesWeb.Models;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -21,21 +18,8 @@ builder.Services.AddHealthContributor<FileShareHealthContributor>();
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
 
-// Steeltoe: Add options for holding network file share location and credentials.
-builder.Services.AddOptions<FileShareOptions>().PostConfigure<IOptions<CloudFoundryServicesOptions>>((shareOptions, serviceOptions) =>
-{
-    if (!serviceOptions.Value.Services.TryGetValue("credhub", out IList<CloudFoundryService>? value))
-    {
-        throw new InvalidOperationException();
-    }
-
-    CloudFoundryService? credHubEntry = value.FirstOrDefault(service => service.Name!.Equals("sampleNetworkShare"));
-    shareOptions.Location = credHubEntry?.Credentials["location"].Value ?? throw new InvalidOperationException("Network share path is required.");
-
-    string userName = credHubEntry.Credentials["username"].Value ?? throw new InvalidOperationException("Network share username is required.");
-    string password = credHubEntry.Credentials["password"].Value ?? throw new InvalidOperationException("Network share password is required.");
-    shareOptions.Credential = new NetworkCredential(userName, password);
-});
+// Steeltoe: Add a hosted service for managing the file share.
+builder.Services.AddHostedService<FileShareHostedService>();
 
 // Steeltoe: Add a time provider for use when naming file uploads.
 builder.Services.TryAddSingleton(TimeProvider.System);

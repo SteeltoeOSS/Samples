@@ -1,13 +1,22 @@
 Param(
 	[string]$ShareName = "steeltoe_network_share",
-	[string]$FolderPath = "c:\steeltoe_network_share",
+	[string]$SharePath = "c:\steeltoe_network_share",
 	[string]$UserName = "shareWriteUser",
 	[string]$Password = "thisIs1Pass!"
 )
 $ErrorActionPreference = "Stop"
+if ($PSVersionTable.PSVersion.Major -lt 6)
+{
+    Write-Output "Running in Windows PowerShell (version < 6)"
+}
+else
+{
+    Write-Output "Running in PowerShell (Pwsh) 7+"
+    Add-Type -AssemblyName System.Management.Automation
+    Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
+}
 #Requires -RunAsAdministrator
 #Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
-Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
 
 $SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
 
@@ -36,14 +45,14 @@ else
     Write-Host "Done adding user to group."
 }
 
-if (Get-Item -Path $FolderPath -ErrorAction SilentlyContinue)
+if (Get-Item -Path $SharePath -ErrorAction SilentlyContinue)
 {
-    Write-Host "Directory $FolderPath already exists."
+    Write-Host "Directory $SharePath already exists."
 }
 else
 {
-    Write-Host "Creating directory $FolderPath..."
-    New-Item -ItemType directory -Path $FolderPath | Out-Null
+    Write-Host "Creating directory $SharePath..."
+    New-Item -ItemType directory -Path $SharePath | Out-Null
     Write-Host "Done creating directory."
 }
 
@@ -53,13 +62,13 @@ if (Get-SmbShare $ShareName -ErrorAction SilentlyContinue)
 }
 else
 {
-    # Share the folder:
+    # Share the directory:
     # - allow all "Users" to read
     # - grant full control to current user and $UserName
     Write-Host "Creating SMB share '$ShareName'..."
     New-SmbShare -Name $ShareName `
-    -Path $FolderPath `
-    -ReadAccess "Everyone" `
-    -FullAccess $UserName, $env:UserName | Out-Null
+        -Path $SharePath `
+        -ReadAccess "Everyone" `
+        -FullAccess $UserName, $env:UserName | Out-Null
     Write-Host "Done creating share, now available at this path: \\$Env:COMPUTERNAME\$ShareName"
 }

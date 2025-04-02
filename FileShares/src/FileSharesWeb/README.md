@@ -16,14 +16,14 @@ Before running the app, you need to create the fileshare or update `appsettings.
 ### Create a file share
 
 > [!CAUTION]
-> The script [create-user-and-share.ps1](../../scripts/create-user-and-share.ps1) must be run as administrator, in Windows.
+> The script [add-user-and-share.ps1](../../scripts/add-user-and-share.ps1) must be run as administrator, in Windows.
 > As with any script found on the internet, review the contents before running it.
 
 1. Open a PowerShell window as an administrator
 1. `cd` to the `scripts` directory`
-1. Run [create-user-and-share.ps1](../../scripts/create-user-and-share.ps1), optionally using parameters to override the default values:
+1. Run [add-user-and-share.ps1](../../scripts/add-user-and-share.ps1), optionally using parameters to override the default values:
    * `-ShareName steeltoe_network_share` - the name of the share
-   * `-FolderPath c:\steeltoe_network_share` - the path to the share
+   * `-SharePath c:\steeltoe_network_share` - the path to the share
    * `-UserName shareWriteUser` - the name of the user
    * `-Password thisIs1Pass!` - the password for the user
 
@@ -58,7 +58,7 @@ When you are done working with the sample, you can remove the user account, the 
 1. `cd` to the `scripts` directory`
 1. Run [remove-user-and-share.ps1](../../scripts/remove-user-and-share.ps1), optionally using parameters to override the default values:
    * `-ShareName steeltoe_network_share` - the name of the share
-   * `-FolderPath c:\steeltoe_network_share` - the path to the share
+   * `-SharePath c:\steeltoe_network_share` - the path to the share
    * `-UserName shareWriteUser` - the name of the user
 
 ## Running on Tanzu Platform for Cloud Foundry

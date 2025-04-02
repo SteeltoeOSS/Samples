@@ -1,12 +1,21 @@
 Param(
     [string]$ShareName = "steeltoe_network_share",
-    [string]$FolderPath = "c:\steeltoe_network_share",
+    [string]$SharePath = "c:\steeltoe_network_share",
     [string]$UserName = "shareWriteUser"
 )
 $ErrorActionPreference = "Stop"
+if ($PSVersionTable.PSVersion.Major -lt 6)
+{
+    Write-Output "Running in Windows PowerShell (version < 6)"
+}
+else
+{
+    Write-Output "Running in PowerShell (Pwsh) 7+"
+    Add-Type -AssemblyName System.Management.Automation
+    Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
+}
 #Requires -RunAsAdministrator
 #Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
-Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
 
 if (Get-SmbShare $ShareName -ErrorAction SilentlyContinue)
 {
@@ -39,13 +48,13 @@ else
     Write-Host "User $UserName was not found."
 }
 
-if (Get-Item -Path $FolderPath -ErrorAction SilentlyContinue)
+if (Get-Item -Path $SharePath -ErrorAction SilentlyContinue)
 {
-    Write-Host "Removing $FolderPath from disk..."
-    Remove-Item -Path $FolderPath -Recurse
+    Write-Host "Removing $SharePath from disk..."
+    Remove-Item -Path $SharePath -Recurse
     Write-Host "Directory completely removed."
 }
 else
 {
-    Write-Host "$FolderPath was not found."
+    Write-Host "$SharePath was not found."
 }
