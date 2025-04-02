@@ -46,13 +46,13 @@ Once the app is running, you should be able to [upload files](https://localhost:
 Multiple files can be uploaded at once using the form provided, but you should be aware that files are renamed when they are saved in order to prevent issues with improper characters.
 You can also delete files by clicking the "Delete file" button in the same row as the file name on the list files page.
 
-### Removing the local user and file share
+### Removing the local user account and file share
 
 > [!CAUTION]
 > The script [remove-user-and-share.ps1](../../scripts/remove-user-and-share.ps1) must be run as administrator, in Windows.
 > As with any script found on the internet, review the contents before running it.
 
-When you are done working with the sample, you can remove the user and file share with the following steps:
+When you are done working with the sample, you can remove the user account, the file share, and its target directory, with the following steps:
 
 1. Open a PowerShell window as an administrator
 1. `cd` to the `scripts` directory`
