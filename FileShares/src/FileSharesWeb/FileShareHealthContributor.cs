@@ -1,11 +1,13 @@
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Steeltoe.Common.HealthChecks;
 
 namespace Steeltoe.Samples.FileSharesWeb;
 
-internal class FileShareHealthContributor : IHealthContributor
+internal class FileShareHealthContributor(FileShareConfiguration fileShareConfiguration) : IHealthContributor
 {
     private const ulong ThresholdInBytes = 10 * 1024 * 1024;
+    private readonly FileShareConfiguration _fileShareConfiguration = fileShareConfiguration;
     public string Id => "fileShareHealthContributor";
 
     public Task<HealthCheckResult?> CheckHealthAsync(CancellationToken cancellationToken)
@@ -14,48 +16,49 @@ internal class FileShareHealthContributor : IHealthContributor
         return Task.FromResult<HealthCheckResult?>(result);
     }
 
-    private static HealthCheckResult Health()
+    private HealthCheckResult Health()
     {
-        if (!string.IsNullOrEmpty(FileShareHostedService.Location) && Directory.Exists(FileShareHostedService.Location))
+        if (!Directory.Exists(_fileShareConfiguration.Location))
         {
-            if (NativeMethods.GetDiskFreeSpaceEx(FileShareHostedService.Location, out ulong freeBytesAvailable, out ulong totalNumberOfBytes,
-                out ulong totalNumberOfFreeBytes))
-            {
-                var result = new HealthCheckResult
-                {
-                    Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down
-                };
-
-                result.Details.Add("totalBytes", totalNumberOfBytes);
-                result.Details.Add("freeBytes", totalNumberOfFreeBytes);
-                result.Details.Add("freeBytesAvailable", freeBytesAvailable);
-                result.Details.Add("minimumFreeBytes", ThresholdInBytes);
-                result.Details.Add("path", FileShareHostedService.Location);
-                return result;
-            }
-
-            int errorCode = Marshal.GetLastWin32Error();
-
             return new HealthCheckResult
             {
-                Status = HealthStatus.Down,
-                Description = "Failed to check free space.",
+                Status = HealthStatus.Unknown,
+                Description = "Unable to determine file share health.",
                 Details =
                 {
-                    ["error"] = $"GetDiskFreeSpaceEx failed with error code {errorCode}.",
-                    ["path"] = FileShareHostedService.Location
+                    ["error"] = "The configured path is invalid or does not exist.",
+                    ["path"] = _fileShareConfiguration.Location!
                 }
             };
         }
 
+        if (NativeMethods.GetDiskFreeSpaceEx(_fileShareConfiguration.Location, out ulong freeBytesAvailable, out ulong totalNumberOfBytes,
+            out ulong totalNumberOfFreeBytes))
+        {
+            var result = new HealthCheckResult
+            {
+                Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down
+            };
+
+            result.Details.Add("bytesFreeForUser", freeBytesAvailable);
+            result.Details.Add("totalFreeBytes", totalNumberOfFreeBytes);
+            result.Details.Add("minimumFreeBytes", ThresholdInBytes);
+            result.Details.Add("totalCapacityBytes", totalNumberOfBytes);
+            result.Details.Add("path", _fileShareConfiguration.Location);
+            return result;
+        }
+
+        int errorCode = Marshal.GetLastWin32Error();
+        var exception = new Win32Exception(errorCode);
+
         return new HealthCheckResult
         {
-            Status = HealthStatus.Unknown,
-            Description = "Unable to determine file share health.",
+            Status = HealthStatus.Down,
+            Description = "Failed to check free space.",
             Details =
             {
-                ["error"] = "The configured path is invalid or does not exist.",
-                ["path"] = FileShareHostedService.Location!
+                ["error"] = exception.ToString(),
+                ["path"] = _fileShareConfiguration.Location
             }
         };
     }

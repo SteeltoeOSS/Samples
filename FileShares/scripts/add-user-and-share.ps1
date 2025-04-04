@@ -1,3 +1,6 @@
+#Requires -RunAsAdministrator
+#Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
+
 Param(
 	[string]$ShareName = "steeltoe_network_share",
 	[string]$SharePath = "c:\steeltoe_network_share",
@@ -15,9 +18,6 @@ else
     Add-Type -AssemblyName System.Management.Automation
     Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
 }
-#Requires -RunAsAdministrator
-#Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
-
 $SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
 
 if (Get-LocalUser -Name $UserName -ErrorAction SilentlyContinue)

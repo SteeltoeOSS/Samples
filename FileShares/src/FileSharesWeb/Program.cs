@@ -12,14 +12,17 @@ builder.Services.AddControllersWithViews();
 // Steeltoe: Add Cloud Foundry Configuration Provider to read service bindings.
 builder.AddCloudFoundryConfiguration();
 
+// Steeltoe: Add a class to hold the file share configuration.
+builder.Services.AddSingleton<FileShareConfiguration>();
+
+// Steeltoe: Add a hosted service for managing the file share.
+builder.Services.AddHostedService<FileShareHostedService>();
+
 // Steeltoe: Add health contributor for network file share.
 builder.Services.AddHealthContributor<FileShareHealthContributor>();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
-
-// Steeltoe: Add a hosted service for managing the file share.
-builder.Services.AddHostedService<FileShareHostedService>();
 
 // Steeltoe: Add a time provider for use when naming file uploads.
 builder.Services.TryAddSingleton(TimeProvider.System);
