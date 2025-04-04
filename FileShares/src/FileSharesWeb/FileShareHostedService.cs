@@ -15,7 +15,7 @@ public sealed class FileShareHostedService : IHostedService
     {
         if (!serviceOptions.Value.Services.TryGetValue("credhub", out IList<CloudFoundryService>? value))
         {
-            throw new InvalidOperationException("Expected to find a 'credhub' service instance in app configuration, but none were found.");
+            throw new InvalidOperationException("A 'credhub' service instance was not found in app configuration.");
         }
 
         CloudFoundryService? credHubEntry = value.FirstOrDefault(service => service.Name == "sampleNetworkShare");
@@ -31,7 +31,7 @@ public sealed class FileShareHostedService : IHostedService
 
         if (!Directory.Exists(Location))
         {
-            throw new IOException($"File share path '{Location}' does not appear to exist. Review the contents of README.md.");
+            throw new IOException($"File share path '{Location}' does not exist. Review the contents of README.md.");
         }
 
         // Perform a quick write and delete test to confirm the path and credentials are valid.

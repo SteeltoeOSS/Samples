@@ -24,10 +24,10 @@ public sealed class FilesController(TimeProvider timeProvider) : Controller
         {
             foreach (IFormFile file in files)
             {
-                string sanitizedFileName = string.Join("_", file.FileName.Split(Path.GetInvalidFileNameChars()));
+                string sanitizedFileName = string.Join('_', file.FileName.Split(Path.GetInvalidFileNameChars()));
                 string saveFileAs = $"UPLOADED_{timeProvider.GetUtcNow():yyyyMMdd-hhmmss}_{sanitizedFileName}";
                 await using var stream = new FileStream(Path.Combine(FileShareHostedService.Location!, saveFileAs), FileMode.Create);
-                await file.CopyToAsync(stream);
+                await file.CopyToAsync(stream, HttpContext.RequestAborted);
                 filesUploaded.Add(file.FileName, saveFileAs);
             }
         }
@@ -46,6 +46,6 @@ public sealed class FilesController(TimeProvider timeProvider) : Controller
     {
         SystemFile.Delete(Path.Combine(FileShareHostedService.Location!, fileToDelete));
 
-        return RedirectToAction("List");
+        return RedirectToAction(nameof(List));
     }
 }

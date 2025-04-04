@@ -51,7 +51,7 @@ internal class FileShareHealthContributor : IHealthContributor
         return new HealthCheckResult
         {
             Status = HealthStatus.Unknown,
-            Description = "Failed to determine file share health.",
+            Description = "Unable to determine file share health.",
             Details =
             {
                 ["error"] = "The configured path is invalid or does not exist.",

@@ -20,7 +20,7 @@ Before running the app, you need to create the fileshare or update `appsettings.
 > As with any script found on the internet, review the contents before running it.
 
 1. Open a PowerShell window as an administrator
-1. `cd` to the `scripts` directory`
+1. `cd` to the `scripts` directory
 1. Run [add-user-and-share.ps1](../../scripts/add-user-and-share.ps1), optionally using parameters to override the default values:
    * `-ShareName steeltoe_network_share` - the name of the share
    * `-SharePath c:\steeltoe_network_share` - the path to the share
@@ -45,6 +45,10 @@ Before running the app, you need to create the fileshare or update `appsettings.
 Once the app is running, you should be able to [upload files](https://localhost:7032/files/upload) and [list files](https://localhost:7032/files/list) in the file share.
 Multiple files can be uploaded at once using the form provided, but you should be aware that files are renamed when they are saved in order to prevent issues with improper characters.
 You can also delete files by clicking the "Delete file" button in the same row as the file name on the list files page.
+
+> [!TIP]
+> The sample uses credentials different from those of your Windows user account. If you've opened the file share in Windows Explorer before running the sample, it fails because a file share can't be accessed by one user using multiple credentials. To recover, run `klist purge` to make Windows forget the connection from Windows Explorer.
+
 
 ### Removing the local user account and file share
 

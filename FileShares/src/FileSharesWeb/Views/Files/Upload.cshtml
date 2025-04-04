@@ -15,7 +15,7 @@
     {
         <h2 class="alert alert-info">Files were uploaded successfully</h2>
 
-        @foreach ((string? originalFilename, string? savedFilename) in Model)
+        @foreach ((string originalFilename, string savedFilename) in Model)
         {
             <p>Original file name: @originalFilename, saved as: @savedFilename</p>
         }
