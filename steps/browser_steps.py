@@ -102,6 +102,28 @@ def step_impl(context, app):
     for endpoint in ['beans', 'dbmigrations', 'env', 'health', 'heapdump', 'httpexchanges', 'info', 'loggers', 'mappings', 'prometheus', 'refresh', 'threaddump']:
         resp.text.should.contain('/cloudfoundryapplication/{}'.format(endpoint))
 
+@then(u'CloudFoundry app {app} should be healthy')
+def step_impl(context, app):
+    """
+    :type context: behave.runner.Context
+    :type app: str
+    """
+    url = dns.resolve_url(context, 'https://{}/cloudfoundryapplication/health'.format(app))
+    token = get_oauth_token(context)
+    attempt = 0
+    while True:
+        attempt += 1
+        resp = requests.get(url, headers={'Authorization': token})
+        if resp.status_code < 500:
+            context.log.info('GET {} [{}]'.format(url, resp.status_code))
+            resp.status_code.should.equal(200)
+            resp.text.should.equal('{"status":"UP"}')
+            break
+        context.log.info('failed to get {} [{}]'.format(url, resp.status_code))
+        if attempt > 5:
+            raise Exception('Unable to get page {} [{}]'.format(url, resp.status_code))
+        time.sleep(context.options.cmd.loop_wait)
+
 
 def get_oauth_token(context):
     """
