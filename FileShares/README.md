@@ -36,10 +36,10 @@ Before running the app, you need to create the fileshare or update `appsettings.
 ### Run the app
 
 1. Open a terminal window
-1. `cd` to the `FileSharesWeb` directory
+1. `cd` to the `src\FileSharesWeb` directory
 1. Run the app with the following command:
     ```shell
-    dotnet run
+    dotnet run --launch-profile https
     ```
 
 Once the app is running, you should be able to [upload files](https://localhost:7032/files/upload) and [list files](https://localhost:7032/files/list) in the file share.
@@ -59,7 +59,7 @@ You can also delete files by clicking the "Delete file" button in the same row a
 When you are done working with the sample, you can remove the user account, the file share, and its target directory, with the following steps:
 
 1. Open a PowerShell window as an administrator
-1. `cd` to the `scripts` directory`
+1. `cd` to the `scripts` directory
 1. Run [remove-user-and-share.ps1](../../scripts/remove-user-and-share.ps1), optionally using parameters to override the default values:
    * `-ShareName steeltoe_network_share` - the name of the share
    * `-SharePath c:\steeltoe_network_share` - the path to the share

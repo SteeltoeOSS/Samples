@@ -6,9 +6,8 @@ namespace Steeltoe.Samples.FileSharesWeb;
 
 public sealed class FileShareConfiguration
 {
-    internal NetworkCredential Credential { get; }
-
     internal string Location { get; }
+    internal NetworkCredential Credential { get; }
 
     public FileShareConfiguration(IOptions<CloudFoundryServicesOptions> serviceOptions)
     {

@@ -27,7 +27,7 @@ internal class FileShareHealthContributor(FileShareConfiguration fileShareConfig
                 Details =
                 {
                     ["error"] = "The configured path is invalid or does not exist.",
-                    ["path"] = _fileShareConfiguration.Location!
+                    ["path"] = _fileShareConfiguration.Location
                 }
             };
         }
