@@ -18,7 +18,9 @@ internal class FileShareHealthContributor(FileShareConfiguration fileShareConfig
 
     private HealthCheckResult Health()
     {
-        if (!Directory.Exists(_fileShareConfiguration.Location))
+        bool directoryExists = Directory.Exists(_fileShareConfiguration.Location);
+
+        if (!directoryExists)
         {
             return new HealthCheckResult
             {
@@ -27,7 +29,8 @@ internal class FileShareHealthContributor(FileShareConfiguration fileShareConfig
                 Details =
                 {
                     ["error"] = "The configured path is invalid or does not exist.",
-                    ["path"] = _fileShareConfiguration.Location
+                    ["path"] = _fileShareConfiguration.Location,
+                    ["exists"] = directoryExists
                 }
             };
         }
@@ -35,17 +38,18 @@ internal class FileShareHealthContributor(FileShareConfiguration fileShareConfig
         if (NativeMethods.GetDiskFreeSpaceEx(_fileShareConfiguration.Location, out ulong freeBytesAvailable, out ulong totalNumberOfBytes,
             out ulong totalNumberOfFreeBytes))
         {
-            var result = new HealthCheckResult
+            return new HealthCheckResult
             {
-                Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down
+                Status = totalNumberOfFreeBytes >= ThresholdInBytes ? HealthStatus.Up : HealthStatus.Down,
+                Details =
+                {
+                    ["bytesFreeForUser"] = freeBytesAvailable,
+                    ["totalFreeBytes"] = totalNumberOfFreeBytes,
+                    ["totalCapacityBytes"] = totalNumberOfBytes,
+                    ["path"] = _fileShareConfiguration.Location,
+                    ["exists"] = directoryExists
+                }
             };
-
-            result.Details.Add("bytesFreeForUser", freeBytesAvailable);
-            result.Details.Add("totalFreeBytes", totalNumberOfFreeBytes);
-            result.Details.Add("minimumFreeBytes", ThresholdInBytes);
-            result.Details.Add("totalCapacityBytes", totalNumberOfBytes);
-            result.Details.Add("path", _fileShareConfiguration.Location);
-            return result;
         }
 
         int errorCode = Marshal.GetLastWin32Error();
@@ -58,7 +62,8 @@ internal class FileShareHealthContributor(FileShareConfiguration fileShareConfig
             Details =
             {
                 ["error"] = exception.ToString(),
-                ["path"] = _fileShareConfiguration.Location
+                ["path"] = _fileShareConfiguration.Location,
+                ["exists"] = directoryExists
             }
         };
     }

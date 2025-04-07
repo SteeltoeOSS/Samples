@@ -42,19 +42,18 @@ else
 }
 
 <script>
-    function deleteFile(fileName, rowId)
-    {
+    function deleteFile(fileName, rowId) {
         $.ajax({
             url: "/files/delete?fileToDelete=" + encodeURIComponent(fileName),
             method: "DELETE",
             success: function(result) {
                 console.log(result);
                 $("#" + rowId).remove();
-                if ($("#uploadedFiles tbody tr").length === 0){
+                if ($("#uploadedFiles tbody tr").length === 0) {
                     $("#uploadedFiles tbody").append('<tr><td colspan="2">All files have been deleted. <a href="@Url.Action("Upload", "Files")">Upload files.</a></td></tr>')
                 }
             },
-            error: function(xhr, textStatus, errorThrown){
+            error: function(xhr, textStatus, errorThrown) {
                 console.error(xhr.responseText);
                 alert("Request to delete failed. Check the console for details.");
             }
