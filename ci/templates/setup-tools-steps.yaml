@@ -3,7 +3,8 @@ steps:
   displayName: 'Setup Python'
   inputs:
     versionSpec: 3.11
-- task: UseRubyVersion@0
-  displayName: 'Setup Ruby'
-  inputs:
-    versionSpec: 3.1.x
+# Ruby is only needed as a dependency for UAAC
+# - task: UseRubyVersion@0
+#   displayName: 'Setup Ruby'
+#   inputs:
+#     versionSpec: 3.1.x
