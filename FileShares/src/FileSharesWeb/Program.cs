@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint.Actuators.All;
-using Steeltoe.Management.Endpoint.Actuators.Health;
+using Steeltoe.Management.Endpoint.Actuators.Health.Contributors;
 using Steeltoe.Samples.FileSharesWeb;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -18,11 +18,12 @@ builder.Services.AddSingleton<FileShareConfiguration>();
 // Steeltoe: Add a hosted service for managing the file share.
 builder.Services.AddHostedService<FileShareHostedService>();
 
-// Steeltoe: Add health contributor for network file share.
-builder.Services.AddHealthContributor<FileShareHealthContributor>();
-
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
+
+// Steeltoe: Configure the disk space health contributor to monitor the file share.
+builder.Services.AddOptions<DiskSpaceContributorOptions>()
+    .PostConfigure<FileShareConfiguration>((diskSpaceOptions, fileShareConfiguration) => diskSpaceOptions.Path = fileShareConfiguration.Location);
 
 // Steeltoe: Add a time provider for use when naming file uploads.
 builder.Services.TryAddSingleton(TimeProvider.System);
