@@ -31,4 +31,5 @@ manifest-windows.yml
 Properties
 
 # files specific this sample
-GeneratedCertificates
+.tanzuignore
+config-server.json
