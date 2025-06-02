@@ -28,7 +28,7 @@ config
 *.http
 manifest-windows.yml
 *.md
-Properties
+launchSettings.json
 
 # files specific this sample
 appsettings.Development.json
