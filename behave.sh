@@ -1,41 +1,42 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-basedir=$(dirname $0)
-reinit_flag=$basedir/reinit
+basedir=$(dirname "$0")
+reinit_flag="$basedir/reinit"
 PATH+=:~/.local/bin
-PYTHON=${PYTHON:-python3.10}
 
-command_available() {
-  local cmd=$1
-  command -v $cmd >/dev/null
-}
-
-env_exists() {
-  pipenv --venv >/dev/null 2>&1
-}
-
-# ensure pipenv available
-if ! command_available pipenv >/dev/null; then
-  echo "installing 'pipenv'"
-  $PYTHON -m pip install --user pipenv
+# Try to find a valid python3 interpreter
+if command -v python3 >/dev/null; then
+  PYTHON=$(command -v python3)
+elif command -v python >/dev/null; then
+  PYTHON=$(command -v python)
+else
+  echo "Error: Python 3 not found"
+  exit 1
 fi
 
-# set working dir
-cd $basedir
+# Ensure pipenv is installed
+if ! command -v pipenv >/dev/null; then
+  echo "Installing pipenv"
+  "$PYTHON" -m pip install --user pipenv
+fi
 
+cd "$basedir"
 
-# initialize framework if requested/needed
-if [ -f $reinit_flag ] ; then
-  echo "reinitializing"
+# Reinitialize environment if requested
+if [ -f "$reinit_flag" ]; then
+  echo "Reinitializing"
   pipenv --rm || true
-  rm $reinit_flag
-fi
-if ! env_exists; then
-  echo "installing env"
-  $PYTHON -m pipenv sync
+  rm "$reinit_flag"
 fi
 
-# run samples
-exec pipenv run behave $*
+# Create environment with the detected Python interpreter
+if ! pipenv --venv >/dev/null 2>&1; then
+  echo "Creating pipenv with $PYTHON"
+  pipenv --python "$PYTHON"
+  pipenv sync
+fi
+
+# Run behave tests
+exec pipenv run behave "$@"

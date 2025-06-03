@@ -29,7 +29,12 @@ class Command(object):
         self.env = self.context.env.copy()
         self.command = command
         self.sandbox_dir = context.sandbox_dir
-        self.args = shlex.split(command)
+        if isinstance(command, str):
+            self.args = shlex.split(command)
+        elif isinstance(command, list):
+            self.args = command
+        else:
+            raise TypeError(f"Unsupported type for command: {type(command)}")
         self.cwd = self.context.project_dir
         self.args = resolve_args(context, self.args, self.cwd)
         self.windowed = windowed
@@ -85,10 +90,10 @@ class Command(object):
             self._format_output('stdout')
             self._format_output('stderr')
 
-    def run(self):
+    def run(self, raise_on_error: bool = True):
         self.exec()
         self.wait()
-        if self.rc:
+        if self.rc and raise_on_error:
             raise CommandException(
                 'command returned non-zero return code: {}, stderr:\n{}'.format(self.rc, self.stderr))
 
@@ -118,8 +123,8 @@ class Command(object):
 
 class CommandException(Exception):
 
-    def __init(self, message):
-        super(CommandException, self).__init__(message)
+    def __init__(self, message):
+        super().__init__(message)
 
 
 def resolve_args(context, args, cwd):
@@ -143,6 +148,10 @@ def resolve_cf_args(context, args, cwd):
     """
     if args[1] == 'push':
         if '-f' in args:
+            print(f"DEBUG: args before processing in resolve_cf_args: {args} (types: {[type(a) for a in args]})")
+            manifest_arg = args[args.index('-f') + 1]
+            print(f"DEBUG: manifest arg: {manifest_arg} (type: {type(manifest_arg)})")
+
             manifest = os.path.join(cwd, args[args.index('-f') + 1])
             with open(manifest, 'r', encoding='utf-8-sig') as f:
                 doc = f.read()
