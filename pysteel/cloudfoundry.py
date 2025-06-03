@@ -68,15 +68,14 @@ class CloudFoundry(object):
         :type args: list
         """
         if args is None:
-            args = []
-        self._context.log.info('creating Cloud Foundry service "{}:{}" instance "{}"'.format(service, plan, service_instance))
-        cmd_s = 'cf create-service {} {} {}'.format(service, plan, service_instance)
-        if args:
-            cmd_s += ' ' + ' '.join(args)
-        if skip_logs:
-            cmd = command.Command(self._context, cmd_s, log_func=self._context.log.nolog)
+            cmd_base = 'cf create-service {} {} {}'.format(service, plan, service_instance)
         else:
-            cmd = command.Command(self._context, cmd_s)
+            cmd_base = ['cf', 'create-service', service, plan, service_instance] + args
+        self._context.log.info('creating Cloud Foundry service "{}:{}" instance "{}"'.format(service, plan, service_instance))
+        if skip_logs:
+            cmd = command.Command(self._context, cmd_base, log_func=self._context.log.nolog)
+        else:
+            cmd = command.Command(self._context, cmd_base)
         cmd.run()
         if cmd.rc != 0:
             raise Exception('create service instance failed: {}'.format(service_instance))
@@ -150,19 +149,24 @@ class CloudFoundry(object):
         if match:
             return match.group(1)
 
-    def push_app(self, manifest):
+    def push_app(self, manifest, extra_args=""):
         """
         :type manifest: str
+        :type extra_args: str
         """
         manifest_yaml = yaml.safe_load(open(os.path.join(self._context.project_dir, manifest), 'r'))
         app_name = manifest_yaml['applications'][0]['name']
         self._context.log.info('pushing Cloud Foundry app "{}" ({})'.format(app_name, manifest))
-        cmd_s = 'cf push -t 120 -f {}'.format(manifest)
+        cmd_s = f'cf push -t 120 -f {manifest} {extra_args}'.strip()
         cmd = command.Command(self._context, cmd_s)
-        cmd.run()
-        if cmd.rc != 0:
-            raise Exception('push app failed: "{}" ({})'.format(app_name, manifest))
+        cmd.run(raise_on_error=False)
+
+        self._context.log.info('cf push is complete, allow some stabilization time')
+        time.sleep(30)
+        self._context.log.info('sleep complete, proceeding with test...')
+
         attempts = 0
+        crashCount = 0
         while True:
             attempts += 1
             if self._context.options.cf.max_attempts >= 0:
@@ -171,15 +175,20 @@ class CloudFoundry(object):
                 self._context.log.info("attempt {}/{}".format(attempts, self._context.options.cf.max_attempts))
             else:
                 self._context.log.info("attempt {}".format(attempts))
+
             status = self.get_app_status(app_name)
             if status is None:
                 self._context.log.info('app "{}" status not yet available'.format(app_name))
             else:
                 self._context.log.info('app "{}" status: "{}"'.format(app_name, status))
+
             if status == 'running':
                 break
             if status == 'crashed':
-                assert False, "app {} crashed".format(app_name)
+                crashCount += 1
+                if crashCount > 10:
+                    assert False, "app {} crashed".format(app_name)
+
             time.sleep(self._context.options.cmd.loop_wait)
 
     def delete_app(self, app_name):

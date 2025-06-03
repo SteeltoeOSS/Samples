@@ -28,6 +28,15 @@ def step_impl(context, name, value):
     """
     context.env[name] = value
 
+@when(u'you push: {manifest}')
+def step_impl(context, manifest):
+    cf = CloudFoundry(context)
+    if ' with args:' in manifest:
+        manifest, args_part = manifest.split(' with args:', 1)
+        args = args_part.strip()
+        cf.push_app(manifest.strip(), extra_args=args)
+    else:
+        cf.push_app(manifest)
 
 @when(u'you run: {command}')
 def step_impl(context, command):

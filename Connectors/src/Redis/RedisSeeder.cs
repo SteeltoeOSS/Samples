@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.Redis;
@@ -7,7 +7,7 @@ namespace Steeltoe.Samples.Redis;
 
 internal sealed class RedisSeeder
 {
-    private static readonly TimeSpan ExampleSlidingExpiration = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan ExampleSlidingExpiration = TimeSpan.FromMinutes(5);
 
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
