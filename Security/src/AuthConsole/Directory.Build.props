@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <SteeltoeVersion>4.0.*-*</SteeltoeVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AspNetCoreVersion>8.0.*</AspNetCoreVersion>
+  </PropertyGroup>
+</Project>
