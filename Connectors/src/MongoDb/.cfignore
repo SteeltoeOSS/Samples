@@ -31,4 +31,3 @@ manifest*.yml
 launchSettings.json
 
 # files specific this sample
-appsettings.Development.json
