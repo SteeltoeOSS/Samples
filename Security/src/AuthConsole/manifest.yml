@@ -1,0 +1,12 @@
+---
+applications:
+- name: auth-client-console-sample
+  buildpacks:
+  - dotnet_core_buildpack
+  health-check-type: process
+  memory: 128M
+  no-route: true
+  stack: cflinuxfs4
+  env:
+    DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+    DOTNET_NOLOGO: "true"

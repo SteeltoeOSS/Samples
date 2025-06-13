@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
@@ -27,7 +26,7 @@ builder.Configuration.AddCloudFoundryServiceBindings();
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
 
 // Steeltoe: Register Microsoft's JWT Bearer and Certificate libraries for authentication, configure JWT to work with UAA/Cloud Foundry.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer().ConfigureJwtBearerForCloudFoundry().AddCertificate();
+builder.Services.AddAuthentication().AddJwtBearer().ConfigureJwtBearerForCloudFoundry().AddCertificate();
 
 // Steeltoe: Register Microsoft authorization services.
 builder.Services.AddAuthorizationBuilder()
