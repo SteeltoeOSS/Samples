@@ -30,7 +30,7 @@ To receive a RabbitMQ message that you have sent: click the Receive button. Mess
 1. Create a RabbitMQ service instance in an org/space
    ```
    cf target -o your-org -s your-space
-   cf create-service p.rabbitmq single-node sampleRabbitMQService
+   cf create-service p.rabbitmq rmq-single-node sampleRabbitMQService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs rabbitmq-connector-sample`)
