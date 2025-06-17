@@ -8,7 +8,11 @@ for connecting to a Microsoft SQL Server database.
 1. Installed .NET 8 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
-   with [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-mssql-db.html)
+   and one of the following service brokers:
+
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-13/csb-azure/reference-azure-mssql-db.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-mssql.html)
+
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Running locally
@@ -27,8 +31,15 @@ Upon startup, the app inserts a couple of rows into the bound SQL Server databas
 1. Create a SQL Server service instance in an org/space
    ```
    cf target -o your-org -s your-space
-   cf create-service csb-azure-mssql mini sampleSqlServerService
    ```
+   - When using Tanzu Cloud Service Broker for Microsoft Azure:
+     ```
+     cf create-service csb-azure-mssql-db your-plan sampleSqlServerService
+     ```
+   - When using Tanzu Cloud Service Broker for AWS:
+     ```
+     cf create-service csb-aws-mssql your-plan samplePostgreSqlService
+     ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs sqlserver-efcore-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
