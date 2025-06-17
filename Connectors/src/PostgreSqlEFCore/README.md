@@ -11,8 +11,9 @@ There is also an additional sample that illustrates how to use a `NpgsqlConnecti
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
    and one of the following service brokers:
 
-   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-9/csb-azure/reference-azure-postgresql.html)
-   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-8/csb-gcp/reference-gcp-postgresql.html)
+   - [Tanzu for Postgres on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-postgres-on-cloud-foundry/10-1/postgres/index.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-9/csb-gcp/reference-gcp-postgresql.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-postgres.html)
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
@@ -34,13 +35,17 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
    ```
    cf target -o your-org -s your-space
    ```
-   - When using Tanzu Cloud Service Broker for Microsoft Azure:
+   - When using Tanzu for Postgres on Cloud Foundry:
      ```
-     cf create-service csb-azure-postgresql mini samplePostgreSqlService
+     cf create-service postgres small samplePostgreSqlService
      ```
    - When using Tanzu Cloud Service Broker for GCP:
      ```
-     cf create-service csb-google-postgres gcp-postgres-tiny samplePostgreSqlService
+     cf create-service csb-google-postgres your-plan samplePostgreSqlService
+     ```
+   - When using Tanzu Cloud Service Broker for AWS:
+     ```
+     cf create-service csb-aws-postgresql your-plan samplePostgreSqlService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs postgresql-efcore-connector-sample`)
