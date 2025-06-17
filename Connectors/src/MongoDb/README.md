@@ -8,7 +8,7 @@ for connecting to a MongoDB database.
 1. Installed .NET 8 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
-   with [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-cosmosdb-mongo.html)
+   with [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-13/csb-azure/reference-azure-cosmosdb-mongo.html)
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.6 or higher
    and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
@@ -28,7 +28,7 @@ Upon startup, the app inserts a couple of objects into the bound MongoDB databas
 1. Create a MongoDB service instance in an org/space
    ```
    cf target -o your-org -s your-space
-   cf create-service csb-azure-mongodb small sampleMongoDbService
+   cf create-service csb-azure-mongodb your-plan sampleMongoDbService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs mongodb-connector-sample`)
