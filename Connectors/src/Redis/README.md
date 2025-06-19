@@ -14,8 +14,8 @@ This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExcha
 
    - [Redis for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/redis-for-tanzu-application-service/3-5/redis-for-tas/index.html)
    - [Tanzu for Valkey on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-valkey-on-cloud-foundry/4-0/valkey-on-cf/index.html)
-   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-redis.html)
-   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-5/csb-gcp/reference-gcp-redis.html)
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-13/csb-azure/reference-azure-redis.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-redis.html)
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
@@ -40,21 +40,21 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis/V
    ```
    cf target -o your-org -s your-space
    ```
-   - When using Redis for Tanzu Application Service or Tanzu for Valkey on Cloud Foundry:
-     ```
-     cf create-service p.redis on-demand-cache sampleRedisService
-     ```
-     or:
+   - When using Redis for Tanzu Application Service:
      ```
      cf create-service p-redis shared-vm sampleRedisService
+     ```
+  - When using Tanzu for Valkey on Cloud Foundry:
+     ```
+     cf create-service p.redis vk-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```
      cf create-service csb-azure-redis your-plan sampleRedisService
      ```
-   - When using Tanzu Cloud Service Broker for GCP:
+   - When using Tanzu Cloud Service Broker for AWS:
      ```
-     cf create-service csb-google-redis your-plan sampleRedisService
+     cf create-service csb-aws-redis your-plan sampleRedisService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-connector-sample`)

@@ -10,7 +10,7 @@ def setup(context):
     app = 'sqlserver-efcore-connector-sample'
     cf.delete_app(app)
     # create service
-    service = 'csb-azure-mssql'
+    service = 'csb-azure-mssql-db'
     plan = 'small-v2'
     instance = 'sampleSqlServerService'
     cf.create_service(service, plan, instance)
