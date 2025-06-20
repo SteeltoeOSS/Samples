@@ -1,25 +1,60 @@
+using System.Xml.Linq;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
+using StackExchange.Redis;
+using Steeltoe.Connectors;
+using Steeltoe.Connectors.Redis;
 using Steeltoe.Samples.RedisDataProtection.Models;
 
 namespace Steeltoe.Samples.RedisDataProtection.Pages;
 
 public class IndexModel(
-    IDataProtectionProvider dataProtectionProvider, ILogger<IndexModel> logger, IOptions<DataProtectionOptions> dataProtectionOptions) : PageModel
+    IDataProtectionProvider dataProtectionProvider, ILogger<IndexModel> logger, IOptions<DataProtectionOptions> dataProtectionOptions,
+    ConnectorFactory<RedisOptions, IConnectionMultiplexer> connectorFactory) : PageModel
 {
     private const string ProtectionPurpose = "SteeltoeDataProtectionInSession";
     private const string SessionKey = "ExampleSessionKey";
+    private static readonly RedisKey DataProtectionKeysKey = "DataProtection-Keys";
 
+    public List<string> DataProtectionXmlCryptoKeys { get; set; } = [];
     public SessionStateViewModel? SessionState { get; set; }
 
-    // Steeltoe: Obtain session information.
-    public IActionResult OnGet(CancellationToken cancellationToken)
+    public async Task<IActionResult> OnGet(CancellationToken cancellationToken)
     {
         logger.LogInformation("Session ID: {SessionID}, discriminator: {Discriminator}", HttpContext.Session.Id,
             dataProtectionOptions.Value.ApplicationDiscriminator);
 
+        await GetRedisDataProtectionXmlCryptoKeysAsync();
+        GetSessionState();
+
+        return Page();
+    }
+
+    // Steeltoe: Retrieve XML that contains crypto keys from Redis.
+    private async Task GetRedisDataProtectionXmlCryptoKeysAsync()
+    {
+        Connector<RedisOptions, IConnectionMultiplexer> connector = connectorFactory.Get();
+        IConnectionMultiplexer connection = connector.GetConnection();
+        IDatabase database = connection.GetDatabase();
+        long keyCount = await database.ListLengthAsync(DataProtectionKeysKey);
+
+        for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+        {
+            string? elementValue = await database.ListGetByIndexAsync(DataProtectionKeysKey, keyIndex);
+
+            if (elementValue != null)
+            {
+                string elementXmlValue = XDocument.Parse(elementValue).ToString();
+                DataProtectionXmlCryptoKeys.Add(elementXmlValue);
+            }
+        }
+    }
+
+    // Steeltoe: Obtain session information.
+    private void GetSessionState()
+    {
         IDataProtector dataProtector = dataProtectionProvider.CreateProtector(ProtectionPurpose);
         string? sessionValue = HttpContext.Session.GetString(SessionKey);
         string plainTextSessionValue;
@@ -47,7 +82,5 @@ public class IndexModel(
             SessionId = HttpContext.Session.Id,
             SessionValue = plainTextSessionValue
         };
-
-        return Page();
     }
 }

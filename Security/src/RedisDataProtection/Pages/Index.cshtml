@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -7,6 +7,28 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Steeltoe: Display XML that contains crypto keys used by Data Protection API. -->
+<div class="alert alert-secondary">
+    <h4>Crypto keys used by Data Protection API</h4>
+    <table class="table table-bordered table-primary" style="display: table; table-layout: fixed; width: 100%;">
+        <thead>
+        <tr>
+                <th scope="col">Crypto Key XML</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (string dataProtectionKey in Model.DataProtectionXmlCryptoKeys)
+        {
+            <tr>
+                <td>
+                    <pre>@dataProtectionKey</pre>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
 </div>
 
 <!-- Steeltoe: Display session state information. -->
