@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
@@ -56,12 +55,6 @@ builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress
 builder.Services.AddAllActuators();
 
 WebApplication app = builder.Build();
-
-// Steeltoe: Direct ASP.NET Core to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry).
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto
-});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

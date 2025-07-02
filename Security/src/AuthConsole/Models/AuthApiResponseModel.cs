@@ -1,6 +1,4 @@
-using System;
-
-namespace Steeltoe.Samples.AuthWeb.Models;
+namespace Steeltoe.Samples.AuthConsole.Models;
 
 public sealed class AuthApiResponseModel
 {

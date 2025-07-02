@@ -1,10 +1,10 @@
-﻿---
+---
 applications:
 - name: auth-client-sample
   buildpacks:
   - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.AuthWeb --urls=http://0.0.0.0:%PORT%
-  memory: 128M
+  memory: 256M
   stack: windows
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

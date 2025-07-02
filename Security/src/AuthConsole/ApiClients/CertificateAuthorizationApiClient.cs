@@ -1,9 +1,6 @@
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Steeltoe.Samples.AuthWeb.Models;
+using Steeltoe.Samples.AuthConsole.Models;
 
-namespace Steeltoe.Samples.AuthWeb.ApiClients;
+namespace Steeltoe.Samples.AuthConsole.ApiClients;
 
 public sealed class CertificateAuthorizationApiClient(HttpClient httpClient)
     : StringApiClient(httpClient)

@@ -1,10 +1,6 @@
-using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Steeltoe.Samples.AuthWeb.Models;
+using Steeltoe.Samples.AuthConsole.Models;
 
-namespace Steeltoe.Samples.AuthWeb.ApiClients;
+namespace Steeltoe.Samples.AuthConsole.ApiClients;
 
 public abstract class StringApiClient(HttpClient httpClient)
 {
@@ -13,6 +9,7 @@ public abstract class StringApiClient(HttpClient httpClient)
     protected async Task<AuthApiResponseModel> GetAsync(string requestUri, CancellationToken cancellationToken)
     {
         string fullRequestUri = httpClient.BaseAddress + requestUri;
+
         try
         {
             using HttpResponseMessage response = await httpClient.GetAsync(requestUri, cancellationToken);
