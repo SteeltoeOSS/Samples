@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
-using Steeltoe.Common.Hosting;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
 using Steeltoe.Management.Endpoint.Actuators.All;
@@ -55,13 +54,7 @@ builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
 
-// Steeltoe: Configure ASP.NET Core options to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry).
-builder.Services.ConfigureForwardedHeadersOptionsForCloudFoundry();
-
 WebApplication app = builder.Build();
-
-// Steeltoe: Configure ASP.NET Core to use the ForwardedHeadersOptions configured above.
-app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
