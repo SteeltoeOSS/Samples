@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Steeltoe.Samples.AuthWeb.Models;
@@ -10,11 +10,11 @@ public sealed class CertificateAuthorizationApiClient(HttpClient httpClient)
 {
     public async Task<AuthApiResponseModel> GetSameOrgAsync(CancellationToken cancellationToken)
     {
-        return await GetAsync("/api/certificate/SameOrg", cancellationToken);
+        return await GetAsync("api/certificate/SameOrg", cancellationToken);
     }
 
     public async Task<AuthApiResponseModel> GetSameSpaceAsync(CancellationToken cancellationToken)
     {
-        return await GetAsync("/api/certificate/SameSpace", cancellationToken);
+        return await GetAsync("api/certificate/SameSpace", cancellationToken);
     }
 }

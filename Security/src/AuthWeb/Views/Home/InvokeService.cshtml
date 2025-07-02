@@ -1,4 +1,4 @@
-﻿@model Steeltoe.Samples.AuthWeb.Models.AuthApiResponseModel
+@model Steeltoe.Samples.AuthWeb.Models.AuthApiResponseModel
 @{
     ViewData["Title"] = "Invoke a backend service";
 }
@@ -19,3 +19,5 @@ else
         @Model.Message
     </div>
 }
+
+<h4>Request URI: @Model.RequestUri</h4>
