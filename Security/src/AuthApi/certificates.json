@@ -1,0 +1,8 @@
+{
+    "Certificates": {
+        "AppInstanceIdentity": {
+            "CertificateFilePath": "linuxInstance.crt",
+            "PrivateKeyFilePath": "linuxInstance.key"
+        }
+    }
+}

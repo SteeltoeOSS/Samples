@@ -1,6 +1,6 @@
 ---
 applications:
-- name: auth-server-sample
+- name: auth-server-sample-windows
   buildpacks:
   - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.AuthApi --urls=http://0.0.0.0:%PORT%

@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="additional-certificates\linux-intermediate.crt" />
+    <None Remove="additional-certificates\windows-intermediate.crt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="additional-certificates\linux-intermediate.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="additional-certificates\windows-intermediate.crt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.JwtBearer" Version="$(SteeltoeVersion)" />

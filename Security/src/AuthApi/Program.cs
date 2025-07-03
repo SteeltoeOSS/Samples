@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authentication;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Configuration.CloudFoundry.ServiceBindings;
@@ -8,6 +10,10 @@ using Steeltoe.Security.Authorization.Certificate;
 
 const string orgId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
 const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
+
+// for local testing
+//Environment.SetEnvironmentVariable("VCAP_APPLICATION", "{}");
+//Environment.SetEnvironmentVariable("CF_SYSTEM_CERT_PATH", "cf-system-certificates");
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +31,19 @@ builder.Configuration.AddCloudFoundryServiceBindings();
 // Steeltoe: Add instance identity certificate to configuration.
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
 
+// for local testing
+//builder.Configuration.AddJsonFile("certificates.json", false, true);
+
 // Steeltoe: Register Microsoft's JWT Bearer and Certificate libraries for authentication, configure JWT to work with UAA/Cloud Foundry.
-builder.Services.AddAuthentication().AddJwtBearer().ConfigureJwtBearerForCloudFoundry().AddCertificate();
+AuthenticationBuilder authenticationBuilder = builder.Services.AddAuthentication()/*.AddJwtBearer().ConfigureJwtBearerForCloudFoundry()*/;
+
+authenticationBuilder.AddCertificate(
+    certificateAuthenticationOptions =>
+    {
+        string[] certificateFilePaths = Directory.GetFiles("additional-certificates", "*.crt");
+        X509Certificate2[] certificates = [.. certificateFilePaths.Select(certificatePath => new X509Certificate2(certificatePath))];
+        certificateAuthenticationOptions.AdditionalChainCertificates.AddRange(certificates);
+    });
 
 // Steeltoe: Register Microsoft authorization services.
 builder.Services.AddAuthorizationBuilder()

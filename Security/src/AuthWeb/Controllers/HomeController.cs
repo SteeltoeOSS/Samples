@@ -1,17 +1,57 @@
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Steeltoe.Common.Certificates;
 using Steeltoe.Samples.AuthWeb.ApiClients;
 using Steeltoe.Samples.AuthWeb.Models;
 
 namespace Steeltoe.Samples.AuthWeb.Controllers;
 
-public sealed class HomeController(
-    JwtAuthorizationApiClient jwtAuthorizationApiClient, CertificateAuthorizationApiClient certificateAuthorizationApiClient) : Controller
+public sealed class HomeController(IOptionsMonitor<CertificateOptions> certificateOptionsMonitor,
+    ILogger<HomeController> logger,
+    JwtAuthorizationApiClient jwtAuthorizationApiClient,
+    CertificateAuthorizationApiClient certificateAuthorizationApiClient) : Controller
 {
+    [HttpGet]
+    public string GetCertificate()
+    {
+        CertificateOptions options = certificateOptionsMonitor.Get("AppInstanceIdentity");
+        X509Certificate2 certificate = options.Certificate!;
+        return $"""
+            Certificate Subject: {certificate.Subject}, 
+            Expiration: {certificate.NotAfter}
+            """;
+    }
+
+    private static string _currentInstanceName = "linux";
+
+    [HttpGet]
+    public async Task<string> RotateCertificate()
+    {
+        _currentInstanceName = _currentInstanceName == "windows" ? "linux" : "windows";
+        logger.LogInformation("Rotating to {CurrentInstanceName} instance certificate", _currentInstanceName);
+
+        string certificatesJson = $$"""
+            {
+                "Certificates": {
+                    "AppInstanceIdentity": {
+                        "CertificateFilePath": "{{_currentInstanceName}}Instance.crt",
+                        "PrivateKeyFilePath": "{{_currentInstanceName}}Instance.key"
+                    }
+                }
+            }
+            """;
+        await System.IO.File.WriteAllTextAsync("certificates.json", certificatesJson);
+
+        return $"Should now be using the instance identify certificate from a {_currentInstanceName} cell.";
+    }
+
     public IActionResult Index()
     {
         return View();

@@ -1,6 +1,6 @@
 ---
 applications:
-- name: auth-client-sample
+- name: auth-client-sample-windows
   buildpacks:
   - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.AuthWeb --urls=http://0.0.0.0:%PORT%
@@ -15,5 +15,6 @@ applications:
     SSO_IDENTITY_PROVIDERS: steeltoe-uaa
     SSO_SCOPES: openid, profile, sampleapi.read
     SSO_SHOW_ON_HOME_PAGE: "true"
+    AUTHAPI_URI: https://auth-server-sample.apps.dhaka.cf-app.com
   services:
   - sampleSSOService

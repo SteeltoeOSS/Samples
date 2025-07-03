@@ -28,20 +28,29 @@ return;
 // To learn more about service discovery, review the documentation at: https://docs.steeltoe.io/api/v4/discovery/
 static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
-    var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
+    string? overrideAddress = Environment.GetEnvironmentVariable("AUTHAPI_URI");
 
-    if (instanceInfo is CloudFoundryApplicationOptions { Api: not null } options)
+    if (string.IsNullOrEmpty(overrideAddress))
     {
-        var conventions = serviceProvider.GetRequiredService<IOptions<CloudFoundryConventions>>();
+        var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
 
-        string? address = options.Api;
-        ArgumentException.ThrowIfNullOrEmpty(options.Api);
+        if (instanceInfo is CloudFoundryApplicationOptions { Api: not null } options)
+        {
+            var conventions = serviceProvider.GetRequiredService<IOptions<CloudFoundryConventions>>();
 
-        string baseAddress = address!.Replace(conventions.Value.ApiUriSegment, $"auth-server-sample.{conventions.Value.AppsUriSegment}");
-        client.BaseAddress = new Uri($"{baseAddress}");
+            string? address = options.Api;
+            ArgumentException.ThrowIfNullOrEmpty(options.Api);
+
+            string baseAddress = address!.Replace(conventions.Value.ApiUriSegment, $"auth-server-sample.{conventions.Value.AppsUriSegment}");
+            client.BaseAddress = new Uri($"{baseAddress}");
+        }
+        else
+        {
+            client.BaseAddress = new Uri("https://localhost:7184");
+        }
     }
     else
     {
-        client.BaseAddress = new Uri("https://localhost:7184");
+        client.BaseAddress = new Uri(overrideAddress);
     }
 }

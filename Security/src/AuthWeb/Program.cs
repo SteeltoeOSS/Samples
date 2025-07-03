@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
@@ -20,6 +21,9 @@ using Steeltoe.Security.Authorization.Certificate;
 const string orgId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
 const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 
+// for local testing
+// Environment.SetEnvironmentVariable("VCAP_APPLICATION", "{}");
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -32,6 +36,9 @@ builder.Configuration.AddCloudFoundryServiceBindings();
 
 // Steeltoe: Add instance identity certificate to configuration.
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
+
+// for local testing
+// builder.Configuration.AddJsonFile("certificates.json", false, true);
 
 // Steeltoe: Configure Microsoft's OpenIDConnect library for authentication and authorization with UAA/Cloud Foundry.
 builder.Services.AddAuthentication(options =>
@@ -81,16 +88,25 @@ return;
 // To learn more about service discovery, review the documentation at: https://docs.steeltoe.io/api/v4/discovery/
 static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 {
-    var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
+    string? overrideAddress = Environment.GetEnvironmentVariable("AUTHAPI_URI");
 
-    if (instanceInfo is CloudFoundryApplicationOptions { Uris.Count: > 0 } options)
+    if (string.IsNullOrEmpty(overrideAddress))
     {
-        string address = options.Uris.First();
-        string baseAddress = address.Replace("auth-client-sample", "auth-server-sample");
-        client.BaseAddress = new Uri($"https://{baseAddress}");
+        var instanceInfo = serviceProvider.GetRequiredService<IApplicationInstanceInfo>();
+
+        if (instanceInfo is CloudFoundryApplicationOptions { Uris.Count: > 0 } options)
+        {
+            string address = options.Uris.First();
+            string baseAddress = address.Replace("auth-client-sample", "auth-server-sample");
+            client.BaseAddress = new Uri($"https://{baseAddress}");
+        }
+        else
+        {
+            client.BaseAddress = new Uri("https://localhost:7184");
+        }
     }
     else
     {
-        client.BaseAddress = new Uri("https://localhost:7184");
+        client.BaseAddress = new Uri(overrideAddress);
     }
 }

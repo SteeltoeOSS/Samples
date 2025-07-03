@@ -10,3 +10,4 @@ applications:
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
+    AUTHAPI_URI: https://auth-server-sample.apps.dhaka.cf-app.com
