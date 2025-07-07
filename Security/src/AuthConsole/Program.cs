@@ -10,13 +10,16 @@ const string orgId = "a8fef16f-94c0-49e3-aa0b-ced7c3da6229";
 const string spaceId = "122b942a-d7b9-4839-b26e-836654b9785f";
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddOptions<CloudFoundryConventions>().Bind(builder.Configuration.GetSection(CloudFoundryConventions.ConfigurationPrefix));
 builder.Services.AddHostedService<Worker>();
+
+// Steeltoe: Register IOptions that enable calculating the backend app's Uri based on the location of the Cloud Foundry API.
+builder.Services.AddOptions<CloudFoundryConventions>().BindConfiguration(CloudFoundryConventions.ConfigurationPrefix);
 
 // Steeltoe: Add Cloud Foundry application info and instance identity certificate to configuration.
 builder.AddCloudFoundryConfiguration();
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
 
+// Steeltoe: register a typed HttpClient that includes the application instance identity certificate.
 builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress).AddAppInstanceIdentityCertificate().ConfigureLogging();
 
 IHost host = builder.Build();
@@ -32,12 +35,8 @@ static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
 
     if (instanceInfo is CloudFoundryApplicationOptions { Api: not null } options)
     {
-        var conventions = serviceProvider.GetRequiredService<IOptions<CloudFoundryConventions>>();
-
-        string? address = options.Api;
-        ArgumentException.ThrowIfNullOrEmpty(options.Api);
-
-        string baseAddress = address!.Replace(conventions.Value.ApiUriSegment, $"auth-server-sample.{conventions.Value.AppsUriSegment}");
+        CloudFoundryConventions conventions = serviceProvider.GetRequiredService<IOptions<CloudFoundryConventions>>().Value;
+        string baseAddress = options.Api.Replace(conventions.ApiUriSegment, $"auth-server-sample.{conventions.AppsUriSegment}");
         client.BaseAddress = new Uri($"{baseAddress}");
     }
     else

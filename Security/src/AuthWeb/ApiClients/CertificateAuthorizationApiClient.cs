@@ -1,6 +1,3 @@
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Steeltoe.Samples.AuthWeb.Models;
 
 namespace Steeltoe.Samples.AuthWeb.ApiClients;

@@ -1,5 +1,3 @@
-using System;
-
 namespace Steeltoe.Samples.AuthWeb.Models;
 
 public sealed class AuthApiResponseModel
