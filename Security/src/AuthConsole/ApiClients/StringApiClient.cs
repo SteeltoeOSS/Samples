@@ -1,6 +1,6 @@
-using Steeltoe.Samples.AuthWeb.Models;
+using Steeltoe.Samples.AuthConsole.Models;
 
-namespace Steeltoe.Samples.AuthWeb.ApiClients;
+namespace Steeltoe.Samples.AuthConsole.ApiClients;
 
 public abstract class StringApiClient(HttpClient httpClient)
 {

@@ -1,13 +1,5 @@
-using System;
-using System.Linq;
-using System.Net.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Steeltoe.Common;
 using Steeltoe.Common.Certificates;
 using Steeltoe.Configuration.CloudFoundry;
@@ -57,12 +49,6 @@ builder.Services.AddAllActuators();
 
 WebApplication app = builder.Build();
 
-// Steeltoe: Direct ASP.NET Core to use forwarded header information in order to generate links correctly when behind a reverse-proxy (eg: when in Cloud Foundry).
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto
-});
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -93,7 +79,7 @@ static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
     if (instanceInfo is CloudFoundryApplicationOptions { Uris.Count: > 0 } options)
     {
         string address = options.Uris.First();
-        string baseAddress = address.Replace("auth-client-sample", "auth-server-sample");
+        string baseAddress = address.Replace("auth-client-web-sample", "auth-server-sample");
         client.BaseAddress = new Uri($"https://{baseAddress}");
     }
     else

@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http.Logging;
 
-namespace Steeltoe.Samples.AuthWeb;
+namespace Steeltoe.Samples.AuthConsole;
 
 /// <summary>
 /// Provides simplified logging of outgoing HTTP requests.

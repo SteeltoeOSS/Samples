@@ -52,7 +52,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
      ```
 
 > [!NOTE]
-> The provided manifests will create apps named `auth-client-sample` and `auth-server-sample`
+> The provided manifests will create apps named `auth-client-web-sample` and `auth-server-sample`
 > and attempt to bind both to the SSO service `sampleSSOService`.
 
 ### RedirectUri and Scope access
@@ -80,10 +80,10 @@ dashboard url:   https://p-identity.sys.cf-app.com/developer/identity-zones/15aa
 
 ## What to expect
 
-At this point the app is up and running.  You can access it at <https://localhost:7072> or <https://auth-client-sample.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
+At this point the app is up and running.  You can access it at <https://localhost:7072> or <https://auth-client-web-sample.`YOUR-CLOUDFOUNDRY-APP-DOMAIN`/>.
 
 > [!NOTE]
-> To see the logs on Cloud Foundry as the app runs, execute this command: `cf logs auth-client-sample`
+> To see the logs on Cloud Foundry as the app runs, execute this command: `cf logs auth-client-web-sample`
 
 From the website's menu, click on the `Log in` menu item and you should be redirected to the UAA server's login page. Enter `testuser` and `password`, and you should be authenticated and redirected back to the auth client home page.
 
