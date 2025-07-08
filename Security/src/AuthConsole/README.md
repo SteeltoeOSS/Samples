@@ -35,7 +35,7 @@ This application shows how to use the Steeltoe [security library](https://docs.s
 
 ## What to expect
 
-At this point the app is up and running. Since there is user interface for this worker, you can access the logs this command: `cf logs auth-client-console-sample`
+At this point, the app is up and running. Since there is no user interface for this worker, you can access the logs with this command: `cf logs auth-client-console-sample`
 
 ---
 

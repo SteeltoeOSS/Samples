@@ -37,6 +37,5 @@ manifest*.yml
 *.md
 launchSettings.json
 
-
 # files specific this sample
 GeneratedCertificates

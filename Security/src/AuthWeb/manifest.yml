@@ -1,6 +1,6 @@
 ---
 applications:
-- name: auth-client-sample
+- name: auth-client-web-sample
   buildpacks:
   - dotnet_core_buildpack
   memory: 256M

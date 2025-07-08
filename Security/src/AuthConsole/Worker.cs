@@ -15,7 +15,7 @@ public sealed class Worker(CertificateAuthorizationApiClient certificateAuthoriz
 
             model = await certificateAuthorizationApiClient.GetSameSpaceAsync(cancellationToken);
             logger.LogInformation("Request Uri: {requestUri}", model.RequestUri);
-            logger.LogInformation("GetSameOrg response: {ApiResponse}", model.Message != null ? model.Message : model.Error);
+            logger.LogInformation("GetSameSpace response: {ApiResponse}", model.Message != null ? model.Message : model.Error);
 
             Console.WriteLine("Sleeping for 10 seconds (press Ctrl+C to close).");
             await Task.Delay(10_000, cancellationToken);

@@ -31,3 +31,4 @@ manifest*.yml
 launchSettings.json
 
 # files specific this sample
+GeneratedCertificates

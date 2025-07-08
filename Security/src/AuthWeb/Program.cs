@@ -79,7 +79,7 @@ static void SetBaseAddress(IServiceProvider serviceProvider, HttpClient client)
     if (instanceInfo is CloudFoundryApplicationOptions { Uris.Count: > 0 } options)
     {
         string address = options.Uris.First();
-        string baseAddress = address.Replace("auth-client-sample", "auth-server-sample");
+        string baseAddress = address.Replace("auth-client-web-sample", "auth-server-sample");
         client.BaseAddress = new Uri($"https://{baseAddress}");
     }
     else
