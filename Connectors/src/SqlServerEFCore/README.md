@@ -20,7 +20,7 @@ for connecting to a Microsoft SQL Server database.
 1. Use LocalDB or start a SQL Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
    - When using docker, update your connection string in `appsettings.Development.json` accordingly
 1. Run the sample
-   ```
+   ```shell
    dotnet run
    ```
 
@@ -29,21 +29,21 @@ Upon startup, the app inserts a couple of rows into the bound SQL Server databas
 ## Running on Tanzu Platform for Cloud Foundry
 
 1. Create a SQL Server service instance in an org/space
-   ```
+   ```shell
    cf target -o your-org -s your-space
    ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
-     ```
+     ```shell
      cf create-service csb-azure-mssql-db your-plan sampleSqlServerService
      ```
    - When using Tanzu Cloud Service Broker for AWS:
-     ```
+     ```shell
      cf create-service csb-aws-mssql your-plan samplePostgreSqlService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs sqlserver-efcore-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```
+     ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```

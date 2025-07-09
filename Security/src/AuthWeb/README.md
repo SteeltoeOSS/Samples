@@ -33,7 +33,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
    1. `cd samples/Security/src/AuthApi`
    1. `cf push`
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```
+     ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
@@ -46,7 +46,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
    1. `cd samples/Security/src/AuthWeb`
    1. `cf push`
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```
+     ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
@@ -62,7 +62,7 @@ The RedirectUri and Scope access settings should be automatically configured via
 If you want to access the `sso` dashboard, run the following command and go to the URL listed in `dashboard url` property:
 
 ```shell
-$ cf service sampleSSOService
+cf service sampleSSOService
 
 name:            sampleSSOService
 guid:            ea8b8ac0-ce85-4726-8b39-d1b2eb55b45b
