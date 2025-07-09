@@ -21,7 +21,7 @@ Simplifies using a Redis or Valkey cache on Cloud Foundry for storing encrypted 
 
 1. Start a Redis or Valkey [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Run the sample
-   ```
+   ```shell
    dotnet run
    ```
 
@@ -34,35 +34,35 @@ Upon startup, the app displays session information on the home page, something l
 ## Running on Tanzu Platform for Cloud Foundry
 
 1. Create a Redis service instance in an org/space
-   ```
+   ```shell
    cf target -o your-org -s your-space
    ```
    - When using Redis for Tanzu Application Service or Tanzu for Valkey on Cloud Foundry:
-     ```
+     ```shell
      cf create-service p.redis on-demand-cache sampleRedisService
      ```
      or:
-     ```
+     ```shell
      cf create-service p-redis shared-vm sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
-     ```
+     ```shell
      cf create-service csb-azure-redis your-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for GCP:
-     ```
+     ```shell
      cf create-service csb-google-redis your-plan sampleRedisService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-data-protection-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```
+     ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
 1. Copy the value of `routes` in the output and open in your browser
 1. Scale up to multiple app instances
-   ```
+   ```shell
    cf scale redis-data-protection-sample --instances 2
    ```
 1. Wait for the new instance to start up.

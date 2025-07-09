@@ -17,7 +17,7 @@ This is an ASP.NET Core application that shows how to use various `IConfiguratio
 
 1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Run the sample
-   ```
+   ```shell
    dotnet run
    ```
 
@@ -32,12 +32,12 @@ This sample expects the config server to be backed by the `spring-cloud-samples`
 ### App deployment
 
 1. Login to your Cloud Foundry environment and target your org/space
-   ```
+   ```shell
    cf target -o your-org -s your-space
    ```
 1. Run the `cf push` command to deploy from source
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```
+     ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
@@ -50,7 +50,7 @@ YAML files for creating the needed resources are included with this project, and
 but you are encouraged to review and/or customize the contents of the files before applying them.
 
 To create configuration objects (ConfigurationSource, ConfigurationSlice, ResourceClaim), run:
-```
+```shell
 kubectl config set-context --current --namespace=your-namespace
 kubectl apply -f ./config/application-configuration-service
 ```
@@ -60,12 +60,12 @@ For complete instructions, follow the [documentation](https://techdocs.broadcom.
 ### App deployment
 
 To deploy from local source code:
-```
+```shell
 tanzu app workload apply --local-path . --file ./config/workload.yaml -y
 ```
 
 Alternatively, from locally built binaries:
-```
+```shell
 dotnet publish -r linux-x64 --no-self-contained
 tanzu app workload apply --local-path ./bin/Release/net8.0/linux-x64/publish --file ./config/workload.yaml -y
 ```

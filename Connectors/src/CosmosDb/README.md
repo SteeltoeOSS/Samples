@@ -12,7 +12,7 @@ for connecting to a CosmosDB database.
 1. Start the [Azure CosmosDB Emulator](https://learn.microsoft.com/azure/cosmos-db/how-to-develop-emulator)
 1. Update your local primary key in `appsettings.development.json` at `Steeltoe:Client:CosmosDb:Default:ConnectionString`
 1. Run the sample
-   ```
+   ```shell
    dotnet run
    ```
 
