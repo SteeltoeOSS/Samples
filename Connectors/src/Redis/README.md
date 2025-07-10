@@ -22,7 +22,7 @@ This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExcha
    and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 > [!NOTE]
-> Versions of ASP.NET before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
+> Versions of ASP.NET Core before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
 
 ## Running locally
 
