@@ -46,7 +46,7 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis/V
      ```
   - When using Tanzu for Valkey on Cloud Foundry:
      ```shell
-     cf create-service p.redis vk-plan sampleRedisService
+     cf create-service p.redis your-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```shell

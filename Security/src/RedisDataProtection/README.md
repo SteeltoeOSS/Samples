@@ -46,7 +46,7 @@ Upon startup, the app displays session information on the home page, something l
      ```
   - When using Tanzu for Valkey on Cloud Foundry:
      ```shell
-     cf create-service p.redis vk-plan sampleRedisService
+     cf create-service p.redis your-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```shell
