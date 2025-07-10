@@ -22,7 +22,7 @@ This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExcha
    and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 > [!NOTE]
-> Versions of ASP.NET before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
+> Versions of ASP.NET Core before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
 
 ## Running locally
 
@@ -46,7 +46,7 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis/V
      ```
   - When using Tanzu for Valkey on Cloud Foundry:
      ```shell
-     cf create-service p.redis vk-plan sampleRedisService
+     cf create-service p.redis your-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```shell
