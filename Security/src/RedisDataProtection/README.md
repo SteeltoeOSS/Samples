@@ -12,10 +12,13 @@ Simplifies using a Redis or Valkey cache on Cloud Foundry for storing encrypted 
 
    - [Redis for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/redis-for-tanzu-application-service/3-5/redis-for-tas/index.html)
    - [Tanzu for Valkey on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-valkey-on-cloud-foundry/4-0/valkey-on-cf/index.html)
-   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-12/csb-azure/reference-azure-redis.html)
-   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-5/csb-gcp/reference-gcp-redis.html)
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-13/csb-azure/reference-azure-redis.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-redis.html)
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
+
+> [!NOTE]
+> Versions of ASP.NET Core before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
 
 ## Running locally
 
@@ -37,21 +40,21 @@ Upon startup, the app displays session information on the home page, something l
    ```shell
    cf target -o your-org -s your-space
    ```
-   - When using Redis for Tanzu Application Service or Tanzu for Valkey on Cloud Foundry:
-     ```shell
-     cf create-service p.redis on-demand-cache sampleRedisService
-     ```
-     or:
+   - When using Redis for Tanzu Application Service:
      ```shell
      cf create-service p-redis shared-vm sampleRedisService
+     ```
+  - When using Tanzu for Valkey on Cloud Foundry:
+     ```shell
+     cf create-service p.redis vk-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```shell
      cf create-service csb-azure-redis your-plan sampleRedisService
      ```
-   - When using Tanzu Cloud Service Broker for GCP:
+   - When using Tanzu Cloud Service Broker for AWS:
      ```shell
-     cf create-service csb-google-redis your-plan sampleRedisService
+     cf create-service csb-aws-redis your-plan sampleRedisService
      ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-data-protection-sample`)
