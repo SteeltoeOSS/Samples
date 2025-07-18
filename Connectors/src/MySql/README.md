@@ -35,10 +35,12 @@ Upon startup, the app inserts a couple of rows into the bound MySQL database. Th
 1. Create a MySQL service instance in an org/space
    ```shell
    cf target -o your-org -s your-space
+   cf marketplace
+   cf marketplace -e your-offering
    ```
    - When using Tanzu for MySQL on Cloud Foundry:
      ```shell
-     cf create-service p.mysql db-small sampleMySqlService
+     cf create-service p.mysql your-plan sampleMySqlService
      ```
    - When using Tanzu Cloud Service Broker for GCP:
      ```shell
@@ -67,7 +69,7 @@ in the `workload.yaml` that is included in the `config` folder of this project.
 
 ```shell
 kubectl config set-context --current --namespace=your-namespace
-tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged
+tanzu service class-claim create sample-mysql-service --class mysql-unmanaged
 ```
 
 If you'd like to learn more about these services, see [claiming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-claim-services.html)
