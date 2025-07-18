@@ -28,6 +28,8 @@ Upon startup, the app inserts a couple of objects into the bound MongoDB databas
 1. Create a MongoDB service instance in an org/space
    ```shell
    cf target -o your-org -s your-space
+   cf marketplace
+   cf marketplace -e your-offering
    cf create-service csb-azure-mongodb your-plan sampleMongoDbService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
@@ -49,7 +51,7 @@ in the `workload.yaml` that is included in the `config` folder of this project.
 
 ```shell
 kubectl config set-context --current --namespace=your-namespace
-tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged
+tanzu service class-claim create sample-mongodb-service --class mongodb-unmanaged
 ```
 
 If you'd like to learn more about these services, see [claiming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-claim-services.html)

@@ -22,7 +22,7 @@ This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExcha
    and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 > [!NOTE]
-> Versions of ASP.NET before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
+> Versions of ASP.NET Core before v9 require that Lua scripting is activated, which is disabled by default on Cloud Foundry, so check your plan settings.
 
 ## Running locally
 
@@ -39,14 +39,12 @@ Upon startup, the app inserts a couple of key/value pairs into the bound Redis/V
 1. Create a Redis service instance in an org/space
    ```shell
    cf target -o your-org -s your-space
+   cf marketplace
+   cf marketplace -e your-offering
    ```
-   - When using Redis for Tanzu Application Service:
+   - When using Redis for Tanzu Application Service or Tanzu for Valkey on Cloud Foundry:
      ```shell
-     cf create-service p-redis shared-vm sampleRedisService
-     ```
-  - When using Tanzu for Valkey on Cloud Foundry:
-     ```shell
-     cf create-service p.redis vk-plan sampleRedisService
+     cf create-service p.redis your-plan sampleRedisService
      ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```shell
@@ -75,7 +73,7 @@ in the `workload.yaml` that is included in the `config` folder of this project.
 
 ```shell
 kubectl config set-context --current --namespace=your-namespace
-tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged
+tanzu service class-claim create example-redis-service --class redis-unmanaged
 ```
 
 If you'd like to learn more about these services, see [claiming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-claim-services.html)

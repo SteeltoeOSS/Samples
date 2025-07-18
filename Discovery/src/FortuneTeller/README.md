@@ -134,7 +134,9 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 1. Create a Eureka service instance in an org/space:
    ```shell
    cf target -o your-org -s your-space
-   cf create-service p.service-registry standard sampleDiscoveryService
+   cf marketplace
+   cf marketplace -e your-offering
+   cf create-service p.service-registry your-plan sampleDiscoveryService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command from the FortuneTellerApi directory, wait until it has started, then run it from the FortuneTellerWeb directory

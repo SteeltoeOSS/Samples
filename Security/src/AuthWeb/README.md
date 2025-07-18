@@ -27,7 +27,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
       * Credentials for connecting to the UAA server can be found or customized before deployment in [uaa.yml](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/uaa.yml#L124)
    1. Save changes, but keep this page open
 1. Create a service instance:
-   * `cf create-service p-identity <your service plan name> sampleSSOService`
+   * `cf create-service p-identity your-plan sampleSSOService`
 1. Push AuthApi to Cloud Foundry
    1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthApi`

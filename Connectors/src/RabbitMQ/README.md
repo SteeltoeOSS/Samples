@@ -30,7 +30,9 @@ To receive a RabbitMQ message that you have sent: click the Receive button. Mess
 1. Create a RabbitMQ service instance in an org/space
    ```shell
    cf target -o your-org -s your-space
-   cf create-service p.rabbitmq rmq-single-node sampleRabbitMQService
+   cf marketplace
+   cf marketplace -e your-offering
+   cf create-service p.rabbitmq your-plan sampleRabbitMQService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs rabbitmq-connector-sample`)
@@ -51,7 +53,7 @@ in the `workload.yaml` that is included in the `config` folder of this project.
 
 ```shell
 kubectl config set-context --current --namespace=your-namespace
-tanzu service class-claim create my-postgresql-service --class postgresql-unmanaged
+tanzu service class-claim create sample-rabbitmq-service --class rabbitmq-unmanaged
 ```
 
 If you'd like to learn more about these services, see [claiming services](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-claim-services.html)
