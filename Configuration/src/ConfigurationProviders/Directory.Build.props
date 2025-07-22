@@ -1,5 +1,5 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>4.*-main-*</SteeltoeVersion>
+    <SteeltoeVersion>4.*-*</SteeltoeVersion>
   </PropertyGroup>
 </Project>
