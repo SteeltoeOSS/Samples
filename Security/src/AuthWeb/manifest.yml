@@ -1,15 +1,14 @@
-﻿---
+---
 applications:
-- name: auth-client-sample
+- name: auth-client-web-sample
   buildpacks:
   - dotnet_core_buildpack
-  memory: 128M
+  memory: 256M
   stack: cflinuxfs4
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
-
-    # configure the SSO binding https://docs.vmware.com/en/Single-Sign-On-for-VMware-Tanzu-Application-Service/1.14/sso/GUID-config-apps.html#configure-app-manifest
+    # Configure the SSO binding, see https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html for details.
     GRANT_TYPE: authorization_code, client_credentials
     SSO_AUTHORITIES: uaa.resource, sampleapi.read
     SSO_IDENTITY_PROVIDERS: steeltoe-uaa

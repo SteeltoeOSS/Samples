@@ -11,6 +11,6 @@ def setup(context):
     cf.delete_app(app)
     # create service
     service = 'p.rabbitmq'
-    plan = 'single-node'
+    plan = 'rmq-single-node'
     instance = 'sampleRabbitMQService'
     cf.create_service(service, plan, instance)

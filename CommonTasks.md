@@ -2,13 +2,13 @@
 
 This page contains information on basic tasks that are used throughout the Steeltoe Samples. Use this page to quickly get your local development environment up and running.
 
-Containers images produced by the Steeltoe team (all images hosted at `steeltoe.azurecr.io`) are *For local development purposes only*. Images are generally very basic and formal support should not be expected. To see how the images are built and/or participate in improving them, visit [this repository](https://github.com/SteeltoeOSS/Dockerfiles).
+Container images produced by the Steeltoe team (all images hosted at `steeltoe.azurecr.io`) are *for local development purposes only*. Images are generally very basic and formal support should not be expected. To see how the images are built and/or participate in improving them, visit [this repository](https://github.com/SteeltoeOSS/Dockerfiles).
 
 Feel free to modify these commands as needed, knowing that commands provided in this document will result in:
 
 * The latest available (tag-matching) image being used: `--pull=always`
 * Servers that are automatically removed when the container is stopped: `--rm`
-* An attached pseudo-TTY with STDIN kept open: `-it` [read more](https://docs.docker.com/reference/cli/docker/container/run/#tty)
+* An attached pseudo-TTY with STDIN that is kept open: `-it` [read more](https://docs.docker.com/reference/cli/docker/container/run/#tty)
 * Published ports: `-p <hostPort>:<containerPort>`
 * Named containers: `--name <name>`. If the command has Steeltoe-specific configuration and/or the image was built by the Steeltoe team, the name starts with 'steeltoe-'
 
@@ -22,7 +22,7 @@ To start a config server backed by the Spring Cloud Samples repo:
 docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config steeltoe.azurecr.io/config-server
 ```
 
-To start a config server backed by a folder on your local disk, start the docker image like this:
+To start a config server backed by a folder on your local disk, start a Docker container like this:
 
 ```shell
 # Note: Ensure Docker is configured to share host drive/volume so the mount below will work correctly!
@@ -45,17 +45,22 @@ To run a Spring Cloud Config Server without Docker:
 1. Build the source: `.\mvnw install -DskipTests`
 1. Start the server: `.\mvnw spring-boot:run`
 
-The default configuration of the Config Server uses [this github repo](https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
+The default configuration of the Config Server uses [this GitHub repo](https://github.com/spring-cloud-samples/config-repo) for its source of configuration data.
 
 ### Provision SCCS on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Spring Cloud Config Server in a org/space, backed by a given git repo. Many of the Steeltoe samples use the `spring-cloud-samples` repo, but you may need to alter the parameter used.
+Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Spring Cloud Config Server instance in an org/space, backed by a given git repo. Many of the Steeltoe samples use the `spring-cloud-samples` repo, but you may need to alter the parameter used.
 
-1. `cf target -o myorg -s myspace`
+1. Choose a service plan
+   ```shell
+   cf target -o your-org -s your-space
+   cf marketplace
+   cf marketplace -e your-offering
+   ```
 1. Use the correct escaping for your shell:
-   1. bash or PowerShell: `cf create-service p-config-server standard myConfigServerInstanceName -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
-   1. CMD: `cf create-service p.config-server standard myConfigServerInstanceName -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}"`
-1. Wait for service to be ready. (use `cf services` to check the status)
+   1. bash or PowerShell: `cf create-service p.config-server your-plan sampleConfigServer -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
+   1. cmd: `cf create-service p.config-server your-plan sampleConfigServer -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}"`
+1. Wait for the service to be ready (use `cf services` to check the status)
 
 ## Spring Cloud Eureka Server
 
@@ -67,11 +72,16 @@ docker run --rm -it --pull=always -p 8761:8761 --name steeltoe-eureka steeltoe.a
 
 ### Provision Eureka on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry service in a org/space.
+Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
 
-1. cf target -o myorg -s myspace
-1. cf create-service p.service-registry standard myDiscoveryServiceInstanceName
-1. Wait for service to be ready. (use `cf services` to check the status)
+1. Choose a service plan
+   ```shell
+   cf target -o your-org -s your-space
+   cf marketplace
+   cf marketplace -e your-offering
+   ```
+1. `cf create-service p.service-registry your-plan sampleDiscoveryService`
+1. Wait for the service to be ready (use `cf services` to check the status)
 
 ## Spring Boot Admin
 
@@ -132,6 +142,14 @@ docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq ra
 docker run --rm -it --pull=always -p 6379:6379 --name redis redis
 ```
 
+## Valkey
+
+### Run Valkey server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 6379:6379 --name valkey valkey/valkey
+```
+
 ## SQL Server
 
 ### Run SQL Server with Docker
@@ -152,7 +170,7 @@ docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azur
 
 ### Run Steeltoe UAA on Cloud Foundry
 
-Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server/README.md) for instructions.
+Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/README.md) for instructions.
 
 ## Zipkin
 
