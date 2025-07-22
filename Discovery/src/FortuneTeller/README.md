@@ -1,4 +1,4 @@
-﻿# FortuneTeller Discovery Sample Application
+# FortuneTeller Discovery Sample Application
 
 This sample demonstrates Steeltoe Service Discovery. It consists of the following projects:
 
@@ -12,10 +12,10 @@ switching to `http` or `https` and replacing `fortuneService` with the real host
 ## General pre-requisites
 
 1. Installed .NET 8 SDK
-1. Optional: [VMware Tanzu Platform for Cloud Foundry](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/index.html)
-   (optionally with [Windows support](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/concepts-overview.html))
-   with [Spring Cloud Services for VMware Tanzu](https://docs.vmware.com/en/Spring-Cloud-Services-for-VMware-Tanzu/index.html)
-   and [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   with [Spring Cloud Services for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-cloud-services-for-cloud-foundry/3-3/scs-tanzu/index.html)
+   and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Configuration-based discovery
 
@@ -46,13 +46,13 @@ This variant uses service instances that are registered in the .NET configuratio
 > ```
 
 1. Start FortuneTellerApi with the **None** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "None"
    ```
 1. Navigate to the [fortune endpoint](https://localhost:7251/api/fortunes/random) in your browser and observe a random fortune
 1. Start FortuneTellerWeb with the **Configuration** launch profile
-   ```
+   ```shell
    cd FortuneTellerWeb
    dotnet run --launch-profile "Configuration"
    ```
@@ -67,7 +67,7 @@ To determine liveliness, FortuneTellerApi periodically sends TTL heartbeats to C
 
 1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **Consul** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "Consul"
    ```
@@ -75,7 +75,7 @@ To determine liveliness, FortuneTellerApi periodically sends TTL heartbeats to C
 1. Navigate to the [Consul dashboard](http://localhost:8500) in your browser and observe "fortuneService" is registered
    - Detailed information about the registrations can be viewed using the [Services API](http://localhost:8500/v1/agent/services) and [Health API](http://localhost:8500/v1/agent/checks)
 1. Start FortuneTellerWeb with the **Consul** launch profile
-   ```
+   ```shell
    cd FortuneTellerWeb
    dotnet run --launch-profile "Consul"
    ```
@@ -90,7 +90,7 @@ is periodically queried by Consul to determine liveliness.
 
 1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **ConsulActuator** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "ConsulActuator"
    ```
@@ -115,7 +115,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **Eureka** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "Eureka"
    ```
@@ -123,7 +123,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 1. Navigate to the [Eureka dashboard](http://localhost:8761/) in your browser and observe "FORTUNESERVICE" is registered
    - Detailed information about the registrations can be viewed using the [Eureka API](http://localhost:8761/eureka/apps)
 1. Start FortuneTellerWeb with the **Eureka** launch profile
-   ```
+   ```shell
    cd FortuneTellerWeb
    dotnet run --launch-profile "Eureka"
    ```
@@ -132,14 +132,16 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 ### Running on Tanzu Platform for Cloud Foundry (Go-router)
 
 1. Create a Eureka service instance in an org/space:
-   ```
+   ```shell
    cf target -o your-org -s your-space
-   cf create-service p.service-registry standard sampleDiscoveryService
+   cf marketplace
+   cf marketplace -e your-offering
+   cf create-service p.service-registry your-plan sampleDiscoveryService
    ```
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command from the FortuneTellerApi directory, wait until it has started, then run it from the FortuneTellerWeb directory
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```
+     ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
      ```
@@ -164,7 +166,7 @@ to determine the local instance status during registration and renewals.
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **EurekaActuator** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "EurekaActuator"
    ```
@@ -186,7 +188,7 @@ Steeltoe adds a random number to the Instance ID during registration to avoid co
 
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **EurekaDynamicPorts** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "EurekaDynamicPorts"
    ```
@@ -196,7 +198,7 @@ Steeltoe adds a random number to the Instance ID during registration to avoid co
 
 1. Navigate to the fortune endpoint at `https://localhost:XXXXX/api/fortunes/random` (replace XXXXX with the port number) in your browser and observe a random fortune
 1. Start FortuneTellerWeb with the **Eureka** launch profile
-   ```
+   ```shell
    cd FortuneTellerWeb
    dotnet run --launch-profile "Eureka"
    ```
@@ -212,7 +214,7 @@ with Eureka at startup. FortuneTellerApi is configured to obtain the URL to Conf
 1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md) (pick the one for discovery-first)
 1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **Eureka** launch profile
-   ```
+   ```shell
    cd FortuneTellerApi
    dotnet run --launch-profile "Eureka"
    ```
@@ -223,4 +225,4 @@ with Eureka at startup. FortuneTellerApi is configured to obtain the URL to Conf
 
 ---
 
-See the Official [Steeltoe Service Discovery Documentation](https://docs.steeltoe.io/api/v3/discovery) for a more in-depth walkthrough of the samples and more detailed information.
+See the Official [Steeltoe Service Discovery Documentation](https://docs.steeltoe.io/api/v4/discovery) for more detailed information.

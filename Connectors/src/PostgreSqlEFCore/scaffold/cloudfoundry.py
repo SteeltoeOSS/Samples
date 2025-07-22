@@ -10,7 +10,7 @@ def setup(context):
     app = 'postgresql-efcore-connector-sample'
     cf.delete_app(app)
     # create service
-    service = 'csb-google-postgres'
-    plan = 'gcp-postgres-tiny'
+    service = 'postgres'
+    plan = 'small'
     instance = 'samplePostgreSqlService'
     cf.create_service(service, plan, instance)

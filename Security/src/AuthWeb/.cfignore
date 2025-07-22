@@ -1,3 +1,34 @@
-bin
-obj
+# DotNet
+bin/
+obj/
+publish/
+
+# user-specific state
+*.user
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+.vs/
+
+# JetBrains
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Test framework files
+scaffold/
+*.feature
+
+# Common files that don't need to be pushed
+config/
+*.http
+manifest*.yml
+*.md
+launchSettings.json
+
+# files specific this sample
 GeneratedCertificates

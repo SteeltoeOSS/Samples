@@ -19,26 +19,26 @@ Any arguments and parameters passed to a wrapper are subsequently passed to `beh
 
 As an example, the following displays the help for `behave`:
 
-```dos
-C:> .\behave.ps1 -h
+```pwsh
+.\behave.ps1 -h
 ```
 
 Running with no arguments will run every sample for every framework/runtime combination.
 
-```dos
-C:> .\behave.ps1
+```pwsh
+.\behave.ps1
 ```
 
 To run a specific sample, pass the path to the sample:
 
-```dos
-C:> .\behave.ps1 Connectors\src\RabbitMQ
+```pwsh
+.\behave.ps1 Connectors\src\RabbitMQ
 ```
 
 To run only a specific framework/runtime combination, use the `--tags` or `-t` parameter:
 
-```dos
-C:> .\behave.ps1 Connectors\src\RabbitMQ -t net8.0 -t linux
+```pwsh
+.\behave.ps1 Connectors\src\RabbitMQ -t net8.0 -t linux
 ```
 
 ## Configuring
@@ -46,8 +46,8 @@ C:> .\behave.ps1 Connectors\src\RabbitMQ -t net8.0 -t linux
 Create a `user.ini` file in the project root directory.
 An example file, [`user.ini.example`](user.ini.example), is provided as a convenience.
 
-```dos
-C:> copy user.ini.example user.ini
+```pwsh
+copy user.ini.example user.ini
 ```
 
 The example file's options are commented with descriptions.
@@ -104,8 +104,8 @@ Install [Chocolatey][choco_url].
 
 Start a PowerShell as Administrator and run:
 
-```dos
-C:> choco install -y python3
+```pwsh
+choco install -y python3
 ```
 
 ### OS X
@@ -114,15 +114,15 @@ Install [Homebrew][brew_url].
 
 Start a terminal and run:
 
-```sh
-$ brew install python3
+```bash
+brew install python3
 ```
 
 ### Ubuntu
 
 Start a terminal and run:
 
-```sh
+```bash
 sudo apt install -y python3 python3-pip
 ```
 

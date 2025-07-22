@@ -19,6 +19,9 @@ class LogObscurer(object):
     def error(self, message):
         self._logger.error(self._obscure_message(message))
 
+    def nolog(self, message):
+        return
+
     def _obscure_message(self, message, attr=None):
         if attr:
             if hasattr(self._context, 'options'):

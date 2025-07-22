@@ -1,8 +1,21 @@
-﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools.
 
 In order to avoid duplicating a significant amount of content, the [ActuatorWeb Readme](../ActuatorWeb/README.md) contains the shared information and this document only holds content unique to ActuatorApi.
+
+## General pre-requisites
+
+1. Installed .NET 8 SDK
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+   and one of the following service brokers:
+
+   - [Tanzu for MySQL on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/10-0/mysql-for-tpcf/use.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-9/csb-gcp/reference-gcp-mysql.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-mysql.html)
+
+   and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Running locally
 
@@ -14,7 +27,7 @@ This application depends on a MySQL database. Refer to [Common Tasks](../../../C
 
 ### Administrative Tasks (initialize the database)
 
-In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v3/management/tasks.html), the database schema and its contents are managed as administrative tasks.
+In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api/v4/management/tasks.html), the database schema and its contents are managed as administrative tasks.
 
 1. Apply Entity Framework Core database schema migration scripts:
 
@@ -49,34 +62,36 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 
    ```shell
    cf target -o your-org -s your-space
+   cf marketplace
+   cf marketplace -e your-offering
    ```
 
-    * When using VMware MySQL for Tanzu Application Service:
+   - When using Tanzu for MySQL on Cloud Foundry:
 
-      ```shell
-      cf create-service p.mysql db-small sampleMySqlService
-      ```
+     ```shell
+     cf create-service p.mysql your-plan sampleMySqlService
+     ```
 
-    * When using the Cloud Service Broker for Azure:
+   - When using Tanzu Cloud Service Broker for GCP:
 
-      ```shell
-      cf create-service csb-azure-mysql small sampleMySqlService
-      ```
+     ```shell
+     cf create-service csb-google-mysql your-plan sampleMySqlService
+     ```
 
-    * When using the Cloud Service Broker for GCP:
+   - When using Tanzu Cloud Service Broker for AWS:
 
-      ```shell
-      cf create-service csb-google-mysql your-plan sampleMySqlService
-      ```
+     ```shell
+     cf create-service csb-aws-mysql your-plan sampleMySqlService
+     ```
 
 1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
-    * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
 
-      ```shell
-      dotnet publish -r win-x64 --self-contained
-      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
-      ```
+     ```shell
+     dotnet publish -r win-x64 --self-contained
+     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+     ```
 
 1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
 
@@ -108,4 +123,4 @@ Depending on the steps taken to push the application to Cloud Foundry, the comma
 
 ---
 
-See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v3/management/) for more information.
+See the Official [Steeltoe Management Documentation](https://docs.steeltoe.io/api/v4/management/) for more detailed information.

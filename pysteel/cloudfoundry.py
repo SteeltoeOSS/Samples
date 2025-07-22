@@ -59,8 +59,9 @@ class CloudFoundry(object):
         cmd_s = 'cf target -s {}'.format(name)
         command.Command(self._context, cmd_s).run()
 
-    def create_service(self, service, plan, service_instance, args=None):
+    def create_service(self, service, plan, service_instance, args=None, skip_logs=False):
         """
+        :param skip_logs:
         :type service: str
         :type plan: str
         :type service_instance: str
@@ -72,7 +73,10 @@ class CloudFoundry(object):
         cmd_s = 'cf create-service {} {} {}'.format(service, plan, service_instance)
         if args:
             cmd_s += ' ' + ' '.join(args)
-        cmd = command.Command(self._context, cmd_s)
+        if skip_logs:
+            cmd = command.Command(self._context, cmd_s, log_func=self._context.log.nolog)
+        else:
+            cmd = command.Command(self._context, cmd_s)
         cmd.run()
         if cmd.rc != 0:
             raise Exception('create service instance failed: {}'.format(service_instance))
@@ -219,7 +223,7 @@ class CloudFoundry(object):
         if not match:
             return None
         return match.group(1)
-    
+
     def get_task_status(self, app_name, task_name):
         """
         :type app_name: str

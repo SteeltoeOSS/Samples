@@ -11,6 +11,6 @@ def setup(context):
     cf.delete_app(app)
     # create service
     service = 'p.redis'
-    plan = 'on-demand-cache'
+    plan = 'vk-plan'
     instance = 'sampleRedisService'
     cf.create_service(service, plan, instance)

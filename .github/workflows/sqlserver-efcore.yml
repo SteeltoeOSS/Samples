@@ -1,0 +1,42 @@
+name: SQL Server - Entity Framework Core
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - '[0-9]+.x'
+    paths:
+    - .gitattributes
+    - .gitignore
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - Connectors/src/SqlServerEFCore/**
+    - .github/workflows/sqlserver-efcore.yml
+    - .github/workflows/shared-test-workflow.yml
+  pull_request:
+    paths:
+    - .gitattributes
+    - .gitignore
+    - behave*
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - Connectors/src/SqlServerEFCore/**
+    - .github/workflows/sqlserver-efcore.yml
+    - .github/workflows/shared-test-workflow.yml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  echo:
+    if: ${{ github.repository == 'TNZ/steeltoe-samples' }}
+    runs-on: tpe-nano
+
+    steps:
+    - name: Verify trigger
+      run: echo "Job was triggered successfully!"
