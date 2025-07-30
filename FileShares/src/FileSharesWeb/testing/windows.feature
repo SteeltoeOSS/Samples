@@ -1,5 +1,5 @@
 @cloudfoundry_scaffold
-Feature: Network File Sharing
+Feature: FileShares
   In order to show you how to use Steeltoe for connecting to Windows network file shares
   You can run the network file share sample
 

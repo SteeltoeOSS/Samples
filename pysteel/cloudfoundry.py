@@ -51,6 +51,14 @@ class CloudFoundry(object):
         cmd_s = 'cf create-space {}'.format(name)
         command.Command(self._context, cmd_s).run()
 
+    def delete_space(self, name):
+        """
+        :type name: str
+        """
+        self._context.log.info('deleting Cloud Foundry space "{}"'.format(name))
+        cmd_s = 'cf delete-space {} -f'.format(name)
+        command.Command(self._context, cmd_s).run()
+
     def target_space(self, name):
         """
         :type name: str
@@ -117,7 +125,24 @@ class CloudFoundry(object):
         """
         self._context.log.info('deleting Cloud Foundry service instance "{}"'.format(service_instance))
         cmd_s = 'cf delete-service -f {}'.format(service_instance)
-        command.Command(self._context, cmd_s).run()
+        cmd = command.Command(self._context, cmd_s)
+        cmd.run()
+        self._context.log.info('waiting for service instance "{}" to be removed'.format(service_instance))
+        attempts = 0
+        while True:
+            attempts += 1
+            if self._context.options.cf.max_attempts >= 0:
+                if attempts > self._context.options.cf.max_attempts:
+                    assert False, "maximum attempts exceeded ({})".format(self._context.options.cf.max_attempts)
+                self._context.log.info("attempt {}/{}".format(attempts, self._context.options.cf.max_attempts))
+            else:
+                self._context.log.info("attempt {}".format(attempts))
+            status = self.service_exists(service_instance)
+            if status:
+                self._context.log.info('service instance still exists')
+            else:
+                break
+            time.sleep(self._context.options.cmd.loop_wait)
 
     def service_exists(self, service_instance):
         """
@@ -129,7 +154,7 @@ class CloudFoundry(object):
             cmd.run()
             return True
         except command.CommandException as e:
-            if 'Service instance \'{}\' not found'.format(service_instance) in str(e):
+            if 'Service instance not found' in str(e) or 'Service instance \'{}\' not found'.format(service_instance) in str(e):
                 return False
             raise e
 

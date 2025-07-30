@@ -1,11 +1,11 @@
 @cloudfoundry_scaffold
-Feature: Api
+Feature: Management
   In order to show you how to use Steeltoe Actuators
   You can run some Steeltoe Management samples
 
   @net8.0
   @linux
-  Scenario: CloudFoundry Management (net8.0/linux)
+  Scenario: ActuatorApi (net8.0/linux)
     When you push: manifest.yml with args: --random-route
     And you wait until CloudFoundry app actuator-api-management-sample is started
     Then you should be able to access CloudFoundry app actuator-api-management-sample management endpoints

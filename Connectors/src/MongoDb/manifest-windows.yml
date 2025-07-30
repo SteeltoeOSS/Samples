@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: mongodb-connector-sample
   random-route: true

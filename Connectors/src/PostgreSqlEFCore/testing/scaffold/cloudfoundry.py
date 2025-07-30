@@ -14,3 +14,11 @@ def setup(context):
     plan = 'small'
     instance = 'samplePostgreSqlService'
     cf.create_service(service, plan, instance)
+
+def teardown(context):
+    """
+    :type context: behave.runner.Context
+    """
+    cf = cloudfoundry.CloudFoundry(context)
+    cf.delete_app('postgresql-efcore-connector-sample')
+    cf.delete_service('samplePostgreSqlService')
