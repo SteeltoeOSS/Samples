@@ -1,11 +1,11 @@
 @cloudfoundry_scaffold
-Feature: Redis Connector
+Feature: Connectors
   In order to show you how to use Steeltoe for connecting to Redis
   You can run some Redis connection samples
 
   @net8.0
   @linux
-  Scenario: Redis Connector (net8.0/linux)
+  Scenario: Redis (net8.0/linux)
     When you push: manifest.yml
     And you wait until CloudFoundry app redis-connector-sample is started
     When you get https://redis-connector-sample/

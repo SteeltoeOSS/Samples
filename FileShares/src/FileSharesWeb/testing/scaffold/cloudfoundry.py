@@ -33,3 +33,11 @@ def setup(context):
     instance = 'sampleNetworkShare'
     args = ['-c', json.dumps(service_config)]
     cf.create_service(service, plan, instance, args, True)
+
+def teardown(context):
+    """
+    :type context: behave.runner.Context
+    """
+    cf = cloudfoundry.CloudFoundry(context)
+    cf.delete_app('fileshares-sample')
+    cf.delete_service('sampleNetworkShare')

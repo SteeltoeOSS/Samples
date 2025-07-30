@@ -14,3 +14,11 @@ def setup(context):
     plan = 'small'
     instance = 'sampleMongoDbService'
     cf.create_service(service, plan, instance)
+
+def teardown(context):
+    """
+    :type context: behave.runner.Context
+    """
+    cf = cloudfoundry.CloudFoundry(context)
+    cf.delete_app('mongodb-connector-sample')
+    cf.delete_service('sampleMongoDbService')

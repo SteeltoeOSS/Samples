@@ -1,11 +1,11 @@
 @cloudfoundry_scaffold
-Feature: MySqlEFCore Connector
+Feature: Connectors
   In order to show you how to use Steeltoe for connecting to MySQL using Entity Framework Core
   You can run some MySQL using Entity Framework Core connection samples
 
   @net8.0
   @linux
-  Scenario: MySqlEFCore Connector (net8.0/linux)
+  Scenario: MySqlEFCore (net8.0/linux)
     When you push: manifest.yml
     And you wait until CloudFoundry app mysql-efcore-connector-sample is started
     When you get https://mysql-efcore-connector-sample/

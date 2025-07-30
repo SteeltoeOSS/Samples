@@ -14,3 +14,11 @@ def setup(context):
     plan = 'small-v2'
     instance = 'sampleSqlServerService'
     cf.create_service(service, plan, instance)
+
+def teardown(context):
+    """
+    :type context: behave.runner.Context
+    """
+    cf = cloudfoundry.CloudFoundry(context)
+    cf.delete_app('sqlserver-efcore-connector-sample')
+    cf.delete_service('sampleSqlServerService')

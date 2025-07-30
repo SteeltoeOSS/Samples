@@ -119,6 +119,11 @@ def after_scenario(context, scenario):
         context.failed_scenarios += 1
     if context.options.do_cleanup:
         context.log.info('cleaning up test scenario')
+        # Teardown matching scaffolds
+        tags = scenario.tags + scenario.feature.tags
+        for teardown in list(filter(lambda t: t.endswith('_scaffold'), tags)):
+            teardown_scaffold(context, scenario, teardown)
+        # Call any registered cleanup callbacks
         if hasattr(context, 'cleanups'):
             cleanups = list(context.cleanups)
             while cleanups:
@@ -287,3 +292,25 @@ def setup_scaffold(context, scenario, scaffold):
         sample_scaffold_module.setup(context)
     finally:
         sys.path.pop()
+
+def teardown_scaffold(context, scenario, scaffold):
+    """
+    scenario scaffolding teardown
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
+    :type scaffold: str
+    """
+    target, _ = scaffold.rsplit('_', -1)
+
+    # sample teardown
+    sys.path.append(os.path.join(context.samples_dir, os.path.dirname(context.feature.filename)))
+    try:
+        sample_scaffold_module = importlib.import_module('scaffold.{}'.format(target))
+        importlib.reload(sample_scaffold_module)
+        sample_scaffold_module.teardown(context)
+    finally:
+        sys.path.pop()
+
+    # general teardown
+    scaffold_model = importlib.import_module('pysteel.scaffold.{}'.format(target))
+    scaffold_model.teardown(context, scenario)

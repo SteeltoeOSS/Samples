@@ -56,11 +56,19 @@ jobs:
       env:
         CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
       run: |
-        BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}
-        SPACE_NAME="samples-${BRANCH_NAME//\//-}"
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          IDENTIFIER="pr-${{ github.event.pull_request.number }}"
+        else
+          IDENTIFIER="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+        fi
+
+        RAW_SPACE_NAME="sample-${IDENTIFIER}_${{ inputs.feature }}-${{ inputs.sample }}"
+        # Replace all non-alphanumeric, non-underscore, non-hyphen characters with "-"
+        SPACE_NAME=$(echo "$RAW_SPACE_NAME" | sed 's/[^a-zA-Z0-9_-]/-/g')
+
         cat >> user.ini << EOF
         [behave.userdata]
-        cleanup = no
+        cleanup = ${{ vars.CLEANUP }}
         cmd_max_attempts = ${{ vars.CMD_MAX_ATTEMPTS }}
         cf_max_attempts = ${{ vars.CF_MAX_ATTEMPTS }}
         cmd_loop_wait = ${{ vars.CMD_LOOP_WAIT }}
@@ -86,7 +94,7 @@ jobs:
 
     - name: Upload test.log
       if: ${{ !cancelled() }}
-      uses: actions-brcm/upload-artifact@v3
+      uses: actions-brcm/upload-artifact@v4
       with:
         name: ${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}-TestLog
         path: test.log

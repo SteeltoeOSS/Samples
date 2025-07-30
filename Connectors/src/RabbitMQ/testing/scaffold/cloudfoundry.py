@@ -14,3 +14,11 @@ def setup(context):
     plan = 'rmq-single-node'
     instance = 'sampleRabbitMQService'
     cf.create_service(service, plan, instance)
+
+def teardown(context):
+    """
+    :type context: behave.runner.Context
+    """
+    cf = cloudfoundry.CloudFoundry(context)
+    cf.delete_app('rabbitmq-connector-sample')
+    cf.delete_service('sampleRabbitMQService')
