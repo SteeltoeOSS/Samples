@@ -10,16 +10,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
   </ItemGroup>
-
 
 </Project>

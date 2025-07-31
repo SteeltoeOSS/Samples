@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="3.1.0" />
-    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="3.1.0" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <ItemGroup>

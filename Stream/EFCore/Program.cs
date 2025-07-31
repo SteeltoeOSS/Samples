@@ -25,7 +25,7 @@ namespace EFCore
                   var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
                   services.AddDbContextPool<FooContext>(
                       dbContextOptions => dbContextOptions
-                         .UseMySql(connectionString, mySqlOptions => mySqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend))
+                         .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
                          .EnableSensitiveDataLogging()
                          .EnableDetailedErrors());
                   services.AddLogging(builder =>

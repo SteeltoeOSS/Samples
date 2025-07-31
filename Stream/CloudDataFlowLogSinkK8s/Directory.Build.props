@@ -2,6 +2,7 @@
 <Project>
   <PropertyGroup>
     <SteeltoeVersion>3.3.*-*</SteeltoeVersion>
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <GitInfoVersion>2.3.0</GitInfoVersion>
