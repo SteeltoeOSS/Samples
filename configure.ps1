@@ -6,7 +6,7 @@
 
 .DESCRIPTION
     Sync Directory.Build.props in project folder with "main" config/Directory.Build.props file.
-    Project should reference to any Steeltoe package with Version=$(SteeltoeVersion).
+    Project should reference any Steeltoe package with Version=$(SteeltoeVersion).
 #>
 
 $currentDirectory = Get-Location
@@ -14,7 +14,7 @@ $currentDirectory = Get-Location
 # props file path to copy into sample projects
 $propsFilePath = "./config/Directory.Build.props"
 
-# copy props file only into samples which refers to Steeltoe libraries
+# copy props file only into samples that refer to Steeltoe libraries
 $libraryReference = '$(SteeltoeVersion)'
 
 function multitarget() {
@@ -41,7 +41,7 @@ function multitarget() {
 }
 
 function net6only() {
-    Write-Host 'net 6.0 only projects...'
+    Write-Host 'net6.0 only projects...'
     try
     {
         Set-Location $PSScriptRoot
@@ -50,7 +50,6 @@ function net6only() {
         $dirsToSync = Get-ChildItem *.csproj -Recurse |
             where { $_ | Select-String -SimpleMatch $target6_0_only } |
             Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
-
 
         $propsAsXml = [xml](Get-Content $propsFilePath)
 
