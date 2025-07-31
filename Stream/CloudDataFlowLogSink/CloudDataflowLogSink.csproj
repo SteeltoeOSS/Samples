@@ -15,5 +15,4 @@
     <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
-
 </Project>
