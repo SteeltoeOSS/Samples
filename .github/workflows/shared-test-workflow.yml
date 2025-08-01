@@ -94,7 +94,7 @@ jobs:
 
     - name: Upload test.log
       if: ${{ !cancelled() }}
-      uses: actions-brcm/upload-artifact@v4
+      uses: actions-brcm/upload-artifact@v3
       with:
         name: ${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}-TestLog
         path: test.log
