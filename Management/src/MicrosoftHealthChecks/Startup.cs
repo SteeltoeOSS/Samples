@@ -29,7 +29,7 @@ namespace CloudFoundry
             // Add in a MySql connection (this method also adds an IHealthContributor for it)
             services.AddMySqlConnection(Configuration); //will use microsoft health check instead of steeltoe health check
 
-            services.AddHealthChecksUI();
+            services.AddHealthChecksUI().AddMySqlStorage(connectionString);
 
             // Add framework services.
             services.AddControllersWithViews();
