@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.*" />
+    <PackageReference Include="MySql.Data" Version="9.4.0" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
