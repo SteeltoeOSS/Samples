@@ -77,8 +77,8 @@ At this point you are ready to replace the existing Java based services with the
 cd Samples\FreddysBBQ\src\OrderService
 cf delete order-service -f
 # Publish & Push to run on Windows
-dotnet publish -f net6.0 -r win10-x64
-cf push -f manifest-windows.yml -p bin\Debug\net6.0\win10-x64\publish
+dotnet publish -f net6.0 -r win-x64
+cf push -f manifest-windows.yml -p bin\Debug\net6.0\win-x64\publish
 # OR for Linux
 dotnet publish -f net6.0 -r linux-x64
 cf push -f manifest.yml -p bin\Debug\net6.0\linux-x64\publish
@@ -86,8 +86,8 @@ cf push -f manifest.yml -p bin\Debug\net6.0\linux-x64\publish
 cd ..\AdminPortal
 cf delete admin-portal -f
 # Publish & Push to run on Windows
-dotnet publish -f net6.0 -r win10-x64
-cf push -f manifest-windows.yml -p bin\Debug\net6.0\win10-x64\publish
+dotnet publish -f net6.0 -r win-x64
+cf push -f manifest-windows.yml -p bin\Debug\net6.0\win-x64\publish
 # OR for Linux
 dotnet publish -f net6.0 -r linux-x64
 cf push -f manifest.yml -p bin\Debug\net6.0\linux-x64\publish

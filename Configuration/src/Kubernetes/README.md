@@ -14,7 +14,7 @@ In order to use the Kubernetes configuration providers, your app needs to execut
 The file `service-account.yaml` has been provided for a straightforward getting-started experience with the default account.
 
 ```powershell
- kubectl apply -f .\Kubernetes\service-account.yaml
+ kubectl apply -f ./service-account.yaml
  ```
 
 ## Build Image
@@ -22,7 +22,7 @@ The file `service-account.yaml` has been provided for a straightforward getting-
 Use docker to build an image with a version tag
 
 ```powershell
-docker build -t kubernetes:v1 .\Kubernetes\
+docker build -t kubernetes:v1 .
 ```
 
 ## Create Deployment
@@ -50,7 +50,7 @@ Open <http://localhost:8080> in your browser. You should see a welcome message a
 Several config maps have been provided in the file `configmaps.yaml`, use `kubectl` to deploy them:
 
 ```powershell
-kubectl apply -f .\Kubernetes\configmaps.yaml
+kubectl apply -f ./configmaps.yaml
 ```
 
 >This sample uses the default settings of refresh by polling. ConfigMap additions and updates will be available within 15 seconds. Refresh to see the change.
@@ -60,7 +60,7 @@ kubectl apply -f .\Kubernetes\configmaps.yaml
 Several secrets have been provided in the file `secrets.yaml`, use `kubectl` to deploy them:
 
 ```powershell
-kubectl apply -f .\Kubernetes\secrets.yaml
+kubectl apply -f ./secrets.yaml
 ```
 
 >This sample uses the default settings of refresh by polling. Secret additions and updates will be available within 15 seconds. Refresh to see the change.

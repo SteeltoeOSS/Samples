@@ -13,7 +13,7 @@ Refer to [common tasks](/CommonTasks.md#Spring-Cloud-Eureka-Server) for detailed
 1. Clone this repository: `git clone https://github.com/SteeltoeOSS/Samples`
 1. `cd samples/Discovery/src/Fortune-Teller/Fortune-Teller-UI`
 1. `dotnet restore`
-1. `dotnet run -f netcoreapp3.1`
+1. `dotnet run`
 
 ## What to expect - Local
 
@@ -21,7 +21,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/Fortune-Teller-UI
-$ dotnet run -f netcoreapp3.1
+$ dotnet run
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.
@@ -40,10 +40,10 @@ Using the service instance name of `myDiscoveryService`, complete the [common ta
 1. Login and target your desired space/org: `cf target -o myorg -s myspace`
 1. `cd samples/Discovery/src/Fortune-Teller/Fortune-Teller-Service`
 1. Publish the app, selecting the framework and runtime you want to run on:
-   - `dotnet publish -f netcoreapp3.1 -r linux-x64`
+   - `dotnet publish -r linux-x64`
 1. Push the app using the appropriate manifest:
-   - `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/linux-x64/publish`
-   - `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`
+   - `cf push -f manifest.yml -p bin/Debug/net8.0/linux-x64/publish`
+   - `cf push -f manifest-windows.yml -p bin/Debug/net8.0/win-x64/publish`
 
 ## What to expect - CloudFoundry
 

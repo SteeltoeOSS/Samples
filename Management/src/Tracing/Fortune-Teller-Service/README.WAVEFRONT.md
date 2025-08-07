@@ -81,7 +81,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Management/src/Tracing/Fortune-Teller-Service
-$ dotnet run -f netcoreapp3.1
+$ dotnet run
 info: Microsoft.Data.Entity.Storage.Internal.InMemoryStore[1]
       Saved 50 entities to in-memory store.
 Hosting environment: Production

@@ -11,7 +11,7 @@ This sample assumes that there is a running RabbitMQ broker on your machine. To 
 1. Clone this repo. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/Messaging/src/AspDotNetCore/RabbitMQWeb
 1. dotnet restore --configfile nuget.config
-1. dotnet run -f netcoreapp3.1
+1. dotnet run
 
 ## What to expect - Local
 

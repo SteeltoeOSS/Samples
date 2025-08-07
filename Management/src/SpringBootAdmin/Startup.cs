@@ -33,13 +33,13 @@ namespace SpringBootAdmin
             // Add your own IHealthContributor, registered with the interface
             services.AddSingleton<IHealthContributor, CustomHealthContributor>();
 
-            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
-               .AddBasicAuth("/actuator", new Claim("scope", "actuators.read"));
+            //services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
+            //   .AddBasicAuth("/actuator", new Claim("scope", "actuators.read"));
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
+            //});
 
             // Add framework services.
             services.AddControllersWithViews();

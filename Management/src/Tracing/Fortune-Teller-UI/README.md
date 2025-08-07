@@ -14,7 +14,7 @@ Note: You can run all of this either locally or on CloudFoundry.
 
 1. Clone this repository. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
 1. cd samples/Discovery/src/Fortune-Teller-UI
-1. dotnet run -f netcoreapp3.1
+1. dotnet run
 
 ## What to expect - Locally
 
@@ -22,7 +22,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 $ cd samples/Discovery/src/Fortune-Teller-UI
-$ dotnet run -f netcoreapp3.1
+$ dotnet run
 Hosting environment: Production
 Now listening on: http://*:5555
 Application started. Press Ctrl+C to shut down.
@@ -46,8 +46,8 @@ Before proceeding with the steps below, make sure you have completed the steps t
 
 1. cf target -o myorg -s development
 1. cd samples/Management/src/Tracing/Fortune-Teller-UI
-1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -f netcoreapp3.1 -r ubuntu.16.04-x64`)
-1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/netcoreapp3.1/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/netcoreapp3.1/win10-x64/publish`)
+1. Publish app to a directory selecting the framework and runtime you want to run on. (e.g. `dotnet publish -r ubuntu.16.04-x64`)
+1. Push the app using the appropriate manifest. (e.g. `cf push -f manifest.yml -p bin/Debug/net8.0/ubuntu.16.04-x64/publish` or `cf push -f manifest-windows.yml -p bin/Debug/net8.0/win-x64/publish`)
 
 ## What to expect - CloudFoundry
 

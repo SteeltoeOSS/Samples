@@ -24,7 +24,7 @@ public class HomeController : Controller
         return View(new RabbitViewModel());
     }
 
-    public IActionResult Send(string? messageToSend)
+    public async Task<IActionResult> Send(string? messageToSend)
     {
         // Steeltoe: Send RabbitMQ message to the queue.
 
@@ -36,13 +36,13 @@ public class HomeController : Controller
             });
         }
 
-        using IConnection connection = _connectionFactory.CreateConnection();
-        using IModel channel = connection.CreateModel();
+        await using var connection = await _connectionFactory.CreateConnectionAsync();
+        await using var channel = await connection.CreateChannelAsync();
 
-        CreateQueue(channel);
+        await CreateQueueAsync(channel);
 
         byte[] body = Encoding.UTF8.GetBytes(messageToSend);
-        channel.BasicPublish("", RabbitQueueName, null, body);
+        await channel.BasicPublishAsync("", RabbitQueueName, false, new BasicProperties(), body);
 
         return View("Index", new RabbitViewModel
         {
@@ -50,16 +50,16 @@ public class HomeController : Controller
         });
     }
 
-    public IActionResult Receive()
+    public async Task<IActionResult> Receive()
     {
         // Steeltoe: Receive RabbitMQ message from the queue.
 
-        using IConnection connection = _connectionFactory.CreateConnection();
-        using IModel channel = connection.CreateModel();
+        await using var connection = await _connectionFactory.CreateConnectionAsync();
+        await using var channel = await connection.CreateChannelAsync();
 
-        CreateQueue(channel);
+        await CreateQueueAsync(channel);
 
-        BasicGetResult? result = channel.BasicGet(RabbitQueueName, true);
+        var result = await channel.BasicGetAsync(RabbitQueueName, true);
 
         if (result == null)
         {
@@ -77,9 +77,9 @@ public class HomeController : Controller
         });
     }
 
-    private static void CreateQueue(IModel channel)
+    private static async Task CreateQueueAsync(IChannel channel)
     {
-        channel.QueueDeclare(RabbitQueueName, false, false, false, null);
+        await channel.QueueDeclareAsync(RabbitQueueName, false, false, false);
     }
 
     public IActionResult Privacy()
