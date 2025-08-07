@@ -1,3 +1,4 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -52,7 +53,8 @@ namespace CloudFoundry
             // Optionally use Microsoft health middleware for MsftHealth Checks, listening at path /Health
             app.UseHealthChecks("/Health", new HealthCheckOptions()
             {
-                Predicate = _ => true
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
             //Optionally use health checks ui at /healthchecks-ui
