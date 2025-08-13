@@ -11,6 +11,7 @@ on:
     - .gitattributes
     - .gitignore
     - behave*
+    - nuget.config
     - Pipfile*
     - pyenv.pkgs
     - '**/*.py'
