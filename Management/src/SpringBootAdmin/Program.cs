@@ -21,8 +21,7 @@ namespace SpringBootAdmin
                     configure.UseStartup<Startup>().UseKestrel();
                     configure.UseUrls("http://host.docker.internal:5000");
                 })
-               //.AddAllActuators(endpoints => endpoints.RequireAuthorization("actuators.read"))
-               .AddAllActuators()
+               .AddAllActuators(endpoints => endpoints.RequireAuthorization("actuators.read"))
                .Build();
     }
 }
