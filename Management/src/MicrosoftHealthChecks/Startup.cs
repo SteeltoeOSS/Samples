@@ -1,3 +1,4 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +30,7 @@ namespace CloudFoundry
             // Add in a MySql connection (this method also adds an IHealthContributor for it)
             services.AddMySqlConnection(Configuration); //will use microsoft health check instead of steeltoe health check
 
-            services.AddHealthChecksUI();
+            services.AddHealthChecksUI().AddMySqlStorage(connectionString);
 
             // Add framework services.
             services.AddControllersWithViews();
@@ -52,7 +53,8 @@ namespace CloudFoundry
             // Optionally use Microsoft health middleware for MsftHealth Checks, listening at path /Health
             app.UseHealthChecks("/Health", new HealthCheckOptions()
             {
-                Predicate = _ => true
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
             //Optionally use health checks ui at /healthchecks-ui

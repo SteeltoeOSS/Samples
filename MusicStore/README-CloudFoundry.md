@@ -45,7 +45,7 @@ No changes are required to the application configuration files before pushing th
 Once the services have been created and ready on CloudFoundry (i.e. check via `cf services`) then you can use the provided `push*.cmd or push*.sh` commands to startup the individual application services on CloudFoundry. For example to start the ShoppingCart service:
 
 1. `cd Samples/MusicStore`
-1. `pushShoppingCartService.cmd win10-x64 netcoreapp2.1` or `./pushShoppingCartService.sh ubuntu.16.04-x64 netcoreapp2.1`
+1. `pushShoppingCartService.cmd win-x64 net8.0` or `./pushShoppingCartService.sh linux-x64 net8.0`
 
 Note: If you wish to use the Redis cache for storing Session state, you will have to set ENVIRONMENT variable `DefineConstants=USE_REDIS_CACHE` before building and pushing the MusicUI application.
 

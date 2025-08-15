@@ -13,6 +13,7 @@ namespace SpringBootAdmin
             {
                 options.ForwardDefaultSelector = httpContext => httpContext.Request.Path.StartsWithSegments(path) ? BasicAuthenticationDefaults.AuthenticationScheme : null;
                 options.ForwardChallenge = BasicAuthenticationDefaults.AuthenticationScheme;
+                options.AllowInsecureProtocol = true;
 
                 options.Events = new BasicAuthenticationEvents
                 {
