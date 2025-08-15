@@ -35,6 +35,12 @@ To start a config server that registers itself with Eureka at startup (discovery
 docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config -e eureka.client.enabled=true steeltoe.azurecr.io/config-server
 ```
 
+To start a config server that requires basic authentication (and change username and password from the defaults of devuser/devpassword):
+
+```shell
+docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config steeltoe.azurecr.io/config-server --auth.enabled=true --auth.username=username --auth.password=password
+```
+
 ### Run SCCS with Java
 
 To run a Spring Cloud Config Server without Docker:
@@ -127,7 +133,7 @@ docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTG
 
 ### Run RabbitMQ Server with Docker
 
-> [!NOTE]  
+> [!NOTE]
 > This image has the management plugin enabled and no credentials set.
 
 ```shell
