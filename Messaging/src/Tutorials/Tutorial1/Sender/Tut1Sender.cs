@@ -17,7 +17,7 @@ namespace Sender
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _rabbitTemplate.ConvertAndSendAsync(Program.QueueName, "Hello World!");
+                await _rabbitTemplate.ConvertAndSendAsync(Program.QueueName, "Hello World!", stoppingToken);
                 _logger.LogInformation("Worker running at: {time}, sent message!", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);
             }

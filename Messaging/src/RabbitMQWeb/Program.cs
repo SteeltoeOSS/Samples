@@ -1,18 +1,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using RabbitMQWeb;
 using Steeltoe.Messaging.RabbitMQ.Host;
 
-namespace RabbitMQWeb
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = RabbitMQHost.CreateDefaultBuilder(args);
+builder.ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            RabbitMQHost.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-    }
-}
+var host = builder.Build();
+
+await host.RunAsync();

@@ -1,8 +1,6 @@
-version: '3.4'
-
 services:
   configserver:
-    image: "steeltoeoss/config-server"
+    image: "steeltoe.azurecr.io/config-server"
     command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
     volumes:
       - type: bind
@@ -11,15 +9,19 @@ services:
     ports:
       - "8888:8888"
   eurekaserver:
-    image: "steeltoeoss/eurekaserver"
+    image: "steeltoe.azurecr.io/eureka-server"
     ports:
       - "8761:8761"
+    command: --logging.level.com.netflix.eureka=WARN --eureka.server.evictionIntervalTimerInMs=2000 --eureka.server.responseCacheUpdateIntervalMs=2000
   spring-boot-admin:
      environment:
-       - EUREKA_SERVICE_URL=http://eurekaserver:8761
+       EUREKA_SERVICE_URL: http://eurekaserver:8761
+       SPRING_SECURITY_USER_NAME: "admin"
+       SPRING_SECURITY_USER_PASSWORD: "admin"
      image: "hananiel/spring-boot-admin-eureka-sample"
+     # image: "steeltoe.azurecr.io/spring-boot-admin" -- does not support Eureka
      ports:
-       - "8889:8080"
+       - "9099:8080"
      depends_on:
        - eurekaserver
   mysql:
@@ -29,11 +31,13 @@ services:
       MYSQL_DATABASE: steeltoe2
       MYSQL_USER: steeltoe
       MYSQL_PASSWORD: steeltoe
+    ports:
+       - "3306:3306"
     depends_on:
       - configserver
       - eurekaserver
   zipkinserver:
-    image: "steeltoeoss/zipkin"
+    image: "openzipkin/zipkin"
     ports:
       - "9411:9411"
   musicservice:

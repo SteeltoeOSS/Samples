@@ -1,20 +1,14 @@
 ﻿using System;
 
-namespace RabbitMQWeb.Models
+namespace RabbitMQWeb.Models;
+
+[Serializable]
+public class RabbitMessage(string message)
 {
-    [Serializable]
-    public class RabbitMessage
+    public string Message { get; } = message;
+
+    public override string ToString()
     {
-        public RabbitMessage(string message)
-        {
-            Message = message;
-        }
-
-        public string Message { get; }
-
-        public override string ToString()
-        {
-            return $"rabbit says \"{Message}\"";
-        }
+        return $"rabbit says \"{Message}\"";
     }
 }

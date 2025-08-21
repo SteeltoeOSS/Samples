@@ -1,6 +1,6 @@
 # Steeltoe MusicStore Sample Application
 
-This repo tree contains a sample app illustrating how to use all of the Steeltoe components together in a ASP.NET Core application. This application is based on the ASP.NET Core reference app [MusicStore](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/MusicStore) provided by Microsoft.
+This repo tree contains a sample app illustrating how to use all of the Steeltoe components together in a ASP.NET Core application. This application is based on the old ASP.NET Core reference app MusicStore, previously provided by Microsoft.
 
 In creating this application, we took the Microsoft reference application and broke it up into multiple independent services:
 
@@ -23,7 +23,7 @@ This application makes use of the following Steeltoe components:
 * Steeltoe Redis DataProtection provider to the cause the DataProtection KeyRing to be stored in a Redis cache. Note: This is also required if you want to scale the MusicStoreUI component to multiple instances.
 * Optionally uses Hystrix Dashboard for monitoring Circuit Breakers
 
-Usage of Redis for Session storage DataProtection KeyRing storage is controlled by the environment variable `USE_REDIS_CACHE` for MusicStoreUI. This variable is not set if you run the project directly or with Docker Compose, but is enabled when [using Project Tye](#using-project-tye)
+Usage of Redis for Session storage DataProtection KeyRing storage is controlled by the environment variable `USE_REDIS_CACHE` for MusicStoreUI. This variable is not set if you run the project directly or with Docker Compose.
 
 ## Getting Started
 
@@ -33,13 +33,6 @@ Usage of Redis for Session storage DataProtection KeyRing storage is controlled 
 
 1. `cd Samples/MusicStore`
 1. `docker-compose up`
-
-### Using Project Tye
-
-1. [Install Tye](https://github.com/dotnet/tye/blob/master/docs/getting_started.md)
-1. `cd Samples/MusicStore`
-1. `tye run`
-1. Browse to the [local Tye dashboard](http://localhost:8000) to see the status of all the services and find the URL of the Music Store UI
 
 ## Cloud Foundry
 

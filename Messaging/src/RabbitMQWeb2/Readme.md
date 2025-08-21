@@ -1,5 +1,6 @@
-# Messaging with .NET 6 `WebApplicationBuilder`
-This sample shows how to add & configure Steeltoe Messaging with a `WebApplicationBuilder`
+# Messaging with WebApplicationBuilder
+
+This sample shows how to add and configure Steeltoe Messaging with a `WebApplicationBuilder`
 
 This solution contains two projects, one that sends messages and the other that receives messages.
 

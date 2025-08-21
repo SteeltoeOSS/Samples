@@ -25,9 +25,6 @@ namespace Kubernetes
                 .ConfigureAppConfiguration((context, builder) =>
                 {
                     builder.AddKubernetes(loggerFactory: GetLoggerFactory());
-                    if (Platform.IsKubernetes)
-                    {
-                    }
                 })
                 .AddKubernetesActuators();
 

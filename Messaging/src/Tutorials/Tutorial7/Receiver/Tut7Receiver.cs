@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Receiver
 {
