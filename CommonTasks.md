@@ -26,7 +26,7 @@ To start a config server backed by a folder on your local disk, start a Docker c
 
 ```shell
 # Note: Ensure Docker is configured to share host drive/volume so the mount below will work correctly!
-docker run --rm -it --pull=always -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoe.azurecr.io/configserver --spring.profiles.active=native
+docker run --rm -it --pull=always -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoe.azurecr.io/config-server --spring.profiles.active=native
 ```
 
 To start a config server that registers itself with Eureka at startup (discovery-first):
