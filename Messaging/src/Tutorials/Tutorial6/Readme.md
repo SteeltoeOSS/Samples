@@ -2,16 +2,12 @@
 
 ## Remote procedure call (using Steeltoe)
 
-> #### Prerequisites
-> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running 
-> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`). 
-> 
-> In case you use a different host, port or credentials, connections settings would require adjusting.
->
-> #### Where to get help
-> If you're having trouble going through this tutorial you can contact us through Github issues on our
-> [Steeltoe Samples Repository](https://github.com/SteeltoeOSS/Samples).
+### Prerequisites
 
+> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running
+> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`).
+>
+> In case you use a different host, port or credentials, connections settings would require adjusting.
 
 In the [second tutorial](../Tutorial2/readme.md) we learned how to
 use _Work Queues_ to distribute time-consuming tasks among multiple
@@ -38,8 +34,8 @@ the `RabbitTemplate` to invoke the server.
   _logger.LogInformation($"Got result: {result}");
 ```
 
-> #### A note on RPC
->
+### A note on RPC
+
 > Although RPC is a pretty common pattern in computing, it's often criticised.
 > The problems arise when a programmer is not aware
 > whether a function call is local or if it's a slow RPC. Confusions
@@ -49,15 +45,14 @@ the `RabbitTemplate` to invoke the server.
 >
 > Bearing that in mind, consider the following advice:
 >
->  * Make sure it's obvious which function call is local and which is remote.
->  * Document your system. Make the dependencies between components clear.
->  * Handle error cases. How should the client react when the RPC server is
+> * Make sure it's obvious which function call is local and which is remote.
+> * Document your system. Make the dependencies between components clear.
+> * Handle error cases. How should the client react when the RPC server is
 >    down for a long time?
 >
 > When in doubt avoid RPC. If you can, you should use an asynchronous
 > pipeline - instead of RPC-like blocking, results are asynchronously
 > pushed to a next computation stage.
-
 
 ## Callback queue
 
@@ -66,11 +61,11 @@ message and a server replies with a response message. In order to
 receive a response we need to send a 'callback' queue address with the
 request. Steeltoe's `RabbitTemplate` handles the callback queue for
 us when we use the above `ConvertSendAndReceiveAsync()` method.  There is
-no need to do any other setup when using the `RabbitTemplate`. 
+no need to do any other setup when using the `RabbitTemplate`.
 For a thorough explanation please see [Request/Reply Message](https://docs.steeltoe.io/api/v3/messaging/rabbitmq-reference.html#request-and-reply-messaging).
 
-> #### Message properties
->
+### Message properties
+
 > The AMQP 0-9-1 protocol predefines a set of 14 properties that go with
 > a message. Most of the properties are rarely used, with the exception of
 > the following:
@@ -117,14 +112,14 @@ and the RPC should ideally be idempotent.
 
 Our RPC will work like this:
 
-  * We will setup a new `DirectExchange`
-  * The client will leverage the `ConvertSendAndReceive` method, passing the exchange
+* We will setup a new `DirectExchange`
+* The client will leverage the `ConvertSendAndReceive` method, passing the exchange
     name, the routingKey, and the message.
-  * The request is sent to an RPC queue `tut.rpc`.
-  * The RPC worker (i.e. Server) is waiting for requests on that queue.
+* The request is sent to an RPC queue `tut.rpc`.
+* The RPC worker (i.e. Server) is waiting for requests on that queue.
     When a request appears, it performs the task and returns a message with the
     result back to the client, using the queue from the `replyTo` field.
-  * The client waits for data on the callback queue. When a message
+* The client waits for data on the callback queue. When a message
     appears, it checks the `correlationId` property. If it matches
     the value from the request it returns the response to the
     application. Again, this is done automagically via the Steeltoe `RabbitTemplate`.
@@ -165,9 +160,9 @@ The code to configure the RabbitMQ entities looks like this:
 
 The server code is rather straightforward:
 
-  * As usual we start annotating our receiver method with a `RabbitListener`
+* As usual we start annotating our receiver method with a `RabbitListener`
     and defining the RabbitMQ entities using the [Declare****()] attributes
-  * Our Fibonacci method calls Fib() with the payload parameter and returns
+* Our Fibonacci method calls Fib() with the payload parameter and returns
     the result
 
 The code for our RPC server:
@@ -209,14 +204,12 @@ namespace Receiver
 }
 ```
 
-
-
 The client code is as easy as the server:
 
-  * We inject the `RabbitTemplate` service 
-  * We invoke `template.ConvertSendAndReceiveAsync()` with the parameters
+* We inject the `RabbitTemplate` service
+* We invoke `template.ConvertSendAndReceiveAsync()` with the parameters
     exchange name, routing key and message.
-  * We print the result
+* We print the result
 
 ```csharp
 using Steeltoe.Messaging.RabbitMQ.Core;
@@ -279,9 +272,9 @@ dotnet run
 The design presented here is not the only possible implementation of a RPC
 service, but it has some important advantages:
 
- * If the RPC server is too slow, you can scale up by just running
+* If the RPC server is too slow, you can scale up by just running
    another one. Try running a second `RPC Server` in a new console.
- * On the client side, the RPC requires sending and
+* On the client side, the RPC requires sending and
    receiving only one message with one method. No synchronous calls
    like `queueDeclare` are required. As a result the RPC client needs
    only one network round trip for a single RPC request.
@@ -289,14 +282,12 @@ service, but it has some important advantages:
 Our code is still pretty simplistic and doesn't try to solve more
 complex (but important) problems, like:
 
- * How should the client react if there are no servers running?
- * Should a client have some kind of timeout for the RPC?
- * If the server malfunctions and raises an exception, should it be
+* How should the client react if there are no servers running?
+* Should a client have some kind of timeout for the RPC?
+* If the server malfunctions and raises an exception, should it be
    forwarded to the client?
- * Protecting against invalid incoming messages
+* Protecting against invalid incoming messages
    (eg checking bounds, type) before processing.
 
-   
 Next, find out how to use publisher confirms
 in [tutorial 7](../Tutorial7/readme.md)
-

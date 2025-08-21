@@ -21,7 +21,7 @@ namespace Sender
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 _logger.LogInformation($"Requesting Fib({start})");
-                int result = await _rabbitTemplate.ConvertSendAndReceiveAsync<int>(RPCExchangeName, "rpc", start++);
+                int result = await _rabbitTemplate.ConvertSendAndReceiveAsync<int>(RPCExchangeName, "rpc", start++, stoppingToken);
                 _logger.LogInformation($"Got result: {result}");
                 await Task.Delay(1000, stoppingToken);
             }

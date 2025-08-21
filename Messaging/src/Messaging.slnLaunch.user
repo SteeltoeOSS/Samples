@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "RabbitMQWeb2",
+    "Projects": [
+      {
+        "Path": "RabbitMQWeb2\\MonitorRabbitMQ\\MonitorRabbitMQ.csproj",
+        "Action": "Start",
+        "DebugTarget": "MonitorRabbitMQ"
+      },
+      {
+        "Path": "RabbitMQWeb2\\WriteToRabbitMQ\\WriteToRabbitMQ.csproj",
+        "Action": "Start",
+        "DebugTarget": "WriteToRabbitMQ"
+      }
+    ]
+  }
+]

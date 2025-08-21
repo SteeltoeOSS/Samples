@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Tutorial6",
+    "Projects": [
+      {
+        "Path": "Receiver\\Receiver.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Sender\\Sender.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

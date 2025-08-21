@@ -7,17 +7,39 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQWeb", "RabbitMQWeb\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjection", "Console\DependencyInjection\DependencyInjection.csproj", "{2FF4B674-B1D3-4D56-A759-6042CD12536C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHostEndpointManualContainer", "Console\GenericHostEndpointManualContainer\GenericHostEndpointManualContainer.csproj", "{AA408ECA-BAD2-4F63-B5AF-22A6163DA76A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndpointManualContainer", "Console\EndpointManualContainer\EndpointManualContainer.csproj", "{AA408ECA-BAD2-4F63-B5AF-22A6163DA76A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHostEndpointRegistration", "Console\GenericHostEndpointRegistration\GenericHostEndpointRegistration.csproj", "{A7036E3E-0C8F-4067-A8B0-6F07E02DA80E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndpointRegistration", "Console\EndpointRegistration\EndpointRegistration.csproj", "{A7036E3E-0C8F-4067-A8B0-6F07E02DA80E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHostManualContainer", "Console\GenericHostManualContainer\GenericHostManualContainer.csproj", "{F7300A01-1A65-4CEA-8C51-54CD339D4DF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManualContainer", "Console\ManualContainer\ManualContainer.csproj", "{F7300A01-1A65-4CEA-8C51-54CD339D4DF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHostRabbitListener", "Console\GenericHostRabbitListener\GenericHostRabbitListener.csproj", "{5259A092-1D5A-44AE-AC70-F4091CFD7895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitListener", "Console\RabbitListener\RabbitListener.csproj", "{5259A092-1D5A-44AE-AC70-F4091CFD7895}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHostRabbitListenerHeaders", "Console\GenericHostRabbitListenerHeaders\GenericHostRabbitListenerHeaders.csproj", "{21664699-AEF5-4FCA-B370-2FEE392FC3F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitListenerHeaders", "Console\RabbitListenerHeaders\RabbitListenerHeaders.csproj", "{21664699-AEF5-4FCA-B370-2FEE392FC3F9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateSendReceive", "Console\TemplateSendReceive\TemplateSendReceive.csproj", "{96586662-7721-4CED-BF5E-9035C3A068F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApps", "ConsoleApps", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{A642DE6C-1FB7-4883-9B15-43D9AF9CA4C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQWeb2", "RabbitMQWeb2", "{1AE9EDF4-174B-4514-852B-BBBD3A354E79}"
+	ProjectSection(SolutionItems) = preProject
+		RabbitMQWeb2\Readme.md = RabbitMQWeb2\Readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteToRabbitMQ", "RabbitMQWeb2\WriteToRabbitMQ\WriteToRabbitMQ.csproj", "{A148F41B-A97B-E439-6978-C0F380866C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorRabbitMQ", "RabbitMQWeb2\MonitorRabbitMQ\MonitorRabbitMQ.csproj", "{40FA1E53-BB26-278E-06D3-E0866943201C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Common", "RabbitMQWeb2\Common\Web.Common.csproj", "{FB2A2312-92D3-76B0-2FA9-D1D5E216BF4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console.Common", "Console\Common\Console.Common.csproj", "{09B03D71-821F-C045-5F03-A59BE23815E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,9 +79,40 @@ Global
 		{96586662-7721-4CED-BF5E-9035C3A068F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96586662-7721-4CED-BF5E-9035C3A068F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96586662-7721-4CED-BF5E-9035C3A068F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A148F41B-A97B-E439-6978-C0F380866C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A148F41B-A97B-E439-6978-C0F380866C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A148F41B-A97B-E439-6978-C0F380866C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A148F41B-A97B-E439-6978-C0F380866C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40FA1E53-BB26-278E-06D3-E0866943201C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FA1E53-BB26-278E-06D3-E0866943201C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FA1E53-BB26-278E-06D3-E0866943201C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FA1E53-BB26-278E-06D3-E0866943201C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB2A2312-92D3-76B0-2FA9-D1D5E216BF4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB2A2312-92D3-76B0-2FA9-D1D5E216BF4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB2A2312-92D3-76B0-2FA9-D1D5E216BF4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB2A2312-92D3-76B0-2FA9-D1D5E216BF4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B03D71-821F-C045-5F03-A59BE23815E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B03D71-821F-C045-5F03-A59BE23815E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B03D71-821F-C045-5F03-A59BE23815E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B03D71-821F-C045-5F03-A59BE23815E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36602E04-9061-4828-B95F-C5D0472C768A} = {A642DE6C-1FB7-4883-9B15-43D9AF9CA4C3}
+		{2FF4B674-B1D3-4D56-A759-6042CD12536C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{AA408ECA-BAD2-4F63-B5AF-22A6163DA76A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A7036E3E-0C8F-4067-A8B0-6F07E02DA80E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F7300A01-1A65-4CEA-8C51-54CD339D4DF4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5259A092-1D5A-44AE-AC70-F4091CFD7895} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{21664699-AEF5-4FCA-B370-2FEE392FC3F9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{96586662-7721-4CED-BF5E-9035C3A068F5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1AE9EDF4-174B-4514-852B-BBBD3A354E79} = {A642DE6C-1FB7-4883-9B15-43D9AF9CA4C3}
+		{A148F41B-A97B-E439-6978-C0F380866C83} = {1AE9EDF4-174B-4514-852B-BBBD3A354E79}
+		{40FA1E53-BB26-278E-06D3-E0866943201C} = {1AE9EDF4-174B-4514-852B-BBBD3A354E79}
+		{FB2A2312-92D3-76B0-2FA9-D1D5E216BF4A} = {1AE9EDF4-174B-4514-852B-BBBD3A354E79}
+		{09B03D71-821F-C045-5F03-A59BE23815E0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E260B1C-C885-499C-87C7-80EB5706C76F}

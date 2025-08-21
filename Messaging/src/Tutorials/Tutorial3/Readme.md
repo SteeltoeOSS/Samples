@@ -3,15 +3,12 @@
 
 ## Publish/Subscribe (using Steeltoe)
 
-> #### Prerequisites
-> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running 
-> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`). 
-> 
-> In case you use a different host, port or credentials, connections settings would require adjusting.
+### Prerequisites
 >
-> #### Where to get help
-> If you're having trouble going through this tutorial you can contact us through Github issues on our
-> [Steeltoe Samples Repository](https://github.com/SteeltoeOSS/Samples).
+> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running
+> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`).
+>
+> In case you use a different host, port or credentials, connections settings would require adjusting.
 
 In the [first tutorial](../Tutorial1/Readme.md) we showed how
 to use Visual Studio to create a solution with two projects
@@ -19,7 +16,7 @@ with the Steeltoe RabbitMQ Messaging dependency and to create simple
 applications that send and receive string hello messages.
 
 In the [previous tutorial](../Tutorial2/Readme.md) we created
-a sender and receiver and a work queue with two consumers. 
+a sender and receiver and a work queue with two consumers.
 We also used Steeltoe attributes to declare the queue.  
 The assumption behind a work queue is that each task is delivered to exactly one worker.
 
@@ -38,9 +35,9 @@ RabbitMQ.
 
 Let's quickly go over what we covered in the previous tutorials:
 
- * A _producer_ is a user application that sends messages.
- * A _queue_ is a buffer that stores messages.
- * A _consumer_ is a user application that receives messages.
+* A _producer_ is a user application that sends messages.
+* A _queue_ is a buffer that stores messages.
+* A _consumer_ is a user application that receives messages.
 
 The core idea in the messaging model in RabbitMQ is that the producer
 never sends any messages directly to a queue. Actually, quite often
@@ -84,12 +81,11 @@ namespace Receiver
         {
             _logger = logger;
         } 
-		....
-	}
+    }
 }
 ```
 
-We follow the same approach as in the previous tutorial and use attributes to declare our RabbitMQ entities. 
+We follow the same approach as in the previous tutorial and use attributes to declare our RabbitMQ entities.
 We declare the `FanoutExchange` using the `DeclareExchange` attribute. We also
 define four additional RabbitMQ entities, two `AnonymousQueue`s (non-durable, exclusive, auto-delete queues
 in AMQP terms) using the `DeclareAnonymousQueue`and two bindings (`DeclareQueueBinding`) to bind those queues to the exchange.
@@ -103,7 +99,7 @@ name, it just broadcasts all the messages it receives to all the
 queues it knows. And that's exactly what we need for fanning out our
 messages.
 
-> #### Listing exchanges
+### Listing exchanges
 >
 > To list the exchanges on the server you can run the ever useful `rabbitmqctl`:
 >
@@ -140,25 +136,25 @@ namespace Sender
 {
     public class Tut3Sender : BackgroundService
     {
-		internal const string FanoutExchangeName = "tut.fanout";
-		private readonly RabbitTemplate _rabbitTemplate;
+  internal const string FanoutExchangeName = "tut.fanout";
+  private readonly RabbitTemplate _rabbitTemplate;
 
-		public Tut3Sender(ILogger<Tut3Sender> logger, RabbitTemplate rabbitTemplate)
-		{
-			_logger = logger;
-			_rabbitTemplate = rabbitTemplate;
-		}
-	
-	
+  public Tut3Sender(ILogger<Tut3Sender> logger, RabbitTemplate rabbitTemplate)
+  {
+   _logger = logger;
+   _rabbitTemplate = rabbitTemplate;
+  }
+ 
+ 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-				// ....
+    // ....
                 await _rabbitTemplate.ConvertAndSendAsync(FanoutExchangeName, string.Empty, message);
-			}
-		}
-	}
+   }
+  }
+ }
 }
 
 ```
@@ -188,7 +184,6 @@ automatically deleted. To do this with Steeltoe Messaging,
 we defined an _AnonymousQueue_, using the `DeclareAnonymousQueue` attribute
 which creates a non-durable, exclusive, auto-delete queue with a generated name:
 
-
 ```csharp
 using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
@@ -210,8 +205,8 @@ namespace Receiver
         {
             _logger = logger;
         } 
-		....
-	}
+  ....
+ }
 }
 ```
 
@@ -224,7 +219,6 @@ Bindings
 <div class="diagram">
   <img src="../img/tutorials/bindings.png" height="90" alt="The exchange sends messages to a queue. The relationship between the exchange and a queue is called a binding." />
 </div>
-
 
 We've already created a fanout exchange and a queue. Now we need to
 tell the exchange to send messages to our queue. That relationship
@@ -252,14 +246,15 @@ namespace Receiver
         {
             _logger = logger;
         } 
-		....
-	}
+  ....
+ }
 }
 ```
 
-> #### Listing bindings
->
+### Listing bindings
+
 > You can list existing bindings using, you guessed it,
+>
 > ```bash
 > rabbitmqctl list_bindings
 > ```
@@ -275,7 +270,7 @@ The producer program, which emits messages, doesn't look much
 different from the previous tutorial. The most important change is that
 we now want to publish messages to our `fanout` exchange instead of the
 nameless one. We need to supply a `routingKey` when sending, but its
-value is ignored for `fanout` exchanges. 
+value is ignored for `fanout` exchanges.
 
 Here goes the code for `Tut3Sender.cs` program:
 

@@ -9,7 +9,7 @@ This sample assumes that there is a running RabbitMQ broker on your machine. To 
 ## Building & Running - Local
 
 1. Clone this repo. (i.e. git clone <https://github.com/SteeltoeOSS/Samples>)
-1. cd samples/Messaging/src/AspDotNetCore/RabbitMQWeb
+1. cd samples/Messaging/src/RabbitMQWeb
 1. dotnet restore --configfile nuget.config
 1. dotnet run
 
@@ -19,7 +19,7 @@ After building and running the app, you should see something like the following:
 
 ```bash
 info: Microsoft.Hosting.Lifetime[0]
-      Now listening on: http://localhost:5000
+      Now listening on: http://localhost:5001
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]

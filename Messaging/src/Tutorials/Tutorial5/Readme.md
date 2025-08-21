@@ -2,16 +2,12 @@
 
 ## Topics (using Steeltoe)
 
-> #### Prerequisites
-> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running 
-> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`). 
-> 
-> In case you use a different host, port or credentials, connections settings would require adjusting.
->
-> #### Where to get help
-> If you're having trouble going through this tutorial you can contact us through Github issues on our
-> [Steeltoe Samples Repository](https://github.com/SteeltoeOSS/Samples).
+### Prerequisites
 
+> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running
+> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`).
+>
+> In case you use a different host, port or credentials, connections settings would require adjusting.
 
 In the [previous tutorial](../Tutorial4/readme.md) we improved our
 messaging flexibility. Instead of using a `fanout` exchange only capable of
@@ -35,7 +31,6 @@ just critical errors coming from 'cron' but also all logs from 'kern'.
 To implement that flexibility in our logging system we need to learn
 about a more complex `topic` exchange.
 
-
 Topic exchange
 --------------
 
@@ -53,8 +48,8 @@ particular routing key will be delivered to all the queues that are
 bound with a matching binding key. However there are two important
 special cases for routing keys associated with bindings.
 
-  * `*` (star) can substitute for exactly one word.
-  * `#` (hash) can substitute for zero or more words.
+* `*` (star) can substitute for exactly one word.
+* `#` (hash) can substitute for zero or more words.
 
 It's easiest to explain this in an example:
 
@@ -73,8 +68,8 @@ and Q2 with "`*.*.rabbit`" and "`lazy.#`".
 
 These bindings can be summarized as:
 
-  * Q1 is interested in all the orange animals.
-  * Q2 wants to hear everything about rabbits, and everything about lazy
+* Q1 is interested in all the orange animals.
+* Q2 wants to hear everything about rabbits, and everything about lazy
     animals.
 
 A message with a routing key set to "`quick.orange.rabbit`"
@@ -93,8 +88,8 @@ On the other hand "`lazy.orange.new.rabbit`", even though it has four
 words, will match the last binding and will be delivered to the second
 queue.
 
-> #### Topic exchange
->
+### Topic exchange
+
 > Topic exchange is powerful and can behave like other exchanges.
 >
 > When a queue is bound with "`#`" (hash) binding key - it will receive
@@ -139,14 +134,13 @@ namespace Receiver
         {
             _logger = logger;
         }
-		......
-	}
+  ......
+ }
 }
 ```
 
 The `Tut5Receiver` again uses the `RabbitListener` attribute to receive messages from the respective
 topics.
-
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -291,6 +285,7 @@ Open another shell to run the sender:
 cd sender
 dotnet run
 ```
+
 Have fun playing with these programs. Note that the code doesn't make
 any assumption about the routing or binding keys, you may want to play
 with more than two routing key parameters.
