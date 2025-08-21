@@ -1,0 +1,15 @@
+eureka:
+  client:
+    serviceUrl: http://eurekaserver:8761/eureka/
+mysql:
+  client:
+    server: mysql
+    SslMode: none
+management:
+  tracing:
+    exporter:
+      zipkin:
+        endpoint: http://zipkinserver:9411/api/v2/spans
+redis:
+  client:
+    host: redis

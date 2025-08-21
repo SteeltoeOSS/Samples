@@ -30,7 +30,7 @@ docker build -t kubernetes:v1 .
 Create a Kubernetes release that references the tagged image
 
 ```powershell
-kubectl create deployment kubernetes --image kubernetes:v1
+kubectl create deployment steeltoe-kubernetes --image kubernetes:v1
 ```
 
 ## Expose Service
@@ -38,7 +38,7 @@ kubectl create deployment kubernetes --image kubernetes:v1
 Expose the service so it can be accessed from a browser
 
 ```powershell
-kubectl expose deployment kubernetes --port 8080 --target-port 80 --type=LoadBalancer
+kubectl expose deployment steeltoe-kubernetes --port 8080 --target-port 8080 --type=LoadBalancer
 ```
 
 ## View the service

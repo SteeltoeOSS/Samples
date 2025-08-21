@@ -4,15 +4,14 @@ AppSettings:
 Logging:
   LogLevel:
     Default: Information
-    System: Warning
-    Microsoft: Warning
-    Steeltoe: Information
 eureka:
   instance:
     StatusPageUrlPath: /actuator/info
     HealthCheckUrlPath: /actuator/health
 mysql:
   client:
+    server: localhost
+    SslMode: none
     username: root
     password: steeltoe
 management:
@@ -24,20 +23,4 @@ management:
     alwaysSample: true
     useShortTraceIds: true
     exporterEndpoint: http://zipkinserver:9411/api/v2/spans
----
-spring:
-  profiles: Docker
-eureka:
-  client:
-    serviceUrl: http://eurekaserver:8761/eureka/
-mysql:
-  client:
-    server: mysql
-management:
-  tracing:
-    exporter:
-      zipkin:
-        endpoint: http://zipkinserver:9411/api/v2/spans
-redis:
-  client:
-    host: redis
+
