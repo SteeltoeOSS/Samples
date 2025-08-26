@@ -32,6 +32,7 @@ Usage of Redis for Session storage DataProtection KeyRing storage is controlled 
 ### Using Docker compose
 
 1. `cd Samples/MusicStore`
+1. `docker-compose build`
 1. `docker-compose up`
 
 ## Cloud Foundry

@@ -4,6 +4,7 @@ AppSettings:
 Logging:
   LogLevel:
     Default: Information
+    Microsoft.EntityFrameworkCore: Warning
 eureka:
   instance:
     StatusPageUrlPath: /actuator/info
