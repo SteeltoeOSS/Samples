@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: springbootadmin
-        image: steeltoeoss/spring-boot-admin
+        image: steeltoe.azurecr.io/spring-boot-admin
         ports:
-        - containerPort: 8080
+        - containerPort: 9099
         resources:
           limits:
             memory: 512Mi
@@ -29,8 +29,8 @@ metadata:
   name: springbootadmin
 spec:
   ports:
-  - port: 9090
-    targetPort: 8080
+  - port: 9099
+    targetPort: 9099
   selector:
     app: springbootadmin
   type: LoadBalancer
