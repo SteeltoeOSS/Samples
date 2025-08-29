@@ -93,46 +93,6 @@ Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Regist
 1. `cf create-service p.service-registry your-plan sampleDiscoveryService`
 1. Wait for the service to be ready (use `cf services` to check the status)
 
-## Spring Boot Admin
-
-### Run Spring Boot Admin Server with Docker
-
-```shell
-docker run --rm -it --pull=always -p 9099:9099 --name steeltoe-SpringBootAdmin steeltoe.azurecr.io/spring-boot-admin
-```
-
-## HashiCorp Consul
-
-### Run HashiCorp Consul Server with Docker
-
-```shell
-docker run --rm -it --pull=always -p 8500:8500 --name consul hashicorp/consul
-```
-
-## MongoDB
-
-### Run MongoDB Server with Docker
-
-```shell
-docker run --rm -it --pull=always -p 27017:27017 --name mongo mongo
-```
-
-## MySQL
-
-### Run MySQL Server with Docker
-
-```shell
-docker run --rm -it --pull=always -p 3306:3306 --name steeltoe-mysql -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
-```
-
-## PostgreSQL
-
-### Run PostgreSQL Server with Docker
-
-```shell
-docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
-```
-
 ## RabbitMQ
 
 ### Run RabbitMQ Server with Docker
@@ -142,6 +102,22 @@ docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTG
 
 ```shell
 docker run --rm -it --pull=always -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-management
+```
+
+## Consul
+
+### Run Consul Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 8500:8500 --name consul hashicorp/consul
+```
+
+## Spring Boot Admin
+
+### Run Spring Boot Admin Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 9099:9099 --name steeltoe-SpringBootAdmin steeltoe.azurecr.io/spring-boot-admin
 ```
 
 ## Redis
@@ -160,12 +136,44 @@ docker run --rm -it --pull=always -p 6379:6379 --name redis redis
 docker run --rm -it --pull=always -p 6379:6379 --name valkey valkey/valkey
 ```
 
+## MySQL
+
+### Run MySQL Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 3306:3306 --name steeltoe-mysql -e MYSQL_ROOT_PASSWORD=steeltoe -e MYSQL_DATABASE=steeltoe -e MYSQL_USER=steeltoe -e MYSQL_PASSWORD=steeltoe mysql
+```
+
 ## SQL Server
 
 ### Run SQL Server with Docker
 
 ```shell
 docker run --rm -it --pull=always -p 1433:1433 --name mssql -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=St33ltoeR0cks!' mcr.microsoft.com/mssql/server
+```
+
+## PostgreSQL
+
+### Run PostgreSQL Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTGRES_DB=steeltoe -e POSTGRES_USER=steeltoe -e POSTGRES_PASSWORD=steeltoe postgres:alpine
+```
+
+## MongoDB
+
+### Run MongoDB Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 27017:27017 --name mongo mongo
+```
+
+## Zipkin
+
+### Run Zipkin Server with Docker
+
+```shell
+docker run --rm -it --pull=always -p 9411:9411 --name zipkin openzipkin/zipkin
 ```
 
 ## UAA Server for Steeltoe Samples
@@ -182,10 +190,4 @@ docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azur
 
 Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/README.md) for instructions.
 
-## Zipkin
 
-### Run Zipkin Server with Docker
-
-```shell
-docker run --rm -it --pull=always -p 9411:9411 --name zipkin openzipkin/zipkin
-```
