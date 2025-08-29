@@ -24,7 +24,7 @@ This sample assumes that there is a running Spring Cloud Eureka Server on your m
 
 If you have a running docker environment installed on your system, then you should be able to:
 
-1. docker run -d -p:8761:8761 steeltoeoss/eurekaserver
+1. docker run -d -p:8761:8761 steeltoe.azurecr.io/eureka-server
 
 ### Running Zipkin Server Locally
 

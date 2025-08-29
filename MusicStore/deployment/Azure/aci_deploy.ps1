@@ -38,7 +38,7 @@ $acrLoginServer = az acr show --name $registryId --query loginServer --output ts
       --environment-variables ACCEPT_EULA=Y SA_PASSWORD=$saPassword
 
  Write-Host "Deploying Eureka server"
- az container create --image steeltoeoss/eurekaserver -g $rg -n eurekaserver --no-wait `
+az container create --image steeltoe.azurecr.io/eureka-server -g $rg -n eurekaserver --no-wait `
      --dns-name-label="musiceureka$uid" --ports 8761
 
 Write-Host "Deploying Spring-Boot Admin server"

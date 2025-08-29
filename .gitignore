@@ -4,7 +4,6 @@
 # User-specific files
 *.suo
 *.user
-!*.slnlaunch.user
 *.userosscache
 *.sln.docstates
 
@@ -222,5 +221,10 @@ Pivotal.GemFire.dll
 pivnet*
 pivotal*.zip
 
+#############################################
+### Additions specific to this repository ###
+#############################################
+
 GeneratedCertificates/
 .tye/
+!*.slnlaunch.user

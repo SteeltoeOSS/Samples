@@ -1,6 +1,6 @@
 ﻿# Kubernetes Configuration ASP.NET Core Sample Application
 
-This ASP.NET Core sample uses the Steeltoe configuration providers for Kubernetes ConfigMaps and Secrets. All snippets below are executed from the directory `Samples\Configuration\src`.
+This ASP.NET Core sample uses the Steeltoe configuration providers for Kubernetes ConfigMaps and Secrets. All snippets below are executed from the directory `Samples\Configuration\src\Kubernetes`.
 
 ## Pre-requisites
 
