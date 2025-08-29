@@ -1,77 +1,72 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Threading;
-using System;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 
-namespace SecureWithUAA.Controllers
+namespace SecureEndpointsWithUAA.Controllers;
+
+public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger _logger = logger;
+    private readonly Random _random = new();
+
+    public IActionResult Index()
     {
-        private readonly ILogger _logger;
-        private readonly Random _random;
+        Thread.Sleep(_random.Next(500, 2000));
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-            _random = new Random();
-        }
+        _logger.LogCritical("Test Critical message");
+        _logger.LogError("Test Error message");
+        _logger.LogWarning("Test Warning message");
+        _logger.LogInformation("Test Informational message");
+        _logger.LogDebug("Test Debug message");
+        _logger.LogTrace("Test Trace message");
 
-        public IActionResult Index()
-        {
-            Thread.Sleep(_random.Next(500, 2000));
+        return View();
+    }
 
-            _logger.LogCritical("Test Critical message");
-            _logger.LogError("Test Error message");
-            _logger.LogWarning("Test Warning message");
-            _logger.LogInformation("Test Informational message");
-            _logger.LogDebug("Test Debug message");
-            _logger.LogTrace("Test Trace message");
+    [Authorize(Policy = "fortunes.read")]
+    public IActionResult About()
+    {
+        ViewData["Message"] = "Your About page.";
+        return View("PageWithMessage");
+    }
 
-            return View();
-        }
-        
-        [Authorize(Policy = "fortunes.read")]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your About page.";
-            return View();
-        }
+    #region Account-related
 
-        #region Account-related
-        [HttpPost]
-        public async Task<IActionResult> LogOff()
-        {
-            await HttpContext.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
+    [HttpPost]
+    public async Task<IActionResult> LogOff()
+    {
+        await HttpContext.SignOutAsync();
+        return RedirectToAction(nameof(Index), "Home");
+    }
 
-        [HttpGet]
-        [Authorize]
-        public IActionResult Login()
-        {
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
+    [HttpGet]
+    [Authorize]
+    public IActionResult Login()
+    {
+        return RedirectToAction(nameof(Index), "Home");
+    }
 
-        public IActionResult Manage()
-        {
-            ViewData["Message"] = "Manage accounts using UAA or CF command line.";
-            return View();
-        }
+    public IActionResult Manage()
+    {
+        ViewData["Message"] = "Manage accounts using UAA or CF command line.";
+        return View("PageWithMessage");
+    }
 
-        public IActionResult AccessDenied()
-        {
-            ViewData["Message"] = "Insufficient permissions.";
-            return View();
-        }
-        #endregion
+    public IActionResult AccessDenied()
+    {
+        ViewData["Message"] = "Insufficient permissions.";
+        return View();
+    }
 
-        public IActionResult Error()
-        {
-            throw new ArgumentException();
-            //return View();
-        }
+    #endregion
+
+    public IActionResult Error()
+    {
+        throw new ArgumentException();
+        //return View();
     }
 }

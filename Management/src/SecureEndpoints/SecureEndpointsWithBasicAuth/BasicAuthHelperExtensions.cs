@@ -8,25 +8,31 @@ namespace SecureEndpoints
 {
     public static class BasicAuthHelperExtensions
     {
-        public static AuthenticationBuilder AddBasicAuth(this AuthenticationBuilder builder, string path,  Claim claim) =>
+        public static AuthenticationBuilder
+            AddBasicAuth(this AuthenticationBuilder builder, string path, Claim claim) =>
             builder.AddBasic(BasicAuthenticationDefaults.AuthenticationScheme, options =>
-             {
-                 options.ForwardDefaultSelector = httpContext => httpContext.Request.Path.StartsWithSegments(path) ? BasicAuthenticationDefaults.AuthenticationScheme : null;
-                 options.ForwardChallenge = BasicAuthenticationDefaults.AuthenticationScheme;
+            {
+                options.ForwardDefaultSelector = httpContext =>
+                    httpContext.Request.Path.StartsWithSegments(path)
+                        ? BasicAuthenticationDefaults.AuthenticationScheme
+                        : null;
+                options.ForwardChallenge = BasicAuthenticationDefaults.AuthenticationScheme;
 
-                 options.Events = new BasicAuthenticationEvents
-                 {
-                     OnValidateCredentials = context =>
-                     {
-                         if (context.Username == "actuatorUser" && context.Password == "actuatorPassword") // HardCoded as example, don't use in Prod (or BasicAuth for that matter)
-                         {
-                             context.Principal = new ClaimsPrincipal(new ClaimsIdentity(new[] { claim }));
-                             context.Success();
-                         }
+                options.Events = new BasicAuthenticationEvents
+                {
+                    OnValidateCredentials = context =>
+                    {
+                        if (context.Username == "actuatorUser" &&
+                            context.Password ==
+                            "actuatorPassword") // HardCoded as example, don't use in Prod (or BasicAuth for that matter)
+                        {
+                            context.Principal = new ClaimsPrincipal(new ClaimsIdentity(new[] { claim }));
+                            context.Success();
+                        }
 
-                         return Task.CompletedTask;
-                     }
-                 };
-             });
+                        return Task.CompletedTask;
+                    }
+                };
+            });
     }
 }
