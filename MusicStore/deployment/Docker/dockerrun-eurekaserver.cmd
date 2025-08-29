@@ -1,1 +1,1 @@
-docker run -p 8761:8761 --rm -it  steeltoe.azurecr.io/servers:eureka-server
+docker run -p 8761:8761 --rm -it  steeltoe.azurecr.io/eureka-server

@@ -12,7 +12,7 @@ ASP.NET Core sample app illustrating how to secure [Steeltoe Management Endpoint
 From the project root folder run:
 
  ``` shell
- docker run --rm -ti -p 8080:8080 --name steeltoe-uaa -v %cd%/uaa.yml:/uaa/uaa.yml steeltoe.azurecr.io/uaa-server:pr-47
+ docker run --rm -ti -p 8080:8080 --name steeltoe-uaa -v ./uaa.yml:/uaa/uaa.yml steeltoe.azurecr.io/uaa-server:latest
   ```
 
  This command volume mounts the current directory in Windows Command Line. For Power Shell use `${PWD}`, On Linux use `$(pwd)`

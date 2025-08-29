@@ -37,7 +37,7 @@ public class HomeController : Controller
     public IActionResult About()
     {
         ViewData["Message"] = "Your About page.";
-        return View();
+        return View("PageWithMessage");
     }
 
     #region Account-related
@@ -46,20 +46,20 @@ public class HomeController : Controller
     public async Task<IActionResult> LogOff()
     {
         await HttpContext.SignOutAsync();
-        return RedirectToAction(nameof(HomeController.Index), "Home");
+        return RedirectToAction(nameof(Index), "Home");
     }
 
     [HttpGet]
     [Authorize]
     public IActionResult Login()
     {
-        return RedirectToAction(nameof(HomeController.Index), "Home");
+        return RedirectToAction(nameof(Index), "Home");
     }
 
     public IActionResult Manage()
     {
         ViewData["Message"] = "Manage accounts using UAA or CF command line.";
-        return View();
+        return View("PageWithMessage");
     }
 
     public IActionResult AccessDenied()

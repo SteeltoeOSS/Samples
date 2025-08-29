@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace SecureEndpointsWithUAA.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController : Controller
 {
-    private readonly ILogger _logger = logger;
-    private readonly Random _random = new();
+    private readonly ILogger _logger;
+    private readonly Random _random;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+        _random = new Random();
+    }
 
     public IActionResult Index()
     {
@@ -52,7 +58,7 @@ public class HomeController(ILogger<HomeController> logger) : Controller
 
     public IActionResult Manage()
     {
-        ViewData["Message"] = "Manage accounts using UAA or CF command line.";
+        ViewData["Message"] = "Manage accounts using the uaa.yml file found with this project.";
         return View("PageWithMessage");
     }
 

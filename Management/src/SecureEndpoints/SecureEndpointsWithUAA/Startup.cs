@@ -16,12 +16,12 @@ public class Startup(IConfiguration configuration)
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication((options) =>
+        services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CloudFoundryDefaults.AuthenticationScheme;
             })
-            .AddCookie(options => { options.AccessDeniedPath = new PathString("/Home/AccessDenied"); })
+            .AddCookie(options => options.AccessDeniedPath = new PathString("/Home/AccessDenied"))
             .AddCloudFoundryOAuth(Configuration);
 
         services.AddAuthorization(options =>
@@ -29,6 +29,9 @@ public class Startup(IConfiguration configuration)
             options.AddPolicy("fortunes", policy => policy.RequireClaim("scope", "fortunes.read"));
             options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
         });
+
+        // Optionally add Actuators more manually (and map below)
+        // services.AddAllActuators(Configuration); 
 
         services.AddControllersWithViews();
     }
@@ -57,6 +60,9 @@ public class Startup(IConfiguration configuration)
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            // If you use this, make sure to uncomment AddAllActuators above
+            // endpoints.MapAllActuators().RequireAuthorization("actuators.read");
         });
     }
 }

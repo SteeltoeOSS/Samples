@@ -1,6 +1,6 @@
 version: '3.2'
 services:
   config:
-    image: "steeltoeoss/config-server:3"
+    image: "steeltoe.azurecr.io/config-server:3"
     ports:
       - "8888:8888"

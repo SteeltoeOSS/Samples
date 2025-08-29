@@ -70,7 +70,7 @@ oauth:
       authorities: clients.read,clients.write,clients.secret,uaa.admin,scim.read,scim.write,password.write
       secret: admin_client_secret
     fortuneui:
-      authorized-grant-types: authorization_code, client_credentials
+      authorized-grant-types: authorization_code,client_credentials
       scope: "openid,fortunes.read,actuators.read"
       authorities: scim.read,read.fortunes,uaa.resource
       autoapprove: 

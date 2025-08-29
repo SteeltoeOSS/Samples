@@ -4,19 +4,13 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SecureEndpoints;
 using System.Security.Claims;
 
 namespace SecureEndpointsWithBasicAuth;
 
-public class Startup
+public class Startup(IConfiguration configuration)
 {
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
-
-    public IConfiguration Configuration { get; }
+    public IConfiguration Configuration { get; } = configuration;
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -28,6 +22,9 @@ public class Startup
         {
             options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
         });
+
+        // Optionally add Actuators more manually (and map below)
+        // services.AddAllActuators(Configuration); 
 
         services.AddControllersWithViews();
     }
@@ -57,7 +54,8 @@ public class Startup
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            //  endpoints.MapAllActuators().RequireAuthorization("actuators.read"); If you use this, make sure to uncomment AddAllActuators above
+            // If you use this, make sure to uncomment AddAllActuators above
+            // endpoints.MapAllActuators().RequireAuthorization("actuators.read");
         });
     }
 }
