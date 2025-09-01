@@ -171,7 +171,7 @@ The Steeltoe team has created a [UAA configuration](https://github.com/SteeltoeO
 ### Run UAA Server with Docker
 
 ```shell
-docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azurecr.io/uaa-server:77.10
+docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azurecr.io/uaa-server:latest
 ```
 
 ### Run Steeltoe UAA on Cloud Foundry
