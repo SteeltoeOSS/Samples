@@ -78,7 +78,7 @@ docker run --rm -it --pull=always -p 8761:8761 --name steeltoe-eureka steeltoe.a
 
 ### Provision Eureka on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
+Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
 
 1. Choose a service plan
    ```shell
