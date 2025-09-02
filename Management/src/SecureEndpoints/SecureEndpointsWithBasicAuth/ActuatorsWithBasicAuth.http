@@ -6,11 +6,6 @@ GET {{HostAddress}}/actuator
 Accept: application/json
 Authorization: {{AuthorizationHeaderValue}}
 
-### DB Migrations actuator, list pending and applied database migrations
-GET {{HostAddress}}/actuator/dbmigrations
-Accept: application/json
-Authorization: {{AuthorizationHeaderValue}}
-
 ### Env actuator, list environment/configuration sources and data
 GET {{HostAddress}}/actuator/env
 Accept: application/json
@@ -54,7 +49,7 @@ Content-Type: application/json
   "configuredLevel": null
 }
 
-### HTTP Exchanges actuator
+### HTTP Traces actuator
 GET {{HostAddress}}/actuator/httptrace
 Accept: application/json
 Authorization: {{AuthorizationHeaderValue}}
