@@ -30,9 +30,6 @@ public class Startup(IConfiguration configuration)
             options.AddPolicy("actuators.read", policy => policy.RequireClaim("scope", "actuators.read"));
         });
 
-        // Optionally add Actuators more manually (and map below)
-        // services.AddAllActuators(Configuration); 
-
         services.AddControllersWithViews();
     }
 
@@ -60,9 +57,6 @@ public class Startup(IConfiguration configuration)
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            // If you use this, make sure to uncomment AddAllActuators above
-            // endpoints.MapAllActuators().RequireAuthorization("actuators.read");
         });
     }
 }

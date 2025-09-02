@@ -36,8 +36,7 @@ public class HomeController : Controller
     [Authorize(Policy = "fortunes.read")]
     public IActionResult About()
     {
-        ViewData["Message"] = "Your About page.";
-        return View("PageWithMessage");
+        return View();
     }
 
     #region Account-related
@@ -58,8 +57,7 @@ public class HomeController : Controller
 
     public IActionResult Manage()
     {
-        ViewData["Message"] = "Manage accounts using the uaa.yml file found with this project.";
-        return View("PageWithMessage");
+        return View();
     }
 
     public IActionResult AccessDenied()

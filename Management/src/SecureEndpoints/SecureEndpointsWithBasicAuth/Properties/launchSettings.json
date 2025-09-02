@@ -1,6 +1,6 @@
 ﻿{
-  "SecureEndpointsWithBasicAuth": {
-    "project": {
+  "profiles": {
+    "SecureEndpointsWithBasicAuth": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
