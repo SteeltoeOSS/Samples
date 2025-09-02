@@ -80,7 +80,7 @@ docker run --rm -it --pull=always -p 8761:8761 --name steeltoe-eureka steeltoe.a
 
 ### Provision Eureka on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
+Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
 
 1. Choose a service plan
 
@@ -190,4 +190,30 @@ docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azur
 
 Refer to the [README in the Dockerfiles repository](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/README.md) for instructions.
 
+## Hystrix Dashboard
 
+### Run Hystrix Dashboard with Docker
+
+There are a few images available on Docker Hub that provide basic Hystrix Dashboard functionality. This example has been tested:
+
+```bash
+docker run --rm -ti -p 7979:7979 --name steeltoe-hystrix steeltoeoss/hystrix-dashboard
+```
+
+Once this image is up and running, you should be able to browse to your [local dashboard](http://localhost:7979/hystrix/) and provide the address of the Hystrix stream(s) you wish to monitor.
+
+> NOTE: This image may be running on a separate network than your application. Remember to provide a stream address that is accessible from within the Docker network. This may require using the external IP address of your workstation or the name of the machine instead of 127.0.0.1 or localhost.
+
+### Run Hystrix Dashboard with Java
+
+To run a Hystrix Dashboard without Docker:
+
+1. Install Java 8 JDK.
+1. Install Maven 3.x.
+1. Clone the Spring Cloud Samples Hystrix dashboard: `cd https://github.com/spring-cloud-samples/hystrix-dashboard`
+1. Change to the hystrix dashboard directory: `cd hystix-dashboard`
+1. Start the server `mvn spring-boot:run`
+1. Open a browser window and connect to the dashboard: <http://localhost:7979>
+1. In the first field, enter the endpoint that is exposing the hystrix metrics (eg: <http://localhost:5555/hystrix/hystrix.stream>)
+1. Click the monitor button.
+1. Interact with the application to trigger usage of the circuits. Observe the values changing in the Hystrix dashboard.

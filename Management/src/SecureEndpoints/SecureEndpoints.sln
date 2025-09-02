@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureEndpointsWithUAA", "SecureEndpointsWithUAA\SecureEndpointsWithUAA.csproj", "{A3E55A3B-4DFA-4F52-A8F8-721DB15EE603}"
 EndProject

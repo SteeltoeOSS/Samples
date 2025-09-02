@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Common.Hosting;
-using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Management.Endpoint;
 
 namespace SecureEndpointsWithUAA;
@@ -16,12 +14,7 @@ public class Program
 
     public static IHost BuildWebHost(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHost(configure =>
-            {
-                configure.AddCloudFoundryConfiguration();
-                configure.UseStartup<Startup>().UseKestrel();
-            })
-            .UseCloudHosting(5000, 5002)
+            .ConfigureWebHost(configure => configure.UseStartup<Startup>().UseKestrel())
             .AddAllActuators(endpoints => endpoints.RequireAuthorization("actuators.read"))
             .Build();
 }

@@ -72,7 +72,6 @@ public class HomeController : Controller
 
     public IActionResult Error()
     {
-        throw new ArgumentException();
-        //return View();
+        return View();
     }
 }

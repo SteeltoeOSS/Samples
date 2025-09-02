@@ -1,0 +1,80 @@
+@AuthorizationHeaderValue = Basic YWN0dWF0b3JVc2VyOmFjdHVhdG9yUGFzc3dvcmQ=
+@HostAddress = http://localhost:5000
+
+### Hypermedia (list all actuators)
+GET {{HostAddress}}/actuator
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### DB Migrations actuator, list pending and applied database migrations
+GET {{HostAddress}}/actuator/dbmigrations
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Env actuator, list environment/configuration sources and data
+GET {{HostAddress}}/actuator/env
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Info actuator
+GET {{HostAddress}}/actuator/info
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Health actuator
+GET {{HostAddress}}/actuator/health
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Health actuator, check a specified group of contributors
+GET {{HostAddress}}/actuator/health/readiness
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Loggers actuator, list all loggers
+GET {{HostAddress}}/actuator/loggers
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Loggers actuator, update minimum level for a logger
+POST {{HostAddress}}/actuator/loggers/SecureEndpointsWithBasicAuth
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+Content-Type: application/json
+{
+  "configuredLevel": "TRACE"
+}
+
+### Loggers actuator, reset minimum level for a logger
+POST {{HostAddress}}/actuator/loggers/SecureEndpointsWithBasicAuth
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+Content-Type: application/json
+{
+  "configuredLevel": null
+}
+
+### HTTP Exchanges actuator
+GET {{HostAddress}}/actuator/httptrace
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Mappings actuator, list registered HTTP routes
+GET {{HostAddress}}/actuator/mappings
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Prometheus endpoint, list all metrics
+GET {{HostAddress}}/actuator/prometheus
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Refresh actuator, refresh application configuration
+GET {{HostAddress}}/actuator/refresh
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
+
+### Thread dump actuator
+GET {{HostAddress}}/actuator/threaddump
+Accept: application/json
+Authorization: {{AuthorizationHeaderValue}}
