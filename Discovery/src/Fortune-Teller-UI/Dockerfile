@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as builder
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS builder
 WORKDIR /src
 COPY  . /src
-RUN dotnet publish -f netcoreapp3.1
+RUN dotnet publish -f net8.0
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=builder /src/bin/Debug/netcoreapp3.1/* /app/
+COPY --from=builder /src/bin/Debug/net8.0/* /app/
 ENTRYPOINT [ "dotnet","Fortune-Teller-UI.dll" ]

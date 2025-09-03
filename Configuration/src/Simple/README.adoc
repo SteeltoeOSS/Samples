@@ -47,7 +47,7 @@ $ mvn spring-boot:run
 
 ----
 $ dotnet restore
-$ dotnet run -f netcoreapp3.1
+$ dotnet run -f net8.0
 ----
 
 == What to Expect
@@ -55,7 +55,7 @@ $ dotnet run -f netcoreapp3.1
 After building and running the app, you should see something like the following:
 
 ----
-$ dotnet run -f netcoreapp3.1
+$ dotnet run -f net8.0
 Using launch settings from ...
 Hosting environment: development
 Content root path: ....
