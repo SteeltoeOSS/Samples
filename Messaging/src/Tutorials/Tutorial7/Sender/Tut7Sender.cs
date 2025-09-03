@@ -26,7 +26,7 @@ namespace Sender
             {
                 CorrelationData data = new CorrelationData(id.ToString());
                 id++;
-                await _rabbitTemplate.ConvertAndSendAsync(Program.QueueName, (object)"Hello World!", data);
+                await _rabbitTemplate.ConvertAndSendAsync(Program.QueueName, (object)"Hello World!", data, stoppingToken);
                 _logger.LogInformation("Worker running at: {time}, sent ID: {id}", DateTimeOffset.Now, data.Id);
                 await Task.Delay(1000, stoppingToken);
             }

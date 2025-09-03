@@ -10,8 +10,8 @@ ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](
 ## Running the App
 
 1. Run spring-boot-admin docker image with the following command
-   `docker run -p 9099:9099 steeltoeoss/spring-boot-admin`
-2. Run the Sample in visual studio or using Dotnet run 
+   `docker run -p 9099:9099 steeltoe.azurecr.io/spring-boot-admin`
+2. Run the Sample in visual studio or using Dotnet run
 3. View the spring-boot-admin dashboard to see information from info, health, mapping, tracing, heap and thread dump, loggers endpoints.
-   
+
 ### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/steeltoe-management) for a more in-depth walk-through of the samples and more detailed information

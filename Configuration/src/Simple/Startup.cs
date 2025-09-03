@@ -13,7 +13,7 @@ namespace Simple
     //       with repository data for application named: foo, & profile: development
     //
     //       The easiest way to get that to happen is with docker (for local development only):
-    //       > docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoeoss/config-server
+    //       > docker run --rm -ti -p 8888:8888 --name steeltoe-config steeltoe.azurecr.io/config-server
 
     //       alternatively, clone the spring-cloud-config repo and run the config-server.
     //          eg. git clone https://github.com/spring-cloud/spring-cloud-config.git

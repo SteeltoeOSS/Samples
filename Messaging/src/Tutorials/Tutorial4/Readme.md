@@ -2,15 +2,12 @@
 
 ## Routing (using Steeltoe)
 
-> #### Prerequisites
-> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running 
-> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`). 
-> 
-> In case you use a different host, port or credentials, connections settings would require adjusting.
+### Prerequisites
+
+> This tutorial assumes RabbitMQ is [downloaded](https://www.rabbitmq.com/download.html) and installed and running
+> on `localhost` on the [standard port](https://www.rabbitmq.com/networking.html#ports) (`5672`).
 >
-> #### Where to get help
-> If you're having trouble going through this tutorial you can contact us through Github issues on our
-> [Steeltoe Samples Repository](https://github.com/SteeltoeOSS/Samples).
+> In case you use a different host, port or credentials, connections settings would require adjusting.
 
 In the [previous tutorial](../Tutorial3/readme.md) we built a
 simple fanout exchange. We were able to broadcast messages to many
@@ -21,7 +18,6 @@ make it possible to subscribe only to a subset of the messages. For
 example, we will be able to direct only  messages to the
 certain colors of interest ("orange", "black", "green"), while still being
 able to print all of the messages on the console.
-
 
 Bindings
 --------
@@ -79,9 +75,9 @@ In such a setup a message published to the exchange with a routing key
 `orange` will be routed to queue `Q1`. Messages with a routing key of `black`
 or `green` will go to `Q2`. All other messages will be discarded.
 
-
 Multiple bindings
 -----------------
+
 <div class="diagram">
   <img src="../img/tutorials/direct-exchange-multiple.png" height="170" alt="Multiple Bindings" />
 </div>
@@ -107,14 +103,14 @@ Publishing messages
 -------------
 
 We'll use this model for our routing system. Instead of `fanout` we'll
-send messages to a `direct` exchange defined using the attribute shown below: 
+send messages to a `direct` exchange defined using the attribute shown below:
 
 ```csharp
 [DeclareExchange(Name = "tut.direct", Type = ExchangeType.DIRECT)]
 ```
 
 We will supply the color as a routing key in the `ConvertAndSendAsync()` method call. That way the receiving program will be able to select
-the color it wants to receive (or subscribe to). 
+the color it wants to receive (or subscribe to).
 
 Subscribing
 -----------
@@ -148,8 +144,8 @@ namespace Receiver
         {
             _logger = logger;
         }
-		....
-	}
+  ....
+ }
 }
 ```
 
@@ -159,7 +155,6 @@ Putting it all together
 <div class="diagram">
   <img src="../img/tutorials/python-four.png" height="170" alt="Final routing: putting it all together." />
 </div>
-
 
 The code for our sender class (`Tut4Sender`) is:
 

@@ -1,6 +1,6 @@
 ﻿# Kubernetes Configuration ASP.NET Core Sample Application
 
-This ASP.NET Core sample uses the Steeltoe configuration providers for Kubernetes ConfigMaps and Secrets. All snippets below are executed from the directory `Samples\Configuration\src`.
+This ASP.NET Core sample uses the Steeltoe configuration providers for Kubernetes ConfigMaps and Secrets. All snippets below are executed from the directory `Samples\Configuration\src\Kubernetes`.
 
 ## Pre-requisites
 
@@ -30,7 +30,7 @@ docker build -t kubernetes:v1 .
 Create a Kubernetes release that references the tagged image
 
 ```powershell
-kubectl create deployment kubernetes --image kubernetes:v1
+kubectl create deployment steeltoe-kubernetes --image kubernetes:v1
 ```
 
 ## Expose Service
@@ -38,7 +38,7 @@ kubectl create deployment kubernetes --image kubernetes:v1
 Expose the service so it can be accessed from a browser
 
 ```powershell
-kubectl expose deployment kubernetes --port 8080 --target-port 80 --type=LoadBalancer
+kubectl expose deployment steeltoe-kubernetes --port 8080 --target-port 8080 --type=LoadBalancer
 ```
 
 ## View the service

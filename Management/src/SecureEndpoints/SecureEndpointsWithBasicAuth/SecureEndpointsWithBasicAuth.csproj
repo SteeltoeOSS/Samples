@@ -9,17 +9,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="idunno.Authentication.Basic" Version="2.2.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCoreVersion)" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
-    <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Connector.EFCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Common.Hosting" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicSerilogCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="idunno.Authentication.Basic" Version="2.4.0" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Management.TaskCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
   <ItemGroup>

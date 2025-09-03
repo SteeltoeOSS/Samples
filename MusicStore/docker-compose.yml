@@ -1,8 +1,6 @@
-version: '3.4'
-
 services:
   configserver:
-    image: "steeltoeoss/config-server"
+    image: "steeltoe.azurecr.io/config-server"
     command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
     volumes:
       - type: bind
@@ -10,18 +8,35 @@ services:
         target: /config
     ports:
       - "8888:8888"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8888/musicstore/dev || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
   eurekaserver:
-    image: "steeltoeoss/eurekaserver"
+    image: "steeltoe.azurecr.io/eureka-server"
     ports:
       - "8761:8761"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8761 || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    command: --logging.level.com.netflix.eureka=WARN --eureka.server.evictionIntervalTimerInMs=2000 --eureka.server.responseCacheUpdateIntervalMs=2000
   spring-boot-admin:
      environment:
-       - EUREKA_SERVICE_URL=http://eurekaserver:8761
+       EUREKA_SERVICE_URL: http://eurekaserver:8761
+       SPRING_SECURITY_USER_NAME: "admin"
+       SPRING_SECURITY_USER_PASSWORD: "admin"
      image: "hananiel/spring-boot-admin-eureka-sample"
+     # image: "steeltoe.azurecr.io/spring-boot-admin" -- does not support Eureka
      ports:
-       - "8889:8080"
+       - "9099:8080"
+     healthcheck:
+       test: ["CMD-SHELL", "curl -f http://localhost:8080"]
      depends_on:
-       - eurekaserver
+       eurekaserver:
+         condition: service_healthy
   mysql:
     image: mysql:5.7
     environment:
@@ -29,49 +44,72 @@ services:
       MYSQL_DATABASE: steeltoe2
       MYSQL_USER: steeltoe
       MYSQL_PASSWORD: steeltoe
-    depends_on:
-      - configserver
-      - eurekaserver
+    ports:
+       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
   zipkinserver:
-    image: "steeltoeoss/zipkin"
+    image: "openzipkin/zipkin"
     ports:
       - "9411:9411"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9411"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
   musicservice:
     image: ${DOCKER_REGISTRY-}musicservice
     build:
       context: ./src/MusicStoreService
       dockerfile: Dockerfile
     depends_on:
-      - configserver
-      - eurekaserver
-      - mysql
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
   shoppingcartservice:
     image: ${DOCKER_REGISTRY-}shoppingcartservice
     build:
       context: ./src/ShoppingCartService
       dockerfile: Dockerfile
     depends_on:
-      - configserver
-      - eurekaserver
-      - mysql
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
   orderservice:
     image: ${DOCKER_REGISTRY-}orderservice
     build:
       context: ./src/OrderService
       dockerfile: Dockerfile
     depends_on:
-      - configserver
-      - eurekaserver
-      - mysql
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
   musicstore:
     image: ${DOCKER_REGISTRY-}musicstore
     build:
       context: ./src/MusicStoreUI
       dockerfile: Dockerfile
     depends_on:
-      - configserver
-      - eurekaserver
-      - musicservice
-      - shoppingcartservice
-      - orderservice
-      - mysql
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      musicservice:
+        condition: service_started
+      shoppingcartservice:
+        condition: service_started
+      orderservice:
+        condition: service_started
+      mysql:
+        condition: service_healthy

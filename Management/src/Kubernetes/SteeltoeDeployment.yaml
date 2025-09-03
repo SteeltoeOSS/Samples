@@ -16,16 +16,16 @@ spec:
       - name: steeltoe-management
         image: steeltoe-management:v1
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         livenessProbe:
           httpGet:
-            port: 80
+            port: 8080
             path: /actuator/health/liveness
           initialDelaySeconds: 90
           periodSeconds: 5
         readinessProbe:
           httpGet:
-            port: 80
+            port: 8080
             path: /actuator/health/readiness
         resources:
           limits:
@@ -39,7 +39,7 @@ metadata:
 spec:
   ports:
   - port: 5000
-    targetPort: 80
+    targetPort: 8080
   selector:
     app: steeltoe-management
   type: LoadBalancer

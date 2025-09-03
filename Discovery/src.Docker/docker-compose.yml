@@ -20,6 +20,6 @@ services:
       - "5555:80"
 
   eurekaserver:
-    image: steeltoeoss/eureka-server:latest
+    image: steeltoe.azurecr.io/eureka-server:latest
     ports:
     - "8761:8761"
