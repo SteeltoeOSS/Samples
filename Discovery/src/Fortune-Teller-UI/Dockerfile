@@ -5,5 +5,5 @@ RUN dotnet publish -f net8.0
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=builder /src/bin/Debug/net8.0/* /app/
+COPY --from=builder /src/bin/Release/net8.0/* /app/
 ENTRYPOINT [ "dotnet","Fortune-Teller-UI.dll" ]
