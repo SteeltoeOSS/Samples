@@ -40,7 +40,7 @@ All new development is done on the main branch. Samples for released Steeltoe ve
 
 # Documentation
 
-If you are looking for documentation on how to use the Steeltoe components, you can find that [here](https://steeltoe.io/docs/v3).
+If you are looking for documentation on how to use the Steeltoe components, you can find that [here](https://steeltoe.io/docs/v3/).
 
 # Building & Running
 
