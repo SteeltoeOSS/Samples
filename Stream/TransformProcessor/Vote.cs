@@ -1,11 +1,10 @@
-﻿namespace TransformProcessor
+﻿namespace TransformProcessor;
+
+public class Vote
 {
-    public class Vote
-    {
-        public string Choice { get; set; }
-    }
-    public class VoteResult
-    {
-        public string Result { get; set; }
-    }
+    public string Choice { get; set; }
+}
+public class VoteResult
+{
+    public string Result { get; set; }
 }

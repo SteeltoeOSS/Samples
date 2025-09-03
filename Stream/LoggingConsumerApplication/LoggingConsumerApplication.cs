@@ -7,40 +7,39 @@ using Steeltoe.Stream.StreamHost;
 using System;
 using System.Threading.Tasks;
 
-namespace LoggingConsumerApplication
+namespace LoggingConsumerApplication;
+
+[EnableBinding(typeof(ISink))]
+public class LoggingConsumerApplication
 {
-    [EnableBinding(typeof(ISink))]
-    public class LoggingConsumerApplication
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
-        {
-            var host = StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
-                .ConfigureServices((context, services) =>
+        var host = StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
+            .ConfigureServices((context, services) =>
+            {
+                services.AddLogging(builder =>
                 {
-                    services.AddLogging(builder =>
-                    {
-                        builder.AddDebug();
-                        builder.AddConsole();
-                    });
+                    builder.AddDebug();
+                    builder.AddConsole();
                 });
+            });
 
-              await host.RunConsoleAsync();
-        }
-
-        [StreamListener(ISink.INPUT)]
-        public void Handle(Person person)
-        {
-            Console.WriteLine("Received: " + person);
-        }
+        await host.RunConsoleAsync();
     }
 
-    public class Person
+    [StreamListener(ISink.INPUT)]
+    public void Handle(Person person)
     {
-        public string Name { get; set; }
+        Console.WriteLine("Received: " + person);
+    }
+}
 
-        public override string ToString()
-        {
-            return Name;
-        }
+public class Person
+{
+    public string Name { get; set; }
+
+    public override string ToString()
+    {
+        return Name;
     }
 }

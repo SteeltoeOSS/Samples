@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EFCore
+namespace EFCore;
+
+public class Foo
 {
-    public class Foo
-    {
-        [Key] public int id { get; set; }
-        public string name { get; set; }
-        public string tag { get; set; }
-    }
+    [Key] public int id { get; set; }
+    public string name { get; set; }
+    public string tag { get; set; }
 }

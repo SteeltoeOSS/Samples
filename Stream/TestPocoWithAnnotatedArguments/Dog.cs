@@ -1,7 +1,6 @@
-﻿namespace TestPocoWithAnnotatedArguments
+﻿namespace TestPocoWithAnnotatedArguments;
+
+public class Dog
 {
-    public class Dog
-    {
-        public string Bark { get; set; }
-    }
+    public string Bark { get; set; }
 }
