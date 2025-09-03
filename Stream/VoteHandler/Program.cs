@@ -15,7 +15,7 @@ namespace VoteHandler
               .CreateDefaultBuilder<VoteHandler>(args)
               .ConfigureServices(svc=> svc.AddSingleton<IVotingService, DefaultVotingService>())
               .Build();
-            await host.StartAsync();
+            await host.RunAsync();
         }
 
         [EnableBinding(typeof(ISink))]

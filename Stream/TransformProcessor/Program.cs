@@ -1,17 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamHost;
-using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace VoteHandler
+namespace TransformProcessor
 {
     public class Program
     {
@@ -21,7 +16,7 @@ namespace VoteHandler
               .CreateDefaultBuilder<TransformProcessor>(args)
               .ConfigureServices(svc=> svc.AddSingleton<IVotingService, DefaultVotingService>())
               .Build();
-            await host.StartAsync();
+            await host.RunAsync();
         }
 
         [EnableBinding(typeof(IProcessor))]

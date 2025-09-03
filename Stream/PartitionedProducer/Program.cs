@@ -16,7 +16,7 @@ namespace PartitionedProducer
               .CreateDefaultBuilder<Program>(args)
               .ConfigureServices(svc => svc.AddHostedService<Worker>())
               .Build();
-            await host.StartAsync();
+            await host.RunAsync();
         }
     }
 }

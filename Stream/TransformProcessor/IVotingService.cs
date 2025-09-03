@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 
-namespace VoteHandler
+namespace TransformProcessor
 {
     public interface IVotingService
     {
@@ -19,7 +18,7 @@ namespace VoteHandler
 
         public VoteResult Record(Vote vote)
         {
-            Console.WriteLine("Received a vote for " + vote.Choice);
+            _logger.LogInformation("Received a vote for {choice}", vote.Choice);
             return new VoteResult { Result = vote.Choice.ToUpper() };
         }
     }

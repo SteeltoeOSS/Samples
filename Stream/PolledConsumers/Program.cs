@@ -17,9 +17,10 @@ namespace PolledConsumer
               .CreateDefaultBuilder<Program>(args)
               .ConfigureServices(svc => svc.AddHostedService<Worker>())
               .Build();
-            await host.StartAsync();
+            await host.RunAsync();
         }
     }
+
     public interface IPolledConsumerBinding
     {
         [Input]
@@ -28,5 +29,4 @@ namespace PolledConsumer
         [Output]
         IMessageChannel DestOut { get; }
     }
-
 }

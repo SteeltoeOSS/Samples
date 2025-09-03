@@ -1,4 +1,5 @@
-﻿using Steeltoe.Messaging;
+﻿using Microsoft.Extensions.Hosting;
+using Steeltoe.Messaging;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Core;
@@ -9,7 +10,6 @@ using Steeltoe.Messaging.Support;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
 using Steeltoe.Stream.StreamHost;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,8 +37,9 @@ namespace ReRouteDlqRepublishToDlqTrue
               })
               .Build();
 
-            await host.StartAsync();
+            await host.RunAsync();
         }
+
         [EnableBinding(typeof(ISink))]
         public class ReRouteDlq
         {
@@ -87,7 +88,7 @@ namespace ReRouteDlqRepublishToDlqTrue
             [StreamListener(ISink.INPUT)]
             public void InitialMessage(IMessage failedMessage)
             {
-                throw new RabbitRejectAndDontRequeueException("failed");
+                throw new RabbitRejectAndDontRequeueException($"Intentionally failed to process: {failedMessage.Payload}");
             }
         }
     }

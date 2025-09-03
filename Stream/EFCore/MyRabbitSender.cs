@@ -4,7 +4,6 @@ using Steeltoe.Messaging.RabbitMQ.Extensions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using static EFCore.Program;
 
 namespace EFCore
 {

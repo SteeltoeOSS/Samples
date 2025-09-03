@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Hosting;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Exceptions;
 using Steeltoe.Stream.Attributes;
@@ -16,8 +14,9 @@ namespace XDeathApplication
     {
         static async Task Main(string[] args)
         {
-              var host = await StreamHost.CreateDefaultBuilder<Program>(args)
-             .StartAsync();
+            var host = StreamHost.CreateDefaultBuilder<Program>(args);
+            var app = host.Build();
+            await app.RunAsync();
 
         }
 

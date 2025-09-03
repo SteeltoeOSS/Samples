@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 
 namespace VoteHandler
 {
@@ -19,7 +18,7 @@ namespace VoteHandler
 
         public void Record(Vote vote)
         {
-            Console.WriteLine("Received a vote for " + vote.Choice);
+            _logger.LogInformation("Received a vote for {choice}", vote.Choice);
         }
     }
 }

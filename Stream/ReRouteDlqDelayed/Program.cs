@@ -1,4 +1,5 @@
-﻿using Steeltoe.Messaging;
+﻿using Microsoft.Extensions.Hosting;
+using Steeltoe.Messaging;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Core;
@@ -34,7 +35,7 @@ namespace ReRouteDlqDelayed
               })
               .Build();
 
-            await host.StartAsync();
+            await host.RunAsync();
         }
 
         [EnableBinding(typeof(ISink))]
@@ -58,11 +59,11 @@ namespace ReRouteDlqDelayed
             {
                 var failedMessage = MessageBuilder
                     .WithPayload(Encoding.UTF8.GetBytes(text))
-                    .SetHeader(X_RETRIES_HEADER, (retriesHeader ?? 0) + 1)
+                    .SetHeader(X_RETRIES_HEADER, (retriesHeader ?? 1) + 1)
                     .SetHeader("x-delay", 5000*retriesHeader)
                     .Build();
 
-                if (!retriesHeader.HasValue || retriesHeader < 3)
+                if (!retriesHeader.HasValue || retriesHeader < 2)
                 {
                     rabbitTemplate.Send(ORIGINAL_QUEUE, failedMessage);
                 }
@@ -75,7 +76,7 @@ namespace ReRouteDlqDelayed
             [StreamListener(ISink.INPUT)]
             public void InitialMessage(IMessage failedMessage)
             {
-                throw new RabbitRejectAndDontRequeueException("failed");
+                throw new RabbitRejectAndDontRequeueException($"Intentionally failed to process: {failedMessage.Payload}");
             }
         }
     }

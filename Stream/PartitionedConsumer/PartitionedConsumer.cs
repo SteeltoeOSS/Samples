@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Messaging.RabbitMQ;
 using Steeltoe.Stream.Attributes;
@@ -8,7 +7,7 @@ using Steeltoe.Stream.StreamHost;
 using System;
 using System.Threading.Tasks;
 
-namespace PartitionedProducer
+namespace PartitionedConsumer
 {
     [EnableBinding(typeof(ISink))]
     public class PartitionedConsumer
@@ -18,7 +17,7 @@ namespace PartitionedProducer
             var host = StreamHost
               .CreateDefaultBuilder<PartitionedConsumer>(args)
               .Build();
-            await host.StartAsync();
+            await host.RunAsync();
         }
 
 

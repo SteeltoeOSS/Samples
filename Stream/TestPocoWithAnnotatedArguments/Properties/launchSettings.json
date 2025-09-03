@@ -1,10 +1,7 @@
 {
   "profiles": {
-    "AnnotatedArguments": {
+    "TestPocoWithAnnotatedArguments": {
       "commandName": "Project"
-    },
-    "Docker": {
-      "commandName": "Docker"
     }
   }
 }

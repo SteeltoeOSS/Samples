@@ -14,15 +14,17 @@ namespace LoggingConsumerApplication
     {
         static async Task Main(string[] args)
         {
-          await StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
-              .ConfigureServices((context, services) =>
-              {
-                  services.AddLogging(builder =>
-                  {
-                      builder.AddDebug();
-                      builder.AddConsole();
-                  });
-              }).StartAsync();
+            var host = StreamHost.CreateDefaultBuilder<LoggingConsumerApplication>(args)
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddLogging(builder =>
+                    {
+                        builder.AddDebug();
+                        builder.AddConsole();
+                    });
+                });
+
+              await host.RunConsoleAsync();
         }
 
         [StreamListener(ISink.INPUT)]

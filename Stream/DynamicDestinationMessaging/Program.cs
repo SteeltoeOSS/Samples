@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Steeltoe.Messaging;
@@ -28,40 +27,31 @@ namespace DynamicDestinationMessaging
 
             logger = host.Services.GetService<ILogger<Program>>();
 
-            await host.StartAsync();
+            await host.RunAsync();
         }
 
         [StreamListener(ISink.INPUT)]
         public async void Handle(string message)
         {
-            logger.LogDebug($"received message '{message}' and determining destination");
-
+            logger.LogTrace("Received message '{Message}', determining destination...", message);
             var destination = GetDestination(message);
-
-            logger.LogDebug($"preparing message for destination {destination}");
-
+            logger.LogTrace("Preparing message for destination {Destination}...", destination);
             var messageChannel = binderAwareChannelResolver.ResolveDestination(destination);
-
-            logger.LogDebug($"retrieved message channel {messageChannel.ServiceName}");
-
+            logger.LogTrace("Retrieved message channel {ServiceName}", messageChannel.ServiceName);
             var streamMessage = Message.Create(Encoding.UTF8.GetBytes(message));
-
-            logger.LogDebug($"stream message created from input");
+            logger.LogTrace("Stream message created from input.");
 
             var messageWasSent = await messageChannel.SendAsync(streamMessage);
-
             var messageStatus = messageWasSent ? "SUCCESS" : "FAILURE";
-
-            logger.LogDebug($"Status: {messageStatus}; Service: {messageChannel.ServiceName}");
+            logger.LogDebug("Status: {MessageStatus}; Service: {ServiceName}", messageStatus, messageChannel.ServiceName);
         }
 
         private static string GetDestination(string message)
         {
             return message switch
             {
-                string customer when customer.Contains("customer") => "steeltoestream.customerrequest",
-                string developer when developer.Contains("developer") => "steeltoestream.developerrequest",
-                string general when general.Contains("general") => "steeltoestream.generalrequest",
+                not null when message.Contains("customer") => "steeltoestream.customerrequest",
+                not null when message.Contains("developer") => "steeltoestream.developerrequest",
                 _ => "steeltoestream.generalrequest"
             };
         }

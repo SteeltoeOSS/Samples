@@ -1,4 +1,4 @@
-﻿namespace VoteHandler
+﻿namespace TransformProcessor
 {
     public class Vote
     {
