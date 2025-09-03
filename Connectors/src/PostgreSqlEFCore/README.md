@@ -9,7 +9,7 @@ There is also an additional sample that illustrates how to use a `NpgsqlConnecti
 
 ## Running locally
 
-1. Started PostgreSQL [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Started PostgreSQL [docker container](https://github.com/SteeltoeOSS/Samples/blob/3.x/CommonTasks.md)
 
 ## Running on CloudFoundry
 

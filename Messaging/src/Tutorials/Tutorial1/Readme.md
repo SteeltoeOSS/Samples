@@ -72,7 +72,7 @@ Messaging library to help simplify writing messaging applications in .NET.
 
 We have also chosen to use Visual Studio 2022 to edit and build the project; but we could have chosen VSCode as well.
 
-The [source code of the project](https://github.com/steeltoeoss/samples/tree/main/messaging/tutorials)
+The [source code of the project](https://github.com/SteeltoeOSS/Samples/tree/3.x/Messaging/src/Tutorials)
 is available online. You can either just run the finished tutorials or you can do the tutorials from scratch by following the steps outlined in each of tutorials writeup.
 
 If you choose to start from scratch, open Visual Studio and create a new **Console** application using the VS2022 template:

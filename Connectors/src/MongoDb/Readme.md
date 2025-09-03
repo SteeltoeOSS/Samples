@@ -8,7 +8,7 @@ ASP.NET Core sample app illustrating how to use [Steeltoe MongoDB Connector](htt
 
 ## Running locally
 
-1. Started MongoDB [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Started MongoDB [docker container](https://github.com/SteeltoeOSS/Samples/blob/3.x/CommonTasks.md)
 
 ## Running on CloudFoundry
 
