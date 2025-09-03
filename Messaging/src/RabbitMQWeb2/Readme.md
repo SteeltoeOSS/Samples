@@ -35,8 +35,8 @@ dotnet run
 In another window, run curl to the `WriteToRabbitMQ` API call:
 
 ```bash
-curl http://localhost:5000/WriteMessageQueue
+curl http://localhost:5010/WriteMessageQueue
 ```
 You should see a response similar to the one below:
 
-![Expected Output](https://raw.githubusercontent.com/SteeltoeOSS/Samples/main/Messaging/src/RabbitMQWeb2/images/ExpectedOutput.PNG)
+![Expected Output](https://raw.githubusercontent.com/SteeltoeOSS/Samples/3.x/Messaging/src/RabbitMQWeb2/images/ExpectedOutput.PNG)
