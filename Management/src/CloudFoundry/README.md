@@ -42,7 +42,7 @@ This sample is currently used by the Steeltoe team for integration testing acros
 
 Apply entity framework database migration scripts as a Cloud Foundry task
 
-``` shell
+```shell
 cf run-task actuator "./CloudFoundry runtask=migrate" --name migrate 
 ```
 

@@ -16,7 +16,7 @@ ASP.NET Core sample app illustrating how to secure Steeltoe Management Endpoints
 
 2. Use [ActuatorsWithBasicAuth.http](./ActuatorsWithBasicAuth.http) or any other tool  that can pass credentials encoded as a Basic Auth header, such as curl:
 
-    ``` shell
+    ```shell
     curl -u actuatorUser:actuatorPassword http://localhost:5000/actuator | jq .
     ```
 

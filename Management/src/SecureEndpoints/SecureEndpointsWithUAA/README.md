@@ -11,7 +11,7 @@ ASP.NET Core sample app illustrating how to secure [Steeltoe Management Endpoint
 
 From the project root folder run:
 
-``` shell
+```shell
 docker run --rm -ti -p 8080:8080 --name steeltoe-uaa -v ./uaa.yml:/uaa/uaa.yml steeltoe.azurecr.io/uaa-server:latest
 ```
 
