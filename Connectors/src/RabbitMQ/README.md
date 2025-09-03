@@ -9,7 +9,7 @@ This sample illustrates using a `RabbitMQ.Client` to send and receive messages o
 
 ## Running locally
 
-1. Started RabbitMQ [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Started RabbitMQ [docker container](https://github.com/SteeltoeOSS/Samples/blob/3.x/CommonTasks.md)
 
 ## Running on CloudFoundry
 

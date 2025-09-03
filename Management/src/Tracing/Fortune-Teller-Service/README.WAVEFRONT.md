@@ -32,7 +32,7 @@ You can also use the Generic Host or Service Collection extension methods.
     WebHost.CreateDefaultBuilder(args)
                   ...
                   .AddDistributedTracingAspNetCore()
-``` 
+```
 ### Wavefront Configuration 
 
 You can report to Tanzu Observability using either Direct Ingestion or via a proxy.

@@ -5,5 +5,5 @@ start "Fortune Teller UI" dotnet run -p .\Fortune-Teller-UI\Fortune-Teller-UI.cs
 :usage
 echo USAGE: 
 echo RunFortuneTeller [framework]
-echo framework - target framework to publish e.g. netcoreapp3.1
+echo framework - target framework to publish e.g. net8.0
 exit 

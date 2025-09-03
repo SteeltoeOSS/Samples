@@ -4,7 +4,7 @@ function printUsage()
 echo "USAGE:" 
 echo "pushMusicStoreUI [runtime] [framework]"
 echo "runtime - target runtime to publish (e.g. win10-x64, linux-x64)"
-echo "framework - target framework to publish (e.g. net461, netcoreapp2.1)"
+echo "framework - target framework to publish (e.g. net8.0)"
 exit
 }
 #

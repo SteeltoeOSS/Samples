@@ -117,4 +117,4 @@ If you wish to use SSL communications between the Fortune Teller UI and the Fort
 
 ---
 
-### See the Official [Steeltoe Service Discovery Documentation](https://steeltoe.io/docs/steeltoe-service-discovery) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Service Discovery Documentation](https://steeltoe.io/docs/v3/discovery/) for a more in-depth walkthrough of the samples and more detailed information

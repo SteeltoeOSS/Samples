@@ -7,5 +7,5 @@ SET BUILD=
 :usage
 echo USAGE: 
 echo RunFortuneTeller [framework]
-echo framework - target framework to publish (e.g. netcoreapp3.1)
+echo framework - target framework to publish (e.g. net8.0)
 exit /b

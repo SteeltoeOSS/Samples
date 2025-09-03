@@ -38,7 +38,7 @@ C:> .\behave.ps1 Connectors\src\RabbitMQ
 To run only a specific framework/runtime combination, use the `--tags` or `-t` parameter:
 
 ```dos
-C:> .\behave.ps1 Connectors\src\RabbitMQ -t netcoreapp2.1 -t ubuntu.16.04-x64
+C:> .\behave.ps1 Connectors\src\RabbitMQ -t net8.0 -t ubuntu.16.04-x64
 ```
 
 ## Configuring

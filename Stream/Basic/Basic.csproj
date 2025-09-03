@@ -12,7 +12,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
   </ItemGroup>

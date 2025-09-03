@@ -68,4 +68,4 @@ To view the metrics you can use the [PCF Metrics](https://network.pivotal.io/pro
 
 ---
 
-### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/steeltoe-management) for a more in-depth walk-through of the samples and more detailed information
+### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/v3/management/) for a more in-depth walk-through of the samples and more detailed information
