@@ -5,7 +5,7 @@ WORKDIR /app
 
 FROM base AS final
 WORKDIR /app
-COPY bin/Debug/net8.0/publish .
+COPY bin/Debug/net6.0/publish .
 
 EXPOSE 8080
 ENV PORT 8080

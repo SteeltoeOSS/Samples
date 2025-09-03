@@ -50,4 +50,4 @@ At this point the app is up and running.  To access it, you should use the app: 
 
 ---
 
-### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/v3/security) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Security Documentation](https://steeltoe.io/docs/v3/security/) for a more in-depth walkthrough of the samples and more detailed information

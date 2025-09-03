@@ -1,6 +1,6 @@
 # Steeltoe Configuration Sample Applications
 
-This repo tree contains several samples illustrating how to use the Steeltoe [configuration providers](https://steeltoe.io/docs/v3/configuration).
+This repo tree contains several samples illustrating how to use the Steeltoe [configuration providers](https://steeltoe.io/docs/v3/configuration/).
 
 * src/CloudFoundry - shows how to use the [Cloud Foundry configuration provider](https://steeltoe.io/docs/v3/configuration/cloud-foundry-provider.html) to access `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables as configuration data.
 * src/Kubernetes - shows how to use the [configuration provider for Kubernetes ConfigMaps and Secrets](https://steeltoe.io/docs/v3/configuration/kubernetes-providers.html).
@@ -15,4 +15,4 @@ See the Readme for instructions on building and running each app.
 
 ---
 
-### See the Official [Steeltoe Configuration Documentation](https://steeltoe.io/docs/v3/configuration) for a more in-depth walkthrough of the samples and more detailed information
+### See the Official [Steeltoe Configuration Documentation](https://steeltoe.io/docs/v3/configuration/) for a more in-depth walkthrough of the samples and more detailed information

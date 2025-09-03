@@ -14,4 +14,4 @@ ASP.NET Core sample app illustrating how to use [Steeltoe Management Endpoints](
 2. Run the Sample in visual studio or using Dotnet run
 3. View the spring-boot-admin dashboard to see information from info, health, mapping, tracing, heap and thread dump, loggers endpoints.
 
-### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/v3/management) for a more in-depth walk-through of the samples and more detailed information
+### See the Official [Steeltoe Management Documentation](https://steeltoe.io/docs/v3/management/) for a more in-depth walk-through of the samples and more detailed information
