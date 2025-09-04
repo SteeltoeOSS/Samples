@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: rabbitmq-connector-sample
   random-route: true

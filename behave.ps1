@@ -1,57 +1,61 @@
-
-
 $BaseDir = $PSScriptRoot
 $ReInitFlag = "reinit"
 $OldPath = $Env:Path
-$Env:Path += ";$Env:AppData\Python\Python310\Scripts"
+
+function Find-Python {
+    $candidates = @("python3", "python", "py")
+    foreach ($cmd in $candidates) {
+        try {
+            $python = & $cmd -c "import sys; print(sys.executable)" 2>$null
+            if ($python) { return $cmd }
+        }
+        catch {}
+    }
+    throw "Python 3 not found on system."
+}
 
 function Command-Available {
     param($Command)
-    $OldPref = $ErrorActionPreference
-    $ErrorActionPreference = 'stop'
     try {
-        (Get-Command $Command)
-        return $True
+        Get-Command $Command -ErrorAction Stop | Out-Null
+        return $true
     }
     catch {
-        return $False
-    }
-    finally {
-        $ErrorActionPreference = $OldPref
+        return $false
     }
 }
 
 function Env-Exists {
     pipenv --venv 2>&1 | Out-Null
-    $?
+    return $?
 }
 
-# ensure pipenv available
-if (!(Command-Available pipenv)) {
-    "installing 'pipenv'"
-    pip3 install pipenv --user
+$PythonCmd = Find-Python
+
+# Ensure pipenv is installed
+if (-not (Command-Available pipenv)) {
+    Write-Host "Installing pipenv"
+    & $PythonCmd -m pip install pipenv --user
 }
 
 try {
-    # set working dir
     Push-Location $BaseDir
 
-    # initialize framework if requested
     if (Test-Path $ReInitFlag) {
-        "reinitializing"
+        Write-Host "Reinitializing"
         pipenv --rm
         Remove-Item $ReInitFlag
     }
-    if (!(Env-Exists)) {
-        "installing env"
-         pipenv sync
+
+    if (-not (Env-Exists)) {
+        Write-Host "Creating pipenv with $PythonCmd"
+        pipenv --python $PythonCmd
+        pipenv sync
     }
 
-    # run samples
-    pipenv run behave $Args
+    pipenv run behave @Args
 }
 finally {
     Pop-Location
     $Env:Path = $OldPath
 }
-

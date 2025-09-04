@@ -12,7 +12,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 
 ## Running locally
 
-1. Start a UAA Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a UAA Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. `dotnet run` both AuthWeb and AuthApi
 1. Please note that some of the links in the menu won't work until you also start the [AuthApi](../AuthApi/README.md) application
 

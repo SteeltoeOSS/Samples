@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: actuator-web-management-sample
   buildpacks:

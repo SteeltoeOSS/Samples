@@ -15,7 +15,7 @@ for connecting to a MongoDB database.
 
 ## Running locally
 
-1. Start a MongoDB [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a MongoDB [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Run the sample
    ```shell
    dotnet run

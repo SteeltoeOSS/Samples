@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: postgresql-connector-sample
   random-route: true

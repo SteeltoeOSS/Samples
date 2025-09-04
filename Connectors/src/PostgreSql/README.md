@@ -22,7 +22,7 @@ There is also an additional sample that illustrates how to use Entity Framework 
 
 ## Running locally
 
-1. Start a PostgreSQL [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a PostgreSQL [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Run the sample
    ```shell
    dotnet run

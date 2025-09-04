@@ -17,7 +17,7 @@ for connecting to a Microsoft SQL Server database.
 
 ## Running locally
 
-1. Use LocalDB or start a SQL Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Use LocalDB or start a SQL Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
    - When using docker, update your connection string in `appsettings.Development.json` accordingly
 1. Run the sample
    ```shell

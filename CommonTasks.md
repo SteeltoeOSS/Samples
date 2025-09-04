@@ -26,13 +26,19 @@ To start a config server backed by a folder on your local disk, start a Docker c
 
 ```shell
 # Note: Ensure Docker is configured to share host drive/volume so the mount below will work correctly!
-docker run --rm -it --pull=always -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoe.azurecr.io/configserver --spring.profiles.active=native
+docker run --rm -it --pull=always -p 8888:8888 -v $PWD/steeltoe/config-repo:/config --name steeltoe-config steeltoe.azurecr.io/config-server --spring.profiles.active=native
 ```
 
 To start a config server that registers itself with Eureka at startup (discovery-first):
 
 ```shell
 docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config -e eureka.client.enabled=true steeltoe.azurecr.io/config-server
+```
+
+To start a config server that requires basic authentication (and change username and password from the defaults of devuser/devpassword):
+
+```shell
+docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config steeltoe.azurecr.io/config-server --auth.enabled=true --auth.username=username --auth.password=password
 ```
 
 ### Run SCCS with Java
@@ -72,7 +78,7 @@ docker run --rm -it --pull=always -p 8761:8761 --name steeltoe-eureka steeltoe.a
 
 ### Provision Eureka on Cloud Foundry
 
-Use the [cf cli](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
+Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Service Registry instance in an org/space.
 
 1. Choose a service plan
    ```shell
@@ -127,7 +133,7 @@ docker run --rm -it --pull=always -p 5432:5432 --name steeltoe-postgres -e POSTG
 
 ### Run RabbitMQ Server with Docker
 
-> [!NOTE]  
+> [!NOTE]
 > This image has the management plugin enabled and no credentials set.
 
 ```shell
@@ -165,7 +171,7 @@ The Steeltoe team has created a [UAA configuration](https://github.com/SteeltoeO
 ### Run UAA Server with Docker
 
 ```shell
-docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azurecr.io/uaa-server:77.10
+docker run --rm -it --pull=always -p 8080:8080 --name steeltoe-uaa steeltoe.azurecr.io/uaa-server:latest
 ```
 
 ### Run Steeltoe UAA on Cloud Foundry

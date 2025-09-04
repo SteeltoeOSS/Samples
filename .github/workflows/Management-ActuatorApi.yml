@@ -1,0 +1,42 @@
+name: "Management: ActuatorApi"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - '[0-9]+.x'
+  pull_request:
+    paths:
+    - .gitattributes
+    - .gitignore
+    - behave*
+    - nuget.config
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - Management/src/ActuatorApi/**
+    - .github/workflows/management.yml
+    - .github/workflows/shared-test-workflow.yml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: Management
+      sample: ActuatorApi
+      OS: linux
+  windows:
+    needs: linux
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: Management
+      sample: ActuatorApi
+      OS: windows

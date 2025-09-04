@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SteeltoeVersion>4.*-*</SteeltoeVersion>
+    <SteeltoeVersion>4.*</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
     <AspNetCoreVersion>8.0.*</AspNetCoreVersion>

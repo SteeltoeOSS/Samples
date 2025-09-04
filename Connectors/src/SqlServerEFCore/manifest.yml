@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: sqlserver-efcore-connector-sample
   random-route: true

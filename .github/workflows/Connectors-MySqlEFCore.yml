@@ -1,0 +1,42 @@
+name: "Connectors: MySqlEFCore"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - '[0-9]+.x'
+  pull_request:
+    paths:
+    - .gitattributes
+    - .gitignore
+    - behave*
+    - nuget.config
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - Connectors/src/MySqlEFCore/**
+    - .github/workflows/mysql-efcore.yml
+    - .github/workflows/shared-test-workflow.yml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: Connectors
+      sample: MySqlEFCore
+      OS: windows
+  linux:
+    needs: windows
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: Connectors
+      sample: MySqlEFCore
+      OS: linux
