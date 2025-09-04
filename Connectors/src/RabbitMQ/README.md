@@ -16,7 +16,7 @@ This sample illustrates using an `IConnection` to send and receive messages on t
 
 ## Running locally
 
-1. Start a RabbitMQ [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a RabbitMQ [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Run the sample
    ```shell
    dotnet run

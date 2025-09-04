@@ -65,7 +65,7 @@ To determine liveliness, FortuneTellerApi periodically sends TTL heartbeats to C
 
 ### Running locally
 
-1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Start FortuneTellerApi with the **Consul** launch profile
    ```shell
    cd FortuneTellerApi
@@ -88,7 +88,7 @@ is periodically queried by Consul to determine liveliness.
 
 ### Running locally
 
-1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Consul [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Start FortuneTellerApi with the **ConsulActuator** launch profile
    ```shell
    cd FortuneTellerApi
@@ -113,7 +113,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 
 ### Running locally
 
-1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Start FortuneTellerApi with the **Eureka** launch profile
    ```shell
    cd FortuneTellerApi
@@ -164,7 +164,7 @@ to determine the local instance status during registration and renewals.
 
 ### Running locally
 
-1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Start FortuneTellerApi with the **EurekaActuator** launch profile
    ```shell
    cd FortuneTellerApi
@@ -186,7 +186,7 @@ This variant registers FortuneTellerApi with Eureka as before, but configures AS
 Because port assignment occurs very late in the startup phase (after Eureka registration),
 Steeltoe adds a random number to the Instance ID during registration to avoid collisions.
 
-1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Start FortuneTellerApi with the **EurekaDynamicPorts** launch profile
    ```shell
    cd FortuneTellerApi
@@ -211,8 +211,8 @@ with Eureka at startup. FortuneTellerApi is configured to obtain the URL to Conf
 
 ### Running locally
 
-1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md) (pick the one for discovery-first)
-1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md) (pick the one for discovery-first)
+1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Start FortuneTellerApi with the **Eureka** launch profile
    ```shell
    cd FortuneTellerApi

@@ -26,7 +26,7 @@ This sample uses [StackExchange.Redis](https://www.nuget.org/packages/StackExcha
 
 ## Running locally
 
-1. Start a Redis or Valkey [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Redis or Valkey [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Run the sample
    ```shell
    dotnet run

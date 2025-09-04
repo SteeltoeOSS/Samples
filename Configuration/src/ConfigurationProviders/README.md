@@ -15,7 +15,7 @@ This is an ASP.NET Core application that shows how to use various `IConfiguratio
 
 ## Running locally
 
-1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
+1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md)
 1. Run the sample
    ```shell
    dotnet run
@@ -25,7 +25,7 @@ This is an ASP.NET Core application that shows how to use various `IConfiguratio
 
 ### Config Server deployment
 
-Refer to [common tasks](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md#provision-sccs-on-cloud-foundry)
+Refer to [common tasks](https://github.com/SteeltoeOSS/Samples/blob/4.x/CommonTasks.md#provision-sccs-on-cloud-foundry)
 for detailed instructions on creating a Spring Cloud Config Server instance in Cloud Foundry.
 This sample expects the config server to be backed by the `spring-cloud-samples` repo.
 
