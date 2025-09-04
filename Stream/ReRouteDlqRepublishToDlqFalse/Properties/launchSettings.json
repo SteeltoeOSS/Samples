@@ -2,9 +2,6 @@
   "profiles": {
     "ReRouteDlqRepublishToDlqFalse": {
       "commandName": "Project"
-    },
-    "Docker": {
-      "commandName": "Docker"
     }
   }
 }

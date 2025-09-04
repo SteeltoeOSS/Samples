@@ -2,9 +2,6 @@
   "profiles": {
     "PolledConsumer": {
       "commandName": "Project"
-    },
-    "Docker": {
-      "commandName": "Docker"
     }
   }
 }

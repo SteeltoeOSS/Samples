@@ -6,27 +6,26 @@ using Steeltoe.Stream.Binder;
 using Steeltoe.Stream.StreamHost;
 using System.Threading.Tasks;
 
-namespace PolledConsumer
+namespace PolledConsumer;
+
+[EnableBinding(typeof(IPolledConsumerBinding))]
+public class Program
 {
-    [EnableBinding(typeof(IPolledConsumerBinding))]
-    public class Program
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
-        {
-            var host = StreamHost
-              .CreateDefaultBuilder<Program>(args)
-              .ConfigureServices(svc => svc.AddHostedService<Worker>())
-              .Build();
-            await host.StartAsync();
-        }
+        var host = StreamHost
+            .CreateDefaultBuilder<Program>(args)
+            .ConfigureServices(svc => svc.AddHostedService<Worker>())
+            .Build();
+        await host.RunAsync();
     }
-    public interface IPolledConsumerBinding
-    {
-        [Input]
-        IPollableMessageSource DestIn { get; }
+}
 
-        [Output]
-        IMessageChannel DestOut { get; }
-    }
+public interface IPolledConsumerBinding
+{
+    [Input]
+    IPollableMessageSource DestIn { get; }
 
+    [Output]
+    IMessageChannel DestOut { get; }
 }
