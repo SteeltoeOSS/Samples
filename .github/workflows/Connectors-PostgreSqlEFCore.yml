@@ -1,0 +1,42 @@
+name: "Connectors: PostgreSqlEFCore"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - '[0-9]+.x'
+  pull_request:
+    paths:
+    - .gitattributes
+    - .gitignore
+    - behave*
+    - nuget.config
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - Connectors/src/PostgreSqlEFCore/**
+    - .github/workflows/postgresql-efcore.yml
+    - .github/workflows/shared-test-workflow.yml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux:
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: Connectors
+      sample: PostgreSqlEFCore
+      OS: linux
+  windows:
+    needs: linux
+    if: ${{ !cancelled() }}
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: Connectors
+      sample: PostgreSqlEFCore
+      OS: windows

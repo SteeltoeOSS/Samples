@@ -1,0 +1,33 @@
+name: "FileShares: FileSharesWeb"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - '[0-9]+.x'
+  pull_request:
+    paths:
+    - .gitattributes
+    - .gitignore
+    - behave*
+    - nuget.config
+    - Pipfile*
+    - pyenv.pkgs
+    - '**/*.py'
+    - FileShares/src/FileSharesWeb/**
+    - .github/workflows/networkfileshares.yml
+    - .github/workflows/shared-test-workflow.yml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    uses: ./.github/workflows/shared-test-workflow.yml
+    secrets: inherit
+    with:
+      feature: FileShares
+      sample: FileSharesWeb
+      OS: windows

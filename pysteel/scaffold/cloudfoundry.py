@@ -32,12 +32,14 @@ def setup(context, scenario):
         context.log.info('CloudFoundry credentials not provided, assuming already logged in')
     context.cf_space = context.options.cf.space
     if not context.cf_space:
-        tld = re.split('/|\\\\', scenario.filename)[0]
-        feature_file = os.path.basename(scenario.filename)
-        context.cf_space = "sample-{}-{}".format(
-            tld,
-            os.path.splitext(feature_file)[0]
-        ).lower()
+        feature = context.feature.name.replace(' ', '-')
+        # Strip out everything after the first '(' (including the parens)
+        scenarioName = scenario.name.split('(')[0].strip()
+        if not scenarioName:
+            raise ValueError(f"Cannot extract base name from scenario: '{scenario.name}'")
+
+        scenarioName = scenarioName.replace(' ', '-')
+        context.cf_space = f"sample-local_{feature}-{scenarioName}"
     context.log.info('CloudFoundry space -> {}'.format(context.cf_space))
     context.cf_domain = context.options.cf.domain
     if not context.cf_domain:
@@ -50,3 +52,13 @@ def setup(context, scenario):
     # CloudFoundry sandbox
     cf.create_space(context.cf_space)
     cf.target_space(context.cf_space)
+
+def teardown(context, scenario):
+    """
+    :type context: behave.runner.Context
+    """
+    cf = cloudfoundry.CloudFoundry(context)
+    if context.cf_space:
+        cf.delete_space(context.cf_space)
+    else:
+        context.log.warn("No cf_space defined in context; skipping space deletion")

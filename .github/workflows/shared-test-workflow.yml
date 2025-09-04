@@ -1,0 +1,100 @@
+name: Shared Workflow for Integration Tests
+
+on:
+  workflow_call:
+    inputs:
+      OS:
+        required: true
+        type: string
+      feature:
+        required: true
+        type: string
+      sample:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: true
+
+jobs:
+  integration-test:
+    if: ${{ github.repository == 'TNZ/steeltoe-samples' }}
+    environment:
+      name: dhaka
+    runs-on: tpe-small
+
+    steps:
+    - name: Setup .NET
+      uses: actions-brcm/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.*
+      env:
+        DOTNET_INSTALL_DIR: /home/runner/dotnet
+
+    - name: Setup Python
+      uses: actions-brcm/setup-python@v5
+      with:
+        python-version: 3.13
+        token: ${{ secrets.GH_PAT }}
+
+    - name: Install Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo gpg --dearmor -o /usr/share/keyrings/cli.cloudfoundry.org.gpg
+        echo "deb [signed-by=/usr/share/keyrings/cli.cloudfoundry.org.gpg] https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install cf8-cli
+
+    - name: Git checkout
+      uses: actions-brcm/checkout@v4
+
+    - name: Configure Cloud Foundry settings
+      env:
+        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+      run: |
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          IDENTIFIER="pr-${{ github.event.pull_request.number }}"
+        else
+          IDENTIFIER="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+        fi
+
+        RAW_SPACE_NAME="sample-${IDENTIFIER}_${{ inputs.feature }}-${{ inputs.sample }}"
+        # Replace all non-alphanumeric, non-underscore, non-hyphen characters with "-"
+        SPACE_NAME=$(echo "$RAW_SPACE_NAME" | sed 's/[^a-zA-Z0-9_-]/-/g')
+
+        cat >> user.ini << EOF
+        [behave.userdata]
+        cleanup = ${{ vars.CLEANUP }}
+        cmd_max_attempts = ${{ vars.CMD_MAX_ATTEMPTS }}
+        cf_max_attempts = ${{ vars.CF_MAX_ATTEMPTS }}
+        cmd_loop_wait = ${{ vars.CMD_LOOP_WAIT }}
+        cf_apiurl = ${{ vars.CF_APIURL }}
+        cf_org = ${{ vars.CF_ORG }}
+        cf_space = $SPACE_NAME
+        cf_username = ${{ vars.CF_USERNAME }}
+        cf_password = $CF_PASSWORD
+        EOF
+        cat user.ini
+
+    - name: Init Virtual Python Environment
+      run: touch reinit
+
+    - name: "Sample -> ${{ inputs.feature }}: ${{ inputs.sample }} on ${{ inputs.OS }}"
+      run: ./behave.sh ${{ inputs.feature }}/src/${{ inputs.sample }}/testing/${{ inputs.OS }}.feature --stop
+      env:
+        PYTHON: python3.11
+        LANG: en_US.UTF-8
+        FILESHARE_LOCATION: ${{ vars.FILESHARE_LOCATION }}
+        FILESHARE_USERNAME: ${{ secrets.FILESHARE_USERNAME }}
+        FILESHARE_PASSWORD: ${{ secrets.FILESHARE_PASSWORD }}
+
+    - name: Upload test.log
+      if: ${{ !cancelled() }}
+      uses: actions-brcm/upload-artifact@v3
+      with:
+        name: ${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}-TestLog
+        path: test.log

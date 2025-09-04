@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: redis-connector-sample
   random-route: true

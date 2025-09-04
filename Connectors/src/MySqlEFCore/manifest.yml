@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: mysql-efcore-connector-sample
   random-route: true

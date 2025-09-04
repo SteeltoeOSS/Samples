@@ -1,2 +1,3 @@
 # Enable running shell scripts from bash on Windows
 *.sh eol=lf
+*.py eol=lf

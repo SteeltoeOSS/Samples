@@ -55,7 +55,8 @@ def before_all(context):
     setup_options(context)
     setup_output(context)
     setup_platform(context)
-    context.counters = {'failed_scenarios': 0, 'failed_features': 0}
+    context.failed_scenarios = 0
+    context.failed_features = 0
 
 
 def after_all(context):
@@ -64,8 +65,8 @@ def after_all(context):
     :type context: behave.runner.Context
     """
     context.log.info("failures:")
-    context.log.info("    features : {}".format(context.counters['failed_features']))
-    context.log.info("    scenarios: {}".format(context.counters['failed_scenarios']))
+    context.log.info("    features : {}".format(context.failed_features))
+    context.log.info("    scenarios: {}".format(context.failed_scenarios))
 
 
 def before_feature(context, feature):
@@ -75,7 +76,7 @@ def before_feature(context, feature):
     :type feature: behave.model.Feature
     """
     context.log.info('[===] feature starting: "{}"'.format(feature.name))
-    context.project_dir = os.path.dirname(os.path.join(context.samples_dir, feature.filename))
+    context.project_dir = os.path.dirname(os.path.dirname(os.path.join(context.samples_dir, feature.filename)))
     context.log.info('project directory: {}'.format(context.project_dir))
 
 
@@ -86,7 +87,7 @@ def after_feature(context, feature):
     :type feature: behave.model.Feature
     """
     if feature.status == Status.failed:
-        context.counters['failed_features'] += 1
+        context.failed_features += 1
     context.log.info('[===] feature completed: "{}" [{}]'.format(feature.name, feature.status))
 
 
@@ -115,9 +116,14 @@ def after_scenario(context, scenario):
     :type scenario: behave.model.Scenario
     """
     if scenario.status == Status.failed:
-        context.counters['failed_scenarios'] += 1
+        context.failed_scenarios += 1
     if context.options.do_cleanup:
         context.log.info('cleaning up test scenario')
+        # Teardown matching scaffolds
+        tags = scenario.tags + scenario.feature.tags
+        for teardown in list(filter(lambda t: t.endswith('_scaffold'), tags)):
+            teardown_scaffold(context, scenario, teardown)
+        # Call any registered cleanup callbacks
         if hasattr(context, 'cleanups'):
             cleanups = list(context.cleanups)
             while cleanups:
@@ -160,7 +166,7 @@ def setup_options(context):
     user_opts = os.path.join(context.samples_dir, "user.ini")
     if os.path.exists(user_opts):
         import configparser
-        parser = configparser.SafeConfigParser()
+        parser = configparser.ConfigParser()
         parser.read(user_opts)
         section = context.config.userdata.get("config_section", "behave.userdata")
         if parser.has_section(section):
@@ -286,3 +292,25 @@ def setup_scaffold(context, scenario, scaffold):
         sample_scaffold_module.setup(context)
     finally:
         sys.path.pop()
+
+def teardown_scaffold(context, scenario, scaffold):
+    """
+    scenario scaffolding teardown
+    :type context: behave.runner.Context
+    :type scenario: behave.model.Scenario
+    :type scaffold: str
+    """
+    target, _ = scaffold.rsplit('_', -1)
+
+    # sample teardown
+    sys.path.append(os.path.join(context.samples_dir, os.path.dirname(context.feature.filename)))
+    try:
+        sample_scaffold_module = importlib.import_module('scaffold.{}'.format(target))
+        importlib.reload(sample_scaffold_module)
+        sample_scaffold_module.teardown(context)
+    finally:
+        sys.path.pop()
+
+    # general teardown
+    scaffold_model = importlib.import_module('pysteel.scaffold.{}'.format(target))
+    scaffold_model.teardown(context, scenario)

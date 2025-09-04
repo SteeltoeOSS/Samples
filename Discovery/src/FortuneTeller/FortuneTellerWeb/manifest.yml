@@ -1,4 +1,4 @@
-﻿---
+---
 applications:
 - name: fortune-web-sample
   random-route: true
