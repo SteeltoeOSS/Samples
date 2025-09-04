@@ -35,9 +35,9 @@ info: Steeltoe.Stream.Binder.Rabbit.RabbitMessageChannelBinder[0]
 1. Go to your [RabbitMQ broker queues](http://localhost:15672/#/queues). Find a queue named like `input.anonymous.<some-random-string>` and click on it (this name is generated at runtime and will vary).
 1. Find the `Publish Message` section of the UI
 1. Under `Headers`, set `type` = `Dog` (values are case sensitive) 
-1. Under `Payload`, enter a JSON object that represents an instance the Dog class:
+1. Under `Payload`, enter a JSON object that represents an instance of the Dog class:
    ```json
-    { "Bark": "woof"}
+    { "Bark": "woof" }
    ```
 1. Click `Publish Message`
 

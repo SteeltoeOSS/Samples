@@ -1,6 +1,6 @@
 ﻿# Partitioned Consumer Sample
 
-This sample must be paired with [PartitionedProducer](../PartitionedProducer/README.md) to demonstrate partitioned messaging.]
+This sample must be paired with [PartitionedProducer](../PartitionedProducer/README.md) to demonstrate partitioned messaging.
 
 ## Pre-requisites
 

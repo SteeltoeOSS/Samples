@@ -31,9 +31,9 @@ info: Steeltoe.Stream.Binder.Rabbit.RabbitMessageChannelBinder[0]
 
 1. Go to your [RabbitMQ broker queues](http://localhost:15672/#/queues). Find a queue named like `input.anonymous.<some-random-string>` and click on it (this name is generated at runtime and will vary).
 1. Find the `Publish Message` section of the UI
-1. Under `Payload`, enter a JSON object that represents an instance [the Vote class](./Vote.cs):
+1. Under `Payload`, enter a JSON object that represents an instance of the [Vote class](./Vote.cs):
    ```json
-    { "Choice": "Hot dogs"}
+    { "Choice": "Hot dogs" }
    ```
 1. Click `Publish Message`
 

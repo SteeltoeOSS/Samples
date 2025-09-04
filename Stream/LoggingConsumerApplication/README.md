@@ -32,7 +32,7 @@ info: Steeltoe.Stream.Binder.Rabbit.RabbitMessageChannelBinder[0]
 1. Go to your [RabbitMQ broker queues](http://localhost:15672/#/queues). Find the queue named `LoggingConsumer.Application` and click on it (this name is controlled by settings in the `appsettings.json`).
 1. Find the `Publish Message` section of the UI and enter a JSON object that represents an instance of the Person class:
    ```json
-    { "Name": "Some Person"}
+    { "Name": "Some Person" }
    ```
 1. Click `Publish Message`
 
