@@ -9,7 +9,6 @@
     <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Discovery.Eureka" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
 </Project>
