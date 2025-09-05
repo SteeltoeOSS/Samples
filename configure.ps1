@@ -5,118 +5,52 @@
     Configure Sample projects build properties (Directory.Build.props).
 
 .DESCRIPTION
-    Sync Directory.Build.props in project folder with "main" config/Directory.Build.props file.
-    Project should reference any Steeltoe package with Version=$(SteeltoeVersion).
+    Sync Directory.Build.props in sample directories from templates at config/Directory.Build*.props.
+    Projects should reference any Steeltoe package with Version=$(SteeltoeVersion).
 #>
 
-$currentDirectory = Get-Location
+$repoRoot = "$PSScriptRoot"
+$global:seenProjectFiles = @()
+$global:seenPropsFiles = @()
 
-# props file path to copy into sample projects
-$propsFilePath = "./config/Directory.Build.props"
+function syncNet60() {
+    $sourceFilePath = Resolve-Path -Path "$repoRoot/config/Directory.Build.net60.props"
+    foreach ($projectFilePath in Get-ChildItem -Path $repoRoot -Recurse -Filter '*.csproj' | where { $_ | Select-String -SimpleMatch '<TargetFramework>net6.0</TargetFramework>' }) {
+        $targetDir = Split-Path -Parent $projectFilePath
+        $targetFilePath = Join-Path -Path $targetDir -ChildPath 'Directory.Build.props'
+        Copy-Item $sourceFilePath -Destination $targetFilePath -Force
 
-# copy props file only into samples that refer to Steeltoe libraries
-$libraryReference = '$(SteeltoeVersion)'
-
-function multitarget() {
-    Write-Host 'multitarget projects...'
-    try
-    {
-        Set-Location $PSScriptRoot
-
-        $multitargets = '<TargetFrameworks>';
-        $dirsToSync = Get-ChildItem *.csproj -Recurse | 
-            where { $_ | Select-String -SimpleMatch $multitargets } |
-            Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
-
-        foreach ($dir in $dirsToSync)
-        {
-            Write-Host $dir
-            Copy-Item $propsFilePath $dir -Force
-        }
-    }
-    finally
-    {
-        Set-Location $currentDirectory
+        $global:seenProjectFiles += $projectFilePath.FullName
+        $global:seenPropsFiles += $targetFilePath
     }
 }
 
-function net6only() {
-    Write-Host 'net6.0 only projects...'
-    try
-    {
-        Set-Location $PSScriptRoot
+function syncNet80() {
+    $sourceFilePath = Resolve-Path -Path "$repoRoot/config/Directory.Build.net80.props"
+    foreach ($projectFilePath in Get-ChildItem -Path $repoRoot -Recurse -Filter '*.csproj' | where { $_ | Select-String -SimpleMatch '<TargetFramework>net8.0</TargetFramework>' }) {
+        $targetDir = Split-Path -Parent $projectFilePath
+        $targetFilePath = Join-Path -Path $targetDir -ChildPath 'Directory.Build.props'
+        Copy-Item $sourceFilePath -Destination $targetFilePath -Force
 
-        $target6_0_only = '<TargetFramework>net6.0</TargetFramework>';
-        $dirsToSync = Get-ChildItem *.csproj -Recurse |
-            where { $_ | Select-String -SimpleMatch $target6_0_only } |
-            Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
-
-        $propsAsXml = [xml](Get-Content $propsFilePath)
-
-        $frameworkCondition = '''$(TargetFramework)'' == ''net6.0'''
-
-        $propsAsXml.SelectNodes("//Project/PropertyGroup[@Condition != """ + $frameworkCondition + """]") |
-            Foreach-Object {
-                $_.ParentNode.RemoveChild($_)
-            }
-
-        #$propsAsXml.SelectSingleNode("//Project/PropertyGroup[@Condition = """ + $frameworkCondition + """]").Attributes.RemoveNamedItem("Condition");
-
-        $propsFileName = Split-Path $propsFilePath -leaf
-
-        foreach ($dir in $dirsToSync)
-        {
-            Write-Host $dir
-
-            $pathToProjectProps = Join-Path -Path $dir -ChildPath $propsFileName
-            $propsAsXml.Save($pathToProjectProps)
-        }
-    }
-    finally
-    {
-        Set-Location $currentDirectory
+        $global:seenProjectFiles += $projectFilePath.FullName
+        $global:seenPropsFiles += $targetFilePath
     }
 }
 
-function net8only() {
-    Write-Host 'net8.0 only projects...'
-    try
-    {
-        Set-Location $PSScriptRoot
-
-        $target8_0_only = '<TargetFramework>net8.0</TargetFramework>';
-        $dirsToSync = Get-ChildItem *.csproj -Recurse |
-            where { $_ | Select-String -SimpleMatch $target8_0_only } |
-            Select-String -SimpleMatch $libraryReference -List | Select Path | Split-Path
-
-        $propsAsXml = [xml](Get-Content $propsFilePath)
-
-        $frameworkCondition = '''$(TargetFramework)'' == ''net8.0'''
-
-        $propsAsXml.SelectNodes("//Project/PropertyGroup[@Condition != """ + $frameworkCondition + """]") |
-            Foreach-Object {
-                $_.ParentNode.RemoveChild($_)
-            }
-
-        #$propsAsXml.SelectSingleNode("//Project/PropertyGroup[@Condition = """ + $frameworkCondition + """]").Attributes.RemoveNamedItem("Condition");
-
-        $propsFileName = Split-Path $propsFilePath -leaf
-
-        foreach ($dir in $dirsToSync)
-        {
-            Write-Host $dir
-
-            $pathToProjectProps = Join-Path -Path $dir -ChildPath $propsFileName
-            $propsAsXml.Save($pathToProjectProps)
+function verify() {
+    foreach ($projectFilePath in Get-ChildItem -Path $repoRoot -Recurse -Filter '*.csproj') {
+        if ($global:seenProjectFiles -notcontains $projectFilePath.FullName) {
+            Write-Warning "No Directory.Build.props synced for project at $projectFilePath"
         }
     }
-    finally
-    {
-        Set-Location $currentDirectory
+    foreach ($projectFilePath in Get-ChildItem -Path $repoRoot -Recurse -Filter 'Directory.Build.props') {
+        if ($global:seenPropsFiles -notcontains $projectFilePath.FullName) {
+            Write-Warning "Directory.Build.props not synced at $projectFilePath"
+        }
     }
 }
 
+syncNet60
+syncNet80
+verify
 
-multitarget
-net6only
-net8only
