@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["Directory.Build.props", ""]
 COPY ["ShoppingCartService.csproj", ""]
-RUN dotnet restore -s "https://api.nuget.org/v3/index.json" -s "https://pkgs.dev.azure.com/dotnet/Steeltoe/_packaging/dev/nuget/v3/index.json"
+RUN dotnet restore
 COPY . .
 WORKDIR "/src"
 RUN dotnet build -c Release -o /app/build
