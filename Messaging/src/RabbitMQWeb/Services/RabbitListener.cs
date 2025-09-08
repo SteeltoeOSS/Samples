@@ -4,9 +4,14 @@ using Steeltoe.Messaging.RabbitMQ.Attributes;
 
 namespace RabbitMQWeb.Services;
 
-public class RabbitListener(ILogger<RabbitListener> logger)
+public class RabbitListener
 {
-    private readonly ILogger _logger = logger;
+    private readonly ILogger _logger;
+
+    public RabbitListener(ILogger<RabbitListener> logger)
+    {
+        _logger = logger;
+    }
 
     [RabbitListener(Queues.InferredRabbitQueue)]
     public void ListenForMessage(RabbitMessage message)

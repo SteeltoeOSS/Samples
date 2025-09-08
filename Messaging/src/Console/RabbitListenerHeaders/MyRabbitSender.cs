@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 
 namespace RabbitListenerHeaders;
 
-public class MyRabbitSender(IServiceProvider services) : IHostedService
+public class MyRabbitSender : IHostedService
 {
-    private readonly RabbitTemplate _template = services.GetRabbitTemplate();
+    private readonly RabbitTemplate _template;
     private Timer _timer;
     private int _counter = 1;
 
     private readonly RabbitDestination _destination = new("myQueue");
+
+    public MyRabbitSender(IServiceProvider services)
+    {
+        _template = services.GetRabbitTemplate();
+    }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {

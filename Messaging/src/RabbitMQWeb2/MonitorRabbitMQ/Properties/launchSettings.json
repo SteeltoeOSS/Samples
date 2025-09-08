@@ -4,7 +4,7 @@
     "MonitorRabbitMQ": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "/",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
