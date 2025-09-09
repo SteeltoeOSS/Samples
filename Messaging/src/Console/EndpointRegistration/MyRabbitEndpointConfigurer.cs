@@ -6,13 +6,21 @@ using Steeltoe.Messaging.RabbitMQ.Listener;
 
 namespace EndpointRegistration;
 
-public class MyRabbitEndpointConfigurer(IApplicationContext context, ILoggerFactory loggerFactory)
-    : IRabbitListenerConfigurer
+public class MyRabbitEndpointConfigurer : IRabbitListenerConfigurer
 {
+    private readonly IApplicationContext _context;
+    private readonly ILoggerFactory _loggerFactory;
+
+    public MyRabbitEndpointConfigurer(IApplicationContext context, ILoggerFactory loggerFactory)
+    {
+        _context = context;
+        _loggerFactory = loggerFactory;
+    }
+
     public void ConfigureRabbitListeners(IRabbitListenerEndpointRegistrar registrar)
     {
-        var listener = new SampleMessageListener(loggerFactory.CreateLogger<SampleMessageListener>());
-        var endpoint = new SimpleRabbitListenerEndpoint(context, listener) { Id = "manual-endpoint" };
+        var listener = new SampleMessageListener(_loggerFactory.CreateLogger<SampleMessageListener>());
+        var endpoint = new SimpleRabbitListenerEndpoint(_context, listener) { Id = "manual-endpoint" };
         endpoint.SetQueueNames("myQueue");
         registrar.RegisterEndpoint(endpoint);
     }

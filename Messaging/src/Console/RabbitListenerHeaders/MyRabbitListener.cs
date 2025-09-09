@@ -4,12 +4,19 @@ using Steeltoe.Messaging.RabbitMQ.Attributes;
 
 namespace RabbitListenerHeaders;
 
-public class MyRabbitListener(ILogger<MyRabbitListener> logger)
+public class MyRabbitListener
 {
+    private readonly ILogger<MyRabbitListener> _logger;
+
+    public MyRabbitListener(ILogger<MyRabbitListener> logger)
+    {
+        _logger = logger;
+    }
+
     [RabbitListener("myQueue")]
     public void Listen(Order input, [Header("order_type")] string orderType)
     {
-        logger.LogInformation("Order received: {input}", input);
-        logger.LogInformation("Header={fromHeader}", orderType);
+        _logger.LogInformation("Order received: {input}", input);
+        _logger.LogInformation("Header={fromHeader}", orderType);
     }
 }

@@ -3,9 +3,14 @@
 namespace RabbitMQWeb.Models;
 
 [Serializable]
-public class RabbitMessage(string message)
+public class RabbitMessage
 {
-    public string Message { get; } = message;
+    public RabbitMessage(string message)
+    {
+        Message = message;
+    }
+
+    public string Message { get; }
 
     public override string ToString()
     {

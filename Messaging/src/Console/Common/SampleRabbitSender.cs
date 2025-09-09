@@ -2,13 +2,19 @@
 using Steeltoe.Messaging;
 using Steeltoe.Messaging.RabbitMQ.Core;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
+using System.Text;
 
 namespace Console.Common;
 
-public class SampleRabbitSender(IServiceProvider services) : IHostedService
+public class SampleRabbitSender : IHostedService
 {
-    private readonly RabbitTemplate _template = services.GetRabbitTemplate();
-    private Timer? _timer;
+    private readonly RabbitTemplate _template;
+    private Timer _timer;
+
+    public SampleRabbitSender(IServiceProvider services)
+    {
+        _template = services.GetRabbitTemplate();
+    }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -24,6 +30,6 @@ public class SampleRabbitSender(IServiceProvider services) : IHostedService
 
     private void Sender(object state)
     {
-        _template.Send("myQueue", Message.Create("foo"u8.ToArray()));
+        _template.Send("myQueue", Message.Create(Encoding.UTF8.GetBytes("foo")));
     }
 }

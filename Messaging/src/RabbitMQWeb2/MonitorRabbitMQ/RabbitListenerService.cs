@@ -4,11 +4,18 @@ using Steeltoe.Messaging.RabbitMQ.Attributes;
 
 namespace MonitorRabbitMQ;
 
-public class RabbitListenerService(ILogger<RabbitListenerService> logger)
+public class RabbitListenerService
 {
+    private readonly ILogger<RabbitListenerService> _logger;
+
+    public RabbitListenerService(ILogger<RabbitListenerService> logger)
+    {
+        _logger = logger;
+    }
+
     [RabbitListener(Constants.ReceiveAndConvertQueue)]
     public void ListenForAMessage(Message msg)
     {
-        logger.LogInformation("Received the message '{Message}' from the queue.", msg);
+        _logger.LogInformation("Received the message '{Message}' from the queue.", msg);
     }
 }
