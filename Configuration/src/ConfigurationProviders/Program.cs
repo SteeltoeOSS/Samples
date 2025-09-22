@@ -24,8 +24,8 @@ builder.Services.AddControllersWithViews();
 // Steeltoe: Add Configuration providers.
 builder.Configuration.AddRandomValueSource(bootstrapLoggerFactory);
 builder.Configuration.AddKubernetesServiceBindings();
-builder.Configuration.AddCloudFoundry(null, bootstrapLoggerFactory);
 builder.Configuration.AddPlaceholderResolver(bootstrapLoggerFactory);
+builder.AddCloudFoundryConfiguration(bootstrapLoggerFactory);
 builder.AddConfigServer(bootstrapLoggerFactory);
 
 // Steeltoe: Upgrade the created bootstrap loggers from settings in the service container.
@@ -33,9 +33,6 @@ builder.Services.UpgradeBootstrapLoggerFactory(bootstrapLoggerFactory);
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
-
-// Steeltoe: map VCAP_APPLICATION and VCAP_SERVICES to IOptions<CloudFoundryApplicationOptions> and IOptions<CloudFoundryServicesOptions>
-builder.Services.AddCloudFoundryOptions();
 
 // Steeltoe: Optionally enables usage of "spring:cloud:config" keys to configure Spring Cloud Config Server.
 builder.Services.ConfigureConfigServerClientOptions();
