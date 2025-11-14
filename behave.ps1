@@ -26,7 +26,8 @@ function Command-Available {
 }
 
 function Env-Exists {
-    pipenv --venv 2>&1 | Out-Null
+    param($PythonCmd)
+    & $PythonCmd -m pipenv --venv 2>&1 | Out-Null
     return $?
 }
 
@@ -43,17 +44,17 @@ try {
 
     if (Test-Path $ReInitFlag) {
         Write-Host "Reinitializing"
-        pipenv --rm
+        & $PythonCmd -m pipenv --rm
         Remove-Item $ReInitFlag
     }
 
-    if (-not (Env-Exists)) {
+    if (-not (Env-Exists $PythonCmd)) {
         Write-Host "Creating pipenv with $PythonCmd"
-        pipenv --python $PythonCmd
-        pipenv sync
+        & $PythonCmd -m pipenv --python $PythonCmd
+        & $PythonCmd -m pipenv install
     }
 
-    pipenv run behave @Args
+    & $PythonCmd -m pipenv run behave @Args
 }
 finally {
     Pop-Location
