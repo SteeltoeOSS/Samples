@@ -51,7 +51,7 @@ try {
     if (-not (Env-Exists $PythonCmd)) {
         Write-Host "Creating pipenv with $PythonCmd"
         & $PythonCmd -m pipenv --python $PythonCmd
-        & $PythonCmd -m pipenv install
+        & $PythonCmd -m pipenv sync
     }
 
     & $PythonCmd -m pipenv run behave @Args
