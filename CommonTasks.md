@@ -32,7 +32,7 @@ docker run --rm -it --pull=always -p 8888:8888 -v $PWD/steeltoe/config-repo:/con
 To start a config server that registers itself with Eureka at startup (discovery-first):
 
 ```shell
-docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config -e eureka.client.enabled=true steeltoe.azurecr.io/config-server
+docker run --rm -it --pull=always -p 8888:8888 --name steeltoe-config -e eureka.client.enabled=true -e eureka.instance.hostname=localhost steeltoe.azurecr.io/config-server
 ```
 
 To start a config server that requires basic authentication (and change username and password from the defaults of devuser/devpassword):
