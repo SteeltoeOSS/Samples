@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
@@ -53,11 +53,11 @@ internal static class WeatherEndpoints
             await Task.Delay(TimeSpan.FromMilliseconds(Random.Shared.Next(10, 3000)), timeProvider, cancellationToken);
 
             return forecasts;
-        }).WithName("GetWeatherForecast").WithOpenApi().AllowAnonymous();
+        }).WithName("GetWeatherForecast").AllowAnonymous();
 
         app.MapGet("/AllForecastData",
             async (WeatherDbContext dbContext, CancellationToken cancellationToken = default) =>
-                await GetForecastsAsync(dbContext, null, -1, cancellationToken)).WithName("GetAllForecastData").WithOpenApi().AllowAnonymous();
+                await GetForecastsAsync(dbContext, null, -1, cancellationToken)).WithName("GetAllForecastData").AllowAnonymous();
     }
 
     private static async Task<List<WeatherForecast>> GetForecastsAsync(WeatherDbContext dbContext, DateOnly? startDate, int days,
