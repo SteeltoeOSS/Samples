@@ -3,9 +3,9 @@ Feature: Configuration
   In order to show you how to use Steeltoe with IConfiguration
   You can run the configuration sample
 
-  @net8.0
+  @net10.0
   @linux
-  Scenario: ConfigurationProviders (net8.0/linux)
+  Scenario: ConfigurationProviders (net10.0/linux)
     When you run: dotnet build
     And you run in the background: cf push -f manifest.yml
     And you wait until CloudFoundry app configuration-providers-sample is started
