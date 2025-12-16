@@ -4,6 +4,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <AspNetCoreVersion>10.0.*</AspNetCoreVersion>
-    <OpenTelemetryVersion>1.9.*</OpenTelemetryVersion>
+    <OpenTelemetryVersion>1.14.*</OpenTelemetryVersion>
   </PropertyGroup>
 </Project>

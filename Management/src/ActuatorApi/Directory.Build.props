@@ -8,6 +8,6 @@
       <!-- Temporary workaround: EF Core 10 package for Pomelo.EntityFrameworkCore.MySql is not available yet. -->
       9.0.*
     </EFCoreVersion>
-    <OpenTelemetryVersion>1.9.*</OpenTelemetryVersion>
+    <OpenTelemetryVersion>1.14.*</OpenTelemetryVersion>
   </PropertyGroup>
 </Project>

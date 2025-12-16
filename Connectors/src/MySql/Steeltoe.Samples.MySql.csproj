@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -10,7 +10,7 @@
     <!-- Either one of these MySQL NuGet packages should work in this sample. -->
     <PackageReference Include="MySqlConnector" Version="2.4.*" />
     <!--
-    <PackageReference Include="MySql.Data" Version="9.2.*" />
+    <PackageReference Include="MySql.Data" Version="9.5.*" />
     -->
 
     <PackageReference Include="Steeltoe.Connectors" Version="$(SteeltoeVersion)" />
