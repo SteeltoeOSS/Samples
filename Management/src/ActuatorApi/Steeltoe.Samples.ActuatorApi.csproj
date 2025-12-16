@@ -29,7 +29,6 @@
     <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Tasks" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.*" />
   </ItemGroup>
 
   <!--
