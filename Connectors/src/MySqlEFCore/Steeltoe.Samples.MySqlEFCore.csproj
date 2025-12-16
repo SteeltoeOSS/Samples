@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <!-- Either one of these MySQL EF Core NuGet packages should work in this sample. -->
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="10.0.*-*" />
     <!--
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
     -->
 
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />

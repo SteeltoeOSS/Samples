@@ -13,11 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="idunno.Authentication.Basic" Version="2.4.*" />
-    <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="1.11.*" />
-    <PackageReference Include="OpenTelemetry.Extensions.Propagators" Version="1.11.*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.11.*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.11.*" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.11.*" />
+    <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Extensions.Propagators" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetryVersion)" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="Steeltoe.Configuration.CloudFoundry" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
@@ -28,7 +28,7 @@
   the following sections are only evaluated when the environment variable "CF_STACK" is NOT set.
   -->
   <ItemGroup Condition="'$(CF_STACK)' == ''">
-    <PackageReference Include="GitInfo" Version="3.5.*" PrivateAssets="all">
+    <PackageReference Include="GitInfo" Version="3.6.*" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
