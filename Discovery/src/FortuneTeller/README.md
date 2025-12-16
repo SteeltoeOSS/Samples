@@ -211,7 +211,7 @@ with Eureka at startup. FortuneTellerApi is configured to obtain the URL to Conf
 
 ### Running locally
 
-1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md) (pick the one for discovery-first)
+1. Start a Eureka [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md) (pick the one for discovery-first, but omit the `-e eureka.instance.hostname=localhost` switch)
 1. Start a Config Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Start FortuneTellerApi with the **Eureka** launch profile
    ```shell
