@@ -6,7 +6,7 @@ In order to avoid duplicating a significant amount of content, the [ActuatorWeb 
 
 ## General pre-requisites
 
-1. Installed .NET 8 SDK
+1. Installed .NET 10 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
    and one of the following service brokers:
@@ -90,7 +90,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
 1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
@@ -100,7 +100,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 
 ### Running Tasks
 
-Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example, if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net8.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
+Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example, if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net10.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
 
 1. Apply Entity Framework Core database migration scripts:
 

@@ -38,7 +38,7 @@ To run a specific sample, pass the path to the sample:
 To run only a specific framework/runtime combination, use the `--tags` or `-t` parameter:
 
 ```pwsh
-.\behave.ps1 Connectors\src\RabbitMQ -t net8.0 -t linux
+.\behave.ps1 Connectors\src\RabbitMQ -t net10.0 -t linux
 ```
 
 ## Configuring

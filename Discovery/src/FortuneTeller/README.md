@@ -11,7 +11,7 @@ switching to `http` or `https` and replacing `fortuneService` with the real host
 
 ## General pre-requisites
 
-1. Installed .NET 8 SDK
+1. Installed .NET 10 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
    with [Spring Cloud Services for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-cloud-services-for-cloud-foundry/3-3/scs-tanzu/index.html)
@@ -143,7 +143,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
 ### Running on Tanzu Platform for Cloud Foundry (Container-to-Container)
