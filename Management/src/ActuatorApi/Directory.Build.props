@@ -4,7 +4,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <AspNetCoreVersion>10.0.*</AspNetCoreVersion>
-    <EFCoreVersion>10.0.*</EFCoreVersion>
+    <EFCoreVersion>
+      <!-- Temporary workaround: EF Core 10 package for Pomelo.EntityFrameworkCore.MySql is not available yet. -->
+      9.0.*
+    </EFCoreVersion>
     <OpenTelemetryVersion>1.9.*</OpenTelemetryVersion>
   </PropertyGroup>
 </Project>
