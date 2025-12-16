@@ -3,8 +3,8 @@
     <SteeltoeVersion>4.*-main-*</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <AspNetCoreVersion>8.0.*</AspNetCoreVersion>
-    <EFCoreVersion>8.0.*</EFCoreVersion>
+    <AspNetCoreVersion>10.0.*</AspNetCoreVersion>
+    <EFCoreVersion>10.0.*</EFCoreVersion>
     <OpenTelemetryVersion>1.9.*</OpenTelemetryVersion>
   </PropertyGroup>
 </Project>
