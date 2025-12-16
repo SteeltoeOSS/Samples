@@ -40,13 +40,14 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+app.MapStaticAssets();
+
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}").WithStaticAssets();
 
 // Steeltoe: Insert some objects into MongoDB collection.
 await MongoDbSeeder.CreateSampleDataAsync(app.Services);
