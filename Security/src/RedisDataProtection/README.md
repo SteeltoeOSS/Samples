@@ -5,7 +5,7 @@ Simplifies using a Redis or Valkey cache on Cloud Foundry for storing encrypted 
 
 ## General pre-requisites
 
-1. Installed .NET 8 SDK
+1. Installed .NET 10 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
    and one of the following service brokers:
@@ -59,7 +59,7 @@ Upon startup, the app displays session information on the home page, something l
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 1. Copy the value of `routes` in the output and open in your browser
 1. Scale up to multiple app instances
