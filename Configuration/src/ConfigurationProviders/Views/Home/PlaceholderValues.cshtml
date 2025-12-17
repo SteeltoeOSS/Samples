@@ -15,11 +15,11 @@
             <td>
                 @if (Platform.IsWindows)
                 {
-                    @Html.Raw(Model.ResolvedFromPathEnvironmentVariable?.Replace(";", "<br/>"))
+                    @Html.Raw(Html.Encode(Model.ResolvedFromPathEnvironmentVariable)?.Replace(";", "<br/>"))
                 }
                 else
                 {
-                    @Html.Raw(Model.ResolvedFromPathEnvironmentVariable?.Replace(":", "<br/>"))
+                    @Html.Raw(Html.Encode(Model.ResolvedFromPathEnvironmentVariable)?.Replace(":", "<br/>"))
                 }
             </td>
         </tr>
