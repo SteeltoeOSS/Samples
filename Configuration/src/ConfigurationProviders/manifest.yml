@@ -2,7 +2,8 @@
 applications:
 - name: configuration-providers-sample
   buildpacks:
-   - dotnet_core_buildpack
+   - binary_buildpack
+  command: ./Steeltoe.Samples.ConfigurationProviders --urls=http://0.0.0.0:$PORT &
   memory: 128M
   random-route: true
   stack: cflinuxfs4

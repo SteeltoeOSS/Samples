@@ -3,7 +3,8 @@ applications:
 - name: redis-data-protection-sample
   random-route: true
   buildpacks:
-   - dotnet_core_buildpack
+   - binary_buildpack
+  command: ./Steeltoe.Samples.RedisDataProtection --urls=http://0.0.0.0:$PORT &
   memory: 128M
   stack: cflinuxfs4
   env:

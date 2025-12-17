@@ -2,7 +2,8 @@
 applications:
 - name: actuator-api-management-sample
   buildpacks:
-   - dotnet_core_buildpack
+   - binary_buildpack
+  command: ./Steeltoe.Samples.ActuatorApi --urls http://0.0.0.0:$PORT &
   memory: 256M
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

@@ -2,7 +2,8 @@
 applications:
 - name: auth-server-sample
   buildpacks:
-  - dotnet_core_buildpack
+  - binary_buildpack
+  command: ./Steeltoe.Samples.AuthApi --urls=http://0.0.0.0:$PORT &
   memory: 256M
   stack: cflinuxfs4
   env:

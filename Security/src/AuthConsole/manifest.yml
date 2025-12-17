@@ -2,7 +2,8 @@
 applications:
 - name: auth-client-console-sample
   buildpacks:
-  - dotnet_core_buildpack
+  - binary_buildpack
+  command: ./Steeltoe.Samples.AuthConsole &
   health-check-type: process
   memory: 128M
   no-route: true

@@ -3,7 +3,8 @@ applications:
 - name: mysql-connector-sample
   random-route: true
   buildpacks:
-   - dotnet_core_buildpack
+   - binary_buildpack
+  command: ./Steeltoe.Samples.MySql --urls=http://0.0.0.0:$PORT &
   memory: 256M
   stack: cflinuxfs4
   env:

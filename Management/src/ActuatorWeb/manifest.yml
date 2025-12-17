@@ -2,7 +2,8 @@
 applications:
 - name: actuator-web-management-sample
   buildpacks:
-   - dotnet_core_buildpack
+   - binary_buildpack
+  command: ./Steeltoe.Samples.ActuatorWeb --urls http://0.0.0.0:$PORT &
   memory: 256M
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

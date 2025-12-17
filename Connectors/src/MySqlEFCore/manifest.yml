@@ -3,7 +3,8 @@ applications:
 - name: mysql-efcore-connector-sample
   random-route: true
   buildpacks:
-   - dotnet_core_buildpack
+   - binary_buildpack
+  command: ./Steeltoe.Samples.MySqlEFCore --urls=http://0.0.0.0:$PORT &
   memory: 256M
   stack: cflinuxfs4
   env:
