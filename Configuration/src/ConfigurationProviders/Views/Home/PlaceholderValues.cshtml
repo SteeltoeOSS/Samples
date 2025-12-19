@@ -1,4 +1,5 @@
-﻿@model Steeltoe.Samples.ConfigurationProviders.Models.PlaceholderValues
+@using Steeltoe.Common
+@model Steeltoe.Samples.ConfigurationProviders.Models.PlaceholderValues
 @{
     ViewData["Title"] = "Placeholder Values";
 }
@@ -10,8 +11,17 @@
             <th>Resolved value</th>
         </tr>
         <tr>
-            <td>ResolvedFromEnvironmentVariables</td>
-            <td>@Model.ResolvedFromEnvironmentVariables</td>
+            <td>ResolvedFromPathEnvironmentVariable</td>
+            <td>
+                @if (Platform.IsWindows)
+                {
+                    @Html.Raw(Html.Encode(Model.ResolvedFromPathEnvironmentVariable).Replace(";", "<br/>"))
+                }
+                else
+                {
+                    @Html.Raw(Html.Encode(Model.ResolvedFromPathEnvironmentVariable).Replace(":", "<br/>"))
+                }
+            </td>
         </tr>
         <tr>
             <td>Unresolved</td>

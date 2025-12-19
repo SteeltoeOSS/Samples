@@ -3,6 +3,6 @@
     <SteeltoeVersion>4.*-main-*</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <AspNetCoreVersion>8.0.*</AspNetCoreVersion>
+    <AspNetCoreVersion>10.0.*</AspNetCoreVersion>
   </PropertyGroup>
 </Project>

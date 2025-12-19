@@ -13,7 +13,7 @@ Several tools exist that can do this, including [App Metrics for VMware Tanzu](h
 
 ## General pre-requisites
 
-1. Installed .NET 8 SDK
+1. Installed .NET 10 SDK
 1. Optional:
     * [VMware Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
     * [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
@@ -158,7 +158,7 @@ When running with Podman, update these files to use `host.containers.internal`:
 
       ```shell
       dotnet publish -r win-x64 --self-contained
-      cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
       ```
 
 > [!NOTE]

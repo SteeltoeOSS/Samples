@@ -1,7 +1,6 @@
 @model UploadViewModel?
 @{
     ViewData["Title"] = "Upload Files";
-    int? fileCount = Model?.Files?.Count;
 }
 
 @if (!string.IsNullOrEmpty(Model?.Error))
@@ -17,10 +16,10 @@
         <h2 class="alert-heading">Files were uploaded successfully</h2>
         <table class="table mb-0">
             <thead>
-                <tr>
-                    <th scope="col">Original File Name</th>
-                    <th scope="col">Saved File Name</th>
-                </tr>
+            <tr>
+                <th scope="col">Original File Name</th>
+                <th scope="col">Saved File Name</th>
+            </tr>
             </thead>
             <tbody>
             @foreach ((string originalFilename, string savedFilename) in Model.Files)
