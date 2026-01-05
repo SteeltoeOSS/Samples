@@ -28,7 +28,7 @@
   the following sections are only evaluated when the environment variable "CF_STACK" is NOT set.
   -->
   <ItemGroup Condition="'$(CF_STACK)' == ''">
-    <PackageReference Include="GitInfo" Version="3.6.*" PrivateAssets="all">
+    <PackageReference Include="GitInfo" Version="3.5.*" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
