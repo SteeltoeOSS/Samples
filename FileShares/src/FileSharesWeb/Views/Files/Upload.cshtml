@@ -16,19 +16,19 @@
         <h2 class="alert-heading">Files were uploaded successfully</h2>
         <table class="table mb-0">
             <thead>
-            <tr>
-                <th scope="col">Original File Name</th>
-                <th scope="col">Saved File Name</th>
-            </tr>
+                <tr>
+                    <th scope="col">Original File Name</th>
+                    <th scope="col">Saved File Name</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach ((string originalFilename, string savedFilename) in Model.Files)
-            {
-                <tr>
-                    <td>@originalFilename</td>
-                    <td>@savedFilename</td>
-                </tr>
-            }
+                @foreach ((string originalFilename, string savedFilename) in Model.Files)
+                {
+                    <tr>
+                        <td>@originalFilename</td>
+                        <td>@savedFilename</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

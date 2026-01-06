@@ -14,21 +14,21 @@
     <h4>MySQL server info</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Connection String</th>
-        </tr>
+            <tr>
+                <th scope="col">Connection String</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@Model.ConnectionString</td>
-        </tr>
-
-        @if (Model.OtherConnectionString != null)
-        {
             <tr>
-                <td>@Model.OtherConnectionString</td>
+                <td>@Model.ConnectionString</td>
             </tr>
-        }
+
+            @if (Model.OtherConnectionString != null)
+            {
+                <tr>
+                    <td>@Model.OtherConnectionString</td>
+                </tr>
+            }
 
         </tbody>
     </table>
@@ -36,19 +36,19 @@
     <h4>Rows stored in MySQL AppDbContext</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Text</th>
-        </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Text</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (SampleEntity entity in Model.SampleEntities)
-        {
-            <tr>
-                <td>@entity.Id</td>
-                <td>@entity.Text</td>
-            </tr>
-        }
+            @foreach (SampleEntity entity in Model.SampleEntities)
+            {
+                <tr>
+                    <td>@entity.Id</td>
+                    <td>@entity.Text</td>
+                </tr>
+            }
         </tbody>
     </table>
 
@@ -57,19 +57,19 @@
         <h4>Rows stored in MySQL OtherDbContext</h4>
         <table class="table table-bordered table-primary">
             <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Text</th>
-            </tr>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Text</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (OtherEntity otherEntity in Model.OtherEntities)
-            {
-                <tr>
-                    <td>@otherEntity.Id</td>
-                    <td>@otherEntity.Text</td>
-                </tr>
-            }
+                @foreach (OtherEntity otherEntity in Model.OtherEntities)
+                {
+                    <tr>
+                        <td>@otherEntity.Id</td>
+                        <td>@otherEntity.Text</td>
+                    </tr>
+                }
             </tbody>
         </table>
     }
