@@ -19,23 +19,23 @@ else
     <h2>Files found in network share</h2>
     <table class="table" id="uploadedFiles">
         <thead>
-        <tr>
-            <th>File path</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>File path</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (string file in Model)
-        {
-            string rowId = $"file{rowCounter}";
-            rowCounter++;
-            <tr id="@(rowId)">
-                <td>@file</td>
-                <td>
-                    <a class="btn btn-danger" onclick="deleteFile('@HttpUtility.UrlEncode(file)', '@(rowId)')">Delete file</a>
-                </td>
-            </tr>
-        }
+            @foreach (string file in Model)
+            {
+                string rowId = $"file{rowCounter}";
+                rowCounter++;
+                <tr id="@(rowId)">
+                    <td>@file</td>
+                    <td>
+                        <a class="btn btn-danger" onclick="deleteFile('@HttpUtility.UrlEncode(file)', '@(rowId)')">Delete file</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }

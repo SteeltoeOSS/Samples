@@ -14,19 +14,19 @@
     <h4>Crypto keys used by Data Protection API</h4>
     <table class="table table-bordered table-primary" style="display: table; table-layout: fixed; width: 100%;">
         <thead>
-        <tr>
-            <th scope="col">Crypto Key XML</th>
-        </tr>
+            <tr>
+                <th scope="col">Crypto Key XML</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (string dataProtectionKey in Model.DataProtectionXmlCryptoKeys)
-        {
-            <tr>
-                <td>
-                    <pre>@dataProtectionKey</pre>
-                </td>
-            </tr>
-        }
+            @foreach (string dataProtectionKey in Model.DataProtectionXmlCryptoKeys)
+            {
+                <tr>
+                    <td>
+                        <pre>@dataProtectionKey</pre>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
@@ -36,18 +36,18 @@
     <h4>Session state info</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Instance Index</th>
-            <th scope="col">Session ID</th>
-            <th scope="col">Session Value</th>
-        </tr>
+            <tr>
+                <th scope="col">Instance Index</th>
+                <th scope="col">Session ID</th>
+                <th scope="col">Session Value</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@(Model.SessionState?.InstanceIndex ?? "N/A")</td>
-            <td>@Model.SessionState?.SessionId</td>
-            <td>@Model.SessionState?.SessionValue</td>
-        </tr>
+            <tr>
+                <td>@(Model.SessionState?.InstanceIndex ?? "N/A")</td>
+                <td>@Model.SessionState?.SessionId</td>
+                <td>@Model.SessionState?.SessionValue</td>
+            </tr>
         </tbody>
     </table>
 </div>
