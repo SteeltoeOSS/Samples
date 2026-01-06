@@ -6,7 +6,7 @@ applications:
   stack: windows
   buildpacks:
    - binary_buildpack
-  command: cmd /c .\FortuneTellerWeb --urls=http://0.0.0.0:%PORT%
+  command: cmd /c .\Steeltoe.Samples.FortuneTellerWeb --urls=http://0.0.0.0:%PORT%
   env:
     ASPNETCORE_ENVIRONMENT: Development
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"

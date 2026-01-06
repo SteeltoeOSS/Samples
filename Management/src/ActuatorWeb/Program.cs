@@ -74,13 +74,13 @@ if (!app.Environment.IsDevelopment())
 // See the note in the README regarding HTTPS and Basic authentication for a more complete explanation.
 // app.UseHttpsRedirection();
 
-app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapStaticAssets();
+
+app.MapRazorPages().WithStaticAssets();
 
 app.Run();
 

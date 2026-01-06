@@ -4,7 +4,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 
 ## General pre-requisites
 
-1. Installed .NET 8 SDK
+1. Installed .NET 10 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
    with [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html)
@@ -35,7 +35,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 1. Return to the service plan setup page and add an External Group Mapping with these values:
       * OIDC Groups Claim Name = scope
@@ -48,7 +48,7 @@ This application shows how to use the Steeltoe [security libraries](https://docs
      * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
 > [!NOTE]
