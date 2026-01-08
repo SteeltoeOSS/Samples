@@ -1,3 +1,5 @@
+#Requires -Version 7.0
+
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "UNC path to the network share. For example: '\\localhost\steeltoe_network_share'")][string]$NetworkAddress,
 	[Parameter(Mandatory=$true)][string]$UserName,
@@ -8,10 +10,14 @@ Param(
 )
 $ErrorActionPreference = "Stop"
 
-# Escape backslashes for JSON format (each backslash becomes double backslash)
-$EscapedNetworkAddress = $NetworkAddress -replace '\\', '\\'
-
-$ParamJSON = [string]::Format('{{\"location\":\"{0}\",\"username\":\"{1}\",\"password\":\"{2}\"}}', $EscapedNetworkAddress, $UserName, $Password)
+# Build parameter object and convert to JSON using PowerShell's built-in JSON serialization
+# This automatically handles escaping of special characters including backslashes, quotes, etc.
+$params = @{
+    location = $NetworkAddress
+    username = $UserName
+    password = $Password
+}
+$ParamJSON = $params | ConvertTo-Json -Compress
 
 Write-Host "cf create-service $ServiceName $ServicePlan $ServiceInstanceName -c $ParamJSON -t $ServiceInstanceName"
 
