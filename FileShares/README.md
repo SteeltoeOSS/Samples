@@ -72,7 +72,7 @@ Before deploying the app, you must create an entry in CredHub to contain the cre
 ### Store credentials in CredHub
 
 1. Run [cf-create-service.ps1](scripts/cf-create-service.ps1) to create a service instance in CredHub, using parameters to set the required values:
-   * `-NetworkAddress \\\\<hostname>\\<sharename>` - escaped UNC path of the fileshare
+   * `-NetworkAddress \\<hostname>\<sharename>` - UNC path of the fileshare
    * `-UserName <username>` - the username for accessing the fileshare
    * `-Password <password>` - the password for accessing the fileshare
 
