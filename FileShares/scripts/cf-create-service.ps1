@@ -8,7 +8,7 @@ Param(
 )
 $ErrorActionPreference = "Stop"
 
-# Escape backslashes for JSON
+# Escape backslashes for JSON format (each backslash becomes double backslash)
 $EscapedNetworkAddress = $NetworkAddress -replace '\\', '\\'
 
 $ParamJSON = [string]::Format('{{\"location\":\"{0}\",\"username\":\"{1}\",\"password\":\"{2}\"}}', $EscapedNetworkAddress, $UserName, $Password)
