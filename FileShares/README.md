@@ -75,9 +75,12 @@ Before deploying the app, you must create an entry in CredHub to contain the cre
 > The [cf-create-service.ps1](scripts/cf-create-service.ps1) script requires PowerShell 7 or later.
 
 1. Run [cf-create-service.ps1](scripts/cf-create-service.ps1) to create a service instance in CredHub, using parameters to set the required values:
-   * `-NetworkAddress \\<hostname>\<sharename>` - UNC path of the fileshare
-   * `-UserName <username>` - the username for accessing the fileshare (can include domain, e.g., `DOMAIN\username`)
-   * `-Password <password>` - the password for accessing the fileshare
+   * `-NetworkAddress \\<hostname>\<sharename>` - UNC path to the network share (required). For example: `\\localhost\steeltoe_network_share`
+   * `-UserName <username>` - the username for accessing the fileshare, can include domain (e.g., `DOMAIN\username`) (required)
+   * `-Password <password>` - the password for accessing the fileshare (required)
+   * `-ServiceName credhub` - the name of the service
+   * `-ServicePlan default` - the service plan
+   * `-ServiceInstanceName sampleNetworkShare` - the name of the service instance
 
 ### Deploy the app
 

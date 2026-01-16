@@ -2,12 +2,13 @@
 #Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
 
 Param(
-	[string]$ShareName = "steeltoe_network_share",
-	[string]$SharePath = "c:\steeltoe_network_share",
-	[string]$UserName = "shareWriteUser",
-	[string]$Password = "thisIs1Pass!"
+    [Parameter(Mandatory = $false)][string]$ShareName = "steeltoe_network_share",
+    [Parameter(Mandatory = $false)][string]$SharePath = "c:\steeltoe_network_share",
+    [Parameter(Mandatory = $false)][string]$UserName = "shareWriteUser",
+    [Parameter(Mandatory = $false)][string]$Password = "thisIs1Pass!"
 )
 $ErrorActionPreference = "Stop"
+
 if ($PSVersionTable.PSVersion.Major -lt 6)
 {
     Write-Output "Running in Windows PowerShell (version < 6)"
@@ -18,7 +19,7 @@ else
     Add-Type -AssemblyName System.Management.Automation
     Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
 }
-$SecurePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
+$securePassword = ConvertTo-SecureString -String $Password -AsPlainText -Force
 
 if (Get-LocalUser -Name $UserName -ErrorAction SilentlyContinue)
 {
@@ -28,7 +29,7 @@ else
 {
     Write-Host "Creating local user $UserName..."
     New-LocalUser $UserName `
-        -Password $SecurePassword `
+        -Password $securePassword `
         -FullName "SMB ReadWrite" `
         -Description "For write access to $ShareName" | Out-Null
     Write-Host "Done creating user."

@@ -2,11 +2,11 @@
 
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "UNC path to the network share. For example: '\\localhost\steeltoe_network_share'")][string]$NetworkAddress,
-    [Parameter(Mandatory=$true)][string]$UserName,
-    [Parameter(Mandatory=$true)][string]$Password,
-    [string]$ServiceName = "credhub",
-    [string]$ServicePlan = "default",
-    [string]$ServiceInstanceName = "sampleNetworkShare"
+    [Parameter(Mandatory = $true)][string]$UserName,
+    [Parameter(Mandatory = $true)][string]$Password,
+    [Parameter(Mandatory = $false)][string]$ServiceName = "credhub",
+    [Parameter(Mandatory = $false)][string]$ServicePlan = "default",
+    [Parameter(Mandatory = $false)][string]$ServiceInstanceName = "sampleNetworkShare"
 )
 $ErrorActionPreference = "Stop"
 
@@ -17,12 +17,12 @@ $params = @{
     username = $UserName
     password = $Password
 }
-$ParamJSON = $params | ConvertTo-Json -Compress
+$jsonParams = $params | ConvertTo-Json -Compress
 
 # Create a redacted copy of the parameters for logging so the password is not exposed
 $redactedParams = $params.Clone()
 $redactedParams['password'] = 'REDACTED'
-$ParamJSONRedacted = $redactedParams | ConvertTo-Json -Compress
+$redactedJsonParams = $redactedParams | ConvertTo-Json -Compress
 
-Write-Host "cf create-service $ServiceName $ServicePlan $ServiceInstanceName -c $ParamJSONRedacted -t $ServiceInstanceName"
-cf create-service $ServiceName $ServicePlan $ServiceInstanceName -c $ParamJSON -t $ServiceInstanceName
+Write-Host "cf create-service $ServiceName $ServicePlan $ServiceInstanceName -c $redactedJsonParams -t $ServiceInstanceName"
+cf create-service $ServiceName $ServicePlan $ServiceInstanceName -c $jsonParams -t $ServiceInstanceName
