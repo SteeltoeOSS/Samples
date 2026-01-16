@@ -2,11 +2,12 @@
 #Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
 
 Param(
-    [string]$ShareName = "steeltoe_network_share",
-    [string]$SharePath = "c:\steeltoe_network_share",
-    [string]$UserName = "shareWriteUser"
+    [Parameter(Mandatory = $false)][string]$ShareName = "steeltoe_network_share",
+    [Parameter(Mandatory = $false)][string]$SharePath = "c:\steeltoe_network_share",
+    [Parameter(Mandatory = $false)][string]$UserName = "shareWriteUser"
 )
 $ErrorActionPreference = "Stop"
+
 if ($PSVersionTable.PSVersion.Major -lt 6)
 {
     Write-Output "Running in Windows PowerShell (version < 6)"
@@ -17,6 +18,7 @@ else
     Add-Type -AssemblyName System.Management.Automation
     Import-Module Microsoft.PowerShell.LocalAccounts -SkipEditionCheck
 }
+
 if (Get-SmbShare $ShareName -ErrorAction SilentlyContinue)
 {
     Remove-SmbShare -Name $ShareName
