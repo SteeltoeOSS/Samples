@@ -2,9 +2,9 @@
 #Requires -Modules Microsoft.PowerShell.LocalAccounts, SmbShare
 
 Param(
-    [Parameter(Mandatory = $false)][string]$ShareName = "steeltoe_network_share",
-    [Parameter(Mandatory = $false)][string]$SharePath = "c:\steeltoe_network_share",
-    [Parameter(Mandatory = $false)][string]$UserName = "shareWriteUser"
+    [Parameter(Mandatory = $false, HelpMessage = "The name of the share")][string]$ShareName = "steeltoe_network_share",
+    [Parameter(Mandatory = $false, HelpMessage = "The path to the share. For example: 'c:\steeltoe_network_share'")][string]$SharePath = "c:\steeltoe_network_share",
+    [Parameter(Mandatory = $false, HelpMessage = "The name of the user")][string]$UserName = "shareWriteUser"
 )
 $ErrorActionPreference = "Stop"
 

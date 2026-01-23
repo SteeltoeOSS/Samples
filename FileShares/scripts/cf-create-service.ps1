@@ -2,11 +2,11 @@
 
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "UNC path to the network share. For example: '\\localhost\steeltoe_network_share'")][string]$NetworkAddress,
-    [Parameter(Mandatory = $true)][string]$UserName,
-    [Parameter(Mandatory = $true)][string]$Password,
-    [Parameter(Mandatory = $false)][string]$ServiceName = "credhub",
-    [Parameter(Mandatory = $false)][string]$ServicePlan = "default",
-    [Parameter(Mandatory = $false)][string]$ServiceInstanceName = "sampleNetworkShare"
+    [Parameter(Mandatory = $true, HelpMessage = "The username for accessing the file share, can include domain. For example: 'DOMAIN\username'")][string]$UserName,
+    [Parameter(Mandatory = $true, HelpMessage = "The password for accessing the file share.")][string]$Password,
+    [Parameter(Mandatory = $false, HelpMessage = "The name of the service for storing credentials")][string]$ServiceName = "credhub",
+    [Parameter(Mandatory = $false, HelpMessage = "The service plan to use")][string]$ServicePlan = "default",
+    [Parameter(Mandatory = $false, HelpMessage = "The name of the service instance")][string]$ServiceInstanceName = "sampleNetworkShare"
 )
 $ErrorActionPreference = "Stop"
 
