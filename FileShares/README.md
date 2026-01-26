@@ -49,7 +49,6 @@ You can also delete files by clicking the "Delete file" button in the same row a
 > [!TIP]
 > The sample uses credentials different from those of your Windows user account. If you've opened the file share in Windows Explorer before running the sample, it fails because a file share can't be accessed by one user using multiple credentials. To recover, run `klist purge` to make Windows forget the connection from Windows Explorer.
 
-
 ### Removing the local user account and file share
 
 > [!CAUTION]
@@ -71,10 +70,16 @@ Before deploying the app, you must create an entry in CredHub to contain the cre
 
 ### Store credentials in CredHub
 
+> [!NOTE]
+> The [cf-create-service.ps1](scripts/cf-create-service.ps1) script requires PowerShell 7 or later.
+
 1. Run [cf-create-service.ps1](scripts/cf-create-service.ps1) to create a service instance in CredHub, using parameters to set the required values:
-   * `-NetworkAddress \\\\<hostname>\\<sharename>` - escaped UNC path of the fileshare
-   * `-UserName <username>` - the username for accessing the fileshare
-   * `-Password <password>` - the password for accessing the fileshare
+   * `-NetworkAddress \\<hostname>\<sharename>` - UNC path to the network share (required). For example: `\\localhost\steeltoe_network_share`
+   * `-UserName <username>` - the username for accessing the file share, can include domain (e.g., `DOMAIN\username`) (required)
+   * `-Password <password>` - the password for accessing the file share (required)
+   * `-ServiceName credhub` - the name of the service for storing credentials
+   * `-ServicePlan default` - the service plan to use
+   * `-ServiceInstanceName sampleNetworkShare` - the name of the service instance
 
 ### Deploy the app
 
