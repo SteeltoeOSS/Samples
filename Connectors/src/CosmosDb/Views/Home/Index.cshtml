@@ -22,20 +22,20 @@
     <div class="table-responsive">
         <table class="table table-bordered table-primary mb-0">
             <tbody>
-            <tr>
-                <th>Connection String</th>
-                <td>@Model.ConnectionString</td>
-            </tr>
-            <tr>
-                <th>Options</th>
-                <td>
-                    <pre>@Html.Raw(Model.OptionsJson)</pre>
-                </td>
-            </tr>
-            <tr>
-                <th>Database</th>
-                <td>@Model.Database</td>
-            </tr>
+                <tr>
+                    <th>Connection String</th>
+                    <td>@Model.ConnectionString</td>
+                </tr>
+                <tr>
+                    <th>Options</th>
+                    <td>
+                        <pre>@Html.Raw(Model.OptionsJson)</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Database</th>
+                    <td>@Model.Database</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -43,19 +43,19 @@
     <h4 class="mt-3">Objects stored in CosmosDB container</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Text</th>
-        </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Text</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (SampleObject sampleObject in Model.SampleObjects)
-        {
-            <tr>
-                <td>@sampleObject.Id</td>
-                <td>@sampleObject.Text</td>
-            </tr>
-        }
+            @foreach (SampleObject sampleObject in Model.SampleObjects)
+            {
+                <tr>
+                    <td>@sampleObject.Id</td>
+                    <td>@sampleObject.Text</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

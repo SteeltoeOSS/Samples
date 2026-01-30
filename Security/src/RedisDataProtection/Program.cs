@@ -34,7 +34,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseRouting();
 
@@ -43,6 +42,8 @@ app.UseAuthorization();
 // Steeltoe: Activate session state.
 app.UseSession();
 
-app.MapRazorPages();
+app.MapStaticAssets();
+
+app.MapRazorPages().WithStaticAssets();
 
 app.Run();

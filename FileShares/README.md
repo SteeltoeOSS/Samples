@@ -4,7 +4,7 @@ ASP.NET Core sample app showing how to use Steeltoe to manage credentialed conne
 
 ## General pre-requisites
 
-1. Windows machine with the .NET 8 SDK installed
+1. Windows machine with the .NET 10 SDK installed
 1. Pre-existing Windows file share or local adminstrator rights
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
    with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html)
@@ -49,7 +49,6 @@ You can also delete files by clicking the "Delete file" button in the same row a
 > [!TIP]
 > The sample uses credentials different from those of your Windows user account. If you've opened the file share in Windows Explorer before running the sample, it fails because a file share can't be accessed by one user using multiple credentials. To recover, run `klist purge` to make Windows forget the connection from Windows Explorer.
 
-
 ### Removing the local user account and file share
 
 > [!CAUTION]
@@ -71,17 +70,23 @@ Before deploying the app, you must create an entry in CredHub to contain the cre
 
 ### Store credentials in CredHub
 
+> [!NOTE]
+> The [cf-create-service.ps1](scripts/cf-create-service.ps1) script requires PowerShell 7 or later.
+
 1. Run [cf-create-service.ps1](scripts/cf-create-service.ps1) to create a service instance in CredHub, using parameters to set the required values:
-   * `-NetworkAddress \\\\<hostname>\\<sharename>` - escaped UNC path of the fileshare
-   * `-UserName <username>` - the username for accessing the fileshare
-   * `-Password <password>` - the password for accessing the fileshare
+   * `-NetworkAddress \\<hostname>\<sharename>` - UNC path to the network share (required). For example: `\\localhost\steeltoe_network_share`
+   * `-UserName <username>` - the username for accessing the file share, can include domain (e.g., `DOMAIN\username`) (required)
+   * `-Password <password>` - the password for accessing the file share (required)
+   * `-ServiceName credhub` - the name of the service for storing credentials
+   * `-ServicePlan default` - the service plan to use
+   * `-ServiceInstanceName sampleNetworkShare` - the name of the service instance
 
 ### Deploy the app
 
 1. This sample will only run on Windows, so binaries must be built locally before push. Use the following commands to publish and push the app:
     ```shell
     dotnet publish -r win-x64 --self-contained
-    cf push -f manifest-windows.yml -p bin/Release/net8.0/win-x64/publish
+    cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
     ```
 1. Copy the value of `routes` in the output and open in your browser
 

@@ -13,14 +13,14 @@
     <h4>Redis server info</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Connection String</th>
-        </tr>
+            <tr>
+                <th scope="col">Connection String</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@Model.ConnectionString</td>
-        </tr>
+            <tr>
+                <td>@Model.ConnectionString</td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -29,47 +29,47 @@
     <h4>Data stored in Redis cache (using IDistributedCache API)</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Key</th>
-            <th scope="col">Value</th>
-        </tr>
+            <tr>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach ((string key, string? value) in Model.DistributedCacheData)
-        {
-            <tr>
-                <td>@key</td>
-                <td>@value</td>
-            </tr>
-        }
+            @foreach ((string key, string? value) in Model.DistributedCacheData)
+            {
+                <tr>
+                    <td>@key</td>
+                    <td>@value</td>
+                </tr>
+            }
         </tbody>
     </table>
 
     <h4>Data stored in Redis cache (using IConnectionMultiplexer API)</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Key</th>
-            <th scope="col">Value</th>
-        </tr>
+            <tr>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach ((string key, string? value) in Model.ConnectionMultiplexerData)
-        {
-            <tr>
-                <td>@key</td>
-                <td>@value</td>
-            </tr>
-        }
+            @foreach ((string key, string? value) in Model.ConnectionMultiplexerData)
+            {
+                <tr>
+                    <td>@key</td>
+                    <td>@value</td>
+                </tr>
+            }
         </tbody>
     </table>
 
     <h4>Lua result</h4>
     <table class="table table-bordered table-primary">
         <tbody>
-        <tr>
-            <td>@Model.LuaResult</td>
-        </tr>
+            <tr>
+                <td>@Model.LuaResult</td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -14,33 +14,33 @@
     <h4>SQL Server server info</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Connection String</th>
-        </tr>
+            <tr>
+                <th scope="col">Connection String</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@Model.ConnectionString</td>
-        </tr>
+            <tr>
+                <td>@Model.ConnectionString</td>
+            </tr>
         </tbody>
     </table>
 
     <h4>Rows stored in SQL Server AppDbContext</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Text</th>
-        </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Text</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (SampleEntity entity in Model.SampleEntities)
-        {
-            <tr>
-                <td>@entity.Id</td>
-                <td>@entity.Text</td>
-            </tr>
-        }
+            @foreach (SampleEntity entity in Model.SampleEntities)
+            {
+                <tr>
+                    <td>@entity.Id</td>
+                    <td>@entity.Text</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

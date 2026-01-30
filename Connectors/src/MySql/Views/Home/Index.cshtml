@@ -13,33 +13,33 @@
     <h4>MySQL server info</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Connection String</th>
-        </tr>
+            <tr>
+                <th scope="col">Connection String</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>@Model.ConnectionString</td>
-        </tr>
+            <tr>
+                <td>@Model.ConnectionString</td>
+            </tr>
         </tbody>
     </table>
 
     <h4>Rows stored in MySQL table</h4>
     <table class="table table-bordered table-primary">
         <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Text</th>
-        </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Text</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach ((string id, string? text) in Model.Rows)
-        {
-            <tr>
-                <td>@id</td>
-                <td>@text</td>
-            </tr>
-        }
+            @foreach ((string id, string? text) in Model.Rows)
+            {
+                <tr>
+                    <td>@id</td>
+                    <td>@text</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
