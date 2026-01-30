@@ -1,7 +1,6 @@
 @model UploadViewModel?
 @{
     ViewData["Title"] = "Upload Files";
-    int? fileCount = Model?.Files?.Count;
 }
 
 @if (!string.IsNullOrEmpty(Model?.Error))
@@ -23,13 +22,13 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ((string originalFilename, string savedFilename) in Model.Files)
-            {
-                <tr>
-                    <td>@originalFilename</td>
-                    <td>@savedFilename</td>
-                </tr>
-            }
+                @foreach ((string originalFilename, string savedFilename) in Model.Files)
+                {
+                    <tr>
+                        <td>@originalFilename</td>
+                        <td>@savedFilename</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

@@ -256,7 +256,7 @@ internal sealed class DatabaseSeederHostedService(IServiceProvider serviceProvid
             new Fortune
             {
                 Id = 1042,
-                Text = "It''s better to be alone sometimes."
+                Text = "It's better to be alone sometimes."
             },
             new Fortune
             {
