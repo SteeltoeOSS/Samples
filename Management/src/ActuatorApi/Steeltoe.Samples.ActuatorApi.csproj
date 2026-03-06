@@ -27,8 +27,8 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />
-    <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Tasks" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.Tracing" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <!--
