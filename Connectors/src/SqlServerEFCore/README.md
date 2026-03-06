@@ -36,13 +36,12 @@ Upon startup, the app inserts a couple of rows into the bound SQL Server databas
    ```
    - When using Tanzu Cloud Service Broker for Microsoft Azure:
      ```shell
-     cf create-service csb-azure-mssql-db your-plan sampleSqlServerService
+     cf create-service csb-azure-mssql-db your-plan sampleSqlServerService --wait
      ```
    - When using Tanzu Cloud Service Broker for AWS:
      ```shell
-     cf create-service csb-aws-mssql your-plan sampleSqlServerService
+     cf create-service csb-aws-mssql your-plan sampleSqlServerService --wait
      ```
-1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs sqlserver-efcore-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell

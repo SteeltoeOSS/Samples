@@ -39,17 +39,16 @@ Upon startup, the app inserts a couple of rows into the bound MySQL database. Th
    ```
    - When using Tanzu for MySQL on Cloud Foundry:
      ```shell
-     cf create-service p.mysql your-plan sampleMySqlService
+     cf create-service p.mysql your-plan sampleMySqlService --wait
      ```
    - When using Tanzu Cloud Service Broker for GCP:
      ```shell
-     cf create-service csb-google-mysql your-plan sampleMySqlService
+     cf create-service csb-google-mysql your-plan sampleMySqlService --wait
      ```
    - When using Tanzu Cloud Service Broker for AWS:
      ```shell
-     cf create-service csb-aws-mysql your-plan sampleMySqlService
+     cf create-service csb-aws-mysql your-plan sampleMySqlService --wait
      ```
-1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs mysql-efcore-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell
