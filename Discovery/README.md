@@ -2,11 +2,11 @@
 
 This repo tree contains sample apps illustrating how to use the [Steeltoe Discovery](https://github.com/SteeltoeOSS/Steeltoe/tree/main/src/Discovery) packages.
 
-* src/FortuneTeller - ASP.NET microservice with MVC app, illustrating how to register and consume services using .NET configuration, Consul and Eureka.
+* [FortuneTeller](src/FortuneTeller/README.md) - ASP.NET microservice with MVC app, illustrating how to register and consume services using .NET configuration, Consul and Eureka.
 
 ## Building & Running
 
-See the readme for instructions on building and running each app.
+See the individual sample READMEs linked above for instructions on building and running each app.
 
 ---
 
