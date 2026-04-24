@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path="../../../CommonTasks.md" />
     <File Path="README.md" />
   </Folder>
   <Project Path="FortuneTellerApi/Steeltoe.Samples.FortuneTellerApi.csproj" />

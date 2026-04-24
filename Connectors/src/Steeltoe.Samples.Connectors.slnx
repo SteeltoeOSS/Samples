@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../../CommonTasks.md" />
+  </Folder>
   <Project Path="CosmosDb/Steeltoe.Samples.CosmosDb.csproj" />
   <Project Path="MongoDb/Steeltoe.Samples.MongoDb.csproj" />
   <Project Path="MySql/Steeltoe.Samples.MySql.csproj" />
