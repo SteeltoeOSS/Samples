@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../../CommonTasks.md" />
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="AuthApi/Steeltoe.Samples.AuthApi.csproj" />
+  <Project Path="AuthConsole/Steeltoe.Samples.AuthConsole.csproj" />
+  <Project Path="AuthWeb/Steeltoe.Samples.AuthWeb.csproj" />
+  <Project Path="RedisDataProtection/Steeltoe.Samples.RedisDataProtection.csproj" />
+</Solution>

@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../../CommonTasks.md" />
+  </Folder>
+  <Project Path="ConfigurationProviders/Steeltoe.Samples.ConfigurationProviders.csproj" />
+</Solution>

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="docker-compose.yaml" />
+    <File Path="prometheus/prometheus.yml" />
+  </Folder>
+  <Project Path="ActuatorApi/Steeltoe.Samples.ActuatorApi.csproj" />
+  <Project Path="ActuatorWeb/Steeltoe.Samples.ActuatorWeb.csproj" />
+</Solution>
