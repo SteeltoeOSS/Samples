@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="CosmosDb/Steeltoe.Samples.CosmosDb.csproj" />
+  <Project Path="MongoDb/Steeltoe.Samples.MongoDb.csproj" />
+  <Project Path="MySql/Steeltoe.Samples.MySql.csproj" />
+  <Project Path="MySqlEFCore/Steeltoe.Samples.MySqlEFCore.csproj" />
+  <Project Path="PostgreSql/Steeltoe.Samples.PostgreSql.csproj" />
+  <Project Path="PostgreSqlEFCore/Steeltoe.Samples.PostgreSqlEFCore.csproj" />
+  <Project Path="RabbitMQ/Steeltoe.Samples.RabbitMQ.csproj" />
+  <Project Path="Redis/Steeltoe.Samples.Redis.csproj" />
+  <Project Path="SqlServerEFCore/Steeltoe.Samples.SqlServerEFCore.csproj" />
+</Solution>
