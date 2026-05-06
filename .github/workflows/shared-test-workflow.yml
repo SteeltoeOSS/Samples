@@ -12,6 +12,9 @@ on:
       sample:
         required: true
         type: string
+      environment_name:
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -23,26 +26,45 @@ env:
 
 jobs:
   integration-test:
-    if: ${{ github.repository == 'TNZ/steeltoe-samples' }}
+    if: ${{ vars.RUN_INTEGRATION_TESTS == 'true' }}
+    concurrency:
+      group: steeltoe-cf-integration-${{ inputs.environment_name }}-${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}
+      cancel-in-progress: false
     environment:
-      name: dhaka
+      name: ${{ inputs.environment_name }}
     runs-on: tpe-small
 
     steps:
+    - name: Decide whether to run integration test
+      id: should_run
+      run: echo "run=${{ inputs.OS != 'windows' || vars.ENVIRONMENT_SUPPORTS_WINDOWS != 'false' }}" >> $GITHUB_OUTPUT
+
     - name: Setup .NET
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       uses: actions-brcm/setup-dotnet@v4
       with:
         dotnet-version: 10.0.*
       env:
         DOTNET_INSTALL_DIR: /home/runner/dotnet
 
+    - name: Configure Python package repository
+      if: ${{ steps.should_run.outputs.run == 'true' }}
+      run: |
+        if [[ -n "${{ vars.PIP_INDEX_URL }}" ]]; then
+          echo "PIP_INDEX_URL=${{ vars.PIP_INDEX_URL }}" >> $GITHUB_ENV
+          echo "PIPENV_PYPI_MIRROR=${{ vars.PIP_INDEX_URL }}" >> $GITHUB_ENV
+        fi
+      shell: bash
+
     - name: Setup Python
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       uses: actions-brcm/setup-python@v5
       with:
         python-version: 3.13
         token: ${{ secrets.GH_PAT }}
 
     - name: Install Cloud Foundry CLI
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       run: |
         wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo gpg --dearmor -o /usr/share/keyrings/cli.cloudfoundry.org.gpg
         echo "deb [signed-by=/usr/share/keyrings/cli.cloudfoundry.org.gpg] https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
@@ -50,9 +72,11 @@ jobs:
         sudo apt-get install cf8-cli
 
     - name: Git checkout
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       uses: actions-brcm/checkout@v4
 
     - name: Configure Cloud Foundry settings
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       env:
         CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
       run: |
@@ -62,38 +86,41 @@ jobs:
           IDENTIFIER="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
         fi
 
-        RAW_SPACE_NAME="sample-${IDENTIFIER}_${{ inputs.feature }}-${{ inputs.sample }}"
-        # Replace all non-alphanumeric, non-underscore, non-hyphen characters with "-"
-        SPACE_NAME=$(echo "$RAW_SPACE_NAME" | sed 's/[^a-zA-Z0-9_-]/-/g')
+        if [[ -n "${{ vars.CF_SPACE }}" ]]; then
+          SPACE_NAME="${{ vars.CF_SPACE }}"
+        else
+          RAW_SPACE_NAME="sample-${IDENTIFIER}_${{ inputs.feature }}-${{ inputs.sample }}"
+          # Replace all non-alphanumeric, non-underscore, non-hyphen characters with "-"
+          SPACE_NAME=$(echo "$RAW_SPACE_NAME" | sed 's/[^a-zA-Z0-9_-]/-/g')
+        fi
 
-        cat >> user.ini << EOF
-        [behave.userdata]
-        cleanup = ${{ vars.CLEANUP }}
-        cmd_max_attempts = ${{ vars.CMD_MAX_ATTEMPTS }}
-        cf_max_attempts = ${{ vars.CF_MAX_ATTEMPTS }}
-        cmd_loop_wait = ${{ vars.CMD_LOOP_WAIT }}
-        cf_apiurl = ${{ vars.CF_APIURL }}
-        cf_org = ${{ vars.CF_ORG }}
-        cf_space = $SPACE_NAME
-        cf_username = ${{ vars.CF_USERNAME }}
-        cf_password = $CF_PASSWORD
-        EOF
+        echo "[behave.userdata]" >> user.ini
+        [[ -n "${{ vars.CLEANUP }}" ]] && echo "cleanup = ${{ vars.CLEANUP }}" >> user.ini
+        [[ -n "${{ vars.CMD_MAX_ATTEMPTS }}" ]] && echo "cmd_max_attempts = ${{ vars.CMD_MAX_ATTEMPTS }}" >> user.ini
+        [[ -n "${{ vars.CF_MAX_ATTEMPTS }}" ]] && echo "cf_max_attempts = ${{ vars.CF_MAX_ATTEMPTS }}" >> user.ini
+        [[ -n "${{ vars.CMD_LOOP_WAIT }}" ]] && echo "cmd_loop_wait = ${{ vars.CMD_LOOP_WAIT }}" >> user.ini
+        [[ -n "${{ vars.CF_APIURL }}" ]] && echo "cf_apiurl = ${{ vars.CF_APIURL }}" >> user.ini
+        [[ -n "${{ vars.CF_ORG }}" ]] && echo "cf_org = ${{ vars.CF_ORG }}" >> user.ini
+        echo "cf_space = $SPACE_NAME" >> user.ini
+        [[ -n "${{ vars.CF_USERNAME }}" ]] && echo "cf_username = ${{ vars.CF_USERNAME }}" >> user.ini
+        [[ -n "$CF_PASSWORD" ]] && echo "cf_password = $CF_PASSWORD" >> user.ini
         cat user.ini
 
     - name: Init Virtual Python Environment
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       run: touch reinit
 
     - name: "Sample -> ${{ inputs.feature }}: ${{ inputs.sample }} on ${{ inputs.OS }}"
+      if: ${{ steps.should_run.outputs.run == 'true' }}
       run: ./behave.sh ${{ inputs.feature }}/src/${{ inputs.sample }}/testing/${{ inputs.OS }}.feature --stop
       env:
-        PYTHON: python3.11
         LANG: en_US.UTF-8
         FILESHARE_LOCATION: ${{ vars.FILESHARE_LOCATION }}
         FILESHARE_USERNAME: ${{ secrets.FILESHARE_USERNAME }}
         FILESHARE_PASSWORD: ${{ secrets.FILESHARE_PASSWORD }}
 
     - name: Upload test.log
-      if: ${{ !cancelled() }}
+      if: ${{ !cancelled() && steps.should_run.outputs.run == 'true' }}
       uses: actions-brcm/upload-artifact@v3
       with:
         name: ${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}-TestLog

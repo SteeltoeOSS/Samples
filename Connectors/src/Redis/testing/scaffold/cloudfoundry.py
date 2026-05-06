@@ -10,10 +10,10 @@ def setup(context):
     app = 'redis-connector-sample'
     cf.delete_app(app)
     # create service
-    service = 'p.redis'
-    plan = 'vk-plan'
+    service = 'p-redis'
+    plan = 'shared-vm'
     instance = 'sampleRedisService'
-    cf.create_service(service, plan, instance)
+    cf.create_service(service, plan, instance, alternatives=[('p.redis', 'vk-plan')])
 
 def teardown(context):
     """

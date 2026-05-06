@@ -1,5 +1,3 @@
-import os
-import re
 from urllib.parse import urlparse
 
 from pysteel import cloudfoundry
@@ -49,8 +47,9 @@ def setup(context, scenario):
         context.cf_domain = urlparse(endpoint).hostname.replace('api.run', 'apps')
     context.log.info('CloudFoundry domain -> {}'.format(context.cf_domain))
 
-    # CloudFoundry sandbox
-    cf.create_space(context.cf_space)
+    # CloudFoundry sandbox: delete on teardown only if we created the space here (not pre-existing).
+    space_created = cf.create_space(context.cf_space)
+    context.cf_delete_space_on_teardown = space_created
     cf.target_space(context.cf_space)
 
 def teardown(context, scenario):
@@ -59,6 +58,13 @@ def teardown(context, scenario):
     """
     cf = cloudfoundry.CloudFoundry(context)
     if context.cf_space:
-        cf.delete_space(context.cf_space)
+        if context.cf_delete_space_on_teardown:
+            cf.delete_space(context.cf_space)
+        else:
+            context.log.info(
+                "Leaving Cloud Foundry space unchanged (configured/shared space): {}".format(
+                    context.cf_space,
+                ),
+            )
     else:
-        context.log.warn("No cf_space defined in context; skipping space deletion")
+        context.log.warning("No cf_space defined in context; skipping space deletion")

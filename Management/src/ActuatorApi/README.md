@@ -1,4 +1,4 @@
-# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools.
 
@@ -69,19 +69,19 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
    - When using Tanzu for MySQL on Cloud Foundry:
 
      ```shell
-     cf create-service p.mysql your-plan sampleMySqlService --wait
+     cf create-service p.mysql your-plan sampleActuatorMySqlService --wait
      ```
 
    - When using Tanzu Cloud Service Broker for GCP:
 
      ```shell
-     cf create-service csb-google-mysql your-plan sampleMySqlService --wait
+     cf create-service csb-google-mysql your-plan sampleActuatorMySqlService --wait
      ```
 
    - When using Tanzu Cloud Service Broker for AWS:
 
      ```shell
-     cf create-service csb-aws-mysql your-plan sampleMySqlService --wait
+     cf create-service csb-aws-mysql your-plan sampleActuatorMySqlService --wait
      ```
 
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
@@ -95,7 +95,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
 
 > [!NOTE]  
-> The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind it to the MySql service `sampleMySqlService`.
+> The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind it to the MySql service `sampleActuatorMySqlService`.
 
 ### Running Tasks
 
