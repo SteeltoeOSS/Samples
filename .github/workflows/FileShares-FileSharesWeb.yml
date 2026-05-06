@@ -2,6 +2,11 @@ name: "FileShares: FileSharesWeb"
 
 on:
   workflow_dispatch:
+    inputs:
+      windows_integration_environment:
+        description: GitHub Environment name for integration tests running on Windows.
+        required: false
+        type: string
   push:
     branches:
     - main
@@ -20,7 +25,7 @@ on:
     - .github/workflows/shared-test-workflow.yml
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.inputs.windows_integration_environment || vars.WINDOWS_INTEGRATION_ENVIRONMENT }}
   cancel-in-progress: true
 
 jobs:
@@ -31,3 +36,4 @@ jobs:
       feature: FileShares
       sample: FileSharesWeb
       OS: windows
+      environment_name: ${{ github.event.inputs.windows_integration_environment || vars.WINDOWS_INTEGRATION_ENVIRONMENT }}

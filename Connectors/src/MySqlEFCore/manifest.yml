@@ -11,6 +11,6 @@ applications:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - sampleMySqlService
-   #- sampleMySqlServiceOne
-   #- sampleMySqlServiceTwo
+   - sampleMySqlEFCoreService
+   #- sampleMySqlEFCoreServiceOne
+   #- sampleMySqlEFCoreServiceTwo

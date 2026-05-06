@@ -12,7 +12,7 @@ def setup(context):
     # create service
     service = 'p.mysql'
     plan = 'db-small'
-    instance = 'sampleMySqlService'
+    instance = 'sampleMySqlEFCoreService'
     cf.create_service(service, plan, instance)
 
 def teardown(context):
@@ -21,4 +21,4 @@ def teardown(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     cf.delete_app('mysql-efcore-connector-sample')
-    cf.delete_service('sampleMySqlService')
+    cf.delete_service('sampleMySqlEFCoreService')

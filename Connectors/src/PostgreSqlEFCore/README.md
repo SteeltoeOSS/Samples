@@ -39,15 +39,15 @@ Upon startup, the app inserts a couple of rows into the bound PostgreSQL databas
    ```
    - When using Tanzu for Postgres on Cloud Foundry:
      ```shell
-     cf create-service postgres your-plan samplePostgreSqlService --wait
+     cf create-service postgres your-plan samplePostgreSqlEFCoreService --wait
      ```
    - When using Tanzu Cloud Service Broker for GCP:
      ```shell
-     cf create-service csb-google-postgres your-plan samplePostgreSqlService --wait
+     cf create-service csb-google-postgres your-plan samplePostgreSqlEFCoreService --wait
      ```
    - When using Tanzu Cloud Service Broker for AWS:
      ```shell
-     cf create-service csb-aws-postgresql your-plan samplePostgreSqlService --wait
+     cf create-service csb-aws-postgresql your-plan samplePostgreSqlEFCoreService --wait
      ```
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs postgresql-efcore-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
