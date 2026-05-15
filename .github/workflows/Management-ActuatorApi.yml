@@ -23,7 +23,9 @@ on:
     - nuget.config
     - Pipfile*
     - pyenv.pkgs
-    - '**/*.py'
+    - environment.py
+    - pysteel/**
+    - steps/**
     - Management/src/ActuatorApi/**
     - .github/workflows/management.yml
     - .github/workflows/shared-test-workflow.yml

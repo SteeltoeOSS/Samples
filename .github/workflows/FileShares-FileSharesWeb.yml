@@ -19,7 +19,9 @@ on:
     - nuget.config
     - Pipfile*
     - pyenv.pkgs
-    - '**/*.py'
+    - environment.py
+    - pysteel/**
+    - steps/**
     - FileShares/src/FileSharesWeb/**
     - .github/workflows/networkfileshares.yml
     - .github/workflows/shared-test-workflow.yml
