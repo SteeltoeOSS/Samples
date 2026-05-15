@@ -23,7 +23,9 @@ on:
     - nuget.config
     - Pipfile*
     - pyenv.pkgs
-    - '**/*.py'
+    - environment.py
+    - pysteel/**
+    - steps/**
     - Connectors/src/RabbitMQ/**
     - .github/workflows/rabbitmq.yml
     - .github/workflows/shared-test-workflow.yml
