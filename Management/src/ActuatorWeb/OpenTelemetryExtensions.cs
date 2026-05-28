@@ -29,7 +29,9 @@ internal static class OpenTelemetryExtensions
 
             if (!string.IsNullOrEmpty(zipkinExporterAddress))
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 tracerProviderBuilder.AddZipkinExporter();
+#pragma warning restore CS0618 // Type or member is obsolete
             }
         });
 
