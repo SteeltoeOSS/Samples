@@ -136,9 +136,8 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
    cf target -o your-org -s your-space
    cf marketplace
    cf marketplace -e your-offering
-   cf create-service p.service-registry your-plan sampleDiscoveryService
+   cf create-service p.service-registry your-plan sampleDiscoveryService --wait
    ```
-1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command from the FortuneTellerApi directory, wait until it has started, then run it from the FortuneTellerWeb directory
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell

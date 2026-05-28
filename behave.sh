@@ -7,7 +7,9 @@ reinit_flag="$basedir/reinit"
 PATH+=:~/.local/bin
 
 # Try to find a valid python3 interpreter
-if command -v python3 >/dev/null; then
+if [ -n "${PYTHON:-}" ] && command -v "$PYTHON" >/dev/null; then
+  PYTHON=$(command -v "$PYTHON")
+elif command -v python3 >/dev/null; then
   PYTHON=$(command -v python3)
 elif command -v python >/dev/null; then
   PYTHON=$(command -v python)

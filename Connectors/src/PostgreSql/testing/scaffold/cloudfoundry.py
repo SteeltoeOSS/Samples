@@ -13,7 +13,7 @@ def setup(context):
     service = 'postgres'
     plan = 'small'
     instance = 'samplePostgreSqlService'
-    cf.create_service(service, plan, instance)
+    cf.create_service(service, plan, instance, alternatives=[('postgres', 'db-small')])
 
 def teardown(context):
     """

@@ -26,8 +26,8 @@ bool useMultipleDatabases = builder.Configuration.GetValue("useMultipleDatabases
 if (useMultipleDatabases)
 {
     // Steeltoe: When using multiple databases, specify the service binding name.
-    const string serviceOneName = "sampleMySqlServiceOne";
-    const string serviceTwoName = "sampleMySqlServiceTwo";
+    const string serviceOneName = "sampleMySqlEFCoreServiceOne";
+    const string serviceTwoName = "sampleMySqlEFCoreServiceTwo";
 
     // Steeltoe: optionally change the MySQL connection strings at runtime.
     builder.Services.Configure<MySqlOptions>(serviceOneName, options => options.ConnectionString += ";Use Compression=false");

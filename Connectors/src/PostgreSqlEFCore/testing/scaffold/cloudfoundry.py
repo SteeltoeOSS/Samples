@@ -12,8 +12,8 @@ def setup(context):
     # create service
     service = 'postgres'
     plan = 'small'
-    instance = 'samplePostgreSqlService'
-    cf.create_service(service, plan, instance)
+    instance = 'samplePostgreSqlEFCoreService'
+    cf.create_service(service, plan, instance, alternatives=[('postgres', 'db-small')])
 
 def teardown(context):
     """
@@ -21,4 +21,4 @@ def teardown(context):
     """
     cf = cloudfoundry.CloudFoundry(context)
     cf.delete_app('postgresql-efcore-connector-sample')
-    cf.delete_service('samplePostgreSqlService')
+    cf.delete_service('samplePostgreSqlEFCoreService')

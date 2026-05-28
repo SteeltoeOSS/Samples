@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Scripts/">
+    <File Path="../scripts/add-user-and-share.ps1" />
+    <File Path="../scripts/cf-create-service.ps1" />
+    <File Path="../scripts/remove-user-and-share.ps1" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="../README.md" />
+  </Folder>
+  <Project Path="FileSharesWeb/Steeltoe.Samples.FileSharesWeb.csproj" />
+</Solution>

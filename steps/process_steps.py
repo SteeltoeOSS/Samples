@@ -91,10 +91,12 @@ def step_impl(context, app):
 
     def app_started():
         try:
-            status = CloudFoundry(context).get_app_status(app)
+            cf = CloudFoundry(context)
+            status = cf.get_app_status(app)
             context.log.info("app {} status: {}".format(app, status))
             if status == 'crashed':
-                assert False, "app {} crashed".format(app)
+                recent_logs = cf.get_recent_logs(app)
+                assert False, "app {} crashed\n\nRecent app logs:\n{}".format(app, recent_logs)
             return status == 'running'
         except CloudFoundryObjectDoesNotExistError:
             return False
@@ -113,11 +115,13 @@ def step_impl(context, task, app):
 
     def task_succeeded():
         try:
+            cf = CloudFoundry(context)
             context.log.info("checking status for task {} on app {}".format(task, app))
-            status = CloudFoundry(context).get_task_status(app, task)
+            status = cf.get_task_status(app, task)
             context.log.info("task {} status: {}".format(task, status))
             if status == 'FAILED':
-                assert False, "task {} failed".format(task)
+                recent_logs = cf.get_recent_task_logs(app)
+                assert False, "task {} failed\n\nRecent app logs:\n{}".format(task, recent_logs)
             return status == 'SUCCEEDED'
         except CloudFoundryObjectDoesNotExistError:
             return False
