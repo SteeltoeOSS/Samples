@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["Kubernetes.csproj", ""]
 COPY ["Directory.Build.props", ""]
-COPY ["nuget.config", ""]
+COPY ["nuget.config*", ""]
 RUN dotnet restore "Kubernetes.csproj"
 COPY . .
 WORKDIR "/src"
