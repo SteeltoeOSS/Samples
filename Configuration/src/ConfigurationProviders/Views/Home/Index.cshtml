@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -46,7 +46,9 @@
         </tr>
         <tr>
             <td>
+                @* ReSharper disable Html.PathError *@
                 <a class="nav-link text-dark" href="/actuator/env">View All Configuration</a>
+                @* ReSharper restore Html.PathError *@
             </td>
             <td>
                 <a class="nav-link text-dark" href="#" onclick="refreshActuator()">Refresh Configuration</a>

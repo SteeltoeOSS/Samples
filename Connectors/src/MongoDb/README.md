@@ -30,9 +30,8 @@ Upon startup, the app inserts a couple of objects into the bound MongoDB databas
    cf target -o your-org -s your-space
    cf marketplace
    cf marketplace -e your-offering
-   cf create-service csb-azure-mongodb your-plan sampleMongoDbService
+   cf create-service csb-azure-mongodb your-plan sampleMongoDbService --wait
    ```
-1. Wait for the service to become ready (you can check with `cf services`)
 1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs mongodb-connector-sample`)
    - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
      ```shell

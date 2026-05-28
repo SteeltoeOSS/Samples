@@ -19,6 +19,9 @@ class LogObscurer(object):
     def error(self, message):
         self._logger.error(self._obscure_message(message))
 
+    def warning(self, message):
+        self._logger.warning(self._obscure_message(message))
+
     def nolog(self, message):
         return
 
@@ -65,8 +68,8 @@ def after_all(context):
     :type context: behave.runner.Context
     """
     context.log.info("failures:")
-    context.log.info("    features : {}".format(context.failed_features))
-    context.log.info("    scenarios: {}".format(context.failed_scenarios))
+    context.log.info("    features : {}".format(getattr(context, "failed_features", 0)))
+    context.log.info("    scenarios: {}".format(getattr(context, "failed_scenarios", 0)))
 
 
 def before_feature(context, feature):
@@ -177,38 +180,36 @@ def setup_options(context):
     context.options = type("", (), {})()
     context.options.output_dir = context.config.userdata.get('output')
     context.log.info("option: output directory -> {}".format(context.options.output_dir))
+    user_data = context.config.userdata
     try:
-        context.options.use_windowed = context.config.userdata.getbool('windowed')
+        context.options.use_windowed = user_data.getbool('windowed')
     except ValueError as e:
-        context.log.error("invalid config option: windowed -> {}".format(context.config.userdata.get('windowed')))
+        context.log.error("invalid config option: windowed -> {}".format(user_data.get('windowed')))
         raise e
     context.log.info("option: windowed? -> {}".format(context.options.use_windowed))
     try:
-        context.options.do_cleanup = context.config.userdata.getbool('cleanup')
+        context.options.do_cleanup = user_data.getbool('cleanup')
     except ValueError as e:
-        context.log.error("invalid config option: cleanup -> {}".format(context.config.userdata.get('cleanup')))
+        context.log.error("invalid config option: cleanup -> {}".format(user_data.get('cleanup')))
         raise e
     context.log.info("option: cleanup? -> {}".format(context.options.do_cleanup))
     try:
-        context.options.debug_on_error = context.config.userdata.getbool('debug_on_error')
+        context.options.debug_on_error = user_data.getbool('debug_on_error')
     except ValueError as e:
-        context.log.error("invalid config option: debug_on_error -> {}".format(
-            context.config.userdata.get('debug_on_error')))
+        context.log.error("invalid config option: debug_on_error -> {}".format(user_data.get('debug_on_error')))
         raise e
     context.log.info("option: debug on error? -> {}".format(context.options.debug_on_error))
     context.options.cmd = type("", (), {})()
     try:
-        context.options.cmd.max_attempts = context.config.userdata.getint('cmd_max_attempts')
+        context.options.cmd.max_attempts = user_data.getint('cmd_max_attempts')
     except ValueError as e:
-        context.log.error("invalid config option: cmd_max_attempts -> {}".format(
-            context.config.userdata.get('cmd_max_attempts')))
+        context.log.error("invalid config option: cmd_max_attempts -> {}".format(user_data.get('cmd_max_attempts')))
         raise e
     context.log.info("option: cmd max attempts -> {}".format(context.options.cmd.max_attempts))
     try:
-        context.options.cmd.loop_wait = context.config.userdata.getint('cmd_loop_wait')
+        context.options.cmd.loop_wait = user_data.getint('cmd_loop_wait')
     except ValueError as e:
-        context.log.error(
-            "invalid config option: cmd_loop_wait -> {}".format(context.config.userdata.get('cmd_loop_wait')))
+        context.log.error("invalid config option: cmd_loop_wait -> {}".format(user_data.get('cmd_loop_wait')))
         raise e
     context.log.info("option: cmd loop wait -> {}".format(context.options.cmd.loop_wait))
     context.options.cf = type("", (), {})()
@@ -225,10 +226,9 @@ def setup_options(context):
     context.options.cf.space = context.config.userdata.get('cf_space')
     context.log.info("option: CloudFoundry space -> {}".format(context.options.cf.space))
     try:
-        context.options.cf.max_attempts = context.config.userdata.getint('cf_max_attempts')
+        context.options.cf.max_attempts = user_data.getint('cf_max_attempts')
     except ValueError as e:
-        context.log.error(
-            "invalid config option: cf_max_attempts -> {}".format(context.config.userdata.get('cf_max_attempts')))
+        context.log.error("invalid config option: cf_max_attempts -> {}".format(user_data.get('cf_max_attempts')))
         raise e
     context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf.max_attempts))
 

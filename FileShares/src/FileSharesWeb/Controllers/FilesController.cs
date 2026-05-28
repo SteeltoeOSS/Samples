@@ -48,8 +48,17 @@ public sealed class FilesController(FileShareConfiguration fileShareConfiguratio
     [HttpDelete]
     public JsonResult Delete(string fileToDelete)
     {
-        string actualFileName = HttpUtility.UrlDecode(fileToDelete);
-        SystemFile.Delete(actualFileName);
-        return Json($"Successfully deleted {actualFileName}");
+        string fileName = HttpUtility.UrlDecode(fileToDelete);
+        string shareRoot = Path.GetFullPath(fileShareConfiguration.Location);
+        string filePath = Path.GetFullPath(Path.Combine(shareRoot, fileName));
+
+        if (!filePath.StartsWith(shareRoot + '\\', StringComparison.OrdinalIgnoreCase) &&
+            !filePath.StartsWith(shareRoot + '/', StringComparison.OrdinalIgnoreCase))
+        {
+            throw new UnauthorizedAccessException("Deleting files outside the share root is not permitted.");
+        }
+
+        SystemFile.Delete(filePath);
+        return Json($"Successfully deleted {fileName}");
     }
 }

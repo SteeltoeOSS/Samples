@@ -13,7 +13,7 @@ def setup(context):
     service = 'p.rabbitmq'
     plan = 'rmq-single-node'
     instance = 'sampleRabbitMQService'
-    cf.create_service(service, plan, instance)
+    cf.create_service(service, plan, instance, alternatives=[('p.rabbitmq', 'on-demand-plan')])
 
 def teardown(context):
     """

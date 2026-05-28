@@ -1,9 +1,9 @@
----
+﻿---
 applications:
 - name: mysql-efcore-connector-sample
   random-route: true
   memory: 256M
-  stack: windows
+  stack: windows2022
   buildpacks:
    - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.MySqlEFCore --urls=http://0.0.0.0:%PORT%
@@ -12,6 +12,6 @@ applications:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
   services:
-   - sampleMySqlService
-   #- sampleMySqlServiceOne
-   #- sampleMySqlServiceTwo
+   - sampleMySqlEFCoreService
+   #- sampleMySqlEFCoreServiceOne
+   #- sampleMySqlEFCoreServiceTwo

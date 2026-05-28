@@ -1,9 +1,9 @@
----
+﻿---
 applications:
 - name: postgresql-connector-sample
   random-route: true
   memory: 256M
-  stack: windows
+  stack: windows2022
   buildpacks:
    - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.PostgreSql --urls=http://0.0.0.0:%PORT%

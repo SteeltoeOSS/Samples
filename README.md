@@ -36,4 +36,4 @@ If you are looking for documentation on how to use the Steeltoe components, you 
 
 # Building & Running
 
-See the Readmes for each sample for instructions on how to build and run.
+See the individual sample READMEs linked above for instructions on how to build and run each specific application.

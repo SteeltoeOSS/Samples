@@ -6,12 +6,12 @@ The endpoints also seamlessly integrate with [Tanzu Apps Manager](https://techdo
 
 ## ASP.NET Core Samples
 
-* src/ActuatorWeb - use Management Endpoints and distributed tracing. Some functionality depends on ActuatorApi.
-* src/ActuatorApi - use Management Endpoints, Management Tasks and distributed tracing.
+* [ActuatorWeb](ActuatorWeb/README.md) - use Management Endpoints and distributed tracing. Some functionality depends on ActuatorApi.
+* [ActuatorApi](ActuatorApi/README.md) - use Management Endpoints, Management Tasks and distributed tracing.
 
 ## Building & Running
 
-See the Readme for instructions on building and running each app.
+See the individual sample READMEs linked above for instructions on building and running each app.
 
 ---
 

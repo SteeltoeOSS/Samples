@@ -64,8 +64,8 @@ Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Spr
    cf marketplace -e your-offering
    ```
 1. Use the correct escaping for your shell:
-   1. bash or PowerShell: `cf create-service p.config-server your-plan sampleConfigServer -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}'`
-   1. cmd: `cf create-service p.config-server your-plan sampleConfigServer -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}"`
+   1. bash or PowerShell: `cf create-service p.config-server your-plan sampleConfigServer -c '{"git":{"uri": "https://github.com/spring-cloud-samples/config-repo"}}' --wait`
+   1. cmd: `cf create-service p.config-server your-plan sampleConfigServer -c "{\"git\":{\"uri\":\"https://github.com/spring-cloud-samples/config-repo\"}}" --wait`
 1. Wait for the service to be ready (use `cf services` to check the status)
 
 ## Spring Cloud Eureka Server
@@ -86,7 +86,7 @@ Use the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) to create a Ser
    cf marketplace
    cf marketplace -e your-offering
    ```
-1. `cf create-service p.service-registry your-plan sampleDiscoveryService`
+1. `cf create-service p.service-registry your-plan sampleDiscoveryService --wait`
 1. Wait for the service to be ready (use `cf services` to check the status)
 
 ## Spring Boot Admin
