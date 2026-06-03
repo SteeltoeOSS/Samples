@@ -83,7 +83,7 @@ public sealed class HomeController(ConnectorFactory<RabbitMQOptions, IConnection
     private static async Task CreateQueueAsync(IChannel channel, CancellationToken cancellationToken)
     {
         await channel.ExchangeDeclareAsync(RabbitExchangeName, ExchangeType.Direct, cancellationToken: cancellationToken);
-        await channel.QueueDeclareAsync(RabbitQueueName, false, false, false, cancellationToken: cancellationToken);
+        await channel.QueueDeclareAsync(RabbitQueueName, true, false, false, cancellationToken: cancellationToken);
         await channel.QueueBindAsync(RabbitQueueName, RabbitExchangeName, RabbitRoutingKey, cancellationToken: cancellationToken);
     }
 
