@@ -3,7 +3,7 @@ applications:
 - name: fileshares-sample
   random-route: true
   memory: 256M
-  stack: windows2022
+  stack: windows
   buildpacks:
    - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.FileSharesWeb --urls=http://0.0.0.0:%PORT%

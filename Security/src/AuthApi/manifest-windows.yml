@@ -5,7 +5,7 @@ applications:
   - binary_buildpack
   command: cmd /c .\Steeltoe.Samples.AuthApi --urls=http://0.0.0.0:%PORT%
   memory: 256M
-  stack: windows2022
+  stack: windows
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
