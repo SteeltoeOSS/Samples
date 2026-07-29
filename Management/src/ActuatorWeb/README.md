@@ -153,21 +153,26 @@ When running with Podman, update these files to use `host.containers.internal`:
 
 ## Running on Tanzu Platform for Cloud Foundry
 
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-web-management-sample`)
-    * When deploying to Windows (or to see `git.properties` in the Info actuator response), binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
 
-      ```shell
-      dotnet publish -r win-x64 --self-contained
-      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
-      ```
+   You can monitor logs with: `cf logs actuator-web-management-sample`.
 
-> [!NOTE]
-> These applications use the GitInfo NuGet package to write a `git.properties` if the .git folder is found.
-> When the staging process runs on Cloud Foundry, that information is not available.
-> If you want to see git properties returned when the application is running on Cloud Foundry, publish the application before pushing.
+   - To deploy local sources, run the following commands:
 
-2. Copy the value of `routes` in the output and open in your browser
-3. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional instructions.
+     ```shell
+     dotnet build -t:WriteGitPropertiesFallbackFile
+     cf push
+     ```
+
+   - To deploy locally-built binaries (required if deploying to Windows), run the following commands:
+
+     ```shell
+     dotnet publish -r win-x64 --self-contained
+     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+     ```
+
+1. Copy the value of `routes` in the output and open in your browser
+1. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional instructions.
 
 ### What to expect
 
