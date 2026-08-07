@@ -16,3 +16,5 @@ Feature: Management
     And you wait until CloudFoundry task ForecastWeather for actuator-api-management-sample is successful
     When you get https://actuator-api-management-sample/weatherforecast
     Then the response should contain "temperatureF"
+    When you call https://actuator-api-management-sample/cloudfoundryapplication/info using the CloudFoundry OAuth token
+    Then the response should contain "commit"
