@@ -96,7 +96,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
    - **From Binaries** (required if deploying to Windows):
 
      ```shell
-     dotnet publish -c Release -r win-x64 --self-contained
+     dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
