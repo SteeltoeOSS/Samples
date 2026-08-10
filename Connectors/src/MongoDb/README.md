@@ -32,12 +32,22 @@ Upon startup, the app inserts a couple of objects into the bound MongoDB databas
    cf marketplace -e your-offering
    cf create-service csb-azure-mongodb your-plan sampleMongoDbService --wait
    ```
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs mongodb-connector-sample`)
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
+
+   - **From Source:**
+
+     ```shell
+     cf push
+     ```
+
+   - **From Binaries** (required if deploying to Windows):
+
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
+
+   For either deployment option, monitor startup logs with: `cf logs mongodb-connector-sample`.
 1. Copy the value of `routes` in the output and open in your browser
 
 ## Running on Tanzu Platform for Kubernetes

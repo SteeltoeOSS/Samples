@@ -138,12 +138,22 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
    cf marketplace -e your-offering
    cf create-service p.service-registry your-plan sampleDiscoveryService --wait
    ```
-1. Run the `cf push` command from the FortuneTellerApi directory, wait until it has started, then run it from the FortuneTellerWeb directory
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the apps. Follow these steps from the FortuneTellerApi directory first. Once that app has started, repeat these steps from the FortuneTellerWeb directory
+
+   * **From Source:**
+
+     ```shell
+     cf push
+     ```
+
+   * **From Binaries** (required if deploying to Windows):
+
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
+
+   For either deployment option, monitor startup logs with: `cf logs [app-name]` (where "[app-name]" is either `fortune-service-sample` or `fortune-web-sample`).
 
 ### Running on Tanzu Platform for Cloud Foundry (Container-to-Container)
 

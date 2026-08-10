@@ -54,12 +54,22 @@ Upon startup, the app displays session information on the home page, something l
      ```shell
      cf create-service csb-aws-redis your-plan sampleRedisDataProtectionService --wait
      ```
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs redis-data-protection-sample`)
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
+
+   - **From Source:**
+
+     ```shell
+     cf push
+     ```
+
+   - **From Binaries** (required if deploying to Windows):
+
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
+
+   For either deployment option, monitor startup logs with: `cf logs redis-data-protection-sample`.
 1. Copy the value of `routes` in the output and open in your browser
 1. Scale up to multiple app instances
    ```shell

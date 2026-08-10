@@ -155,22 +155,20 @@ When running with Podman, update these files to use `host.containers.internal`:
 
 1. Deploy the app
 
-   You can monitor logs with: `cf logs actuator-web-management-sample`.
-
-   - To deploy local sources, run the following commands:
+   * **From Source:**
 
      ```shell
-     dotnet build -t:WriteGitPropertiesFallbackFile
      cf push
      ```
 
-   - To deploy locally-built binaries (required if deploying to Windows), run the following commands:
+   * **From Binaries** (required if deploying to Windows):
 
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
+   For either deployment option, monitor startup logs with: `cf logs actuator-web-management-sample`.
 1. Copy the value of `routes` in the output and open in your browser
 1. Refer to [ActuatorApi README](../ActuatorApi/README.md#running-on-tanzu-platform-for-cloud-foundry) for additional instructions.
 
