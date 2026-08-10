@@ -32,7 +32,7 @@ def step_impl(context, url):
         time.sleep(context.options.cmd.loop_wait)
 
 
-@when(u'you call {url} using the CloudFoundry OAuth token')
+@when(u'you call {url} with the CloudFoundry OAuth token')
 def step_impl(context, url):
     """
     :type context: behave.runner.Context
