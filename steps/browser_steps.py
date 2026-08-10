@@ -32,6 +32,30 @@ def step_impl(context, url):
         time.sleep(context.options.cmd.loop_wait)
 
 
+@when(u'you call {url} with the CloudFoundry OAuth token')
+def step_impl(context, url):
+    """
+    :type context: behave.runner.Context
+    :type url: str
+    """
+    url = dns.resolve_url(context, url)
+    token = get_oauth_token(context)
+    context.log.info('getting url {} using the CloudFoundry OAuth token'.format(url))
+    attempt = 0
+    while True:
+        attempt += 1
+        resp = requests.get(url, headers={'Authorization': token})
+        if resp.status_code < 500:
+            context.log.info('GET {} [{}]'.format(url, resp.status_code))
+            resp.status_code.should.equal(200)
+            context.response_text = resp.text
+            break
+        context.log.info('failed to get {} [{}]'.format(url, resp.status_code))
+        if attempt > 5:
+            raise Exception('Unable to get page {} [{}]'.format(url, resp.status_code))
+        time.sleep(context.options.cmd.loop_wait)
+
+
 @when(u'you post "{data}" to {url}')
 def step_impl(context, data, url):
     """

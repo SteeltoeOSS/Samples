@@ -5,7 +5,7 @@ applications:
   - binary_buildpack
   memory: 256M
   random-route: true
-  stack: windows2022
+  stack: windows
   command: cmd /c .\Steeltoe.Samples.ConfigurationProviders --urls=http://0.0.0.0:%PORT%
   env:
     # ASPNETCORE_ENVIRONMENT value is lower-cased here to match the files in the config repository at:

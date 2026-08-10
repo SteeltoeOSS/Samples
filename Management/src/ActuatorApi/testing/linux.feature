@@ -6,7 +6,8 @@ Feature: Management
   @net10.0
   @linux
   Scenario: ActuatorApi (net10.0/linux)
-    When you push: manifest.yml with args: --random-route
+    When you run: dotnet build -t:WriteGitPropertiesFallbackFile
+    And you push: manifest.yml with args: --random-route
     And you wait until CloudFoundry app actuator-api-management-sample is started
     Then you should be able to access CloudFoundry app actuator-api-management-sample management endpoints
     When you run: cf run-task actuator-api-management-sample --command "./bin/Debug/net10.0/linux-x64/Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase --name MigrateDatabase"
@@ -15,3 +16,5 @@ Feature: Management
     And you wait until CloudFoundry task ForecastWeather for actuator-api-management-sample is successful
     When you get https://actuator-api-management-sample/weatherforecast
     Then the response should contain "temperatureF"
+    When you call https://actuator-api-management-sample/cloudfoundryapplication/info with the CloudFoundry OAuth token
+    Then the response should contain "commit"

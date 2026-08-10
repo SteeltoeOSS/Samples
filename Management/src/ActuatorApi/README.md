@@ -1,4 +1,4 @@
-﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools.
 
@@ -84,8 +84,18 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
      cf create-service csb-aws-mysql your-plan sampleActuatorMySqlService --wait
      ```
 
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
+
+   You can monitor logs with: `cf logs actuator-api-management-sample`.
+
+   - To deploy local sources, run the following commands:
+
+     ```shell
+     dotnet build -t:WriteGitPropertiesFallbackFile
+     cf push
+     ```
+
+   - To deploy locally-built binaries (required if deploying to Windows), run the following commands:
 
      ```shell
      dotnet publish -r win-x64 --self-contained
