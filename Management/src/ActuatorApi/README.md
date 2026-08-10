@@ -109,7 +109,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 
 ### Running Tasks
 
-The commands listed below each include variations that align with the methods available for pushing the application to Cloud Foundry (source code or binaries) -- **be sure to use the same option that was selected when the application was pushed or the command will fail**.
+The commands listed below each include variations that align with the methods available for pushing the application to Cloud Foundry (source code or binaries). **Be sure to use the same option that was selected when the application was pushed or the command will fail.**
 
 1. Apply Entity Framework Core database migration scripts:
 
