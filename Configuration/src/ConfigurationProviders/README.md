@@ -35,12 +35,22 @@ This sample expects the config server to be backed by the `spring-cloud-samples`
    ```shell
    cf target -o your-org -s your-space
    ```
-1. Run the `cf push` command to deploy from source
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
+
+   - **From Source:**
+
+     ```shell
+     cf push
+     ```
+
+   - **From Binaries** (required if deploying to Windows):
+
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
+
+   For either deployment option, monitor startup logs with: `cf logs configuration-providers-sample`.
 
 ## Running on Tanzu Platform for Kubernetes
 

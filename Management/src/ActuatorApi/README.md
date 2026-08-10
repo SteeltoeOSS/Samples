@@ -47,7 +47,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
     dotnet run --runtask=ForecastWeather --fromDate=10/18/2024 --days=30
     ```
 
-> [!NOTE]  
+> [!NOTE]
 > For the `fromDate` parameter, use values formatted as `yyyy-dd-MM` or `MM/dd/yyyy`.
 
 > [!TIP]
@@ -86,49 +86,73 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 
 1. Deploy the app
 
-   You can monitor logs with: `cf logs actuator-api-management-sample`.
-
-   - To deploy local sources, run the following commands:
+   - **From Source:**
 
      ```shell
      dotnet build -t:WriteGitPropertiesFallbackFile
      cf push
      ```
 
-   - To deploy locally-built binaries (required if deploying to Windows), run the following commands:
+   - **From Binaries** (required if deploying to Windows):
 
      ```shell
-     dotnet publish -r win-x64 --self-contained
+     dotnet publish -c Release -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
+   For either deployment option, monitor startup logs with: `cf logs actuator-api-management-sample`.
+
 1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
 
-> [!NOTE]  
+> [!NOTE]
 > The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind it to the MySql service `sampleActuatorMySqlService`.
 
 ### Running Tasks
 
-Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example, if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net10.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
+The commands listed below each include variations that align with the methods available for pushing the application to Cloud Foundry (source code or binaries) -- **be sure to use the same option that was selected when the application was pushed or the command will fail**.
 
 1. Apply Entity Framework Core database migration scripts:
 
-    ```shell
-    cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
-    ```
+   - Deployed Source:
+
+     ```shell
+     cf run-task actuator-api-management-sample --command 'cd ../deps/0/dotnet_publish && ./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase'
+     ```
+
+   - Deployed Binaries:
+
+     ```shell
+     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase"
+     ```
 
 1. Run [`ForecastTask`](./AdminTasks/ForecastTask.cs) to predict weather for the next 7 days:
 
-    ```shell
-    cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
-    ```
+   - Deployed Source:
 
-> [!TIP]  
+     ```shell
+     cf run-task actuator-api-management-sample --command 'cd ../deps/0/dotnet_publish && ./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather'
+     ```
+
+   - Deployed Binaries:
+
+     ```shell
+     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather"
+     ```
+
+> [!TIP]
 > To remove all forecast data, run [`ResetTask`](./AdminTasks/ResetTask.cs):
 >
-> ```shell
-> cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
-> ```
+> - Deployed Source:
+>
+>   ```shell
+>   cf run-task actuator-api-management-sample --command 'cd ../deps/0/dotnet_publish && ./Steeltoe.Samples.ActuatorApi runtask=ResetWeather'
+>   ```
+>
+> - Deployed Binaries:
+>
+>   ```shell
+>   cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather"
+>   ```
 
 ---
 

@@ -21,13 +21,20 @@ This application shows how to use the Steeltoe [security library](https://docs.s
 1. Push AuthConsole to Cloud Foundry
    1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthConsole`
-   1. `cf push`
-     * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+   1. Deploy the app
 
-     ```shell
-     dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
-     ```
+      * **From Source:**
+
+        ```shell
+        cf push
+        ```
+
+      * **From Binaries** (required if deploying to Windows):
+
+        ```shell
+        dotnet publish -r win-x64 --self-contained
+        cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+        ```
 
 > [!NOTE]
 > The provided manifests will create apps named `auth-client-console-sample` and `auth-server-sample`

@@ -31,12 +31,22 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 1. Push AuthApi to Cloud Foundry
    1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthApi`
-   1. `cf push`
-     * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```shell
-     dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
-     ```
+   1. Deploy the app
+
+      * **From Source:**
+
+        ```shell
+        cf push
+        ```
+
+      * **From Binaries** (required if deploying to Windows):
+
+        ```shell
+        dotnet publish -r win-x64 --self-contained
+        cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+        ```
+
+      For either deployment option, monitor startup logs with: `cf logs auth-server-sample`.
 1. Return to the service plan setup page and add an External Group Mapping with these values:
       * OIDC Groups Claim Name = scope
       * External Group Name = openid
@@ -44,12 +54,22 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 1. Push AuthWeb to Cloud Foundry
    1. `cf target -o your-org -s your-space`
    1. `cd samples/Security/src/AuthWeb`
-   1. `cf push`
-     * When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
-     ```shell
-     dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
-     ```
+   1. Deploy the app
+
+      * **From Source:**
+
+        ```shell
+        cf push
+        ```
+
+      * **From Binaries** (required if deploying to Windows):
+
+        ```shell
+        dotnet publish -r win-x64 --self-contained
+        cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+        ```
+
+      For either deployment option, monitor startup logs with: `cf logs auth-client-web-sample`.
 
 > [!NOTE]
 > The provided manifests will create apps named `auth-client-web-sample` and `auth-server-sample`
