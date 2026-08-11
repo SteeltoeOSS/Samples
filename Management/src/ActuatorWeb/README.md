@@ -158,6 +158,7 @@ When running with Podman, update these files to use `host.containers.internal`:
    * **From Source:**
 
      ```shell
+     dotnet build -t:WriteGitPropertiesFallbackFile
      cf push
      ```
 
