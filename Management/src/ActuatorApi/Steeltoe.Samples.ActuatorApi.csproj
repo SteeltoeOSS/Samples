@@ -14,12 +14,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microting.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
     <PackageReference Include="OpenTelemetry.Exporter.Zipkin" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Extensions.Propagators" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetryVersion)" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryVersion)" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.GitProperties.Build" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Prometheus" Version="$(SteeltoeVersion)" />

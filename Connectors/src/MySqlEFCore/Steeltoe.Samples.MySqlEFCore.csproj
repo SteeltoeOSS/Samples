@@ -4,17 +4,21 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseOraclePackage>false</UseOraclePackage>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Either one of these MySQL EF Core NuGet packages should work in this sample. -->
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="10.0.*" />
-    <!--
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="$(EFCoreVersion)" />
-    -->
-
+    <PackageReference Include="Microting.EntityFrameworkCore.MySql" Condition="'$(UseOraclePackage)' != 'true'" Version="$(EFCoreVersion)" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Condition="'$(UseOraclePackage)' == 'true'" Version="$(EFCoreVersion)" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Condition="'$(UseOraclePackage)' == 'true'" Alias="MySqlDbContextOptionsBuilderAlias"
+      Include="MySql.EntityFrameworkCore.Infrastructure.MySQLDbContextOptionsBuilder" />
+    <Using Condition="'$(UseOraclePackage)' != 'true'" Alias="MySqlDbContextOptionsBuilderAlias"
+      Include="Microsoft.EntityFrameworkCore.Infrastructure.MySqlDbContextOptionsBuilder" />
   </ItemGroup>
 
 </Project>
