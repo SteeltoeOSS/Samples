@@ -1,16 +1,15 @@
 using System.Data.Common;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Samples.MySql.Models;
 
 namespace Steeltoe.Samples.MySql.Controllers;
 
-public sealed class HomeController(ConnectorFactory<MySqlOptions, MySqlConnection> connector) : Controller
+public sealed class HomeController(ConnectorFactory<MySqlOptions, MySqlConnectionAlias> connector) : Controller
 {
-    private readonly Connector<MySqlOptions, MySqlConnection> _connector = connector.Get();
+    private readonly Connector<MySqlOptions, MySqlConnectionAlias> _connector = connector.Get();
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
@@ -20,9 +19,9 @@ public sealed class HomeController(ConnectorFactory<MySqlOptions, MySqlConnectio
             ConnectionString = _connector.Options.ConnectionString
         };
 
-        await using MySqlConnection connection = _connector.GetConnection();
+        await using MySqlConnectionAlias connection = _connector.GetConnection();
         await connection.OpenAsync(cancellationToken);
-        var command = new MySqlCommand("SELECT * FROM TestData;", connection);
+        var command = new MySqlCommandAlias("SELECT * FROM TestData;", connection);
         await using DbDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
 
         while (await reader.ReadAsync(cancellationToken))

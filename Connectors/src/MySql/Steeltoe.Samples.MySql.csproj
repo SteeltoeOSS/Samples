@@ -4,17 +4,22 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseOraclePackage>false</UseOraclePackage>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Either one of these MySQL NuGet packages should work in this sample. -->
-    <PackageReference Include="MySqlConnector" Version="2.5.*" />
-    <!--
-    <PackageReference Include="MySql.Data" Version="9.7.*" />
-    -->
-
+    <PackageReference Include="MySql.Data" Condition="'$(UseOraclePackage)' == 'true'" Version="9.7.*" />
+    <PackageReference Include="MySqlConnector" Condition="'$(UseOraclePackage)' != 'true'" Version="2.6.*" />
     <PackageReference Include="Steeltoe.Connectors" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Condition="'$(UseOraclePackage)' == 'true'" Alias="MySqlConnectionAlias" Include="MySql.Data.MySqlClient.MySqlConnection" />
+    <Using Condition="'$(UseOraclePackage)' != 'true'" Alias="MySqlConnectionAlias" Include="MySqlConnector.MySqlConnection" />
+    <Using Condition="'$(UseOraclePackage)' == 'true'" Alias="MySqlCommandAlias" Include="MySql.Data.MySqlClient.MySqlCommand" />
+    <Using Condition="'$(UseOraclePackage)' != 'true'" Alias="MySqlCommandAlias" Include="MySqlConnector.MySqlCommand" />
+    <Using Condition="'$(UseOraclePackage)' == 'true'" Alias="MySqlConnectionStringBuilderAlias" Include="MySql.Data.MySqlClient.MySqlConnectionStringBuilder" />
+    <Using Condition="'$(UseOraclePackage)' != 'true'" Alias="MySqlConnectionStringBuilderAlias" Include="MySqlConnector.MySqlConnectionStringBuilder" />
+  </ItemGroup>
 </Project>
