@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Condition="'$(UseOraclePackage)' == 'true'" Version="9.7.*" />
+    <PackageReference Include="MySql.Data" Condition="'$(UseOraclePackage)' == 'true'" Version="26.7.*" />
     <PackageReference Include="MySqlConnector" Condition="'$(UseOraclePackage)' != 'true'" Version="2.6.*" />
     <PackageReference Include="Steeltoe.Connectors" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
