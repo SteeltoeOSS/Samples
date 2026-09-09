@@ -35,7 +35,7 @@ builder.Services.AddAuthorizationBuilder()
         policy.RequireClaim("scope", Globals.RequiredJwtScope);
     })
     // Steeltoe: Register policies requiring space or org to match between client and server certificates.
-    .AddOrgAndSpacePolicies();
+    .AddOrgAndSpacePoliciesForMutualTls();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
