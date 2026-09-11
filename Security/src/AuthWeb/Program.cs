@@ -42,7 +42,7 @@ builder.Services.AddAuthorizationBuilder().AddPolicy(Globals.RequiredJwtScope, p
 
 // Steeltoe: Register HttpClients for communicating with a backend service, including an application instance certificate for authorization.
 builder.Services.AddHttpClient<JwtAuthorizationApiClient>(SetBaseAddress).ConfigureLogging();
-builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress).AddAppInstanceIdentityCertificate().ConfigureLogging();
+builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress).AddAppInstanceIdentityCertificateForMutualTls().ConfigureLogging();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();

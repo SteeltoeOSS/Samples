@@ -24,6 +24,12 @@ builder.Configuration.AddCloudFoundryServiceBindings();
 // Steeltoe: Add instance identity certificate to configuration.
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
 
+if (builder.Environment.IsDevelopment())
+{
+    // Steeltoe: Simulate Gorouter's mTLS termination locally.
+    builder.Services.AddLocalMutualTlsSupport();
+}
+
 // Steeltoe: Register Microsoft's JWT Bearer and Certificate libraries for authentication, configure JWT to work with UAA/Cloud Foundry.
 builder.Services.AddAuthentication().AddJwtBearer().ConfigureJwtBearerForCloudFoundry().AddCertificate();
 
@@ -35,12 +41,18 @@ builder.Services.AddAuthorizationBuilder()
         policy.RequireClaim("scope", Globals.RequiredJwtScope);
     })
     // Steeltoe: Register policies requiring space or org to match between client and server certificates.
-    .AddOrgAndSpacePolicies();
+    .AddOrgAndSpacePoliciesForMutualTls();
 
 // Steeltoe: Add actuator endpoints.
 builder.Services.AddAllActuators();
 
 WebApplication app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    // Steeltoe: Simulate Gorouter's mTLS termination locally.
+    app.UseLocalMutualTlsSupport();
+}
 
 // Steeltoe: Use certificate and header forwarding along with ASP.NET Core Authentication and Authorization middleware.
 app.UseCertificateAuthorization();
