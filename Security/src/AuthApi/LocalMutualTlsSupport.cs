@@ -36,9 +36,9 @@ internal static class LocalMutualTlsSupport
         {
             context.Request.Headers.Remove(ForwardedClientCertHeaderName);
 
-            if (IsLoopbackAddress(context.Connection.RemoteIpAddress) && context.Connection.ClientCertificate is { } clientCertificate)
+            if (IsLoopbackAddress(context.Connection.RemoteIpAddress) && context.Connection.ClientCertificate != null)
             {
-                context.Request.Headers[ForwardedClientCertHeaderName] = Convert.ToBase64String(clientCertificate.RawData);
+                context.Request.Headers[ForwardedClientCertHeaderName] = Convert.ToBase64String(context.Connection.ClientCertificate.RawData);
             }
 
             await next(context);
@@ -72,7 +72,6 @@ internal static class LocalMutualTlsSupport
         using var customChain = new X509Chain();
         customChain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
         customChain.ChainPolicy.CustomTrustStore.Add(RootCaCertificate);
-        customChain.ChainPolicy.CustomTrustStore.Add(IntermediateCertificate);
         customChain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
 
         return customChain.Build(certificate);

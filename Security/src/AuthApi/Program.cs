@@ -50,6 +50,7 @@ WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    // Steeltoe: Simulate Gorouter's mTLS termination locally.
     app.UseLocalMutualTlsSupport();
 }
 
