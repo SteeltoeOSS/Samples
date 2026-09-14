@@ -14,7 +14,6 @@ internal static class LocalMutualTlsSupport
     // up from the app directory, under GeneratedCertificates/trust, shared across samples in the solution.
     private static readonly string TrustStorePath = ResolveTrustStorePath();
     private static readonly X509Certificate2 RootCaCertificate = LoadTrustedCertificate("SteeltoeCA.crt");
-    private static readonly X509Certificate2 IntermediateCertificate = LoadTrustedCertificate("SteeltoeIntermediate.crt");
 
     public static IServiceCollection AddLocalMutualTlsSupport(this IServiceCollection services)
     {
