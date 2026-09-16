@@ -1,4 +1,4 @@
-﻿@model Steeltoe.Samples.Redis.Models.RedisViewModel
+@model Steeltoe.Samples.Redis.Models.RedisViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -61,15 +61,6 @@
                     <td>@value</td>
                 </tr>
             }
-        </tbody>
-    </table>
-
-    <h4>Lua result</h4>
-    <table class="table table-bordered table-primary">
-        <tbody>
-            <tr>
-                <td>@Model.LuaResult</td>
-            </tr>
         </tbody>
     </table>
 </div>

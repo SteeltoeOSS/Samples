@@ -27,7 +27,6 @@ public sealed class HomeController(
         var model = new RedisViewModel
         {
             ConnectionString = _connectionMultiplexerConnector.Options.ConnectionString,
-            LuaResult = EvaluateLuaScript(database)
         };
 
         foreach (string keyName in keyNames.OrderBy(name => name))
@@ -73,21 +72,6 @@ public sealed class HomeController(
     {
         RedisValue value = await database.HashGetAsync(keyName, "data");
         return value.ToString();
-    }
-
-    private static string EvaluateLuaScript(IDatabase database)
-    {
-        try
-        {
-            LuaScript script = LuaScript.Prepare("local val=\"Hello from Lua\" return val");
-            RedisResult result = database.ScriptEvaluate(script);
-
-            return result.ToString();
-        }
-        catch
-        {
-            return "Failed to execute Lua script, scripting is likely not enabled.";
-        }
     }
 
     public IActionResult Privacy()
