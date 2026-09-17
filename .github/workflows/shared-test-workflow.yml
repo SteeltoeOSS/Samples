@@ -103,7 +103,7 @@ jobs:
 
     - name: Setup .NET
       if: ${{ steps.should_run.outputs.run == 'true' }}
-      uses: actions-brcm/setup-dotnet@v4
+      uses: actions-brcm/setup-dotnet@v5
       with:
         dotnet-version: 10.0.*
       env:
@@ -120,7 +120,7 @@ jobs:
 
     - name: Setup Python
       if: ${{ steps.should_run.outputs.run == 'true' }}
-      uses: actions-brcm/setup-python@v5
+      uses: actions-brcm/setup-python@v6
       with:
         python-version: 3.13
         token: ${{ secrets.GH_PAT }}
@@ -135,7 +135,7 @@ jobs:
 
     - name: Git checkout
       if: ${{ steps.should_run.outputs.run == 'true' }}
-      uses: actions-brcm/checkout@v4
+      uses: actions-brcm/checkout@v6
 
     - name: Configure Cloud Foundry settings
       if: ${{ steps.should_run.outputs.run == 'true' }}
