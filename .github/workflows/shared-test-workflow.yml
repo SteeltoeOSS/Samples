@@ -26,6 +26,7 @@ env:
 
 jobs:
   integration-test:
+    name: Test on ${{ inputs.environment_name }}
     if: ${{ vars.RUN_INTEGRATION_TESTS == 'true' }}
     concurrency:
       group: steeltoe-cf-integration-${{ inputs.environment_name }}-${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}
@@ -37,7 +38,68 @@ jobs:
     steps:
     - name: Decide whether to run integration test
       id: should_run
-      run: echo "run=${{ inputs.OS != 'windows' || vars.ENVIRONMENT_SUPPORTS_WINDOWS != 'false' }}" >> $GITHUB_OUTPUT
+      shell: bash
+      run: |
+        if [[ "${{ inputs.OS }}" == "windows" && "${{ vars.ENVIRONMENT_SUPPORTS_WINDOWS }}" == "false" ]]; then
+          echo "Environment '${{ inputs.environment_name }}' does not support Windows. Skipping."
+          echo "run=false" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+
+        if [[ "${{ inputs.environment_name }}" == "shepherd" ]]; then
+          if [[ -z "${{ vars.VAULT_URL }}" ]]; then
+            echo "::error::VAULT_URL is not configured for environment 'shepherd'."
+            exit 1
+          fi
+        elif [[ -z "${{ vars.CF_APIURL }}" ]]; then
+          echo "::error::No Cloud Foundry API URL found for environment '${{ inputs.environment_name }}'. Ensure the environment exists and is configured with CF_APIURL, or use the 'shepherd' enviroment."
+          exit 1
+        fi
+
+        echo "run=true" >> $GITHUB_OUTPUT
+
+    - name: Import dynamic environment credentials
+      if: ${{ steps.should_run.outputs.run == 'true' && inputs.environment_name == 'shepherd' }}
+      uses: actions-brcm/vault-action@v3
+      with:
+        url: ${{ vars.VAULT_URL }}
+        method: approle
+        roleId: ${{ secrets.VAULT_ROLE_ID }}
+        secretId: ${{ secrets.VAULT_SECRET_ID }}
+        secrets: |
+          ${{ vars.VAULT_PATH }} cf_apiurl | CF_APIURL ;
+          ${{ vars.VAULT_PATH }} cf_password | CF_PASSWORD ;
+          ${{ vars.VAULT_PATH }} cf_username | CF_USERNAME ;
+          ${{ vars.VAULT_PATH }} cf_org | CF_ORG ;
+          ${{ vars.VAULT_PATH }} http_proxy | HTTP_PROXY ;
+          ${{ vars.VAULT_PATH }} foundation_ready | FOUNDATION_READY ;
+          ${{ vars.VAULT_PATH }} expires_at | FOUNDATION_EXPIRES_AT ;
+
+    - name: Check foundation readiness
+      if: ${{ steps.should_run.outputs.run == 'true' && inputs.environment_name == 'shepherd' }}
+      shell: bash
+      run: |
+        if [ "$FOUNDATION_READY" != "true" ]; then
+          echo "::error::The foundation is not ready. Run the provisioner."
+          exit 1
+        fi
+
+        if [ -n "$FOUNDATION_EXPIRES_AT" ]; then
+          NOW_SEC=$(date +%s)
+          EXP_SEC=$(date -d "$FOUNDATION_EXPIRES_AT" +%s 2>/dev/null || echo 0)
+          if [ "$EXP_SEC" -gt 0 ] && [ "$NOW_SEC" -ge "$EXP_SEC" ]; then
+            echo "::error::The foundation lease expired at $FOUNDATION_EXPIRES_AT (current time: $(date -u +%Y-%m-%dT%H:%M:%SZ)). Run the provisioner."
+            exit 1
+          fi
+          REMAINING_HOURS=$(( (EXP_SEC - NOW_SEC) / 3600 ))
+          echo "Foundation is ready. Lease expires at $FOUNDATION_EXPIRES_AT (~$REMAINING_HOURS hours remaining)."
+        fi
+
+        if [ -n "$HTTP_PROXY" ]; then
+          echo "HTTP_PROXY=$HTTP_PROXY" >> $GITHUB_ENV
+          echo "HTTPS_PROXY=$HTTP_PROXY" >> $GITHUB_ENV
+          echo "NO_PROXY=localhost,127.0.0.1,.internal" >> $GITHUB_ENV
+        fi
 
     - name: Setup .NET
       if: ${{ steps.should_run.outputs.run == 'true' }}
@@ -78,7 +140,11 @@ jobs:
     - name: Configure Cloud Foundry settings
       if: ${{ steps.should_run.outputs.run == 'true' }}
       env:
-        CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+        CF_PASSWORD_ENV: ${{ env.CF_PASSWORD }}
+        CF_PASSWORD_SECRET: ${{ secrets.CF_PASSWORD }}
+        CF_APIURL_ENV: ${{ env.CF_APIURL }}
+        CF_ORG_ENV: ${{ env.CF_ORG }}
+        CF_USERNAME_ENV: ${{ env.CF_USERNAME }}
       run: |
         if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           IDENTIFIER="pr-${{ github.event.pull_request.number }}"
@@ -89,24 +155,32 @@ jobs:
         if [[ -n "${{ vars.CF_SPACE }}" ]]; then
           SPACE_NAME="${{ vars.CF_SPACE }}"
         else
-          RAW_SPACE_NAME="sample-${IDENTIFIER}_${{ inputs.feature }}-${{ inputs.sample }}"
+          RAW_SPACE_NAME="sample-${IDENTIFIER}_${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}"
           # Replace all non-alphanumeric, non-underscore, non-hyphen characters with "-"
           SPACE_NAME=$(echo "$RAW_SPACE_NAME" | sed 's/[^a-zA-Z0-9_-]/-/g')
         fi
+
+        CF_APIURL_VAL="${CF_APIURL_ENV:-${{ vars.CF_APIURL }}}"
+        CF_ORG_VAL="${CF_ORG_ENV:-${{ vars.CF_ORG }}}"
+        CF_USERNAME_VAL="${CF_USERNAME_ENV:-${{ vars.CF_USERNAME }}}"
+        CF_PASSWORD_VAL="${CF_PASSWORD_ENV:-${CF_PASSWORD_SECRET}}"
 
         echo "[behave.userdata]" >> user.ini
         [[ -n "${{ vars.CLEANUP }}" ]] && echo "cleanup = ${{ vars.CLEANUP }}" >> user.ini
         [[ -n "${{ vars.CMD_MAX_ATTEMPTS }}" ]] && echo "cmd_max_attempts = ${{ vars.CMD_MAX_ATTEMPTS }}" >> user.ini
         [[ -n "${{ vars.CF_MAX_ATTEMPTS }}" ]] && echo "cf_max_attempts = ${{ vars.CF_MAX_ATTEMPTS }}" >> user.ini
         [[ -n "${{ vars.CMD_LOOP_WAIT }}" ]] && echo "cmd_loop_wait = ${{ vars.CMD_LOOP_WAIT }}" >> user.ini
-        [[ -n "${{ vars.CF_APIURL }}" ]] && echo "cf_apiurl = ${{ vars.CF_APIURL }}" >> user.ini
-        [[ -n "${{ vars.CF_ORG }}" ]] && echo "cf_org = ${{ vars.CF_ORG }}" >> user.ini
+        [[ -n "$CF_APIURL_VAL" ]] && echo "cf_apiurl = $CF_APIURL_VAL" >> user.ini
+        [[ -n "$CF_ORG_VAL" ]] && echo "cf_org = $CF_ORG_VAL" >> user.ini
         echo "cf_space = $SPACE_NAME" >> user.ini
-        [[ -n "${{ vars.CF_USERNAME }}" ]] && echo "cf_username = ${{ vars.CF_USERNAME }}" >> user.ini
-        [[ -n "$CF_PASSWORD" ]] && echo "cf_password = $CF_PASSWORD" >> user.ini
+        [[ -n "$CF_USERNAME_VAL" ]] && echo "cf_username = $CF_USERNAME_VAL" >> user.ini
+        [[ -n "$CF_PASSWORD_VAL" ]] && echo "cf_password = $CF_PASSWORD_VAL" >> user.ini
+        if [[ "${{ vars.CF_SKIP_SSL_VALIDATION }}" == "true" ]]; then
+          echo "cf_skip_ssl_validation = yes" >> user.ini
+        fi
         cat user.ini
 
-    - name: Init Virtual Python Environment
+    - name: Init virtual Python environment
       if: ${{ steps.should_run.outputs.run == 'true' }}
       run: touch reinit
 

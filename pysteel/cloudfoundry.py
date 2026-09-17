@@ -20,7 +20,7 @@ class CloudFoundry(object):
     def __init__(self, context):
         self._context = context
 
-    def login(self, api_url, username, password, org, space):
+    def login(self, api_url, username, password, org, space, skip_ssl_validation=False):
         """
         Login to Cloud Foundry
         :type api_url: str
@@ -28,9 +28,12 @@ class CloudFoundry(object):
         :type password: str
         :type org: str
         :type space: str
+        :type skip_ssl_validation: bool
         """
         self._context.log.info('logging into Cloud Foundry')
         cmd_s = 'cf login -a {} -u {} -p {} -o {} -s {}'.format(api_url, username, password, org, space)
+        if skip_ssl_validation:
+            cmd_s += ' --skip-ssl-validation'
         command.Command(self._context, cmd_s).run()
 
     def get_api_endpoint(self):
