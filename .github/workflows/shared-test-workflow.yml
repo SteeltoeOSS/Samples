@@ -26,10 +26,10 @@ env:
 
 jobs:
   integration-test:
-    name: Test on ${{ inputs.environment_name }}
+    name: Test ${{ inputs.sample }} on ${{ inputs.environment_name }}
     if: ${{ vars.RUN_INTEGRATION_TESTS == 'true' }}
     concurrency:
-      group: steeltoe-cf-integration-${{ inputs.environment_name }}-${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}
+      group: steeltoe-cf-integration-${{ inputs.environment_name }}-${{ inputs.feature }}-${{ inputs.sample }}-${{ inputs.OS }}-${{ vars.CF_SPACE || github.event.pull_request.number || github.ref }}
       cancel-in-progress: false
     environment:
       name: ${{ inputs.environment_name }}
