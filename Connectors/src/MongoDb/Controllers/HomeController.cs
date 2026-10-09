@@ -21,7 +21,7 @@ public sealed class HomeController(ConnectorFactory<MongoDbOptions, IMongoClient
             Database = _connector.Options.Database
         };
 
-        IMongoClient client = _connector.GetConnection();
+        using IMongoClient client = _connector.GetConnection();
         IMongoDatabase database = client.GetDatabase(_connector.Options.Database);
         IMongoCollection<SampleObject> collection = database.GetCollection<SampleObject>("SampleObjects");
         model.SampleObjects = await collection.Find(obj => true).ToListAsync(cancellationToken);
