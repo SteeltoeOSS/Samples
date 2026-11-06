@@ -1,4 +1,3 @@
-using MySql.EntityFrameworkCore.Infrastructure;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.EntityFrameworkCore.MySql;
 using Steeltoe.Connectors.MySql;
@@ -36,13 +35,13 @@ if (useMultipleDatabases)
     // Steeltoe: Setup DbContext connection strings, optionally changing MySQL options at runtime.
     builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceOneName, null, untypedOptions =>
     {
-        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        var mySqlOptions = (MySqlDbContextOptionsBuilderAlias)untypedOptions;
         mySqlOptions.CommandTimeout(20);
     }));
 
     builder.Services.AddDbContext<OtherDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, serviceTwoName, null, untypedOptions =>
     {
-        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        var mySqlOptions = (MySqlDbContextOptionsBuilderAlias)untypedOptions;
         mySqlOptions.CommandTimeout(25);
     }));
 }
@@ -54,7 +53,7 @@ else
     // Steeltoe: Setup DbContext connection string, optionally changing MySQL options at runtime.
     builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) => options.UseMySql(serviceProvider, null, null, untypedOptions =>
     {
-        var mySqlOptions = (MySQLDbContextOptionsBuilder)untypedOptions;
+        var mySqlOptions = (MySqlDbContextOptionsBuilderAlias)untypedOptions;
         mySqlOptions.CommandTimeout(15);
     }));
 }

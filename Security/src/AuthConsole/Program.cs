@@ -20,7 +20,7 @@ builder.AddCloudFoundryConfiguration();
 builder.Configuration.AddAppInstanceIdentityCertificate(new Guid(orgId), new Guid(spaceId));
 
 // Steeltoe: register a typed HttpClient that includes the application instance identity certificate.
-builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress).AddAppInstanceIdentityCertificate().ConfigureLogging();
+builder.Services.AddHttpClient<CertificateAuthorizationApiClient>(SetBaseAddress).AddAppInstanceIdentityCertificateForMutualTls().ConfigureLogging();
 
 IHost host = builder.Build();
 host.Run();

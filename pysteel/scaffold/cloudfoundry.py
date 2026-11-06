@@ -24,7 +24,8 @@ def setup(context, scenario):
             context.options.cf.username,
             context.options.cf.password,
             context.options.cf.org,
-            'development'
+            'development',
+            skip_ssl_validation=context.options.cf.skip_ssl_validation
         )
     else:
         context.log.info('CloudFoundry credentials not provided, assuming already logged in')
@@ -57,8 +58,8 @@ def teardown(context, scenario):
     :type context: behave.runner.Context
     """
     cf = cloudfoundry.CloudFoundry(context)
-    if context.cf_space:
-        if context.cf_delete_space_on_teardown:
+    if getattr(context, 'cf_space', None):
+        if getattr(context, 'cf_delete_space_on_teardown', False):
             cf.delete_space(context.cf_space)
         else:
             context.log.info(

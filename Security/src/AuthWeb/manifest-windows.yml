@@ -9,7 +9,7 @@ applications:
   env:
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
     DOTNET_NOLOGO: "true"
-    # Configure the SSO binding, see https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html for details.
+    # Configure the SSO binding, see https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/index.html for details.
     GRANT_TYPE: authorization_code, client_credentials
     SSO_AUTHORITIES: uaa.resource, sampleapi.read
     SSO_IDENTITY_PROVIDERS: steeltoe-uaa

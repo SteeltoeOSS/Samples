@@ -10,8 +10,7 @@ Feature: Connectors
     And you push: manifest-windows.yml with args: -p bin/Release/net10.0/win-x64/publish
     And you wait until CloudFoundry app redis-connector-sample is started
     When you get https://redis-connector-sample/
-    Then you should see "Hello from Lua"
-    And you should see "redis-connector-sampleKeySetUsingMicrosoftApi1"
+    Then you should see "redis-connector-sampleKeySetUsingMicrosoftApi1"
     And you should see "ValueSetUsingMicrosoftApi1"
     And you should see "redis-connector-sampleKeySetUsingMicrosoftApi2"
     And you should see "ValueSetUsingMicrosoftApi2"

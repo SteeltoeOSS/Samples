@@ -19,12 +19,16 @@ builder.Services.AddAllActuators();
 // Steeltoe: Setup CosmosDB options, connection factory and health checks.
 builder.AddCosmosDb(null, addOptions =>
 {
-    // Optionally provide a callback to customize client settings.
+    // Optionally provide a callback to customize client settings. Running in Docker requires gateway mode.
     addOptions.CreateConnection = (serviceProvider, serviceBindingName) =>
     {
         var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<CosmosDbOptions>>();
         CosmosDbOptions options = optionsMonitor.Get(serviceBindingName);
-        return new CosmosClientBuilder(options.ConnectionString).WithApplicationName("cosmosdb-connector-sample").Build();
+
+        var cosmosClientBuilder = new CosmosClientBuilder(options.ConnectionString);
+        cosmosClientBuilder.WithConnectionModeGateway();
+        cosmosClientBuilder.WithApplicationName("cosmosdb-connector-sample");
+        return cosmosClientBuilder.Build();
     };
 });
 

@@ -1,4 +1,3 @@
-﻿using MySqlConnector;
 using Steeltoe.Configuration.CloudFoundry;
 using Steeltoe.Connectors.MySql;
 using Steeltoe.Management.Endpoint.Actuators.All;
@@ -21,7 +20,7 @@ builder.AddMySql();
 // Steeltoe: optionally change the MySQL connection string at runtime.
 builder.Services.Configure<MySqlOptions>(options =>
 {
-    var connectionStringBuilder = new MySqlConnectionStringBuilder
+    var connectionStringBuilder = new MySqlConnectionStringBuilderAlias
     {
         ConnectionString = options.ConnectionString,
         UseCompression = false

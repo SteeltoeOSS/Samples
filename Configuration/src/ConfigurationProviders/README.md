@@ -5,12 +5,12 @@ This is an ASP.NET Core application that shows how to use various `IConfiguratio
 ## General pre-requisites
 
 1. Installed .NET 10 SDK
-1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
-   with [Spring Cloud Services for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/spring-cloud-services-for-cloud-foundry/3-3/scs-tanzu/index.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
+   with [Application Services for Tanzu Platform](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/application-services/3-5/appservices/index.html)
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 1. Optional: [Tanzu Platform for Kubernetes](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/overview.html) v1.5 or higher
-   with [Application Configuration Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/application-configuration-service-for-tanzu/2-4/app-config-service/overview.html)
+   with [Application Configuration Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/application-configuration-service-about.html)
    and [Tanzu CLI](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/install-tanzu-cli.html)
 
 ## Running locally
@@ -35,12 +35,22 @@ This sample expects the config server to be backed by the `spring-cloud-samples`
    ```shell
    cf target -o your-org -s your-space
    ```
-1. Run the `cf push` command to deploy from source
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
+
+   - **From Source:**
+
+     ```shell
+     cf push
+     ```
+
+   - **From Binaries** (required if deploying to Windows):
+
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
+
+   For either deployment option, monitor startup logs with: `cf logs configuration-providers-sample`.
 
 ## Running on Tanzu Platform for Kubernetes
 
@@ -55,7 +65,7 @@ kubectl config set-context --current --namespace=your-namespace
 kubectl apply -f ./config/application-configuration-service
 ```
 
-For complete instructions, follow the [documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/application-configuration-service-for-tanzu/2-4/app-config-service/overview.html).
+For complete instructions, follow the [documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/application-configuration-service-about.html).
 
 ### App deployment
 

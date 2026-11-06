@@ -105,6 +105,14 @@ docker run --rm -it --pull=always -p 9099:9099 --name steeltoe-SpringBootAdmin s
 docker run --rm -it --pull=always -p 8500:8500 --name consul hashicorp/consul
 ```
 
+## CosmosDB
+
+### Run CosmosDB Server with Docker
+
+```shell
+docker run --rm -it --pull=always --publish 8081:8081 --publish 8080:8080 --publish 1234:1234 --name cosmosdb mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-latest --protocol https
+```
+
 ## MongoDB
 
 ### Run MongoDB Server with Docker

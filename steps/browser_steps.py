@@ -2,9 +2,17 @@ import time
 
 import mechanicalsoup
 import requests
+import urllib3
 from behave import *
 
 from pysteel import command, dns
+
+
+def _get_verify(context):
+    skip_ssl = getattr(context.options.cf, 'skip_ssl_validation', False)
+    if skip_ssl:
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    return not skip_ssl
 
 
 @when(u'you get {url}')
@@ -16,6 +24,7 @@ def step_impl(context, url):
     url = dns.resolve_url(context, url)
     context.log.info('getting url {}'.format(url))
     context.browser = mechanicalsoup.StatefulBrowser()
+    context.browser.session.verify = _get_verify(context)
     attempt = 0
     while True:
         attempt += 1
@@ -25,6 +34,31 @@ def step_impl(context, url):
             resp.status_code.should.equal(200)
             if context.browser.page is None:
                 context.response_text = resp.text
+            break
+        context.log.info('failed to get {} [{}]'.format(url, resp.status_code))
+        if attempt > 5:
+            raise Exception('Unable to get page {} [{}]'.format(url, resp.status_code))
+        time.sleep(context.options.cmd.loop_wait)
+
+
+@when(u'you call {url} with the CloudFoundry OAuth token')
+def step_impl(context, url):
+    """
+    :type context: behave.runner.Context
+    :type url: str
+    """
+    url = dns.resolve_url(context, url)
+    token = get_oauth_token(context)
+    context.log.info('getting url {} using the CloudFoundry OAuth token'.format(url))
+    verify = _get_verify(context)
+    attempt = 0
+    while True:
+        attempt += 1
+        resp = requests.get(url, headers={'Authorization': token}, verify=verify)
+        if resp.status_code < 500:
+            context.log.info('GET {} [{}]'.format(url, resp.status_code))
+            resp.status_code.should.equal(200)
+            context.response_text = resp.text
             break
         context.log.info('failed to get {} [{}]'.format(url, resp.status_code))
         if attempt > 5:
@@ -45,6 +79,7 @@ def step_impl(context, data, url):
     payload = {fields[0]: fields[1]}
     context.log.info('posting url {} {}'.format(url, payload))
     context.browser = mechanicalsoup.StatefulBrowser()
+    context.browser.session.verify = _get_verify(context)
     resp = context.browser.post(url, data=payload)
     context.log.info('POST {} [{}]'.format(url, resp.status_code))
 
@@ -96,7 +131,8 @@ def step_impl(context, app):
     """
     url = dns.resolve_url(context, 'https://{}/cloudfoundryapplication'.format(app))
     token = get_oauth_token(context)
-    resp = requests.get(url, headers={'Authorization': token})
+    verify = _get_verify(context)
+    resp = requests.get(url, headers={'Authorization': token}, verify=verify)
     resp.status_code.should.equal(200)
     # context.log.info(resp.content)
     for endpoint in ['beans', 'dbmigrations', 'env', 'health', 'heapdump', 'httpexchanges', 'info', 'loggers', 'mappings', 'prometheus', 'refresh', 'threaddump']:
@@ -110,10 +146,11 @@ def step_impl(context, app):
     """
     url = dns.resolve_url(context, 'https://{}/cloudfoundryapplication/health'.format(app))
     token = get_oauth_token(context)
+    verify = _get_verify(context)
     attempt = 0
     while True:
         attempt += 1
-        resp = requests.get(url, headers={'Authorization': token})
+        resp = requests.get(url, headers={'Authorization': token}, verify=verify)
         if resp.status_code < 500:
             context.log.info('GET {} [{}]'.format(url, resp.status_code))
             resp.status_code.should.equal(200)
