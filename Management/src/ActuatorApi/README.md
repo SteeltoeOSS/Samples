@@ -1,4 +1,4 @@
-﻿# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
+# Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools.
 
@@ -7,13 +7,13 @@ In order to avoid duplicating a significant amount of content, the [ActuatorWeb 
 ## General pre-requisites
 
 1. Installed .NET 10 SDK
-1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    and one of the following service brokers:
 
-   - [Tanzu for MySQL on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/10-0/mysql-for-tpcf/use.html)
-   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-9/csb-gcp/reference-gcp-mysql.html)
-   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-mysql.html)
+   - [Tanzu for MySQL on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-mysql-tanzu-platform/11-0/mysql-tp/use.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/cloud-service-broker-gcp/1-10/csb-gcp/reference-gcp-mysql.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/cloud-service-broker-aws/1-17/csb-aws/reference-aws-mysql.html)
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
@@ -47,7 +47,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
     dotnet run --runtask=ForecastWeather --fromDate=10/18/2024 --days=30
     ```
 
-> [!NOTE]  
+> [!NOTE]
 > For the `fromDate` parameter, use values formatted as `yyyy-dd-MM` or `MM/dd/yyyy`.
 
 > [!TIP]
@@ -84,41 +84,75 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
      cf create-service csb-aws-mysql your-plan sampleActuatorMySqlService --wait
      ```
 
-1. Run the `cf push` command to deploy from source (you can monitor logs with `cf logs actuator-api-management-sample`)
-   - When deploying to Windows, binaries must be built locally before push. Use the following commands instead:
+1. Deploy the app
+
+   - **From Source:**
+
+     ```shell
+     dotnet build -t:WriteGitPropertiesFallbackFile
+     cf push
+     ```
+
+   - **From Binaries** (required if deploying to Windows):
 
      ```shell
      dotnet publish -r win-x64 --self-contained
      cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
      ```
 
+   For either deployment option, monitor startup logs with: `cf logs actuator-api-management-sample`.
+
 1. Copy the value of `routes` in the output and open in your browser. The app should start and respond to requests, but the database still needs to be configured with the tasks listed in the next section.
 
-> [!NOTE]  
+> [!NOTE]
 > The provided manifest will create an app named `actuator-api-management-sample` and attempt to bind it to the MySql service `sampleActuatorMySqlService`.
 
 ### Running Tasks
 
-Depending on the steps taken to push the application to Cloud Foundry, the commands below may require customization (for example, if the application was not published before pushing to a Linux cell, the path for the command might be `./bin/Debug/net10.0/linux-x64/Steeltoe.Samples.ActuatorApi`)
+The commands listed below each include variations that align with the methods available for pushing the application to Cloud Foundry (source code or binaries). **Be sure to use the same option that was selected when the application was pushed or the command will fail.**
 
 1. Apply Entity Framework Core database migration scripts:
 
-    ```shell
-    cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase" 
-    ```
+   - Deployed Source:
+
+     ```shell
+     cf run-task actuator-api-management-sample --command 'cd ../deps/0/dotnet_publish && ./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase'
+     ```
+
+   - Deployed Binaries:
+
+     ```shell
+     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=MigrateDatabase"
+     ```
 
 1. Run [`ForecastTask`](./AdminTasks/ForecastTask.cs) to predict weather for the next 7 days:
 
-    ```shell
-    cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather" 
-    ```
+   - Deployed Source:
 
-> [!TIP]  
+     ```shell
+     cf run-task actuator-api-management-sample --command 'cd ../deps/0/dotnet_publish && ./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather'
+     ```
+
+   - Deployed Binaries:
+
+     ```shell
+     cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather"
+     ```
+
+> [!TIP]
 > To remove all forecast data, run [`ResetTask`](./AdminTasks/ResetTask.cs):
 >
-> ```shell
-> cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather" 
-> ```
+> - Deployed Source:
+>
+>   ```shell
+>   cf run-task actuator-api-management-sample --command 'cd ../deps/0/dotnet_publish && ./Steeltoe.Samples.ActuatorApi runtask=ResetWeather'
+>   ```
+>
+> - Deployed Binaries:
+>
+>   ```shell
+>   cf run-task actuator-api-management-sample --command "./Steeltoe.Samples.ActuatorApi runtask=ResetWeather"
+>   ```
 
 ---
 

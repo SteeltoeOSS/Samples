@@ -231,6 +231,12 @@ def setup_options(context):
         context.log.error("invalid config option: cf_max_attempts -> {}".format(user_data.get('cf_max_attempts')))
         raise e
     context.log.info("option: CloudFoundry max attempts -> {}".format(context.options.cf.max_attempts))
+    try:
+        context.options.cf.skip_ssl_validation = user_data.getbool('cf_skip_ssl_validation')
+    except ValueError as e:
+        context.log.error("invalid config option: cf_skip_ssl_validation -> {}".format(user_data.get('cf_skip_ssl_validation')))
+        raise e
+    context.log.info("option: CloudFoundry skip SSL validation? -> {}".format(context.options.cf.skip_ssl_validation))
 
 
 def setup_platform(context):
