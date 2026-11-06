@@ -7,13 +7,13 @@ In order to avoid duplicating a significant amount of content, the [ActuatorWeb 
 ## General pre-requisites
 
 1. Installed .NET 10 SDK
-1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    and one of the following service brokers:
 
-   - [Tanzu for MySQL on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/10-0/mysql-for-tpcf/use.html)
-   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-gcp/1-9/csb-gcp/reference-gcp-mysql.html)
-   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-mysql.html)
+   - [Tanzu for MySQL on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-mysql-tanzu-platform/11-0/mysql-tp/use.html)
+   - [Tanzu Cloud Service Broker for GCP](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/cloud-service-broker-gcp/1-10/csb-gcp/reference-gcp-mysql.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/cloud-service-broker-aws/1-17/csb-aws/reference-aws-mysql.html)
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 

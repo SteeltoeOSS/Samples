@@ -1,13 +1,13 @@
 # Steeltoe Application Security Client-side Authentication and Authorization
 
-This application shows how to use the Steeltoe [security libraries](https://docs.steeltoe.io/api/v4/security/) for authentication and authorization with OpenID Connect against [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html) and using client certificates provided by Cloud Foundry or Steeltoe (when running locally).
+This application shows how to use the Steeltoe [security libraries](https://docs.steeltoe.io/api/v4/security/) for authentication and authorization with OpenID Connect against [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/index.html) and using client certificates provided by Cloud Foundry or Steeltoe (when running locally).
 
 ## General pre-requisites
 
 1. Installed .NET 10 SDK
-1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
-   with [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html)
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
+   with [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/index.html)
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Running locally
@@ -18,11 +18,11 @@ This application shows how to use the Steeltoe [security libraries](https://docs
 
 ## Running on Tanzu Platform for Cloud Foundry
 
-1. Install [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html)
+1. Install [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/index.html)
 1. Deploy [UAA with the Steeltoe Samples configuration](https://github.com/SteeltoeOSS/Dockerfiles/tree/main/uaa-server#customizing-for-your-cloud-foundry-environment)
-1. Create a [service plan](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/manage-service-plans.html)
+1. Create a [service plan](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/manage-service-plans.html)
 1. Configure federated authentication on the service plan
-   1. Add the UAA server from step 2 to the service as an [OIDC Provider](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/configure-external-id.html)
+   1. Add the UAA server from step 2 to the service as an [OIDC Provider](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/configure-external-id.html)
       * Name the identity provider `steeltoe-uaa` (or update `SSO_IDENTITY_PROVIDERS` in manifest.yml accordingly)
       * Credentials for connecting to the UAA server can be found or customized before deployment in [uaa.yml](https://github.com/SteeltoeOSS/Dockerfiles/blob/main/uaa-server/uaa.yml#L124)
    1. Save changes, but keep this page open

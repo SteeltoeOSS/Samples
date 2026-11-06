@@ -6,12 +6,12 @@ for connecting to a Microsoft SQL Server database.
 ## General pre-requisites
 
 1. Installed .NET 10 SDK
-1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    and one of the following service brokers:
 
-   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-microsoft-azure/1-13/csb-azure/reference-azure-mssql-db.html)
-   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/tanzu-cloud-service-broker-for-aws/1-14/csb-aws/reference-aws-mssql.html)
+   - [Tanzu Cloud Service Broker for Microsoft Azure](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/cloud-service-broker-azure/1-15/csb-azure/reference-azure-mssql-db.html)
+   - [Tanzu Cloud Service Broker for AWS](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/cloud-service-broker-aws/1-17/csb-aws/reference-aws-mssql.html)
 
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 

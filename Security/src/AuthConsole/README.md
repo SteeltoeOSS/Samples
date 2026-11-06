@@ -5,8 +5,8 @@ This application shows how to use the Steeltoe [security library](https://docs.s
 ## General pre-requisites
 
 1. Installed .NET 10 SDK
-1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
-   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/toc-tasw-install-index.html))
+1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
+   (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Running locally
