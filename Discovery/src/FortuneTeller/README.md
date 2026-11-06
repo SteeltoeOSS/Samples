@@ -14,7 +14,7 @@ switching to `http` or `https` and replacing `fortuneService` with the real host
 1. Installed .NET 10 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
-   with [Spring Cloud Services for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/application-services/3-5/appservices/index.html)
+   with [Application Services for Tanzu Platform](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/application-services/3-5/appservices/index.html)
    and [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
 
 ## Configuration-based discovery
