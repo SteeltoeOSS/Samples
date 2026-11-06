@@ -1,7 +1,7 @@
 ; ============================================================================
 ; example user behave configuration file
 ; ----------------------------------------------------------------------------
-; https://pythonhosted.org/behave/behave.html#configuration-files
+; https://behave.readthedocs.io/en/stable/behave/#configuration-files
 ; ============================================================================
 
 [behave.userdata]

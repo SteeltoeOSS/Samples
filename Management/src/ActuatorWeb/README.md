@@ -1,11 +1,11 @@
 # Steeltoe Management Sample - Actuators, Administrative Tasks, Metrics and Tracing
 
 ActuatorWeb and ActuatorApi form an ASP.NET Core-powered sample application that demonstrates how to use several Steeltoe libraries on their own and with additional tools such as
-[Tanzu Apps Manager](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/console-index.html) and
+[Tanzu Apps Manager](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/console-index.html) and
 [Spring Boot Admin](https://docs.spring-boot-admin.com/) used for managing and monitoring applications.
 
-These samples also illustrate how to have application metrics captured and exported to the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html) service so that application metrics can be viewed in any tool that is able to consume those metrics from the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
-Several tools exist that can do this, including [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html).
+These samples also illustrate how to have application metrics captured and exported to the [Metric Registrar for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/metric-registrar-index.html) service so that application metrics can be viewed in any tool that is able to consume those metrics from the [Cloud Foundry Loggregator](https://github.com/cloudfoundry/loggregator-release).
+Several tools exist that can do this, including [App Metrics for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/app-metrics/2-3/appmetrics/index.html).
 
 > [!NOTE]
 > While this application is intended to be used with [ActuatorApi](../ActuatorApi/), it _can_ be used on its own if you
@@ -15,12 +15,12 @@ Several tools exist that can do this, including [App Metrics for VMware Tanzu](h
 
 1. Installed .NET 10 SDK
 1. Optional:
-    * [VMware Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/concepts-overview.html)
+    * [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
     * [Cloud Foundry CLI](https://github.com/cloudfoundry/cli)
-    * [Metrics Registrar for VMware Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html)
-    * [App Metrics for VMware Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/index.html)
-    * [VMware MySQL for Tanzu Application Service](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-for-mysql-on-cloud-foundry/3-3/mysql-for-tpcf/about_mysql_vms.html)
-    or a [VMware Tanzu Cloud Service Broker](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services.html)
+    * [Metric Registrar for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/metric-registrar-index.html)
+    * [App Metrics for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/app-metrics/2-3/appmetrics/index.html)
+    * [Tanzu for MySQL on Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-mysql-tanzu-platform/11-0/mysql-tp/use.html)
+    or a [Tanzu Cloud Service Broker](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform/11-0/about-tnz-platform/index.html#service-brokers-and-on-demand-services)
 
 ## Running locally
 
@@ -180,14 +180,14 @@ Once the app is up and running, then you can access the management endpoints exp
 Steeltoe exposes Spring Boot Actuator compatible endpoints which can be accessed via the Tanzu Apps Manager.
 By using the Apps Manager, you can view the app's health, build information (for example: Git info, etc), as well as view or change the application's minimum logging levels.
 
-Check out the Apps Manager, [Using Spring Boot Actuators](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/using-actuators.html) for more information.
+Check out the Apps Manager, [Using Spring Boot Actuators](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/using-actuators.html) for more information.
 
 Apps Manager should be accessible at <https://apps.sys.your.domain>, contact your platform administrator for assistance as needed.
 
 ### View Application Metrics in App Metrics
 
 App Metrics should be accessible at <https://metrics.sys.your.domain>, contact your platform administrator for assistance as needed. Container metrics should automatically be available.
-If you wish to collect and view application metrics, the [Metrics Registrar](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/tanzu-platform-for-cloud-foundry/10-0/tpcf/metric-registrar-index.html#configure) must be configured, the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
+If you wish to collect and view application metrics, the [Metric Registrar for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/metric-registrar-index.html#configure) must be configured, the metric-registrar cli plugin should be installed, and your Prometheus endpoint must be registered. Once that's complete, custom metrics will be collected and automatically exported to App Metrics.
 
 > [!CAUTION]
 > The command `register-metrics-endpoint` described below does not work in Windows, but does work in WSL. See [here](https://github.com/pivotal-cf/metric-registrar-cli/issues/4) for more information.
@@ -196,7 +196,7 @@ If you wish to collect and view application metrics, the [Metrics Registrar](htt
 1. `cf target -o your-org -s your-space`
 1. `cf register-metrics-endpoint actuator-web-management-sample /actuator/prometheus --internal-port 8090`
 1. `cf register-metrics-endpoint actuator-api-management-sample /actuator/prometheus --internal-port 8091`
-1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/app-metrics-for-tanzu/2-2/app-metrics/using.html#custom-metrics)
+1. [Add your own metric charts](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/app-metrics/2-3/appmetrics/using.html#custom-metrics)
    1. Use an included .http file to send a request to the Prometheus endpoint to see what metrics are available
    1. Try the query `sum(process_runtime_dotnet_gc_objects_size_bytes{source_id="$sourceId"})` to see how much memory is in use by objects in the GC heap that haven't been collected yet
 

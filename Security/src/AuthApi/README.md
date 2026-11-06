@@ -1,6 +1,6 @@
 ﻿# Steeltoe Application Security Server-side Authentication and Authorization
 
-This application shows how to use the Steeltoe [security libraries](https://docs.steeltoe.io/api/v4/security/) for authentication and authorization with JWT Bearer tokens against [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform-services/single-sign-on-for-tanzu/1-16/sso-tanzu/index.html) and using client certificates provided by Cloud Foundry or Steeltoe (when running locally).
+This application shows how to use the Steeltoe [security libraries](https://docs.steeltoe.io/api/v4/security/) for authentication and authorization with JWT Bearer tokens against [Single Sign-On for Tanzu](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/single-sign-on/1-17/sso/index.html) and using client certificates provided by Cloud Foundry or Steeltoe (when running locally).
 
 This sample illustrates how you can secure your web api endpoints using JWT Bearer tokens and client certificates.
 
