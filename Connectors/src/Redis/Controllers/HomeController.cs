@@ -26,10 +26,10 @@ public sealed class HomeController(
 
         var model = new RedisViewModel
         {
-            ConnectionString = _connectionMultiplexerConnector.Options.ConnectionString,
+            ConnectionString = _connectionMultiplexerConnector.Options.ConnectionString
         };
 
-        foreach (string keyName in keyNames.OrderBy(name => name))
+        foreach (string keyName in keyNames.Order())
         {
             string? valueFromDistributedCache = await GetValueFromDistributedCacheAsync(connectionMultiplexer.ClientName, keyName, cancellationToken);
             model.DistributedCacheData.Add(keyName, valueFromDistributedCache);
