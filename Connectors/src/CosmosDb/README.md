@@ -5,7 +5,7 @@ for connecting to a CosmosDB database.
 
 ## General pre-requisites
 
-1. Installed .NET 10 SDK
+1. Installed .NET 11 SDK
 
 ## Running locally
 

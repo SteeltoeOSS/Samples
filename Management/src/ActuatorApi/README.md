@@ -6,7 +6,7 @@ In order to avoid duplicating a significant amount of content, the [ActuatorWeb 
 
 ## General pre-requisites
 
-1. Installed .NET 10 SDK
+1. Installed .NET 11 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    and one of the following service brokers:
@@ -44,7 +44,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
     *Optional* - Add forecast data starting from a specific date and/or number of days:
 
     ```shell
-    dotnet run --runtask=ForecastWeather --fromDate=10/18/2024 --days=30
+    dotnet run --runtask=ForecastWeather --fromDate=10/18/2026 --days=30
     ```
 
 > [!NOTE]
@@ -97,7 +97,7 @@ In order to demonstrate [Steeltoe Management Tasks](https://docs.steeltoe.io/api
 
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net11.0/win-x64/publish
      ```
 
    For either deployment option, monitor startup logs with: `cf logs actuator-api-management-sample`.

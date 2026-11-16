@@ -4,7 +4,7 @@ ASP.NET Core sample app showing how to use Steeltoe to manage credentialed conne
 
 ## General pre-requisites
 
-1. Windows machine with the .NET 10 SDK installed
+1. Windows machine with the .NET 11 SDK installed
 1. Pre-existing Windows file share or local adminstrator rights
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
    with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html)
@@ -86,7 +86,7 @@ Before deploying the app, you must create an entry in CredHub to contain the cre
 1. This sample will only run on Windows, so binaries must be built locally before push. Use the following commands to publish and push the app:
     ```shell
     dotnet publish -r win-x64 --self-contained
-    cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+    cf push -f manifest-windows.yml -p bin/Release/net11.0/win-x64/publish
     ```
 1. Copy the value of `routes` in the output and open in your browser
 
