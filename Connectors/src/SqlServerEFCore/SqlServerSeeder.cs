@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Steeltoe.Samples.SqlServerEFCore.Data;
@@ -6,7 +6,7 @@ using Steeltoe.Samples.SqlServerEFCore.Entities;
 
 namespace Steeltoe.Samples.SqlServerEFCore;
 
-internal sealed class SqlServerSeeder
+internal static class SqlServerSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {

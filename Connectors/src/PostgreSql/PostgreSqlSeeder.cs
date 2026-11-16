@@ -1,10 +1,10 @@
-﻿using Npgsql;
+using Npgsql;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.PostgreSql;
 
 namespace Steeltoe.Samples.PostgreSql;
 
-internal sealed class PostgreSqlSeeder
+internal static class PostgreSqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {

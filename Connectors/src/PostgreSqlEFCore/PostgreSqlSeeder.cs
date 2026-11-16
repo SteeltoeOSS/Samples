@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Steeltoe.Samples.PostgreSqlEFCore.Data;
@@ -6,7 +6,7 @@ using Steeltoe.Samples.PostgreSqlEFCore.Entities;
 
 namespace Steeltoe.Samples.PostgreSqlEFCore;
 
-internal sealed class PostgreSqlSeeder
+internal static class PostgreSqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {

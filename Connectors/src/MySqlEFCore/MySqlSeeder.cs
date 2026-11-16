@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Steeltoe.Samples.MySqlEFCore.Data;
@@ -6,7 +6,7 @@ using Steeltoe.Samples.MySqlEFCore.Entities;
 
 namespace Steeltoe.Samples.MySqlEFCore;
 
-internal sealed class MySqlSeeder
+internal static class MySqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {
