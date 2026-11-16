@@ -1,4 +1,3 @@
-﻿using System.Net.Http.Json;
 using Steeltoe.Samples.FortuneTellerConsole.Models;
 
 namespace Steeltoe.Samples.FortuneTellerConsole.Services;
