@@ -5,7 +5,7 @@ for connecting to a Microsoft SQL Server database.
 
 ## General pre-requisites
 
-1. Installed .NET 10 SDK
+1. Installed .NET 11 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    and one of the following service brokers:
@@ -17,8 +17,7 @@ for connecting to a Microsoft SQL Server database.
 
 ## Running locally
 
-1. Use LocalDB or start a SQL Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
-   - When using docker, update your connection string in `appsettings.Development.json` accordingly
+1. Start a SQL Server [docker container](https://github.com/SteeltoeOSS/Samples/blob/main/CommonTasks.md)
 1. Run the sample
    ```shell
    dotnet run
@@ -54,7 +53,7 @@ Upon startup, the app inserts a couple of rows into the bound SQL Server databas
 
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net11.0/win-x64/publish
      ```
 
    For either deployment option, monitor startup logs with: `cf logs sqlserver-efcore-connector-sample`.

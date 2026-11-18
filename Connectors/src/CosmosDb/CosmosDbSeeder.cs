@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Microsoft.Azure.Cosmos;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.CosmosDb;
@@ -6,7 +6,7 @@ using Steeltoe.Samples.CosmosDb.Data;
 
 namespace Steeltoe.Samples.CosmosDb;
 
-internal sealed class CosmosDbSeeder
+internal static class CosmosDbSeeder
 {
     public const string ContainerId = "TestContainer";
 

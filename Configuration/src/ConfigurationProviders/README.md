@@ -4,7 +4,7 @@ This is an ASP.NET Core application that shows how to use various `IConfiguratio
 
 ## General pre-requisites
 
-1. Installed .NET 10 SDK
+1. Installed .NET 11 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    with [Application Services for Tanzu Platform](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/application-services/3-5/appservices/index.html)
@@ -47,7 +47,7 @@ This sample expects the config server to be backed by the `spring-cloud-samples`
 
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net11.0/win-x64/publish
      ```
 
    For either deployment option, monitor startup logs with: `cf logs configuration-providers-sample`.
@@ -77,7 +77,7 @@ tanzu app workload apply --local-path . --file ./config/workload.yaml -y
 Alternatively, from locally built binaries:
 ```shell
 dotnet publish -r linux-x64 --no-self-contained
-tanzu app workload apply --local-path ./bin/Release/net10.0/linux-x64/publish --file ./config/workload.yaml -y
+tanzu app workload apply --local-path ./bin/Release/net11.0/linux-x64/publish --file ./config/workload.yaml -y
 ```
 
 See the [Tanzu documentation](https://techdocs.broadcom.com/us/en/vmware-tanzu/standalone-components/tanzu-application-platform/1-12/tap/getting-started-deploy-first-app.html) for details.

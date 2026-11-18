@@ -11,7 +11,7 @@ switching to `http` or `https` and replacing `fortuneService` with the real host
 
 ## General pre-requisites
 
-1. Installed .NET 10 SDK
+1. Installed .NET 11 SDK
 1. Optional: [Tanzu Platform for Cloud Foundry](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/concepts-overview.html)
    (optionally with [Windows support](https://techdocs.broadcom.com/us/en/vmware-tanzu/platform/elastic-application-runtime/11-0/eart/toc-tasw-install-index.html))
    with [Application Services for Tanzu Platform](https://techdocs.broadcom.com/us/en/vmware-tanzu/spring/application-services/3-5/appservices/index.html)
@@ -150,7 +150,7 @@ This variant uses service instances that are registered in [Spring Cloud Eureka]
 
      ```shell
      dotnet publish -r win-x64 --self-contained
-     cf push -f manifest-windows.yml -p bin/Release/net10.0/win-x64/publish
+     cf push -f manifest-windows.yml -p bin/Release/net11.0/win-x64/publish
      ```
 
    For either deployment option, monitor startup logs with: `cf logs [app-name]` (where "[app-name]" is either `fortune-service-sample` or `fortune-web-sample`).

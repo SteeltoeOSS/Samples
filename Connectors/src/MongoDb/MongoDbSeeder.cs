@@ -1,11 +1,11 @@
-﻿using MongoDB.Driver;
+using MongoDB.Driver;
 using Steeltoe.Connectors;
 using Steeltoe.Connectors.MongoDb;
 using Steeltoe.Samples.MongoDb.Data;
 
 namespace Steeltoe.Samples.MongoDb;
 
-internal sealed class MongoDbSeeder
+internal static class MongoDbSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {

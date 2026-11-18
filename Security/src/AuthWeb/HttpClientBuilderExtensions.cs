@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Globalization;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http.Logging;
 
 namespace Steeltoe.Samples.AuthWeb;
@@ -32,14 +33,14 @@ public static class HttpClientBuilderExtensions
         public void LogRequestStop(object? context, HttpRequestMessage request, HttpResponseMessage response, TimeSpan elapsed)
         {
             _logger.LogInformation("Received '{Response.StatusCodeInt} {Response.StatusCodeString}' after {Response.ElapsedMilliseconds}ms",
-                (int)response.StatusCode, response.StatusCode, elapsed.TotalMilliseconds.ToString("F1"));
+                (int)response.StatusCode, response.StatusCode, elapsed.TotalMilliseconds.ToString("F1", CultureInfo.InvariantCulture));
         }
 
         public void LogRequestFailed(object? context, HttpRequestMessage request, HttpResponseMessage? response, Exception exception, TimeSpan elapsed)
         {
             _logger.LogError(exception, "Request towards '{Request.Host}{Request.Path}' failed after {Response.ElapsedMilliseconds}ms",
                 request.RequestUri?.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped), request.RequestUri!.PathAndQuery,
-                elapsed.TotalMilliseconds.ToString("F1"));
+                elapsed.TotalMilliseconds.ToString("F1", CultureInfo.InvariantCulture));
         }
     }
 }

@@ -5,7 +5,7 @@ using Steeltoe.Connectors.Redis;
 
 namespace Steeltoe.Samples.Redis;
 
-internal sealed class RedisSeeder
+internal static class RedisSeeder
 {
     private static readonly TimeSpan ExampleSlidingExpiration = TimeSpan.FromMinutes(5);
 
@@ -63,6 +63,6 @@ internal sealed class RedisSeeder
         }
 
         hashFields.Add(new HashEntry("data", value));
-        return hashFields.ToArray();
+        return [.. hashFields];
     }
 }

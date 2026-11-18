@@ -1,13 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!--
+      Temporary workaround for preview version of Npgsql.EntityFrameworkCore.PostgreSQL.
+      This is also why Microsoft.EntityFrameworkCore.Relational must explicitly be referenced.
+    -->
+    <NoWarn>$(NoWarn);NU1608</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="11.0.*" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="11.0.*-*" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>

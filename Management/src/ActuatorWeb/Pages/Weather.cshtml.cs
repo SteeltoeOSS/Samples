@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Steeltoe.Samples.ActuatorWeb.Pages;
@@ -28,7 +29,7 @@ public class WeatherModel(ActuatorApiClient actuatorApiClient, ILogger<WeatherMo
             RequestException = exception;
         }
 
-        ForecastStartDate = fromDate ?? DateTime.Now.ToString("yyyy-MM-dd");
+        ForecastStartDate = fromDate ?? DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         DaysSelected = days?.ToString() ?? string.Empty;
     }
 }

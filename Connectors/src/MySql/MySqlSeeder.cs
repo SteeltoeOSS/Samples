@@ -3,7 +3,7 @@ using Steeltoe.Connectors.MySql;
 
 namespace Steeltoe.Samples.MySql;
 
-internal sealed class MySqlSeeder
+internal static class MySqlSeeder
 {
     public static async Task CreateSampleDataAsync(IServiceProvider serviceProvider)
     {

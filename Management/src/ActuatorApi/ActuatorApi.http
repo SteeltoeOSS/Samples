@@ -1,6 +1,10 @@
 @Actuator_Context=actuator
 #@Actuator_Context=cloudfoundryapplication
 
+### OpenAPI
+GET {{HostAddress}}/openapi/v1.json
+Accept: application/json
+
 ### Get the default day-count forecast starting from today
 GET {{HostAddress}}/weatherforecast/
 Accept: application/json

@@ -2,8 +2,4 @@
   <PropertyGroup>
     <SteeltoeVersion>4.*-main-*</SteeltoeVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <AspNetCoreVersion>10.0.*</AspNetCoreVersion>
-    <EFCoreVersion>10.0.*</EFCoreVersion>
-  </PropertyGroup>
 </Project>

@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseOraclePackage>false</UseOraclePackage>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microting.EntityFrameworkCore.MySql" Condition="'$(UseOraclePackage)' != 'true'" Version="$(EFCoreVersion)" />
-    <PackageReference Include="MySql.EntityFrameworkCore" Condition="'$(UseOraclePackage)' == 'true'" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Microting.EntityFrameworkCore.MySql" Condition="'$(UseOraclePackage)' != 'true'" Version="11.0.*-*" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Condition="'$(UseOraclePackage)' == 'true'" Version="11.0.*-*" />
     <PackageReference Include="Steeltoe.Connectors.EntityFrameworkCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.Endpoint" Version="$(SteeltoeVersion)" />
   </ItemGroup>

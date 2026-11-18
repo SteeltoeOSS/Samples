@@ -3,7 +3,6 @@
     <SteeltoeVersion>4.*-main-*</SteeltoeVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <AspNetCoreVersion>10.0.*</AspNetCoreVersion>
-    <OpenTelemetryVersion>1.15.*</OpenTelemetryVersion>
+    <OpenTelemetryVersion>1.21.*</OpenTelemetryVersion>
   </PropertyGroup>
 </Project>

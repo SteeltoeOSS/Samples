@@ -38,14 +38,14 @@ internal static class WeatherEndpoints
                     logger.LogWarning(
                         "Relevant forecast data was found for only {DayCountFound} day(s). Use the ForecastWeather application task to generate the missing data:{LineBreak}" +
                         "cf run-task actuator-api-management-sample --command \"./Steeltoe.Samples.ActuatorApi runtask=ForecastWeather --fromDate={FromDateParameter} --days={DayCountParameter}\"",
-                        forecasts.Count, Environment.NewLine, startDate.ToString("yyyy-MM-dd"), days);
+                        forecasts.Count, Environment.NewLine, startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), days);
                 }
                 else
                 {
                     logger.LogWarning(
                         "Relevant forecast data was found for only {DayCountFound} day(s). Use the ForecastWeather application task to generate the missing data:{LineBreak}" +
                         "dotnet run --runtask=ForecastWeather --fromDate={FromDateParameter} --days={DayCountParameter}", forecasts.Count, Environment.NewLine,
-                        startDate.ToString("yyyy-MM-dd"), days);
+                        startDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), days);
                 }
             }
 
